@@ -13,6 +13,7 @@ do
 			ALERT_FORMAT = "|TInterface\\DialogFrame\\DialogAlertIcon:48|t%s";
 
 			FOUND_FORMAT = "Found "..GREEN_FONT_COLOR_CODE..LDQuo.."%s"..RDQuo..FONT_COLOR_CODE_CLOSE.."!";
+			BUTTON_FOUND = "NPC found!";
 
 			NPC_ADD_FORMAT = "Added NPC "..GRAY_FONT_COLOR_CODE..LDQuo.."%s"..RDQuo..FONT_COLOR_CODE_CLOSE.." (ID %d).";
 			NPC_REMOVE_FORMAT = "Removed NPC "..GRAY_FONT_COLOR_CODE..LDQuo.."%s"..RDQuo..FONT_COLOR_CODE_CLOSE.." (ID %d).";
@@ -42,4 +43,7 @@ do
 
 	SLASH__NPCSCAN1 = "/npcscan";
 	SLASH__NPCSCAN2 = "/scan";
+
+	BINDING_HEADER__NPCSCAN = Title;
+	_G[ "BINDING_NAME_CLICK _NPCScanButton:LeftButton" ] = "Target found unit";
 end

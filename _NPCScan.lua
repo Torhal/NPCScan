@@ -158,6 +158,7 @@ do
 			Name = me.TestID( ID );
 			if ( Name ) then
 				me.Alert( L.FOUND_FORMAT:format( Name ) );
+				me.Button.SetNPC( Name, ID );
 				IDs[ ID ] = nil; -- Stop searching for this NPC
 			end
 		end
