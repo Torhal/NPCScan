@@ -10,7 +10,6 @@ do
 	_NPCScanLocalization = setmetatable(
 		{
 			MESSAGE_FORMAT = Title..": %s";
-			ALERT_FORMAT = "|TInterface\\DialogFrame\\DialogAlertIcon:48|t%s";
 
 			FOUND_FORMAT = "Found "..GREEN_FONT_COLOR_CODE..LDQuo.."%s"..RDQuo..FONT_COLOR_CODE_CLOSE.."!";
 			BUTTON_FOUND = "NPC found!";

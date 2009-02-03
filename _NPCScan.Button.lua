@@ -53,7 +53,9 @@ function me.Update ()
 			me:SetText( me.Name );
 			UIFrameFadeRemoveFrame( me.Glow );
 			UIFrameFlashRemoveFrame( me.Glow );
-			UIFrameFlash( me.Glow, 0.1, 0.7, 0.8 );
+			if ( UIParent:IsVisible() ) then -- Only flash when animating frame is shown
+				UIFrameFlash( me.Glow, 0.1, 0.7, 0.8 );
+			end
 			me:Show();
 			me.Model:SetCreature( me.ID );
 			me.Model:SetPosition( 1, 0, -0.5 );

@@ -84,14 +84,10 @@ function me.Message ( Message, Color )
 end
 --[[****************************************************************************
   * Function: _NPCScan.Alert                                                   *
-  * Description: Show a message in the middle of the screen and play a sound.  *
+  * Description: Dramatically prints a message and play a sound.               *
   ****************************************************************************]]
 function me.Alert ( Message, Color )
 	me.Message( Message, Color );
-	if ( not Color ) then
-		Color = NORMAL_FONT_COLOR;
-	end
-	RaidNotice_AddMessage( RaidWarningFrame, L.ALERT_FORMAT:format( Message ), Color );
 	PlaySoundFile( "sound\\event sounds\\event_wardrum_ogre.wav" );
 	PlaySoundFile( "sound\\events\\scourge_horn.wav" );
 	UIFrameFlash( LowHealthFrame, 0.5, 0.5, 6, false, 0.5 );
