@@ -6,57 +6,57 @@
 
 local L = _NPCScanLocalization;
 _NPCScanOptions = {
-	IDs = { -- Keys (names) in this table don't matter; they aren't used in searching.
+	IDs = { -- Keys must be lowercase, but don't have to match the NPC name
 		-- Note: Tameable NPCs will be "found" if you encounter them as pets, so don't search for them.
 
-		[ L[ "Time-Lost Proto-Drake" ] ] = 32491;
+		[ L[ "Time-Lost Proto-Drake" ]:lower() ] = 32491;
 
 		-- Northern Exposure (Northrend)
-		[ L[ "Aotona" ] ] = 32481;
-		[ L[ "Dirkee" ] ] = 32500;
-		[ L[ "Griegen" ] ] = 32471;
-		[ L[ "High Thane Jorfus" ] ] = 32501;
-		[ L[ "Icehorn" ] ] = 32361;
-		[ L[ "King Ping" ] ] = 32398;
-		[ L[ "Old Crystalbark" ] ] = 32357;
-		[ L[ "Putridus the Ancient" ] ] = 32487;
-		[ L[ "Seething Hate" ] ] = 32429;
-		[ L[ "Terror Spinner" ] ] = 32475;
-		[ L[ "Vigdis the War Maiden" ] ] = 32386;
-		[ L[ "Zul'drak Sentinel" ] ] = 32447;
-		[ L[ "Crazed Indu'le Survivor" ] ] = 32409;
-		[ L[ "Fumblub Gearwind" ] ] = 32358;
-		[ L[ "Grocklar" ] ] = 32422;
-		[ L[ "Hildana Deathstealer" ] ] = 32495;
-		--[ L[ "King Krush" ] ] = 32485;
-		--[ L[ "Loque'nahak" ] ] = 32517;
-		[ L[ "Perobas the Bloodthirster" ] ] = 32377;
-		[ L[ "Scarlet Highlord Daion" ] ] = 32417;
-		[ L[ "Syreian the Bonecarver" ] ] = 32438;
-		[ L[ "Tukemuth" ] ] = 32400;
-		[ L[ "Vyragosa" ] ] = 32630;
+		[ L[ "Aotona" ]:lower() ] = 32481;
+		[ L[ "Dirkee" ]:lower() ] = 32500;
+		[ L[ "Griegen" ]:lower() ] = 32471;
+		[ L[ "High Thane Jorfus" ]:lower() ] = 32501;
+		[ L[ "Icehorn" ]:lower() ] = 32361;
+		[ L[ "King Ping" ]:lower() ] = 32398;
+		[ L[ "Old Crystalbark" ]:lower() ] = 32357;
+		[ L[ "Putridus the Ancient" ]:lower() ] = 32487;
+		[ L[ "Seething Hate" ]:lower() ] = 32429;
+		[ L[ "Terror Spinner" ]:lower() ] = 32475;
+		[ L[ "Vigdis the War Maiden" ]:lower() ] = 32386;
+		[ L[ "Zul'drak Sentinel" ]:lower() ] = 32447;
+		[ L[ "Crazed Indu'le Survivor" ]:lower() ] = 32409;
+		[ L[ "Fumblub Gearwind" ]:lower() ] = 32358;
+		[ L[ "Grocklar" ]:lower() ] = 32422;
+		[ L[ "Hildana Deathstealer" ]:lower() ] = 32495;
+		--[ L[ "King Krush" ]:lower() ] = 32485;
+		--[ L[ "Loque'nahak" ]:lower() ] = 32517;
+		[ L[ "Perobas the Bloodthirster" ]:lower() ] = 32377;
+		[ L[ "Scarlet Highlord Daion" ]:lower() ] = 32417;
+		[ L[ "Syreian the Bonecarver" ]:lower() ] = 32438;
+		[ L[ "Tukemuth" ]:lower() ] = 32400;
+		[ L[ "Vyragosa" ]:lower() ] = 32630;
 
 		-- Bloody Rare (Outlands)
-		[ L[ "Ambassador Jerrikar" ] ] = 18695;
-		[ L[ "Chief Engineer Lorthander" ] ] = 18697;
-		[ L[ "Collidus the Warp-Watcher" ] ] = 18694;
-		[ L[ "Doomsayer Jurim" ] ] = 18686;
-		[ L[ "Fulgorge" ] ] = 18678;
-		[ L[ "Hemathion" ] ] = 18692;
-		[ L[ "Marticar" ] ] = 18680;
-		[ L[ "Morcrush" ] ] = 18690;
-		[ L[ "Okrek" ] ] = 18685;
-		[ L[ "Voidhunter Yar" ] ] = 18683;
-		[ L[ "Bog Lurker" ] ] = 18682;
-		[ L[ "Coilfang Emissary" ] ] = 18681;
-		[ L[ "Crippler" ] ] = 18689;
-		[ L[ "Ever-Core the Punisher" ] ] = 18698;
-		--[ L[ "Goretooth" ] ] = 17144;
-		[ L[ "Kraator" ] ] = 18696;
-		[ L[ "Mekthorg the Wild" ] ] = 18677;
-		--[ L[ "Nuramoc" ] ] = 20932;
-		[ L[ "Speaker Mar'grom" ] ] = 18693;
-		[ L[ "Vorakem Doomspeaker" ] ] = 18679;
+		[ L[ "Ambassador Jerrikar" ]:lower() ] = 18695;
+		[ L[ "Chief Engineer Lorthander" ]:lower() ] = 18697;
+		[ L[ "Collidus the Warp-Watcher" ]:lower() ] = 18694;
+		[ L[ "Doomsayer Jurim" ]:lower() ] = 18686;
+		[ L[ "Fulgorge" ]:lower() ] = 18678;
+		[ L[ "Hemathion" ]:lower() ] = 18692;
+		[ L[ "Marticar" ]:lower() ] = 18680;
+		[ L[ "Morcrush" ]:lower() ] = 18690;
+		[ L[ "Okrek" ]:lower() ] = 18685;
+		[ L[ "Voidhunter Yar" ]:lower() ] = 18683;
+		[ L[ "Bog Lurker" ]:lower() ] = 18682;
+		[ L[ "Coilfang Emissary" ]:lower() ] = 18681;
+		[ L[ "Crippler" ]:lower() ] = 18689;
+		[ L[ "Ever-Core the Punisher" ]:lower() ] = 18698;
+		--[ L[ "Goretooth" ]:lower() ] = 17144;
+		[ L[ "Kraator" ]:lower() ] = 18696;
+		[ L[ "Mekthorg the Wild" ]:lower() ] = 18677;
+		--[ L[ "Nuramoc" ]:lower() ] = 20932;
+		[ L[ "Speaker Mar'grom" ]:lower() ] = 18693;
+		[ L[ "Vorakem Doomspeaker" ]:lower() ] = 18679;
 	};
 };
 
@@ -76,11 +76,11 @@ me.IDs = IDs;
   * Function: _NPCScan.Message                                                 *
   * Description: Prints a message in the default chat window.                  *
   ****************************************************************************]]
-function me.Message ( Message, Color )
+function me.Message ( Message, Color, Plain )
 	if ( not Color ) then
 		Color = NORMAL_FONT_COLOR;
 	end
-	DEFAULT_CHAT_FRAME:AddMessage( L.MESSAGE_FORMAT:format( Message ), Color.r, Color.g, Color.b );
+	DEFAULT_CHAT_FRAME:AddMessage( Plain and Message or L.MESSAGE_FORMAT:format( Message ), Color.r, Color.g, Color.b );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Alert                                                   *
@@ -111,33 +111,58 @@ do
 end
 
 --[[****************************************************************************
-  * Function: _NPCScan.AddNPC                                                  *
+  * Function: _NPCScan.Add                                                     *
   * Description: Adds an NPC ID to scan for.                                   *
   ****************************************************************************]]
-function me.AddNPC ( Name, ID )
-	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.AddNPC - string expected." );
-	assert( tonumber( ID ), "Invalid argument #2 \"ID\" to _NPCScan.AddNPC - number expected." );
+function me.Add ( Name, ID )
+	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.Add - string expected." );
+	assert( tonumber( ID ), "Invalid argument #2 \"ID\" to _NPCScan.Add - number expected." );
 
-	if ( not _NPCScanOptions.IDs[ Name ] ) then
+	local NameKey = Name:lower();
+	if ( not _NPCScanOptions.IDs[ NameKey ] ) then
 		IDs[ ID ] = true;
-		_NPCScanOptions.IDs[ Name ] = ID;
-		me.Message( L.NPC_ADD_FORMAT:format( Name, ID ), GREEN_FONT_COLOR );
+		_NPCScanOptions.IDs[ NameKey ] = ID;
+		me.Message( L.NPC_ADD_FORMAT:format( Name, ID ) );
 		return true;
 	end
 end
 --[[****************************************************************************
-  * Function: _NPCScan.RemoveNPC                                               *
+  * Function: _NPCScan.Remove                                                  *
   * Description: Removes an NPC from the scanning list.                        *
   ****************************************************************************]]
-function me.RemoveNPC ( Name )
-	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.RemoveNPC - string expected." );
+function me.Remove ( Name )
+	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.Remove - string expected." );
 
-	local ID = _NPCScanOptions.IDs[ Name ];
+	local NameKey = Name:lower();
+	local ID = _NPCScanOptions.IDs[ NameKey ];
 	if ( ID ) then
 		IDs[ ID ] = nil;
-		_NPCScanOptions.IDs[ Name ] = nil;
-		me.Message( L.NPC_REMOVE_FORMAT:format( Name, ID ), RED_FONT_COLOR );
+		_NPCScanOptions.IDs[ NameKey ] = nil;
+		me.Message( L.NPC_REMOVE_FORMAT:format( Name, ID ) );
 		return true;
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.List                                                    *
+  * Description: Lists all NPCs set to be searched for.                        *
+  ****************************************************************************]]
+do
+	local SortedNames = {};
+	function me.List ()
+		local Count = 0;
+		local IDs = _NPCScanOptions.IDs;
+		for Name in pairs( IDs ) do
+			Count = Count + 1;
+			SortedNames[ #SortedNames + 1 ] = Name;
+		end
+		sort( SortedNames );
+
+		me.Message( L.CMD_LIST_FORMAT:format( Count ) );
+		for _, Name in ipairs( SortedNames ) do
+			me.Message( L.CMD_LISTENTRY_FORMAT:format( Name, IDs[ Name ] ), me.TestID( IDs[ Name ] ) and GREEN_FONT_COLOR, true );
+		end
+
+		wipe( SortedNames );
 	end
 end
 
@@ -153,7 +178,7 @@ do
 		for ID in pairs( IDs ) do
 			Name = me.TestID( ID );
 			if ( Name ) then
-				me.Alert( L.FOUND_FORMAT:format( Name ) );
+				me.Alert( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
 				me.Button.SetNPC( Name, ID );
 				IDs[ ID ] = nil; -- Stop searching for this NPC
 			end
@@ -172,8 +197,9 @@ function me:ADDON_LOADED ( _, AddOn )
 		local CachedNames = {};
 		for Name, ID in pairs( _NPCScanOptions.IDs ) do
 			-- Don't add NPCs already in the cache
-			if ( me.TestID( ID ) ) then
-				CachedNames[ #CachedNames + 1 ] = L.NAME_FORMAT:format( Name );
+			local FoundName = me.TestID( ID );
+			if ( FoundName ) then
+				CachedNames[ #CachedNames + 1 ] = L.NAME_FORMAT:format( FoundName );
 			else -- Add
 				IDs[ ID ] = true;
 			end
@@ -215,21 +241,24 @@ end
   * Description: Slash command to add and remove NPCs.                         *
   ****************************************************************************]]
 function me.SlashCommand ( Input )
-	local Command, Arguments = Input:match( "^(%S+)%s+(.+)%s*$" );
+	local Command, Arguments = Input:match( "^(%S+)%s*(.-)%s*$" );
 	if ( Command ) then
 		Command = Command:upper();
 		if ( Command == L.CMD_ADD ) then
 			local ID, Name = Arguments:match( "^(%d+)%s+(.+)$" );
 			if ( ID ) then
-				if ( not me.AddNPC( Name, tonumber( ID ) ) ) then
+				if ( not me.Add( Name, tonumber( ID ) ) ) then
 					me.Message( L.CMD_ADDDUPLICATE_FORMAT:format( Name, ID ), RED_FONT_COLOR );
 				end
 				return;
 			end
 		elseif ( Command == L.CMD_REMOVE ) then
-			if ( not me.RemoveNPC( Arguments ) ) then
+			if ( not me.Remove( Arguments ) ) then
 				me.Message( L.CMD_REMOVENOTFOUND_FORMAT:format( Arguments ), RED_FONT_COLOR );
 			end
+			return;
+		elseif ( Command == L.CMD_LIST ) then
+			me.List();
 			return;
 		end
 	end
