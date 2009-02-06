@@ -9,9 +9,8 @@ local L = _NPCScanLocalization;
 local me = CreateFrame( "Button", "_NPCScanButton", _NPCScan, "SecureActionButtonTemplate" );
 _NPCScan.Button = me;
 
-me.UpdatePending = false;
-me.Name = nil;
-me.ID = nil;
+me.PendingName = nil;
+me.PendingID = nil;
 
 me.RotationRate = math.pi / 4;
 
@@ -23,51 +22,32 @@ me.RotationRate = math.pi / 4;
   * Description: Sets the button to a given NPC and shows it.                  *
   ****************************************************************************]]
 function me.SetNPC ( Name, ID )
-	me.Name = Name;
-	me.ID = ID;
-	me.Update();
-end
---[[****************************************************************************
-  * Function: _NPCScan.Button.ClearNPC                                         *
-  * Description: Hides the button and clears its attributes.                   *
-  ****************************************************************************]]
-function me.ClearNPC ()
-	me.Name = nil;
-	me.ID = nil;
-	me.Update();
+	if ( InCombatLockdown() ) then
+		me.PendingName = Name;
+		me.PendingID = ID;
+	else
+		me.Update( Name, ID );
+	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.Button.Update                                           *
   * Description: Updates the button based on its Name and ID fields.           *
   ****************************************************************************]]
-function me.Update ()
-	if ( InCombatLockdown() ) then
-		me.UpdatePending = true;
-	else
-		me.UpdatePending = false;
+function me.Update ( Name, ID )
+	me:SetAttribute( "macrotext", "/cleartarget\n/targetexact "..Name );
+	me:Enable();
+	me:Show();
 
-		if ( me.Name and me.ID ) then
-			-- Show
-			me:SetAttribute( "macrotext", "/cleartarget\n/targetexact "..me.Name );
-			me:Enable();
-			me:SetText( me.Name );
-			UIFrameFadeRemoveFrame( me.Glow );
-			UIFrameFlashRemoveFrame( me.Glow );
-			if ( UIParent:IsVisible() ) then -- Only flash when animating frame is shown
-				UIFrameFlash( me.Glow, 0.1, 0.7, 0.8 );
-			end
-			me:Show();
-			me.Model:SetCreature( me.ID );
-			me.Model:SetPosition( 1, 0, -0.5 );
-			me.Model:SetFacing( 0 );
-		else
-			-- Hide
-			me:SetAttribute( "macrotext", nil );
-			me.Model:ClearModel();
-			me:Disable();
-			me:Hide();
-		end
+	me:SetText( Name );
+	UIFrameFadeRemoveFrame( me.Glow );
+	UIFrameFlashRemoveFrame( me.Glow );
+	if ( UIParent:IsVisible() ) then -- Only flash when animating frame is shown
+		UIFrameFlash( me.Glow, 0.1, 0.7, 0.8 );
 	end
+
+	me.Model:SetCreature( ID );
+	me.Model:SetPosition( 1, 0, -0.5 );
+	me.Model:SetFacing( 0 );
 end
 
 
@@ -102,20 +82,14 @@ function me:OnLeave ()
 end
 
 --[[****************************************************************************
-  * Function: _NPCScan.Button:PLAYER_REGEN_DISABLED                            *
-  ****************************************************************************]]
-function me:PLAYER_REGEN_DISABLED ()
-	-- Entered combat
-	me.Close:Disable();
-end
---[[****************************************************************************
   * Function: _NPCScan.Button:PLAYER_REGEN_ENABLED                             *
   ****************************************************************************]]
 function me:PLAYER_REGEN_ENABLED ()
-	-- Left combat
-	me.Close:Enable();
-	if ( me.UpdatePending ) then
-		me.Update();
+	-- Update button after leaving combat
+	if ( me.PendingName and me.PendingID ) then
+		me.Update( me.PendingName, me.PendingID );
+		me.PendingName = nil;
+		me.PendingID = nil;
 	end
 end
 --[[****************************************************************************
@@ -188,11 +162,18 @@ do
 	me.EnableDrag( false );
 
 	-- Close button
-	me.Close = CreateFrame( "Button", nil, me, "UIPanelCloseButton" );
-	me.Close:SetPoint( "TOPRIGHT" );
-	me.Close:SetScale( 0.8 );
-	me.Close:SetScript( "OnClick", me.ClearNPC );
-	me.Close:SetHitRectInsets( 8, 8, 8, 8 );
+	local Close = CreateFrame( "Button", nil, me, "UIPanelCloseButton,SecureHandlerClickTemplate" );
+	me.Close = Close;
+	Close:SetPoint( "TOPRIGHT" );
+	Close:SetWidth( 32 );
+	Close:SetHeight( 32 );
+	Close:SetScale( 0.8 );
+	Close:SetHitRectInsets( 8, 8, 8, 8 );
+	Close:SetAttribute( "_onclick", [[
+		local Button = self:GetParent();
+		Button:Disable();
+		Button:Hide();
+	]] );
 
 	-- Model view
 	local Model = CreateFrame( "DressUpModel", nil, me );
@@ -224,6 +205,5 @@ do
 	me:SetScript( "OnLeave", me.OnLeave );
 	me:SetScript( "OnEvent", me.OnEvent );
 	me:RegisterEvent( "PLAYER_REGEN_ENABLED" );
-	me:RegisterEvent( "PLAYER_REGEN_DISABLED" );
 	me:RegisterEvent( "MODIFIER_STATE_CHANGED" );
 end
