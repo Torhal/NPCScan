@@ -72,6 +72,21 @@ end
 
 
 --[[****************************************************************************
+  * Function: _NPCScan.Button.EnableDrag                                       *
+  * Description: Enables or disables dragging the button.                      *
+  ****************************************************************************]]
+function me.EnableDrag ( Enable )
+	local Drag = me.Drag;
+	Drag:ClearAllPoints();
+	if ( Enable ) then
+		Drag:SetAllPoints();
+	else -- Position offscreen
+		Drag:SetPoint( "TOP", UIParent, 0, math.huge );
+	end
+end
+
+
+--[[****************************************************************************
   * Function: _NPCScan.Button:OnEnter                                          *
   * Description: Highlights the button.                                        *
   ****************************************************************************]]
@@ -104,6 +119,15 @@ function me:PLAYER_REGEN_ENABLED ()
 	end
 end
 --[[****************************************************************************
+  * Function: _NPCScan.Button:MODIFIER_STATE_CHANGED                           *
+  ****************************************************************************]]
+function me:MODIFIER_STATE_CHANGED ( _, Modifier, State )
+	Modifier = Modifier:sub( 2 );
+	if ( GetModifiedClick( "_NPCSCAN_BUTTONDRAG" ):find( Modifier, 1, true ) ) then
+		me.EnableDrag( State == 1 );
+	end
+end
+--[[****************************************************************************
   * Function: _NPCScan.Button:OnEvent                                          *
   * Description: Global event handler.                                         *
   ****************************************************************************]]
@@ -121,6 +145,9 @@ do
 	me:SetWidth( 150 );
 	me:SetHeight( 42 );
 	me:SetPoint( "BOTTOM", UIParent, 0, 128 );
+	me:SetMovable( true );
+	me:SetUserPlaced( true );
+	me:SetClampedToScreen( true );
 	me:SetFrameStrata( "FULLSCREEN_DIALOG" );
 	me:SetNormalTexture( "Interface\\AchievementFrame\\UI-Achievement-Parchment-Horizontal" );
 	local Background = me:GetNormalTexture();
@@ -156,11 +183,16 @@ do
 	} );
 	me:OnLeave(); -- Set non-highlighted colors
 
+	-- Drag frame
+	me.Drag = me:CreateTitleRegion();
+	me.EnableDrag( false );
+
 	-- Close button
 	me.Close = CreateFrame( "Button", nil, me, "UIPanelCloseButton" );
 	me.Close:SetPoint( "TOPRIGHT" );
 	me.Close:SetScale( 0.8 );
 	me.Close:SetScript( "OnClick", me.ClearNPC );
+	me.Close:SetHitRectInsets( 8, 8, 8, 8 );
 
 	-- Model view
 	local Model = CreateFrame( "DressUpModel", nil, me );
@@ -168,6 +200,7 @@ do
 	Model:SetPoint( "BOTTOMLEFT", me, "TOPLEFT", 0, -4 );
 	Model:SetPoint( "RIGHT" );
 	Model:SetHeight( me:GetWidth() );
+	me:SetClampRectInsets( 0, 0, Model:GetTop() - me:GetTop(), 0 ); -- Allow room for model
 	Model:SetScript( "OnUpdate", function ( self, Elapsed )
 		self:SetFacing( self:GetFacing() + Elapsed * me.RotationRate );
 	end );
@@ -192,4 +225,5 @@ do
 	me:SetScript( "OnEvent", me.OnEvent );
 	me:RegisterEvent( "PLAYER_REGEN_ENABLED" );
 	me:RegisterEvent( "PLAYER_REGEN_DISABLED" );
+	me:RegisterEvent( "MODIFIER_STATE_CHANGED" );
 end
