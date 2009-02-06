@@ -69,6 +69,8 @@ me.Tooltip = Tooltip
 local IDs = {};
 me.IDs = IDs;
 
+me.UpdateRate = 0.1;
+
 
 
 
@@ -174,13 +176,19 @@ end
 do
 	local pairs = pairs;
 	local Name;
+	local LastUpdate = 0;
 	function me:OnUpdate ( Elapsed )
-		for ID in pairs( IDs ) do
-			Name = me.TestID( ID );
-			if ( Name ) then
-				me.Alert( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
-				me.Button.SetNPC( Name, ID );
-				IDs[ ID ] = nil; -- Stop searching for this NPC
+		LastUpdate = LastUpdate + Elapsed;
+		if ( LastUpdate >= me.UpdateRate ) then
+			LastUpdate = 0;
+
+			for ID in pairs( IDs ) do
+				Name = me.TestID( ID );
+				if ( Name ) then
+					me.Alert( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
+					me.Button.SetNPC( Name, ID );
+					IDs[ ID ] = nil; -- Stop searching for this NPC
+				end
 			end
 		end
 	end
