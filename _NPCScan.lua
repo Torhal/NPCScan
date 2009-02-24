@@ -9,7 +9,7 @@ _NPCScanOptions = {
 	IDs = { -- Keys must be lowercase, but don't have to match the NPC name
 		-- Note: Tameable NPCs will be "found" if you encounter them as pets, so don't search for them.
 
-		[ L[ "Time-Lost Proto-Drake" ]:lower() ] = 32491;
+		[ L[ "Time-Lost Proto Drake" ]:lower() ] = 32491;
 
 		-- Northern Exposure (Northrend)
 		[ L[ "Aotona" ]:lower() ] = 32481;

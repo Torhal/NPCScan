@@ -9,10 +9,31 @@ local L = _NPCScanLocalization;
 local me = CreateFrame( "Button", "_NPCScanButton", _NPCScan, "SecureActionButtonTemplate" );
 _NPCScan.Button = me;
 
+local Model = CreateFrame( "PlayerModel", nil, me );
+me.Model = Model;
+
 me.PendingName = nil;
 me.PendingID = nil;
 
 me.RotationRate = math.pi / 4;
+
+-- Key is lowercase, value = "[Scale]|[X]|[Y]|[Z]", where any parameter can be left empty
+me.ModelCameras = {
+	[ "creature\\protodragon\\protodragon.m2" ] = "1.5|||10"; -- Time-lost Proto Drake
+
+	[ "creature\\parrot\\parrot.m2" ] = "2"; -- Aotona
+	[ "creature\\clockworkgnome\\clockworkgnome.m2" ] = "1.5"; -- Dirkee, Fumblub Gearwind
+	[ "creature\\northrendstonegiant\\northrendstonegiant.m2" ] = "1.5"; -- Grocklar
+	[ "creature\\valkierdark\\valkierdark.m2" ] = "1.7"; -- Hildana Deathstealer
+	[ "creature\\northrendworgen\\northrendworgen.m2" ] = "2"; -- Perobas the Bloodthirster
+	[ "creature\\northrendfleshgiant\\northrendfleshgiant.m2" ] = "1.5||2"; -- Putridus the Ancient
+	[ "creature\\fleshbeast\\fleshbeast.m2" ] = "1.4"; -- Seething Hate
+	[ "creature\\vrykulfemale\\vrykulfemalehunter.m2" ] = "2"; -- Syreian the Bonecarver, Vigdis the War Maiden
+	[ "creature\\mammoth\\mammoth.m2" ] = ".6|.8|2.5"; -- Tukemuth
+	[ "creature\\bonespider\\bonespider.m2" ] = "2||-1.5"; -- Terror Spinner
+	[ "creature\\zuldrakgolem\\zuldrakgolem.m2" ] = ".65||1.4"; -- Zul'drak Sentinel
+	[ "creature\\dragon\\northrenddragon.m2" ] = ".5||15|-3"; -- Vyragosa
+};
 
 
 
@@ -30,6 +51,16 @@ function me.SetNPC ( Name, ID )
 	end
 end
 --[[****************************************************************************
+  * Function: _NPCScan.Button.Model.Reset                                      *
+  * Description: Clears the model and readies it for a SetCreature call.       *
+  ****************************************************************************]]
+function Model.Reset ()
+	Model:ClearModel();
+	Model:SetModelScale( 1 );
+	Model:SetPosition( 0, 0, 0 );
+	Model:SetFacing( 0 );
+end
+--[[****************************************************************************
   * Function: _NPCScan.Button.Update                                           *
   * Description: Updates the button based on its Name and ID fields.           *
   ****************************************************************************]]
@@ -45,9 +76,13 @@ function me.Update ( Name, ID )
 		UIFrameFlash( me.Glow, 0.1, 0.7, 0.8 );
 	end
 
-	me.Model:SetCreature( ID );
-	me.Model:SetPosition( 1, 0, -0.5 );
-	me.Model:SetFacing( 0 );
+	Model.Reset();
+	Model:SetCreature( ID );
+	if ( type( Model:GetModel() ) == "string" ) then
+		local Scale, X, Y, Z = ( "|" ):split( me.ModelCameras[ Model:GetModel():lower() ] or "" );
+		Model:SetModelScale( 0.5 * ( tonumber( Scale ) or 1 ) );
+		Model:SetPosition( tonumber( Z ) or 0, tonumber( X ) or 0, tonumber( Y ) or 0 );
+	end
 end
 
 
@@ -176,11 +211,9 @@ do
 	]] );
 
 	-- Model view
-	local Model = CreateFrame( "DressUpModel", nil, me );
-	me.Model = Model;
 	Model:SetPoint( "BOTTOMLEFT", me, "TOPLEFT", 0, -4 );
 	Model:SetPoint( "RIGHT" );
-	Model:SetHeight( me:GetWidth() );
+	Model:SetHeight( me:GetWidth() * 0.6 );
 	me:SetClampRectInsets( 0, 0, Model:GetTop() - me:GetTop(), 0 ); -- Allow room for model
 	Model:SetScript( "OnUpdate", function ( self, Elapsed )
 		self:SetFacing( self:GetFacing() + Elapsed * me.RotationRate );
