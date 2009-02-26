@@ -69,6 +69,7 @@ me.Tooltip = Tooltip
 local IDs = {};
 me.IDs = IDs;
 
+me.IDMax = 0xFFFF; -- Largest ID that will fit in a GUID's 2-byte NPC ID field
 me.UpdateRate = 0.1;
 
 
@@ -78,11 +79,11 @@ me.UpdateRate = 0.1;
   * Function: _NPCScan.Message                                                 *
   * Description: Prints a message in the default chat window.                  *
   ****************************************************************************]]
-function me.Message ( Message, Color, Plain )
+function me.Message ( Message, Color )
 	if ( not Color ) then
 		Color = NORMAL_FONT_COLOR;
 	end
-	DEFAULT_CHAT_FRAME:AddMessage( Plain and Message or L.MESSAGE_FORMAT:format( Message ), Color.r, Color.g, Color.b );
+	DEFAULT_CHAT_FRAME:AddMessage( L.MESSAGE_FORMAT:format( Message ), Color.r, Color.g, Color.b );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Alert                                                   *
@@ -119,12 +120,12 @@ end
 function me.Add ( Name, ID )
 	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.Add - string expected." );
 	assert( tonumber( ID ), "Invalid argument #2 \"ID\" to _NPCScan.Add - number expected." );
+	assert( ID >= 1 and ID <= me.IDMax, "Invalid argument #2 \"ID\" to _NPCScan.Add - Out of range." );
 
 	local NameKey = Name:lower();
 	if ( not _NPCScanOptions.IDs[ NameKey ] ) then
 		IDs[ ID ] = true;
 		_NPCScanOptions.IDs[ NameKey ] = ID;
-		me.Message( L.NPC_ADD_FORMAT:format( Name, ID ) );
 		return true;
 	end
 end
@@ -140,31 +141,7 @@ function me.Remove ( Name )
 	if ( ID ) then
 		IDs[ ID ] = nil;
 		_NPCScanOptions.IDs[ NameKey ] = nil;
-		me.Message( L.NPC_REMOVE_FORMAT:format( Name, ID ) );
 		return true;
-	end
-end
---[[****************************************************************************
-  * Function: _NPCScan.List                                                    *
-  * Description: Lists all NPCs set to be searched for.                        *
-  ****************************************************************************]]
-do
-	local SortedNames = {};
-	function me.List ()
-		local Count = 0;
-		local IDs = _NPCScanOptions.IDs;
-		for Name in pairs( IDs ) do
-			Count = Count + 1;
-			SortedNames[ #SortedNames + 1 ] = Name;
-		end
-		sort( SortedNames );
-
-		me.Message( L.CMD_LIST_FORMAT:format( Count ) );
-		for _, Name in ipairs( SortedNames ) do
-			me.Message( L.CMD_LISTENTRY_FORMAT:format( Name, IDs[ Name ] ), me.TestID( IDs[ Name ] ) and GREEN_FONT_COLOR, true );
-		end
-
-		wipe( SortedNames );
 	end
 end
 
@@ -244,38 +221,6 @@ do
 end
 
 
---[[****************************************************************************
-  * Function: _NPCScan.SlashCommand                                            *
-  * Description: Slash command to add and remove NPCs.                         *
-  ****************************************************************************]]
-function me.SlashCommand ( Input )
-	local Command, Arguments = Input:match( "^(%S+)%s*(.-)%s*$" );
-	if ( Command ) then
-		Command = Command:upper();
-		if ( Command == L.CMD_ADD ) then
-			local ID, Name = Arguments:match( "^(%d+)%s+(.+)$" );
-			if ( ID ) then
-				if ( not me.Add( Name, tonumber( ID ) ) ) then
-					me.Message( L.CMD_ADDDUPLICATE_FORMAT:format( Name, ID ), RED_FONT_COLOR );
-				end
-				return;
-			end
-		elseif ( Command == L.CMD_REMOVE ) then
-			if ( not me.Remove( Arguments ) ) then
-				me.Message( L.CMD_REMOVENOTFOUND_FORMAT:format( Arguments ), RED_FONT_COLOR );
-			end
-			return;
-		elseif ( Command == L.CMD_LIST ) then
-			me.List();
-			return;
-		end
-	end
-
-	-- No such command
-	me.Message( L.CMD_HELP );
-end
-
-
 
 
 --------------------------------------------------------------------------------
@@ -293,6 +238,4 @@ do
 	Tooltip:AddFontStrings(
 		Tooltip.Text,
 		Tooltip:CreateFontString( "$parentTextRight1", nil, "GameTooltipText" ) );
-
-	SlashCmdList[ "_NPCSCAN" ] = me.SlashCommand;
 end
