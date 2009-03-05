@@ -14,7 +14,7 @@
 ## SavedVariables: _NPCScanOptions
 ## OptionalDeps: LibTextTable-1.0
 embeds.xml
-Localization.lua
+Locales.xml
 
 _NPCScan.lua
 _NPCScan.Button.lua
