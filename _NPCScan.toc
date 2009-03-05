@@ -13,6 +13,8 @@
 ## X-Embeds: LibTextTable-1.0
 ## SavedVariables: _NPCScanOptions
 ## OptionalDeps: LibTextTable-1.0
+Libs\LibStub\LibStub.lua
+
 Embeds.xml
 Locales.xml
 
