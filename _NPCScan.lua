@@ -124,7 +124,12 @@ function me.Add ( Name, ID )
 
 	local NameKey = Name:lower();
 	if ( not _NPCScanOptions.IDs[ NameKey ] ) then
-		IDs[ ID ] = true;
+		local FoundName = me.TestID( ID );
+		if ( FoundName ) then -- Already seen
+			me.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
+		else
+			IDs[ ID ] = true;
+		end
 		_NPCScanOptions.IDs[ NameKey ] = ID;
 		return true;
 	end
