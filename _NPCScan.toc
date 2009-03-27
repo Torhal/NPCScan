@@ -3,11 +3,11 @@
 ## Notes: Scans NPCs around you for rare ones.
 ## Author: Saiket
 ## Version: 3.0.9.2
-## X-Date: 2009-03-25
+## X-Date: 2009-03-26
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com
-## X-Website: http://sites.google.com/site/wowsaiket/Add-Ons
+## X-Website: http://sites.google.com/site/wowsaiket/Add-Ons/NPCScan
 ## X-Feedback: http://code.google.com/p/wow-saiket/issues/list?can=1&q=AddOn:NPCScan
 ## X-Localizations: enUS
 ## X-Embeds: LibTextTable-1.0
