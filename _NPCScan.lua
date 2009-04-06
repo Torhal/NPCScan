@@ -17,7 +17,7 @@ me.OptionsDefault = {
 };
 me.OptionsCharacterDefault = {
 	Version = me.Version;
-	IDs = { -- Keys must be lowercase, but don't have to match the NPC name
+	IDs = { -- Keys must be lowercase and trimmed, but don't have to match the NPC name
 		-- Note: Tameable NPCs will be "found" if you encounter them as pets, so don't search for them.
 
 		[ L[ "Time-Lost Proto Drake" ]:lower() ] = 32491;
@@ -152,8 +152,8 @@ function me.Add ( Name, ID )
 	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.Add - string expected." );
 	assert( tonumber( ID ), "Invalid argument #2 \"ID\" to _NPCScan.Add - number expected." );
 	assert( ID >= 1 and ID <= me.IDMax, "Invalid argument #2 \"ID\" to _NPCScan.Add - Out of range." );
-
-	Name = Name:lower();
+	Name = Name:trim():lower();
+	assert( Name ~= "", "Invalid argument #1 \"Name\" to _NPCScan.Add - empty string." );
 
 	local OldID = _NPCScanOptionsCharacter.IDs[ Name ];
 	if ( OldID == ID ) then
@@ -179,8 +179,9 @@ end
   ****************************************************************************]]
 function me.Remove ( Name )
 	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.Remove - string expected." );
+	Name = Name:trim():lower();
+	assert( Name ~= "", "Invalid argument #1 \"Name\" to _NPCScan.Remove - empty string." );
 
-	Name = Name:lower();
 	local ID = _NPCScanOptionsCharacter.IDs[ Name ];
 	if ( ID ) then
 		_NPCScanOptionsCharacter.IDs[ Name ] = nil;
