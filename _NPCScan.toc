@@ -3,7 +3,7 @@
 ## Notes: Scans NPCs around you for rare ones.
 ## Author: Saiket
 ## Version: 3.0.9.2
-## X-Date: 2009-03-28
+## X-Date: 2009-04-05
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com
@@ -12,6 +12,7 @@
 ## X-Localizations: enUS
 ## X-Embeds: LibTextTable-1.0
 ## SavedVariables: _NPCScanOptions
+## SavedVariablesPerCharacter: _NPCScanOptionsCharacter
 ## OptionalDeps: LibTextTable-1.0
 Libs\LibStub\LibStub.lua
 

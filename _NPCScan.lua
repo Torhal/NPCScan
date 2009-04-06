@@ -4,8 +4,19 @@
   ****************************************************************************]]
 
 
+_NPCScanOptions = nil; -- Filled in on load
+_NPCScanOptionsCharacter = nil;
+
+
 local L = _NPCScanLocalization;
-_NPCScanOptions = {
+local me = CreateFrame( "Frame", "_NPCScan" );
+me.Version = GetAddOnMetadata( "_NPCScan", "Version" ):match( "^([%d.]+)" );
+
+me.OptionsDefault = {
+	Version = me.Version;
+};
+me.OptionsCharacterDefault = {
+	Version = me.Version;
 	IDs = { -- Keys must be lowercase, but don't have to match the NPC name
 		-- Note: Tameable NPCs will be "found" if you encounter them as pets, so don't search for them.
 
@@ -60,8 +71,6 @@ _NPCScanOptions = {
 	};
 };
 
-
-local me = CreateFrame( "Frame", "_NPCScan" );
 
 local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip", me );
 me.Tooltip = Tooltip
@@ -122,17 +131,25 @@ function me.Add ( Name, ID )
 	assert( tonumber( ID ), "Invalid argument #2 \"ID\" to _NPCScan.Add - number expected." );
 	assert( ID >= 1 and ID <= me.IDMax, "Invalid argument #2 \"ID\" to _NPCScan.Add - Out of range." );
 
-	local NameKey = Name:lower();
-	if ( not _NPCScanOptions.IDs[ NameKey ] ) then
-		local FoundName = me.TestID( ID );
-		if ( FoundName ) then -- Already seen
-			me.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
-		else
-			IDs[ ID ] = true;
-		end
-		_NPCScanOptions.IDs[ NameKey ] = ID;
-		return true;
+	Name = Name:lower();
+
+	local OldID = _NPCScanOptionsCharacter.IDs[ Name ];
+	if ( OldID == ID ) then
+		return; -- No change
+	elseif ( OldID ) then -- Replace old value
+		IDs[ OldID ] = nil;
 	end
+
+	local FoundName = me.TestID( ID );
+	if ( FoundName ) then -- Already seen
+		me.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
+	else
+		IDs[ ID ] = true;
+	end
+	_NPCScanOptionsCharacter.IDs[ Name ] = ID;
+
+	me.Options.Update();
+	return true;
 end
 --[[****************************************************************************
   * Function: _NPCScan.Remove                                                  *
@@ -141,12 +158,41 @@ end
 function me.Remove ( Name )
 	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.Remove - string expected." );
 
-	local NameKey = Name:lower();
-	local ID = _NPCScanOptions.IDs[ NameKey ];
+	Name = Name:lower();
+	local ID = _NPCScanOptionsCharacter.IDs[ Name ];
 	if ( ID ) then
+		_NPCScanOptionsCharacter.IDs[ Name ] = nil;
 		IDs[ ID ] = nil;
-		_NPCScanOptions.IDs[ NameKey ] = nil;
+
+		me.Options.Update();
 		return true;
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.SynchronizeIDs                                          *
+  * Description: Resets the scanning list and reloads it from saved settings.  *
+  ****************************************************************************]]
+do
+	local CachedNames = {};
+	function me.SynchronizeIDs ()
+		wipe( IDs ); -- Remove old scanned mobs
+
+		-- Add all NPCs from options
+		for Name, ID in pairs( _NPCScanOptionsCharacter.IDs ) do
+			-- Don't add NPCs already in the cache
+			local FoundName = me.TestID( ID );
+			if ( FoundName ) then
+				CachedNames[ #CachedNames + 1 ] = L.NAME_FORMAT:format( FoundName );
+			else -- Add
+				IDs[ ID ] = true;
+			end
+		end
+		-- Print all cached names
+		if ( next( CachedNames ) ) then
+			table.sort( CachedNames );
+			me.Message( L.ALREADY_CACHED_FORMAT:format( table.concat( CachedNames, L.NAME_SEPARATOR ) ) );
+			wipe( CachedNames );
+		end
 	end
 end
 
@@ -183,22 +229,28 @@ function me:ADDON_LOADED ( _, AddOn )
 		me:UnregisterEvent( "ADDON_LOADED" );
 		me.ADDON_LOADED = nil;
 
-		-- Add all NPCs from options
-		local CachedNames = {};
-		for Name, ID in pairs( _NPCScanOptions.IDs ) do
-			-- Don't add NPCs already in the cache
-			local FoundName = me.TestID( ID );
-			if ( FoundName ) then
-				CachedNames[ #CachedNames + 1 ] = L.NAME_FORMAT:format( FoundName );
-			else -- Add
-				IDs[ ID ] = true;
+		-- Apply default settings
+		if ( not _NPCScanOptions ) then
+			_NPCScanOptions = CopyTable( me.OptionsDefault );
+		end
+		if ( not _NPCScanOptionsCharacter ) then
+			_NPCScanOptionsCharacter = CopyTable( me.OptionsCharacterDefault );
+		end
+
+		-- Validate settings
+		if ( _NPCScanOptions.Version ~= me.Version ) then
+			if ( _NPCScanOptions.Version == nil ) then -- Pre 3.0.9.2
+				-- NPC IDs need to be moved into per-character storage
+				_NPCScanOptionsCharacter.IDs = _NPCScanOptions.IDs;
+				_NPCScanOptions = CopyTable( me.OptionsDefault );
 			end
+			_NPCScanOptions.Version = me.Version;
 		end
-		-- Print all cached names
-		if ( next( CachedNames ) ) then
-			table.sort( CachedNames );
-			me.Message( L.ALREADY_CACHED_FORMAT:format( table.concat( CachedNames, L.NAME_SEPARATOR ) ) );
+		if ( _NPCScanOptionsCharacter.Version ~= me.Version ) then
+			_NPCScanOptionsCharacter.Version = me.Version;
 		end
+
+		me.SynchronizeIDs();
 	end
 end
 --[[****************************************************************************

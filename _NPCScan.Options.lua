@@ -48,7 +48,7 @@ function me.ValidateButtons ()
 	local ID = #me.EditBoxID:GetText() > 0 and me.EditBoxID:GetNumber() or nil;
 	Name = #Name > 0 and Name or nil;
 
-	local CanRemove = _NPCScanOptions.IDs[ Name ];
+	local CanRemove = _NPCScanOptionsCharacter.IDs[ Name ];
 	local CanAdd = Name and ID and ID ~= CanRemove and ID >= 1 and ID <= _NPCScan.IDMax;
 
 	if ( me.Table ) then
@@ -62,23 +62,14 @@ end
   * Description: Adds a list element.                                          *
   ****************************************************************************]]
 function me.Add ()
-	local Name = me.EditBoxName:GetText():lower();
-	if ( not _NPCScanOptions.IDs[ Name ] or _NPCScan.Remove( Name ) ) then
-		if ( _NPCScan.Add( Name, me.EditBoxID:GetNumber() ) ) then
-			me.SetEditBoxText();
-			me.Update();
-		end
-	end
+	_NPCScan.Add( me.EditBoxName:GetText(), me.EditBoxID:GetNumber() );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Remove                                          *
   * Description: Removes a list element.                                       *
   ****************************************************************************]]
 function me.Remove ()
-	if ( _NPCScan.Remove( me.EditBoxName:GetText():lower() ) ) then
-		me.SetEditBoxText();
-		me.Update();
-	end
+	_NPCScan.Remove( me.EditBoxName:GetText() );
 end
 
 
@@ -102,11 +93,15 @@ end
   ****************************************************************************]]
 do
 	local SortedNames = {};
-	function me.Update ()
+	function me.Update ( Force )
+		if ( not Force and not me:IsVisible() ) then
+			return;
+		end
+
 		me.SetEditBoxText();
 
 		me.Table:Clear();
-		local IDs = _NPCScanOptions.IDs;
+		local IDs = _NPCScanOptionsCharacter.IDs;
 		for Name in pairs( IDs ) do
 			SortedNames[ #SortedNames + 1 ] = Name;
 		end
@@ -118,6 +113,7 @@ do
 				Name, IDs[ Name ] );
 		end
 		wipe( SortedNames );
+		return true;
 	end
 end
 --[[****************************************************************************
@@ -126,21 +122,31 @@ end
   ****************************************************************************]]
 function me:TableOnSelect ( Key )
 	if ( Key ~= nil ) then
-		me.SetEditBoxText( Key, _NPCScanOptions.IDs[ Key ] );
+		me.SetEditBoxText( Key, _NPCScanOptionsCharacter.IDs[ Key ] );
 	end
 end
 --[[****************************************************************************
-  * Function: _NPCScan.Options:OnShow                                          *
+  * Function: _NPCScan.Options:default                                         *
+  * Description: Resets all settings to defaults.                              *
+  ****************************************************************************]]
+function me:default ()
+	_NPCScanOptions = CopyTable( _NPCScan.OptionsDefault );
+	_NPCScanOptionsCharacter = CopyTable( _NPCScan.OptionsCharacterDefault );
+
+	_NPCScan.SynchronizeIDs();
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Options:refresh                                         *
   * Description: Creates the NPC table when displayed.                         *
   ****************************************************************************]]
-function me:OnShow ()
+function me:refresh ()
 	if ( not me.Table ) then
 		me.Table = LibStub( "LibTextTable-1.0" ).New( nil, me.TableContainer );
 		me.Table.OnSelect = me.TableOnSelect;
 		me.Table:SetAllPoints();
 		me.Table:SetHeader( L.OPTIONS_CACHED, L.OPTIONS_NAME, L.OPTIONS_ID );
 	end
-	me.Update();
+	me.Update( true ); -- Force update even if hidden, since refresh gets called for all panels when options are shown
 end
 
 
@@ -161,7 +167,7 @@ end
 
 do
 	me.name = L.OPTIONS_TITLE;
-	me:SetScript( "OnShow", me.OnShow );
+	me:Hide();
 
 	-- Pane title
 	me.Title = me:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
