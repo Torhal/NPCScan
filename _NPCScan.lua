@@ -75,7 +75,7 @@ me.OptionsCharacterDefault = {
 local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip", me );
 me.Tooltip = Tooltip
 
-local IDs = {};
+local IDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
 me.IDs = IDs;
 
 me.IDMax = 0xFFFF; -- Largest ID that will fit in a GUID's 2-byte NPC ID field
@@ -123,8 +123,30 @@ do
 end
 
 --[[****************************************************************************
+  * Function: _NPCScan.AddScan                                                 *
+  * Description: Begins searching for an NPC ID.                               *
+  ****************************************************************************]]
+function me.AddScan ( ID )
+	IDs[ ID ] = ( IDs[ ID ] or 0 ) + 1; -- Increment
+end
+--[[****************************************************************************
+  * Function: _NPCScan.RemoveScan                                              *
+  * Description: Stops searching for an NPC ID.                                *
+  ****************************************************************************]]
+function me.RemoveScan ( ID, All )
+	if ( All ) then -- Stop all concurrent scans
+		IDs[ ID ] = nil;
+	else -- Stop only one instance of the scan
+		local Count = IDs[ ID ];
+		if ( Count ) then -- Reduce counter, and clear if zero
+			IDs[ ID ] = Count > 1 and Count - 1 or nil;
+		end
+	end
+end
+
+--[[****************************************************************************
   * Function: _NPCScan.Add                                                     *
-  * Description: Adds an NPC ID to scan for.                                   *
+  * Description: Adds an NPC name and ID to settings and begins searching.     *
   ****************************************************************************]]
 function me.Add ( Name, ID )
 	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.Add - string expected." );
@@ -137,14 +159,14 @@ function me.Add ( Name, ID )
 	if ( OldID == ID ) then
 		return; -- No change
 	elseif ( OldID ) then -- Replace old value
-		IDs[ OldID ] = nil;
+		me.RemoveScan( OldID );
 	end
 
 	local FoundName = me.TestID( ID );
 	if ( FoundName ) then -- Already seen
 		me.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
 	else
-		IDs[ ID ] = true;
+		me.AddScan( ID );
 	end
 	_NPCScanOptionsCharacter.IDs[ Name ] = ID;
 
@@ -153,7 +175,7 @@ function me.Add ( Name, ID )
 end
 --[[****************************************************************************
   * Function: _NPCScan.Remove                                                  *
-  * Description: Removes an NPC from the scanning list.                        *
+  * Description: Removes an NPC from settings by name and stops searching.     *
   ****************************************************************************]]
 function me.Remove ( Name )
 	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.Remove - string expected." );
@@ -162,7 +184,7 @@ function me.Remove ( Name )
 	local ID = _NPCScanOptionsCharacter.IDs[ Name ];
 	if ( ID ) then
 		_NPCScanOptionsCharacter.IDs[ Name ] = nil;
-		IDs[ ID ] = nil;
+		me.RemoveScan( ID );
 
 		me.Options.Update();
 		return true;
@@ -184,7 +206,7 @@ do
 			if ( FoundName ) then
 				CachedNames[ #CachedNames + 1 ] = L.NAME_FORMAT:format( FoundName );
 			else -- Add
-				IDs[ ID ] = true;
+				me.AddScan( ID );
 			end
 		end
 		-- Print all cached names
@@ -215,7 +237,7 @@ do
 				if ( Name ) then
 					me.Alert( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
 					me.Button.SetNPC( Name, ID );
-					IDs[ ID ] = nil; -- Stop searching for this NPC
+					me.RemoveScan( ID, true ); -- Stop searching for this NPC entirely
 				end
 			end
 		end
