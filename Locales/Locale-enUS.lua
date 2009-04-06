@@ -15,7 +15,7 @@ do
 		FOUND_FORMAT = "Found "..LDQuo.."%s"..RDQuo.."!";
 		BUTTON_FOUND = "NPC found!";
 
-		ALREADY_CACHED_FORMAT = "Consider removing the following unit(s) from the "..LDQuo.."/npcscan"..RDQuo.." menu or resetting them by clearing your cache: %s.";
+		ALREADY_CACHED_FORMAT = "The following unit(s) are already cached.  Consider removing them using "..LDQuo.."/npcscan"..RDQuo.."'s menu or resetting them by clearing your cache: %s.";
 		NAME_FORMAT = LDQuo.."%s"..RDQuo;
 		NAME_SEPARATOR = ", ";
 
