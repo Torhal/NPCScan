@@ -40,13 +40,20 @@ function me.SetEditBoxText ( Name, ID )
 	me.EditBoxID:SetText( ID or "" );
 end
 --[[****************************************************************************
+  * Function: _NPCScan.Options:EditBoxNameGetText                              *
+  * Description: Returns the name field without leading or trailing spaces.    *
+  ****************************************************************************]]
+function me:EditBoxNameGetText ( ... )
+	return self:GetTextBackup( ... ):trim();
+end
+--[[****************************************************************************
   * Function: _NPCScan.Options.ValidateButtons                                 *
   * Description: Validates ability to use add and remove buttons.              *
   ****************************************************************************]]
 function me.ValidateButtons ()
 	local Name = me.EditBoxName:GetText():lower();
-	local ID = #me.EditBoxID:GetText() > 0 and me.EditBoxID:GetNumber() or nil;
-	Name = #Name > 0 and Name or nil;
+	local ID = me.EditBoxID:GetText() ~= "" and me.EditBoxID:GetNumber() or nil;
+	Name = Name ~= "" and Name or nil;
 
 	local CanRemove = _NPCScanOptionsCharacter.IDs[ Name ];
 	local CanAdd = Name and ID and ID ~= CanRemove and ID >= 1 and ID <= _NPCScan.IDMax;
@@ -249,6 +256,8 @@ do
 	EditBoxName:SetScript( "OnTextChanged", me.ValidateButtons );
 	EditBoxName:SetScript( "OnEnter", me.ControlOnEnter );
 	EditBoxName:SetScript( "OnLeave", me.ControlOnLeave );
+	EditBoxName.GetTextBackup = EditBoxName.GetText;
+	EditBoxName.GetText = me.EditBoxNameGetText;
 	EditBoxName.tooltipText = L.OPTIONS_NAME_DESC;
 
 	EditBoxID:SetPoint( "LEFT",
