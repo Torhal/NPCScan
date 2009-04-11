@@ -72,14 +72,12 @@ me.OptionsCharacterDefault = {
 };
 
 
-local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip", me );
-me.Tooltip = Tooltip
-
-local IDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
-me.IDs = IDs;
+me.ScanIDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
 
 me.IDMax = 0xFFFF; -- Largest ID that will fit in a GUID's 2-byte NPC ID field
 me.UpdateRate = 0.1;
+
+local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip", me );
 
 
 
@@ -124,23 +122,23 @@ end
 
 
 --[[****************************************************************************
-  * Function: _NPCScan.AddScan                                                 *
+  * Function: _NPCScan.ScanAdd                                                 *
   * Description: Begins searching for an NPC ID.                               *
   ****************************************************************************]]
-function me.AddScan ( ID )
-	IDs[ ID ] = ( IDs[ ID ] or 0 ) + 1; -- Increment
+function me.ScanAdd ( ID )
+	me.ScanIDs[ ID ] = ( me.ScanIDs[ ID ] or 0 ) + 1; -- Increment
 end
 --[[****************************************************************************
-  * Function: _NPCScan.RemoveScan                                              *
+  * Function: _NPCScan.ScanRemove                                              *
   * Description: Stops searching for an NPC ID.                                *
   ****************************************************************************]]
-function me.RemoveScan ( ID, All )
+function me.ScanRemove ( ID, All )
 	if ( All ) then -- Stop all concurrent scans
-		IDs[ ID ] = nil;
+		me.ScanIDs[ ID ] = nil;
 	else -- Stop only one instance of the scan
-		local Count = IDs[ ID ];
+		local Count = me.ScanIDs[ ID ];
 		if ( Count ) then -- Reduce counter, and clear if zero
-			IDs[ ID ] = Count > 1 and Count - 1 or nil;
+			me.ScanIDs[ ID ] = Count > 1 and Count - 1 or nil;
 		end
 	end
 end
@@ -158,7 +156,7 @@ function me.Add ( Name, ID )
 	if ( OldID == ID ) then
 		return; -- No change
 	elseif ( OldID ) then -- Replace old value
-		me.RemoveScan( OldID );
+		me.ScanRemove( OldID );
 	end
 	_NPCScanOptionsCharacter.IDs[ Name ] = ID;
 
@@ -166,7 +164,7 @@ function me.Add ( Name, ID )
 	if ( FoundName ) then -- Already seen
 		return true, FoundName;
 	else
-		me.AddScan( ID );
+		me.ScanAdd( ID );
 		return true;
 	end
 end
@@ -180,7 +178,7 @@ function me.Remove ( Name )
 
 	if ( ID ) then
 		_NPCScanOptionsCharacter.IDs[ Name ] = nil;
-		me.RemoveScan( ID );
+		me.ScanRemove( ID );
 
 		return true;
 	end
@@ -192,7 +190,7 @@ end
 do
 	local CachedNames = {};
 	function me.SynchronizeIDs ()
-		wipe( IDs ); -- Remove old scanned mobs
+		wipe( me.ScanIDs ); -- Remove old scanned mobs
 
 		-- Add all NPCs from options
 		for Name, ID in pairs( _NPCScanOptionsCharacter.IDs ) do
@@ -201,7 +199,7 @@ do
 			if ( FoundName ) then
 				CachedNames[ #CachedNames + 1 ] = L.NAME_FORMAT:format( FoundName );
 			else -- Add
-				me.AddScan( ID );
+				me.ScanAdd( ID );
 			end
 		end
 		-- Print all cached names
@@ -227,12 +225,12 @@ do
 		if ( LastUpdate >= me.UpdateRate ) then
 			LastUpdate = 0;
 
-			for ID in pairs( IDs ) do
+			for ID in pairs( me.ScanIDs ) do
 				Name = me.TestID( ID );
 				if ( Name ) then
 					me.Alert( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
 					me.Button.SetNPC( Name, ID );
-					me.RemoveScan( ID, true ); -- Stop searching for this NPC entirely
+					me.ScanRemove( ID, true ); -- Stop searching for this NPC entirely
 				end
 			end
 		end
