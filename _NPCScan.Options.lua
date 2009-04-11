@@ -27,7 +27,7 @@ function me.Test ()
 	_NPCScan.Button:SetText( Name );
 	local Model = _NPCScan.Button.Model;
 	Model:SetUnit( "player" );
-	Model:SetScale( 0.75 );
+	Model:SetModelScale( 0.75 );
 end
 
 
