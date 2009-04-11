@@ -69,14 +69,22 @@ end
   * Description: Adds a list element.                                          *
   ****************************************************************************]]
 function me.Add ()
-	_NPCScan.Add( me.EditBoxName:GetText(), me.EditBoxID:GetNumber() );
+	local Success, FoundName = _NPCScan.Add( me.EditBoxName:GetText(), me.EditBoxID:GetNumber() );
+	if ( Success ) then
+		me.Update();
+		if ( FoundName ) then
+			_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
+		end
+	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Remove                                          *
   * Description: Removes a list element.                                       *
   ****************************************************************************]]
 function me.Remove ()
-	_NPCScan.Remove( me.EditBoxName:GetText() );
+	if ( _NPCScan.Remove( me.EditBoxName:GetText() ) ) then
+		me.Update();
+	end
 end
 
 

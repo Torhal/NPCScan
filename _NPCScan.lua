@@ -122,6 +122,7 @@ do
 	end
 end
 
+
 --[[****************************************************************************
   * Function: _NPCScan.AddScan                                                 *
   * Description: Begins searching for an NPC ID.                               *
@@ -144,16 +145,14 @@ function me.RemoveScan ( ID, All )
 	end
 end
 
+
 --[[****************************************************************************
   * Function: _NPCScan.Add                                                     *
   * Description: Adds an NPC name and ID to settings and begins searching.     *
   ****************************************************************************]]
 function me.Add ( Name, ID )
-	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.Add - string expected." );
-	assert( tonumber( ID ), "Invalid argument #2 \"ID\" to _NPCScan.Add - number expected." );
-	assert( ID >= 1 and ID <= me.IDMax, "Invalid argument #2 \"ID\" to _NPCScan.Add - Out of range." );
 	Name = Name:trim():lower();
-	assert( Name ~= "", "Invalid argument #1 \"Name\" to _NPCScan.Add - empty string." );
+	ID = tonumber( ID );
 
 	local OldID = _NPCScanOptionsCharacter.IDs[ Name ];
 	if ( OldID == ID ) then
@@ -161,33 +160,28 @@ function me.Add ( Name, ID )
 	elseif ( OldID ) then -- Replace old value
 		me.RemoveScan( OldID );
 	end
+	_NPCScanOptionsCharacter.IDs[ Name ] = ID;
 
 	local FoundName = me.TestID( ID );
 	if ( FoundName ) then -- Already seen
-		me.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
+		return true, FoundName;
 	else
 		me.AddScan( ID );
+		return true;
 	end
-	_NPCScanOptionsCharacter.IDs[ Name ] = ID;
-
-	me.Options.Update();
-	return true;
 end
 --[[****************************************************************************
   * Function: _NPCScan.Remove                                                  *
   * Description: Removes an NPC from settings by name and stops searching.     *
   ****************************************************************************]]
 function me.Remove ( Name )
-	assert( type( Name ) == "string", "Invalid argument #1 \"Name\" to _NPCScan.Remove - string expected." );
 	Name = Name:trim():lower();
-	assert( Name ~= "", "Invalid argument #1 \"Name\" to _NPCScan.Remove - empty string." );
-
 	local ID = _NPCScanOptionsCharacter.IDs[ Name ];
+
 	if ( ID ) then
 		_NPCScanOptionsCharacter.IDs[ Name ] = nil;
 		me.RemoveScan( ID );
 
-		me.Options.Update();
 		return true;
 	end
 end
