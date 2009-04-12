@@ -25,3 +25,4 @@ _NPCScan.lua
 _NPCScan.Button.lua
 
 _NPCScan.Options.lua
+_NPCScan.Options.Search.lua

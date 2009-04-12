@@ -9,8 +9,6 @@ local L = _NPCScanLocalization;
 local me = CreateFrame( "Frame" );
 _NPCScan.Options = me;
 
-me.TableContainer = CreateFrame( "Frame", nil, me );
-
 
 
 
@@ -32,65 +30,6 @@ end
 
 
 --[[****************************************************************************
-  * Function: _NPCScan.Options.SetEditBoxText                                  *
-  * Description: Sets the edit boxes' text.                                    *
-  ****************************************************************************]]
-function me.SetEditBoxText ( Name, ID )
-	me.EditBoxName:SetText( Name or "" );
-	me.EditBoxID:SetText( ID or "" );
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options:EditBoxNameGetText                              *
-  * Description: Returns the name field without leading or trailing spaces.    *
-  ****************************************************************************]]
-function me:EditBoxNameGetText ( ... )
-	return self:GetTextBackup( ... ):trim();
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options.ValidateButtons                                 *
-  * Description: Validates ability to use add and remove buttons.              *
-  ****************************************************************************]]
-function me.ValidateButtons ()
-	local Name = me.EditBoxName:GetText():lower();
-	local ID = me.EditBoxID:GetText() ~= "" and me.EditBoxID:GetNumber() or nil;
-	Name = Name ~= "" and Name or nil;
-
-	local CanRemove = _NPCScanOptionsCharacter.NPCs[ Name ];
-	local CanAdd = Name and ID and ID ~= CanRemove and ID >= 1 and ID <= _NPCScan.IDMax;
-
-	if ( me.Table ) then
-		me.Table:SetSelectionByKey( CanRemove and Name or nil );
-	end
-	me.AddButton[ CanAdd and "Enable" or "Disable" ]( me.AddButton );
-	me.RemoveButton[ CanRemove and "Enable" or "Disable" ]( me.RemoveButton );
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options.Add                                             *
-  * Description: Adds a list element.                                          *
-  ****************************************************************************]]
-function me.Add ()
-	local Name = me.EditBoxName:GetText();
-	_NPCScan.NPCRemove( Name );
-	local Success, FoundName = _NPCScan.NPCAdd( Name, me.EditBoxID:GetNumber() );
-	if ( Success ) then
-		me.Update();
-		if ( FoundName ) then
-			_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
-		end
-	end
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options.Remove                                          *
-  * Description: Removes a list element.                                       *
-  ****************************************************************************]]
-function me.Remove ()
-	if ( _NPCScan.NPCRemove( me.EditBoxName:GetText() ) ) then
-		me.Update();
-	end
-end
-
-
---[[****************************************************************************
   * Function: _NPCScan.Options:ControlOnEnter                                  *
   ****************************************************************************]]
 function me:ControlOnEnter ()
@@ -105,48 +44,11 @@ function me:ControlOnLeave ()
 end
 
 --[[****************************************************************************
-  * Function: _NPCScan.Options.Update                                          *
-  * Description: Fills in the NPC table.                                       *
-  ****************************************************************************]]
-do
-	local SortedNames = {};
-	function me.Update ( Force )
-		if ( not Force and not me:IsVisible() ) then
-			return;
-		end
-
-		me.SetEditBoxText();
-
-		me.Table:Clear();
-		local NPCs = _NPCScanOptionsCharacter.NPCs;
-		for Name in pairs( NPCs ) do
-			SortedNames[ #SortedNames + 1 ] = Name;
-		end
-		sort( SortedNames );
-
-		for _, Name in ipairs( SortedNames ) do
-			me.Table:AddRow( Name,
-				L[ _NPCScan.TestID( NPCs[ Name ] ) and "OPTIONS_CACHED_YES" or "OPTIONS_CACHED_NO" ],
-				Name, NPCs[ Name ] );
-		end
-		wipe( SortedNames );
-		return true;
-	end
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options:TableOnSelect                                   *
-  * Description: Updates the edit boxes when a table row is selected.          *
-  ****************************************************************************]]
-function me:TableOnSelect ( Name )
-	if ( Name ~= nil ) then
-		me.SetEditBoxText( Name, _NPCScanOptionsCharacter.NPCs[ Name ] );
-	end
-end
---[[****************************************************************************
   * Function: _NPCScan.Options:default                                         *
   * Description: Resets all settings to defaults.                              *
   ****************************************************************************]]
 function me:default ()
+	print("Options","default")
 	_NPCScanOptions = CopyTable( _NPCScan.OptionsDefault );
 	_NPCScanOptionsCharacter = CopyTable( _NPCScan.OptionsCharacterDefault );
 
@@ -154,16 +56,10 @@ function me:default ()
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options:refresh                                         *
-  * Description: Creates the NPC table when displayed.                         *
+  * Description: Updates controls when displayed/reset.                        *
   ****************************************************************************]]
 function me:refresh ()
-	if ( not me.Table ) then
-		me.Table = LibStub( "LibTextTable-1.0" ).New( nil, me.TableContainer );
-		me.Table.OnSelect = me.TableOnSelect;
-		me.Table:SetAllPoints();
-		me.Table:SetHeader( L.OPTIONS_CACHED, L.OPTIONS_NAME, L.OPTIONS_ID );
-	end
-	me.Update( true ); -- Force update even if hidden, since refresh gets called for all panels when options are shown
+	print("Options","refresh")
 end
 
 
@@ -209,75 +105,6 @@ do
 	TestButton:SetScript( "OnEnter", me.ControlOnEnter );
 	TestButton:SetScript( "OnLeave", me.ControlOnLeave );
 	TestButton.tooltipText = L.OPTIONS_TEST_DESC;
-
-
-	-- Create add and remove buttons
-	local RemoveButton = CreateFrame( "Button", nil, me, "GameMenuButtonTemplate" );
-	me.RemoveButton = RemoveButton;
-	RemoveButton:SetWidth( 16 );
-	RemoveButton:SetHeight( 20 );
-	RemoveButton:SetPoint( "BOTTOMRIGHT", -16, 16 );
-	RemoveButton:SetText( L.OPTIONS_REMOVE );
-	RemoveButton:SetScript( "OnClick", me.Remove );
-	local AddButton = CreateFrame( "Button", nil, me, "GameMenuButtonTemplate" );
-	me.AddButton = AddButton;
-	AddButton:SetWidth( 16 );
-	AddButton:SetHeight( 20 );
-	AddButton:SetPoint( "BOTTOMRIGHT", RemoveButton, "TOPRIGHT", 0, 4 );
-	AddButton:SetText( L.OPTIONS_ADD );
-	AddButton:SetScript( "OnClick", me.Add );
-
-
-	-- Create edit boxes
-	local LabelID = me:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
-	me.LabelID = LabelID;
-	LabelID:SetPoint( "BOTTOMLEFT", 16, 16 );
-	LabelID:SetPoint( "TOP", RemoveButton );
-	LabelID:SetText( L.OPTIONS_ID );
-	local LabelName = me:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
-	me.LabelName = LabelName;
-	LabelName:SetPoint( "BOTTOMLEFT", LabelID, "TOPLEFT", 0, 4 );
-	LabelName:SetPoint( "TOP", AddButton );
-	LabelName:SetText( L.OPTIONS_NAME );
-
-	local EditBoxName = CreateFrame( "EditBox", "_NPCScanOptionsName", me, "InputBoxTemplate" );
-	me.EditBoxName = EditBoxName;
-	local EditBoxID = CreateFrame( "EditBox", "_NPCScanOptionsID", me, "InputBoxTemplate" );
-	me.EditBoxID = EditBoxID;
-
-	EditBoxID:SetPoint( "TOP", LabelID );
-	EditBoxID:SetPoint( "BOTTOMRIGHT", RemoveButton, "BOTTOMLEFT", -4, 0 );
-	EditBoxID:SetAutoFocus( false );
-	EditBoxID:SetNumeric( true );
-	EditBoxID:SetMaxLetters( floor( log10( _NPCScan.IDMax ) ) + 1 );
-	EditBoxID:SetScript( "OnTabPressed", function () EditBoxName:SetFocus(); end );
-	EditBoxID:SetScript( "OnEnterPressed", me.Add );
-	EditBoxID:SetScript( "OnTextChanged", me.ValidateButtons );
-	EditBoxID:SetScript( "OnEnter", me.ControlOnEnter );
-	EditBoxID:SetScript( "OnLeave", me.ControlOnLeave );
-	EditBoxID.tooltipText = L.OPTIONS_ID_DESC;
-
-	EditBoxName:SetPoint( "TOP", LabelName );
-	EditBoxName:SetPoint( "LEFT", EditBoxID );
-	EditBoxName:SetPoint( "BOTTOMRIGHT", EditBoxID, "TOPRIGHT" );
-	EditBoxName:SetAutoFocus( false );
-	EditBoxName:SetScript( "OnTabPressed", function () EditBoxID:SetFocus(); end );
-	EditBoxName:SetScript( "OnEnterPressed", me.Add );
-	EditBoxName:SetScript( "OnTextChanged", me.ValidateButtons );
-	EditBoxName:SetScript( "OnEnter", me.ControlOnEnter );
-	EditBoxName:SetScript( "OnLeave", me.ControlOnLeave );
-	EditBoxName.GetTextBackup = EditBoxName.GetText;
-	EditBoxName.GetText = me.EditBoxNameGetText;
-	EditBoxName.tooltipText = L.OPTIONS_NAME_DESC;
-
-	EditBoxID:SetPoint( "LEFT",
-		LabelName:GetStringWidth() > LabelID:GetStringWidth() and LabelName or LabelID,
-		"RIGHT", 8, 0 );
-
-	me.TableContainer:SetPoint( "TOPLEFT", TestButton, "BOTTOMLEFT", 0, -8 );
-	me.TableContainer:SetPoint( "RIGHT", -16, 0 );
-	me.TableContainer:SetPoint( "BOTTOM", AddButton, "TOP", 0, 4 );
-	me.TableContainer:SetBackdrop( { bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background"; } );
 
 
 	InterfaceOptions_AddCategory( me );
