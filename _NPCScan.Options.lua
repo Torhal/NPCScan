@@ -55,7 +55,7 @@ function me.ValidateButtons ()
 	local ID = me.EditBoxID:GetText() ~= "" and me.EditBoxID:GetNumber() or nil;
 	Name = Name ~= "" and Name or nil;
 
-	local CanRemove = _NPCScanOptionsCharacter.IDs[ Name ];
+	local CanRemove = _NPCScanOptionsCharacter.NPCs[ Name ];
 	local CanAdd = Name and ID and ID ~= CanRemove and ID >= 1 and ID <= _NPCScan.IDMax;
 
 	if ( me.Table ) then
@@ -69,7 +69,9 @@ end
   * Description: Adds a list element.                                          *
   ****************************************************************************]]
 function me.Add ()
-	local Success, FoundName = _NPCScan.Add( me.EditBoxName:GetText(), me.EditBoxID:GetNumber() );
+	local Name = me.EditBoxName:GetText();
+	_NPCScan.NPCRemove( Name );
+	local Success, FoundName = _NPCScan.NPCAdd( Name, me.EditBoxID:GetNumber() );
 	if ( Success ) then
 		me.Update();
 		if ( FoundName ) then
@@ -82,7 +84,7 @@ end
   * Description: Removes a list element.                                       *
   ****************************************************************************]]
 function me.Remove ()
-	if ( _NPCScan.Remove( me.EditBoxName:GetText() ) ) then
+	if ( _NPCScan.NPCRemove( me.EditBoxName:GetText() ) ) then
 		me.Update();
 	end
 end
@@ -116,16 +118,16 @@ do
 		me.SetEditBoxText();
 
 		me.Table:Clear();
-		local IDs = _NPCScanOptionsCharacter.IDs;
-		for Name in pairs( IDs ) do
+		local NPCs = _NPCScanOptionsCharacter.NPCs;
+		for Name in pairs( NPCs ) do
 			SortedNames[ #SortedNames + 1 ] = Name;
 		end
 		sort( SortedNames );
 
 		for _, Name in ipairs( SortedNames ) do
 			me.Table:AddRow( Name,
-				L[ _NPCScan.TestID( IDs[ Name ] ) and "OPTIONS_CACHED_YES" or "OPTIONS_CACHED_NO" ],
-				Name, IDs[ Name ] );
+				L[ _NPCScan.TestID( NPCs[ Name ] ) and "OPTIONS_CACHED_YES" or "OPTIONS_CACHED_NO" ],
+				Name, NPCs[ Name ] );
 		end
 		wipe( SortedNames );
 		return true;
@@ -135,9 +137,9 @@ end
   * Function: _NPCScan.Options:TableOnSelect                                   *
   * Description: Updates the edit boxes when a table row is selected.          *
   ****************************************************************************]]
-function me:TableOnSelect ( Key )
-	if ( Key ~= nil ) then
-		me.SetEditBoxText( Key, _NPCScanOptionsCharacter.IDs[ Key ] );
+function me:TableOnSelect ( Name )
+	if ( Name ~= nil ) then
+		me.SetEditBoxText( Name, _NPCScanOptionsCharacter.NPCs[ Name ] );
 	end
 end
 --[[****************************************************************************
@@ -148,7 +150,7 @@ function me:default ()
 	_NPCScanOptions = CopyTable( _NPCScan.OptionsDefault );
 	_NPCScanOptionsCharacter = CopyTable( _NPCScan.OptionsCharacterDefault );
 
-	_NPCScan.SynchronizeIDs();
+	_NPCScan.ScanSynchronize();
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options:refresh                                         *

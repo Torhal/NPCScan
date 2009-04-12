@@ -9,7 +9,17 @@ do
 	local LDQuo, RDQuo = GRAY_FONT_COLOR_CODE.."\226\128\156", "\226\128\157|r";
 
 
+	local Metatable = {
+		__index = function ( self, Key )
+			if ( Key ~= nil ) then
+				rawset( self, Key, Key );
+				return Key;
+			end
+		end;
+	};
 	_NPCScanLocalization = setmetatable( {
+		NPCS = setmetatable( {}, Metatable );
+
 		MESSAGE_FORMAT = Title..": %s";
 
 		FOUND_FORMAT = "Found "..LDQuo.."%s"..RDQuo.."!";
@@ -39,14 +49,7 @@ do
 
 		OPTIONS_ADD = "+";
 		OPTIONS_REMOVE = "-";
-	}, {
-		__index = function ( self, Key )
-			if ( Key ~= nil ) then
-				rawset( self, Key, Key );
-				return Key;
-			end
-		end;
-	} );
+	}, Metatable );
 
 
 
