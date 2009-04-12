@@ -45,21 +45,11 @@ end
 
 --[[****************************************************************************
   * Function: _NPCScan.Options:default                                         *
-  * Description: Resets all settings to defaults.                              *
   ****************************************************************************]]
 function me:default ()
-	print("Options","default")
-	_NPCScanOptions = CopyTable( _NPCScan.OptionsDefault );
-	_NPCScanOptionsCharacter = CopyTable( _NPCScan.OptionsCharacterDefault );
+	_NPCScan.LoadDefaults( true );
 
 	_NPCScan.ScanSynchronize();
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options:refresh                                         *
-  * Description: Updates controls when displayed/reset.                        *
-  ****************************************************************************]]
-function me:refresh ()
-	print("Options","refresh")
 end
 
 

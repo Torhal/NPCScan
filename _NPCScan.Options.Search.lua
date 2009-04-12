@@ -219,6 +219,15 @@ function me:OnShow ()
 		me.TabSelect( me.Tabs[ 1 ] );
 	end
 end
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search:default                                  *
+  ****************************************************************************]]
+function me:default ()
+	_NPCScan.LoadDefaults();
+
+	_NPCScan.ScanSynchronize();
+	me.Update();
+end
 
 
 

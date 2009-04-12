@@ -258,6 +258,25 @@ end
 
 
 --[[****************************************************************************
+  * Function: _NPCScan.LoadDefaults                                            *
+  * Description: Loads defaults per character and optionally globally.         *
+  ****************************************************************************]]
+function me.LoadDefaults ( Global )
+	if ( Global ) then
+		_NPCScanOptions = CopyTable( me.OptionsDefault );
+	end
+	_NPCScanOptionsCharacter = CopyTable( me.OptionsCharacterDefault );
+
+	-- Add all uncompleted achievements
+	for AchievementID in pairs( me.Achievements ) do
+		if ( _NPCScanOptionsCharacter.AchievementsAddFound or not select( 4, GetAchievementInfo( AchievementID ) ) ) then -- Not completed
+			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
+		end
+	end
+end
+
+
+--[[****************************************************************************
   * Function: _NPCScan:OnUpdate                                                *
   * Description: Scans all NPCs and alerts if any are found.                   *
   ****************************************************************************]]
@@ -289,11 +308,8 @@ function me.OnLoad ()
 	me.OnLoad = nil;
 
 	-- Apply default settings
-	if ( not _NPCScanOptions ) then
-		_NPCScanOptions = CopyTable( me.OptionsDefault );
-	end
 	if ( not _NPCScanOptionsCharacter ) then
-		_NPCScanOptionsCharacter = CopyTable( me.OptionsCharacterDefault );
+		me.LoadDefaults( not _NPCScanOptions );
 	end
 
 	-- Validate settings
@@ -354,8 +370,6 @@ do
 
 	-- Save achievement criteria data
 	for AchievementID, Achievement in pairs( me.Achievements ) do
-		me.OptionsCharacterDefault.Achievements[ AchievementID ] = true;
-
 		Achievement.Criteria = {};
 		for Criteria = 1, GetAchievementNumCriteria( AchievementID ) do
 			local _, CriteriaType, _, _, _, _, _, AssetID, _, CriteriaID = GetAchievementCriteriaInfo( AchievementID, Criteria );
