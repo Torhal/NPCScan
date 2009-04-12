@@ -182,7 +182,7 @@ do
 		if ( not _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
 			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
 
-			for ID, CriteriaID in pairs( me.Achievements[ AchievementID ].NPCs ) do
+			for ID, CriteriaID in pairs( me.Achievements[ AchievementID ].Criteria ) do
 				local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
 				if ( not Completed or _NPCScanOptionsCharacter.AchievementsAddFound ) then
 					local FoundName = me.TestID( ID );
@@ -212,7 +212,7 @@ function me.AchievementRemove ( AchievementID )
 	if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
 		_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
 
-		for ID in pairs( me.Achievements[ AchievementID ].NPCs ) do
+		for ID in pairs( me.Achievements[ AchievementID ].Criteria ) do
 			me.ScanRemove( AchievementID, ID );
 		end
 		return true;
@@ -353,15 +353,14 @@ do
 
 
 	-- Save achievement criteria data
-	for AchievementID, Table in pairs( me.Achievements ) do
+	for AchievementID, Achievement in pairs( me.Achievements ) do
 		me.OptionsCharacterDefault.Achievements[ AchievementID ] = true;
-		Table.Name = select( 2, GetAchievementInfo( AchievementID ) );
 
-		Table.NPCs = {};
+		Achievement.Criteria = {};
 		for Criteria = 1, GetAchievementNumCriteria( AchievementID ) do
 			local _, CriteriaType, _, _, _, _, _, AssetID, _, CriteriaID = GetAchievementCriteriaInfo( AchievementID, Criteria );
 			if ( CriteriaType == 0 and not me.TamableIDs[ AssetID ] ) then -- Mob kill type
-				Table.NPCs[ AssetID ] = CriteriaID;
+				Achievement.Criteria[ AssetID ] = CriteriaID;
 			end
 		end
 	end

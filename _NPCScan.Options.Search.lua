@@ -111,7 +111,7 @@ do
 		return CriteriaNames[ Criteria1 ] < CriteriaNames[ Criteria2 ];
 	end
 	function me:AchievementUpdate ()
-		local Criteria = _NPCScan.Achievements[ self.AchievementID ].NPCs;
+		local Criteria = _NPCScan.Achievements[ self.AchievementID ].Criteria;
 		for _, CriteriaID in pairs( Criteria ) do
 			CriteriaNames[ CriteriaID ], _, CriteriaCompleted[ CriteriaID ], _, _, _, _, CriteriaNPCs[ CriteriaID ]
 				= GetAchievementCriteriaInfo( CriteriaID );
@@ -348,8 +348,8 @@ do
 		return Tab;
 	end
 	AddTab( L.SEARCH_NPCS, me.NPCUpdate, me.NPCActivate, me.NPCDeactivate );
-	for AchievementID, Achievement in pairs( _NPCScan.Achievements ) do
-		AddTab( Achievement.Name, me.AchievementUpdate ).AchievementID = AchievementID;
+	for AchievementID in pairs( _NPCScan.Achievements ) do
+		AddTab( select( 2, GetAchievementInfo( AchievementID ) ), me.AchievementUpdate ).AchievementID = AchievementID;
 	end
 
 
