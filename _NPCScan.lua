@@ -47,6 +47,20 @@ me.UpdateRate = 0.1;
 
 local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip", me );
 
+local List = setmetatable( {}, { __index = { -- List string builder
+	Add = function ( self, Element )
+		self[ #self + 1 ] = Element;
+	end;
+	Clear = function ( self ) -- Assemble string and clear
+		if ( next( self ) ) then
+			sort( self );
+			local String = table.concat( self, L.LIST_SEPARATOR );
+			wipe( self );
+			return String;
+		end
+	end;
+} } );
+
 
 
 
@@ -117,36 +131,32 @@ end
   * Function: _NPCScan.ScanSynchronize                                         *
   * Description: Resets the scanning list and reloads it from saved settings.  *
   ****************************************************************************]]
-do
-	local CachedNames = {};
-	function me.ScanSynchronize ()
-		-- Clear all scans
-		for ID in pairs( me.ScanIDs ) do
-			me.ScanRemoveAll( ID );
-		end
+function me.ScanSynchronize ()
+	-- Clear all scans
+	for ID in pairs( me.ScanIDs ) do
+		me.ScanRemoveAll( ID );
+	end
 
-		-- Add all NPCs from options
-		for Name, ID in pairs( _NPCScanOptionsCharacter.NPCs ) do
-			_NPCScanOptionsCharacter.NPCs[ Name ] = nil;
-			local Success, FoundName = me.NPCAdd( Name, ID );
-			if ( Success and FoundName ) then -- Was already cached
-				CachedNames[ #CachedNames + 1 ] = L.NAME_FORMAT:format( FoundName );
-			end
+	-- Add all NPCs from options
+	for Name, ID in pairs( _NPCScanOptionsCharacter.NPCs ) do
+		_NPCScanOptionsCharacter.NPCs[ Name ] = nil;
+		local Success, FoundName = me.NPCAdd( Name, ID );
+		if ( Success and FoundName ) then -- Was already cached
+			List:Add( L.NAME_FORMAT:format( FoundName ) );
 		end
-		-- Print all cached NPC names
-		if ( next( CachedNames ) ) then
-			table.sort( CachedNames );
-			me.Message( L.ALREADY_CACHED_FORMAT:format( table.concat( CachedNames, L.NAME_SEPARATOR ) ) );
-			wipe( CachedNames );
-		end
+	end
+	-- Print all cached NPC names
+	local CachedNames = List:Clear();
+	if ( CachedNames ) then
+		me.Message( L.ALREADY_CACHED_FORMAT:format( CachedNames ) );
+	end
 
-		for AchievementID in pairs( me.Achievements ) do
-			if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
-				_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
-				local Success, FoundList = me.AchievementAdd( AchievementID );
-				if ( Success and FoundList ) then -- Some NPCs were already cached
-					me.Message( L.ALREADY_CACHED_FORMAT:format( FoundList ) );
-				end
+	for AchievementID in pairs( me.Achievements ) do
+		if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
+			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
+			local Success, FoundList = me.AchievementAdd( AchievementID );
+			if ( Success and FoundList ) then -- Some NPCs were already cached
+				me.Message( L.ALREADY_CACHED_FORMAT:format( FoundList ) );
 			end
 		end
 	end
@@ -157,33 +167,24 @@ end
   * Function: _NPCScan.AchievementAdd                                          *
   * Description: Adds a kill-related achievement to track.                     *
   ****************************************************************************]]
-do
-	local CachedNames = {};
-	function me.AchievementAdd ( AchievementID )
-		if ( not _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
-			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
+function me.AchievementAdd ( AchievementID )
+	if ( not _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
+		_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
 
-			for ID, CriteriaID in pairs( me.Achievements[ AchievementID ].Criteria ) do
-				local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
-				if ( not Completed or _NPCScanOptionsCharacter.AchievementsAddFound ) then
-					local FoundName = me.TestID( ID );
-					if ( FoundName ) then -- Already seen
-						CachedNames[ #CachedNames + 1 ] = L.NAME_FORMAT:format( FoundName );
-					else
-						me.Achievements[ AchievementID ].Active[ ID ] = true;
-						me.ScanAdd( ID );
-					end
+		for ID, CriteriaID in pairs( me.Achievements[ AchievementID ].Criteria ) do
+			local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
+			if ( not Completed or _NPCScanOptionsCharacter.AchievementsAddFound ) then
+				local FoundName = me.TestID( ID );
+				if ( FoundName ) then -- Already seen
+					List:Add( L.NAME_FORMAT:format( FoundName ) );
+				else
+					me.Achievements[ AchievementID ].Active[ ID ] = true;
+					me.ScanAdd( ID );
 				end
 			end
-
-			local CachedList;
-			if ( next( CachedNames ) ) then -- Return all cached names
-				table.sort( CachedNames );
-				CachedList = table.concat( CachedNames, L.NAME_SEPARATOR );
-				wipe( CachedNames );
-			end
-			return true, CachedList;
 		end
+
+		return true, List:Clear();
 	end
 end
 --[[****************************************************************************
