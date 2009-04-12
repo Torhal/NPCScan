@@ -36,9 +36,6 @@ me.TamableIDs = {
 };
 
 me.ScanIDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
-me.ScanGroups = setmetatable( {}, { -- Subsets of scanned NPCs divided by group ("NPC" or AchievementID)
-	__index = function ( self, Group ) local Table = {}; rawset( self, Group, Table ); return Table; end;
-} );
 
 me.Achievements = { -- Criteria data for each achievement
 	[ 1312 ] = {}; -- Bloody Rare (Outlands)
@@ -96,30 +93,17 @@ end
   * Function: _NPCScan.ScanAdd                                                 *
   * Description: Begins searching for an NPC ID.                               *
   ****************************************************************************]]
-function me.ScanAdd ( Group, ID )
-	Group = me.ScanGroups[ Group ];
-
-	-- Increment both group and total
-	Group[ ID ] = ( Group[ ID ] or 0 ) + 1;
-	me.ScanIDs[ ID ] = ( me.ScanIDs[ ID ] or 0 ) + 1;
+function me.ScanAdd ( ID )
+	me.ScanIDs[ ID ] = ( me.ScanIDs[ ID ] or 0 ) + 1; -- Increment
 end
 --[[****************************************************************************
   * Function: _NPCScan.ScanRemove                                              *
   * Description: Stops searching for an NPC ID.                                *
   ****************************************************************************]]
-function me.ScanRemove ( Group, ID )
-	local Removed = false;
-	Group = me.ScanGroups[ Group ];
-
-	-- Remove from group
-	local Count = Group[ ID ];
-	if ( Count ) then -- Reduce counter, and clear if zero
-		Group[ ID ] = Count > 1 and Count - 1 or nil;
-		Removed = true;
-	end
-
-	if ( Removed ) then -- Was present in group; Decrement total
-		me.ScanIDs[ ID ] = me.ScanIDs[ ID ] > 1 and me.ScanIDs[ ID ] - 1 or nil;
+function me.ScanRemove ( ID )
+	local Count = me.ScanIDs[ ID ];
+	if ( Count ) then -- Decrement
+		me.ScanIDs[ ID ] = Count > 1 and Count - 1 or nil;
 	end
 end
 --[[****************************************************************************
@@ -127,9 +111,6 @@ end
   * Description: Stops all concurrent scans for a common NPC ID.               *
   ****************************************************************************]]
 function me.ScanRemoveAll ( ID )
-	for _, Group in pairs( me.ScanGroups ) do
-		Group[ ID ] = nil;
-	end
 	me.ScanIDs[ ID ] = nil;
 end
 --[[****************************************************************************
@@ -189,7 +170,8 @@ do
 					if ( FoundName ) then -- Already seen
 						CachedNames[ #CachedNames + 1 ] = L.NAME_FORMAT:format( FoundName );
 					else
-						me.ScanAdd( AchievementID, ID );
+						me.Achievements[ AchievementID ].Active[ ID ] = true;
+						me.ScanAdd( ID );
 					end
 				end
 			end
@@ -212,9 +194,10 @@ function me.AchievementRemove ( AchievementID )
 	if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
 		_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
 
-		for ID in pairs( me.Achievements[ AchievementID ].Criteria ) do
-			me.ScanRemove( AchievementID, ID );
+		for ID in pairs( me.Achievements[ AchievementID ].Active ) do
+			me.ScanRemove( ID );
 		end
+		wipe( me.Achievements[ AchievementID ].Active );
 		return true;
 	end
 end
@@ -235,7 +218,7 @@ function me.NPCAdd ( Name, ID )
 		if ( FoundName ) then -- Already seen
 			return true, FoundName;
 		else
-			me.ScanAdd( "NPC", ID );
+			me.ScanAdd( ID );
 			return true;
 		end
 	end
@@ -250,7 +233,7 @@ function me.NPCRemove ( Name )
 
 	if ( ID ) then
 		_NPCScanOptionsCharacter.NPCs[ Name ] = nil;
-		me.ScanRemove( "NPC", ID );
+		me.ScanRemove( ID );
 
 		return true;
 	end
@@ -314,10 +297,7 @@ function me.OnLoad ()
 
 	-- Validate settings
 	if ( _NPCScanOptionsCharacter.Version ~= me.Version ) then
-		if ( _NPCScanOptions.Version ~= me.Version ) then
-			_NPCScanOptions = CopyTable( me.OptionsDefault );
-		end
-		_NPCScanOptionsCharacter = CopyTable( me.OptionsCharacterDefault );
+		me.LoadDefaults( _NPCScanOptions.Version ~= me.Version );
 	end
 
 	me.ScanSynchronize();
@@ -371,6 +351,7 @@ do
 	-- Save achievement criteria data
 	for AchievementID, Achievement in pairs( me.Achievements ) do
 		Achievement.Criteria = {};
+		Achievement.Active = {};
 		for Criteria = 1, GetAchievementNumCriteria( AchievementID ) do
 			local _, CriteriaType, _, _, _, _, _, AssetID, _, CriteriaID = GetAchievementCriteriaInfo( AchievementID, Criteria );
 			if ( CriteriaType == 0 and not me.TamableIDs[ AssetID ] ) then -- Mob kill type
