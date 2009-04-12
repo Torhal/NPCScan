@@ -319,6 +319,12 @@ function me:PLAYER_ENTERING_WORLD ()
 	end
 end
 --[[****************************************************************************
+  * Function: _NPCScan:ACHIEVEMENT_EARNED                                      *
+  ****************************************************************************]]
+function me:ACHIEVEMENT_EARNED ( _, AchievementID )
+	me.AchievementRemove( AchievementID );
+end
+--[[****************************************************************************
   * Function: _NPCScan:OnEvent                                                 *
   ****************************************************************************]]
 do
@@ -341,6 +347,7 @@ do
 	me:SetScript( "OnUpdate", me.OnUpdate );
 	me:SetScript( "OnEvent", me.OnEvent );
 	me:RegisterEvent( "PLAYER_ENTERING_WORLD" );
+	me:RegisterEvent( "ACHIEVEMENT_EARNED" );
 
 	-- Add template text lines
 	Tooltip.Text = Tooltip:CreateFontString( "$parentTextLeft1", nil, "GameTooltipText" );
