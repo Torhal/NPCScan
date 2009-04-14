@@ -14,6 +14,9 @@ me.TableContainer = CreateFrame( "Frame", nil, me );
 
 me.Tabs = {};
 me.TabSelected = nil;
+me.UpdateRequested = nil;
+
+me.AchievementDisabledAlpha = 0.5;
 
 local SortedNames = {}; -- Used to sort text tables
 
@@ -48,6 +51,25 @@ end
 function me:TabOnClick ()
 	PlaySound( "igCharacterInfoTab" );
 	me.TabSelect( self );
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search:TabCheckOnClick                          *
+  ****************************************************************************]]
+function me:TabCheckOnClick ()
+	local Enable = self:GetChecked();
+	PlaySound( Enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff" );
+	me.AchievementSetEnabled( self:GetParent().AchievementID, Enable );
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search:TabCheckOnEnter                          *
+  ****************************************************************************]]
+function me:TabCheckOnEnter ()
+	local _, Name, _, _, _, _, _, Description = GetAchievementInfo( self:GetParent().AchievementID );
+	GameTooltip:SetOwner( self, "ANCHOR_TOPLEFT" );
+	GameTooltip:SetText( Name );
+	local Color = HIGHLIGHT_FONT_COLOR;
+	GameTooltip:AddLine( Description, Color.r, Color.g, Color.b, true );
+	GameTooltip:Show();
 end
 
 
@@ -101,35 +123,57 @@ end
 
 
 --[[****************************************************************************
+  * Function: _NPCScan.Options.Search.AchievementSetEnabled                    *
+  * Description: Enables/disables the achievement related to a tab.            *
+  ****************************************************************************]]
+function me.AchievementSetEnabled ( AchievementID, Enable )
+	local Tab = me.Tabs[ AchievementID ];
+	Tab.Checkbox:SetChecked( Enable );
+
+	_NPCScan[ Enable and "AchievementAdd" or "AchievementRemove" ]( AchievementID );
+	if ( me.TabSelected == Tab ) then
+		me.Table:SetAlpha( Enable and 1.0 or me.AchievementDisabledAlpha );
+	end
+end
+--[[****************************************************************************
   * Function: _NPCScan.Options.Search:AchievementUpdate                        *
   ****************************************************************************]]
 do
 	local CriteriaNames = {};
-	local CriteriaNPCs = {};
 	local CriteriaCompleted = {};
 	local function SortFunc ( Criteria1, Criteria2 )
 		return CriteriaNames[ Criteria1 ] < CriteriaNames[ Criteria2 ];
 	end
 	function me:AchievementUpdate ()
 		local Criteria = _NPCScan.Achievements[ self.AchievementID ].Criteria;
-		for _, CriteriaID in pairs( Criteria ) do
-			CriteriaNames[ CriteriaID ], _, CriteriaCompleted[ CriteriaID ], _, _, _, _, CriteriaNPCs[ CriteriaID ]
-				= GetAchievementCriteriaInfo( CriteriaID );
+		for CriteriaID in pairs( Criteria ) do
+			CriteriaNames[ CriteriaID ], _, CriteriaCompleted[ CriteriaID ] = GetAchievementCriteriaInfo( CriteriaID );
 			SortedNames[ #SortedNames + 1 ] = CriteriaID;
 		end
 		sort( SortedNames, SortFunc );
 
 		me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED );
 		for _, CriteriaID in ipairs( SortedNames ) do
-			me.Table:AddRow( nil, L[ _NPCScan.TestID( CriteriaNPCs[ CriteriaID ] ) and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
-				CriteriaNames[ CriteriaID ], CriteriaNPCs[ CriteriaID ],
+			me.Table:AddRow( nil, L[ _NPCScan.TestID( Criteria[ CriteriaID ] ) and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
+				CriteriaNames[ CriteriaID ], Criteria[ CriteriaID ],
 				L[ CriteriaCompleted[ CriteriaID ] and "SEARCH_COMPLETED_YES" or "SEARCH_COMPLETED_NO" ] );
 		end
 		wipe( CriteriaNames );
-		wipe( CriteriaNPCs );
 		wipe( CriteriaCompleted );
 		wipe( SortedNames );
 	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search:AchievementActivate                      *
+  ****************************************************************************]]
+function me:AchievementActivate ()
+	me.Table:SetAlpha( _NPCScanOptionsCharacter.Achievements[ self.AchievementID ] and 1.0 or me.AchievementDisabledAlpha );
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search:AchievementDeactivate                    *
+  ****************************************************************************]]
+function me:AchievementDeactivate ()
+	me.Table:SetAlpha( 1.0 );
 end
 
 
@@ -199,10 +243,16 @@ end
   * Description: Updates all controls, including the current tab.              *
   ****************************************************************************]]
 function me.Update ()
-	if ( me:IsVisible() ) then
-		if ( me.TabSelected ) then
-			me.TabSelected:Update();
-		end
+	me.UpdateRequested = true; -- Update executed in next OnUpdate
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search:OnUpdate                                 *
+  ****************************************************************************]]
+function me:OnUpdate ()
+	if ( me.UpdateRequested ) then
+		me.UpdateRequested = nil;
+
+		me.TabSelected:Update();
 	end
 end
 --[[****************************************************************************
@@ -214,10 +264,10 @@ function me:OnShow ()
 		me.Table:SetAllPoints();
 	end
 
-	me.Update();
 	if ( not me.TabSelected ) then
-		me.TabSelect( me.Tabs[ 1 ] );
+		me.TabSelect( me.Tabs[ "NPC" ] );
 	end
+	me.Update();
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search:default                                  *
@@ -241,6 +291,7 @@ do
 	me.parent = L.OPTIONS_TITLE;
 	me:Hide();
 	me:SetScript( "OnShow", me.OnShow );
+	me:SetScript( "OnUpdate", me.OnUpdate );
 
 	-- Pane title
 	me.Title = me:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
@@ -333,15 +384,32 @@ do
 	me.TableContainer:SetPoint( "BOTTOM", NPCControls );
 	me.TableContainer:SetBackdrop( { bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background"; } );
 
-	local function AddTab ( Title, Update, Activate, Deactivate )
-		local ID = #me.Tabs + 1;
-		local Tab = CreateFrame( "Button", "_NPCScanSearchTab"..ID, me.TableContainer, "TabButtonTemplate" );
-		tinsert( me.Tabs, Tab );
+	-- Add all tabs
+	local LastTab;
+	local TabCount = 0;
+	local function AddTab ( ID, Update, Activate, Deactivate )
+		TabCount = TabCount + 1;
+		local Tab = CreateFrame( "Button", "_NPCScanSearchTab"..TabCount, me.TableContainer, "TabButtonTemplate" );
+		me.Tabs[ ID ] = Tab;
 
-		Tab:SetID( ID );
-		Tab:SetText( Title );
 		Tab:SetHitRectInsets( 6, 6, 6, 0 );
 		Tab:SetScript( "OnClick", me.TabOnClick );
+
+		if ( type( ID ) == "number" ) then -- AchievementID
+			Tab:SetText( select( 2, GetAchievementInfo( ID ) ) );
+			Tab.AchievementID = ID;
+			local Checkbox = CreateFrame( "CheckButton", nil, Tab, "UICheckButtonTemplate" );
+			Tab.Checkbox = Checkbox;
+			Checkbox:SetWidth( 14 );
+			Checkbox:SetHeight( 14 );
+			Checkbox:SetPoint( "RIGHT", _G[ Tab:GetName().."Text" ], "LEFT", 2, -2 );
+			Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
+			Checkbox:SetScript( "OnClick", me.TabCheckOnClick );
+			Checkbox:SetScript( "OnEnter", me.TabCheckOnEnter );
+			Checkbox:SetScript( "OnLeave", _NPCScan.Options.ControlOnLeave );
+		else
+			Tab:SetText( L.SEARCH_NPCS );
+		end
 		PanelTemplates_TabResize( Tab, 0 );
 
 		Tab.Update = Update;
@@ -349,16 +417,16 @@ do
 		Tab.Deactivate = Deactivate;
 
 		PanelTemplates_DeselectTab( Tab );
-		if ( ID == 1 ) then
-			Tab:SetPoint( "BOTTOMLEFT", me.TableContainer, "TOPLEFT" );
+		if ( LastTab ) then
+			Tab:SetPoint( "LEFT", LastTab, "RIGHT", -4, 0 );
 		else
-			Tab:SetPoint( "LEFT", me.Tabs[ ID - 1 ], "RIGHT", -4, 0 );
+			Tab:SetPoint( "BOTTOMLEFT", me.TableContainer, "TOPLEFT" );
 		end
-		return Tab;
+		LastTab = Tab;
 	end
-	AddTab( L.SEARCH_NPCS, me.NPCUpdate, me.NPCActivate, me.NPCDeactivate );
+	AddTab( "NPC", me.NPCUpdate, me.NPCActivate, me.NPCDeactivate );
 	for AchievementID in pairs( _NPCScan.Achievements ) do
-		AddTab( select( 2, GetAchievementInfo( AchievementID ) ), me.AchievementUpdate ).AchievementID = AchievementID;
+		AddTab( AchievementID, me.AchievementUpdate, me.AchievementActivate, me.AchievementDeactivate );
 	end
 
 

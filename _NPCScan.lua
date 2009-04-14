@@ -171,15 +171,15 @@ function me.AchievementAdd ( AchievementID )
 	if ( not _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
 		_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
 
-		for ID, CriteriaID in pairs( me.Achievements[ AchievementID ].Criteria ) do
+		for CriteriaID, NPCID in pairs( me.Achievements[ AchievementID ].Criteria ) do
 			local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
 			if ( not Completed or _NPCScanOptionsCharacter.AchievementsAddFound ) then
-				local FoundName = me.TestID( ID );
+				local FoundName = me.TestID( NPCID );
 				if ( FoundName ) then -- Already seen
 					List:Add( L.NAME_FORMAT:format( FoundName ) );
 				else
-					me.Achievements[ AchievementID ].Active[ ID ] = true;
-					me.ScanAdd( ID );
+					me.Achievements[ AchievementID ].Active[ CriteriaID ] = true;
+					me.ScanAdd( NPCID );
 				end
 			end
 		end
@@ -195,8 +195,9 @@ function me.AchievementRemove ( AchievementID )
 	if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
 		_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
 
-		for ID in pairs( me.Achievements[ AchievementID ].Active ) do
-			me.ScanRemove( ID );
+		local Criteria = me.Achievements[ AchievementID ].Criteria;
+		for CriteriaID in pairs( me.Achievements[ AchievementID ].Active ) do
+			me.ScanRemove( Criteria[ CriteriaID ] );
 		end
 		wipe( me.Achievements[ AchievementID ].Active );
 		return true;
@@ -363,7 +364,7 @@ do
 		for Criteria = 1, GetAchievementNumCriteria( AchievementID ) do
 			local _, CriteriaType, _, _, _, _, _, AssetID, _, CriteriaID = GetAchievementCriteriaInfo( AchievementID, Criteria );
 			if ( CriteriaType == 0 and not me.TamableIDs[ AssetID ] ) then -- Mob kill type
-				Achievement.Criteria[ AssetID ] = CriteriaID;
+				Achievement.Criteria[ CriteriaID ] = AssetID;
 			end
 		end
 	end
