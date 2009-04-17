@@ -1,9 +1,9 @@
-## Interface: 30000
+## Interface: 30100
 ## Title: _|cffCCCC88NPCScan|r
 ## Notes: Scans NPCs around you for rare ones.
 ## Author: Saiket
-## Version: 3.0.9.3
-## X-Date: 2009-04-13
+## Version: 3.1.0.1
+## X-Date: 2009-04-16
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com

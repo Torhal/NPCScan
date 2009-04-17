@@ -6,7 +6,7 @@
 
 local _NPCScan = _NPCScan;
 local L = _NPCScanLocalization;
-local me = CreateFrame( "Button", "_NPCScanButton", _NPCScan, "SecureActionButtonTemplate" );
+local me = CreateFrame( "Button", "_NPCScanButton", nil, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate" );
 _NPCScan.Button = me;
 
 local Model = CreateFrame( "PlayerModel", nil, me );
@@ -65,23 +65,27 @@ end
   * Description: Updates the button based on its Name and ID fields.           *
   ****************************************************************************]]
 function me.Update ( Name, ID )
-	me:SetAttribute( "macrotext", "/cleartarget\n/targetexact "..Name );
-	me:Enable();
-	me:Show();
-
+	me:Show(); -- Note: Must be visible before model scale calls will work
 	me:SetText( Name );
+	Model.Reset();
+	if ( type( ID ) == "string" ) then -- ID is UnitID
+		Model:SetUnit( ID );
+		Model:SetModelScale( 0.75 );
+		Name = ID;
+	else -- ID is NPC ID
+		Model:SetCreature( ID );
+		if ( type( Model:GetModel() ) == "string" ) then
+			local Scale, X, Y, Z = ( "|" ):split( me.ModelCameras[ Model:GetModel():lower() ] or "" );
+			Model:SetModelScale( 0.5 * ( tonumber( Scale ) or 1 ) );
+			Model:SetPosition( tonumber( Z ) or 0, tonumber( X ) or 0, tonumber( Y ) or 0 );
+		end
+	end
+	me:SetAttribute( "macrotext", "/cleartarget\n/targetexact "..Name );
+
 	UIFrameFadeRemoveFrame( me.Glow );
 	UIFrameFlashRemoveFrame( me.Glow );
 	if ( UIParent:IsVisible() ) then -- Only flash when animating frame is shown
 		UIFrameFlash( me.Glow, 0.1, 0.7, 0.8 );
-	end
-
-	Model.Reset();
-	Model:SetCreature( ID );
-	if ( type( Model:GetModel() ) == "string" ) then
-		local Scale, X, Y, Z = ( "|" ):split( me.ModelCameras[ Model:GetModel():lower() ] or "" );
-		Model:SetModelScale( 0.5 * ( tonumber( Scale ) or 1 ) );
-		Model:SetPosition( tonumber( Z ) or 0, tonumber( X ) or 0, tonumber( Y ) or 0 );
 	end
 end
 
@@ -150,7 +154,6 @@ me.OnEvent = _NPCScan.OnEvent;
 -----------------------------
 
 do
-	me:Hide();
 	me:SetWidth( 150 );
 	me:SetHeight( 42 );
 	me:SetPoint( "BOTTOM", UIParent, 0, 128 );
@@ -165,6 +168,10 @@ do
 	Background:SetPoint( "BOTTOMLEFT", 3, 3 );
 	Background:SetPoint( "TOPRIGHT", -3, -3 );
 	Background:SetTexCoord( 0, 1, 0, 0.25 );
+
+	me:SetAttribute( "_onshow", "self:Enable();" );
+	me:SetAttribute( "_onhide", "self:Disable();" );
+	me:Hide();
 
 	local TitleBackground = me:CreateTexture( nil, "ARTWORK" );
 	TitleBackground:SetTexture( "Interface\\AchievementFrame\\UI-Achievement-Title" );
@@ -197,18 +204,13 @@ do
 	me.EnableDrag( false );
 
 	-- Close button
-	local Close = CreateFrame( "Button", nil, me, "UIPanelCloseButton,SecureHandlerClickTemplate" );
+	local Close = CreateFrame( "Button", nil, me, "UIPanelCloseButton" );
 	me.Close = Close;
 	Close:SetPoint( "TOPRIGHT" );
 	Close:SetWidth( 32 );
 	Close:SetHeight( 32 );
 	Close:SetScale( 0.8 );
 	Close:SetHitRectInsets( 8, 8, 8, 8 );
-	Close:SetAttribute( "_onclick", [[
-		local Button = self:GetParent();
-		Button:Disable();
-		Button:Hide();
-	]] );
 
 	-- Model view
 	Model:SetPoint( "BOTTOMLEFT", me, "TOPLEFT", 0, -4 );

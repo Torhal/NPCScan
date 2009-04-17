@@ -21,11 +21,7 @@ function me.Test ()
 	_NPCScan.Alert( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
 	_NPCScan.Message( L.OPTIONS_TEST_HELP_FORMAT:format( GetModifiedClick( "_NPCSCAN_BUTTONDRAG" ) ) );
 
-	_NPCScan.Button.SetNPC( UnitName( "player" ), 0 );
-	_NPCScan.Button:SetText( Name );
-	local Model = _NPCScan.Button.Model;
-	Model:SetUnit( "player" );
-	Model:SetModelScale( 0.75 );
+	_NPCScan.Button.SetNPC( Name, "player" );
 end
 
 
