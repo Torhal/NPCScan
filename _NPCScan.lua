@@ -181,7 +181,7 @@ end
   ****************************************************************************]]
 function me.AchievementAdd ( AchievementID, NoSync )
 	local Achievement = me.Achievements[ AchievementID ];
-	if ( not Achievement.Enabled ) then
+	if ( Achievement and not Achievement.Enabled ) then
 		Achievement.Enabled = true;
 		if ( not NoSync ) then
 			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
@@ -210,7 +210,7 @@ end
   ****************************************************************************]]
 function me.AchievementRemove ( AchievementID, NoSync )
 	local Achievement = me.Achievements[ AchievementID ];
-	if ( Achievement.Enabled ) then
+	if ( Achievement and Achievement.Enabled ) then
 		Achievement.Enabled = false;
 		if ( not NoSync ) then
 			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
