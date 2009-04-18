@@ -41,6 +41,7 @@ me.Achievements = { -- Criteria data for each achievement
 	[ 1312 ] = {}; -- Bloody Rare (Outlands)
 	[ 2257 ] = {}; -- Frostbitten (Northrend)
 };
+me.CriteriaUpdateRequested = nil;
 
 me.IDMax = 0xFFFF; -- Largest ID that will fit in a GUID's 2-byte NPC ID field
 me.UpdateRate = 0.1;
@@ -164,6 +165,43 @@ end
 
 
 --[[****************************************************************************
+  * Function: _NPCScan.NPCAdd                                                  *
+  * Description: Adds an NPC name and ID to settings and begins searching.     *
+  ****************************************************************************]]
+function me.NPCAdd ( Name, ID )
+	Name = Name:trim():lower();
+	ID = tonumber( ID );
+
+	if ( not _NPCScanOptionsCharacter.NPCs[ Name ] ) then
+		_NPCScanOptionsCharacter.NPCs[ Name ] = ID;
+
+		local FoundName = me.TestID( ID );
+		if ( FoundName ) then -- Already seen
+			return true, FoundName;
+		else
+			me.ScanAdd( ID );
+			return true;
+		end
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.NPCRemove                                               *
+  * Description: Removes an NPC from settings by name and stops searching.     *
+  ****************************************************************************]]
+function me.NPCRemove ( Name )
+	Name = Name:trim():lower();
+	local ID = _NPCScanOptionsCharacter.NPCs[ Name ];
+
+	if ( ID ) then
+		_NPCScanOptionsCharacter.NPCs[ Name ] = nil;
+		me.ScanRemove( ID );
+
+		return true;
+	end
+end
+
+
+--[[****************************************************************************
   * Function: _NPCScan.AchievementAdd                                          *
   * Description: Adds a kill-related achievement to track.                     *
   ****************************************************************************]]
@@ -203,41 +241,25 @@ function me.AchievementRemove ( AchievementID )
 		return true;
 	end
 end
-
-
 --[[****************************************************************************
-  * Function: _NPCScan.NPCAdd                                                  *
-  * Description: Adds an NPC name and ID to settings and begins searching.     *
+  * Function: _NPCScan.CriteriaUpdate                                          *
+  * Description: Scans all active criteria and removes any completed NPCs.     *
   ****************************************************************************]]
-function me.NPCAdd ( Name, ID )
-	Name = Name:trim():lower();
-	ID = tonumber( ID );
-
-	if ( not _NPCScanOptionsCharacter.NPCs[ Name ] ) then
-		_NPCScanOptionsCharacter.NPCs[ Name ] = ID;
-
-		local FoundName = me.TestID( ID );
-		if ( FoundName ) then -- Already seen
-			return true, FoundName;
-		else
-			me.ScanAdd( ID );
-			return true;
+do
+	local GetAchievementCriteriaInfo = GetAchievementCriteriaInfo;
+	local select = select;
+	local pairs = pairs;
+	function me.CriteriaUpdate ()
+		if ( not _NPCScanOptionsCharacter.AchievementsAddFound ) then
+			for _, Achievement in pairs( me.Achievements ) do
+				for CriteriaID in pairs( Achievement.Active ) do
+					if ( select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) then -- Completed
+						Achievement.Active[ CriteriaID ] = nil;
+						me.ScanRemove( Achievement.Criteria[ CriteriaID ] );
+					end
+				end
+			end
 		end
-	end
-end
---[[****************************************************************************
-  * Function: _NPCScan.NPCRemove                                               *
-  * Description: Removes an NPC from settings by name and stops searching.     *
-  ****************************************************************************]]
-function me.NPCRemove ( Name )
-	Name = Name:trim():lower();
-	local ID = _NPCScanOptionsCharacter.NPCs[ Name ];
-
-	if ( ID ) then
-		_NPCScanOptionsCharacter.NPCs[ Name ] = nil;
-		me.ScanRemove( ID );
-
-		return true;
 	end
 end
 
@@ -270,6 +292,11 @@ do
 	local Name;
 	local LastUpdate = 0;
 	function me:OnUpdate ( Elapsed )
+		if ( me.CriteriaUpdateRequested ) then
+			me.CriteriaUpdateRequested = nil;
+			me.CriteriaUpdate();
+		end
+
 		LastUpdate = LastUpdate + Elapsed;
 		if ( LastUpdate >= me.UpdateRate ) then
 			LastUpdate = 0;
@@ -326,6 +353,12 @@ function me:ACHIEVEMENT_EARNED ( _, AchievementID )
 	me.AchievementRemove( AchievementID );
 end
 --[[****************************************************************************
+  * Function: _NPCScan:CRITERIA_UPDATE                                         *
+  ****************************************************************************]]
+function me:CRITERIA_UPDATE ()
+	me.CriteriaUpdateRequested = true;
+end
+--[[****************************************************************************
   * Function: _NPCScan:OnEvent                                                 *
   ****************************************************************************]]
 do
@@ -349,6 +382,7 @@ do
 	me:SetScript( "OnEvent", me.OnEvent );
 	me:RegisterEvent( "PLAYER_ENTERING_WORLD" );
 	me:RegisterEvent( "ACHIEVEMENT_EARNED" );
+	me:RegisterEvent( "CRITERIA_UPDATE" );
 
 	-- Add template text lines
 	Tooltip.Text = Tooltip:CreateFontString( "$parentTextLeft1", nil, "GameTooltipText" );
