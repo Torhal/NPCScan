@@ -361,6 +361,7 @@ do
 					me.Alert( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
 					me.Button.SetNPC( Name, ID );
 					me.ScanRemoveAll( ID );
+					me.Options.Search.UpdateTab();
 				end
 			end
 		end
