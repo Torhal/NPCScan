@@ -224,6 +224,7 @@ function me.AchievementAdd ( AchievementID, NoSync )
 			end
 		end
 		me.Options.Search.AchievementSetEnabled( AchievementID, true );
+		me.Options.Search.UpdateTab( AchievementID );
 
 		return true, List:Clear();
 	end
@@ -245,6 +246,7 @@ function me.AchievementRemove ( AchievementID, NoSync )
 		end
 		wipe( Achievement.Active );
 		me.Options.Search.AchievementSetEnabled( AchievementID, false );
+		me.Options.Search.UpdateTab( AchievementID );
 		return true;
 	end
 end
