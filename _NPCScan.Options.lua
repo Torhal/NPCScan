@@ -45,7 +45,7 @@ end
 function me:default ()
 	_NPCScan.LoadDefaults( true );
 
-	_NPCScan.ScanSynchronize();
+	_NPCScan.Synchronize();
 end
 
 

@@ -56,7 +56,7 @@ end
   * Function: _NPCScan.Options.Search:TabCheckOnClick                          *
   ****************************************************************************]]
 function me:TabCheckOnClick ()
-	local Enable = self:GetChecked();
+	local Enable = not not self:GetChecked();
 	PlaySound( Enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff" );
 	me.AchievementSetEnabled( self:GetParent().AchievementID, Enable );
 end
@@ -81,7 +81,7 @@ end
   ****************************************************************************]]
 function me:NPCOnSelect ( Name )
 	if ( Name ~= nil ) then
-		me.SetEditBoxText( Name, _NPCScanOptionsCharacter.NPCs[ Name ] );
+		me.SetEditBoxText( Name, _NPCScan.NPCs[ Name ] );
 	end
 end
 --[[****************************************************************************
@@ -90,17 +90,16 @@ end
 function me:NPCUpdate ()
 	me.SetEditBoxText();
 
-	local NPCs = _NPCScanOptionsCharacter.NPCs;
-	for Name in pairs( NPCs ) do
+	for Name in pairs( _NPCScan.NPCs ) do
 		SortedNames[ #SortedNames + 1 ] = Name;
 	end
 	sort( SortedNames );
 
-	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID );
+	me.Table:Clear();
 	for _, Name in ipairs( SortedNames ) do
 		me.Table:AddRow( Name,
-			L[ _NPCScan.TestID( NPCs[ Name ] ) and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
-			Name, NPCs[ Name ] );
+			L[ _NPCScan.TestID( _NPCScan.NPCs[ Name ] ) and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
+			Name, _NPCScan.NPCs[ Name ] );
 	end
 	wipe( SortedNames );
 end
@@ -108,6 +107,7 @@ end
   * Function: _NPCScan.Options.Search:NPCActivate                              *
   ****************************************************************************]]
 function me:NPCActivate ()
+	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID );
 	me.NPCControls:Show();
 	me.TableContainer:SetPoint( "BOTTOM", me.NPCControls, "TOP", 0, 4 );
 	me.Table.OnSelect = me.NPCOnSelect;
@@ -152,7 +152,7 @@ do
 		end
 		sort( SortedNames, SortFunc );
 
-		me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED );
+		me.Table:Clear();
 		for _, CriteriaID in ipairs( SortedNames ) do
 			me.Table:AddRow( nil, L[ _NPCScan.TestID( Criteria[ CriteriaID ] ) and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
 				CriteriaNames[ CriteriaID ], Criteria[ CriteriaID ],
@@ -167,7 +167,8 @@ end
   * Function: _NPCScan.Options.Search:AchievementActivate                      *
   ****************************************************************************]]
 function me:AchievementActivate ()
-	me.Table:SetAlpha( _NPCScanOptionsCharacter.Achievements[ self.AchievementID ] and 1.0 or me.AchievementDisabledAlpha );
+	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED );
+	me.Table:SetAlpha( _NPCScan.Achievements[ self.AchievementID ].Enabled and 1.0 or me.AchievementDisabledAlpha );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search:AchievementDeactivate                    *
@@ -203,7 +204,7 @@ function me.ValidateButtons ()
 	local ID = me.EditBoxID:GetText() ~= "" and me.EditBoxID:GetNumber() or nil;
 	Name = Name ~= "" and Name or nil;
 
-	local CanRemove = _NPCScanOptionsCharacter.NPCs[ Name ];
+	local CanRemove = _NPCScan.NPCs[ Name ];
 	local CanAdd = Name and ID and ID ~= CanRemove and ID >= 1 and ID <= _NPCScan.IDMax;
 
 	if ( me.Table ) then
@@ -220,11 +221,8 @@ function me.Add ()
 	local Name = me.EditBoxName:GetText();
 	_NPCScan.NPCRemove( Name );
 	local Success, FoundName = _NPCScan.NPCAdd( Name, me.EditBoxID:GetNumber() );
-	if ( Success ) then
-		me.Update();
-		if ( FoundName ) then
-			_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
-		end
+	if ( Success and FoundName ) then
+		_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
 	end
 end
 --[[****************************************************************************
@@ -232,18 +230,18 @@ end
   * Description: Removes a Custom NPC list element.                            *
   ****************************************************************************]]
 function me.Remove ()
-	if ( _NPCScan.NPCRemove( me.EditBoxName:GetText() ) ) then
-		me.Update();
-	end
+	_NPCScan.NPCRemove( me.EditBoxName:GetText() );
 end
 
 
 --[[****************************************************************************
-  * Function: _NPCScan.Options.Search.Update                                   *
-  * Description: Updates all controls, including the current tab.              *
+  * Function: _NPCScan.Options.Search.UpdateTab                                *
+  * Description: Updates the table for a given tab if it is displayed.         *
   ****************************************************************************]]
-function me.Update ()
-	me.UpdateRequested = true; -- Update executed in next OnUpdate
+function me.UpdateTab ( ID )
+	if ( not ID or me.Tabs[ ID ] == me.TabSelected ) then
+		me.UpdateRequested = true; -- Update executed in next OnUpdate
+	end;
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search:OnUpdate                                 *
@@ -264,19 +262,19 @@ function me:OnShow ()
 		me.Table:SetAllPoints();
 	end
 
-	if ( not me.TabSelected ) then
+	if ( me.TabSelected ) then
+		me.UpdateTab();
+	else
 		me.TabSelect( me.Tabs[ "NPC" ] );
 	end
-	me.Update();
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search:default                                  *
   ****************************************************************************]]
 function me:default ()
-	_NPCScan.LoadDefaults();
+	_NPCScan.LoadDefaults(); -- Only per-character
 
-	_NPCScan.ScanSynchronize();
-	me.Update();
+	_NPCScan.Synchronize();
 end
 
 

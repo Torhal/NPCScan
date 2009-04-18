@@ -36,7 +36,7 @@ me.TamableIDs = {
 };
 
 me.ScanIDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
-
+me.NPCs = {}; -- Same format as NPCs options table
 me.Achievements = { -- Criteria data for each achievement
 	[ 1312 ] = {}; -- Bloody Rare (Outlands)
 	[ 2257 ] = {}; -- Frostbitten (Northrend)
@@ -128,52 +128,22 @@ end
 function me.ScanRemoveAll ( ID )
 	me.ScanIDs[ ID ] = nil;
 end
---[[****************************************************************************
-  * Function: _NPCScan.ScanSynchronize                                         *
-  * Description: Resets the scanning list and reloads it from saved settings.  *
-  ****************************************************************************]]
-function me.ScanSynchronize ()
-	-- Clear all scans
-	for ID in pairs( me.ScanIDs ) do
-		me.ScanRemoveAll( ID );
-	end
-
-	-- Add all NPCs from options
-	for Name, ID in pairs( _NPCScanOptionsCharacter.NPCs ) do
-		_NPCScanOptionsCharacter.NPCs[ Name ] = nil;
-		local Success, FoundName = me.NPCAdd( Name, ID );
-		if ( Success and FoundName ) then -- Was already cached
-			List:Add( L.NAME_FORMAT:format( FoundName ) );
-		end
-	end
-	-- Print all cached NPC names
-	local CachedNames = List:Clear();
-	if ( CachedNames ) then
-		me.Message( L.ALREADY_CACHED_FORMAT:format( CachedNames ) );
-	end
-
-	for AchievementID in pairs( me.Achievements ) do
-		if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
-			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
-			local Success, FoundList = me.AchievementAdd( AchievementID );
-			if ( Success and FoundList ) then -- Some NPCs were already cached
-				me.Message( L.ALREADY_CACHED_FORMAT:format( FoundList ) );
-			end
-		end
-	end
-end
 
 
 --[[****************************************************************************
   * Function: _NPCScan.NPCAdd                                                  *
   * Description: Adds an NPC name and ID to settings and begins searching.     *
   ****************************************************************************]]
-function me.NPCAdd ( Name, ID )
+function me.NPCAdd ( Name, ID, NoSync )
 	Name = Name:trim():lower();
-	ID = tonumber( ID );
 
-	if ( not _NPCScanOptionsCharacter.NPCs[ Name ] ) then
-		_NPCScanOptionsCharacter.NPCs[ Name ] = ID;
+	if ( not me.NPCs[ Name ] ) then
+		ID = tonumber( ID );
+		me.NPCs[ Name ] = ID;
+		if ( not NoSync ) then
+			_NPCScanOptionsCharacter.NPCs[ Name ] = ID;
+		end
+		me.Options.Search.UpdateTab( "NPC" );
 
 		local FoundName = me.TestID( ID );
 		if ( FoundName ) then -- Already seen
@@ -188,12 +158,16 @@ end
   * Function: _NPCScan.NPCRemove                                               *
   * Description: Removes an NPC from settings by name and stops searching.     *
   ****************************************************************************]]
-function me.NPCRemove ( Name )
+function me.NPCRemove ( Name, NoSync )
 	Name = Name:trim():lower();
-	local ID = _NPCScanOptionsCharacter.NPCs[ Name ];
+	local ID = me.NPCs[ Name ];
 
 	if ( ID ) then
-		_NPCScanOptionsCharacter.NPCs[ Name ] = nil;
+		me.NPCs[ Name ] = nil;
+		if ( not NoSync ) then
+			_NPCScanOptionsCharacter.NPCs[ Name ] = nil;
+		end
+		me.Options.Search.UpdateTab( "NPC" );
 		me.ScanRemove( ID );
 
 		return true;
@@ -205,22 +179,27 @@ end
   * Function: _NPCScan.AchievementAdd                                          *
   * Description: Adds a kill-related achievement to track.                     *
   ****************************************************************************]]
-function me.AchievementAdd ( AchievementID )
-	if ( not _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
-		_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
+function me.AchievementAdd ( AchievementID, NoSync )
+	local Achievement = me.Achievements[ AchievementID ];
+	if ( not Achievement.Enabled ) then
+		Achievement.Enabled = true;
+		if ( not NoSync ) then
+			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
+		end
 
-		for CriteriaID, NPCID in pairs( me.Achievements[ AchievementID ].Criteria ) do
+		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
 			local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
 			if ( not Completed or _NPCScanOptionsCharacter.AchievementsAddFound ) then
 				local FoundName = me.TestID( NPCID );
 				if ( FoundName ) then -- Already seen
 					List:Add( L.NAME_FORMAT:format( FoundName ) );
 				else
-					me.Achievements[ AchievementID ].Active[ CriteriaID ] = true;
+					Achievement.Active[ CriteriaID ] = true;
 					me.ScanAdd( NPCID );
 				end
 			end
 		end
+		me.Options.Search.AchievementSetEnabled( AchievementID, true );
 
 		return true, List:Clear();
 	end
@@ -229,15 +208,19 @@ end
   * Function: _NPCScan.AchievementRemove                                       *
   * Description: Removes an achievement from settings and stops tracking it.   *
   ****************************************************************************]]
-function me.AchievementRemove ( AchievementID )
-	if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
-		_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
-
-		local Criteria = me.Achievements[ AchievementID ].Criteria;
-		for CriteriaID in pairs( me.Achievements[ AchievementID ].Active ) do
-			me.ScanRemove( Criteria[ CriteriaID ] );
+function me.AchievementRemove ( AchievementID, NoSync )
+	local Achievement = me.Achievements[ AchievementID ];
+	if ( Achievement.Enabled ) then
+		Achievement.Enabled = false;
+		if ( not NoSync ) then
+			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
 		end
-		wipe( me.Achievements[ AchievementID ].Active );
+
+		for CriteriaID in pairs( Achievement.Active ) do
+			me.ScanRemove( Achievement.Criteria[ CriteriaID ] );
+		end
+		wipe( Achievement.Active );
+		me.Options.Search.AchievementSetEnabled( AchievementID, false );
 		return true;
 	end
 end
@@ -251,12 +234,17 @@ do
 	local pairs = pairs;
 	function me.CriteriaUpdate ()
 		if ( not _NPCScanOptionsCharacter.AchievementsAddFound ) then
-			for _, Achievement in pairs( me.Achievements ) do
+			for AchievementID, Achievement in pairs( me.Achievements ) do
+				local Updated = false;
 				for CriteriaID in pairs( Achievement.Active ) do
 					if ( select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) then -- Completed
 						Achievement.Active[ CriteriaID ] = nil;
 						me.ScanRemove( Achievement.Criteria[ CriteriaID ] );
+						Updated = true;
 					end
+				end
+				if ( Updated ) then
+					me.Options.Search.UpdateTab( AchievementID );
 				end
 			end
 		end
@@ -281,6 +269,45 @@ function me.LoadDefaults ( Global )
 		end
 	end
 end
+--[[****************************************************************************
+  * Function: _NPCScan.Synchronize                                             *
+  * Description: Resets the scanning list and reloads it from saved settings.  *
+  ****************************************************************************]]
+function me.Synchronize ()
+	-- Clear all scans
+	for AchievementID in pairs( me.Achievements ) do
+		me.AchievementRemove( AchievementID, true );
+	end
+	for Name in pairs( me.NPCs ) do
+		me.NPCRemove( Name, true );
+	end
+	for ID in pairs( me.ScanIDs ) do
+		me.ScanRemoveAll( ID );
+	end
+
+	-- Add all NPCs from options
+	for Name, ID in pairs( _NPCScanOptionsCharacter.NPCs ) do
+		local Success, FoundName = me.NPCAdd( Name, ID );
+		if ( Success and FoundName ) then -- Was already cached
+			List:Add( L.NAME_FORMAT:format( FoundName ) );
+		end
+	end
+	-- Print all cached NPC names
+	local CachedNames = List:Clear();
+	if ( CachedNames ) then
+		me.Message( L.ALREADY_CACHED_FORMAT:format( CachedNames ) );
+	end
+
+	-- Add recognized achievements
+	for AchievementID in pairs( me.Achievements ) do
+		if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
+			local Success, FoundList = me.AchievementAdd( AchievementID );
+			if ( Success and FoundList ) then -- Some NPCs were already cached
+				me.Message( L.ALREADY_CACHED_FORMAT:format( FoundList ) );
+			end
+		end
+	end
+end
 
 
 --[[****************************************************************************
@@ -292,7 +319,7 @@ do
 	local Name;
 	local LastUpdate = 0;
 	function me:OnUpdate ( Elapsed )
-		if ( me.CriteriaUpdateRequested ) then
+		if ( me.CriteriaUpdateRequested ) then -- CRITERIA_UPDATE bucket
 			me.CriteriaUpdateRequested = nil;
 			me.CriteriaUpdate();
 		end
@@ -329,7 +356,7 @@ function me.OnLoad ()
 		me.LoadDefaults( _NPCScanOptions.Version ~= me.Version );
 	end
 
-	me.ScanSynchronize();
+	me.Synchronize();
 end
 --[[****************************************************************************
   * Function: _NPCScan:PLAYER_ENTERING_WORLD                                   *
@@ -393,6 +420,7 @@ do
 
 	-- Save achievement criteria data
 	for AchievementID, Achievement in pairs( me.Achievements ) do
+		Achievement.Enabled = false;
 		Achievement.Criteria = {};
 		Achievement.Active = {};
 		for Criteria = 1, GetAchievementNumCriteria( AchievementID ) do
