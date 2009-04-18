@@ -53,6 +53,21 @@ function me:TabOnClick ()
 	me.TabSelect( self );
 end
 --[[****************************************************************************
+  * Function: _NPCScan.Options.Search:TabOnEnter                               *
+  ****************************************************************************]]
+function me:TabOnEnter ()
+	GameTooltip:SetOwner( self, "ANCHOR_TOPLEFT", 0, -8 );
+	if ( self.AchievementID ) then
+		local _, Name, _, _, _, _, _, Description = GetAchievementInfo( self.AchievementID );
+		GameTooltip:SetText( Name );
+		local Color = HIGHLIGHT_FONT_COLOR;
+		GameTooltip:AddLine( Description, Color.r, Color.g, Color.b, true );
+	else
+		GameTooltip:SetText( L.SEARCH_NPCS_DESC, nil, nil, nil, nil, true );
+	end
+	GameTooltip:Show();
+end
+--[[****************************************************************************
   * Function: _NPCScan.Options.Search:TabCheckOnClick                          *
   ****************************************************************************]]
 function me:TabCheckOnClick ()
@@ -62,17 +77,6 @@ function me:TabCheckOnClick ()
 	if ( FoundList ) then
 		_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( FoundList ) );
 	end
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options.Search:TabCheckOnEnter                          *
-  ****************************************************************************]]
-function me:TabCheckOnEnter ()
-	local _, Name, _, _, _, _, _, Description = GetAchievementInfo( self:GetParent().AchievementID );
-	GameTooltip:SetOwner( self, "ANCHOR_TOPLEFT" );
-	GameTooltip:SetText( Name );
-	local Color = HIGHLIGHT_FONT_COLOR;
-	GameTooltip:AddLine( Description, Color.r, Color.g, Color.b, true );
-	GameTooltip:Show();
 end
 
 
@@ -420,6 +424,8 @@ do
 
 		Tab:SetHitRectInsets( 6, 6, 6, 0 );
 		Tab:SetScript( "OnClick", me.TabOnClick );
+		Tab:SetScript( "OnEnter", me.TabOnEnter );
+		Tab:SetScript( "OnLeave", _NPCScan.Options.ControlOnLeave );
 
 		if ( type( ID ) == "number" ) then -- AchievementID
 			Tab:SetText( select( 2, GetAchievementInfo( ID ) ) );
@@ -431,8 +437,6 @@ do
 			Checkbox:SetPoint( "RIGHT", _G[ Tab:GetName().."Text" ], "LEFT", 2, -2 );
 			Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
 			Checkbox:SetScript( "OnClick", me.TabCheckOnClick );
-			Checkbox:SetScript( "OnEnter", me.TabCheckOnEnter );
-			Checkbox:SetScript( "OnLeave", _NPCScan.Options.ControlOnLeave );
 		else
 			Tab:SetText( L.SEARCH_NPCS );
 		end

@@ -43,6 +43,7 @@ do
 		SEARCH_DESC = "This table allows you to add or remove NPCs and achievements to scan for.  Note that tameable mobs cannot be searched for since they get found even as hunter pets.";
 
 		SEARCH_NPCS = "Custom NPCs";
+		SEARCH_NPCS_DESC = "Add any NPC to track, even if it has no achievement.";
 
 		SEARCH_CACHED = "Found";
 		SEARCH_NAME = "Name:";
@@ -53,7 +54,6 @@ do
 
 		SEARCH_CACHED_YES = "|T"..READY_CHECK_NOT_READY_TEXTURE..":0|t";
 		SEARCH_CACHED_NO = "";
-
 		SEARCH_COMPLETED_YES = "|T"..READY_CHECK_READY_TEXTURE..":0|t";
 		SEARCH_COMPLETED_NO = "";
 
