@@ -59,6 +59,12 @@ do
 
 		SEARCH_ADD = "+";
 		SEARCH_REMOVE = "-";
+
+
+		CMD_ADD = "ADD";
+		CMD_REMOVE = "REMOVE";
+		CMD_REMOVENOTFOUND_FORMAT = "NPC "..LDQuo.."%s"..RDQuo.." not found.";
+		CMD_HELP = "Commands are "..LDQuo.."/npcscan add <NpcID> <Name>"..RDQuo..", "..LDQuo.."/npcscan remove <Name>"..RDQuo..", and simply "..LDQuo.."/npcscan"..RDQuo.." for the options menu.";
 	}, Metatable );
 
 
