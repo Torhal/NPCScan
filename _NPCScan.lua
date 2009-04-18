@@ -37,6 +37,7 @@ me.TamableIDs = {
 
 me.ScanIDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
 me.NPCs = {}; -- Same format as NPCs options table
+me.AchievementsAddFound = false;
 me.Achievements = { -- Criteria data for each achievement
 	[ 1312 ] = {}; -- Bloody Rare (Outlands)
 	[ 2257 ] = {}; -- Frostbitten (Northrend)
@@ -176,6 +177,29 @@ end
 
 
 --[[****************************************************************************
+  * Function: _NPCScan.AchievementSetAddFound                                  *
+  * Description: Enables tracking of unneeded achievement NPCs.                *
+  ****************************************************************************]]
+function me.AchievementSetAddFound ( Enable, NoSync )
+	if ( Enable ~= me.AchievementsAddFound ) then
+		me.AchievementsAddFound = Enable;
+		if ( not NoSync ) then
+			_NPCScanOptionsCharacter.AchievementsAddFound = Enable;
+		end
+
+		me.Options.Search.AddFoundCheckbox:SetChecked( Enable );
+		for AchievementID, Achievement in pairs( me.Achievements ) do
+			if ( Achievement.Enabled ) then
+				me.AchievementRemove( AchievementID );
+				local Success, FoundList = me.AchievementAdd( AchievementID );
+				if ( Success and FoundList ) then
+					me.Message( L.ALREADY_CACHED_FORMAT:format( FoundList ) );
+				end
+			end
+		end
+	end
+end
+--[[****************************************************************************
   * Function: _NPCScan.AchievementAdd                                          *
   * Description: Adds a kill-related achievement to track.                     *
   ****************************************************************************]]
@@ -189,7 +213,7 @@ function me.AchievementAdd ( AchievementID, NoSync )
 
 		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
 			local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
-			if ( not Completed or _NPCScanOptionsCharacter.AchievementsAddFound ) then
+			if ( not Completed or me.AchievementsAddFound ) then
 				local FoundName = me.TestID( NPCID );
 				if ( FoundName ) then -- Already seen
 					List:Add( L.NAME_FORMAT:format( FoundName ) );
@@ -233,7 +257,7 @@ do
 	local select = select;
 	local pairs = pairs;
 	function me.CriteriaUpdate ()
-		if ( not _NPCScanOptionsCharacter.AchievementsAddFound ) then
+		if ( not me.AchievementsAddFound ) then
 			for AchievementID, Achievement in pairs( me.Achievements ) do
 				local Updated = false;
 				for CriteriaID in pairs( Achievement.Active ) do
@@ -263,8 +287,9 @@ function me.LoadDefaults ( Global )
 	_NPCScanOptionsCharacter = CopyTable( me.OptionsCharacterDefault );
 
 	-- Add all uncompleted achievements
+	local AchievementsAddFound = _NPCScanOptionsCharacter.AchievementsAddFound;
 	for AchievementID in pairs( me.Achievements ) do
-		if ( _NPCScanOptionsCharacter.AchievementsAddFound or not select( 4, GetAchievementInfo( AchievementID ) ) ) then -- Not completed
+		if ( AchievementsAddFound or not select( 4, GetAchievementInfo( AchievementID ) ) ) then -- Not completed
 			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
 		end
 	end
@@ -284,10 +309,11 @@ function me.Synchronize ()
 	for ID in pairs( me.ScanIDs ) do
 		me.ScanRemoveAll( ID );
 	end
+	me.AchievementSetAddFound( false, true );
 
 	-- Add all NPCs from options
 	for Name, ID in pairs( _NPCScanOptionsCharacter.NPCs ) do
-		local Success, FoundName = me.NPCAdd( Name, ID );
+		local Success, FoundName = me.NPCAdd( Name, ID, true );
 		if ( Success and FoundName ) then -- Was already cached
 			List:Add( L.NAME_FORMAT:format( FoundName ) );
 		end
@@ -299,9 +325,10 @@ function me.Synchronize ()
 	end
 
 	-- Add recognized achievements
+	me.AchievementSetAddFound( _NPCScanOptionsCharacter.AchievementsAddFound, true );
 	for AchievementID in pairs( me.Achievements ) do
 		if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
-			local Success, FoundList = me.AchievementAdd( AchievementID );
+			local Success, FoundList = me.AchievementAdd( AchievementID, true );
 			if ( Success and FoundList ) then -- Some NPCs were already cached
 				me.Message( L.ALREADY_CACHED_FORMAT:format( FoundList ) );
 			end

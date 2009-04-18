@@ -58,7 +58,10 @@ end
 function me:TabCheckOnClick ()
 	local Enable = not not self:GetChecked();
 	PlaySound( Enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff" );
-	me.AchievementSetEnabled( self:GetParent().AchievementID, Enable );
+	local FoundList = me.AchievementSetEnabled( self:GetParent().AchievementID, Enable );
+	if ( FoundList ) then
+		_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( FoundList ) );
+	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search:TabCheckOnEnter                          *
@@ -76,19 +79,64 @@ end
 
 
 --[[****************************************************************************
+  * Function: _NPCScan.Options.Search.NPCSetEditBoxText                        *
+  * Description: Sets the edit boxes' text.                                    *
+  ****************************************************************************]]
+function me.NPCSetEditBoxText ( Name, ID )
+	me.EditBoxName:SetText( Name or "" );
+	me.EditBoxID:SetText( ID or "" );
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search.NPCValidateButtons                       *
+  * Description: Validates ability to use add and remove buttons.              *
+  ****************************************************************************]]
+function me.NPCValidateButtons ()
+	local Name = me.EditBoxName:GetText():trim():lower();
+	local ID = me.EditBoxID:GetText() ~= "" and me.EditBoxID:GetNumber() or nil;
+	Name = Name ~= "" and Name or nil;
+
+	local CanRemove = _NPCScan.NPCs[ Name ];
+	local CanAdd = Name and ID and ID ~= CanRemove and ID >= 1 and ID <= _NPCScan.IDMax;
+
+	if ( me.Table ) then
+		me.Table:SetSelectionByKey( CanRemove and Name or nil );
+	end
+	me.AddButton[ CanAdd and "Enable" or "Disable" ]( me.AddButton );
+	me.RemoveButton[ CanRemove and "Enable" or "Disable" ]( me.RemoveButton );
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search.NPCAdd                                   *
+  * Description: Adds a Custom NPC list element.                               *
+  ****************************************************************************]]
+function me.NPCAdd ()
+	local Name = me.EditBoxName:GetText();
+	_NPCScan.NPCRemove( Name );
+	local Success, FoundName = _NPCScan.NPCAdd( Name, me.EditBoxID:GetNumber() );
+	if ( Success and FoundName ) then
+		_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search.NPCRemove                                *
+  * Description: Removes a Custom NPC list element.                            *
+  ****************************************************************************]]
+function me.NPCRemove ()
+	_NPCScan.NPCRemove( me.EditBoxName:GetText() );
+end
+--[[****************************************************************************
   * Function: _NPCScan.Options.Search:NPCOnSelect                              *
   * Description: Updates the edit boxes when a table row is selected.          *
   ****************************************************************************]]
 function me:NPCOnSelect ( Name )
 	if ( Name ~= nil ) then
-		me.SetEditBoxText( Name, _NPCScan.NPCs[ Name ] );
+		me.NPCSetEditBoxText( Name, _NPCScan.NPCs[ Name ] );
 	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search:NPCUpdate                                *
   ****************************************************************************]]
 function me:NPCUpdate ()
-	me.SetEditBoxText();
+	me.NPCSetEditBoxText();
 
 	for Name in pairs( _NPCScan.NPCs ) do
 		SortedNames[ #SortedNames + 1 ] = Name;
@@ -122,6 +170,15 @@ function me:NPCDeactivate ()
 end
 
 
+
+
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search.AchievementAddFoundOnClick               *
+  * Description: Enables/disables the achievement related to a tab.            *
+  ****************************************************************************]]
+function me.AchievementAddFoundOnClick ( Enable )
+	_NPCScan.AchievementSetAddFound( Enable == "1" );
+end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search.AchievementSetEnabled                    *
   * Description: Enables/disables the achievement related to a tab.            *
@@ -130,9 +187,14 @@ function me.AchievementSetEnabled ( AchievementID, Enable )
 	local Tab = me.Tabs[ AchievementID ];
 	Tab.Checkbox:SetChecked( Enable );
 
-	_NPCScan[ Enable and "AchievementAdd" or "AchievementRemove" ]( AchievementID );
 	if ( me.TabSelected == Tab ) then
 		me.Table:SetAlpha( Enable and 1.0 or me.AchievementDisabledAlpha );
+	end
+	if ( Enable ) then
+		local Success, FoundList = _NPCScan.AchievementAdd( AchievementID );
+		return Success and FoundList;
+	else
+		_NPCScan.AchievementRemove( AchievementID );
 	end
 end
 --[[****************************************************************************
@@ -169,69 +231,19 @@ end
 function me:AchievementActivate ()
 	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED );
 	me.Table:SetAlpha( _NPCScan.Achievements[ self.AchievementID ].Enabled and 1.0 or me.AchievementDisabledAlpha );
+	me.AchievementControls:Show();
+	me.TableContainer:SetPoint( "BOTTOM", me.AchievementControls, "TOP" );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search:AchievementDeactivate                    *
   ****************************************************************************]]
 function me:AchievementDeactivate ()
 	me.Table:SetAlpha( 1.0 );
+	me.AchievementControls:Hide();
+	me.TableContainer:SetPoint( "BOTTOM", me.AchievementControls );
 end
 
 
-
-
---[[****************************************************************************
-  * Function: _NPCScan.Options.Search.SetEditBoxText                           *
-  * Description: Sets the edit boxes' text.                                    *
-  ****************************************************************************]]
-function me.SetEditBoxText ( Name, ID )
-	me.EditBoxName:SetText( Name or "" );
-	me.EditBoxID:SetText( ID or "" );
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options.Search:EditBoxNameGetText                       *
-  * Description: Returns the name field without leading or trailing spaces.    *
-  ****************************************************************************]]
-function me:EditBoxNameGetText ( ... )
-	return self:GetTextBackup( ... ):trim();
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options.Search.ValidateButtons                          *
-  * Description: Validates ability to use add and remove buttons.              *
-  ****************************************************************************]]
-function me.ValidateButtons ()
-	local Name = me.EditBoxName:GetText():lower();
-	local ID = me.EditBoxID:GetText() ~= "" and me.EditBoxID:GetNumber() or nil;
-	Name = Name ~= "" and Name or nil;
-
-	local CanRemove = _NPCScan.NPCs[ Name ];
-	local CanAdd = Name and ID and ID ~= CanRemove and ID >= 1 and ID <= _NPCScan.IDMax;
-
-	if ( me.Table ) then
-		me.Table:SetSelectionByKey( CanRemove and Name or nil );
-	end
-	me.AddButton[ CanAdd and "Enable" or "Disable" ]( me.AddButton );
-	me.RemoveButton[ CanRemove and "Enable" or "Disable" ]( me.RemoveButton );
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options.Search.Add                                      *
-  * Description: Adds a Custom NPC list element.                               *
-  ****************************************************************************]]
-function me.Add ()
-	local Name = me.EditBoxName:GetText();
-	_NPCScan.NPCRemove( Name );
-	local Success, FoundName = _NPCScan.NPCAdd( Name, me.EditBoxID:GetNumber() );
-	if ( Success and FoundName ) then
-		_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
-	end
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options.Search.Remove                                   *
-  * Description: Removes a Custom NPC list element.                            *
-  ****************************************************************************]]
-function me.Remove ()
-	_NPCScan.NPCRemove( me.EditBoxName:GetText() );
-end
 
 
 --[[****************************************************************************
@@ -315,22 +327,21 @@ do
 	me.RemoveButton = RemoveButton;
 	RemoveButton:SetWidth( 16 );
 	RemoveButton:SetHeight( 20 );
-	RemoveButton:SetPoint( "BOTTOMRIGHT", me, "BOTTOMRIGHT", -16, 16 );
+	RemoveButton:SetPoint( "BOTTOMRIGHT", me, -16, 16 );
 	RemoveButton:SetText( L.SEARCH_REMOVE );
-	RemoveButton:SetScript( "OnClick", me.Remove );
+	RemoveButton:SetScript( "OnClick", me.NPCRemove );
 	local AddButton = CreateFrame( "Button", nil, NPCControls, "GameMenuButtonTemplate" );
 	me.AddButton = AddButton;
 	AddButton:SetWidth( 16 );
 	AddButton:SetHeight( 20 );
 	AddButton:SetPoint( "BOTTOMRIGHT", RemoveButton, "TOPRIGHT", 0, 4 );
 	AddButton:SetText( L.SEARCH_ADD );
-	AddButton:SetScript( "OnClick", me.Add );
-
+	AddButton:SetScript( "OnClick", me.NPCAdd );
 
 	-- Create edit boxes
 	local LabelID = NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
 	me.LabelID = LabelID;
-	LabelID:SetPoint( "BOTTOMLEFT", me, "BOTTOMLEFT", 16, 16 );
+	LabelID:SetPoint( "BOTTOMLEFT", me, 16, 16 );
 	LabelID:SetPoint( "TOP", RemoveButton );
 	LabelID:SetText( L.SEARCH_ID );
 	local LabelName = NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
@@ -350,8 +361,8 @@ do
 	EditBoxID:SetNumeric( true );
 	EditBoxID:SetMaxLetters( floor( log10( _NPCScan.IDMax ) ) + 1 );
 	EditBoxID:SetScript( "OnTabPressed", function () EditBoxName:SetFocus(); end );
-	EditBoxID:SetScript( "OnEnterPressed", me.Add );
-	EditBoxID:SetScript( "OnTextChanged", me.ValidateButtons );
+	EditBoxID:SetScript( "OnEnterPressed", function () AddButton:Click(); end );
+	EditBoxID:SetScript( "OnTextChanged", me.NPCValidateButtons );
 	EditBoxID:SetScript( "OnEnter", _NPCScan.Options.ControlOnEnter );
 	EditBoxID:SetScript( "OnLeave", _NPCScan.Options.ControlOnLeave );
 	EditBoxID.tooltipText = L.SEARCH_ID_DESC;
@@ -361,12 +372,10 @@ do
 	EditBoxName:SetPoint( "BOTTOMRIGHT", EditBoxID, "TOPRIGHT" );
 	EditBoxName:SetAutoFocus( false );
 	EditBoxName:SetScript( "OnTabPressed", function () EditBoxID:SetFocus(); end );
-	EditBoxName:SetScript( "OnEnterPressed", me.Add );
-	EditBoxName:SetScript( "OnTextChanged", me.ValidateButtons );
+	EditBoxName:SetScript( "OnEnterPressed", function () AddButton:Click(); end );
+	EditBoxName:SetScript( "OnTextChanged", me.NPCValidateButtons );
 	EditBoxName:SetScript( "OnEnter", _NPCScan.Options.ControlOnEnter );
 	EditBoxName:SetScript( "OnLeave", _NPCScan.Options.ControlOnLeave );
-	EditBoxName.GetTextBackup = EditBoxName.GetText;
-	EditBoxName.GetText = me.EditBoxNameGetText;
 	EditBoxName.tooltipText = L.SEARCH_NAME_DESC;
 
 	EditBoxID:SetPoint( "LEFT",
@@ -377,6 +386,25 @@ do
 	NPCControls:SetPoint( "LEFT", LabelID );
 	NPCControls:SetPoint( "TOP", AddButton );
 
+
+	-- Controls for achievement tables
+	local AchievementControls = CreateFrame( "Frame", nil, me );
+	me.AchievementControls = AchievementControls;
+	AchievementControls:Hide();
+
+	local AddFoundCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchAchievementAddFoundCheckbox", AchievementControls, "InterfaceOptionsCheckButtonTemplate" );
+	me.AddFoundCheckbox = AddFoundCheckbox;
+	AddFoundCheckbox:SetPoint( "BOTTOMLEFT", NPCControls );
+	AddFoundCheckbox.setFunc = me.AchievementAddFoundOnClick;
+	AddFoundCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC;
+	_G[ AddFoundCheckbox:GetName().."Text" ]:SetText( L.SEARCH_ACHIEVEMENTADDFOUND );
+
+	AchievementControls:SetPoint( "BOTTOMRIGHT", NPCControls );
+	AchievementControls:SetPoint( "LEFT", NPCControls );
+	AchievementControls:SetPoint( "TOP", AddFoundCheckbox );
+
+
+	-- Place table
 	me.TableContainer:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -32 );
 	me.TableContainer:SetPoint( "RIGHT", -16, 0 );
 	me.TableContainer:SetPoint( "BOTTOM", NPCControls );

@@ -60,6 +60,9 @@ do
 		SEARCH_ADD = "+";
 		SEARCH_REMOVE = "-";
 
+		SEARCH_ACHIEVEMENTADDFOUND = "Search for completed achievement NPCs";
+		SEARCH_ACHIEVEMENTADDFOUND_DESC = "Continues searching for all achievement NPCs, even if you no longer need them.";
+
 
 		CMD_ADD = "ADD";
 		CMD_REMOVE = "REMOVE";
