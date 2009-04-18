@@ -294,6 +294,40 @@ function me:default ()
 end
 
 
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search.SlashCommand                             *
+  * Description: Slash command chat handler to open the options pane.  Also    *
+  *   supports subcommands for adding and removing NPCs.                       *
+  ****************************************************************************]]
+function me.SlashCommand ( Input )
+	local Command, Arguments = Input:match( "^(%S+)%s*(.-)%s*$" );
+	if ( Command ) then
+		Command = Command:upper();
+		if ( Command == L.CMD_ADD ) then
+			local ID, Name = Arguments:match( "^(%d+)%s+(.+)$" );
+			if ( ID ) then
+				_NPCScan.NPCRemove( Name );
+				local Success, FoundName = _NPCScan.NPCAdd( Name, ID );
+				if ( Success and FoundName ) then
+					_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
+				end
+				return;
+			end
+		elseif ( Command == L.CMD_REMOVE ) then
+			if ( not _NPCScan.NPCRemove( Arguments ) ) then
+				_NPCScan.Message( L.CMD_REMOVENOTFOUND_FORMAT:format( Arguments ), RED_FONT_COLOR );
+			end
+			return;
+		end
+		-- Invalid subcommand
+		_NPCScan.Message( L.CMD_HELP );
+
+	else -- No subcommand
+		InterfaceOptionsFrame_OpenToCategory( me );
+	end
+end
+
+
 
 
 --------------------------------------------------------------------------------
@@ -461,4 +495,5 @@ do
 
 
 	InterfaceOptions_AddCategory( me );
+	SlashCmdList[ "_NPCSCAN" ] = me.SlashCommand;
 end
