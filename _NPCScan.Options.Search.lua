@@ -16,7 +16,7 @@ me.Tabs = {};
 me.TabSelected = nil;
 me.UpdateRequested = nil;
 
-me.NoScanAlpha = 0.5;
+me.InactiveAlpha = 0.5;
 
 local SortedNames = {}; -- Used to sort text tables
 
@@ -153,12 +153,12 @@ function me:NPCUpdate ()
 	sort( SortedNames );
 
 	for _, Name in ipairs( SortedNames ) do
-		local Found = _NPCScan.TestID( _NPCScan.NPCs[ Name ] );
+		local Cached = _NPCScan.TestID( _NPCScan.NPCs[ Name ] );
 		me.Table:AddRow( Name,
-			L[ Found and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
+			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
 			Name, _NPCScan.NPCs[ Name ] );
-		if ( Found ) then
-			me.Table.Rows[ #me.Table.Rows ]:SetAlpha( me.NoScanAlpha );
+		if ( Cached ) then
+			me.Table.Rows[ #me.Table.Rows ]:SetAlpha( me.InactiveAlpha );
 		end
 	end
 	wipe( SortedNames );
@@ -203,7 +203,7 @@ function me.AchievementSetEnabled ( AchievementID, Enable )
 	Tab.Checkbox:SetChecked( Enable );
 
 	if ( me.TabSelected == Tab ) then
-		me.Table.Header:SetAlpha( Enable and 1.0 or me.NoScanAlpha );
+		me.Table.Header:SetAlpha( Enable and 1.0 or me.InactiveAlpha );
 	end
 	if ( Enable ) then
 		return _NPCScan.AchievementAdd( AchievementID );
@@ -222,20 +222,21 @@ do
 	end
 	function me:AchievementUpdate ()
 		local Achievement = _NPCScan.Achievements[ self.AchievementID ];
-		for CriteriaID in pairs( Achievement.Criteria ) do
-			CriteriaNames[ CriteriaID ], _, CriteriaCompleted[ CriteriaID ] = GetAchievementCriteriaInfo( CriteriaID );
-			SortedNames[ #SortedNames + 1 ] = CriteriaID;
+		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
+			if ( not _NPCScan.TamableIDs[ NPCID ] ) then
+				CriteriaNames[ CriteriaID ], _, CriteriaCompleted[ CriteriaID ] = GetAchievementCriteriaInfo( CriteriaID );
+				SortedNames[ #SortedNames + 1 ] = CriteriaID;
+			end
 		end
 		sort( SortedNames, SortFunc );
 
-		local Disabled = not Achievement.Enabled;
 		for _, CriteriaID in ipairs( SortedNames ) do
-			local Found = _NPCScan.TestID( Achievement.Criteria[ CriteriaID ] );
-			me.Table:AddRow( nil, L[ Found and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
+			local Cached = _NPCScan.TestID( Achievement.Criteria[ CriteriaID ] );
+			me.Table:AddRow( nil, L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
 				CriteriaNames[ CriteriaID ], Achievement.Criteria[ CriteriaID ],
 				L[ CriteriaCompleted[ CriteriaID ] and "SEARCH_COMPLETED_YES" or "SEARCH_COMPLETED_NO" ] );
-			if ( Disabled or Found or ( not _NPCScan.AchievementsAddFound and CriteriaCompleted[ CriteriaID ] ) ) then
-				me.Table.Rows[ #me.Table.Rows ]:SetAlpha( me.NoScanAlpha );
+			if ( Cached or not Achievement.Active[ CriteriaID ] ) then
+				me.Table.Rows[ #me.Table.Rows ]:SetAlpha( me.InactiveAlpha );
 			end
 		end
 		wipe( CriteriaNames );
@@ -248,7 +249,7 @@ end
   ****************************************************************************]]
 function me:AchievementActivate ()
 	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED );
-	me.Table.Header:SetAlpha( _NPCScan.Achievements[ self.AchievementID ].Enabled and 1.0 or me.NoScanAlpha );
+	me.Table.Header:SetAlpha( _NPCScan.Achievements[ self.AchievementID ].Enabled and 1.0 or me.InactiveAlpha );
 	me.AchievementControls:Show();
 	me.TableContainer:SetPoint( "BOTTOM", me.AchievementControls, "TOP" );
 end
