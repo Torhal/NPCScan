@@ -78,9 +78,9 @@ end
 function me:TabCheckOnClick ()
 	local Enable = not not self:GetChecked();
 	PlaySound( Enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff" );
-	local FoundList = me.AchievementSetEnabled( self:GetParent().AchievementID, Enable );
-	if ( FoundList ) then
-		_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( FoundList ) );
+	local Success, FoundList = me.AchievementSetEnabled( self:GetParent().AchievementID, Enable );
+	if ( Success and #FoundList > 0 ) then
+		_NPCScan.Message( L.CACHED_FORMAT:format( FoundList:Clear() ), RED_FONT_COLOR );
 	end
 end
 
@@ -122,7 +122,7 @@ function me.NPCAdd ()
 	_NPCScan.NPCRemove( Name );
 	local Success, FoundName = _NPCScan.NPCAdd( Name, me.EditBoxID:GetNumber() );
 	if ( Success and FoundName ) then
-		_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
+		_NPCScan.Message( L.CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
 	end
 end
 --[[****************************************************************************
@@ -189,7 +189,10 @@ end
   * Description: Enables/disables the achievement related to a tab.            *
   ****************************************************************************]]
 function me.AchievementAddFoundOnClick ( Enable )
-	_NPCScan.AchievementSetAddFound( Enable == "1" );
+	local Success, FoundList = _NPCScan.AchievementSetAddFound( Enable == "1" );
+	if ( Success and #FoundList > 0 ) then
+		_NPCScan.Message( L.CACHED_FORMAT:format( FoundList:Clear() ), RED_FONT_COLOR );
+	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search.AchievementSetEnabled                    *
@@ -203,8 +206,7 @@ function me.AchievementSetEnabled ( AchievementID, Enable )
 		me.Table.Header:SetAlpha( Enable and 1.0 or me.NoScanAlpha );
 	end
 	if ( Enable ) then
-		local Success, FoundList = _NPCScan.AchievementAdd( AchievementID );
-		return Success and FoundList;
+		return _NPCScan.AchievementAdd( AchievementID );
 	else
 		_NPCScan.AchievementRemove( AchievementID );
 	end
@@ -325,7 +327,7 @@ function me.SlashCommand ( Input )
 				_NPCScan.NPCRemove( Name );
 				local Success, FoundName = _NPCScan.NPCAdd( Name, ID );
 				if ( Success and FoundName ) then
-					_NPCScan.Message( L.ALREADY_CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
+					_NPCScan.Message( L.CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
 				end
 				return;
 			end

@@ -54,7 +54,7 @@ local List = setmetatable( {}, { __index = { -- List string builder
 		self[ #self + 1 ] = Element;
 	end;
 	Clear = function ( self ) -- Assemble string and clear
-		if ( next( self ) ) then
+		if ( #self > 0 ) then
 			sort( self );
 			local String = table.concat( self, L.LIST_SEPARATOR );
 			wipe( self );
@@ -191,12 +191,10 @@ function me.AchievementSetAddFound ( Enable, NoSync )
 		for AchievementID, Achievement in pairs( me.Achievements ) do
 			if ( Achievement.Enabled ) then
 				me.AchievementRemove( AchievementID );
-				local Success, FoundList = me.AchievementAdd( AchievementID );
-				if ( Success and FoundList ) then
-					me.Message( L.ALREADY_CACHED_FORMAT:format( FoundList ) );
-				end
+				me.AchievementAdd( AchievementID );
 			end
 		end
+		return true, List;
 	end
 end
 --[[****************************************************************************
@@ -226,7 +224,7 @@ function me.AchievementAdd ( AchievementID, NoSync )
 		me.Options.Search.AchievementSetEnabled( AchievementID, true );
 		me.Options.Search.UpdateTab( AchievementID );
 
-		return true, List:Clear();
+		return true, List;
 	end
 end
 --[[****************************************************************************
@@ -320,21 +318,16 @@ function me.Synchronize ()
 			List:Add( L.NAME_FORMAT:format( FoundName ) );
 		end
 	end
-	-- Print all cached NPC names
-	local CachedNames = List:Clear();
-	if ( CachedNames ) then
-		me.Message( L.ALREADY_CACHED_FORMAT:format( CachedNames ) );
-	end
 
 	-- Add recognized achievements
 	me.AchievementSetAddFound( _NPCScanOptionsCharacter.AchievementsAddFound, true );
 	for AchievementID in pairs( me.Achievements ) do
 		if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
-			local Success, FoundList = me.AchievementAdd( AchievementID, true );
-			if ( Success and FoundList ) then -- Some NPCs were already cached
-				me.Message( L.ALREADY_CACHED_FORMAT:format( FoundList ) );
-			end
+			me.AchievementAdd( AchievementID, true );
 		end
+	end
+	if ( #List > 0 ) then -- Some NPCs were already cached
+		me.Message( L.CACHED_LONG_FORMAT:format( List:Clear() ) );
 	end
 end
 
