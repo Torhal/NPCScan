@@ -47,7 +47,7 @@ do
 		SEARCH_NPCS = "Custom NPCs";
 		SEARCH_NPCS_DESC = "Add any NPC to track, even if it has no achievement.";
 
-		SEARCH_CACHED = "Found";
+		SEARCH_CACHED = "Cached";
 		SEARCH_NAME = "Name:";
 		SEARCH_NAME_DESC = "A label for the NPC.  It is case insensitive and doesn't have to match the NPC's actual name.";
 		SEARCH_ID = "NPC ID:";
