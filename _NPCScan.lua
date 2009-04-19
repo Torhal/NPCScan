@@ -14,6 +14,7 @@ me.Version = GetAddOnMetadata( "_NPCScan", "Version" ):match( "^([%d.]+)" );
 
 me.OptionsDefault = {
 	Version = me.Version;
+	AchievementsAddFound = false;
 };
 me.OptionsCharacterDefault = {
 	Version = me.Version;
@@ -22,7 +23,6 @@ me.OptionsCharacterDefault = {
 		[ L.NPCS[ "Time-Lost Proto Drake" ]:trim():lower() ] = 32491;
 	};
 	Achievements = {}; -- Filled with all entries in me.Achievements
-	AchievementsAddFound = false;
 };
 
 
@@ -184,7 +184,7 @@ function me.AchievementSetAddFound ( Enable, NoSync )
 	if ( Enable ~= me.AchievementsAddFound ) then
 		me.AchievementsAddFound = Enable;
 		if ( not NoSync ) then
-			_NPCScanOptionsCharacter.AchievementsAddFound = Enable;
+			_NPCScanOptions.AchievementsAddFound = Enable;
 		end
 
 		me.Options.Search.AddFoundCheckbox:SetChecked( Enable );
@@ -287,7 +287,7 @@ function me.LoadDefaults ( Global )
 	_NPCScanOptionsCharacter = CopyTable( me.OptionsCharacterDefault );
 
 	-- Add all uncompleted achievements
-	local AchievementsAddFound = _NPCScanOptionsCharacter.AchievementsAddFound;
+	local AchievementsAddFound = _NPCScanOptions.AchievementsAddFound;
 	for AchievementID in pairs( me.Achievements ) do
 		if ( AchievementsAddFound or not select( 4, GetAchievementInfo( AchievementID ) ) ) then -- Not completed
 			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
@@ -320,7 +320,7 @@ function me.Synchronize ()
 	end
 
 	-- Add recognized achievements
-	me.AchievementSetAddFound( _NPCScanOptionsCharacter.AchievementsAddFound, true );
+	me.AchievementSetAddFound( _NPCScanOptions.AchievementsAddFound, true );
 	for AchievementID in pairs( me.Achievements ) do
 		if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
 			me.AchievementAdd( AchievementID, true );
