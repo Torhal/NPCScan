@@ -210,14 +210,16 @@ function me.AchievementAdd ( AchievementID, NoSync )
 		end
 
 		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
-			local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
-			if ( not Completed or me.AchievementsAddFound ) then
-				local FoundName = me.TestID( NPCID );
-				if ( FoundName ) then -- Already seen
-					List:Add( L.NAME_FORMAT:format( FoundName ) );
-				else
-					Achievement.Active[ CriteriaID ] = true;
-					me.ScanAdd( NPCID );
+			if ( not me.TamableIDs[ NPCID ] ) then
+				local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
+				if ( not Completed or me.AchievementsAddFound ) then
+					local FoundName = me.TestID( NPCID );
+					if ( FoundName ) then -- Already seen
+						List:Add( L.NAME_FORMAT:format( FoundName ) );
+					else
+						Achievement.Active[ CriteriaID ] = true;
+						me.ScanAdd( NPCID );
+					end
 				end
 			end
 		end
@@ -353,7 +355,7 @@ do
 			for ID in pairs( me.ScanIDs ) do
 				Name = me.TestID( ID );
 				if ( Name ) then
-					me.Alert( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
+					me.Alert( L[ me.TamableIDs[ ID ] and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
 					me.Button.SetNPC( Name, ID );
 					me.ScanRemoveAll( ID );
 					me.Options.Search.UpdateTab();
@@ -448,7 +450,7 @@ do
 		Achievement.Active = {};
 		for Criteria = 1, GetAchievementNumCriteria( AchievementID ) do
 			local _, CriteriaType, _, _, _, _, _, AssetID, _, CriteriaID = GetAchievementCriteriaInfo( AchievementID, Criteria );
-			if ( CriteriaType == 0 and not me.TamableIDs[ AssetID ] ) then -- Mob kill type
+			if ( CriteriaType == 0 ) then -- Mob kill type
 				Achievement.Criteria[ CriteriaID ] = AssetID;
 			end
 		end

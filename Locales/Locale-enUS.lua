@@ -23,6 +23,7 @@ do
 		MESSAGE_FORMAT = Title..": %s";
 
 		FOUND_FORMAT = "Found "..LDQuo.."%s"..RDQuo.."!";
+		FOUND_TAMABLE_FORMAT = "Found "..LDQuo.."%s"..RDQuo.."!  "..RED_FONT_COLOR_CODE.."(Note: Tamable mob, may only be a pet.)|r";
 		BUTTON_FOUND = "NPC found!";
 
 		CACHED_LONG_FORMAT = "The following unit(s) are already cached.  Consider removing them using "..LDQuo.."/npcscan"..RDQuo.."'s menu or resetting them by clearing your cache: %s.";
