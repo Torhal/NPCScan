@@ -186,10 +186,18 @@ end
 
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search.AchievementAddFoundOnClick               *
-  * Description: Enables/disables the achievement related to a tab.            *
   ****************************************************************************]]
 function me.AchievementAddFoundOnClick ( Enable )
 	local Success, FoundList = _NPCScan.AchievementSetAddFound( Enable == "1" );
+	if ( Success and #FoundList > 0 ) then
+		_NPCScan.Message( L.CACHED_FORMAT:format( FoundList:Clear() ), RED_FONT_COLOR );
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search.AchievementAddTamableOnClick             *
+  ****************************************************************************]]
+function me.AchievementAddTamableOnClick ( Enable )
+	local Success, FoundList = _NPCScan.AchievementSetAddTamable( Enable == "1" );
 	if ( Success and #FoundList > 0 ) then
 		_NPCScan.Message( L.CACHED_FORMAT:format( FoundList:Clear() ), RED_FONT_COLOR );
 	end
@@ -223,7 +231,7 @@ do
 	function me:AchievementUpdate ()
 		local Achievement = _NPCScan.Achievements[ self.AchievementID ];
 		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
-			if ( not _NPCScan.TamableIDs[ NPCID ] ) then
+			if ( _NPCScan.AchievementsAddTamable or not _NPCScan.TamableIDs[ NPCID ] ) then
 				CriteriaNames[ CriteriaID ], _, CriteriaCompleted[ CriteriaID ] = GetAchievementCriteriaInfo( CriteriaID );
 				SortedNames[ #SortedNames + 1 ] = CriteriaID;
 			end
@@ -456,9 +464,17 @@ do
 	AddFoundCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC;
 	_G[ AddFoundCheckbox:GetName().."Text" ]:SetText( L.SEARCH_ACHIEVEMENTADDFOUND );
 
+	local AddTamableCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchAchievementAddTamableCheckbox", AchievementControls, "InterfaceOptionsCheckButtonTemplate" );
+	me.AddTamableCheckbox = AddTamableCheckbox;
+	AddTamableCheckbox:SetPoint( "BOTTOMLEFT", AddFoundCheckbox, "TOPLEFT" );
+	AddTamableCheckbox.setFunc = me.AchievementAddTamableOnClick;
+	AddTamableCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDTAMABLE_DESC;
+	AddTamableCheckbox.tooltipRequirement = L.SEARCH_ACHIEVEMENTADDTAMABLE_WARNING;
+	_G[ AddTamableCheckbox:GetName().."Text" ]:SetText( L.SEARCH_ACHIEVEMENTADDTAMABLE );
+
 	AchievementControls:SetPoint( "BOTTOMRIGHT", NPCControls );
 	AchievementControls:SetPoint( "LEFT", NPCControls );
-	AchievementControls:SetPoint( "TOP", AddFoundCheckbox );
+	AchievementControls:SetPoint( "TOP", AddTamableCheckbox );
 
 
 	-- Place table

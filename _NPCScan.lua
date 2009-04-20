@@ -15,6 +15,7 @@ me.Version = GetAddOnMetadata( "_NPCScan", "Version" ):match( "^([%d.]+)" );
 me.OptionsDefault = {
 	Version = me.Version;
 	AchievementsAddFound = false;
+	AchievementsAddTamable = false;
 };
 me.OptionsCharacterDefault = {
 	Version = me.Version;
@@ -38,6 +39,7 @@ me.TamableIDs = {
 me.ScanIDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
 me.NPCs = {}; -- Same format as NPCs options table
 me.AchievementsAddFound = false;
+me.AchievementsAddTamable = false;
 me.Achievements = { -- Criteria data for each achievement
 	[ 1312 ] = {}; -- Bloody Rare (Outlands)
 	[ 2257 ] = {}; -- Frostbitten (Northrend)
@@ -198,6 +200,27 @@ function me.AchievementSetAddFound ( Enable, NoSync )
 	end
 end
 --[[****************************************************************************
+  * Function: _NPCScan.AchievementSetAddFound                                  *
+  * Description: Enables tracking of unneeded achievement NPCs.                *
+  ****************************************************************************]]
+function me.AchievementSetAddTamable ( Enable, NoSync )
+	if ( Enable ~= me.AchievementsAddTamable ) then
+		me.AchievementsAddTamable = Enable;
+		if ( not NoSync ) then
+			_NPCScanOptions.AchievementsAddTamable = Enable;
+		end
+
+		me.Options.Search.AddTamableCheckbox:SetChecked( Enable );
+		for AchievementID, Achievement in pairs( me.Achievements ) do
+			if ( Achievement.Enabled ) then
+				me.AchievementRemove( AchievementID );
+				me.AchievementAdd( AchievementID );
+			end
+		end
+		return true, List;
+	end
+end
+--[[****************************************************************************
   * Function: _NPCScan.AchievementAdd                                          *
   * Description: Adds a kill-related achievement to track.                     *
   ****************************************************************************]]
@@ -210,7 +233,7 @@ function me.AchievementAdd ( AchievementID, NoSync )
 		end
 
 		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
-			if ( not me.TamableIDs[ NPCID ] ) then
+			if ( me.AchievementsAddTamable or not me.TamableIDs[ NPCID ] ) then
 				local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
 				if ( not Completed or me.AchievementsAddFound ) then
 					local FoundName = me.TestID( NPCID );
@@ -312,6 +335,7 @@ function me.Synchronize ()
 		me.ScanRemoveAll( ID );
 	end
 	me.AchievementSetAddFound( false, true );
+	me.AchievementSetAddTamable( false, true );
 
 	-- Add all NPCs from options
 	for Name, ID in pairs( _NPCScanOptionsCharacter.NPCs ) do
@@ -323,6 +347,7 @@ function me.Synchronize ()
 
 	-- Add recognized achievements
 	me.AchievementSetAddFound( _NPCScanOptions.AchievementsAddFound, true );
+	me.AchievementSetAddTamable( _NPCScanOptions.AchievementsAddTamable, true );
 	for AchievementID in pairs( me.Achievements ) do
 		if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
 			me.AchievementAdd( AchievementID, true );

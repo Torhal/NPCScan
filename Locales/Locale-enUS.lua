@@ -64,6 +64,9 @@ do
 
 		SEARCH_ACHIEVEMENTADDFOUND = "Search for completed achievement NPCs";
 		SEARCH_ACHIEVEMENTADDFOUND_DESC = "Continues searching for all achievement NPCs, even if you no longer need them.";
+		SEARCH_ACHIEVEMENTADDTAMABLE = "Search for tamable NPCs";
+		SEARCH_ACHIEVEMENTADDTAMABLE_DESC = "Scans for NPCs tamable by hunters.";
+		SEARCH_ACHIEVEMENTADDTAMABLE_WARNING = RED_FONT_COLOR_CODE.."Warning: Pets that originally were rare NPCs will trigger the found alert.|r";
 
 
 		CMD_ADD = "ADD";
