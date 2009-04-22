@@ -397,13 +397,43 @@ function me.OnLoad ()
 	me.OnLoad = nil;
 
 	-- Apply default settings
-	if ( not _NPCScanOptionsCharacter ) then
-		me.LoadDefaults( not _NPCScanOptions );
+	if ( not ( _NPCScanOptionsCharacter or _NPCScanOptionsCharacter.Version ) ) then
+		me.LoadDefaults( not ( _NPCScanOptions or _NPCScanOptions.Version ) );
 	end
 
-	-- Validate settings
-	if ( _NPCScanOptionsCharacter.Version ~= me.Version ) then
-		me.LoadDefaults( _NPCScanOptions.Version ~= me.Version );
+	-- Update settings incrementally
+	local Options = _NPCScanOptions;
+	if ( Options.Version == "3.0.9.2" ) then -- 3.1.0.1: Added options for finding already found and tamable mobs
+		Options.AchievementsAddFound = false;
+		Options.AchievementsAddTamable = false;
+		Options.Version = "3.1.0.1";
+	end
+	if ( Options.Version ~= me.Version ) then
+		Options.Version = me.Version;
+	end
+	-- Character settings
+	local OptionsCharacter = _NPCScanOptionsCharacter;
+	if ( OptionsCharacter.Version == "3.0.9.2" ) then -- 3.1.0.1: Remove NPCs that are duplicated by achievements
+		local NPCs = OptionsCharacter.IDs;
+		OptionsCharacter.IDs = nil;
+		OptionsCharacter.NPCs = NPCs;
+		OptionsCharacter.Achievements = {};
+		local AchievementNPCs = {};
+		for AchievementID, Achievement in pairs( me.Achievements ) do
+			for _, ID in pairs( Achievement.Criteria ) do
+				AchievementNPCs[ ID ] = AchievementID;
+			end
+		end
+		for Name, ID in pairs( NPCs ) do
+			if ( AchievementNPCs[ ID ] ) then
+				NPCs[ Name ] = nil;
+				OptionsCharacter.Achievements[ AchievementNPCs[ ID ] ] = true;
+			end
+		end
+		OptionsCharacter.Version = "3.1.0.1";
+	end
+	if ( OptionsCharacter.Version ~= me.Version ) then
+		OptionsCharacter.Version = me.Version;
 	end
 
 	me.Synchronize();
