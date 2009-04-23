@@ -45,6 +45,7 @@ me.Achievements = { -- Criteria data for each achievement
 	[ 1312 ] = {}; -- Bloody Rare (Outlands)
 	[ 2257 ] = {}; -- Frostbitten (Northrend)
 };
+me.AchievementsEnabledCount = 0;
 me.CriteriaUpdateRequested = nil;
 
 me.IDMax = 0xFFFF; -- Largest ID that will fit in a GUID's 2-byte NPC ID field
@@ -248,6 +249,11 @@ function me.AchievementAdd ( AchievementID, NoSync )
 		if ( not NoSync ) then
 			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
 		end
+		if ( me.AchievementsEnabledCount == 0 ) then
+			me:RegisterEvent( "ACHIEVEMENT_EARNED" );
+			me:RegisterEvent( "CRITERIA_UPDATE" );
+		end
+		me.AchievementsEnabledCount = me.AchievementsEnabledCount + 1;
 
 		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
 			if ( me.AchievementsAddTamable or not me.TamableIDs[ NPCID ] ) then
@@ -279,6 +285,11 @@ function me.AchievementRemove ( AchievementID, NoSync )
 		Achievement.Enabled = false;
 		if ( not NoSync ) then
 			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
+		end
+		me.AchievementsEnabledCount = me.AchievementsEnabledCount - 1;
+		if ( me.AchievementsEnabledCount == 0 ) then
+			me:UnregisterEvent( "ACHIEVEMENT_EARNED" );
+			me:UnregisterEvent( "CRITERIA_UPDATE" );
 		end
 
 		for CriteriaID in pairs( Achievement.Active ) do
@@ -500,8 +511,6 @@ do
 	me:SetScript( "OnUpdate", me.OnUpdate );
 	me:SetScript( "OnEvent", me.OnEvent );
 	me:RegisterEvent( "PLAYER_ENTERING_WORLD" );
-	me:RegisterEvent( "ACHIEVEMENT_EARNED" );
-	me:RegisterEvent( "CRITERIA_UPDATE" );
 
 	-- Add template text lines
 	Tooltip.Text = Tooltip:CreateFontString( "$parentTextLeft1", nil, "GameTooltipText" );
