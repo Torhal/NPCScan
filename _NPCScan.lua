@@ -28,6 +28,7 @@ me.OptionsCharacterDefault = {
 
 
 me.TamableIDs = {
+	[ 33776 ] = true; -- Gondria
 	-- Bloody Rare (Outlands)
 	[ 17144 ] = true; -- Goretooth
 	[ 20932 ] = true; -- Nuramoc
