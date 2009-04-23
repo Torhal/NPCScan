@@ -51,19 +51,7 @@ me.UpdateRate = 0.1;
 
 local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip", me );
 
-local List = setmetatable( {}, { __index = { -- List string builder
-	Add = function ( self, Element )
-		self[ #self + 1 ] = Element;
-	end;
-	Clear = function ( self ) -- Assemble string and clear
-		if ( #self > 0 ) then
-			sort( self );
-			local String = table.concat( self, L.LIST_SEPARATOR );
-			wipe( self );
-			return String;
-		end
-	end;
-} } );
+local CacheList = {};
 
 
 
@@ -87,6 +75,34 @@ function me.Alert ( Message, Color )
 	PlaySoundFile( "sound\\event sounds\\event_wardrum_ogre.wav" );
 	PlaySoundFile( "sound\\events\\scourge_horn.wav" );
 	UIFrameFlash( LowHealthFrame, 0.5, 0.5, 6, false, 0.5 );
+end
+
+
+--[[****************************************************************************
+  * Function: _NPCScan.CacheListAdd                                            *
+  ****************************************************************************]]
+function me.CacheListAdd ( FoundName )
+	CacheList[ #CacheList + 1 ] = FoundName;
+end
+--[[****************************************************************************
+  * Function: _NPCScan.CacheListPrint                                          *
+  ****************************************************************************]]
+do
+	local FirstPrint = true;
+	function me.CacheListPrint ( ForcePrint )
+		if ( #CacheList > 0 ) then
+			if ( ForcePrint or true ) then
+				for Index, Name in ipairs( CacheList ) do
+					CacheList[ Index ] = L.CACHED_NAME_FORMAT:format( Name );
+				end
+				sort( CacheList );
+				me.Message( L[ FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT" ]:format( table.concat( CacheList, L.CACHED_SEPARATOR ) ),
+					ForcePrint and RED_FONT_COLOR );
+				FirstPrint = false;
+			end
+			wipe( CacheList );
+		end
+	end
 end
 
 
@@ -150,11 +166,11 @@ function me.NPCAdd ( Name, ID, NoSync )
 
 		local FoundName = me.TestID( ID );
 		if ( FoundName ) then -- Already seen
-			return true, FoundName;
+			me.CacheListAdd( FoundName );
 		else
 			me.ScanAdd( ID );
-			return true;
 		end
+		return true;
 	end
 end
 --[[****************************************************************************
@@ -196,7 +212,7 @@ function me.AchievementSetAddFound ( Enable, NoSync )
 				me.AchievementAdd( AchievementID );
 			end
 		end
-		return true, List;
+		return true;
 	end
 end
 --[[****************************************************************************
@@ -217,7 +233,7 @@ function me.AchievementSetAddTamable ( Enable, NoSync )
 				me.AchievementAdd( AchievementID );
 			end
 		end
-		return true, List;
+		return true;
 	end
 end
 --[[****************************************************************************
@@ -238,7 +254,7 @@ function me.AchievementAdd ( AchievementID, NoSync )
 				if ( not Completed or me.AchievementsAddFound ) then
 					local FoundName = me.TestID( NPCID );
 					if ( FoundName ) then -- Already seen
-						List:Add( L.NAME_FORMAT:format( FoundName ) );
+						me.CacheListAdd( FoundName );
 					else
 						Achievement.Active[ CriteriaID ] = true;
 						me.ScanAdd( NPCID );
@@ -249,7 +265,7 @@ function me.AchievementAdd ( AchievementID, NoSync )
 		me.Options.Search.AchievementSetEnabled( AchievementID, true );
 		me.Options.Search.UpdateTab( AchievementID );
 
-		return true, List;
+		return true;
 	end
 end
 --[[****************************************************************************
@@ -339,10 +355,7 @@ function me.Synchronize ()
 
 	-- Add all NPCs from options
 	for Name, ID in pairs( _NPCScanOptionsCharacter.NPCs ) do
-		local Success, FoundName = me.NPCAdd( Name, ID, true );
-		if ( Success and FoundName ) then -- Was already cached
-			List:Add( L.NAME_FORMAT:format( FoundName ) );
-		end
+		me.NPCAdd( Name, ID, true );
 	end
 
 	-- Add recognized achievements
@@ -353,9 +366,7 @@ function me.Synchronize ()
 			me.AchievementAdd( AchievementID, true );
 		end
 	end
-	if ( #List > 0 ) then -- Some NPCs were already cached
-		me.Message( L.CACHED_LONG_FORMAT:format( List:Clear() ) );
-	end
+	me.CacheListPrint();
 end
 
 

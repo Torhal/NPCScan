@@ -78,9 +78,8 @@ end
 function me:TabCheckOnClick ()
 	local Enable = not not self:GetChecked();
 	PlaySound( Enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff" );
-	local Success, FoundList = me.AchievementSetEnabled( self:GetParent().AchievementID, Enable );
-	if ( Success and #FoundList > 0 ) then
-		_NPCScan.Message( L.CACHED_FORMAT:format( FoundList:Clear() ), RED_FONT_COLOR );
+	if ( me.AchievementSetEnabled( self:GetParent().AchievementID, Enable ) ) then
+		_NPCScan.CacheListPrint( true );
 	end
 end
 
@@ -120,9 +119,8 @@ end
 function me.NPCAdd ()
 	local Name = me.EditBoxName:GetText();
 	_NPCScan.NPCRemove( Name );
-	local Success, FoundName = _NPCScan.NPCAdd( Name, me.EditBoxID:GetNumber() );
-	if ( Success and FoundName ) then
-		_NPCScan.Message( L.CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
+	if ( _NPCScan.NPCAdd( Name, me.EditBoxID:GetNumber() ) ) then
+		_NPCScan.CacheListPrint( true );
 	end
 end
 --[[****************************************************************************
@@ -188,18 +186,16 @@ end
   * Function: _NPCScan.Options.Search.AchievementAddFoundOnClick               *
   ****************************************************************************]]
 function me.AchievementAddFoundOnClick ( Enable )
-	local Success, FoundList = _NPCScan.AchievementSetAddFound( Enable == "1" );
-	if ( Success and #FoundList > 0 ) then
-		_NPCScan.Message( L.CACHED_FORMAT:format( FoundList:Clear() ), RED_FONT_COLOR );
+	if ( _NPCScan.AchievementSetAddFound( Enable == "1" ) ) then
+		_NPCScan.CacheListPrint( true );
 	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search.AchievementAddTamableOnClick             *
   ****************************************************************************]]
 function me.AchievementAddTamableOnClick ( Enable )
-	local Success, FoundList = _NPCScan.AchievementSetAddTamable( Enable == "1" );
-	if ( Success and #FoundList > 0 ) then
-		_NPCScan.Message( L.CACHED_FORMAT:format( FoundList:Clear() ), RED_FONT_COLOR );
+	if ( _NPCScan.AchievementSetAddTamable( Enable == "1" ) ) then
+		_NPCScan.CacheListPrint( true );
 	end
 end
 --[[****************************************************************************
@@ -334,9 +330,8 @@ function me.SlashCommand ( Input )
 			local ID, Name = Arguments:match( "^(%d+)%s+(.+)$" );
 			if ( ID ) then
 				_NPCScan.NPCRemove( Name );
-				local Success, FoundName = _NPCScan.NPCAdd( Name, ID );
-				if ( Success and FoundName ) then
-					_NPCScan.Message( L.CACHED_FORMAT:format( L.NAME_FORMAT:format( FoundName ) ), RED_FONT_COLOR );
+				if ( _NPCScan.NPCAdd( Name, ID ) ) then
+					_NPCScan.CacheListPrint( true );
 				end
 				return;
 			end
