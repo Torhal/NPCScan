@@ -76,7 +76,7 @@ end
   * Function: _NPCScan.Options.Search:TabCheckOnClick                          *
   ****************************************************************************]]
 function me:TabCheckOnClick ()
-	local Enable = not not self:GetChecked();
+	local Enable = self:GetChecked();
 	PlaySound( Enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff" );
 	if ( me.AchievementSetEnabled( self:GetParent().AchievementID, Enable ) ) then
 		_NPCScan.CacheListPrint( true );
@@ -253,7 +253,7 @@ end
   ****************************************************************************]]
 function me:AchievementActivate ()
 	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED );
-	me.Table.Header:SetAlpha( _NPCScan.Achievements[ self.AchievementID ].Enabled and 1.0 or me.InactiveAlpha );
+	me.Table.Header:SetAlpha( _NPCScan.AchievementsEnabled[ self.AchievementID ] and 1.0 or me.InactiveAlpha );
 	me.AchievementControls:Show();
 	me.TableContainer:SetPoint( "BOTTOM", me.AchievementControls, "TOP" );
 end

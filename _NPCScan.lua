@@ -45,7 +45,7 @@ me.Achievements = { -- Criteria data for each achievement
 	[ 1312 ] = {}; -- Bloody Rare (Outlands)
 	[ 2257 ] = {}; -- Frostbitten (Northrend)
 };
-me.AchievementsEnabledCount = 0;
+me.AchievementsEnabled = {};
 me.CriteriaUpdateRequested = nil;
 
 me.IDMax = 0xFFFF; -- Largest ID that will fit in a GUID's 2-byte NPC ID field
@@ -208,11 +208,9 @@ function me.AchievementSetAddFound ( Enable, NoSync )
 		end
 
 		me.Options.Search.AddFoundCheckbox:SetChecked( Enable );
-		for AchievementID, Achievement in pairs( me.Achievements ) do
-			if ( Achievement.Enabled ) then
-				me.AchievementRemove( AchievementID );
-				me.AchievementAdd( AchievementID );
-			end
+		for AchievementID in pairs( me.AchievementsEnabled ) do
+			me.AchievementRemove( AchievementID );
+			me.AchievementAdd( AchievementID );
 		end
 		return true;
 	end
@@ -229,11 +227,9 @@ function me.AchievementSetAddTamable ( Enable, NoSync )
 		end
 
 		me.Options.Search.AddTamableCheckbox:SetChecked( Enable );
-		for AchievementID, Achievement in pairs( me.Achievements ) do
-			if ( Achievement.Enabled ) then
-				me.AchievementRemove( AchievementID );
-				me.AchievementAdd( AchievementID );
-			end
+		for AchievementID in pairs( me.AchievementsEnabled ) do
+			me.AchievementRemove( AchievementID );
+			me.AchievementAdd( AchievementID );
 		end
 		return true;
 	end
@@ -244,16 +240,15 @@ end
   ****************************************************************************]]
 function me.AchievementAdd ( AchievementID, NoSync )
 	local Achievement = me.Achievements[ AchievementID ];
-	if ( Achievement and not Achievement.Enabled ) then
-		Achievement.Enabled = true;
-		if ( not NoSync ) then
-			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
-		end
-		if ( me.AchievementsEnabledCount == 0 ) then
+	if ( Achievement and not me.AchievementsEnabled[ AchievementID ] ) then
+		if ( not next( me.AchievementsEnabled ) ) then -- First
 			me:RegisterEvent( "ACHIEVEMENT_EARNED" );
 			me:RegisterEvent( "CRITERIA_UPDATE" );
 		end
-		me.AchievementsEnabledCount = me.AchievementsEnabledCount + 1;
+		me.AchievementsEnabled[ AchievementID ] = true;
+		if ( not NoSync ) then
+			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = true;
+		end
 
 		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
 			if ( me.AchievementsAddTamable or not me.TamableIDs[ NPCID ] ) then
@@ -281,15 +276,14 @@ end
   ****************************************************************************]]
 function me.AchievementRemove ( AchievementID, NoSync )
 	local Achievement = me.Achievements[ AchievementID ];
-	if ( Achievement and Achievement.Enabled ) then
-		Achievement.Enabled = false;
-		if ( not NoSync ) then
-			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
-		end
-		me.AchievementsEnabledCount = me.AchievementsEnabledCount - 1;
-		if ( me.AchievementsEnabledCount == 0 ) then
+	if ( Achievement and me.AchievementsEnabled[ AchievementID ] ) then
+		me.AchievementsEnabled[ AchievementID ] = nil;
+		if ( not next( me.AchievementsEnabled ) ) then -- Last
 			me:UnregisterEvent( "ACHIEVEMENT_EARNED" );
 			me:UnregisterEvent( "CRITERIA_UPDATE" );
+		end
+		if ( not NoSync ) then
+			_NPCScanOptionsCharacter.Achievements[ AchievementID ] = nil;
 		end
 
 		for CriteriaID in pairs( Achievement.Active ) do
@@ -311,7 +305,8 @@ do
 	local pairs = pairs;
 	function me.CriteriaUpdate ()
 		if ( not me.AchievementsAddFound ) then
-			for AchievementID, Achievement in pairs( me.Achievements ) do
+			for AchievementID in pairs( me.AchievementsEnabled ) do
+				local Achievement = me.Achievements[ AchievementID ];
 				local Updated = false;
 				for CriteriaID in pairs( Achievement.Active ) do
 					if ( select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) then -- Completed
@@ -353,7 +348,7 @@ end
   ****************************************************************************]]
 function me.Synchronize ()
 	-- Clear all scans
-	for AchievementID in pairs( me.Achievements ) do
+	for AchievementID in pairs( me.AchievementsEnabled ) do
 		me.AchievementRemove( AchievementID, true );
 	end
 	for Name in pairs( me.NPCs ) do
@@ -521,7 +516,6 @@ do
 
 	-- Save achievement criteria data
 	for AchievementID, Achievement in pairs( me.Achievements ) do
-		Achievement.Enabled = false;
 		Achievement.Criteria = {};
 		Achievement.Active = {};
 		for Criteria = 1, GetAchievementNumCriteria( AchievementID ) do
