@@ -76,7 +76,7 @@ end
   * Function: _NPCScan.Options.Search:TabCheckOnClick                          *
   ****************************************************************************]]
 function me:TabCheckOnClick ()
-	local Enable = self:GetChecked();
+	local Enable = not not self:GetChecked();
 	PlaySound( Enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff" );
 	if ( me.AchievementSetEnabled( self:GetParent().AchievementID, Enable ) ) then
 		_NPCScan.CacheListPrint( true );
@@ -227,7 +227,7 @@ do
 	function me:AchievementUpdate ()
 		local Achievement = _NPCScan.Achievements[ self.AchievementID ];
 		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
-			if ( _NPCScan.AchievementsAddTamable or not _NPCScan.TamableIDs[ NPCID ] ) then
+			if ( _NPCScanOptions.AchievementsAddTamable or not _NPCScan.TamableIDs[ NPCID ] ) then
 				CriteriaNames[ CriteriaID ], _, CriteriaCompleted[ CriteriaID ] = GetAchievementCriteriaInfo( CriteriaID );
 				SortedNames[ #SortedNames + 1 ] = CriteriaID;
 			end

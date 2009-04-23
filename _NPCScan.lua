@@ -14,6 +14,7 @@ me.Version = GetAddOnMetadata( "_NPCScan", "Version" ):match( "^([%d.]+)" );
 
 me.OptionsDefault = {
 	Version = me.Version;
+	CacheWarnings = true;
 	AchievementsAddFound = false;
 	AchievementsAddTamable = false;
 };
@@ -39,8 +40,6 @@ me.TamableIDs = {
 
 me.ScanIDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
 me.NPCs = {}; -- Same format as NPCs options table
-me.AchievementsAddFound = false;
-me.AchievementsAddTamable = false;
 me.Achievements = { -- Criteria data for each achievement
 	[ 1312 ] = {}; -- Bloody Rare (Outlands)
 	[ 2257 ] = {}; -- Frostbitten (Northrend)
@@ -93,7 +92,7 @@ do
 	local FirstPrint = true;
 	function me.CacheListPrint ( ForcePrint )
 		if ( #CacheList > 0 ) then
-			if ( ForcePrint or true ) then
+			if ( ForcePrint or _NPCScanOptions.CacheWarnings ) then
 				for Index, Name in ipairs( CacheList ) do
 					CacheList[ Index ] = L.CACHED_NAME_FORMAT:format( Name );
 				end
@@ -104,6 +103,18 @@ do
 			end
 			wipe( CacheList );
 		end
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.SetCacheWarnings                                        *
+  * Description: Enables printing cache lists on login.                        *
+  ****************************************************************************]]
+function me.SetCacheWarnings ( Enable, Force )
+	if ( Enable ~= _NPCScanOptions.CacheWarnings or Force ) then
+		_NPCScanOptions.CacheWarnings = Enable;
+
+		me.Options.CacheWarningsCheckbox:SetChecked( Enable );
+		return true;
 	end
 end
 
@@ -200,12 +211,9 @@ end
   * Function: _NPCScan.AchievementSetAddFound                                  *
   * Description: Enables tracking of unneeded achievement NPCs.                *
   ****************************************************************************]]
-function me.AchievementSetAddFound ( Enable, NoSync )
-	if ( Enable ~= me.AchievementsAddFound ) then
-		me.AchievementsAddFound = Enable;
-		if ( not NoSync ) then
-			_NPCScanOptions.AchievementsAddFound = Enable;
-		end
+function me.AchievementSetAddFound ( Enable, Force )
+	if ( Enable ~= _NPCScanOptions.AchievementsAddFound or Force ) then
+		_NPCScanOptions.AchievementsAddFound = Enable;
 
 		me.Options.Search.AddFoundCheckbox:SetChecked( Enable );
 		for AchievementID in pairs( me.AchievementsEnabled ) do
@@ -219,12 +227,9 @@ end
   * Function: _NPCScan.AchievementSetAddFound                                  *
   * Description: Enables tracking of unneeded achievement NPCs.                *
   ****************************************************************************]]
-function me.AchievementSetAddTamable ( Enable, NoSync )
-	if ( Enable ~= me.AchievementsAddTamable ) then
-		me.AchievementsAddTamable = Enable;
-		if ( not NoSync ) then
-			_NPCScanOptions.AchievementsAddTamable = Enable;
-		end
+function me.AchievementSetAddTamable ( Enable, Force )
+	if ( Enable ~= _NPCScanOptions.AchievementsAddTamable or Force ) then
+		_NPCScanOptions.AchievementsAddTamable = Enable;
 
 		me.Options.Search.AddTamableCheckbox:SetChecked( Enable );
 		for AchievementID in pairs( me.AchievementsEnabled ) do
@@ -251,9 +256,9 @@ function me.AchievementAdd ( AchievementID, NoSync )
 		end
 
 		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
-			if ( me.AchievementsAddTamable or not me.TamableIDs[ NPCID ] ) then
+			if ( _NPCScanOptions.AchievementsAddTamable or not me.TamableIDs[ NPCID ] ) then
 				local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
-				if ( not Completed or me.AchievementsAddFound ) then
+				if ( not Completed or _NPCScanOptions.AchievementsAddFound ) then
 					local FoundName = me.TestID( NPCID );
 					if ( FoundName ) then -- Already seen
 						me.CacheListAdd( FoundName );
@@ -304,7 +309,7 @@ do
 	local select = select;
 	local pairs = pairs;
 	function me.CriteriaUpdate ()
-		if ( not me.AchievementsAddFound ) then
+		if ( not _NPCScanOptions.AchievementsAddFound ) then
 			for AchievementID in pairs( me.AchievementsEnabled ) do
 				local Achievement = me.Achievements[ AchievementID ];
 				local Updated = false;
@@ -357,17 +362,16 @@ function me.Synchronize ()
 	for ID in pairs( me.ScanIDs ) do
 		me.ScanRemoveAll( ID );
 	end
-	me.AchievementSetAddFound( false, true );
-	me.AchievementSetAddTamable( false, true );
 
 	-- Add all NPCs from options
+	me.SetCacheWarnings( _NPCScanOptions.CacheWarnings == true, true );
 	for Name, ID in pairs( _NPCScanOptionsCharacter.NPCs ) do
 		me.NPCAdd( Name, ID, true );
 	end
 
 	-- Add recognized achievements
-	me.AchievementSetAddFound( _NPCScanOptions.AchievementsAddFound, true );
-	me.AchievementSetAddTamable( _NPCScanOptions.AchievementsAddTamable, true );
+	me.AchievementSetAddFound( _NPCScanOptions.AchievementsAddFound == true, true );
+	me.AchievementSetAddTamable( _NPCScanOptions.AchievementsAddTamable == true, true );
 	for AchievementID in pairs( me.Achievements ) do
 		if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
 			me.AchievementAdd( AchievementID, true );
@@ -422,6 +426,7 @@ function me.OnLoad ()
 	-- Update settings incrementally
 	local Options = _NPCScanOptions;
 	if ( Options.Version == "3.0.9.2" ) then -- 3.1.0.1: Added options for finding already found and tamable mobs
+		Options.CacheWarnings = true;
 		Options.AchievementsAddFound = false;
 		Options.AchievementsAddTamable = false;
 		Options.Version = "3.1.0.1";

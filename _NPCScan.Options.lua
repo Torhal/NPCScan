@@ -39,6 +39,15 @@ function me:ControlOnLeave ()
 	GameTooltip:Hide();
 end
 
+
+--[[****************************************************************************
+  * Function: _NPCScan.Options.CacheWarningsOnClick                            *
+  ****************************************************************************]]
+function me.CacheWarningsOnClick ( Enable )
+	_NPCScan.SetCacheWarnings( Enable == "1" );
+end
+
+
 --[[****************************************************************************
   * Function: _NPCScan.Options:default                                         *
   ****************************************************************************]]
@@ -82,6 +91,15 @@ do
 	TestButton:SetScript( "OnEnter", me.ControlOnEnter );
 	TestButton:SetScript( "OnLeave", me.ControlOnLeave );
 	TestButton.tooltipText = L.OPTIONS_TEST_DESC;
+
+
+	-- Miscellaneous checkboxes
+	local CacheWarningsCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchCacheWarningsCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
+	me.CacheWarningsCheckbox = CacheWarningsCheckbox;
+	CacheWarningsCheckbox:SetPoint( "TOPLEFT", TestButton, "BOTTOMLEFT", 0, -16 );
+	CacheWarningsCheckbox.setFunc = me.CacheWarningsOnClick;
+	CacheWarningsCheckbox.tooltipText = L.OPTIONS_CACHEWARNINGS_DESC;
+	_G[ CacheWarningsCheckbox:GetName().."Text" ]:SetText( L.OPTIONS_CACHEWARNINGS );
 
 
 	InterfaceOptions_AddCategory( me );

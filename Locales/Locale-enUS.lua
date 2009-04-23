@@ -40,6 +40,9 @@ do
 		OPTIONS_TEST_NAME = "You! (Test)";
 		OPTIONS_TEST_HELP_FORMAT = "Click the target button or use the provided keybinding to target the found mob.  Hold "..HIGHLIGHT_FONT_COLOR_CODE.."<%s>|r and drag to move the target button.  Note that if an NPC is found while you're in combat, the button will only appear after you exit combat.";
 
+		OPTIONS_CACHEWARNINGS = "Print login reminders to empty the cache";
+		OPTIONS_CACHEWARNINGS_DESC = "If an NPC is already cached when you log in, this option prints a reminder to clear your cache.";
+
 
 		SEARCH_TITLE = "Search";
 		SEARCH_DESC = "This table allows you to add or remove NPCs and achievements to scan for.  Note that tameable mobs cannot be searched for since they get found even as hunter pets.";
