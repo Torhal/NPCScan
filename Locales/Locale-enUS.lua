@@ -45,7 +45,7 @@ do
 
 
 		SEARCH_TITLE = "Search";
-		SEARCH_DESC = "This table allows you to add or remove NPCs and achievements to scan for.  Note that tameable mobs cannot be searched for since they get found even as hunter pets.";
+		SEARCH_DESC = "This table allows you to add or remove NPCs and achievements to scan for.";
 
 		SEARCH_NPCS = "Custom NPCs";
 		SEARCH_NPCS_DESC = "Add any NPC to track, even if it has no achievement.";
