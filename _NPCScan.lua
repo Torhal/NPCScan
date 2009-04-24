@@ -29,13 +29,14 @@ me.OptionsCharacterDefault = {
 
 
 me.TamableIDs = {
+	-- Northrend
+	[ 32481 ] = true; -- Aotona
 	[ 33776 ] = true; -- Gondria
-	-- Bloody Rare (Outlands)
-	[ 17144 ] = true; -- Goretooth
-	[ 20932 ] = true; -- Nuramoc
-	-- Frostbitten (Northrend)
 	[ 32485 ] = true; -- King Krush
 	[ 32517 ] = true; -- Loque'nahak
+	-- Outlands
+	[ 17144 ] = true; -- Goretooth
+	[ 20932 ] = true; -- Nuramoc
 };
 
 me.ScanIDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID

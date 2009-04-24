@@ -118,8 +118,12 @@ end
   ****************************************************************************]]
 function me.NPCAdd ()
 	local Name = me.EditBoxName:GetText();
+	local ID = me.EditBoxID:GetNumber();
+	if ( _NPCScan.TamableIDs[ ID ] ) then
+		_NPCScan.Message( L.SEARCH_ADD_TAMABLE_FORMAT:format( Name ) );
+	end
 	_NPCScan.NPCRemove( Name );
-	if ( _NPCScan.NPCAdd( Name, me.EditBoxID:GetNumber() ) ) then
+	if ( _NPCScan.NPCAdd( Name, ID ) ) then
 		_NPCScan.CacheListPrint( true );
 	end
 end

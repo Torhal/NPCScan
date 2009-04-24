@@ -64,6 +64,7 @@ do
 
 		SEARCH_ADD = "+";
 		SEARCH_REMOVE = "-";
+		SEARCH_ADD_TAMABLE_FORMAT = "Note: "..LDQuo.."%s"..RDQuo.." is tamable, so seeing it as a tamed hunter's pet will cause a false alarm.";
 
 		SEARCH_ACHIEVEMENTADDFOUND = "Search for completed Achievement NPCs";
 		SEARCH_ACHIEVEMENTADDFOUND_DESC = "Continues searching for all achievement NPCs, even if you no longer need them.";
