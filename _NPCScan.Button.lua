@@ -82,11 +82,9 @@ function me.Update ( Name, ID )
 	end
 	me:SetAttribute( "macrotext", "/cleartarget\n/targetexact "..Name );
 
-	UIFrameFadeRemoveFrame( me.Glow );
-	UIFrameFlashRemoveFrame( me.Glow );
-	if ( UIParent:IsVisible() ) then -- Only flash when animating frame is shown
-		UIFrameFlash( me.Glow, 0.1, 0.7, 0.8 );
-	end
+	me:StopAnimating();
+	me.Glow:Play();
+	me.Shine:Play();
 end
 
 
@@ -173,7 +171,7 @@ do
 	me:SetAttribute( "_onhide", "self:Disable();" );
 	me:Hide();
 
-	local TitleBackground = me:CreateTexture( nil, "ARTWORK" );
+	local TitleBackground = me:CreateTexture( nil, "BORDER" );
 	TitleBackground:SetTexture( "Interface\\AchievementFrame\\UI-Achievement-Title" );
 	TitleBackground:SetPoint( "TOPRIGHT", -5, -5 );
 	TitleBackground:SetPoint( "LEFT", 5, 0 );
@@ -221,17 +219,48 @@ do
 		self:SetFacing( self:GetFacing() + Elapsed * me.RotationRate );
 	end );
 
-	-- Flash frame
-	local Glow = CreateFrame( "Frame", "$parentGlow", me );
-	me.Glow = Glow;
-	Glow:SetPoint( "CENTER" );
-	Glow:SetWidth( 400 / 300 * me:GetWidth() );
-	Glow:SetHeight( 171 / 88 * me:GetHeight() );
-	local Texture = Glow:CreateTexture( nil, "OVERLAY" );
-	Texture:SetAllPoints();
+
+	-- Glow animation
+	local Texture = Model:CreateTexture( nil, "OVERLAY" );
+	Texture:SetPoint( "CENTER", me );
+	Texture:SetWidth( 400 / 300 * me:GetWidth() );
+	Texture:SetHeight( 171 / 70 * me:GetHeight() );
 	Texture:SetTexture( "Interface\\AchievementFrame\\UI-Achievement-Alert-Glow" );
 	Texture:SetBlendMode( "ADD" );
 	Texture:SetTexCoord( 0, 0.78125, 0, 0.66796875 );
+	Texture:SetAlpha( 0 );
+	me.Glow = Texture:CreateAnimationGroup();
+	local FadeIn = me.Glow:CreateAnimation( "Alpha" );
+	FadeIn:SetChange( 1.0 );
+	FadeIn:SetDuration( 0.2 );
+	local FadeOut = me.Glow:CreateAnimation( "Alpha" );
+	FadeOut:SetOrder( 2 );
+	FadeOut:SetChange( -1.0 );
+	FadeOut:SetDuration( 0.5 );
+
+	-- Shine animation (reflection swipe)
+	local Texture = me:CreateTexture( nil, "ARTWORK" );
+	Texture:SetPoint( "TOPLEFT", me, 0, 8 );
+	Texture:SetWidth( 67 / 300 * me:GetWidth() );
+	Texture:SetHeight( 1.28 * me:GetHeight() );
+	Texture:SetTexture( "Interface\\AchievementFrame\\UI-Achievement-Alert-Glow" );
+	Texture:SetBlendMode( "ADD" );
+	Texture:SetTexCoord( 0.78125, 0.912109375, 0, 0.28125 );
+	Texture:SetAlpha( 0 );
+	me.Shine = Texture:CreateAnimationGroup();
+	local Show = me.Shine:CreateAnimation( "Alpha" );
+	Show:SetStartDelay( 0.3 );
+	Show:SetChange( 1.0 );
+	Show:SetDuration( 1e-5 ); -- Note: 0 is invalid
+	local Slide = me.Shine:CreateAnimation( "Translation" );
+	Slide:SetOrder( 2 );
+	Slide:SetOffset( me:GetWidth() - Texture:GetWidth() + 8, 0 );
+	Slide:SetDuration( 0.4 );
+	local FadeOut = me.Shine:CreateAnimation( "Alpha" );
+	FadeOut:SetOrder( 2 );
+	FadeOut:SetStartDelay( 0.2 );
+	FadeOut:SetChange( -1.0 );
+	FadeOut:SetDuration( 0.2 );
 
 
 	me:SetAttribute( "type", "macro" );
