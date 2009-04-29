@@ -420,8 +420,8 @@ function me.OnLoad ()
 	me.OnLoad = nil;
 
 	-- Apply default settings
-	if ( not ( _NPCScanOptionsCharacter or _NPCScanOptionsCharacter.Version ) ) then
-		me.LoadDefaults( not ( _NPCScanOptions or _NPCScanOptions.Version ) );
+	if ( not ( _NPCScanOptionsCharacter and _NPCScanOptionsCharacter.Version ) ) then
+		me.LoadDefaults( not ( _NPCScanOptions and _NPCScanOptions.Version ) );
 	end
 
 	-- Update settings incrementally
