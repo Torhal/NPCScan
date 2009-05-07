@@ -28,17 +28,6 @@ me.OptionsCharacterDefault = {
 };
 
 
-me.TamableIDs = {
-	-- Northrend
-	[ 32481 ] = true; -- Aotona
-	[ 33776 ] = true; -- Gondria
-	[ 32485 ] = true; -- King Krush
-	[ 32517 ] = true; -- Loque'nahak
-	-- Outlands
-	[ 17144 ] = true; -- Goretooth
-	[ 20932 ] = true; -- Nuramoc
-};
-
 me.ScanIDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
 me.NPCs = {}; -- Same format as NPCs options table
 me.Achievements = { -- Criteria data for each achievement
