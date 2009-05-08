@@ -24,6 +24,26 @@ local SortedNames = {}; -- Used to sort text tables
 
 
 --[[****************************************************************************
+  * Function: _NPCScan.Options.Search.FindTamableOnClick                       *
+  ****************************************************************************]]
+function me.FindTamableOnClick ( Enable )
+	if ( _NPCScan.SetFindTamable( Enable == "1" ) ) then
+		_NPCScan.CacheListPrint( true );
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Options.Search.AchievementAddFoundOnClick               *
+  ****************************************************************************]]
+function me.AchievementAddFoundOnClick ( Enable )
+	if ( _NPCScan.SetAchievementsAddFound( Enable == "1" ) ) then
+		_NPCScan.CacheListPrint( true );
+	end
+end
+
+
+
+
+--[[****************************************************************************
   * Function: _NPCScan.Options.Search.TabSelect                                *
   * Description: Selects the given tab.                                        *
   ****************************************************************************]]
@@ -155,11 +175,11 @@ function me:NPCUpdate ()
 	sort( SortedNames );
 
 	for _, Name in ipairs( SortedNames ) do
-		local Cached = _NPCScan.TestID( _NPCScan.NPCs[ Name ] );
+		local ID = _NPCScan.NPCs[ Name ];
+		local Cached = _NPCScan.TestID( ID );
 		me.Table:AddRow( Name,
-			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
-			Name, _NPCScan.NPCs[ Name ] );
-		if ( Cached ) then
+			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ], Name, ID );
+		if ( Cached or ( _NPCScan.TamableIDs[ ID ] and not _NPCScanOptions.FindTamable ) ) then
 			me.Table.Rows[ #me.Table.Rows ]:SetAlpha( me.InactiveAlpha );
 		end
 	end
@@ -186,22 +206,6 @@ end
 
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Options.Search.AchievementAddFoundOnClick               *
-  ****************************************************************************]]
-function me.AchievementAddFoundOnClick ( Enable )
-	if ( _NPCScan.AchievementSetAddFound( Enable == "1" ) ) then
-		_NPCScan.CacheListPrint( true );
-	end
-end
---[[****************************************************************************
-  * Function: _NPCScan.Options.Search.AchievementAddTamableOnClick             *
-  ****************************************************************************]]
-function me.AchievementAddTamableOnClick ( Enable )
-	if ( _NPCScan.AchievementSetAddTamable( Enable == "1" ) ) then
-		_NPCScan.CacheListPrint( true );
-	end
-end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search.AchievementSetEnabled                    *
   * Description: Enables/disables the achievement related to a tab.            *
@@ -231,10 +235,8 @@ do
 	function me:AchievementUpdate ()
 		local Achievement = _NPCScan.Achievements[ self.AchievementID ];
 		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
-			if ( _NPCScanOptions.AchievementsAddTamable or not _NPCScan.TamableIDs[ NPCID ] ) then
-				CriteriaNames[ CriteriaID ], _, CriteriaCompleted[ CriteriaID ] = GetAchievementCriteriaInfo( CriteriaID );
-				SortedNames[ #SortedNames + 1 ] = CriteriaID;
-			end
+			CriteriaNames[ CriteriaID ], _, CriteriaCompleted[ CriteriaID ] = GetAchievementCriteriaInfo( CriteriaID );
+			SortedNames[ #SortedNames + 1 ] = CriteriaID;
 		end
 		sort( SortedNames, SortFunc );
 
@@ -258,16 +260,12 @@ end
 function me:AchievementActivate ()
 	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED );
 	me.Table.Header:SetAlpha( _NPCScan.AchievementsEnabled[ self.AchievementID ] and 1.0 or me.InactiveAlpha );
-	me.AchievementControls:Show();
-	me.TableContainer:SetPoint( "BOTTOM", me.AchievementControls, "TOP" );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Options.Search:AchievementDeactivate                    *
   ****************************************************************************]]
 function me:AchievementDeactivate ()
 	me.Table.Header:SetAlpha( 1.0 );
-	me.AchievementControls:Hide();
-	me.TableContainer:SetPoint( "BOTTOM", me.AchievementControls );
 end
 
 
@@ -315,7 +313,7 @@ end
   * Function: _NPCScan.Options.Search:default                                  *
   ****************************************************************************]]
 function me:default ()
-	_NPCScan.LoadDefaults(); -- Only per-character
+	_NPCScan.LoadDefaults( true );
 
 	_NPCScan.Synchronize();
 end
@@ -379,6 +377,27 @@ do
 	SubText:SetJustifyH( "LEFT" );
 	SubText:SetJustifyV( "TOP" );
 	SubText:SetText( L.SEARCH_DESC );
+
+
+	-- Settings checkboxes
+	local FindTamableCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchFindTamableCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
+	me.FindTamableCheckbox = FindTamableCheckbox;
+	FindTamableCheckbox:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
+	FindTamableCheckbox.setFunc = me.FindTamableOnClick;
+	FindTamableCheckbox.tooltipText = L.SEARCH_FINDTAMABLE_DESC;
+	FindTamableCheckbox.tooltipRequirement = L.SEARCH_FINDTAMABLE_WARNING;
+	local Label = _G[ FindTamableCheckbox:GetName().."Text" ];
+	Label:SetText( L.SEARCH_FINDTAMABLE );
+	FindTamableCheckbox:SetHitRectInsets( 4, 4 - Label:GetStringWidth(), 4, 4 );
+
+	local AddFoundCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchAchievementAddFoundCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
+	me.AddFoundCheckbox = AddFoundCheckbox;
+	AddFoundCheckbox:SetPoint( "TOPLEFT", FindTamableCheckbox, "BOTTOMLEFT", 0, 4 );
+	AddFoundCheckbox.setFunc = me.AchievementAddFoundOnClick;
+	AddFoundCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC;
+	local Label = _G[ AddFoundCheckbox:GetName().."Text" ];
+	Label:SetText( L.SEARCH_ACHIEVEMENTADDFOUND );
+	AddFoundCheckbox:SetHitRectInsets( 4, 4 - Label:GetStringWidth(), 4, 4 );
 
 
 	-- Controls for NPCs table
@@ -451,33 +470,9 @@ do
 	NPCControls:SetPoint( "TOP", AddButton );
 
 
-	-- Controls for achievement tables
-	local AchievementControls = CreateFrame( "Frame", nil, me );
-	me.AchievementControls = AchievementControls;
-	AchievementControls:Hide();
-
-	local AddFoundCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchAchievementAddFoundCheckbox", AchievementControls, "InterfaceOptionsCheckButtonTemplate" );
-	me.AddFoundCheckbox = AddFoundCheckbox;
-	AddFoundCheckbox:SetPoint( "BOTTOMLEFT", NPCControls );
-	AddFoundCheckbox.setFunc = me.AchievementAddFoundOnClick;
-	AddFoundCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC;
-	_G[ AddFoundCheckbox:GetName().."Text" ]:SetText( L.SEARCH_ACHIEVEMENTADDFOUND );
-
-	local AddTamableCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchAchievementAddTamableCheckbox", AchievementControls, "InterfaceOptionsCheckButtonTemplate" );
-	me.AddTamableCheckbox = AddTamableCheckbox;
-	AddTamableCheckbox:SetPoint( "BOTTOMLEFT", AddFoundCheckbox, "TOPLEFT" );
-	AddTamableCheckbox.setFunc = me.AchievementAddTamableOnClick;
-	AddTamableCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDTAMABLE_DESC;
-	AddTamableCheckbox.tooltipRequirement = L.SEARCH_ACHIEVEMENTADDTAMABLE_WARNING;
-	_G[ AddTamableCheckbox:GetName().."Text" ]:SetText( L.SEARCH_ACHIEVEMENTADDTAMABLE );
-
-	AchievementControls:SetPoint( "BOTTOMRIGHT", NPCControls );
-	AchievementControls:SetPoint( "LEFT", NPCControls );
-	AchievementControls:SetPoint( "TOP", AddTamableCheckbox );
-
-
 	-- Place table
-	me.TableContainer:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -32 );
+	me.TableContainer:SetPoint( "TOP", AddFoundCheckbox, "BOTTOM", 0, -28 );
+	me.TableContainer:SetPoint( "LEFT", SubText, -2, 0 );
 	me.TableContainer:SetPoint( "RIGHT", -16, 0 );
 	me.TableContainer:SetPoint( "BOTTOM", NPCControls );
 	me.TableContainer:SetBackdrop( { bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background"; } );

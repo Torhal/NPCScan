@@ -47,6 +47,12 @@ do
 		SEARCH_TITLE = "Search";
 		SEARCH_DESC = "This table allows you to add or remove NPCs and achievements to scan for.";
 
+		SEARCH_FINDTAMABLE = "Search for tamable NPCs";
+		SEARCH_FINDTAMABLE_DESC = "Scans for NPCs tamable by hunters.";
+		SEARCH_FINDTAMABLE_WARNING = RED_FONT_COLOR_CODE.."Warning: Pets that originally were rare NPCs will trigger the found alert.|r";
+		SEARCH_ACHIEVEMENTADDFOUND = "Search for completed Achievement NPCs";
+		SEARCH_ACHIEVEMENTADDFOUND_DESC = "Continues searching for all achievement NPCs, even if you no longer need them.";
+
 		SEARCH_NPCS = "Custom NPCs";
 		SEARCH_NPCS_DESC = "Add any NPC to track, even if it has no achievement.";
 
@@ -65,12 +71,6 @@ do
 		SEARCH_ADD = "+";
 		SEARCH_REMOVE = "-";
 		SEARCH_ADD_TAMABLE_FORMAT = "Note: "..LDQuo.."%s"..RDQuo.." is tamable, so seeing it as a tamed hunter's pet will cause a false alarm.";
-
-		SEARCH_ACHIEVEMENTADDFOUND = "Search for completed Achievement NPCs";
-		SEARCH_ACHIEVEMENTADDFOUND_DESC = "Continues searching for all achievement NPCs, even if you no longer need them.";
-		SEARCH_ACHIEVEMENTADDTAMABLE = "Search for tamable Achievement NPCs";
-		SEARCH_ACHIEVEMENTADDTAMABLE_DESC = "Scans for NPCs tamable by hunters.";
-		SEARCH_ACHIEVEMENTADDTAMABLE_WARNING = RED_FONT_COLOR_CODE.."Warning: Pets that originally were rare NPCs will trigger the found alert.|r";
 
 
 		CMD_ADD = "ADD";

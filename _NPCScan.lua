@@ -15,13 +15,12 @@ me.Version = GetAddOnMetadata( "_NPCScan", "Version" ):match( "^([%d.]+)" );
 me.OptionsDefault = {
 	Version = me.Version;
 	CacheWarnings = true;
+	FindTamable = false;
 	AchievementsAddFound = false;
-	AchievementsAddTamable = false;
 };
 me.OptionsCharacterDefault = {
 	Version = me.Version;
 	NPCs = { -- Keys must be lowercase and trimmed, but don't have to match the NPC name
-		-- Note: Tameable NPCs will be "found" if you encounter them as pets, so don't search for them.
 		[ L.NPCS[ "Time-Lost Proto Drake" ]:trim():lower() ] = 32491;
 	};
 	Achievements = {}; -- Filled with all entries in me.Achievements
@@ -95,18 +94,6 @@ do
 		end
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.SetCacheWarnings                                        *
-  * Description: Enables printing cache lists on login.                        *
-  ****************************************************************************]]
-function me.SetCacheWarnings ( Enable, Force )
-	if ( Enable ~= _NPCScanOptions.CacheWarnings or Force ) then
-		_NPCScanOptions.CacheWarnings = Enable;
-
-		me.Options.CacheWarningsCheckbox:SetChecked( Enable );
-		return true;
-	end
-end
 
 
 --[[****************************************************************************
@@ -131,16 +118,27 @@ end
   * Description: Begins searching for an NPC ID.                               *
   ****************************************************************************]]
 function me.ScanAdd ( ID )
-	me.ScanIDs[ ID ] = ( me.ScanIDs[ ID ] or 0 ) + 1; -- Increment
+	if ( _NPCScanOptions.FindTamable or not me.TamableIDs[ ID ] ) then
+		local FoundName = me.TestID( ID );
+		if ( FoundName ) then -- Already seen
+			me.CacheListAdd( FoundName );
+		else
+			me.ScanIDs[ ID ] = ( me.ScanIDs[ ID ] or 0 ) + 1; -- Increment
+			return true;
+		end
+	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.ScanRemove                                              *
   * Description: Stops searching for an NPC ID.                                *
   ****************************************************************************]]
 function me.ScanRemove ( ID )
-	local Count = me.ScanIDs[ ID ];
-	if ( Count ) then -- Decrement
-		me.ScanIDs[ ID ] = Count > 1 and Count - 1 or nil;
+	if ( _NPCScanOptions.FindTamable or not me.TamableIDs[ ID ] ) then
+		local Count = me.ScanIDs[ ID ];
+		if ( Count ) then -- Decrement
+			me.ScanIDs[ ID ] = Count > 1 and Count - 1 or nil;
+			return true;
+		end
 	end
 end
 --[[****************************************************************************
@@ -166,13 +164,8 @@ function me.NPCAdd ( Name, ID, NoSync )
 			_NPCScanOptionsCharacter.NPCs[ Name ] = ID;
 		end
 		me.Options.Search.UpdateTab( "NPC" );
+		me.ScanAdd( ID );
 
-		local FoundName = me.TestID( ID );
-		if ( FoundName ) then -- Already seen
-			me.CacheListAdd( FoundName );
-		else
-			me.ScanAdd( ID );
-		end
 		return true;
 	end
 end
@@ -198,38 +191,6 @@ end
 
 
 --[[****************************************************************************
-  * Function: _NPCScan.AchievementSetAddFound                                  *
-  * Description: Enables tracking of unneeded achievement NPCs.                *
-  ****************************************************************************]]
-function me.AchievementSetAddFound ( Enable, Force )
-	if ( Enable ~= _NPCScanOptions.AchievementsAddFound or Force ) then
-		_NPCScanOptions.AchievementsAddFound = Enable;
-
-		me.Options.Search.AddFoundCheckbox:SetChecked( Enable );
-		for AchievementID in pairs( me.AchievementsEnabled ) do
-			me.AchievementRemove( AchievementID );
-			me.AchievementAdd( AchievementID );
-		end
-		return true;
-	end
-end
---[[****************************************************************************
-  * Function: _NPCScan.AchievementSetAddFound                                  *
-  * Description: Enables tracking of unneeded achievement NPCs.                *
-  ****************************************************************************]]
-function me.AchievementSetAddTamable ( Enable, Force )
-	if ( Enable ~= _NPCScanOptions.AchievementsAddTamable or Force ) then
-		_NPCScanOptions.AchievementsAddTamable = Enable;
-
-		me.Options.Search.AddTamableCheckbox:SetChecked( Enable );
-		for AchievementID in pairs( me.AchievementsEnabled ) do
-			me.AchievementRemove( AchievementID );
-			me.AchievementAdd( AchievementID );
-		end
-		return true;
-	end
-end
---[[****************************************************************************
   * Function: _NPCScan.AchievementAdd                                          *
   * Description: Adds a kill-related achievement to track.                     *
   ****************************************************************************]]
@@ -246,17 +207,9 @@ function me.AchievementAdd ( AchievementID, NoSync )
 		end
 
 		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
-			if ( _NPCScanOptions.AchievementsAddTamable or not me.TamableIDs[ NPCID ] ) then
-				local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
-				if ( not Completed or _NPCScanOptions.AchievementsAddFound ) then
-					local FoundName = me.TestID( NPCID );
-					if ( FoundName ) then -- Already seen
-						me.CacheListAdd( FoundName );
-					else
-						Achievement.Active[ CriteriaID ] = true;
-						me.ScanAdd( NPCID );
-					end
-				end
+			local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
+			if ( ( not Completed or _NPCScanOptions.AchievementsAddFound ) and me.ScanAdd( NPCID ) ) then
+				Achievement.Active[ CriteriaID ] = true;
 			end
 		end
 		me.Options.Search.AchievementSetEnabled( AchievementID, true );
@@ -320,6 +273,74 @@ end
 
 
 --[[****************************************************************************
+  * Function: _NPCScan.SetCacheWarnings                                        *
+  * Description: Enables printing cache lists on login.                        *
+  ****************************************************************************]]
+function me.SetCacheWarnings ( Enable )
+	if ( Enable ~= _NPCScanOptions.CacheWarnings ) then
+		_NPCScanOptions.CacheWarnings = Enable;
+
+		me.Options.CacheWarningsCheckbox:SetChecked( Enable );
+		return true;
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.SetFindTamable                                          *
+  * Description: Enables tracking of tamable NPCs.                             *
+  ****************************************************************************]]
+do
+	local NPCsTemp = {};
+	local AchievementsTemp = {};
+	function me.SetFindTamable ( Enable )
+		if ( Enable ~= _NPCScanOptions.FindTamable ) then
+			-- Remove all pet scans
+			for Name, ID in pairs( me.NPCs ) do
+				if ( me.TamableIDs[ ID ] ) then
+					NPCsTemp[ Name ] = ID;
+					me.NPCRemove( Name );
+				end
+			end
+			for AchievementID in pairs( me.AchievementsEnabled ) do
+				AchievementsTemp[ AchievementID ] = true;
+				me.AchievementRemove( AchievementID, true );
+			end
+
+			_NPCScanOptions.FindTamable = Enable;
+			me.Options.Search.FindTamableCheckbox:SetChecked( Enable );
+
+			-- Re-add the scans
+			for Name, ID in pairs( NPCsTemp ) do
+				NPCsTemp[ Name ] = nil;
+				me.NPCAdd( Name, ID );
+			end
+			for AchievementID in pairs( AchievementsTemp ) do
+				AchievementsTemp[ AchievementID ] = nil;
+				me.AchievementAdd( AchievementID, true );
+			end
+
+			return true;
+		end
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.SetAchievementsAddFound                                 *
+  * Description: Enables tracking of unneeded achievement NPCs.                *
+  ****************************************************************************]]
+function me.SetAchievementsAddFound ( Enable )
+	if ( Enable ~= _NPCScanOptions.AchievementsAddFound ) then
+		_NPCScanOptions.AchievementsAddFound = Enable;
+
+		me.Options.Search.AddFoundCheckbox:SetChecked( Enable );
+		for AchievementID in pairs( me.AchievementsEnabled ) do
+			me.AchievementRemove( AchievementID, true );
+			me.AchievementAdd( AchievementID, true );
+		end
+		return true;
+	end
+end
+
+
+--[[****************************************************************************
   * Function: _NPCScan.LoadDefaults                                            *
   * Description: Loads defaults per character and optionally globally.         *
   ****************************************************************************]]
@@ -341,33 +362,40 @@ end
   * Function: _NPCScan.Synchronize                                             *
   * Description: Resets the scanning list and reloads it from saved settings.  *
   ****************************************************************************]]
-function me.Synchronize ()
-	-- Clear all scans
-	for AchievementID in pairs( me.AchievementsEnabled ) do
-		me.AchievementRemove( AchievementID, true );
+do
+	local function ForceSettingUpdate ( Table, Key )
+		local Value = Table[ Key ];
+		Table[ Key ] = not Value;
+		return Value == true; -- When compared in the next Set* call, will always run as if the setting had changed
 	end
-	for Name in pairs( me.NPCs ) do
-		me.NPCRemove( Name, true );
-	end
-	for ID in pairs( me.ScanIDs ) do
-		me.ScanRemoveAll( ID );
-	end
-
-	-- Add all NPCs from options
-	me.SetCacheWarnings( _NPCScanOptions.CacheWarnings == true, true );
-	for Name, ID in pairs( _NPCScanOptionsCharacter.NPCs ) do
-		me.NPCAdd( Name, ID, true );
-	end
-
-	-- Add recognized achievements
-	me.AchievementSetAddFound( _NPCScanOptions.AchievementsAddFound == true, true );
-	me.AchievementSetAddTamable( _NPCScanOptions.AchievementsAddTamable == true, true );
-	for AchievementID in pairs( me.Achievements ) do
-		if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
-			me.AchievementAdd( AchievementID, true );
+	function me.Synchronize ()
+		-- Clear all scans
+		for AchievementID in pairs( me.AchievementsEnabled ) do
+			me.AchievementRemove( AchievementID, true );
 		end
+		for Name in pairs( me.NPCs ) do
+			me.NPCRemove( Name, true );
+		end
+		for ID in pairs( me.ScanIDs ) do
+			me.ScanRemoveAll( ID );
+		end
+
+		-- Add all NPCs from options
+		me.SetCacheWarnings( ForceSettingUpdate( _NPCScanOptions, "CacheWarnings" ) );
+		me.SetFindTamable( ForceSettingUpdate( _NPCScanOptions, "FindTamable" ) );
+		for Name, ID in pairs( _NPCScanOptionsCharacter.NPCs ) do
+			me.NPCAdd( Name, ID, true );
+		end
+
+		-- Add recognized achievements
+		me.SetAchievementsAddFound( ForceSettingUpdate( _NPCScanOptions, "AchievementsAddFound" ) );
+		for AchievementID in pairs( me.Achievements ) do
+			if ( _NPCScanOptionsCharacter.Achievements[ AchievementID ] ) then
+				me.AchievementAdd( AchievementID, true );
+			end
+		end
+		me.CacheListPrint();
 	end
-	me.CacheListPrint();
 end
 
 
@@ -417,8 +445,8 @@ function me.OnLoad ()
 	local Options = _NPCScanOptions;
 	if ( Options.Version == "3.0.9.2" ) then -- 3.1.0.1: Added options for finding already found and tamable mobs
 		Options.CacheWarnings = true;
+		Options.FindTamable = false;
 		Options.AchievementsAddFound = false;
-		Options.AchievementsAddTamable = false;
 		Options.Version = "3.1.0.1";
 	end
 	if ( Options.Version ~= me.Version ) then
