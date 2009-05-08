@@ -21,6 +21,7 @@ me.OptionsDefault = {
 me.OptionsCharacterDefault = {
 	Version = me.Version;
 	NPCs = { -- Keys must be lowercase and trimmed, but don't have to match the NPC name
+		[ L.NPCS[ "Gondria" ]:trim():lower() ] = 33776;
 		[ L.NPCS[ "Time-Lost Proto Drake" ]:trim():lower() ] = 32491;
 	};
 	Achievements = {}; -- Filled with all entries in me.Achievements
