@@ -90,5 +90,5 @@ do
 	SLASH__NPCSCAN2 = "/scan";
 
 	BINDING_HEADER__NPCSCAN = Title;
-	_G[ "BINDING_NAME_CLICK _NPCScanButton:LeftButton" ] = "Target found unit";
+	_G[ "BINDING_NAME_CLICK _NPCScanButton:LeftButton" ] = "Target last found mob\n"..GRAY_FONT_COLOR_CODE.."(Use when _NPCScan alerts you)|r";
 end
