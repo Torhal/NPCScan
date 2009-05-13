@@ -32,16 +32,16 @@ do
 		CACHED_SEPARATOR = ", ";
 
 
-		OPTIONS_TITLE = Title;
-		OPTIONS_DESC = "These options let you configure the way _NPCScan alerts you when it finds rare NPCs.";
+		CONFIG_TITLE = Title;
+		CONFIG_DESC = "These options let you configure the way _NPCScan alerts you when it finds rare NPCs.";
 
-		OPTIONS_TEST = "Test Found Alert";
-		OPTIONS_TEST_DESC = "Simulates an "..LDQuo.."NPC found"..RDQuo.." alert to let you know what to look out for.";
-		OPTIONS_TEST_NAME = "You! (Test)";
-		OPTIONS_TEST_HELP_FORMAT = "Click the target button or use the provided keybinding to target the found mob.  Hold "..HIGHLIGHT_FONT_COLOR_CODE.."<%s>|r and drag to move the target button.  Note that if an NPC is found while you're in combat, the button will only appear after you exit combat.";
+		CONFIG_TEST = "Test Found Alert";
+		CONFIG_TEST_DESC = "Simulates an "..LDQuo.."NPC found"..RDQuo.." alert to let you know what to look out for.";
+		CONFIG_TEST_NAME = "You! (Test)";
+		CONFIG_TEST_HELP_FORMAT = "Click the target button or use the provided keybinding to target the found mob.  Hold "..HIGHLIGHT_FONT_COLOR_CODE.."<%s>|r and drag to move the target button.  Note that if an NPC is found while you're in combat, the button will only appear after you exit combat.";
 
-		OPTIONS_CACHEWARNINGS = "Print login reminders to empty the cache";
-		OPTIONS_CACHEWARNINGS_DESC = "If an NPC is already cached when you log in, this option prints a reminder to clear your cache.";
+		CONFIG_CACHEWARNINGS = "Print login reminders to empty the cache";
+		CONFIG_CACHEWARNINGS_DESC = "If an NPC is already cached when you log in, this option prints a reminder to clear your cache.";
 
 
 		SEARCH_TITLE = "Search";
