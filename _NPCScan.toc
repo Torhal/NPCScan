@@ -11,7 +11,7 @@
 ## X-Feedback: http://code.google.com/p/wow-saiket/issues/list?can=1&q=AddOn:NPCScan
 ## X-RelSite-WoWI: 12995
 ## X-Localizations: enUS
-## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, ruRU
+## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, koKR, ruRU, zhCN, zhTW
 ## X-Embeds: LibTextTable-1.0
 ## SavedVariables: _NPCScanOptions
 ## SavedVariablesPerCharacter: _NPCScanOptionsCharacter
