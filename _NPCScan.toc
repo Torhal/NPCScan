@@ -3,7 +3,7 @@
 ## Notes: Scans NPCs around you for rare ones.
 ## Author: Saiket
 ## Version: 3.1.0.1
-## X-Date: 2009-05-12
+## X-Date: 2009-05-15
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com

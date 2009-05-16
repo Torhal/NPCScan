@@ -472,7 +472,9 @@ end
   * Function: _NPCScan:ACHIEVEMENT_EARNED                                      *
   ****************************************************************************]]
 function me:ACHIEVEMENT_EARNED ( _, AchievementID )
-	me.AchievementRemove( AchievementID );
+	if ( not me.Options.AchievementsAddFound ) then
+		me.AchievementRemove( AchievementID );
+	end
 end
 --[[****************************************************************************
   * Function: _NPCScan:CRITERIA_UPDATE                                         *
