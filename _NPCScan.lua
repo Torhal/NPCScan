@@ -40,7 +40,7 @@ me.Achievements = { -- Criteria data for each achievement
 };
 me.CriteriaUpdateRequested = nil;
 
-me.IDMax = 0xFFFF; -- Largest ID that will fit in a GUID's 2-byte NPC ID field
+me.IDMax = 0xFFFFFF; -- Largest ID that will fit in a GUID's 2-byte NPC ID field
 me.UpdateRate = 0.1;
 
 local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip", me );
@@ -106,7 +106,7 @@ end
   ****************************************************************************]]
 function me.TestID ( ID )
 	Tooltip:SetOwner( WorldFrame, "ANCHOR_NONE" );
-	Tooltip:SetHyperlink( ( "unit:0xF53000%04X000000" ):format( ID ) );
+	Tooltip:SetHyperlink( ( "unit:0xF530%06X000000" ):format( ID ) );
 	if ( Tooltip:IsShown() ) then
 		return Tooltip.Text:GetText();
 	end
