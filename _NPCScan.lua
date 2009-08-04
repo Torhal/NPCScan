@@ -29,6 +29,7 @@ me.OptionsCharacterDefault = {
 	Version = me.Version;
 	NPCs = { -- Keys must be lowercase and trimmed, but don't have to match the NPC name
 		[ L.NPCS[ "Gondria" ]:trim():lower() ] = 33776;
+		[ L.NPCS[ "Skoll" ]:trim():lower() ] = 35189;
 		[ L.NPCS[ "Time-Lost Proto Drake" ]:trim():lower() ] = 32491;
 
 		[ L.NPCS[ "Dart" ]:trim():lower() ] = 14232;
@@ -487,7 +488,8 @@ function me.OnLoad ()
 			end
 			OptionsCharacter.Version = "3.1.0.1";
 		end
-		if ( OptionsCharacter.Version == "3.1.0.1" ) then -- 3.2.0.1: Added default scans for rare raptors in 3.2
+		if ( OptionsCharacter.Version == "3.1.0.1" ) then -- 3.2.0.1: Added default scans for rare raptors and Skoll in 3.2
+			OptionsCharacter.NPCs[ L.NPCS[ "Skoll" ]:trim():lower() ] = 35189;
 			OptionsCharacter.NPCs[ L.NPCS[ "Dart" ]:trim():lower() ] = 14232;
 			OptionsCharacter.NPCs[ L.NPCS[ "Takk the Leaper" ]:trim():lower() ] = 5842;
 			OptionsCharacter.NPCs[ L.NPCS[ "Ravasaur Matriarch" ]:trim():lower() ] = 6581;
