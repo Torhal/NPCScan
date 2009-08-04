@@ -31,17 +31,28 @@ do
 		CACHED_NAME_FORMAT = LDQuo.."%s"..RDQuo;
 		CACHED_SEPARATOR = ", ";
 
+		OVERLAY_INCOMPATIBLE = "Your versions of %s ("..GRAY_FONT_COLOR_CODE.."%s|r) and "..Title.." ("..GRAY_FONT_COLOR_CODE.."%s|r) are incompatible.  Please update both so they can work together."; -- Overlay name, Overlay version, _NPCScan version
+
 
 		CONFIG_TITLE = Title;
 		CONFIG_DESC = "These options let you configure the way _NPCScan alerts you when it finds rare NPCs.";
+
+		CONFIG_CACHEWARNINGS = "Print login reminders to empty the cache";
+		CONFIG_CACHEWARNINGS_DESC = "If an NPC is already cached when you log in, this option prints a reminder to clear your cache.";
+
+
+		CONFIG_ALERT = "Alert Options";
 
 		CONFIG_TEST = "Test Found Alert";
 		CONFIG_TEST_DESC = "Simulates an "..LDQuo.."NPC found"..RDQuo.." alert to let you know what to look out for.";
 		CONFIG_TEST_NAME = "You! (Test)";
 		CONFIG_TEST_HELP_FORMAT = "Click the target button or use the provided keybinding to target the found mob.  Hold "..HIGHLIGHT_FONT_COLOR_CODE.."<%s>|r and drag to move the target button.  Note that if an NPC is found while you're in combat, the button will only appear after you exit combat.";
 
-		CONFIG_CACHEWARNINGS = "Print login reminders to empty the cache";
-		CONFIG_CACHEWARNINGS_DESC = "If an NPC is already cached when you log in, this option prints a reminder to clear your cache.";
+		CONFIG_ALERT_UNMUTE = "Unmute for alert sound";
+		CONFIG_ALERT_UNMUTE_DESC = "Briefly enables game sound when an NPC is found to play an alert tone if you have muted the game.";
+		CONFIG_ALERT_SOUND = "Alert sound file";
+		CONFIG_ALERT_SOUND_DESC = "Choose the alert sound to play when an NPC is found.  Additional sounds can be added through "..LDQuo.."SharedMedia"..RDQuo.." addons.";
+		CONFIG_ALERT_SOUND_DEFAULT = NORMAL_FONT_COLOR_CODE..DEFAULT.."|r";
 
 
 		SEARCH_TITLE = "Search";

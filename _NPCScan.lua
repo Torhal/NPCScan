@@ -20,14 +20,21 @@ me.OptionsCharacter = {
 me.OptionsDefault = {
 	Version = me.Version;
 	CacheWarnings = true;
-	FindTamable = false;
-	AchievementsAddFound = false;
+	FindTamable = nil;
+	AchievementsAddFound = nil;
+	AlertSoundUnmute = nil;
+	AlertSound = nil; -- Default sound
 };
 me.OptionsCharacterDefault = {
 	Version = me.Version;
 	NPCs = { -- Keys must be lowercase and trimmed, but don't have to match the NPC name
 		[ L.NPCS[ "Gondria" ]:trim():lower() ] = 33776;
 		[ L.NPCS[ "Time-Lost Proto Drake" ]:trim():lower() ] = 32491;
+
+		[ L.NPCS[ "Dart" ]:trim():lower() ] = 14232;
+		[ L.NPCS[ "Takk the Leaper" ]:trim():lower() ] = 5842;
+		[ L.NPCS[ "Ravasaur Matriarch" ]:trim():lower() ] = 6581;
+		[ L.NPCS[ "Razormaw Matriarch" ]:trim():lower() ] = 1140;
 	};
 	Achievements = {}; -- Filled with all entries in me.Achievements
 };
@@ -40,12 +47,8 @@ me.Achievements = { -- Criteria data for each achievement
 };
 me.CriteriaUpdateRequested = nil;
 
-me.IDMax = 0xFFFFFF; -- Largest ID that will fit in a GUID's 2-byte NPC ID field
+me.IDMax = 0xFFFFFF; -- Largest ID that will fit in a GUID's 24-bit NPC ID field
 me.UpdateRate = 0.1;
-
-local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip", me );
-
-local CacheList = {};
 
 
 
@@ -60,28 +63,19 @@ function me.Message ( Message, Color )
 	end
 	DEFAULT_CHAT_FRAME:AddMessage( L.MESSAGE_FORMAT:format( Message ), Color.r, Color.g, Color.b );
 end
---[[****************************************************************************
-  * Function: _NPCScan.Alert                                                   *
-  * Description: Dramatically prints a message and play a sound.               *
-  ****************************************************************************]]
-function me.Alert ( Message, Color )
-	me.Message( Message, Color );
-	PlaySoundFile( "sound\\event sounds\\event_wardrum_ogre.wav" );
-	PlaySoundFile( "sound\\events\\scourge_horn.wav" );
-	UIFrameFlash( LowHealthFrame, 0.5, 0.5, 6, false, 0.5 );
-end
 
 
 --[[****************************************************************************
   * Function: _NPCScan.CacheListAdd                                            *
   ****************************************************************************]]
-function me.CacheListAdd ( FoundName )
-	CacheList[ #CacheList + 1 ] = FoundName;
-end
+do
+	local CacheList = {};
+	function me.CacheListAdd ( FoundName )
+		CacheList[ #CacheList + 1 ] = FoundName;
+	end
 --[[****************************************************************************
   * Function: _NPCScan.CacheListPrint                                          *
   ****************************************************************************]]
-do
 	local FirstPrint = true;
 	function me.CacheListPrint ( ForcePrint )
 		if ( #CacheList > 0 ) then
@@ -104,11 +98,17 @@ end
   * Function: _NPCScan.TestID                                                  *
   * Description: Checks for a given NPC ID.                                    *
   ****************************************************************************]]
-function me.TestID ( ID )
-	Tooltip:SetOwner( WorldFrame, "ANCHOR_NONE" );
-	Tooltip:SetHyperlink( ( "unit:0xF530%06X000000" ):format( ID ) );
-	if ( Tooltip:IsShown() ) then
-		return Tooltip.Text:GetText();
+do
+	local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip", me );
+	-- Add template text lines
+	local Text = Tooltip:CreateFontString( "$parentTextLeft1", nil, "GameTooltipText" );
+	Tooltip:AddFontStrings( Text, Tooltip:CreateFontString( "$parentTextRight1", nil, "GameTooltipText" ) );
+	function me.TestID ( ID )
+		Tooltip:SetOwner( WorldFrame, "ANCHOR_NONE" );
+		Tooltip:SetHyperlink( ( "unit:0xF530%06X000000" ):format( ID ) );
+		if ( Tooltip:IsShown() ) then
+			return Text:GetText();
+		end
 	end
 end
 
@@ -122,8 +122,13 @@ function me.ScanAdd ( ID )
 		local FoundName = me.TestID( ID );
 		if ( FoundName ) then -- Already seen
 			me.CacheListAdd( FoundName );
-		else
-			me.ScanIDs[ ID ] = ( me.ScanIDs[ ID ] or 0 ) + 1; -- Increment
+		else -- Increment
+			if ( me.ScanIDs[ ID ] ) then
+				me.ScanIDs[ ID ] = me.ScanIDs[ ID ] + 1;
+			else
+				me.ScanIDs[ ID ] = 1;
+				me.Overlays.Add( ID );
+			end
 			return true;
 		end
 	end
@@ -136,7 +141,12 @@ function me.ScanRemove ( ID )
 	if ( me.Options.FindTamable or not me.TamableIDs[ ID ] ) then
 		local Count = me.ScanIDs[ ID ];
 		if ( Count ) then -- Decrement
-			me.ScanIDs[ ID ] = Count > 1 and Count - 1 or nil;
+			if ( Count > 1 ) then
+				me.ScanIDs[ ID ] = Count - 1;
+			else
+				me.ScanIDs[ ID ] = nil;
+				me.Overlays.Remove( ID );
+			end
 			return true;
 		end
 	end
@@ -146,7 +156,10 @@ end
   * Description: Stops all concurrent scans for a common NPC ID.               *
   ****************************************************************************]]
 function me.ScanRemoveAll ( ID )
-	me.ScanIDs[ ID ] = nil;
+	if ( me.ScanIDs[ ID ] ) then
+		me.ScanIDs[ ID ] = nil;
+		me.Overlays.Remove( ID );
+	end
 end
 
 
@@ -265,10 +278,10 @@ end
   * Description: Enables printing cache lists on login.                        *
   ****************************************************************************]]
 function me.SetCacheWarnings ( Enable )
-	if ( Enable ~= me.Options.CacheWarnings ) then
-		me.Options.CacheWarnings = Enable;
+	if ( not Enable ~= not me.Options.CacheWarnings ) then
+		me.Options.CacheWarnings = Enable or nil;
 
-		me.Config.CacheWarningsCheckbox:SetChecked( Enable );
+		me.Config.CacheWarnings:SetChecked( Enable );
 		return true;
 	end
 end
@@ -280,7 +293,7 @@ do
 	local NPCsTemp = {};
 	local AchievementsTemp = {};
 	function me.SetFindTamable ( Enable )
-		if ( Enable ~= me.Options.FindTamable ) then
+		if ( not Enable ~= not me.Options.FindTamable ) then
 			-- Remove all pet scans
 			for Name, ID in pairs( me.OptionsCharacter.NPCs ) do
 				if ( me.TamableIDs[ ID ] ) then
@@ -293,7 +306,7 @@ do
 				me.AchievementRemove( AchievementID );
 			end
 
-			me.Options.FindTamable = Enable;
+			me.Options.FindTamable = Enable or nil;
 			me.Config.Search.FindTamableCheckbox:SetChecked( Enable );
 
 			-- Re-add the scans
@@ -315,14 +328,38 @@ end
   * Description: Enables tracking of unneeded achievement NPCs.                *
   ****************************************************************************]]
 function me.SetAchievementsAddFound ( Enable )
-	if ( Enable ~= me.Options.AchievementsAddFound ) then
-		me.Options.AchievementsAddFound = Enable;
+	if ( not Enable ~= not me.Options.AchievementsAddFound ) then
+		me.Options.AchievementsAddFound = Enable or nil;
 		me.Config.Search.AddFoundCheckbox:SetChecked( Enable );
 
 		for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
 			me.AchievementRemove( AchievementID );
 			me.AchievementAdd( AchievementID );
 		end
+		return true;
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.SetAlertSoundUnmute                                     *
+  * Description: Enables unmuting sound to play found alerts.                  *
+  ****************************************************************************]]
+function me.SetAlertSoundUnmute ( Enable )
+	if ( not Enable ~= not me.Options.AlertSoundUnmute ) then
+		me.Options.AlertSoundUnmute = Enable or nil;
+
+		me.Config.AlertSoundUnmute:SetChecked( Enable );
+		return true;
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.SetAlertSound                                           *
+  * Description: Sets the sound to play when NPCs are found.                   *
+  ****************************************************************************]]
+function me.SetAlertSound ( AlertSound )
+	if ( AlertSound ~= me.Options.AlertSound ) then
+		me.Options.AlertSound = AlertSound;
+
+		UIDropDownMenu_SetText( me.Config.AlertSound, AlertSound == nil and L.CONFIG_ALERT_SOUND_DEFAULT or AlertSound );
 		return true;
 	end
 end
@@ -362,6 +399,8 @@ function me.Synchronize ( Options, OptionsCharacter )
 	me.SetCacheWarnings( Options.CacheWarnings );
 	me.SetFindTamable( Options.FindTamable );
 	me.SetAchievementsAddFound( Options.AchievementsAddFound );
+	me.SetAlertSoundUnmute( Options.AlertSoundUnmute );
+	me.SetAlertSound( Options.AlertSound );
 
 	for Name, ID in pairs( OptionsCharacter.NPCs ) do
 		me.NPCAdd( Name, ID );
@@ -396,8 +435,10 @@ do
 			for ID in pairs( me.ScanIDs ) do
 				Name = me.TestID( ID );
 				if ( Name ) then
-					me.Alert( L[ me.TamableIDs[ ID ] and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
-					me.Button.SetNPC( Name, ID );
+					me.Message( L[ me.TamableIDs[ ID ] and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
+					if ( not ( me.TamableIDs[ ID ] and IsResting() ) ) then
+						me.Button.SetNPC( Name, ID );
+					end
 					me.ScanRemoveAll( ID );
 					me.Config.Search.UpdateTab();
 				end
@@ -421,8 +462,6 @@ function me.OnLoad ()
 	if ( Options ) then
 		if ( Options.Version == "3.0.9.2" ) then -- 3.1.0.1: Added options for finding already found and tamable mobs
 			Options.CacheWarnings = true;
-			Options.FindTamable = false;
-			Options.AchievementsAddFound = false;
 			Options.Version = "3.1.0.1";
 		end
 		Options.Version = me.Version;
@@ -448,6 +487,13 @@ function me.OnLoad ()
 			end
 			OptionsCharacter.Version = "3.1.0.1";
 		end
+		if ( OptionsCharacter.Version == "3.1.0.1" ) then -- 3.2.0.1: Added default scans for rare raptors in 3.2
+			OptionsCharacter.NPCs[ L.NPCS[ "Dart" ]:trim():lower() ] = 14232;
+			OptionsCharacter.NPCs[ L.NPCS[ "Takk the Leaper" ]:trim():lower() ] = 5842;
+			OptionsCharacter.NPCs[ L.NPCS[ "Ravasaur Matriarch" ]:trim():lower() ] = 6581;
+			OptionsCharacter.NPCs[ L.NPCS[ "Razormaw Matriarch" ]:trim():lower() ] = 1140;
+			OptionsCharacter.Version = "3.2.0.1";
+		end
 		OptionsCharacter.Version = me.Version;
 	end
 
@@ -462,10 +508,11 @@ function me:PLAYER_ENTERING_WORLD ()
 	end
 
 	-- Do not scan while in instances
-	if ( IsInInstance() ) then
-		self:Hide();
-	else
+	local InInstance, InstanceType = IsInInstance();
+	if ( not InInstance or InstanceType == "party" ) then
 		self:Show();
+	else
+		self:Hide();
 	end
 end
 --[[****************************************************************************
@@ -505,12 +552,6 @@ do
 	me:SetScript( "OnUpdate", me.OnUpdate );
 	me:SetScript( "OnEvent", me.OnEvent );
 	me:RegisterEvent( "PLAYER_ENTERING_WORLD" );
-
-	-- Add template text lines
-	Tooltip.Text = Tooltip:CreateFontString( "$parentTextLeft1", nil, "GameTooltipText" );
-	Tooltip:AddFontStrings(
-		Tooltip.Text,
-		Tooltip:CreateFontString( "$parentTextRight1", nil, "GameTooltipText" ) );
 
 
 	-- Save achievement criteria data

@@ -96,7 +96,7 @@ end
   * Function: _NPCScan.Config.Search:TabCheckOnClick                           *
   ****************************************************************************]]
 function me:TabCheckOnClick ()
-	local Enable = self:GetChecked() == 1;
+	local Enable = self:GetChecked();
 	PlaySound( Enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff" );
 	if ( me.AchievementSetEnabled( self:GetParent().AchievementID, Enable ) ) then
 		_NPCScan.CacheListPrint( true );

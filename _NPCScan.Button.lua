@@ -6,6 +6,7 @@
 
 local _NPCScan = _NPCScan;
 local L = _NPCScanLocalization;
+local LSM = LibStub( "LibSharedMedia-3.0" );
 local me = CreateFrame( "Button", "_NPCScanButton", nil, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate" );
 _NPCScan.Button = me;
 
@@ -43,11 +44,51 @@ me.ModelCameras = {
   * Description: Sets the button to a given NPC and shows it.                  *
   ****************************************************************************]]
 function me.SetNPC ( Name, ID )
+	if ( tonumber( ID ) ) then
+		_NPCScan.Overlays.Add( ID );
+	end
+
+	me.PlaySound( _NPCScan.Options.AlertSound );
+	if ( GetCVarBool( "screenEdgeFlash" ) ) then
+		UIFrameFlash( LowHealthFrame, 0.5, 0.5, 6, false, 0.5 );
+	end
+
 	if ( InCombatLockdown() ) then
+		if ( tonumber( me.PendingID ) ) then -- Remove old pending NPC
+			_NPCScan.Overlays.Remove( me.PendingID );
+		end
 		me.PendingName = Name;
 		me.PendingID = ID;
 	else
 		me.Update( Name, ID );
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Button.PlaySound                                        *
+  ****************************************************************************]]
+function me.PlaySound ( AlertSound )
+	local SoundEnableChanged, SoundInBGChanged;
+	if ( _NPCScan.Options.AlertSoundUnmute ) then
+		if ( not GetCVarBool( "Sound_EnableAllSound" ) ) then
+			SoundEnableChanged = true;
+			SetCVar( "Sound_EnableAllSound", 1 );
+		end
+		if ( not GetCVarBool( "Sound_EnableSoundWhenGameIsInBG" ) ) then
+			SoundInBGChanged = true;
+			SetCVar( "Sound_EnableSoundWhenGameIsInBG", 1 );
+		end
+	end
+	if ( AlertSound == nil ) then -- Default
+		PlaySoundFile( [[sound\event sounds\event_wardrum_ogre.wav]] );
+		PlaySoundFile( [[sound\events\scourge_horn.wav]] );
+	else
+		PlaySoundFile( LSM:Fetch( LSM.MediaType.SOUND, AlertSound ) );
+	end
+	if ( SoundEnableChanged ) then
+		SetCVar( "Sound_EnableAllSound", 0 );
+	end
+	if ( SoundInBGChanged ) then
+		SetCVar( "Sound_EnableSoundWhenGameIsInBG", 0 );
 	end
 end
 --[[****************************************************************************
@@ -65,6 +106,11 @@ end
   * Description: Updates the button based on its Name and ID fields.           *
   ****************************************************************************]]
 function me.Update ( Name, ID )
+	if ( tonumber( me.ID ) ) then -- Remove last overlay
+		_NPCScan.Overlays.Remove( me.ID );
+	end
+	me.ID = ID;
+
 	me:Show(); -- Note: Must be visible before model scale calls will work
 	me:SetText( Name );
 	Model.Reset();
@@ -104,15 +150,22 @@ end
 
 
 --[[****************************************************************************
+  * Function: _NPCScan.Button:OnHide                                           *
+  ****************************************************************************]]
+function me:OnHide ()
+	if ( tonumber( me.ID ) ) then -- Remove current overlay
+		_NPCScan.Overlays.Remove( me.ID );
+	end
+	me.ID = nil;
+end
+--[[****************************************************************************
   * Function: _NPCScan.Button:OnEnter                                          *
-  * Description: Highlights the button.                                        *
   ****************************************************************************]]
 function me:OnEnter ()
 	me:SetBackdropBorderColor( 1, 1, 0.15 ); -- Yellow
 end
 --[[****************************************************************************
   * Function: _NPCScan.Button:OnLeave                                          *
-  * Description: Removes highlighting.                                         *
   ****************************************************************************]]
 function me:OnLeave ()
 	me:SetBackdropBorderColor( 0.7, 0.15, 0.05 ); -- Brown
@@ -268,6 +321,7 @@ do
 	me:SetScript( "OnEnter", me.OnEnter );
 	me:SetScript( "OnLeave", me.OnLeave );
 	me:SetScript( "OnEvent", me.OnEvent );
+	me:HookScript( "OnHide", me.OnHide );
 	me:RegisterEvent( "PLAYER_REGEN_ENABLED" );
 	me:RegisterEvent( "MODIFIER_STATE_CHANGED" );
 end
