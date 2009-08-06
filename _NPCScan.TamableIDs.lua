@@ -75,6 +75,7 @@ _NPCScan.TamableIDs = {
 	[ 2175 ] = true; -- Shadowclaw
 	[ 14266 ] = true; -- Shanda the Spinner
 	[ 4132 ] = true; -- Silithid Ravager
+	[ 35189 ] = true; -- Skoll
 	[ 5356 ] = true; -- Snarler
 	[ 5829 ] = true; -- Snort the Heckler
 	[ 8204 ] = true; -- Soriid the Devourer
