@@ -83,6 +83,7 @@ _NPCScan.TamableIDs = {
 	[ 10359 ] = true; -- Sri'skulk
 	[ 2172 ] = true; -- Strider Clutchmother
 	[ 5842 ] = true; -- Takk the Leaper
+	[ 32475 ] = true; -- Terror Spinner
 	[ 8660 ] = true; -- The Evalcharr
 	[ 5807 ] = true; -- The Rake
 	[ 11497 ] = true; -- The Razza
