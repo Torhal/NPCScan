@@ -13,6 +13,7 @@ me.Debug = false; -- Set to true so incompatible hooks will throw real errors
 
 local MESSAGE_ADD = "NpcOverlay_Add";
 local MESSAGE_REMOVE = "NpcOverlay_Remove";
+local MESSAGE_FOUND = "NpcOverlay_Found";
 
 
 
@@ -30,6 +31,13 @@ end
   ****************************************************************************]]
 function me.Remove ( ID )
 	me:SendMessage( MESSAGE_REMOVE, ID );
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Overlays.Found                                          *
+  * Description: Lets overlay mods know the NPC ID was found.                  *
+  ****************************************************************************]]
+function me.Found ( ID )
+	me:SendMessage( MESSAGE_FOUND, ID );
 end
 
 

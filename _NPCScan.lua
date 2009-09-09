@@ -20,7 +20,7 @@ me.OptionsCharacter = {
 me.OptionsDefault = {
 	Version = me.Version;
 	CacheWarnings = true;
-	FindTamable = nil;
+	FindTamable = true;
 	AchievementsAddFound = nil;
 	AlertSoundUnmute = nil;
 	AlertSound = nil; -- Default sound
@@ -436,11 +436,16 @@ do
 			for ID in pairs( me.ScanIDs ) do
 				Name = me.TestID( ID );
 				if ( Name ) then
-					me.Message( L[ me.TamableIDs[ ID ] and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
-					if ( not ( me.TamableIDs[ ID ] and IsResting() ) ) then
+					me.ScanRemoveAll( ID );
+					local TamableLocation = me.TamableIDs[ ID ];
+					me.Message( L[ TamableLocation and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
+					if ( not TamableLocation
+						or ( TamableLocation == true and not IsResting() )
+						or TamableLocation == GetRealZoneText()
+					) then
 						me.Button.SetNPC( Name, ID );
 					end
-					me.ScanRemoveAll( ID );
+					me.Overlays.Found( ID );
 					me.Config.Search.UpdateTab();
 				end
 			end
