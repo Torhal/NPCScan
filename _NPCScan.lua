@@ -436,17 +436,26 @@ do
 			for ID in pairs( me.ScanIDs ) do
 				Name = me.TestID( ID );
 				if ( Name ) then
+					me.Overlays.Found( ID );
 					me.ScanRemoveAll( ID );
-					local TamableLocation = me.TamableIDs[ ID ];
-					me.Message( L[ TamableLocation and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
-					if ( not TamableLocation
-						or ( TamableLocation == true and not IsResting() )
-						or TamableLocation == GetRealZoneText()
-					) then
+					me.Config.Search.UpdateTab();
+
+					local TamableLocation, InvalidMessage = me.TamableIDs[ ID ];
+					if ( TamableLocation == true ) then -- Tamable, but expected zone is unknown (instance mob, etc.)
+						if ( IsResting() ) then -- Most likely a hunter pet in town
+							InvalidMessage = L.FOUND_TAMABLE_RESTING_FORMAT:format( Name );
+						end
+					elseif ( TamableLocation ) then -- Is a string; Expected zone of the mob is known
+						local CurrentLocation = GetRealZoneText();
+						if ( TamableLocation ~= CurrentLocation ) then -- Definitely a pet; Found in wrong zone
+							InvalidMessage = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format( Name, CurrentLocation, TamableLocation );
+						end
+					end
+
+					me.Message( InvalidMessage or L[ TamableLocation and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
+					if ( not InvalidMessage ) then
 						me.Button.SetNPC( Name, ID );
 					end
-					me.Overlays.Found( ID );
-					me.Config.Search.UpdateTab();
 				end
 			end
 		end
@@ -526,6 +535,16 @@ function me:PLAYER_ENTERING_WORLD ()
 	end
 end
 --[[****************************************************************************
+  * Function: _NPCScan:ZONE_CHANGED_NEW_AREA                                   *
+  * Description: Sets the OnUpdate handler only after zone info is known.      *
+  ****************************************************************************]]
+function me:ZONE_CHANGED_NEW_AREA ( Event )
+	self:UnregisterEvent( Event );
+	self[ Event ] = nil;
+
+	self:SetScript( "OnUpdate", me.OnUpdate );
+end
+--[[****************************************************************************
   * Function: _NPCScan:ACHIEVEMENT_EARNED                                      *
   ****************************************************************************]]
 function me:ACHIEVEMENT_EARNED ( _, AchievementID )
@@ -559,9 +578,14 @@ end
 -----------------------------
 
 do
-	me:SetScript( "OnUpdate", me.OnUpdate );
 	me:SetScript( "OnEvent", me.OnEvent );
 	me:RegisterEvent( "PLAYER_ENTERING_WORLD" );
+	-- Set OnUpdate script after zone info loads
+	if ( GetRealZoneText() == "" ) then -- Zone information unknown (initial login)
+		me:RegisterEvent( "ZONE_CHANGED_NEW_AREA" );
+	else -- Zone information is known
+		me:ZONE_CHANGED_NEW_AREA( "ZONE_CHANGED_NEW_AREA" );
+	end
 
 
 	-- Save achievement criteria data
