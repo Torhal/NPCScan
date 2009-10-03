@@ -13,6 +13,10 @@ _NPCScan.Button = me;
 local Model = CreateFrame( "PlayerModel", nil, me );
 me.Model = Model;
 
+local Flash = CreateFrame( "Frame" );
+me.Flash = Flash;
+Flash.LoopCountMax = 3;
+
 me.PendingName = nil;
 me.PendingID = nil;
 
@@ -50,7 +54,9 @@ function me.SetNPC ( Name, ID )
 
 	me.PlaySound( _NPCScan.Options.AlertSound );
 	if ( GetCVarBool( "screenEdgeFlash" ) ) then
-		UIFrameFlash( LowHealthFrame, 0.5, 0.5, 6, false, 0.5 );
+		Flash:Show();
+		Flash.Fade:Pause(); -- Forces OnPlay to fire again if it was already playing
+		Flash.Fade:Play();
 	end
 
 	if ( InCombatLockdown() ) then
@@ -198,6 +204,28 @@ end
 me.OnEvent = _NPCScan.OnEvent;
 
 
+--[[****************************************************************************
+  * Function: _NPCScan.Button.Flash:OnLoop                                     *
+  * Description: Stops the animation after a number of loops.                  *
+  ****************************************************************************]]
+function Flash:OnLoop ( Direction )
+	if ( Direction == "FORWARD" ) then
+		self.LoopCount = self.LoopCount + 1;
+		if ( self.LoopCount >= Flash.LoopCountMax ) then
+			self:Stop();
+			Flash:Hide();
+		end
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Button.Flash:OnPlay                                     *
+  * Description: Resets the loop count when resumed/restarted.                 *
+  ****************************************************************************]]
+function Flash:OnPlay ()
+	self.LoopCount = 0;
+end
+
+
 
 
 --------------------------------------------------------------------------------
@@ -314,6 +342,28 @@ do
 	FadeOut:SetStartDelay( 0.2 );
 	FadeOut:SetChange( -1.0 );
 	FadeOut:SetDuration( 0.2 );
+
+
+	-- Full screen flash
+	Flash:Hide();
+	Flash:SetAllPoints();
+	Flash:SetAlpha( 0 );
+	Flash:SetFrameStrata( "FULLSCREEN_DIALOG" );
+
+	local Texture = Flash:CreateTexture();
+	Texture:SetBlendMode( "ADD" );
+	Texture:SetAllPoints();
+	Texture:SetTexture( [[Interface\FullScreenTextures\LowHealth]] );
+
+	Flash.Fade = Flash:CreateAnimationGroup();
+	Flash.Fade:SetLooping( "BOUNCE" );
+	Flash.Fade:SetScript( "OnLoop", Flash.OnLoop );
+	Flash.Fade:SetScript( "OnPlay", Flash.OnPlay );
+
+	local FadeIn = Flash.Fade:CreateAnimation( "Alpha" );
+	FadeIn:SetChange( 1.0 );
+	FadeIn:SetDuration( 0.5 );
+	FadeIn:SetEndDelay( 0.25 );
 
 
 	me:SetAttribute( "type", "macro" );
