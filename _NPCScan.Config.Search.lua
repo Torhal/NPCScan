@@ -87,6 +87,11 @@ function me:TabOnEnter ()
 		GameTooltip:SetText( Name );
 		local Color = HIGHLIGHT_FONT_COLOR;
 		GameTooltip:AddLine( Description, Color.r, Color.g, Color.b, true );
+
+		if ( not _NPCScan.OptionsCharacter.Achievements[ self.AchievementID ] ) then
+			Color = RED_FONT_COLOR;
+			GameTooltip:AddLine( L.SEARCH_ACHIEVEMENT_DISABLED, Color.r, Color.g, Color.b );
+		end
 	else
 		GameTooltip:SetText( L.SEARCH_NPCS_DESC, nil, nil, nil, nil, true );
 	end
@@ -101,6 +106,12 @@ function me:TabCheckOnClick ()
 	if ( me.AchievementSetEnabled( self:GetParent().AchievementID, Enable ) ) then
 		_NPCScan.CacheListPrint( true );
 	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Config.Search:TabCheckOnEnter                           *
+  ****************************************************************************]]
+function me:TabCheckOnEnter ()
+	me.TabOnEnter( self:GetParent() );
 end
 
 
@@ -213,13 +224,22 @@ end
 function me.AchievementSetEnabled ( AchievementID, Enable )
 	local Tab = me.Tabs[ AchievementID ];
 	Tab.Checkbox:SetChecked( Enable );
+	local Texture = Tab.Checkbox:GetCheckedTexture();
+	Texture:Show();
+
+	-- Update tooltip if shown
+	if ( GameTooltip:GetOwner() == Tab ) then
+		me.TabOnEnter( Tab );
+	end
 
 	if ( me.TabSelected == Tab ) then
 		me.Table.Header:SetAlpha( Enable and 1.0 or me.InactiveAlpha );
 	end
 	if ( Enable ) then
+		Texture:SetTexture( [[Interface\Buttons\UI-CheckBox-Check]] );
 		return _NPCScan.AchievementAdd( AchievementID ); -- Return true if cache might have changed
 	else
+		Texture:SetTexture( [[Interface\RAIDFRAME\ReadyCheck-NotReady]] );
 		_NPCScan.AchievementRemove( AchievementID );
 	end
 end
@@ -489,19 +509,23 @@ do
 		Tab:SetScript( "OnLeave", _NPCScan.Config.ControlOnLeave );
 
 		if ( type( ID ) == "number" ) then -- AchievementID
-			Tab:SetText( select( 2, GetAchievementInfo( ID ) ) );
+			local Size = select( 2, Tab:GetFontString():GetFont() ) + 4;
+			Tab:SetText( "|T:"..Size.."|t"..select( 2, GetAchievementInfo( ID ) ) );
 			Tab.AchievementID = ID;
 			local Checkbox = CreateFrame( "CheckButton", nil, Tab, "UICheckButtonTemplate" );
 			Tab.Checkbox = Checkbox;
-			Checkbox:SetWidth( 14 );
-			Checkbox:SetHeight( 14 );
-			Checkbox:SetPoint( "RIGHT", _G[ Tab:GetName().."Text" ], "LEFT", 2, -2 );
+			Checkbox:SetWidth( Size + 2 );
+			Checkbox:SetHeight( Size + 2 );
+			Checkbox:SetPoint( "LEFT", _G[ Tab:GetName().."Text" ], -4, 0 );
 			Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
 			Checkbox:SetScript( "OnClick", me.TabCheckOnClick );
+			Checkbox:SetScript( "OnEnter", me.TabCheckOnEnter );
+			Checkbox:SetScript( "OnLeave", _NPCScan.Config.ControlOnLeave );
+			me.AchievementSetEnabled( ID, false ); -- Initialize the custom "unchecked" texture
 		else
 			Tab:SetText( L.SEARCH_NPCS );
 		end
-		PanelTemplates_TabResize( Tab, 0 );
+		PanelTemplates_TabResize( Tab, -8 );
 
 		Tab.Update = Update;
 		Tab.Activate = Activate;

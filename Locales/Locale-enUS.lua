@@ -68,6 +68,7 @@ do
 
 		SEARCH_NPCS = "Custom NPCs";
 		SEARCH_NPCS_DESC = "Add any NPC to track, even if it has no achievement.";
+		SEARCH_ACHIEVEMENT_DISABLED = "Disabled";
 
 		SEARCH_CACHED = "Cached";
 		SEARCH_NAME = "Name:";
