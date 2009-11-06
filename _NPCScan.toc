@@ -2,8 +2,8 @@
 ## Title: _|cffCCCC88NPCScan|r
 ## Notes: Scans NPCs around you for rare ones.
 ## Author: Saiket
-## Version: 3.2.0.8
-## X-Date: 2009-10-04
+## Version: 3.2.0.9
+## X-Date: 2009-11-05
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com
