@@ -24,14 +24,6 @@ local SortedNames = {}; -- Used to sort text tables
 
 
 --[[****************************************************************************
-  * Function: _NPCScan.Config.Search.FindTamableOnClick                        *
-  ****************************************************************************]]
-function me.FindTamableOnClick ( Enable )
-	if ( _NPCScan.SetFindTamable( Enable == "1" ) ) then
-		_NPCScan.CacheListPrint( true );
-	end
-end
---[[****************************************************************************
   * Function: _NPCScan.Config.Search.AchievementAddFoundOnClick                *
   ****************************************************************************]]
 function me.AchievementAddFoundOnClick ( Enable )
@@ -190,7 +182,7 @@ function me:NPCUpdate ()
 		local Cached = _NPCScan.TestID( ID );
 		me.Table:AddRow( Name,
 			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ], Name, ID );
-		if ( Cached or ( _NPCScan.TamableIDs[ ID ] and not _NPCScan.Options.FindTamable ) ) then
+		if ( Cached ) then
 			me.Table.Rows[ #me.Table.Rows ]:SetAlpha( me.InactiveAlpha );
 		end
 	end
@@ -337,39 +329,6 @@ function me:default ()
 end
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.SlashCommand                              *
-  * Description: Slash command chat handler to open the options pane.  Also    *
-  *   supports subcommands for adding and removing NPCs.                       *
-  ****************************************************************************]]
-function me.SlashCommand ( Input )
-	local Command, Arguments = Input:match( "^(%S+)%s*(.-)%s*$" );
-	if ( Command ) then
-		Command = Command:upper();
-		if ( Command == L.CMD_ADD ) then
-			local ID, Name = Arguments:match( "^(%d+)%s+(.+)$" );
-			if ( ID ) then
-				_NPCScan.NPCRemove( Name );
-				if ( _NPCScan.NPCAdd( Name, ID ) ) then
-					_NPCScan.CacheListPrint( true );
-				end
-				return;
-			end
-		elseif ( Command == L.CMD_REMOVE ) then
-			if ( not _NPCScan.NPCRemove( Arguments ) ) then
-				_NPCScan.Message( L.CMD_REMOVENOTFOUND_FORMAT:format( Arguments ), RED_FONT_COLOR );
-			end
-			return;
-		end
-		-- Invalid subcommand
-		_NPCScan.Message( L.CMD_HELP );
-
-	else -- No subcommand
-		InterfaceOptionsFrame_OpenToCategory( me );
-	end
-end
-
-
 
 
 --------------------------------------------------------------------------------
@@ -398,19 +357,9 @@ do
 
 
 	-- Settings checkboxes
-	local FindTamableCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchFindTamableCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
-	me.FindTamableCheckbox = FindTamableCheckbox;
-	FindTamableCheckbox:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
-	FindTamableCheckbox.setFunc = me.FindTamableOnClick;
-	FindTamableCheckbox.tooltipText = L.SEARCH_FINDTAMABLE_DESC;
-	FindTamableCheckbox.tooltipRequirement = L.SEARCH_FINDTAMABLE_WARNING;
-	local Label = _G[ FindTamableCheckbox:GetName().."Text" ];
-	Label:SetText( L.SEARCH_FINDTAMABLE );
-	FindTamableCheckbox:SetHitRectInsets( 4, 4 - Label:GetStringWidth(), 4, 4 );
-
 	local AddFoundCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchAchievementAddFoundCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
 	me.AddFoundCheckbox = AddFoundCheckbox;
-	AddFoundCheckbox:SetPoint( "TOPLEFT", FindTamableCheckbox, "BOTTOMLEFT", 0, 4 );
+	AddFoundCheckbox:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
 	AddFoundCheckbox.setFunc = me.AchievementAddFoundOnClick;
 	AddFoundCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC;
 	local Label = _G[ AddFoundCheckbox:GetName().."Text" ];
@@ -507,6 +456,7 @@ do
 		Tab:SetScript( "OnClick", me.TabOnClick );
 		Tab:SetScript( "OnEnter", me.TabOnEnter );
 		Tab:SetScript( "OnLeave", _NPCScan.Config.ControlOnLeave );
+		Tab:SetMotionScriptsWhileDisabled( true ); -- Allow tooltip while active
 
 		if ( type( ID ) == "number" ) then -- AchievementID
 			local Size = select( 2, Tab:GetFontString():GetFont() ) + 4;
@@ -546,5 +496,4 @@ do
 
 
 	InterfaceOptions_AddCategory( me );
-	SlashCmdList[ "_NPCSCAN" ] = me.SlashCommand;
 end

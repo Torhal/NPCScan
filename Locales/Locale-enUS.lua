@@ -23,8 +23,9 @@ do
 		MESSAGE_FORMAT = Title..": %s";
 
 		FOUND_FORMAT = "Found "..LDQuo.."%s"..RDQuo.."!";
+		FOUND_ZONE_UNKNOWN = UNKNOWN;
 		FOUND_TAMABLE_FORMAT = "Found "..LDQuo.."%s"..RDQuo.."!  "..RED_FONT_COLOR_CODE.."(Note: Tamable mob, may only be a pet.)|r";
-		FOUND_TAMABLE_WRONGZONE_FORMAT = RED_FONT_COLOR_CODE.."False alarm:|r Found tamable mob "..LDQuo.."%s"..RDQuo.." in %s instead of %s; Definitely a pet."; -- Name, CurrentZone, ExpectedZone
+		FOUND_TAMABLE_WRONGZONE_FORMAT = RED_FONT_COLOR_CODE.."False alarm:|r Found tamable mob "..LDQuo.."%s"..RDQuo.." in %s instead of %s (ID %d); Definitely a pet."; -- Name, CurrentZone, ExpectedZone, ExpectedZoneID
 		FOUND_TAMABLE_RESTING_FORMAT = RED_FONT_COLOR_CODE.."False alarm:|r Found tamable mob "..LDQuo.."%s"..RDQuo.." while resting; Probably a pet.";
 		BUTTON_FOUND = "NPC found!";
 
@@ -60,9 +61,6 @@ do
 		SEARCH_TITLE = "Search";
 		SEARCH_DESC = "This table allows you to add or remove NPCs and achievements to scan for.";
 
-		SEARCH_FINDTAMABLE = "Search for tamable NPCs";
-		SEARCH_FINDTAMABLE_DESC = "Scans for NPCs tamable by hunters.";
-		SEARCH_FINDTAMABLE_WARNING = RED_FONT_COLOR_CODE.."Warning: Pets that originally were rare NPCs will trigger the found alert.|r";
 		SEARCH_ACHIEVEMENTADDFOUND = "Search for completed Achievement NPCs";
 		SEARCH_ACHIEVEMENTADDFOUND_DESC = "Continues searching for all achievement NPCs, even if you no longer need them.";
 
@@ -90,7 +88,9 @@ do
 		CMD_ADD = "ADD";
 		CMD_REMOVE = "REMOVE";
 		CMD_REMOVENOTFOUND_FORMAT = "NPC "..LDQuo.."%s"..RDQuo.." not found.";
-		CMD_HELP = "Commands are "..LDQuo.."/npcscan add <NpcID> <Name>"..RDQuo..", "..LDQuo.."/npcscan remove <Name>"..RDQuo..", and simply "..LDQuo.."/npcscan"..RDQuo.." for the options menu.";
+		CMD_CACHE = "CACHE";
+		CMD_CACHE_EMPTY = "None of the mobs being searched for are cached.";
+		CMD_HELP = "Commands are "..LDQuo.."/npcscan add <NpcID> <Name>"..RDQuo..", "..LDQuo.."/npcscan remove <Name>"..RDQuo..", "..LDQuo.."/npcscan cache"..RDQuo.." to list cached mobs, and simply "..LDQuo.."/npcscan"..RDQuo.." for the options menu.";
 	}, Metatable );
 
 
