@@ -10,6 +10,7 @@ _NPCScan.TamableIDs = { -- [ NpcID ] = ZoneID; (See WorldMapArea.dbc)
 	[ 32481 ] = 493; -- Aotona
 	[ 14222 ] = 15; -- Araga
 	[ 5349 ] = 121; -- Arash-ethis
+	[ 38453 ] = 490; -- Arcturis
 	[ 5834 ] = 11; -- Azzere the Skyblade
 	[ 2753 ] = 17; -- Barnabus
 	[ 14280 ] = 24; -- Big Samras

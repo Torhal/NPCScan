@@ -29,6 +29,7 @@ me.OptionsCharacterDefault = {
 	NPCs = { -- Keys must be lowercase and trimmed, but don't have to match the NPC name
 		[ L.NPCS[ "Gondria" ]:trim():lower() ] = 33776;
 		[ L.NPCS[ "Skoll" ]:trim():lower() ] = 35189;
+		[ L.NPCS[ "Arcturis" ]:trim():lower() ] = 38453;
 		[ L.NPCS[ "Time-Lost Proto Drake" ]:trim():lower() ] = 32491;
 	};
 	Achievements = {}; -- Filled with all entries in me.Achievements
@@ -478,9 +479,14 @@ function me.OnLoad ()
 			Version = "3.1.0.1";
 		end
 		if ( Version == "3.1.0.1" or Version == "3.2.0.1" or Version == "3.2.0.2" ) then
-			-- 3.2.0.3: Added default scans for Skoll
+			-- 3.2.0.3: Added default scan for Skoll
 			OptionsCharacter.NPCs[ L.NPCS[ "Skoll" ]:trim():lower() ] = 35189;
 			Version = "3.2.0.3";
+		end
+		if ( "3.2.0.3" >= Version and Version <= "3.2.0.8" ) then
+			-- 3.3.0.1: Added default scan for Arcturis
+			OptionsCharacter.NPCs[ L.NPCS[ "Arcturis" ]:trim():lower() ] = 38453;
+			Version = "3.3.0.1";
 		end
 		OptionsCharacter.Version = me.Version;
 	end
