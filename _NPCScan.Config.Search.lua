@@ -414,7 +414,7 @@ do
 	EditBoxID:SetScript( "OnEnterPressed", function () AddButton:Click(); end );
 	EditBoxID:SetScript( "OnTextChanged", me.NPCValidateButtons );
 	EditBoxID:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
-	EditBoxID:SetScript( "OnLeave", _NPCScan.Config.ControlOnLeave );
+	EditBoxID:SetScript( "OnLeave", GameTooltip_Hide );
 	EditBoxID.tooltipText = L.SEARCH_ID_DESC;
 
 	EditBoxName:SetPoint( "TOP", LabelName );
@@ -425,7 +425,7 @@ do
 	EditBoxName:SetScript( "OnEnterPressed", function () AddButton:Click(); end );
 	EditBoxName:SetScript( "OnTextChanged", me.NPCValidateButtons );
 	EditBoxName:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
-	EditBoxName:SetScript( "OnLeave", _NPCScan.Config.ControlOnLeave );
+	EditBoxName:SetScript( "OnLeave", GameTooltip_Hide );
 	EditBoxName.tooltipText = L.SEARCH_NAME_DESC;
 
 	EditBoxID:SetPoint( "LEFT",
@@ -455,7 +455,7 @@ do
 		Tab:SetHitRectInsets( 6, 6, 6, 0 );
 		Tab:SetScript( "OnClick", me.TabOnClick );
 		Tab:SetScript( "OnEnter", me.TabOnEnter );
-		Tab:SetScript( "OnLeave", _NPCScan.Config.ControlOnLeave );
+		Tab:SetScript( "OnLeave", GameTooltip_Hide );
 		Tab:SetMotionScriptsWhileDisabled( true ); -- Allow tooltip while active
 
 		if ( type( ID ) == "number" ) then -- AchievementID
@@ -470,7 +470,7 @@ do
 			Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
 			Checkbox:SetScript( "OnClick", me.TabCheckOnClick );
 			Checkbox:SetScript( "OnEnter", me.TabCheckOnEnter );
-			Checkbox:SetScript( "OnLeave", _NPCScan.Config.ControlOnLeave );
+			Checkbox:SetScript( "OnLeave", GameTooltip_Hide );
 			me.AchievementSetEnabled( ID, false ); -- Initialize the custom "unchecked" texture
 		else
 			Tab:SetText( L.SEARCH_NPCS );

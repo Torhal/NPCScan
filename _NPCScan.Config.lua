@@ -27,12 +27,6 @@ function me:ControlOnEnter ()
 	GameTooltip:SetOwner( self, "ANCHOR_TOPRIGHT" );
 	GameTooltip:SetText( self.tooltipText, nil, nil, nil, nil, 1 );
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config:ControlOnLeave                                   *
-  ****************************************************************************]]
-function me:ControlOnLeave ()
-	GameTooltip:Hide();
-end
 
 
 --[[****************************************************************************
@@ -134,7 +128,7 @@ do
 	me.Test:SetPoint( "TOPLEFT", 16, -16 );
 	me.Test:SetScript( "OnClick", me.Test.OnClick );
 	me.Test:SetScript( "OnEnter", me.ControlOnEnter );
-	me.Test:SetScript( "OnLeave", me.ControlOnLeave );
+	me.Test:SetScript( "OnLeave", GameTooltip_Hide );
 	me.Test:SetText( L.CONFIG_TEST );
 	me.Test.tooltipText = L.CONFIG_TEST_DESC;
 
@@ -146,7 +140,7 @@ do
 	me.AlertSound:SetPoint( "RIGHT", -12, 0 );
 	me.AlertSound:EnableMouse( true );
 	me.AlertSound:SetScript( "OnEnter", me.ControlOnEnter );
-	me.AlertSound:SetScript( "OnLeave", me.ControlOnLeave );
+	me.AlertSound:SetScript( "OnLeave", GameTooltip_Hide );
 	UIDropDownMenu_JustifyText( me.AlertSound, "LEFT" );
 	_G[ me.AlertSound:GetName().."Middle" ]:SetPoint( "RIGHT", -16, 0 );
 	local Label = me.AlertSound:CreateFontString( nil, "ARTWORK", "GameFontNormalSmall" );
