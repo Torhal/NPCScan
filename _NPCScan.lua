@@ -483,10 +483,10 @@ function me.OnLoad ()
 			OptionsCharacter.NPCs[ L.NPCS[ "Skoll" ]:trim():lower() ] = 35189;
 			Version = "3.2.0.3";
 		end
-		if ( "3.2.0.3" >= Version and Version <= "3.2.0.8" ) then
-			-- 3.3.0.1: Added default scan for Arcturis
+		if ( "3.2.0.3" <= Version and Version <= "3.3.0.1" ) then
+			-- 3.3.0.2: Added default scan for Arcturis
 			OptionsCharacter.NPCs[ L.NPCS[ "Arcturis" ]:trim():lower() ] = 38453;
-			Version = "3.3.0.1";
+			Version = "3.3.0.2";
 		end
 		OptionsCharacter.Version = me.Version;
 	end
