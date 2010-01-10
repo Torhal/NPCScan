@@ -233,8 +233,7 @@ end
 -----------------------------
 
 do
-	me:SetWidth( 150 );
-	me:SetHeight( 42 );
+	me:SetSize( 150, 42 );
 	me:SetPoint( "BOTTOM", UIParent, 0, 128 );
 	me:SetMovable( true );
 	me:SetUserPlaced( true );
@@ -286,8 +285,7 @@ do
 	local Close = CreateFrame( "Button", nil, me, "UIPanelCloseButton" );
 	me.Close = Close;
 	Close:SetPoint( "TOPRIGHT" );
-	Close:SetWidth( 32 );
-	Close:SetHeight( 32 );
+	Close:SetSize( 32, 32 );
 	Close:SetScale( 0.8 );
 	Close:SetHitRectInsets( 8, 8, 8, 8 );
 
@@ -304,8 +302,7 @@ do
 	-- Glow animation
 	local Texture = Model:CreateTexture( nil, "OVERLAY" );
 	Texture:SetPoint( "CENTER", me );
-	Texture:SetWidth( 400 / 300 * me:GetWidth() );
-	Texture:SetHeight( 171 / 70 * me:GetHeight() );
+	Texture:SetSize( 400 / 300 * me:GetWidth(), 171 / 70 * me:GetHeight() );
 	Texture:SetTexture( "Interface\\AchievementFrame\\UI-Achievement-Alert-Glow" );
 	Texture:SetBlendMode( "ADD" );
 	Texture:SetTexCoord( 0, 0.78125, 0, 0.66796875 );
@@ -322,8 +319,7 @@ do
 	-- Shine animation (reflection swipe)
 	local Texture = me:CreateTexture( nil, "ARTWORK" );
 	Texture:SetPoint( "TOPLEFT", me, 0, 8 );
-	Texture:SetWidth( 67 / 300 * me:GetWidth() );
-	Texture:SetHeight( 1.28 * me:GetHeight() );
+	Texture:SetSize( 67 / 300 * me:GetWidth(), 1.28 * me:GetHeight() );
 	Texture:SetTexture( "Interface\\AchievementFrame\\UI-Achievement-Alert-Glow" );
 	Texture:SetBlendMode( "ADD" );
 	Texture:SetTexCoord( 0.78125, 0.912109375, 0, 0.28125 );

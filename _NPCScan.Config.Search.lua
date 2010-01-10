@@ -375,15 +375,13 @@ do
 	-- Create add and remove buttons
 	local RemoveButton = CreateFrame( "Button", nil, NPCControls, "GameMenuButtonTemplate" );
 	me.RemoveButton = RemoveButton;
-	RemoveButton:SetWidth( 16 );
-	RemoveButton:SetHeight( 20 );
+	RemoveButton:SetSize( 16, 20 );
 	RemoveButton:SetPoint( "BOTTOMRIGHT", me, -16, 16 );
 	RemoveButton:SetText( L.SEARCH_REMOVE );
 	RemoveButton:SetScript( "OnClick", me.NPCRemove );
 	local AddButton = CreateFrame( "Button", nil, NPCControls, "GameMenuButtonTemplate" );
 	me.AddButton = AddButton;
-	AddButton:SetWidth( 16 );
-	AddButton:SetHeight( 20 );
+	AddButton:SetSize( 16, 20 );
 	AddButton:SetPoint( "BOTTOMRIGHT", RemoveButton, "TOPRIGHT", 0, 4 );
 	AddButton:SetText( L.SEARCH_ADD );
 	AddButton:SetScript( "OnClick", me.NPCAdd );
@@ -464,8 +462,7 @@ do
 			Tab.AchievementID = ID;
 			local Checkbox = CreateFrame( "CheckButton", nil, Tab, "UICheckButtonTemplate" );
 			Tab.Checkbox = Checkbox;
-			Checkbox:SetWidth( Size + 2 );
-			Checkbox:SetHeight( Size + 2 );
+			Checkbox:SetSize( Size + 2, Size + 2 );
 			Checkbox:SetPoint( "LEFT", _G[ Tab:GetName().."Text" ], -4, 0 );
 			Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
 			Checkbox:SetScript( "OnClick", me.TabCheckOnClick );
