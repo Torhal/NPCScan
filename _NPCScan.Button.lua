@@ -50,6 +50,7 @@ me.ModelCameras = {
 function me.SetNPC ( Name, ID )
 	if ( tonumber( ID ) ) then
 		_NPCScan.Overlays.Add( ID );
+		_NPCScan.Overlays.Found( ID );
 	end
 
 	me.PlaySound( _NPCScan.Options.AlertSound );

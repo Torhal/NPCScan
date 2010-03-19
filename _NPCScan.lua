@@ -203,9 +203,9 @@ function me.AchievementAdd ( AchievementID )
 		end
 		me.OptionsCharacter.Achievements[ AchievementID ] = true;
 
-		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
+		for CriteriaID, NpcID in pairs( Achievement.Criteria ) do
 			local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
-			if ( ( not Completed or me.Options.AchievementsAddFound ) and me.ScanAdd( NPCID ) ) then
+			if ( ( not Completed or me.Options.AchievementsAddFound ) and me.ScanAdd( NpcID ) ) then
 				Achievement.Active[ CriteriaID ] = true;
 			end
 		end
@@ -390,7 +390,6 @@ do
 			for ID in pairs( me.ScanIDs ) do
 				Name = me.TestID( ID );
 				if ( Name ) then
-					me.Overlays.Found( ID );
 					me.ScanRemoveAll( ID );
 					me.Config.Search.UpdateTab();
 
@@ -424,7 +423,7 @@ do
 
 					me.Message( InvalidMessage or L[ ZoneIDExpected and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
 					if ( not InvalidMessage ) then
-						me.Button.SetNPC( Name, ID );
+						me.Button.SetNPC( Name, ID ); -- Sends added and found overlay messages
 					end
 				end
 			end
@@ -491,6 +490,7 @@ function me.OnLoad ()
 		OptionsCharacter.Version = me.Version;
 	end
 
+	me.Overlays.Register();
 	me.Synchronize( Options, OptionsCharacter ); -- Loads defaults if either are nil
 end
 --[[****************************************************************************

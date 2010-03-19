@@ -246,7 +246,7 @@ do
 	end
 	function me:AchievementUpdate ()
 		local Achievement = _NPCScan.Achievements[ self.AchievementID ];
-		for CriteriaID, NPCID in pairs( Achievement.Criteria ) do
+		for CriteriaID in pairs( Achievement.Criteria ) do
 			CriteriaNames[ CriteriaID ], _, CriteriaCompleted[ CriteriaID ] = GetAchievementCriteriaInfo( CriteriaID );
 			SortedNames[ #SortedNames + 1 ] = CriteriaID;
 		end
