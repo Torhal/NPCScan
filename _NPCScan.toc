@@ -3,7 +3,7 @@
 ## Notes: Scans NPCs around you for rare ones.
 ## Author: Saiket
 ## Version: 3.3.0.3
-## X-Date: 2010-03-17
+## X-Date: 2010-03-21
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com
@@ -16,7 +16,7 @@
 ## X-Embeds: LibTextTable-1.0, LibSharedMedia-3.0
 ## SavedVariables: _NPCScanOptions
 ## SavedVariablesPerCharacter: _NPCScanOptionsCharacter
-## OptionalDeps: Ace3, LibTextTable-1.0, LibSharedMedia-3.0
+## OptionalDeps: Ace3, LibTextTable-1.0, LibSharedMedia-3.0, LibRareSpawns
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
 

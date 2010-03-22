@@ -20,6 +20,11 @@ me.InactiveAlpha = 0.5;
 
 local SortedNames = {}; -- Used to sort text tables
 
+local LibRareSpawnsData;
+if ( IsAddOnLoaded( "LibRareSpawns" ) ) then
+	LibRareSpawnsData = LibRareSpawns.ByNPCID;
+end
+
 
 
 
@@ -307,12 +312,72 @@ function me:OnUpdate ()
 	end
 end
 --[[****************************************************************************
+  * Function: _NPCScan.Config.Search:TableRowOnEnter                           *
+  * Description: Adds mob info from LibRareSpawns.                             *
+  ****************************************************************************]]
+if ( LibRareSpawnsData ) then
+	local MaxSize = 160; -- Larger images are forced to this max width and height
+	function me:TableRowOnEnter ()
+		local Data = LibRareSpawnsData[ select( 4, self:GetData() ) ];
+		if ( Data ) then
+			local Width, Height = Data.PortraitWidth, Data.PortraitHeight;
+			if ( Width > MaxSize ) then
+				Height = Height * ( MaxSize / Width );
+				Width = MaxSize;
+			end
+			if ( Height > MaxSize ) then
+				Width = Width * ( MaxSize / Height );
+				Height = MaxSize;
+			end
+
+			GameTooltip:SetOwner( self, "ANCHOR_TOPRIGHT" );
+			GameTooltip:SetText( L.SEARCH_IMAGE_FORMAT:format( Data.Portrait, Height, Width ) );
+			GameTooltip:AddLine( L.SEARCH_LEVEL_TYPE_FORMAT:format( Data.Level, Data.MonsterType ) );
+			GameTooltip:Show();
+		end
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Config.Search:TableAddRow                               *
+  ****************************************************************************]]
+do
+	local AddRowBackup;
+	if ( LibRareSpawnsData ) then
+		local function AddTooltipHooks( Row, ... )
+			Row:SetScript( "OnEnter", me.TableRowOnEnter );
+			Row:SetScript( "OnLeave", GameTooltip_Hide );
+
+			return Row, ...;
+		end
+		function me:TableAddRow ( ... )
+			return AddTooltipHooks( AddRowBackup( self, ... ) );
+		end
+	end
+--[[****************************************************************************
+  * Function: _NPCScan.Config.Search:TableCreate                               *
+  ****************************************************************************]]
+	function me:TableCreate ()
+		-- Note: Keep late bound so _NPCScan.Overlay can hook into the table as it's created
+		if ( not self.Table ) then
+			self.Table = LibStub( "LibTextTable-1.0" ).New( nil, self.TableContainer );
+			self.Table:SetAllPoints();
+
+			if ( LibRareSpawnsData ) then
+				-- Hook row creation to add mouseover tooltips
+				AddRowBackup = self.Table.AddRow;
+				self.Table.AddRow = self.TableAddRow;
+			end
+
+			return self.Table;
+		end
+	end
+end
+--[[****************************************************************************
   * Function: _NPCScan.Config.Search:OnShow                                    *
   ****************************************************************************]]
 function me:OnShow ()
 	if ( not me.Table ) then
-		me.Table = LibStub( "LibTextTable-1.0" ).New( nil, me.TableContainer );
-		me.Table:SetAllPoints();
+		me:TableCreate();
 	end
 
 	if ( me.TabSelected ) then

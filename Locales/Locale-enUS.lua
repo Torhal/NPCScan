@@ -84,6 +84,9 @@ do
 		SEARCH_REMOVE = "-";
 		SEARCH_ADD_TAMABLE_FORMAT = "Note: "..LDQuo.."%s"..RDQuo.." is tamable, so seeing it as a tamed hunter's pet will cause a false alarm.";
 
+		SEARCH_IMAGE_FORMAT = "|T%s:%d:%d|t"; -- Path, Height, Width
+		SEARCH_LEVEL_TYPE_FORMAT = UNIT_TYPE_LEVEL_TEMPLATE; -- Level, Type
+
 
 		CMD_ADD = "ADD";
 		CMD_REMOVE = "REMOVE";
