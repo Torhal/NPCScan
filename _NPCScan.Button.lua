@@ -21,23 +21,24 @@ me.PendingName = nil;
 me.PendingID = nil;
 
 me.RotationRate = math.pi / 4;
+me.RaidTargetIcon = 4; -- Green triangle
 
 -- Key is lowercase, value = "[Scale]|[X]|[Y]|[Z]", where any parameter can be left empty
 me.ModelCameras = {
-	[ "creature\\protodragon\\protodragon.m2" ] = "1.5|||10"; -- Time-lost Proto Drake
+	[ [[creature\protodragon\protodragon.m2]] ] = "1.5|||10"; -- Time-lost Proto Drake
 
-	[ "creature\\parrot\\parrot.m2" ] = "2"; -- Aotona
-	[ "creature\\clockworkgnome\\clockworkgnome.m2" ] = "1.5"; -- Dirkee, Fumblub Gearwind
-	[ "creature\\northrendstonegiant\\northrendstonegiant.m2" ] = "1.5"; -- Grocklar
-	[ "creature\\valkierdark\\valkierdark.m2" ] = "1.7"; -- Hildana Deathstealer
-	[ "creature\\northrendworgen\\northrendworgen.m2" ] = "2"; -- Perobas the Bloodthirster
-	[ "creature\\northrendfleshgiant\\northrendfleshgiant.m2" ] = "1.5||2"; -- Putridus the Ancient
-	[ "creature\\fleshbeast\\fleshbeast.m2" ] = "1.4"; -- Seething Hate
-	[ "creature\\vrykulfemale\\vrykulfemalehunter.m2" ] = "2"; -- Syreian the Bonecarver, Vigdis the War Maiden
-	[ "creature\\mammoth\\mammoth.m2" ] = ".6|.8|2.5"; -- Tukemuth
-	[ "creature\\bonespider\\bonespider.m2" ] = "2||-1.5"; -- Terror Spinner
-	[ "creature\\zuldrakgolem\\zuldrakgolem.m2" ] = ".65||1.4"; -- Zul'drak Sentinel
-	[ "creature\\dragon\\northrenddragon.m2" ] = ".5||15|-3"; -- Vyragosa
+	[ [[creature\parrot\parrot.m2]] ] = "2"; -- Aotona
+	[ [[creature\clockworkgnome\clockworkgnome.m2]] ] = "1.5"; -- Dirkee, Fumblub Gearwind
+	[ [[creature\northrendstonegiant\northrendstonegiant.m2]] ] = "1.5"; -- Grocklar
+	[ [[creature\valkierdark\valkierdark.m2]] ] = "1.7"; -- Hildana Deathstealer
+	[ [[creature\northrendworgen\northrendworgen.m2]] ] = "2"; -- Perobas the Bloodthirster
+	[ [[creature\northrendfleshgiant\northrendfleshgiant.m2]] ] = "1.5||2"; -- Putridus the Ancient
+	[ [[creature\fleshbeast\fleshbeast.m2]] ] = "1.4"; -- Seething Hate
+	[ [[creature\vrykulfemale\vrykulfemalehunter.m2]] ] = "2"; -- Syreian the Bonecarver, Vigdis the War Maiden
+	[ [[creature\mammoth\mammoth.m2]] ] = ".6|.8|2.5"; -- Tukemuth
+	[ [[creature\bonespider\bonespider.m2]] ] = "2||-1.5"; -- Terror Spinner
+	[ [[creature\zuldrakgolem\zuldrakgolem.m2]] ] = ".65||1.4"; -- Zul'drak Sentinel
+	[ [[creature\dragon\northrenddragon.m2]] ] = ".5||15|-3"; -- Vyragosa
 };
 
 
@@ -109,6 +110,12 @@ function Model.Reset ()
 	Model:SetFacing( 0 );
 end
 --[[****************************************************************************
+  * Function: _NPCScan.Button.Model:OnUpdate                                   *
+  ****************************************************************************]]
+function Model:OnUpdate ( Elapsed )
+	self:SetFacing( self:GetFacing() + Elapsed * me.RotationRate );
+end
+--[[****************************************************************************
   * Function: _NPCScan.Button.Update                                           *
   * Description: Updates the button based on its Name and ID fields.           *
   ****************************************************************************]]
@@ -134,6 +141,7 @@ function me.Update ( Name, ID )
 		end
 	end
 	me:SetAttribute( "macrotext", "/cleartarget\n/targetexact "..Name );
+	me:PLAYER_TARGET_CHANGED(); -- Updates the target icon
 
 	me:StopAnimating();
 	me.Glow:Play();
@@ -157,9 +165,20 @@ end
 
 
 --[[****************************************************************************
+  * Function: _NPCScan.Button:OnShow                                           *
+  ****************************************************************************]]
+function me:OnShow ()
+	me:RegisterEvent( "MODIFIER_STATE_CHANGED" );
+	me:RegisterEvent( "PLAYER_TARGET_CHANGED" );
+	me.EnableDrag( IsModifiedClick( "_NPCSCAN_BUTTONDRAG" ) );
+end
+--[[****************************************************************************
   * Function: _NPCScan.Button:OnHide                                           *
   ****************************************************************************]]
 function me:OnHide ()
+	me:UnregisterEvent( "MODIFIER_STATE_CHANGED" );
+	me:UnregisterEvent( "PLAYER_TARGET_CHANGED" );
+
 	if ( tonumber( me.ID ) ) then -- Remove current overlay
 		_NPCScan.Overlays.Remove( me.ID );
 	end
@@ -199,8 +218,31 @@ function me:MODIFIER_STATE_CHANGED ( _, Modifier, State )
 	end
 end
 --[[****************************************************************************
+  * Function: _NPCScan.Button:PLAYER_TARGET_CHANGED                            *
+  * Description: Raid marks the rare when it's targetted.                      *
+  ****************************************************************************]]
+do
+	local function TargetIsFoundRare ( ID ) -- Returns true if the button targetted its rare
+		if ( tonumber( ID ) ) then
+			local GUID = UnitGUID( "target" );
+			if ( GUID and tonumber( ID ) == tonumber( GUID:sub( 8, 12 ), 16 ) ) then
+				return true;
+			end
+		else -- UnitID
+			return UnitIsUnit( ID, "target" );
+		end
+	end
+	function me:PLAYER_TARGET_CHANGED ()
+		if ( TargetIsFoundRare( me.ID )
+			and GetRaidTargetIndex( "target" ) ~= me.RaidTargetIcon -- Wrong mark
+			and ( GetNumRaidMembers() == 0 or IsRaidOfficer() ) -- Player can mark
+		) then
+			SetRaidTarget( "target", me.RaidTargetIcon );
+		end
+	end
+end
+--[[****************************************************************************
   * Function: _NPCScan.Button:OnEvent                                          *
-  * Description: Global event handler.                                         *
   ****************************************************************************]]
 me.OnEvent = _NPCScan.OnEvent;
 
@@ -240,7 +282,7 @@ do
 	me:SetUserPlaced( true );
 	me:SetClampedToScreen( true );
 	me:SetFrameStrata( "FULLSCREEN_DIALOG" );
-	me:SetNormalTexture( "Interface\\AchievementFrame\\UI-Achievement-Parchment-Horizontal" );
+	me:SetNormalTexture( [[Interface\AchievementFrame\UI-Achievement-Parchment-Horizontal]] );
 	local Background = me:GetNormalTexture();
 	Background:SetDrawLayer( "BACKGROUND" );
 	Background:ClearAllPoints();
@@ -253,7 +295,7 @@ do
 	me:Hide();
 
 	local TitleBackground = me:CreateTexture( nil, "BORDER" );
-	TitleBackground:SetTexture( "Interface\\AchievementFrame\\UI-Achievement-Title" );
+	TitleBackground:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Title]] );
 	TitleBackground:SetPoint( "TOPRIGHT", -5, -5 );
 	TitleBackground:SetPoint( "LEFT", 5, 0 );
 	TitleBackground:SetHeight( 18 );
@@ -274,7 +316,7 @@ do
 	-- Border
 	me:SetBackdrop( {
 		tile = true; edgeSize = 16;
-		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border";
+		edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]];
 	} );
 	me:OnLeave(); -- Set non-highlighted colors
 
@@ -295,16 +337,14 @@ do
 	Model:SetPoint( "RIGHT" );
 	Model:SetHeight( me:GetWidth() * 0.6 );
 	me:SetClampRectInsets( 0, 0, Model:GetTop() - me:GetTop(), 0 ); -- Allow room for model
-	Model:SetScript( "OnUpdate", function ( self, Elapsed )
-		self:SetFacing( self:GetFacing() + Elapsed * me.RotationRate );
-	end );
+	Model:SetScript( "OnUpdate", Model.OnUpdate );
 
 
 	-- Glow animation
 	local Texture = Model:CreateTexture( nil, "OVERLAY" );
 	Texture:SetPoint( "CENTER", me );
 	Texture:SetSize( 400 / 300 * me:GetWidth(), 171 / 70 * me:GetHeight() );
-	Texture:SetTexture( "Interface\\AchievementFrame\\UI-Achievement-Alert-Glow" );
+	Texture:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Alert-Glow]] );
 	Texture:SetBlendMode( "ADD" );
 	Texture:SetTexCoord( 0, 0.78125, 0, 0.66796875 );
 	Texture:SetAlpha( 0 );
@@ -321,7 +361,7 @@ do
 	local Texture = me:CreateTexture( nil, "ARTWORK" );
 	Texture:SetPoint( "TOPLEFT", me, 0, 8 );
 	Texture:SetSize( 67 / 300 * me:GetWidth(), 1.28 * me:GetHeight() );
-	Texture:SetTexture( "Interface\\AchievementFrame\\UI-Achievement-Alert-Glow" );
+	Texture:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Alert-Glow]] );
 	Texture:SetBlendMode( "ADD" );
 	Texture:SetTexCoord( 0.78125, 0.912109375, 0, 0.28125 );
 	Texture:SetAlpha( 0 );
@@ -368,7 +408,7 @@ do
 	me:SetScript( "OnEnter", me.OnEnter );
 	me:SetScript( "OnLeave", me.OnLeave );
 	me:SetScript( "OnEvent", me.OnEvent );
+	me:HookScript( "OnShow", me.OnShow );
 	me:HookScript( "OnHide", me.OnHide );
 	me:RegisterEvent( "PLAYER_REGEN_ENABLED" );
-	me:RegisterEvent( "MODIFIER_STATE_CHANGED" );
 end
