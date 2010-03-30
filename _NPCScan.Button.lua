@@ -78,6 +78,7 @@ end
   ****************************************************************************]]
 function me:SetNPC ( Name, ID )
 	if ( tonumber( ID ) ) then
+		ID = tonumber( ID );
 		_NPCScan.Overlays.Add( ID );
 		_NPCScan.Overlays.Found( ID );
 	end
@@ -90,7 +91,7 @@ function me:SetNPC ( Name, ID )
 	end
 
 	if ( InCombatLockdown() ) then
-		if ( tonumber( self.PendingID ) ) then -- Remove old pending NPC
+		if ( type( self.PendingID ) == "number" ) then -- Remove old pending NPC
 			_NPCScan.Overlays.Remove( self.PendingID );
 		end
 		self.PendingName = Name;
@@ -104,18 +105,23 @@ end
   * Description: Updates the button based on its Name and ID fields.           *
   ****************************************************************************]]
 function me:Update ( Name, ID )
-	if ( tonumber( self.ID ) ) then -- Remove last overlay
+	if ( type( self.ID ) == "number" ) then -- Remove last overlay
 		_NPCScan.Overlays.Remove( self.ID );
 	end
 	self.ID = ID;
 
 	self:SetText( Name );
-	self.Model:Reset();
-	if ( type( ID ) == "string" ) then -- ID is UnitID
-		self.Model:SetUnit( ID );
+	local Model = self.Model;
+	Model:Reset();
+	if ( type( ID ) == "number" ) then -- ID is NPC ID
+		Model.UnitID = nil;
+		Model:SetCreature( ID );
+		self:UnregisterEvent( "UNIT_MODEL_CHANGED" );
+	else -- ID is UnitID
+		Model.UnitID = ID;
+		Model:SetUnit( ID );
 		Name = ID;
-	else -- ID is NPC ID
-		self.Model:SetCreature( ID );
+		self:RegisterEvent( "UNIT_MODEL_CHANGED" );
 	end
 	self:SetAttribute( "macrotext", "/cleartarget\n/targetexact "..Name );
 	self:PLAYER_TARGET_CHANGED(); -- Updates the target icon
@@ -154,11 +160,11 @@ end
 function me:OnHide ()
 	self:UnregisterEvent( "MODIFIER_STATE_CHANGED" );
 	self:UnregisterEvent( "PLAYER_TARGET_CHANGED" );
+	self:UnregisterEvent( "UNIT_MODEL_CHANGED" );
 
-	if ( tonumber( self.ID ) ) then -- Remove current overlay
+	if ( type( self.ID ) == "number" ) then -- Remove current overlay
 		_NPCScan.Overlays.Remove( self.ID );
 	end
-	self.ID = nil;
 end
 --[[****************************************************************************
   * Function: _NPCScan.Button:OnEnter                                          *
@@ -180,8 +186,7 @@ function me:PLAYER_REGEN_ENABLED ()
 	-- Update button after leaving combat
 	if ( self.PendingName and self.PendingID ) then
 		self:Update( self.PendingName, self.PendingID );
-		self.PendingName = nil;
-		self.PendingID = nil;
+		self.PendingName, self.PendingID = nil;
 	end
 end
 --[[****************************************************************************
@@ -196,9 +201,9 @@ end
   ****************************************************************************]]
 do
 	local function TargetIsFoundRare ( ID ) -- Returns true if the button targetted its rare
-		if ( tonumber( ID ) ) then
+		if ( type( ID ) == "number" ) then
 			local GUID = UnitGUID( "target" );
-			if ( GUID and tonumber( ID ) == tonumber( GUID:sub( 8, 12 ), 16 ) ) then
+			if ( GUID and ID == tonumber( GUID:sub( 8, 12 ), 16 ) ) then
 				return true;
 			end
 		else -- UnitID
@@ -206,12 +211,32 @@ do
 		end
 	end
 	function me:PLAYER_TARGET_CHANGED ()
-		if ( TargetIsFoundRare( self.ID )
-			and GetRaidTargetIndex( "target" ) ~= self.RaidTargetIcon -- Wrong mark
-			and ( GetNumRaidMembers() == 0 or IsRaidOfficer() ) -- Player can mark
-		) then
-			SetRaidTarget( "target", self.RaidTargetIcon );
+		local ID = self.ID;
+		if ( TargetIsFoundRare( ID ) ) then
+			if ( GetRaidTargetIndex( "target" ) ~= self.RaidTargetIcon -- Wrong mark
+				and ( GetNumRaidMembers() == 0 or IsRaidOfficer() ) -- Player can mark
+			) then
+				SetRaidTarget( "target", self.RaidTargetIcon );
+			end
+
+			if ( type( ID ) == "number" ) then -- Update model with more accurate visual
+				self.Model.UnitID = "target";
+				self:RegisterEvent( "UNIT_MODEL_CHANGED" );
+				self:UNIT_MODEL_CHANGED( nil, "target" );
+			end
+		elseif ( self.Model.UnitID and type( ID ) == "number" ) then -- Quit updating model for creature ID
+			self.Model.UnitID = nil;
+			self:UnregisterEvent( "UNIT_MODEL_CHANGED" );
 		end
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Button:UNIT_MODEL_CHANGED                               *
+  ****************************************************************************]]
+function me:UNIT_MODEL_CHANGED ( _, UnitID )
+	if ( UnitIsUnit( UnitID, self.Model.UnitID ) ) then
+		self.Model:Reset( true ); -- Don't reset rotation
+		self.Model:SetUnit( UnitID );
 	end
 end
 
@@ -241,19 +266,7 @@ end
 
 --[[****************************************************************************
   * Function: _NPCScan.Button.Model:Reset                                      *
-  * Description: Clears the model and readies it for a SetCreature call.       *
-  ****************************************************************************]]
-function me.Model:Reset ()
-	self:ClearModel();
-	self:SetModelScale( 1 );
-	self:SetPosition( 0, 0, 0 );
-	self:SetFacing( 0 );
-
-	self:Update();
-end
---[[****************************************************************************
-  * Function: _NPCScan.Button.Model:Update                                     *
-  * Description: Updates the model's scale and position to fit the button.     *
+  * Description: Clears the model and readies it for a SetCreature/Unit call.  *
   ****************************************************************************]]
 do
 	local function OnUpdate ( self )
@@ -263,7 +276,7 @@ do
 			self:SetScript( "OnUpdate", self.OnUpdate );
 
 			local ID = self:GetParent().ID;
-			if ( tonumber( ID ) or not UnitIsPlayer( ID ) ) then -- Creature
+			if ( type( ID ) == "number" or not UnitIsPlayer( ID ) ) then -- Creature
 				local Scale, X, Y, Z = ( "|" ):split( me.ModelCameras[ Path:lower() ] or "" );
 				self:SetModelScale( 0.5 * ( tonumber( Scale ) or 1 ) );
 				self:SetPosition( tonumber( Z ) or 0, tonumber( X ) or 0, tonumber( Y ) or 0 );
@@ -272,7 +285,14 @@ do
 			end
 		end
 	end
-	function me.Model:Update ()
+	function me.Model:Reset ( KeepFacing )
+		self:ClearModel();
+		self:SetModelScale( 1 );
+		self:SetPosition( 0, 0, 0 );
+		if ( not KeepFacing ) then
+			self:SetFacing( 0 );
+		end
+
 		-- Wait a frame after model changes, or else the current model scale will
 		--   display as 100% with later calls scaling relative to it.
 		self:SetScript( "OnUpdate", OnUpdate );
