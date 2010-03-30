@@ -285,6 +285,11 @@ do
 			end
 		end
 	end
+	local function OnUpdateModel ( self )
+		-- Mesh is loaded; Wait one more frame
+		self:SetScript( "OnUpdateModel", nil );
+		self:SetScript( "OnUpdate", OnUpdate );
+	end
 	function me.Model:Reset ( KeepFacing )
 		self:ClearModel();
 		self:SetModelScale( 1 );
@@ -295,7 +300,8 @@ do
 
 		-- Wait a frame after model changes, or else the current model scale will
 		--   display as 100% with later calls scaling relative to it.
-		self:SetScript( "OnUpdate", OnUpdate );
+		self:SetScript( "OnUpdate", nil );
+		self:SetScript( "OnUpdateModel", OnUpdateModel );
 	end
 end
 --[[****************************************************************************
