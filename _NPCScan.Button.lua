@@ -10,12 +10,10 @@ local LSM = LibStub( "LibSharedMedia-3.0" );
 local me = CreateFrame( "Button", "_NPCScanButton", nil, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate" );
 _NPCScan.Button = me;
 
-local Model = CreateFrame( "PlayerModel", nil, me );
-me.Model = Model;
-
-local Flash = CreateFrame( "Frame" );
-me.Flash = Flash;
-Flash.LoopCountMax = 3;
+me.Drag = me:CreateTitleRegion();
+me.Model = CreateFrame( "PlayerModel", nil, me );
+me.Flash = CreateFrame( "Frame" );
+me.Flash.LoopCountMax = 3;
 
 me.PendingName = nil;
 me.PendingID = nil;
@@ -45,33 +43,6 @@ me.ModelCameras = {
 
 
 --[[****************************************************************************
-  * Function: _NPCScan.Button.SetNPC                                           *
-  * Description: Sets the button to a given NPC and shows it.                  *
-  ****************************************************************************]]
-function me.SetNPC ( Name, ID )
-	if ( tonumber( ID ) ) then
-		_NPCScan.Overlays.Add( ID );
-		_NPCScan.Overlays.Found( ID );
-	end
-
-	me.PlaySound( _NPCScan.Options.AlertSound );
-	if ( GetCVarBool( "screenEdgeFlash" ) ) then
-		Flash:Show();
-		Flash.Fade:Pause(); -- Forces OnPlay to fire again if it was already playing
-		Flash.Fade:Play();
-	end
-
-	if ( InCombatLockdown() ) then
-		if ( tonumber( me.PendingID ) ) then -- Remove old pending NPC
-			_NPCScan.Overlays.Remove( me.PendingID );
-		end
-		me.PendingName = Name;
-		me.PendingID = ID;
-	else
-		me.Update( Name, ID );
-	end
-end
---[[****************************************************************************
   * Function: _NPCScan.Button.PlaySound                                        *
   ****************************************************************************]]
 function me.PlaySound ( AlertSound )
@@ -99,62 +70,67 @@ function me.PlaySound ( AlertSound )
 		SetCVar( "Sound_EnableSoundWhenGameIsInBG", 0 );
 	end
 end
+
+
 --[[****************************************************************************
-  * Function: _NPCScan.Button.Model.Reset                                      *
-  * Description: Clears the model and readies it for a SetCreature call.       *
+  * Function: _NPCScan.Button:SetNPC                                           *
+  * Description: Sets the button to a given NPC and shows it.                  *
   ****************************************************************************]]
-function Model.Reset ()
-	Model:ClearModel();
-	Model:SetModelScale( 1 );
-	Model:SetPosition( 0, 0, 0 );
-	Model:SetFacing( 0 );
+function me:SetNPC ( Name, ID )
+	if ( tonumber( ID ) ) then
+		_NPCScan.Overlays.Add( ID );
+		_NPCScan.Overlays.Found( ID );
+	end
+
+	self.PlaySound( _NPCScan.Options.AlertSound );
+	if ( GetCVarBool( "screenEdgeFlash" ) ) then
+		self.Flash:Show();
+		self.Flash.Fade:Pause(); -- Forces OnPlay to fire again if it was already playing
+		self.Flash.Fade:Play();
+	end
+
+	if ( InCombatLockdown() ) then
+		if ( tonumber( self.PendingID ) ) then -- Remove old pending NPC
+			_NPCScan.Overlays.Remove( self.PendingID );
+		end
+		self.PendingName = Name;
+		self.PendingID = ID;
+	else
+		self:Update( Name, ID );
+	end
 end
 --[[****************************************************************************
-  * Function: _NPCScan.Button.Model:OnUpdate                                   *
-  ****************************************************************************]]
-function Model:OnUpdate ( Elapsed )
-	self:SetFacing( self:GetFacing() + Elapsed * me.RotationRate );
-end
---[[****************************************************************************
-  * Function: _NPCScan.Button.Update                                           *
+  * Function: _NPCScan.Button:Update                                           *
   * Description: Updates the button based on its Name and ID fields.           *
   ****************************************************************************]]
-function me.Update ( Name, ID )
-	if ( tonumber( me.ID ) ) then -- Remove last overlay
-		_NPCScan.Overlays.Remove( me.ID );
+function me:Update ( Name, ID )
+	if ( tonumber( self.ID ) ) then -- Remove last overlay
+		_NPCScan.Overlays.Remove( self.ID );
 	end
-	me.ID = ID;
+	self.ID = ID;
 
-	me:Show(); -- Note: Must be visible before model scale calls will work
-	me:SetText( Name );
-	Model.Reset();
+	self:SetText( Name );
+	self.Model:Reset();
 	if ( type( ID ) == "string" ) then -- ID is UnitID
-		Model:SetUnit( ID );
-		Model:SetModelScale( 0.75 );
+		self.Model:SetUnit( ID );
 		Name = ID;
 	else -- ID is NPC ID
-		Model:SetCreature( ID );
-		if ( type( Model:GetModel() ) == "string" ) then
-			local Scale, X, Y, Z = ( "|" ):split( me.ModelCameras[ Model:GetModel():lower() ] or "" );
-			Model:SetModelScale( 0.5 * ( tonumber( Scale ) or 1 ) );
-			Model:SetPosition( tonumber( Z ) or 0, tonumber( X ) or 0, tonumber( Y ) or 0 );
-		end
+		self.Model:SetCreature( ID );
 	end
-	me:SetAttribute( "macrotext", "/cleartarget\n/targetexact "..Name );
-	me:PLAYER_TARGET_CHANGED(); -- Updates the target icon
+	self:SetAttribute( "macrotext", "/cleartarget\n/targetexact "..Name );
+	self:PLAYER_TARGET_CHANGED(); -- Updates the target icon
 
-	me:StopAnimating();
-	me.Glow:Play();
-	me.Shine:Play();
+	self:Show();
+	self:StopAnimating();
+	self.Glow:Play();
+	self.Shine:Play();
 end
-
-
 --[[****************************************************************************
-  * Function: _NPCScan.Button.EnableDrag                                       *
+  * Function: _NPCScan.Button:EnableDrag                                       *
   * Description: Enables or disables dragging the button.                      *
   ****************************************************************************]]
-function me.EnableDrag ( Enable )
-	local Drag = me.Drag;
+function me:EnableDrag ( Enable )
+	local Drag = self.Drag;
 	Drag:ClearAllPoints();
 	if ( Enable ) then
 		Drag:SetAllPoints();
@@ -168,33 +144,33 @@ end
   * Function: _NPCScan.Button:OnShow                                           *
   ****************************************************************************]]
 function me:OnShow ()
-	me:RegisterEvent( "MODIFIER_STATE_CHANGED" );
-	me:RegisterEvent( "PLAYER_TARGET_CHANGED" );
-	me.EnableDrag( IsModifiedClick( "_NPCSCAN_BUTTONDRAG" ) );
+	self:RegisterEvent( "MODIFIER_STATE_CHANGED" );
+	self:RegisterEvent( "PLAYER_TARGET_CHANGED" );
+	self:EnableDrag( IsModifiedClick( "_NPCSCAN_BUTTONDRAG" ) );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Button:OnHide                                           *
   ****************************************************************************]]
 function me:OnHide ()
-	me:UnregisterEvent( "MODIFIER_STATE_CHANGED" );
-	me:UnregisterEvent( "PLAYER_TARGET_CHANGED" );
+	self:UnregisterEvent( "MODIFIER_STATE_CHANGED" );
+	self:UnregisterEvent( "PLAYER_TARGET_CHANGED" );
 
-	if ( tonumber( me.ID ) ) then -- Remove current overlay
-		_NPCScan.Overlays.Remove( me.ID );
+	if ( tonumber( self.ID ) ) then -- Remove current overlay
+		_NPCScan.Overlays.Remove( self.ID );
 	end
-	me.ID = nil;
+	self.ID = nil;
 end
 --[[****************************************************************************
   * Function: _NPCScan.Button:OnEnter                                          *
   ****************************************************************************]]
 function me:OnEnter ()
-	me:SetBackdropBorderColor( 1, 1, 0.15 ); -- Yellow
+	self:SetBackdropBorderColor( 1, 1, 0.15 ); -- Yellow
 end
 --[[****************************************************************************
   * Function: _NPCScan.Button:OnLeave                                          *
   ****************************************************************************]]
 function me:OnLeave ()
-	me:SetBackdropBorderColor( 0.7, 0.15, 0.05 ); -- Brown
+	self:SetBackdropBorderColor( 0.7, 0.15, 0.05 ); -- Brown
 end
 
 --[[****************************************************************************
@@ -202,20 +178,17 @@ end
   ****************************************************************************]]
 function me:PLAYER_REGEN_ENABLED ()
 	-- Update button after leaving combat
-	if ( me.PendingName and me.PendingID ) then
-		me.Update( me.PendingName, me.PendingID );
-		me.PendingName = nil;
-		me.PendingID = nil;
+	if ( self.PendingName and self.PendingID ) then
+		self:Update( self.PendingName, self.PendingID );
+		self.PendingName = nil;
+		self.PendingID = nil;
 	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.Button:MODIFIER_STATE_CHANGED                           *
   ****************************************************************************]]
-function me:MODIFIER_STATE_CHANGED ( _, Modifier, State )
-	Modifier = Modifier:sub( 2 );
-	if ( GetModifiedClick( "_NPCSCAN_BUTTONDRAG" ):find( Modifier, 1, true ) ) then
-		me.EnableDrag( State == 1 );
-	end
+function me:MODIFIER_STATE_CHANGED ()
+	self:EnableDrag( IsModifiedClick( "_NPCSCAN_BUTTONDRAG" ) );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Button:PLAYER_TARGET_CHANGED                            *
@@ -233,27 +206,24 @@ do
 		end
 	end
 	function me:PLAYER_TARGET_CHANGED ()
-		if ( TargetIsFoundRare( me.ID )
-			and GetRaidTargetIndex( "target" ) ~= me.RaidTargetIcon -- Wrong mark
+		if ( TargetIsFoundRare( self.ID )
+			and GetRaidTargetIndex( "target" ) ~= self.RaidTargetIcon -- Wrong mark
 			and ( GetNumRaidMembers() == 0 or IsRaidOfficer() ) -- Player can mark
 		) then
-			SetRaidTarget( "target", me.RaidTargetIcon );
+			SetRaidTarget( "target", self.RaidTargetIcon );
 		end
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Button:OnEvent                                          *
-  ****************************************************************************]]
-me.OnEvent = _NPCScan.OnEvent;
 
 
 --[[****************************************************************************
   * Function: _NPCScan.Button.Flash:OnLoop                                     *
   * Description: Stops the animation after a number of loops.                  *
   ****************************************************************************]]
-function Flash:OnLoop ( Direction )
+function me.Flash:OnLoop ( Direction )
 	if ( Direction == "FORWARD" ) then
 		self.LoopCount = self.LoopCount + 1;
+		local Flash = self:GetParent();
 		if ( self.LoopCount >= Flash.LoopCountMax ) then
 			self:Stop();
 			Flash:Hide();
@@ -264,8 +234,55 @@ end
   * Function: _NPCScan.Button.Flash:OnPlay                                     *
   * Description: Resets the loop count when resumed/restarted.                 *
   ****************************************************************************]]
-function Flash:OnPlay ()
+function me.Flash:OnPlay ()
 	self.LoopCount = 0;
+end
+
+
+--[[****************************************************************************
+  * Function: _NPCScan.Button.Model:Reset                                      *
+  * Description: Clears the model and readies it for a SetCreature call.       *
+  ****************************************************************************]]
+function me.Model:Reset ()
+	self:ClearModel();
+	self:SetModelScale( 1 );
+	self:SetPosition( 0, 0, 0 );
+	self:SetFacing( 0 );
+
+	self:Update();
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Button.Model:Update                                     *
+  * Description: Updates the model's scale and position to fit the button.     *
+  ****************************************************************************]]
+do
+	local function OnUpdate ( self )
+		local Path = self:GetModel();
+		if ( type( Path ) == "string" ) then
+			-- Restore normal rotation
+			self:SetScript( "OnUpdate", self.OnUpdate );
+
+			local ID = self:GetParent().ID;
+			if ( tonumber( ID ) or not UnitIsPlayer( ID ) ) then -- Creature
+				local Scale, X, Y, Z = ( "|" ):split( me.ModelCameras[ Path:lower() ] or "" );
+				self:SetModelScale( 0.5 * ( tonumber( Scale ) or 1 ) );
+				self:SetPosition( tonumber( Z ) or 0, tonumber( X ) or 0, tonumber( Y ) or 0 );
+			else -- Player
+				self:SetModelScale( 0.75 );
+			end
+		end
+	end
+	function me.Model:Update ()
+		-- Wait a frame after model changes, or else the current model scale will
+		--   display as 100% with later calls scaling relative to it.
+		self:SetScript( "OnUpdate", OnUpdate );
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Button.Model:OnUpdate                                   *
+  ****************************************************************************]]
+function me.Model:OnUpdate ( Elapsed )
+	self:SetFacing( self:GetFacing() + Elapsed * me.RotationRate );
 end
 
 
@@ -320,24 +337,19 @@ do
 	} );
 	me:OnLeave(); -- Set non-highlighted colors
 
-	-- Drag frame
-	me.Drag = me:CreateTitleRegion();
-	me.EnableDrag( false );
-
 	-- Close button
 	local Close = CreateFrame( "Button", nil, me, "UIPanelCloseButton" );
-	me.Close = Close;
 	Close:SetPoint( "TOPRIGHT" );
 	Close:SetSize( 32, 32 );
 	Close:SetScale( 0.8 );
 	Close:SetHitRectInsets( 8, 8, 8, 8 );
 
 	-- Model view
+	local Model = me.Model;
 	Model:SetPoint( "BOTTOMLEFT", me, "TOPLEFT", 0, -4 );
 	Model:SetPoint( "RIGHT" );
 	Model:SetHeight( me:GetWidth() * 0.6 );
 	me:SetClampRectInsets( 0, 0, Model:GetTop() - me:GetTop(), 0 ); -- Allow room for model
-	Model:SetScript( "OnUpdate", Model.OnUpdate );
 
 
 	-- Glow animation
@@ -382,6 +394,7 @@ do
 
 
 	-- Full screen flash
+	local Flash = me.Flash;
 	Flash:Hide();
 	Flash:SetAllPoints();
 	Flash:SetAlpha( 0 );
@@ -407,7 +420,7 @@ do
 
 	me:SetScript( "OnEnter", me.OnEnter );
 	me:SetScript( "OnLeave", me.OnLeave );
-	me:SetScript( "OnEvent", me.OnEvent );
+	me:SetScript( "OnEvent", _NPCScan.OnEvent );
 	me:HookScript( "OnShow", me.OnShow );
 	me:HookScript( "OnHide", me.OnHide );
 	me:RegisterEvent( "PLAYER_REGEN_ENABLED" );

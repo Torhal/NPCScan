@@ -45,7 +45,7 @@ function me.Test:OnClick ()
 	_NPCScan.Message( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
 	_NPCScan.Message( L.CONFIG_TEST_HELP_FORMAT:format( GetModifiedClick( "_NPCSCAN_BUTTONDRAG" ) ) );
 
-	_NPCScan.Button.SetNPC( Name, "player" );
+	_NPCScan.Button:SetNPC( Name, "player" );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Config.AlertSoundUnmute.setFunc                         *

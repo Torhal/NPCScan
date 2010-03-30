@@ -423,7 +423,7 @@ do
 
 					me.Message( InvalidMessage or L[ ZoneIDExpected and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
 					if ( not InvalidMessage ) then
-						me.Button.SetNPC( Name, ID ); -- Sends added and found overlay messages
+						me.Button:SetNPC( Name, ID ); -- Sends added and found overlay messages
 					end
 				end
 			end
