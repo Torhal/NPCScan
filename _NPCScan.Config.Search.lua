@@ -324,10 +324,10 @@ if ( LibRareSpawnsData ) then
 	end
 end
 --[[****************************************************************************
-  * Function: _NPCScan.Config.Search:TableAddRow                               *
+  * Function: _NPCScan.Config.Search:TableCreateRow                            *
   ****************************************************************************]]
 do
-	local AddRowBackup;
+	local CreateRowBackup;
 	if ( LibRareSpawnsData ) then
 		local function AddTooltipHooks( Row, ... )
 			Row:SetScript( "OnEnter", me.TableRowOnEnter );
@@ -335,8 +335,8 @@ do
 
 			return Row, ...;
 		end
-		function me:TableAddRow ( ... )
-			return AddTooltipHooks( AddRowBackup( self, ... ) );
+		function me:TableCreateRow ( ... )
+			return AddTooltipHooks( CreateRowBackup( self, ... ) );
 		end
 	end
 --[[****************************************************************************
@@ -350,8 +350,8 @@ do
 
 			if ( LibRareSpawnsData ) then
 				-- Hook row creation to add mouseover tooltips
-				AddRowBackup = self.Table.AddRow;
-				self.Table.AddRow = self.TableAddRow;
+				CreateRowBackup = self.Table.CreateRow;
+				self.Table.CreateRow = self.TableCreateRow;
 			end
 
 			return self.Table;
