@@ -18,8 +18,6 @@ me.UpdateRequested = nil;
 
 me.InactiveAlpha = 0.5;
 
-local SortedNames = {}; -- Used to sort text tables
-
 local LibRareSpawnsData;
 if ( IsAddOnLoaded( "LibRareSpawns" ) ) then
 	LibRareSpawnsData = LibRareSpawns.ByNPCID;
@@ -177,27 +175,24 @@ end
 function me:NPCUpdate ()
 	me.NPCSetEditBoxText();
 
-	for Name in pairs( _NPCScan.OptionsCharacter.NPCs ) do
-		SortedNames[ #SortedNames + 1 ] = Name;
-	end
-	sort( SortedNames );
-
-	for _, Name in ipairs( SortedNames ) do
-		local ID = _NPCScan.OptionsCharacter.NPCs[ Name ];
+	for Name, ID in pairs( _NPCScan.OptionsCharacter.NPCs ) do
 		local Cached = _NPCScan.TestID( ID );
-		me.Table:AddRow( Name,
+		local Row = me.Table:AddRow( Name,
 			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ], Name, ID );
+
 		if ( Cached ) then
-			me.Table.Rows[ #me.Table.Rows ]:SetAlpha( me.InactiveAlpha );
+			Row:SetAlpha( me.InactiveAlpha );
 		end
 	end
-	wipe( SortedNames );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Config.Search:NPCActivate                               *
   ****************************************************************************]]
 function me:NPCActivate ()
 	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID );
+	me.Table:SetSortHandlers( true, true, true );
+	me.Table:SetSortColumn( 2 ); -- Default by name
+
 	me.NPCControls:Show();
 	me.TableContainer:SetPoint( "BOTTOM", me.NPCControls, "TOP", 0, 4 );
 	me.Table.OnSelect = me.NPCOnSelect;
@@ -243,32 +238,20 @@ end
 --[[****************************************************************************
   * Function: _NPCScan.Config.Search:AchievementUpdate                         *
   ****************************************************************************]]
-do
-	local CriteriaNames = {};
-	local CriteriaCompleted = {};
-	local function SortFunc ( Criteria1, Criteria2 )
-		return CriteriaNames[ Criteria1 ] < CriteriaNames[ Criteria2 ];
-	end
-	function me:AchievementUpdate ()
-		local Achievement = _NPCScan.Achievements[ self.AchievementID ];
-		for CriteriaID in pairs( Achievement.Criteria ) do
-			CriteriaNames[ CriteriaID ], _, CriteriaCompleted[ CriteriaID ] = GetAchievementCriteriaInfo( CriteriaID );
-			SortedNames[ #SortedNames + 1 ] = CriteriaID;
-		end
-		sort( SortedNames, SortFunc );
+function me:AchievementUpdate ()
+	local Achievement = _NPCScan.Achievements[ self.AchievementID ];
+	for CriteriaID in pairs( Achievement.Criteria ) do
+		local Name, _, Completed = GetAchievementCriteriaInfo( CriteriaID );
+		local Cached = _NPCScan.TestID( Achievement.Criteria[ CriteriaID ] );
 
-		for _, CriteriaID in ipairs( SortedNames ) do
-			local Cached = _NPCScan.TestID( Achievement.Criteria[ CriteriaID ] );
-			me.Table:AddRow( nil, L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
-				CriteriaNames[ CriteriaID ], Achievement.Criteria[ CriteriaID ],
-				L[ CriteriaCompleted[ CriteriaID ] and "SEARCH_COMPLETED_YES" or "SEARCH_COMPLETED_NO" ] );
-			if ( Cached or not Achievement.Active[ CriteriaID ] ) then
-				me.Table.Rows[ #me.Table.Rows ]:SetAlpha( me.InactiveAlpha );
-			end
+		local Row = me.Table:AddRow( nil,
+			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ], Name,
+			Achievement.Criteria[ CriteriaID ], -- Npc ID
+			L[ Completed and "SEARCH_COMPLETED_YES" or "SEARCH_COMPLETED_NO" ] );
+
+		if ( Cached or not Achievement.Active[ CriteriaID ] ) then
+			Row:SetAlpha( me.InactiveAlpha );
 		end
-		wipe( CriteriaNames );
-		wipe( CriteriaCompleted );
-		wipe( SortedNames );
 	end
 end
 --[[****************************************************************************
@@ -276,6 +259,9 @@ end
   ****************************************************************************]]
 function me:AchievementActivate ()
 	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED );
+	me.Table:SetSortHandlers( true, true, true, true );
+	me.Table:SetSortColumn( 2 ); -- Default by name
+
 	me.Table.Header:SetAlpha( _NPCScan.OptionsCharacter.Achievements[ self.AchievementID ] and 1.0 or me.InactiveAlpha );
 end
 --[[****************************************************************************
