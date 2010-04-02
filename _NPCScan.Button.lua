@@ -21,22 +21,25 @@ me.PendingID = nil;
 me.RotationRate = math.pi / 4;
 me.RaidTargetIcon = 4; -- Green triangle
 
+me.ModelDefaultScale = 0.75;
 -- Key is lowercase, value = "[Scale]|[X]|[Y]|[Z]", where any parameter can be left empty
 me.ModelCameras = {
-	[ [[creature\protodragon\protodragon.m2]] ] = "1.5|||10"; -- Time-lost Proto Drake
-
-	[ [[creature\parrot\parrot.m2]] ] = "2"; -- Aotona
-	[ [[creature\clockworkgnome\clockworkgnome.m2]] ] = "1.5"; -- Dirkee, Fumblub Gearwind
-	[ [[creature\northrendstonegiant\northrendstonegiant.m2]] ] = "1.5"; -- Grocklar
-	[ [[creature\valkierdark\valkierdark.m2]] ] = "1.7"; -- Hildana Deathstealer
-	[ [[creature\northrendworgen\northrendworgen.m2]] ] = "2"; -- Perobas the Bloodthirster
-	[ [[creature\northrendfleshgiant\northrendfleshgiant.m2]] ] = "1.5||2"; -- Putridus the Ancient
-	[ [[creature\fleshbeast\fleshbeast.m2]] ] = "1.4"; -- Seething Hate
-	[ [[creature\vrykulfemale\vrykulfemalehunter.m2]] ] = "2"; -- Syreian the Bonecarver, Vigdis the War Maiden
-	[ [[creature\mammoth\mammoth.m2]] ] = ".6|.8|2.5"; -- Tukemuth
-	[ [[creature\bonespider\bonespider.m2]] ] = "2||-1.5"; -- Terror Spinner
-	[ [[creature\zuldrakgolem\zuldrakgolem.m2]] ] = ".65||1.4"; -- Zul'drak Sentinel
-	[ [[creature\dragon\northrenddragon.m2]] ] = ".5||15|-3"; -- Vyragosa
+	[ [[creature\spectraltigerferal\spectraltigerferal.m2]] ] = "||-.25|1"; -- Gondria
+	[ [[creature\abyssaloutland\abyssal_outland.m2]] ] = "|.3|1|-8"; -- Kraator
+	[ [[creature\ancientofarcane\ancientofarcane.m2]] ] = "1.25"; -- Old Crystalbark
+	[ [[creature\arcanegolem\arcanegolem.m2]] ] = ".6|.25"; -- Ever-Core the Punisher
+	[ [[creature\bonegolem\bonegolem.m2]] ] = "|.4|.6"; -- Crippler
+	[ [[creature\bonespider\bonespider.m2]] ] = "||-1"; -- Terror Spinner
+	[ [[creature\crocodile\crocodile.m2]] ] = ".7||-.5"; -- Goretooth
+	[ [[creature\dragon\northrenddragon.m2]] ] = ".5||20|-14"; -- Hemathion, Vyragosa
+	[ [[creature\fungalmonster\fungalmonster.m2]] ] = ".5|.2|1"; -- Bog Lurker
+	[ [[creature\mammoth\mammoth.m2]] ] = ".35|.9|2.7"; -- Tukemuth
+	[ [[creature\mountaingiantoutland\mountaingiant_bladesedge.m2]] ] = ".19|-.2|1.2"; -- Morcrush
+	[ [[creature\northrendfleshgiant\northrendfleshgiant.m2]] ] = "||2"; -- Putridus the Ancient
+	[ [[creature\protodragon\protodragon.m2]] ] = "1.3||-3"; -- Time-Lost Proto Drake
+	[ [[creature\satyr\satyr.m2]] ] = ".7|.3|.5"; -- Ambassador Jerrikar
+	[ [[creature\wight\wight.m2]] ] = ".7"; -- Griegen
+	[ [[creature\zuldrakgolem\zuldrakgolem.m2]] ] = ".45|.1|1.3"; -- Zul'drak Sentinel
 };
 
 
@@ -278,10 +281,10 @@ do
 			local ID = self:GetParent().ID;
 			if ( type( ID ) == "number" or not UnitIsPlayer( ID ) ) then -- Creature
 				local Scale, X, Y, Z = ( "|" ):split( me.ModelCameras[ Path:lower() ] or "" );
-				self:SetModelScale( 0.5 * ( tonumber( Scale ) or 1 ) );
+				self:SetModelScale( me.ModelDefaultScale * ( tonumber( Scale ) or 1 ) );
 				self:SetPosition( tonumber( Z ) or 0, tonumber( X ) or 0, tonumber( Y ) or 0 );
 			else -- Player
-				self:SetModelScale( 0.75 );
+				self:SetModelScale( me.ModelDefaultScale );
 			end
 		end
 	end
