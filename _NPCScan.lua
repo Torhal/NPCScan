@@ -67,7 +67,11 @@ end
 do
 	local CacheList = {};
 	function me.CacheListAdd ( FoundName )
-		CacheList[ #CacheList + 1 ] = FoundName;
+		local Key = FoundName:lower();
+		if ( not CacheList[ Key ] ) then
+			CacheList[ Key ] = true;
+			CacheList[ #CacheList + 1 ] = FoundName;
+		end
 	end
 --[[****************************************************************************
   * Function: _NPCScan.CacheListPrint                                          *
