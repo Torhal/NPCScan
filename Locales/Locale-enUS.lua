@@ -34,8 +34,6 @@ do
 		CACHED_NAME_FORMAT = LDQuo.."%s"..RDQuo;
 		CACHED_SEPARATOR = ", ";
 
-		OVERLAY_INCOMPATIBLE = "Your versions of %s ("..GRAY_FONT_COLOR_CODE.."%s|r) and "..Title.." ("..GRAY_FONT_COLOR_CODE.."%s|r) are incompatible.  Please update both so they can work together."; -- Overlay name, Overlay version, _NPCScan version
-
 
 		CONFIG_TITLE = Title;
 		CONFIG_DESC = "These options let you configure the way _NPCScan alerts you when it finds rare NPCs.";
