@@ -63,11 +63,10 @@ end
   * Function: _NPCScan.CacheListAdd                                            *
   ****************************************************************************]]
 do
-	local CacheList = {};
-	function me.CacheListAdd ( FoundName )
-		local Key = FoundName:lower();
-		if ( not CacheList[ Key ] ) then
-			CacheList[ Key ] = true;
+	local CachedIDs, CacheList = {}, {};
+	function me.CacheListAdd ( ID, FoundName )
+		if ( not CachedIDs[ ID ] ) then
+			CachedIDs[ ID ] = true;
 			CacheList[ #CacheList + 1 ] = FoundName;
 		end
 	end
@@ -86,6 +85,7 @@ do
 					ForcePrint and RED_FONT_COLOR );
 				FirstPrint = false;
 			end
+			wipe( CachedIDs );
 			wipe( CacheList );
 			return true;
 		end
@@ -115,7 +115,7 @@ local ScanIDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
 local function ScanAdd ( ID ) -- Begins searching for an NPC
 	local FoundName = me.TestID( ID );
 	if ( FoundName ) then -- Already seen
-		me.CacheListAdd( FoundName );
+		me.CacheListAdd( ID, FoundName );
 	else -- Increment
 		if ( ScanIDs[ ID ] ) then
 			ScanIDs[ ID ] = ScanIDs[ ID ] + 1;
