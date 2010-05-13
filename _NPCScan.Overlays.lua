@@ -69,7 +69,7 @@ do
 				Func( ... );
 			elseif ( not pcall( Func, ... ) ) then -- Error
 				me:UnregisterAllMessages();
-				_NPCScan.Message( L.OVERLAY_INCOMPATIBLE:format( "RareSpawnOverlay",
+				_NPCScan.Print( L.OVERLAY_INCOMPATIBLE:format( "RareSpawnOverlay",
 					tostring( GetAddOnMetadata( "RareSpawnOverlay", "Version" ) ),
 					_NPCScan.Version ), RED_FONT_COLOR );
 			end

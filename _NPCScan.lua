@@ -26,22 +26,20 @@ me.OptionsDefault = {
 };
 me.OptionsCharacterDefault = {
 	Version = me.Version;
-	NPCs = { -- Keys must be lowercase and trimmed, but don't have to match the NPC name
-		[ L.NPCS[ "Gondria" ]:trim():lower() ] = 33776;
-		[ L.NPCS[ "Skoll" ]:trim():lower() ] = 35189;
-		[ L.NPCS[ "Arcturis" ]:trim():lower() ] = 38453;
-		[ L.NPCS[ "Time-Lost Proto Drake" ]:trim():lower() ] = 32491;
+	NPCs = { -- Values must be lowercase and trimmed, but don't have to match the NPC name
+		[ 33776 ] = L.NPCS[ "Gondria" ]:trim():lower();
+		[ 35189 ] = L.NPCS[ "Skoll" ]:trim():lower();
+		[ 38453 ] = L.NPCS[ "Arcturis" ]:trim():lower();
+		[ 32491 ] = L.NPCS[ "Time-Lost Proto Drake" ]:trim():lower();
 	};
 	Achievements = {}; -- Filled with all entries in me.Achievements
 };
 
 
-me.ScanIDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
 me.Achievements = { -- Criteria data for each achievement
 	[ 1312 ] = {}; -- Bloody Rare (Outlands)
 	[ 2257 ] = {}; -- Frostbitten (Northrend)
 };
-me.CriteriaUpdateRequested = nil;
 
 me.IDMax = 0xFFFFF; -- Largest ID that will fit in a GUID's 20-bit NPC ID field
 me.UpdateRate = 0.1;
@@ -50,14 +48,14 @@ me.UpdateRate = 0.1;
 
 
 --[[****************************************************************************
-  * Function: _NPCScan.Message                                                 *
+  * Function: _NPCScan.Print                                                   *
   * Description: Prints a message in the default chat window.                  *
   ****************************************************************************]]
-function me.Message ( Message, Color )
+function me.Print ( Message, Color )
 	if ( not Color ) then
 		Color = NORMAL_FONT_COLOR;
 	end
-	DEFAULT_CHAT_FRAME:AddMessage( L.MESSAGE_FORMAT:format( Message ), Color.r, Color.g, Color.b );
+	DEFAULT_CHAT_FRAME:AddMessage( L.PRINT_FORMAT:format( Message ), Color.r, Color.g, Color.b );
 end
 
 
@@ -84,7 +82,7 @@ do
 					CacheList[ Index ] = L.CACHED_NAME_FORMAT:format( Name );
 				end
 				sort( CacheList );
-				me.Message( L[ FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT" ]:format( table.concat( CacheList, L.CACHED_SEPARATOR ) ),
+				me.Print( L[ FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT" ]:format( table.concat( CacheList, L.CACHED_SEPARATOR ) ),
 					ForcePrint and RED_FONT_COLOR );
 				FirstPrint = false;
 			end
@@ -113,81 +111,65 @@ do
 	end
 end
 
-
---[[****************************************************************************
-  * Function: _NPCScan.ScanAdd                                                 *
-  * Description: Begins searching for an NPC ID.                               *
-  ****************************************************************************]]
-function me.ScanAdd ( ID )
+local ScanIDs = {}; -- [ NPC ID ] = Number of concurrent scans for this ID
+local function ScanAdd ( ID ) -- Begins searching for an NPC
 	local FoundName = me.TestID( ID );
 	if ( FoundName ) then -- Already seen
 		me.CacheListAdd( FoundName );
 	else -- Increment
-		if ( me.ScanIDs[ ID ] ) then
-			me.ScanIDs[ ID ] = me.ScanIDs[ ID ] + 1;
+		if ( ScanIDs[ ID ] ) then
+			ScanIDs[ ID ] = ScanIDs[ ID ] + 1;
 		else
-			me.ScanIDs[ ID ] = 1;
+			ScanIDs[ ID ] = 1;
 			me.Overlays.Add( ID );
 		end
 		return true;
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.ScanRemove                                              *
-  * Description: Stops searching for an NPC ID.                                *
-  ****************************************************************************]]
-function me.ScanRemove ( ID )
-	local Count = me.ScanIDs[ ID ];
+local function ScanRemove ( ID ) -- Stops searching for an NPC when nothing is searching for it
+	local Count = ScanIDs[ ID ];
 	if ( Count ) then -- Decrement
 		if ( Count > 1 ) then
-			me.ScanIDs[ ID ] = Count - 1;
+			ScanIDs[ ID ] = Count - 1;
 		else
-			me.ScanIDs[ ID ] = nil;
+			ScanIDs[ ID ] = nil;
 			me.Overlays.Remove( ID );
 		end
 		return true;
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.ScanRemoveAll                                           *
-  * Description: Stops all concurrent scans for a common NPC ID.               *
-  ****************************************************************************]]
-function me.ScanRemoveAll ( ID )
-	if ( me.ScanIDs[ ID ] ) then
-		me.ScanIDs[ ID ] = nil;
+local function ScanRemoveAll ( ID ) -- Removes all concurrent scans for an ID
+	if ( ScanIDs[ ID ] ) then
+		ScanIDs[ ID ] = nil;
 		me.Overlays.Remove( ID );
 	end
 end
+
+
 
 
 --[[****************************************************************************
   * Function: _NPCScan.NPCAdd                                                  *
   * Description: Adds an NPC name and ID to settings and begins searching.     *
   ****************************************************************************]]
-function me.NPCAdd ( Name, ID )
-	Name = Name:trim():lower();
-
-	if ( not me.OptionsCharacter.NPCs[ Name ] ) then
-		ID = tonumber( ID );
-		me.OptionsCharacter.NPCs[ Name ] = ID;
+function me.NPCAdd ( ID, Name )
+	if ( not me.OptionsCharacter.NPCs[ ID ] ) then
+		me.OptionsCharacter.NPCs[ ID ] = Name:trim():lower();
 		me.Config.Search.UpdateTab( "NPC" );
-		me.ScanAdd( ID );
+		ScanAdd( ID );
 
 		return true;
 	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.NPCRemove                                               *
-  * Description: Removes an NPC from settings by name and stops searching.     *
+  * Description: Removes an NPC from settings and stops searching for it.      *
   ****************************************************************************]]
-function me.NPCRemove ( Name )
-	Name = Name:trim():lower();
-	local ID = me.OptionsCharacter.NPCs[ Name ];
-
-	if ( ID ) then
-		me.OptionsCharacter.NPCs[ Name ] = nil;
+function me.NPCRemove ( ID )
+	if ( me.OptionsCharacter.NPCs[ ID ] ) then
+		me.OptionsCharacter.NPCs[ ID ] = nil;
 		me.Config.Search.UpdateTab( "NPC" );
-		me.ScanRemove( ID );
+		ScanRemove( ID );
 
 		return true;
 	end
@@ -209,7 +191,7 @@ function me.AchievementAdd ( AchievementID )
 
 		for CriteriaID, NpcID in pairs( Achievement.Criteria ) do
 			local _, CriteriaType, Completed = GetAchievementCriteriaInfo( CriteriaID );
-			if ( ( not Completed or me.Options.AchievementsAddFound ) and me.ScanAdd( NpcID ) ) then
+			if ( ( not Completed or me.Options.AchievementsAddFound ) and ScanAdd( NpcID ) ) then
 				Achievement.Active[ CriteriaID ] = true;
 			end
 		end
@@ -233,39 +215,12 @@ function me.AchievementRemove ( AchievementID )
 		end
 
 		for CriteriaID in pairs( Achievement.Active ) do
-			me.ScanRemove( Achievement.Criteria[ CriteriaID ] );
+			ScanRemove( Achievement.Criteria[ CriteriaID ] );
 		end
 		wipe( Achievement.Active );
 		me.Config.Search.AchievementSetEnabled( AchievementID, false );
 		me.Config.Search.UpdateTab( AchievementID );
 		return true;
-	end
-end
---[[****************************************************************************
-  * Function: _NPCScan.CriteriaUpdate                                          *
-  * Description: Scans all active criteria and removes any completed NPCs.     *
-  ****************************************************************************]]
-do
-	local GetAchievementCriteriaInfo = GetAchievementCriteriaInfo;
-	local select = select;
-	local pairs = pairs;
-	function me.CriteriaUpdate ()
-		if ( not me.Options.AchievementsAddFound ) then
-			for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
-				local Achievement = me.Achievements[ AchievementID ];
-				local Updated = false;
-				for CriteriaID in pairs( Achievement.Active ) do
-					if ( select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) then -- Completed
-						Achievement.Active[ CriteriaID ] = nil;
-						me.ScanRemove( Achievement.Criteria[ CriteriaID ] );
-						Updated = true;
-					end
-				end
-				if ( Updated ) then
-					me.Config.Search.UpdateTab( AchievementID );
-				end
-			end
-		end
 	end
 end
 
@@ -324,6 +279,8 @@ function me.SetAlertSound ( AlertSound )
 end
 
 
+
+
 --[[****************************************************************************
   * Function: _NPCScan.Synchronize                                             *
   * Description: Resets the scanning list and reloads it from saved settings.  *
@@ -348,11 +305,11 @@ function me.Synchronize ( Options, OptionsCharacter )
 	for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
 		me.AchievementRemove( AchievementID );
 	end
-	for Name in pairs( me.OptionsCharacter.NPCs ) do
-		me.NPCRemove( Name );
+	for ID in pairs( me.OptionsCharacter.NPCs ) do
+		me.NPCRemove( ID );
 	end
-	for ID in pairs( me.ScanIDs ) do
-		me.ScanRemoveAll( ID );
+	for ID in pairs( ScanIDs ) do
+		ScanRemoveAll( ID );
 	end
 
 	me.SetCacheWarnings( Options.CacheWarnings );
@@ -360,8 +317,8 @@ function me.Synchronize ( Options, OptionsCharacter )
 	me.SetAlertSoundUnmute( Options.AlertSoundUnmute );
 	me.SetAlertSound( Options.AlertSound );
 
-	for Name, ID in pairs( OptionsCharacter.NPCs ) do
-		me.NPCAdd( Name, ID );
+	for ID, Name in pairs( OptionsCharacter.NPCs ) do
+		me.NPCAdd( ID, Name );
 	end
 	for AchievementID in pairs( me.Achievements ) do
 		if ( OptionsCharacter.Achievements[ AchievementID ] ) then
@@ -378,63 +335,82 @@ end
   ****************************************************************************]]
 do
 	local pairs = pairs;
-	local Name;
+	local GetAchievementCriteriaInfo = GetAchievementCriteriaInfo;
+	local select = select;
+	local function CriteriaUpdate () -- Scans all active criteria and removes any completed NPCs
+		if ( not me.Options.AchievementsAddFound ) then
+			for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
+				local Achievement = me.Achievements[ AchievementID ];
+				local Updated = false;
+				for CriteriaID in pairs( Achievement.Active ) do
+					if ( select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) then -- Completed
+						Achievement.Active[ CriteriaID ] = nil;
+						ScanRemove( Achievement.Criteria[ CriteriaID ] );
+						Updated = true;
+					end
+				end
+				if ( Updated ) then
+					me.Config.Search.UpdateTab( AchievementID );
+				end
+			end
+		end
+	end
+
+	local function OnFound ( ID, Name ) -- Validates found mobs before showing alerts
+		ScanRemoveAll( ID );
+		me.Config.Search.UpdateTab();
+
+		local ZoneIDExpected, InvalidMessage = me.TamableIDs[ ID ];
+		if ( ZoneIDExpected == true ) then -- Tamable, but expected zone is unknown (instance mob, etc.)
+			if ( IsResting() ) then -- Most likely a hunter pet in town
+				InvalidMessage = L.FOUND_TAMABLE_RESTING_FORMAT:format( Name );
+			end
+		elseif ( ZoneIDExpected ) then -- Expected zone of the mob is known
+			local ZoneIDBackup = GetCurrentMapAreaID() - 1;
+			SetMapToCurrentZone();
+
+			if ( ZoneIDExpected ~= GetCurrentMapAreaID() - 1 ) then -- Definitely a pet; Found in wrong zone
+				-- Find the name of the expected zone
+				local ZoneTextExpected;
+				SetMapByID( ZoneIDExpected );
+				local Continent = GetCurrentMapContinent();
+				if ( Continent >= 1 ) then
+					local Zone = GetCurrentMapZone();
+					if ( Zone == 0 ) then
+						ZoneTextExpected = select( Continent, GetMapContinents() );
+					else
+						ZoneTextExpected = select( Zone, GetMapZones( Continent ) );
+					end
+				end
+				InvalidMessage = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format( Name, GetZoneText(),
+					ZoneTextExpected or L.FOUND_ZONE_UNKNOWN, ZoneIDExpected );
+			end
+
+			SetMapByID( ZoneIDBackup ); -- Restore previous map view
+		end
+
+		me.Print( InvalidMessage or L[ ZoneIDExpected and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
+		if ( not InvalidMessage ) then
+			me.Button:SetNPC( ID, Name ); -- Sends added and found overlay messages
+		end
+	end
+
 	local LastUpdate = 0;
-	local ZoneIDBackup;
 	function me:OnUpdate ( Elapsed )
 		if ( me.CriteriaUpdateRequested ) then -- CRITERIA_UPDATE bucket
 			me.CriteriaUpdateRequested = nil;
-			me.CriteriaUpdate();
+			CriteriaUpdate();
 		end
 
 		LastUpdate = LastUpdate + Elapsed;
 		if ( LastUpdate >= me.UpdateRate ) then
 			LastUpdate = 0;
 
-			for ID in pairs( me.ScanIDs ) do
-				Name = me.TestID( ID );
+			for ID in pairs( ScanIDs ) do
+				local Name = me.TestID( ID );
 				if ( Name ) then
-					me.ScanRemoveAll( ID );
-					me.Config.Search.UpdateTab();
-
-					local ZoneIDExpected, InvalidMessage = me.TamableIDs[ ID ];
-					if ( ZoneIDExpected == true ) then -- Tamable, but expected zone is unknown (instance mob, etc.)
-						if ( IsResting() ) then -- Most likely a hunter pet in town
-							InvalidMessage = L.FOUND_TAMABLE_RESTING_FORMAT:format( Name );
-						end
-					elseif ( ZoneIDExpected ) then -- Expected zone of the mob is known
-						if ( not ZoneIDBackup ) then
-							ZoneIDBackup = GetCurrentMapAreaID() - 1;
-						end
-						SetMapToCurrentZone();
-						if ( GetCurrentMapAreaID() - 1 ~= ZoneIDExpected ) then -- Definitely a pet; Found in wrong zone
-							-- Find the name of the expected zone
-							local ZoneTextExpected;
-							SetMapByID( ZoneIDExpected );
-							local Continent = GetCurrentMapContinent();
-							if ( Continent >= 1 ) then
-								local Zone = GetCurrentMapZone();
-								if ( Zone == 0 ) then
-									ZoneTextExpected = select( Continent, GetMapContinents() );
-								else
-									ZoneTextExpected = select( Zone, GetMapZones( Continent ) );
-								end
-							end
-							InvalidMessage = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format( Name, GetZoneText(),
-								ZoneTextExpected or L.FOUND_ZONE_UNKNOWN, ZoneIDExpected );
-						end
-					end
-
-					me.Message( InvalidMessage or L[ ZoneIDExpected and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
-					if ( not InvalidMessage ) then
-						me.Button:SetNPC( Name, ID ); -- Sends added and found overlay messages
-					end
+					OnFound( ID, Name );
 				end
-			end
-
-			if ( ZoneIDBackup ) then -- Restore previous map view
-				SetMapByID( ZoneIDBackup );
-				ZoneIDBackup = nil;
 			end
 		end
 	end
@@ -452,7 +428,7 @@ function me.OnLoad ()
 	_NPCScanOptionsCharacter = me.OptionsCharacter;
 
 	-- Update settings incrementally
-	if ( Options ) then
+	if ( Options and Options.Version ~= me.Version ) then
 		if ( Options.Version == "3.0.9.2" ) then -- 3.1.0.1: Added options for finding already found and tamable mobs
 			Options.CacheWarnings = true;
 			Options.Version = "3.1.0.1";
@@ -460,7 +436,7 @@ function me.OnLoad ()
 		Options.Version = me.Version;
 	end
 	-- Character settings
-	if ( OptionsCharacter ) then
+	if ( OptionsCharacter and OptionsCharacter.Version ~= me.Version ) then
 		local Version = OptionsCharacter.Version;
 		if ( Version == "3.0.9.2" ) then -- 3.1.0.1: Remove NPCs that are duplicated by achievements
 			local NPCs = OptionsCharacter.IDs;
@@ -490,6 +466,15 @@ function me.OnLoad ()
 			-- 3.3.0.2: Added default scan for Arcturis
 			OptionsCharacter.NPCs[ L.NPCS[ "Arcturis" ]:trim():lower() ] = 38453;
 			Version = "3.3.0.2";
+		end
+		if ( Version == "3.3.0.2" or Version == "3.3.0.3" or Version == "3.3.0.4" ) then
+			-- 3.3.0.5: Custom NPC scans are indexed by ID instead of name
+			local NPCsNew = {};
+			for Name, ID in pairs( OptionsCharacter.NPCs ) do
+				NPCsNew[ ID ] = Name;
+			end
+			OptionsCharacter.NPCs = NPCsNew;
+			Version = "3.3.0.5";
 		end
 		OptionsCharacter.Version = me.Version;
 	end
@@ -564,33 +549,44 @@ function me.SlashCommand ( Input )
 		if ( Command == L.CMD_ADD ) then
 			local ID, Name = Arguments:match( "^(%d+)%s+(.+)$" );
 			if ( ID ) then
-				me.NPCRemove( Name );
-				if ( me.NPCAdd( Name, ID ) ) then
+				ID = tonumber( ID );
+				me.NPCRemove( ID );
+				if ( me.NPCAdd( ID, Name ) ) then
 					me.CacheListPrint( true );
 				end
 				return;
 			end
 		elseif ( Command == L.CMD_REMOVE ) then
-			if ( not me.NPCRemove( Arguments ) ) then
-				me.Message( L.CMD_REMOVENOTFOUND_FORMAT:format( Arguments ), RED_FONT_COLOR );
+			local ID = tonumber( Arguments );
+			if ( not ID ) then -- Search custom names
+				Arguments = Arguments:trim():lower();
+				for NpcID, Name in pairs( me.OptionsCharacter.NPCs ) do
+					if ( Name == Arguments ) then
+						ID = NpcID;
+						break;
+					end
+				end
+			end
+			if ( not me.NPCRemove( ID ) ) then
+				me.Print( L.CMD_REMOVENOTFOUND_FORMAT:format( Arguments ), RED_FONT_COLOR );
 			end
 			return;
 		elseif ( Command == L.CMD_CACHE ) then
-			for Name, ID in pairs( me.OptionsCharacter.NPCs ) do
-				me.NPCRemove( Name, ID );
-				me.NPCAdd( Name, ID );
+			for ID, Name in pairs( me.OptionsCharacter.NPCs ) do
+				me.NPCRemove( ID );
+				me.NPCAdd( ID, Name );
 			end
 			for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
 				me.AchievementRemove( AchievementID );
 				me.AchievementAdd( AchievementID );
 			end
 			if ( not me.CacheListPrint( true ) ) then -- Nothing in cache
-				me.Message( L.CMD_CACHE_EMPTY, GREEN_FONT_COLOR );
+				me.Print( L.CMD_CACHE_EMPTY, GREEN_FONT_COLOR );
 			end
 			return;
 		end
 		-- Invalid subcommand
-		me.Message( L.CMD_HELP );
+		me.Print( L.CMD_HELP );
 
 	else -- No subcommand
 		InterfaceOptionsFrame_OpenToCategory( me.Config.Search );
@@ -605,18 +601,6 @@ end
 -----------------------------
 
 do
-	me:SetScript( "OnEvent", me.OnEvent );
-	me:RegisterEvent( "PLAYER_ENTERING_WORLD" );
-	-- Set OnUpdate script after zone info loads
-	if ( GetZoneText() == "" ) then -- Zone information unknown (initial login)
-		me:RegisterEvent( "ZONE_CHANGED_NEW_AREA" );
-	else -- Zone information is known
-		me:ZONE_CHANGED_NEW_AREA( "ZONE_CHANGED_NEW_AREA" );
-	end
-
-	SlashCmdList[ "_NPCSCAN" ] = me.SlashCommand;
-
-
 	-- Save achievement criteria data
 	for AchievementID, Achievement in pairs( me.Achievements ) do
 		Achievement.Criteria = {};
@@ -628,4 +612,16 @@ do
 			end
 		end
 	end
+
+
+	me:SetScript( "OnEvent", me.OnEvent );
+	me:RegisterEvent( "PLAYER_ENTERING_WORLD" );
+	-- Set OnUpdate script after zone info loads
+	if ( GetZoneText() == "" ) then -- Zone information unknown (initial login)
+		me:RegisterEvent( "ZONE_CHANGED_NEW_AREA" );
+	else -- Zone information is known
+		me:ZONE_CHANGED_NEW_AREA( "ZONE_CHANGED_NEW_AREA" );
+	end
+
+	SlashCmdList[ "_NPCSCAN" ] = me.SlashCommand;
 end

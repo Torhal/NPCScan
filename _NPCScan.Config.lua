@@ -42,10 +42,10 @@ end
   ****************************************************************************]]
 function me.Test:OnClick ()
 	local Name = L.CONFIG_TEST_NAME;
-	_NPCScan.Message( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
-	_NPCScan.Message( L.CONFIG_TEST_HELP_FORMAT:format( GetModifiedClick( "_NPCSCAN_BUTTONDRAG" ) ) );
+	_NPCScan.Print( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
+	_NPCScan.Print( L.CONFIG_TEST_HELP_FORMAT:format( GetModifiedClick( "_NPCSCAN_BUTTONDRAG" ) ) );
 
-	_NPCScan.Button:SetNPC( Name, "player" );
+	_NPCScan.Button:SetNPC( "player", Name );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Config.AlertSoundUnmute.setFunc                         *

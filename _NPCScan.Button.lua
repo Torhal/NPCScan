@@ -79,7 +79,7 @@ end
   * Function: _NPCScan.Button:SetNPC                                           *
   * Description: Sets the button to a given NPC and shows it.                  *
   ****************************************************************************]]
-function me:SetNPC ( Name, ID )
+function me:SetNPC ( ID, Name )
 	if ( tonumber( ID ) ) then
 		ID = tonumber( ID );
 		_NPCScan.Overlays.Add( ID );
@@ -97,17 +97,16 @@ function me:SetNPC ( Name, ID )
 		if ( type( self.PendingID ) == "number" ) then -- Remove old pending NPC
 			_NPCScan.Overlays.Remove( self.PendingID );
 		end
-		self.PendingName = Name;
-		self.PendingID = ID;
+		self.PendingID, self.PendingName = ID, Name;
 	else
-		self:Update( Name, ID );
+		self:Update( ID, Name );
 	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.Button:Update                                           *
   * Description: Updates the button based on its Name and ID fields.           *
   ****************************************************************************]]
-function me:Update ( Name, ID )
+function me:Update ( ID, Name )
 	if ( type( self.ID ) == "number" ) then -- Remove last overlay
 		_NPCScan.Overlays.Remove( self.ID );
 	end
@@ -188,8 +187,8 @@ end
 function me:PLAYER_REGEN_ENABLED ()
 	-- Update button after leaving combat
 	if ( self.PendingName and self.PendingID ) then
-		self:Update( self.PendingName, self.PendingID );
-		self.PendingName, self.PendingID = nil;
+		self:Update( self.PendingID, self.PendingName );
+		self.PendingID, self.PendingName = nil;
 	end
 end
 --[[****************************************************************************

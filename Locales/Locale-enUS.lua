@@ -20,7 +20,7 @@ do
 	_NPCScanLocalization = setmetatable( {
 		NPCS = setmetatable( {}, Metatable );
 
-		MESSAGE_FORMAT = Title..": %s";
+		PRINT_FORMAT = Title..": %s";
 
 		FOUND_FORMAT = "Found "..LDQuo.."%s"..RDQuo.."!";
 		FOUND_ZONE_UNKNOWN = UNKNOWN;
@@ -72,7 +72,7 @@ do
 		SEARCH_NAME = "Name:";
 		SEARCH_NAME_DESC = "A label for the NPC.  It is case insensitive and doesn't have to match the NPC's actual name.";
 		SEARCH_ID = "NPC ID:";
-		SEARCH_ID_DESC = "The ID of the NPC to search for.  This value can be found on sites like WowHead.com.";
+		SEARCH_ID_DESC = "The ID of the NPC to search for.  This value can be found on sites like Wowhead.com.";
 		SEARCH_COMPLETED = "Done";
 
 		SEARCH_CACHED_YES = "|T"..READY_CHECK_NOT_READY_TEXTURE..":0|t";
@@ -93,7 +93,7 @@ do
 		CMD_REMOVENOTFOUND_FORMAT = "NPC "..LDQuo.."%s"..RDQuo.." not found.";
 		CMD_CACHE = "CACHE";
 		CMD_CACHE_EMPTY = "None of the mobs being searched for are cached.";
-		CMD_HELP = "Commands are "..LDQuo.."/npcscan add <NpcID> <Name>"..RDQuo..", "..LDQuo.."/npcscan remove <Name>"..RDQuo..", "..LDQuo.."/npcscan cache"..RDQuo.." to list cached mobs, and simply "..LDQuo.."/npcscan"..RDQuo.." for the options menu.";
+		CMD_HELP = "Commands are "..LDQuo.."/npcscan add <NpcID> <Name>"..RDQuo..", "..LDQuo.."/npcscan remove <NpcID or Name>"..RDQuo..", "..LDQuo.."/npcscan cache"..RDQuo.." to list cached mobs, and simply "..LDQuo.."/npcscan"..RDQuo.." for the options menu.";
 	}, Metatable );
 
 
