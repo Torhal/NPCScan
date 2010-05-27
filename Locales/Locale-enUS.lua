@@ -64,6 +64,7 @@ do
 
 		SEARCH_NPCS = "Custom NPCs";
 		SEARCH_NPCS_DESC = "Add any NPC to track, even if it has no achievement.";
+		SEARCH_WORLD_FORMAT = "(%s)";
 		SEARCH_ACHIEVEMENT_DISABLED = "Disabled";
 
 		SEARCH_CACHED = "Cached";
@@ -72,6 +73,7 @@ do
 		SEARCH_ID = "NPC ID:";
 		SEARCH_ID_DESC = "The ID of the NPC to search for.  This value can be found on sites like Wowhead.com.";
 		SEARCH_COMPLETED = "Done";
+		SEARCH_WORLD = "Continent:";
 
 		SEARCH_CACHED_YES = "|T"..READY_CHECK_NOT_READY_TEXTURE..":0|t";
 		SEARCH_CACHED_NO = "";

@@ -34,6 +34,9 @@ end
 
 
 
+local function GetWorldIDName ( WorldID ) -- Converts a WorldID into a localized world name
+	return type( WorldID ) == "number" and select( WorldID, GetMapContinents() ) or WorldID;
+end
 --[[****************************************************************************
   * Function: _NPCScan.Config.Search.TabSelect                                 *
   * Description: Selects the given tab.                                        *
@@ -75,12 +78,20 @@ function me:TabOnEnter ()
 	GameTooltip:SetOwner( self, "ANCHOR_TOPLEFT", 0, -8 );
 	if ( self.AchievementID ) then
 		local _, Name, _, _, _, _, _, Description = GetAchievementInfo( self.AchievementID );
-		GameTooltip:SetText( Name );
-		local Color = HIGHLIGHT_FONT_COLOR;
-		GameTooltip:AddLine( Description, Color.r, Color.g, Color.b, true );
+		local WorldID = _NPCScan.Achievements[ self.AchievementID ].WorldID;
+		local Highlight = HIGHLIGHT_FONT_COLOR;
+		if ( WorldID ) then
+			GameTooltip:ClearLines();
+			local Gray = GRAY_FONT_COLOR;
+			GameTooltip:AddDoubleLine( Name, L.SEARCH_WORLD_FORMAT:format( GetWorldIDName( WorldID ) ),
+				Highlight.r, Highlight.g, Highlight.b, Gray.r, Gray.g, Gray.b );
+		else
+			GameTooltip:SetText( Name, Highlight.r, Highlight.g, Highlight.b );
+		end
+		GameTooltip:AddLine( Description, nil, nil, nil, true );
 
 		if ( not _NPCScan.OptionsCharacter.Achievements[ self.AchievementID ] ) then
-			Color = RED_FONT_COLOR;
+			local Color = RED_FONT_COLOR;
 			GameTooltip:AddLine( L.SEARCH_ACHIEVEMENT_DISABLED, Color.r, Color.g, Color.b );
 		end
 	else
@@ -115,27 +126,19 @@ end
 
 local Tabs = {}; -- [ "NPC" or AchievementID ] = Tab;
 --[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCSetEditBoxText                         *
-  * Description: Sets the edit boxes' text.                                    *
-  ****************************************************************************]]
-function me.NPCSetEditBoxText ( ID, Name )
-	me.EditBoxID:SetText( ID or "" );
-	me.EditBoxName:SetText( Name or "" );
-end
---[[****************************************************************************
   * Function: _NPCScan.Config.Search.NPCValidateButtons                        *
   * Description: Validates ability to use add and remove buttons.              *
   ****************************************************************************]]
 function me.NPCValidateButtons ()
-	local ID = me.EditBoxID:GetText() ~= "" and me.EditBoxID:GetNumber() or nil;
+	local NpcID = me.EditBoxID:GetText() ~= "" and me.EditBoxID:GetNumber() or nil;
 	local Name = me.EditBoxName:GetText():trim():lower();
 	Name = Name ~= "" and Name or nil;
 
-	local CanRemove = _NPCScan.OptionsCharacter.NPCs[ ID ];
-	local CanAdd = Name and ID and Name ~= CanRemove and ID >= 1 and ID <= _NPCScan.IDMax;
+	local CanRemove = _NPCScan.OptionsCharacter.NPCs[ NpcID ];
+	local CanAdd = Name and NpcID and Name ~= CanRemove and NpcID >= 1 and NpcID <= _NPCScan.IDMax;
 
 	if ( me.Table ) then
-		me.Table:SetSelectionByKey( CanRemove and ID or nil );
+		me.Table:SetSelectionByKey( CanRemove and NpcID or nil );
 	end
 	me.AddButton[ CanAdd and "Enable" or "Disable" ]( me.AddButton );
 	me.RemoveButton[ CanRemove and "Enable" or "Disable" ]( me.RemoveButton );
@@ -145,12 +148,12 @@ end
   * Description: Adds a Custom NPC list element.                               *
   ****************************************************************************]]
 function me.NPCAdd ()
-	local ID, Name = me.EditBoxID:GetNumber(), me.EditBoxName:GetText();
-	if ( _NPCScan.TamableIDs[ ID ] ) then
+	local NpcID, Name = me.EditBoxID:GetNumber(), me.EditBoxName:GetText();
+	if ( _NPCScan.TamableIDs[ NpcID ] ) then
 		_NPCScan.Print( L.SEARCH_ADD_TAMABLE_FORMAT:format( Name ) );
 	end
-	_NPCScan.NPCRemove( ID );
-	if ( _NPCScan.NPCAdd( ID, Name ) ) then
+	_NPCScan.NPCRemove( NpcID );
+	if ( _NPCScan.NPCAdd( NpcID, Name ) ) then
 		_NPCScan.CacheListPrint( true );
 	end
 end
@@ -165,23 +168,28 @@ end
   * Function: _NPCScan.Config.Search:NPCOnSelect                               *
   * Description: Updates the edit boxes when a table row is selected.          *
   ****************************************************************************]]
-function me:NPCOnSelect ( ID )
-	if ( ID ~= nil ) then
-		me.NPCSetEditBoxText( ID, _NPCScan.OptionsCharacter.NPCs[ ID ] );
+function me:NPCOnSelect ( NpcID )
+	if ( NpcID ~= nil ) then
+		me.EditBoxID:SetText( NpcID );
+		me.EditBoxName:SetText( _NPCScan.OptionsCharacter.NPCs[ NpcID ] );
 	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.Config.Search:NPCUpdate                                 *
   ****************************************************************************]]
 function me:NPCUpdate ()
-	me.NPCSetEditBoxText();
+	me.EditBoxID:SetText( "" );
+	me.EditBoxName:SetText( "" );
 
-	for ID, Name in pairs( _NPCScan.OptionsCharacter.NPCs ) do
-		local Cached = _NPCScan.TestID( ID );
-		local Row = me.Table:AddRow( ID,
-			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ], Name, ID );
+	local CurrentWorldID = _NPCScan.GetCurrentWorldID();
+	local WorldIDs = _NPCScan.OptionsCharacter.NPCWorldIDs;
+	for NpcID, Name in pairs( _NPCScan.OptionsCharacter.NPCs ) do
+		local Cached = _NPCScan.TestID( NpcID );
+		local Row = me.Table:AddRow( NpcID,
+			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
+			Name, NpcID, GetWorldIDName( WorldIDs[ NpcID ] ) );
 
-		if ( Cached ) then
+		if ( Cached or ( WorldIDs[ NpcID ] and WorldIDs[ NpcID ] ~= CurrentWorldID ) ) then
 			Row:SetAlpha( me.InactiveAlpha );
 		end
 	end
@@ -190,7 +198,7 @@ end
   * Function: _NPCScan.Config.Search:NPCActivate                               *
   ****************************************************************************]]
 function me:NPCActivate ()
-	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID );
+	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD );
 	me.Table:SetSortHandlers( true, true, true );
 	me.Table:SetSortColumn( 2 ); -- Default by name
 
@@ -237,16 +245,16 @@ end
   ****************************************************************************]]
 function me:AchievementUpdate ()
 	local Achievement = _NPCScan.Achievements[ self.AchievementID ];
-	for CriteriaID in pairs( Achievement.Criteria ) do
+	for CriteriaID, NpcID in pairs( Achievement.Criteria ) do
 		local Name, _, Completed = GetAchievementCriteriaInfo( CriteriaID );
 		local Cached = _NPCScan.TestID( Achievement.Criteria[ CriteriaID ] );
 
 		local Row = me.Table:AddRow( nil,
-			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ], Name,
-			Achievement.Criteria[ CriteriaID ], -- Npc ID
+			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
+			Name, NpcID,
 			L[ Completed and "SEARCH_COMPLETED_YES" or "SEARCH_COMPLETED_NO" ] );
 
-		if ( Cached or not Achievement.Active[ CriteriaID ] ) then
+		if ( not Achievement.Active[ NpcID ] ) then
 			Row:SetAlpha( me.InactiveAlpha );
 		end
 	end
