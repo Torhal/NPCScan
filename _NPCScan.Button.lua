@@ -7,12 +7,12 @@
 local _NPCScan = _NPCScan;
 local L = _NPCScanLocalization;
 local LSM = LibStub( "LibSharedMedia-3.0" );
-local me = CreateFrame( "Button", "_NPCScanButton", nil, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate" );
+local me = CreateFrame( "Button", "_NPCScanButton", UIParent, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate" );
 _NPCScan.Button = me;
 
 me.Drag = me:CreateTitleRegion();
 me.Model = CreateFrame( "PlayerModel", nil, me );
-me.Flash = CreateFrame( "Frame" );
+me.Flash = CreateFrame( "Frame", nil, me );
 me.Flash.LoopCountMax = 3;
 
 me.PendingName = nil;
@@ -321,6 +321,7 @@ end
 -----------------------------
 
 do
+	me:SetScale( 1.25 );
 	me:SetSize( 150, 42 );
 	me:SetPoint( "BOTTOM", UIParent, 0, 128 );
 	me:SetMovable( true );
