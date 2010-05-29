@@ -39,7 +39,10 @@ me.OptionsCharacterDefault = {
 		[ 38453 ] = 4; -- Arcturis
 		[ 32491 ] = 4; -- Time-Lost Proto Drake
 	};
-	Achievements = {}; -- Filled with all entries in me.Achievements
+	Achievements = {
+		[ 1312 ] = true; -- Bloody Rare (Outlands)
+		[ 2257 ] = true; -- Frostbitten (Northrend)
+	};
 };
 
 
@@ -345,18 +348,13 @@ end
   ****************************************************************************]]
 function me.Synchronize ( Options, OptionsCharacter )
 	-- Load defaults if settings omitted
+	local IsDefaultScan, IsHunter;
 	if ( not Options ) then
 		Options = me.OptionsDefault;
 	end
 	if ( not OptionsCharacter ) then
 		OptionsCharacter = me.OptionsCharacterDefault;
-		-- Add all uncompleted achievements
-		wipe( OptionsCharacter.Achievements );
-		for AchievementID in pairs( me.Achievements ) do
-			if ( Options.AchievementsAddFound or not select( 4, GetAchievementInfo( AchievementID ) ) ) then -- Not completed
-				OptionsCharacter.Achievements[ AchievementID ] = true;
-			end
-		end
+		IsDefaultScan, IsHunter = true, select( 2, UnitClass( "player" ) ) == "HUNTER";
 	end
 
 	-- Clear all scans
@@ -376,10 +374,16 @@ function me.Synchronize ( Options, OptionsCharacter )
 	me.SetAlertSound( Options.AlertSound );
 
 	for NpcID, Name in pairs( OptionsCharacter.NPCs ) do
-		me.NPCAdd( NpcID, Name, OptionsCharacter.NPCWorldIDs[ NpcID ] );
+		-- If defaults, only add tamable custom mobs if the player is a hunter
+		if ( not IsDefaultScan or IsHunter or not me.TamableIDs[ NpcID ] ) then
+			me.NPCAdd( NpcID, Name, OptionsCharacter.NPCWorldIDs[ NpcID ] );
+		end
 	end
 	for AchievementID in pairs( me.Achievements ) do
-		if ( OptionsCharacter.Achievements[ AchievementID ] ) then
+		-- If defaults, don't enable completed achievements unless explicitly allowed
+		if ( OptionsCharacter.Achievements[ AchievementID ] and (
+			not IsDefaultScan or Options.AchievementsAddFound or not select( 4, GetAchievementInfo( AchievementID ) ) -- Not completed
+		) ) then
 			me.AchievementAdd( AchievementID );
 		end
 	end
