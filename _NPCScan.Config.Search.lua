@@ -181,15 +181,13 @@ function me:NPCUpdate ()
 	me.EditBoxID:SetText( "" );
 	me.EditBoxName:SetText( "" );
 
-	local CurrentWorldID = _NPCScan.GetCurrentWorldID();
 	local WorldIDs = _NPCScan.OptionsCharacter.NPCWorldIDs;
 	for NpcID, Name in pairs( _NPCScan.OptionsCharacter.NPCs ) do
-		local Cached = _NPCScan.TestID( NpcID );
 		local Row = me.Table:AddRow( NpcID,
-			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
+			L[ _NPCScan.TestID( NpcID ) and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
 			Name, NpcID, GetWorldIDName( WorldIDs[ NpcID ] ) );
 
-		if ( Cached or ( WorldIDs[ NpcID ] and WorldIDs[ NpcID ] ~= CurrentWorldID ) ) then
+		if ( not _NPCScan.NPCIsActive( NpcID ) ) then
 			Row:SetAlpha( me.InactiveAlpha );
 		end
 	end
@@ -199,7 +197,7 @@ end
   ****************************************************************************]]
 function me:NPCActivate ()
 	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD );
-	me.Table:SetSortHandlers( true, true, true );
+	me.Table:SetSortHandlers( true, true, true, true );
 	me.Table:SetSortColumn( 2 ); -- Default by name
 
 	me.NPCControls:Show();
@@ -247,14 +245,13 @@ function me:AchievementUpdate ()
 	local Achievement = _NPCScan.Achievements[ self.AchievementID ];
 	for CriteriaID, NpcID in pairs( Achievement.Criteria ) do
 		local Name, _, Completed = GetAchievementCriteriaInfo( CriteriaID );
-		local Cached = _NPCScan.TestID( Achievement.Criteria[ CriteriaID ] );
 
-		local Row = me.Table:AddRow( nil,
-			L[ Cached and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
+		local Row = me.Table:AddRow( CriteriaID,
+			L[ _NPCScan.TestID( NpcID ) and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
 			Name, NpcID,
 			L[ Completed and "SEARCH_COMPLETED_YES" or "SEARCH_COMPLETED_NO" ] );
 
-		if ( not Achievement.Active[ NpcID ] ) then
+		if ( not _NPCScan.AchievementNPCIsActive( Achievement, NpcID ) ) then
 			Row:SetAlpha( me.InactiveAlpha );
 		end
 	end

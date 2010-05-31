@@ -105,14 +105,6 @@ end
 
 
 --[[****************************************************************************
-  * Function: _NPCScan.GetCurrentWorldID                                       *
-  * Description: Gets the ID of the current continent or its map name.         *
-  ****************************************************************************]]
-function me.GetCurrentWorldID ()
-	local MapName = GetInstanceInfo();
-	return me.ContinentIDs[ MapName ] or MapName;
-end
---[[****************************************************************************
   * Function: _NPCScan.TestID                                                  *
   * Description: Checks for a given NpcID.                                     *
   ****************************************************************************]]
@@ -130,8 +122,13 @@ do
 	end
 end
 
+
+
+
+local next, assert = next, assert;
+
 local ScanIDs = {}; -- [ NpcID ] = Number of concurrent scans for this ID
-local function ScanAdd ( NpcID ) -- Begins searching for an NPC
+local function ScanAdd ( NpcID ) -- Begins searching for an NPC, and returns true if successful
 	local FoundName = me.TestID( NpcID );
 	if ( FoundName ) then -- Already seen
 		me.CacheListAdd( NpcID, FoundName );
@@ -145,26 +142,14 @@ local function ScanAdd ( NpcID ) -- Begins searching for an NPC
 			ScanIDs[ NpcID ] = 1;
 			me.Overlays.Add( NpcID );
 		end
-		return true;
+		return true; -- Successfully added
 	end
 end
 local function ScanRemove ( NpcID ) -- Stops searching for an NPC when nothing is searching for it
-	local Count = ScanIDs[ NpcID ];
-	if ( Count ) then -- Decrement
-		if ( Count > 1 ) then
-			ScanIDs[ NpcID ] = Count - 1;
-		else
-			ScanIDs[ NpcID ] = nil;
-			me.Overlays.Remove( NpcID );
-			if ( not next( ScanIDs ) ) then -- Last
-				me:Hide();
-			end
-		end
-		return true;
-	end
-end
-local function ScanRemoveAll ( NpcID ) -- Removes all concurrent scans for an ID
-	if ( ScanIDs[ NpcID ] ) then
+	local Count = assert( ScanIDs[ NpcID ], "Attempt to remove inactive scan." );
+	if ( Count > 1 ) then
+		ScanIDs[ NpcID ] = Count - 1;
+	else
 		ScanIDs[ NpcID ] = nil;
 		me.Overlays.Remove( NpcID );
 		if ( not next( ScanIDs ) ) then -- Last
@@ -176,9 +161,35 @@ end
 
 
 
-local function NPCSetActive ( NpcID, Activate ) -- Starts/stops actual scan for NPC when changing worlds
-	( Activate and ScanAdd or ScanRemove )( NpcID );
-	me.Config.Search.UpdateTab( "NPC" );
+local function IsWorldIDActive ( WorldID ) -- Returns true if the given WorldID is active on the current world
+	return not WorldID or WorldID == me.WorldID; -- False/nil active on all worlds
+end
+
+local NPCActivate, NPCDeactivate;
+do
+	local NPCsActive = {};
+	function NPCActivate ( NpcID, WorldID ) -- Starts actual scan for NPC when entering a world
+		if ( not NPCsActive[ NpcID ] and IsWorldIDActive( WorldID ) and ScanAdd( NpcID ) ) then
+			NPCsActive[ NpcID ] = true;
+			me.Config.Search.UpdateTab( "NPC" );
+			return true; -- Successfully activated
+		end
+	end
+	function NPCDeactivate ( NpcID ) -- Ends actual scan for NPC when leaving a world
+		if ( NPCsActive[ NpcID ] ) then
+			NPCsActive[ NpcID ] = nil;
+			ScanRemove( NpcID );
+			me.Config.Search.UpdateTab( "NPC" );
+			return true; -- Successfully deactivated
+		end
+	end
+--[[****************************************************************************
+  * Function: _NPCScan.NPCIsActive                                             *
+  * Description: Returns true if an NPC is actively being searched for.        *
+  ****************************************************************************]]
+	function me.NPCIsActive ( NpcID )
+		return NPCsActive[ NpcID ];
+	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.NPCAdd                                                  *
@@ -188,10 +199,8 @@ function me.NPCAdd ( NpcID, Name, WorldID )
 	local Options = me.OptionsCharacter;
 	if ( not Options.NPCs[ NpcID ] ) then
 		Options.NPCs[ NpcID ], Options.NPCWorldIDs[ NpcID ] = Name:trim():lower(), WorldID;
-		if ( not WorldID or WorldID == me.GetCurrentWorldID() ) then
-			NPCSetActive( NpcID, true );
-		else -- Wasn't active; Just add row
-			me.Config.Search.UpdateTab( "NPC" );
+		if ( not NPCActivate( NpcID, WorldID ) ) then -- Didn't activate
+			me.Config.Search.UpdateTab( "NPC" ); -- Just add row
 		end
 		return true;
 	end
@@ -203,12 +212,9 @@ end
 function me.NPCRemove ( NpcID )
 	local Options = me.OptionsCharacter;
 	if ( Options.NPCs[ NpcID ] ) then
-		local WorldID = Options.NPCWorldIDs[ NpcID ];
 		Options.NPCs[ NpcID ], Options.NPCWorldIDs[ NpcID ] = nil;
-		if ( not WorldID or WorldID == me.GetCurrentWorldID() ) then
-			NPCSetActive( NpcID, false );
-		else -- Wasn't active; Just remove row
-			me.Config.Search.UpdateTab( "NPC" );
+		if ( not NPCDeactivate( NpcID ) ) then -- Wasn't active
+			me.Config.Search.UpdateTab( "NPC" ); -- Just remove row
 		end
 		return true;
 	end
@@ -217,69 +223,80 @@ end
 
 
 
-local function AchievementSetActive ( AchievementID, Activate ) -- Starts/stops actual scan for NPCs when changing worlds
-	local Achievement = me.Achievements[ AchievementID ];
-	local Updated;
-
-	if ( Activate ) then
-		for CriteriaID, NpcID in pairs( Achievement.Criteria ) do
-			if ( not Achievement.Active[ NpcID ]
-				and ( me.Options.AchievementsAddFound or select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) -- Completed
-				and ScanAdd( NpcID )
-			) then
-				Updated, Achievement.Active[ NpcID ] = true, true;
-			end
-		end
-	else -- End all active scans
-		for NpcID in pairs( Achievement.Active ) do
-			if ( ScanRemove( NpcID ) ) then
-				Updated, Achievement.Active[ NpcID ] = true, nil;
-			end
-		end
-	end
-
-	if ( Updated ) then -- Added or removed scans
-		me.Config.Search.UpdateTab( AchievementID );
+local function AchievementNPCActivate ( Achievement, NpcID, CriteriaID ) -- Starts searching for an achievement's NPC
+	if ( Achievement.Active and not Achievement.NPCsActive[ NpcID ]
+		and ( me.Options.AchievementsAddFound or not select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) -- Not completed
+		and ScanAdd( NpcID )
+	) then
+		Achievement.NPCsActive[ NpcID ] = true;
+		me.Config.Search.UpdateTab( Achievement.ID );
+		return true;
 	end
 end
-do
-	local function AchievementSetEnabled ( AchievementID, Enable )
-		me.Config.Search.AchievementSetEnabled( AchievementID, Enable );
-		if ( not me.Achievements[ AchievementID ].WorldID
-			or me.GetCurrentWorldID() == me.Achievements[ AchievementID ].WorldID
-		) then -- Active on this map
-			AchievementSetActive( AchievementID, Enable );
-		end
+local function AchievementNPCDeactivate ( Achievement, NpcID ) -- Stops searching for an achievement's NPC
+	if ( Achievement.NPCsActive[ NpcID ] ) then
+		Achievement.NPCsActive[ NpcID ] = nil;
+		ScanRemove( NpcID );
+		me.Config.Search.UpdateTab( Achievement.ID );
+		return true;
 	end
+end
+local function AchievementActivate ( Achievement ) -- Starts actual scans for achievement NPCs when entering a world
+	if ( not Achievement.Active and IsWorldIDActive( Achievement.WorldID ) ) then
+		Achievement.Active = true;
+		for CriteriaID, NpcID in pairs( Achievement.Criteria ) do
+			AchievementNPCActivate( Achievement, NpcID, CriteriaID );
+		end
+		return true;
+	end
+end
+local function AchievementDeactivate ( Achievement ) -- Ends actual scans for achievement NPCs when leaving a world
+	if ( Achievement.Active ) then
+		Achievement.Active = nil;
+		for NpcID in pairs( Achievement.NPCsActive ) do
+			AchievementNPCDeactivate( Achievement, NpcID );
+		end
+		return true;
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.AchievementNPCIsActive                                  *
+  * Description: Returns true if an achievement NPC is being searched for.     *
+  ****************************************************************************]]
+function me.AchievementNPCIsActive ( Achievement, NpcID )
+	return Achievement.NPCsActive[ NpcID ];
+end
 --[[****************************************************************************
   * Function: _NPCScan.AchievementAdd                                          *
   * Description: Adds a kill-related achievement to track.                     *
   ****************************************************************************]]
-	function me.AchievementAdd ( AchievementID )
-		if ( me.Achievements[ AchievementID ] and not me.OptionsCharacter.Achievements[ AchievementID ] ) then
-			if ( not next( me.OptionsCharacter.Achievements ) ) then -- First
-				me:RegisterEvent( "ACHIEVEMENT_EARNED" );
-				me:RegisterEvent( "CRITERIA_UPDATE" );
-			end
-			me.OptionsCharacter.Achievements[ AchievementID ] = true;
-			AchievementSetEnabled( AchievementID, true );
-			return true;
+function me.AchievementAdd ( AchievementID )
+	local Achievement = me.Achievements[ AchievementID ];
+	if ( Achievement and not me.OptionsCharacter.Achievements[ AchievementID ] ) then
+		if ( not next( me.OptionsCharacter.Achievements ) ) then -- First
+			me:RegisterEvent( "ACHIEVEMENT_EARNED" );
+			me:RegisterEvent( "CRITERIA_UPDATE" );
 		end
+		me.OptionsCharacter.Achievements[ AchievementID ] = true;
+		me.Config.Search.AchievementSetEnabled( AchievementID, true );
+		AchievementActivate( Achievement );
+		return true;
 	end
+end
 --[[****************************************************************************
   * Function: _NPCScan.AchievementRemove                                       *
   * Description: Removes an achievement from settings and stops tracking it.   *
   ****************************************************************************]]
-	function me.AchievementRemove ( AchievementID )
-		if ( me.OptionsCharacter.Achievements[ AchievementID ] ) then
-			me.OptionsCharacter.Achievements[ AchievementID ] = nil;
-			if ( not next( me.OptionsCharacter.Achievements ) ) then -- Last
-				me:UnregisterEvent( "ACHIEVEMENT_EARNED" );
-				me:UnregisterEvent( "CRITERIA_UPDATE" );
-			end
-			AchievementSetEnabled( AchievementID, false );
-			return true;
+function me.AchievementRemove ( AchievementID )
+	if ( me.OptionsCharacter.Achievements[ AchievementID ] ) then
+		AchievementDeactivate( me.Achievements[ AchievementID ] );
+		me.OptionsCharacter.Achievements[ AchievementID ] = nil;
+		if ( not next( me.OptionsCharacter.Achievements ) ) then -- Last
+			me:UnregisterEvent( "ACHIEVEMENT_EARNED" );
+			me:UnregisterEvent( "CRITERIA_UPDATE" );
 		end
+		me.Config.Search.AchievementSetEnabled( AchievementID, false );
+		return true;
 	end
 end
 
@@ -364,9 +381,7 @@ function me.Synchronize ( Options, OptionsCharacter )
 	for NpcID in pairs( me.OptionsCharacter.NPCs ) do
 		me.NPCRemove( NpcID );
 	end
-	for NpcID in pairs( ScanIDs ) do
-		ScanRemoveAll( NpcID );
-	end
+	assert( not next( ScanIDs ), "Orphan NpcIDs in scan pool!" );
 
 	me.SetCacheWarnings( Options.CacheWarnings );
 	me.SetAchievementsAddFound( Options.AchievementsAddFound );
@@ -402,27 +417,21 @@ do
 		if ( not me.Options.AchievementsAddFound ) then
 			for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
 				local Achievement = me.Achievements[ AchievementID ];
-				local Updated = false;
-				for NpcID, CriteriaID in pairs( Achievement.Active ) do
+				for NpcID, CriteriaID in pairs( Achievement.NPCsActive ) do
 					local _, _, Complete = GetAchievementCriteriaInfo( CriteriaID );
 					if ( Complete ) then
-						Updated, Achievement.Active[ NpcID ] = true, nil;
-						ScanRemove( NpcID );
+						AchievementNPCDeactivate( Achievement, NpcID );
 					end
-				end
-				if ( Updated ) then
-					me.Config.Search.UpdateTab( AchievementID );
 				end
 			end
 		end
 	end
 
 	local function OnFound ( NpcID, Name ) -- Validates found mobs before showing alerts
-		ScanRemoveAll( NpcID );
+		NPCDeactivate( NpcID );
 		for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
-			me.Achievements[ AchievementID ].Active[ NpcID ] = nil;
+			AchievementNPCDeactivate( me.Achievements[ AchievementID ], NpcID );
 		end
-		me.Config.Search.UpdateTab();
 
 		local ZoneIDExpected, InvalidMessage = me.TamableIDs[ NpcID ];
 		if ( ZoneIDExpected == true ) then -- Tamable, but expected zone is unknown (instance mob, etc.)
@@ -548,32 +557,40 @@ function me:PLAYER_LOGIN ()
 	me.Overlays.Register();
 	me.Synchronize( Options, OptionsCharacter ); -- Loads defaults if either are nil
 end
-do
-	local function SetWorldScansActive ( Active ) -- Activates or deactivates all scans tied to the current map
-		local CurrentWorldID = me.GetCurrentWorldID();
-		for NpcID, WorldID in pairs( me.OptionsCharacter.NPCWorldIDs ) do
-			if ( WorldID == CurrentWorldID ) then
-				NPCSetActive( NpcID, Active );
-			end
-		end
-		for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
-			if ( me.Achievements[ AchievementID ].WorldID == CurrentWorldID ) then
-				AchievementSetActive( AchievementID, Active );
-			end
-		end
-	end
 --[[****************************************************************************
   * Function: _NPCScan:PLAYER_ENTERING_WORLD                                   *
   ****************************************************************************]]
-	function me:PLAYER_ENTERING_WORLD ()
-		SetWorldScansActive( true );
+function me:PLAYER_ENTERING_WORLD ()
+	-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
+	local MapName = GetInstanceInfo();
+	me.WorldID = me.ContinentIDs[ MapName ] or MapName;
+
+	-- Activate scans on this world
+	for NpcID, WorldID in pairs( me.OptionsCharacter.NPCWorldIDs ) do
+		NPCActivate( NpcID, WorldID );
 	end
+	for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
+		local Achievement = me.Achievements[ AchievementID ];
+		if ( Achievement.WorldID ) then
+			AchievementActivate( Achievement );
+		end
+	end
+end
 --[[****************************************************************************
   * Function: _NPCScan:PLAYER_LEAVING_WORLD                                    *
   ****************************************************************************]]
-	function me:PLAYER_LEAVING_WORLD ()
-		SetWorldScansActive( false );
+function me:PLAYER_LEAVING_WORLD ()
+	-- Stop scans that were only active on the previous world
+	for NpcID in pairs( me.OptionsCharacter.NPCWorldIDs ) do
+		NPCDeactivate( NpcID );
 	end
+	for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
+		local Achievement = me.Achievements[ AchievementID ];
+		if ( Achievement.WorldID ) then
+			AchievementDeactivate( Achievement );
+		end
+	end
+	me.WorldID = nil;
 end
 --[[****************************************************************************
   * Function: _NPCScan:ACHIEVEMENT_EARNED                                      *
@@ -684,8 +701,9 @@ do
 	end
 	-- Save achievement criteria data
 	for AchievementID, Achievement in pairs( me.Achievements ) do
+		Achievement.ID = AchievementID;
 		Achievement.Criteria = {}; -- [ CriteriaID ] = NpcID;
-		Achievement.Active = {}; -- [ NpcID ] = CriteriaID;
+		Achievement.NPCsActive = {}; -- [ NpcID ] = CriteriaID;
 		for Criteria = 1, GetAchievementNumCriteria( AchievementID ) do
 			local _, CriteriaType, _, _, _, _, _, AssetID, _, CriteriaID = GetAchievementCriteriaInfo( AchievementID, Criteria );
 			if ( CriteriaType == 0 ) then -- Mob kill type
