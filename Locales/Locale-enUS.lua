@@ -31,6 +31,7 @@ do
 
 		CACHED_LONG_FORMAT = "The following unit(s) are already cached.  Consider removing them using "..LDQuo.."/npcscan"..RDQuo.."'s menu or resetting them by clearing your cache: %s.";
 		CACHED_FORMAT = "The following unit(s) are already cached: %s.";
+		CACHED_WORLD_FORMAT = "The following %2$s unit(s) are already cached: %1$s."; -- CacheList, MapName
 		CACHED_NAME_FORMAT = LDQuo.."%s"..RDQuo;
 		CACHED_SEPARATOR = ", ";
 
@@ -38,8 +39,8 @@ do
 		CONFIG_TITLE = Title;
 		CONFIG_DESC = "These options let you configure the way _NPCScan alerts you when it finds rare NPCs.";
 
-		CONFIG_CACHEWARNINGS = "Print login reminders to empty the cache";
-		CONFIG_CACHEWARNINGS_DESC = "If an NPC is already cached when you log in, this option prints a reminder to clear your cache.";
+		CONFIG_CACHEWARNINGS = "Print cache reminders on login and world changes";
+		CONFIG_CACHEWARNINGS_DESC = "If an NPC is already cached when you log in or change worlds, this option prints a reminder of which chached mobs can't be searched for.";
 
 
 		CONFIG_ALERT = "Alert Options";

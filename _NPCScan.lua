@@ -71,40 +71,6 @@ end
 
 
 --[[****************************************************************************
-  * Function: _NPCScan.CacheListAdd                                            *
-  ****************************************************************************]]
-do
-	local CachedIDs, CacheList = {}, {};
-	function me.CacheListAdd ( NpcID, FoundName )
-		if ( not CachedIDs[ NpcID ] ) then
-			CachedIDs[ NpcID ] = true;
-			CacheList[ #CacheList + 1 ] = FoundName;
-		end
-	end
---[[****************************************************************************
-  * Function: _NPCScan.CacheListPrint                                          *
-  ****************************************************************************]]
-	local FirstPrint = true;
-	function me.CacheListPrint ( ForcePrint )
-		if ( #CacheList > 0 ) then
-			if ( ForcePrint or me.Options.CacheWarnings ) then
-				for Index, Name in ipairs( CacheList ) do
-					CacheList[ Index ] = L.CACHED_NAME_FORMAT:format( Name );
-				end
-				sort( CacheList );
-				me.Print( L[ FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT" ]:format( table.concat( CacheList, L.CACHED_SEPARATOR ) ),
-					ForcePrint and RED_FONT_COLOR );
-				FirstPrint = false;
-			end
-			wipe( CachedIDs );
-			wipe( CacheList );
-			return true;
-		end
-	end
-end
-
-
---[[****************************************************************************
   * Function: _NPCScan.TestID                                                  *
   * Description: Checks for a given NpcID.                                     *
   ****************************************************************************]]
@@ -123,6 +89,64 @@ do
 end
 
 
+local CacheListAdd, CacheListClear;
+do
+	local CachedIDs, CacheList = {}, {};
+	function CacheListAdd ( NpcID, FoundName ) -- Adds a cached NPC's name to the string builder
+		if ( not CachedIDs[ NpcID ] ) then
+			CachedIDs[ NpcID ], CacheList[ #CacheList + 1 ] = true, FoundName;
+		end
+	end
+	function CacheListClear () -- Clears the string builder's tables
+		wipe( CachedIDs );
+		wipe( CacheList );
+	end
+--[[****************************************************************************
+  * Function: _NPCScan.CacheListPrint                                          *
+  * Description: Prints a standard message listing cached mobs.  Will also     *
+  *   print details about the cache the first time it's called.                *
+  ****************************************************************************]]
+	local FirstPrint = true;
+	function me.CacheListPrint ( ForcePrint, Format, ... )
+		if ( #CacheList > 0 ) then
+			if ( ForcePrint or me.Options.CacheWarnings ) then
+				if ( not Format ) then
+					Format = L[ FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT" ];
+					FirstPrint = false;
+				end
+
+				sort( CacheList );
+				-- Add quotes to all names
+				for Index, Name in ipairs( CacheList ) do
+					CacheList[ Index ] = L.CACHED_NAME_FORMAT:format( Name );
+				end
+				me.Print( Format:format( table.concat( CacheList, L.CACHED_SEPARATOR ), ... ), ForcePrint and RED_FONT_COLOR );
+			end
+			CacheListClear();
+			return true;
+		end
+	end
+end
+local function CacheListPopulate () -- Fills the cache list with all added NPCs, active or not
+	for NpcID in pairs( me.OptionsCharacter.NPCs ) do
+		local Name = me.TestID( NpcID );
+		if ( Name ) then
+			CacheListAdd( NpcID, Name );
+		end
+	end
+	for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
+		for CriteriaID, NpcID in pairs( me.Achievements[ AchievementID ].Criteria ) do
+			if ( me.Options.AchievementsAddFound or not select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) then -- Not completed
+				local Name = me.TestID( NpcID );
+				if ( Name ) then
+					CacheListAdd( NpcID, Name );
+				end
+			end
+		end
+	end
+end
+
+
 
 
 local next, assert = next, assert;
@@ -131,7 +155,7 @@ local ScanIDs = {}; -- [ NpcID ] = Number of concurrent scans for this ID
 local function ScanAdd ( NpcID ) -- Begins searching for an NPC, and returns true if successful
 	local FoundName = me.TestID( NpcID );
 	if ( FoundName ) then -- Already seen
-		me.CacheListAdd( NpcID, FoundName );
+		CacheListAdd( NpcID, FoundName );
 	else -- Increment
 		if ( ScanIDs[ NpcID ] ) then
 			ScanIDs[ NpcID ] = ScanIDs[ NpcID ] + 1;
@@ -324,9 +348,10 @@ function me.SetAchievementsAddFound ( Enable )
 		me.Options.AchievementsAddFound = Enable or nil;
 		me.Config.Search.AddFoundCheckbox:SetChecked( Enable );
 
-		for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
-			me.AchievementRemove( AchievementID );
-			me.AchievementAdd( AchievementID );
+		for _, Achievement in pairs( me.Achievements ) do
+			if ( AchievementDeactivate( Achievement ) ) then -- Was active
+				AchievementActivate( Achievement );
+			end
 		end
 		return true;
 	end
@@ -402,6 +427,7 @@ function me.Synchronize ( Options, OptionsCharacter )
 			me.AchievementAdd( AchievementID );
 		end
 	end
+	CacheListPopulate(); -- Adds inactive mobs to printed list as well
 	me.CacheListPrint();
 end
 
@@ -560,19 +586,28 @@ end
 --[[****************************************************************************
   * Function: _NPCScan:PLAYER_ENTERING_WORLD                                   *
   ****************************************************************************]]
-function me:PLAYER_ENTERING_WORLD ()
-	-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
-	local MapName = GetInstanceInfo();
-	me.WorldID = me.ContinentIDs[ MapName ] or MapName;
+do
+	local FirstWorld = true;
+	function me:PLAYER_ENTERING_WORLD ()
+		-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
+		local MapName = GetInstanceInfo();
+		me.WorldID = me.ContinentIDs[ MapName ] or MapName;
 
-	-- Activate scans on this world
-	for NpcID, WorldID in pairs( me.OptionsCharacter.NPCWorldIDs ) do
-		NPCActivate( NpcID, WorldID );
-	end
-	for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
-		local Achievement = me.Achievements[ AchievementID ];
-		if ( Achievement.WorldID ) then
-			AchievementActivate( Achievement );
+		-- Activate scans on this world
+		for NpcID, WorldID in pairs( me.OptionsCharacter.NPCWorldIDs ) do
+			NPCActivate( NpcID, WorldID );
+		end
+		for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
+			local Achievement = me.Achievements[ AchievementID ];
+			if ( Achievement.WorldID ) then
+				AchievementActivate( Achievement );
+			end
+		end
+		if ( FirstWorld ) then -- Full listing of cached mobs gets printed on login
+			FirstWorld = false;
+			CacheListClear();
+		else -- Print list of cached mobs specific to new world
+			me.CacheListPrint( false, L.CACHED_WORLD_FORMAT, MapName );
 		end
 	end
 end
@@ -666,14 +701,7 @@ function me.SlashCommand ( Input )
 			end
 			return;
 		elseif ( Command == L.CMD_CACHE ) then
-			for ID, Name in pairs( me.OptionsCharacter.NPCs ) do
-				me.NPCRemove( ID );
-				me.NPCAdd( ID, Name );
-			end
-			for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
-				me.AchievementRemove( AchievementID );
-				me.AchievementAdd( AchievementID );
-			end
+			CacheListPopulate();
 			if ( not me.CacheListPrint( true ) ) then -- Nothing in cache
 				me.Print( L.CMD_CACHE_EMPTY, GREEN_FONT_COLOR );
 			end
