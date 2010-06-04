@@ -28,16 +28,18 @@ me.OptionsDefault = {
 me.OptionsCharacterDefault = {
 	Version = me.Version;
 	NPCs = { -- Values must be lowercase and trimmed, but don't have to match the NPC name
+		[ 18684 ] = L.NPCS[ "Bro'Gaz the Clanless" ]:trim():lower();
+		[ 32491 ] = L.NPCS[ "Time-Lost Proto Drake" ]:trim():lower();
 		[ 33776 ] = L.NPCS[ "Gondria" ]:trim():lower();
 		[ 35189 ] = L.NPCS[ "Skoll" ]:trim():lower();
 		[ 38453 ] = L.NPCS[ "Arcturis" ]:trim():lower();
-		[ 32491 ] = L.NPCS[ "Time-Lost Proto Drake" ]:trim():lower();
 	};
 	NPCWorldIDs = {
+		[ 18684 ] = 3; -- Bro'Gaz the Clanless
+		[ 32491 ] = 4; -- Time-Lost Proto Drake
 		[ 33776 ] = 4; -- Gondria
 		[ 35189 ] = 4; -- Skoll
 		[ 38453 ] = 4; -- Arcturis
-		[ 32491 ] = 4; -- Time-Lost Proto Drake
 	};
 	Achievements = {
 		[ 1312 ] = true; -- Bloody Rare (Outlands)
