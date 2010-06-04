@@ -6,11 +6,10 @@
 
 if ( GetLocale() == "deDE" ) then
 	_NPCScanLocalization.NPCS = setmetatable( {
+		[ "Arcturis" ] = "Arcturis";
+		[ "Bro'Gaz the Clanless" ] = "Bro'Gaz der Klanlose";
+		[ "Gondria" ] = "Gondria";
+		[ "Skoll" ] = "Skoll";
 		[ "Time-Lost Proto Drake" ] = "Zeitverlorener Protodrache";
-
-		[ "Dart" ] = "Pfeil";
-		[ "Takk the Leaper" ] = "Takk der Springer";
-		[ "Ravasaur Matriarch" ] = "Ravasaurusmatriarchin";
-		[ "Razormaw Matriarch" ] = "Scharfzahnmatriarchin";
 	}, { __index = _NPCScanLocalization.NPCS; } );
 end

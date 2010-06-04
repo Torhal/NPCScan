@@ -6,11 +6,10 @@
 
 if ( GetLocale() == "frFR" ) then
 	_NPCScanLocalization.NPCS = setmetatable( {
+		[ "Arcturis" ] = "Arcturis";
+		[ "Bro'Gaz the Clanless" ] = "Bro'Gaz Sans-clan";
+		[ "Gondria" ] = "Gondria";
+		[ "Skoll" ] = "Skoll";
 		[ "Time-Lost Proto Drake" ] = "Proto-drake perdu dans le temps";
-
-		[ "Dart" ] = "Flèche";
-		[ "Takk the Leaper" ] = "Takk le Bondisseur";
-		[ "Ravasaur Matriarch" ] = "Matriarche ravasaure";
-		[ "Razormaw Matriarch" ] = "Matriarche tranchegueules";
 	}, { __index = _NPCScanLocalization.NPCS; } );
 end
