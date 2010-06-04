@@ -2,8 +2,9 @@
 ## Title: _|cffCCCC88NPCScan|r
 ## Notes: Scans NPCs around you for rare ones.
 ## Author: Saiket
+## X-Credits: s8095324 (zhTW)
 ## Version: 3.3.0.5
-## X-Date: 2010-05-31
+## X-Date: 2010-06-03
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com
@@ -11,7 +12,7 @@
 ## X-Feedback: http://code.google.com/p/wow-saiket/issues/list?can=1&q=AddOn:NPCScan
 ## X-WoWI-ID: 12995
 ## X-Curse-Project-ID: npcscan
-## X-Localizations: enUS
+## X-Localizations: enUS, zhTW
 ## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, koKR, ruRU, zhCN, zhTW
 ## X-Embeds: LibTextTable-1.0, LibSharedMedia-3.0
 ## SavedVariables: _NPCScanOptions
