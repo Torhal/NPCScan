@@ -9,11 +9,11 @@ if ( GetLocale() == "zhTW" ) then
 
 	_NPCScanLocalization = setmetatable( {
 		NPCS = setmetatable( {
-			[ "Arcturis" ] = "大角";
-			[ "Bro'Gaz the Clanless" ] = "無氏族的伯卡茲";
-			[ "Gondria" ] = "剛卓亞";
-			[ "Skoll" ] = "史科爾";
-			[ "Time-Lost Proto Drake" ] = "時光流逝元龍";
+			[ 18684 ] = "無氏族的伯卡茲"; -- Bro'Gaz the Clanless
+			[ 32491 ] = "時光流逝元龍"; -- Time-Lost Proto Drake
+			[ 33776 ] = "剛卓亞"; -- Gondria
+			[ 35189 ] = "史科爾"; -- Skoll
+			[ 38453 ] = "大角"; -- Arcturis
 		}, { __index = _NPCScanLocalization.NPCS; } );
 
 		FOUND_FORMAT = "發現 "..LDQuo.."%s"..RDQuo.."!";

@@ -9,16 +9,14 @@ do
 	local LDQuo, RDQuo = GRAY_FONT_COLOR_CODE.."\226\128\156", "\226\128\157|r";
 
 
-	local Metatable = {
-		__index = function ( self, Key )
-			if ( Key ~= nil ) then
-				rawset( self, Key, Key );
-				return Key;
-			end
-		end;
-	};
 	_NPCScanLocalization = setmetatable( {
-		NPCS = setmetatable( {}, Metatable );
+		NPCS = {
+			[ 18684 ] = "Bro'Gaz the Clanless";
+			[ 32491 ] = "Time-Lost Proto Drake";
+			[ 33776 ] = "Gondria";
+			[ 35189 ] = "Skoll";
+			[ 38453 ] = "Arcturis";
+		};
 
 		PRINT_FORMAT = Title..": %s";
 
@@ -95,7 +93,14 @@ do
 		CMD_CACHE = "CACHE";
 		CMD_CACHE_EMPTY = "None of the mobs being searched for are cached.";
 		CMD_HELP = "Commands are "..LDQuo.."/npcscan add <NpcID> <Name>"..RDQuo..", "..LDQuo.."/npcscan remove <NpcID or Name>"..RDQuo..", "..LDQuo.."/npcscan cache"..RDQuo.." to list cached mobs, and simply "..LDQuo.."/npcscan"..RDQuo.." for the options menu.";
-	}, Metatable );
+	}, {
+		__index = function ( self, Key )
+			if ( Key ~= nil ) then
+				rawset( self, Key, Key );
+				return Key;
+			end
+		end;
+	} );
 
 
 

@@ -6,10 +6,10 @@
 
 if ( GetLocale() == "ruRU" ) then
 	_NPCScanLocalization.NPCS = setmetatable( {
-		[ "Arcturis" ] = "Арктур";
-		[ "Bro'Gaz the Clanless" ] = "Бро'Газ Без Клана";
-		[ "Gondria" ] = "Гондрия";
-		[ "Skoll" ] = "Сколл";
-		[ "Time-Lost Proto Drake" ] = "Затерянный во времени протодракон";
+		[ 18684 ] = "Бро'Газ Без Клана"; -- Bro'Gaz the Clanless
+		[ 32491 ] = "Затерянный во времени протодракон"; -- Time-Lost Proto Drake
+		[ 33776 ] = "Гондрия"; -- Gondria
+		[ 35189 ] = "Сколл"; -- Skoll
+		[ 38453 ] = "Арктур"; -- Arcturis
 	}, { __index = _NPCScanLocalization.NPCS; } );
 end

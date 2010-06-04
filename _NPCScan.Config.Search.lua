@@ -130,18 +130,17 @@ local Tabs = {}; -- [ "NPC" or AchievementID ] = Tab;
   * Description: Validates ability to use add and remove buttons.              *
   ****************************************************************************]]
 function me.NPCValidateButtons ()
-	local NpcID = me.EditBoxID:GetText() ~= "" and me.EditBoxID:GetNumber() or nil;
-	local Name = me.EditBoxName:GetText():trim():lower();
-	Name = Name ~= "" and Name or nil;
+	local NpcID, Name = me.EditBoxID:GetNumber(), me.EditBoxName:GetText();
 
-	local CanRemove = _NPCScan.OptionsCharacter.NPCs[ NpcID ];
-	local CanAdd = Name and NpcID and Name ~= CanRemove and NpcID >= 1 and NpcID <= _NPCScan.IDMax;
+	local OldName = _NPCScan.OptionsCharacter.NPCs[ NpcID ];
+	local CanAdd = NpcID and NpcID >= 1 and NpcID <= _NPCScan.IDMax
+		and Name and Name ~= "" and Name ~= OldName;
 
 	if ( me.Table ) then
-		me.Table:SetSelectionByKey( CanRemove and NpcID or nil );
+		me.Table:SetSelectionByKey( OldName and NpcID or nil );
 	end
 	me.AddButton[ CanAdd and "Enable" or "Disable" ]( me.AddButton );
-	me.RemoveButton[ CanRemove and "Enable" or "Disable" ]( me.RemoveButton );
+	me.RemoveButton[ OldName and "Enable" or "Disable" ]( me.RemoveButton );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Config.Search.NPCAdd                                    *

@@ -27,12 +27,12 @@ me.OptionsDefault = {
 };
 me.OptionsCharacterDefault = {
 	Version = me.Version;
-	NPCs = { -- Values must be lowercase and trimmed, but don't have to match the NPC name
-		[ 18684 ] = L.NPCS[ "Bro'Gaz the Clanless" ]:trim():lower();
-		[ 32491 ] = L.NPCS[ "Time-Lost Proto Drake" ]:trim():lower();
-		[ 33776 ] = L.NPCS[ "Gondria" ]:trim():lower();
-		[ 35189 ] = L.NPCS[ "Skoll" ]:trim():lower();
-		[ 38453 ] = L.NPCS[ "Arcturis" ]:trim():lower();
+	NPCs = {
+		[ 18684 ] = L.NPCS[ 18684 ]; -- Bro'Gaz the Clanless
+		[ 32491 ] = L.NPCS[ 32491 ]; -- Time-Lost Proto Drake
+		[ 33776 ] = L.NPCS[ 33776 ]; -- Gondria
+		[ 35189 ] = L.NPCS[ 35189 ]; -- Skoll
+		[ 38453 ] = L.NPCS[ 38453 ]; -- Arcturis
 	};
 	NPCWorldIDs = {
 		[ 18684 ] = 3; -- Bro'Gaz the Clanless
@@ -224,7 +224,7 @@ end
 function me.NPCAdd ( NpcID, Name, WorldID )
 	local Options = me.OptionsCharacter;
 	if ( not Options.NPCs[ NpcID ] ) then
-		Options.NPCs[ NpcID ], Options.NPCWorldIDs[ NpcID ] = Name:trim():lower(), WorldID;
+		Options.NPCs[ NpcID ], Options.NPCWorldIDs[ NpcID ] = Name, WorldID;
 		if ( not NPCActivate( NpcID, WorldID ) ) then -- Didn't activate
 			me.Config.Search.UpdateTab( "NPC" ); -- Just add row
 		end
@@ -398,7 +398,7 @@ function me.Synchronize ( Options, OptionsCharacter )
 	end
 	if ( not OptionsCharacter ) then
 		OptionsCharacter = me.OptionsCharacterDefault;
-		IsDefaultScan, IsHunter = true, select( 2, UnitClass( "player" ) ) == "HUNTER";
+		IsDefaultScan, IsHunter = true, IsShiftKeyDown() or select( 2, UnitClass( "player" ) ) == "HUNTER";
 	end
 
 	-- Clear all scans
@@ -560,12 +560,12 @@ function me:PLAYER_LOGIN ()
 		end
 		if ( Version == "3.1.0.1" or Version == "3.2.0.1" or Version == "3.2.0.2" ) then
 			-- 3.2.0.3: Added default scan for Skoll
-			OptionsCharacter.NPCs[ L.NPCS[ "Skoll" ]:trim():lower() ] = 35189;
+			OptionsCharacter.NPCs[ L.NPCS[ 35189 ] ] = 35189;
 			Version = "3.2.0.3";
 		end
 		if ( "3.2.0.3" <= Version and Version <= "3.3.0.1" ) then
 			-- 3.3.0.2: Added default scan for Arcturis
-			OptionsCharacter.NPCs[ L.NPCS[ "Arcturis" ]:trim():lower() ] = 38453;
+			OptionsCharacter.NPCs[ L.NPCS[ 38453 ] ] = 38453;
 			Version = "3.3.0.2";
 		end
 		if ( Version == "3.3.0.2" or Version == "3.3.0.3" or Version == "3.3.0.4" ) then
@@ -690,7 +690,6 @@ function me.SlashCommand ( Input )
 		elseif ( Command == L.CMD_REMOVE ) then
 			local ID = tonumber( Arguments );
 			if ( not ID ) then -- Search custom names
-				Arguments = Arguments:trim():lower();
 				for NpcID, Name in pairs( me.OptionsCharacter.NPCs ) do
 					if ( Name == Arguments ) then
 						ID = NpcID;

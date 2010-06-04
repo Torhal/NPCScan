@@ -6,10 +6,10 @@
 
 if ( GetLocale() == "zhCN" ) then
 	_NPCScanLocalization.NPCS = setmetatable( {
-		--[ "Arcturis" ] = "";
-		[ "Bro'Gaz the Clanless" ] = "独行者布罗加斯";
-		[ "Gondria" ] = "古德利亚";
-		--[ "Skoll ] = "";
-		--[ "Time-Lost Proto Drake" ] = "";
+		[ 18684 ] = "独行者布罗加斯"; -- Bro'Gaz the Clanless
+		--[ 32491 ] = ""; -- Time-Lost Proto Drake
+		[ 33776 ] = "古德利亚"; -- Gondria
+		--[ 35189 ] = ""; -- Skoll
+		--[ 38453 ] = ""; -- Arcturis
 	}, { __index = _NPCScanLocalization.NPCS; } );
 end
