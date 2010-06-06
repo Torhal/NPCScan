@@ -54,7 +54,7 @@ me.Achievements = { -- Criteria data for each achievement
 };
 me.ContinentIDs = {}; -- [ Localized continent name ] = Continent ID (mirrors WorldMapContinent.dbc)
 
-me.IDMax = 0xFFFFF; -- Largest ID that will fit in a GUID's 20-bit NPC ID field
+me.NpcIDMax = 0xFFFFF; -- Largest ID that will fit in a GUID's 20-bit NPC ID field
 me.UpdateRate = 0.1;
 
 

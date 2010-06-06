@@ -72,7 +72,8 @@ do
 		SEARCH_ID = "NPC ID:";
 		SEARCH_ID_DESC = "The ID of the NPC to search for.  This value can be found on sites like Wowhead.com.";
 		SEARCH_COMPLETED = "Done";
-		SEARCH_WORLD = "Continent:";
+		SEARCH_WORLD = "World:";
+		SEARCH_WORLD_DESC = "An optional world name to limit searching to.  Can be a continent name or "..ORANGE_FONT_COLOR_CODE.."instance name|r (case-sensitive).";
 
 		SEARCH_CACHED_YES = "|T"..READY_CHECK_NOT_READY_TEXTURE..":0|t";
 		SEARCH_CACHED_NO = "";

@@ -10,7 +10,16 @@ local L = _NPCScanLocalization;
 local me = CreateFrame( "Frame" );
 _NPCScan.Config.Search = me;
 
+me.AddFoundCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchAchievementAddFoundCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
+
 me.TableContainer = CreateFrame( "Frame", nil, me );
+
+me.NPCControls = CreateFrame( "Frame", nil, me.TableContainer );
+me.NPCName = CreateFrame( "EditBox", "_NPCScanSearchNpcName", me.NPCControls, "InputBoxTemplate" );
+me.NPCNpcID = CreateFrame( "EditBox", "_NPCScanSearchNpcID", me.NPCControls, "InputBoxTemplate" );
+me.NPCWorld = CreateFrame( "EditBox", "_NPCScanSearchNpcWorld", me.NPCControls, "InputBoxTemplate" );
+me.NPCAdd = CreateFrame( "Button", nil, me.NPCControls, "GameMenuButtonTemplate" );
+me.NPCRemove = CreateFrame( "Button", nil, me.NPCControls, "GameMenuButtonTemplate" );
 
 me.InactiveAlpha = 0.5;
 
@@ -23,9 +32,9 @@ end
 
 
 --[[****************************************************************************
-  * Function: _NPCScan.Config.Search.AchievementAddFoundOnClick                *
+  * Function: _NPCScan.Config.Search.AddFoundCheckbox.setFunc                  *
   ****************************************************************************]]
-function me.AchievementAddFoundOnClick ( Enable )
+function me.AddFoundCheckbox.setFunc ( Enable )
 	if ( _NPCScan.SetAchievementsAddFound( Enable == "1" ) ) then
 		_NPCScan.CacheListPrint( true );
 	end
@@ -34,6 +43,11 @@ end
 
 
 
+local function GetWorldID ( World ) -- Converts a localized world name into a WorldID
+	if ( World ~= "" ) then
+		return _NPCScan.ContinentIDs[ World ] or World;
+	end
+end
 local function GetWorldIDName ( WorldID ) -- Converts a WorldID into a localized world name
 	return type( WorldID ) == "number" and select( WorldID, GetMapContinents() ) or WorldID;
 end
@@ -126,42 +140,73 @@ end
 
 local Tabs = {}; -- [ "NPC" or AchievementID ] = Tab;
 --[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCValidateButtons                        *
+  * Function: _NPCScan.Config.Search.NPCValidate                               *
   * Description: Validates ability to use add and remove buttons.              *
   ****************************************************************************]]
-function me.NPCValidateButtons ()
-	local NpcID, Name = me.EditBoxID:GetNumber(), me.EditBoxName:GetText();
+function me.NPCValidate ()
+	local NpcID, Name, WorldID = me.NPCNpcID:GetNumber(), me.NPCName:GetText(), GetWorldID( me.NPCWorld:GetText() );
 
 	local OldName = _NPCScan.OptionsCharacter.NPCs[ NpcID ];
-	local CanAdd = NpcID and NpcID >= 1 and NpcID <= _NPCScan.IDMax
-		and Name and Name ~= "" and Name ~= OldName;
+	local OldWorldID = _NPCScan.OptionsCharacter.NPCWorldIDs[ NpcID ];
+	local CanAdd = NpcID and Name ~= ""
+		and NpcID >= 1 and NpcID <= _NPCScan.NpcIDMax
+		and ( Name ~= OldName or WorldID ~= OldWorldID );
+
+	-- Color world name orange if not a standard continent
+	local WorldColor = type( WorldID ) == "string" and ORANGE_FONT_COLOR or HIGHLIGHT_FONT_COLOR;
+	me.NPCWorld:SetTextColor( WorldColor.r, WorldColor.g, WorldColor.b );
 
 	if ( me.Table ) then
 		me.Table:SetSelectionByKey( OldName and NpcID or nil );
 	end
-	me.AddButton[ CanAdd and "Enable" or "Disable" ]( me.AddButton );
-	me.RemoveButton[ OldName and "Enable" or "Disable" ]( me.RemoveButton );
+	me.NPCAdd[ CanAdd and "Enable" or "Disable" ]( me.NPCAdd );
+	me.NPCRemove[ OldName and "Enable" or "Disable" ]( me.NPCRemove );
 end
 --[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCAdd                                    *
+  * Function: _NPCScan.Config.Search.NPCClear                                  *
+  * Description: Clears the NPC controls.                                      *
+  ****************************************************************************]]
+function me.NPCClear ()
+	me.NPCNpcID:SetText( "" );
+	me.NPCName:SetText( "" );
+	me.NPCWorld:SetText( "" );
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Config.Search.NPCAdd:OnClick                            *
   * Description: Adds a Custom NPC list element.                               *
   ****************************************************************************]]
-function me.NPCAdd ()
-	local NpcID, Name = me.EditBoxID:GetNumber(), me.EditBoxName:GetText();
+function me.NPCAdd:OnClick ()
+	local NpcID, Name, WorldID = me.NPCNpcID:GetNumber(), me.NPCName:GetText(), GetWorldID( me.NPCWorld:GetText() );
 	if ( _NPCScan.TamableIDs[ NpcID ] ) then
 		_NPCScan.Print( L.SEARCH_ADD_TAMABLE_FORMAT:format( Name ) );
 	end
 	_NPCScan.NPCRemove( NpcID );
-	if ( _NPCScan.NPCAdd( NpcID, Name ) ) then
+	if ( _NPCScan.NPCAdd( NpcID, Name, WorldID ) ) then
 		_NPCScan.CacheListPrint( true );
 	end
+	me.NPCClear();
 end
 --[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCRemove                                 *
+  * Function: _NPCScan.Config.Search.NPCRemove:OnClick                         *
   * Description: Removes a Custom NPC list element.                            *
   ****************************************************************************]]
-function me.NPCRemove ()
-	_NPCScan.NPCRemove( me.EditBoxID:GetNumber() );
+function me.NPCRemove:OnClick ()
+	_NPCScan.NPCRemove( me.NPCNpcID:GetNumber() );
+	me.NPCClear();
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Config.Search:NPCOnTabPressed                           *
+  * Description: Cycles through edit box controls.                             *
+  ****************************************************************************]]
+function me:NPCOnTabPressed ()
+	self.NextEditBox:SetFocus();
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Config.Search:NPCOnEnterPressed                         *
+  ****************************************************************************]]
+function me:NPCOnEnterPressed ()
+	self:ClearFocus();
+	me.NPCAdd:Click();
 end
 --[[****************************************************************************
   * Function: _NPCScan.Config.Search:NPCOnSelect                               *
@@ -169,17 +214,16 @@ end
   ****************************************************************************]]
 function me:NPCOnSelect ( NpcID )
 	if ( NpcID ~= nil ) then
-		me.EditBoxID:SetText( NpcID );
-		me.EditBoxName:SetText( _NPCScan.OptionsCharacter.NPCs[ NpcID ] );
+		me.NPCNpcID:SetNumber( NpcID );
+		me.NPCName:SetText( _NPCScan.OptionsCharacter.NPCs[ NpcID ] );
+		me.NPCWorld:SetText( GetWorldIDName( _NPCScan.OptionsCharacter.NPCWorldIDs[ NpcID ] ) or "" );
 	end
 end
 --[[****************************************************************************
   * Function: _NPCScan.Config.Search:NPCUpdate                                 *
   ****************************************************************************]]
 function me:NPCUpdate ()
-	me.EditBoxID:SetText( "" );
-	me.EditBoxName:SetText( "" );
-
+	me.NPCValidate();
 	local WorldIDs = _NPCScan.OptionsCharacter.NPCWorldIDs;
 	for NpcID, Name in pairs( _NPCScan.OptionsCharacter.NPCs ) do
 		local Row = me.Table:AddRow( NpcID,
@@ -199,6 +243,7 @@ function me:NPCActivate ()
 	me.Table:SetSortHandlers( true, true, true, true );
 	me.Table:SetSortColumn( 2 ); -- Default by name
 
+	me.NPCClear();
 	me.NPCControls:Show();
 	me.TableContainer:SetPoint( "BOTTOM", me.NPCControls, "TOP", 0, 4 );
 	me.Table.OnSelect = me.NPCOnSelect;
@@ -283,15 +328,15 @@ do
 	local function OnUpdate ( self ) -- Recreates table data at most once per frame
 		self:SetScript( "OnUpdate", nil );
 
-		for _, Row in ipairs( self.Table.Rows ) do
+		for _, Row in ipairs( me.Table.Rows ) do
 			Row:SetAlpha( 1.0 );
 		end
-		self.Table:Clear();
-		self.TabSelected:Update();
+		me.Table:Clear();
+		me.TabSelected:Update();
 	end
 	function me.UpdateTab ( ID )
 		if ( not ID or Tabs[ ID ] == me.TabSelected ) then
-			me:SetScript( "OnUpdate", OnUpdate );
+			me.TableContainer:SetScript( "OnUpdate", OnUpdate );
 		end;
 	end
 end
@@ -403,89 +448,87 @@ do
 
 
 	-- Settings checkboxes
-	local AddFoundCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchAchievementAddFoundCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
-	me.AddFoundCheckbox = AddFoundCheckbox;
-	AddFoundCheckbox:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
-	AddFoundCheckbox.setFunc = me.AchievementAddFoundOnClick;
-	AddFoundCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC;
-	local Label = _G[ AddFoundCheckbox:GetName().."Text" ];
+	me.AddFoundCheckbox:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
+	me.AddFoundCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC;
+	local Label = _G[ me.AddFoundCheckbox:GetName().."Text" ];
 	Label:SetText( L.SEARCH_ACHIEVEMENTADDFOUND );
-	AddFoundCheckbox:SetHitRectInsets( 4, 4 - Label:GetStringWidth(), 4, 4 );
+	me.AddFoundCheckbox:SetHitRectInsets( 4, 4 - Label:GetStringWidth(), 4, 4 );
 
 
 	-- Controls for NPCs table
-	local NPCControls = CreateFrame( "Frame", nil, me );
-	me.NPCControls = NPCControls;
-	NPCControls:Hide();
+	me.NPCControls:Hide();
 
 	-- Create add and remove buttons
-	local RemoveButton = CreateFrame( "Button", nil, NPCControls, "GameMenuButtonTemplate" );
-	me.RemoveButton = RemoveButton;
-	RemoveButton:SetSize( 16, 20 );
-	RemoveButton:SetPoint( "BOTTOMRIGHT", me, -16, 16 );
-	RemoveButton:SetText( L.SEARCH_REMOVE );
-	RemoveButton:SetScript( "OnClick", me.NPCRemove );
-	local AddButton = CreateFrame( "Button", nil, NPCControls, "GameMenuButtonTemplate" );
-	me.AddButton = AddButton;
-	AddButton:SetSize( 16, 20 );
-	AddButton:SetPoint( "BOTTOMRIGHT", RemoveButton, "TOPRIGHT", 0, 4 );
-	AddButton:SetText( L.SEARCH_ADD );
-	AddButton:SetScript( "OnClick", me.NPCAdd );
+	me.NPCRemove:SetSize( 16, 20 );
+	me.NPCRemove:SetPoint( "BOTTOMRIGHT", me, -16, 16 );
+	me.NPCRemove:SetText( L.SEARCH_REMOVE );
+	me.NPCRemove:SetScript( "OnClick", me.NPCRemove.OnClick );
+	me.NPCAdd:SetSize( 16, 20 );
+	me.NPCAdd:SetPoint( "BOTTOMRIGHT", me.NPCRemove, "TOPRIGHT", 0, 4 );
+	me.NPCAdd:SetText( L.SEARCH_ADD );
+	me.NPCAdd:SetScript( "OnClick", me.NPCAdd.OnClick );
 
 	-- Create edit boxes
-	local LabelName = NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
-	me.LabelName = LabelName;
-	LabelName:SetPoint( "BOTTOMLEFT", me, 16, 16 );
-	LabelName:SetPoint( "TOP", RemoveButton );
-	LabelName:SetText( L.SEARCH_NAME );
-	local LabelID = NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
-	me.LabelID = LabelID;
-	LabelID:SetPoint( "BOTTOMLEFT", LabelName, "TOPLEFT", 0, 4 );
-	LabelID:SetPoint( "TOP", AddButton );
-	LabelID:SetText( L.SEARCH_ID );
+	local NameLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
+	NameLabel:SetPoint( "LEFT", me, 16, 0 );
+	NameLabel:SetPoint( "TOP", me.NPCRemove );
+	NameLabel:SetPoint( "BOTTOM", me.NPCRemove );
+	NameLabel:SetText( L.SEARCH_NAME );
+	local NpcIDLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
+	NpcIDLabel:SetPoint( "LEFT", NameLabel );
+	NpcIDLabel:SetPoint( "TOP", me.NPCAdd );
+	NpcIDLabel:SetPoint( "BOTTOM", me.NPCAdd );
+	NpcIDLabel:SetText( L.SEARCH_ID );
 
-	local EditBoxName = CreateFrame( "EditBox", "_NPCScanSearchName", NPCControls, "InputBoxTemplate" );
-	me.EditBoxName = EditBoxName;
-	local EditBoxID = CreateFrame( "EditBox", "_NPCScanSearchID", NPCControls, "InputBoxTemplate" );
-	me.EditBoxID = EditBoxID;
-
-	EditBoxName:SetPoint( "TOP", LabelName );
-	EditBoxName:SetPoint( "LEFT", -- Attach to longest label
-		LabelName:GetStringWidth() > LabelID:GetStringWidth() and LabelName or LabelID,
+	local function EditBoxSetup ( self )
+		self:SetAutoFocus( false );
+		self:SetScript( "OnTabPressed", me.NPCOnTabPressed );
+		self:SetScript( "OnEnterPressed", me.NPCOnEnterPressed );
+		self:SetScript( "OnTextChanged", me.NPCValidate );
+		self:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
+		self:SetScript( "OnLeave", GameTooltip_Hide );
+		return self;
+	end
+	local NpcID, Name, World = EditBoxSetup( me.NPCNpcID ), EditBoxSetup( me.NPCName ), EditBoxSetup( me.NPCWorld );
+	Name:SetPoint( "LEFT", -- Attach to longest label
+		NameLabel:GetStringWidth() > NpcIDLabel:GetStringWidth() and NameLabel or NpcIDLabel,
 		"RIGHT", 8, 0 );
-	EditBoxName:SetPoint( "BOTTOMRIGHT", RemoveButton, "BOTTOMLEFT", -4, 0 );
-	EditBoxName:SetAutoFocus( false );
-	EditBoxName:SetScript( "OnTabPressed", function () EditBoxID:SetFocus(); end );
-	EditBoxName:SetScript( "OnEnterPressed", function () AddButton:Click(); end );
-	EditBoxName:SetScript( "OnTextChanged", me.NPCValidateButtons );
-	EditBoxName:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
-	EditBoxName:SetScript( "OnLeave", GameTooltip_Hide );
-	EditBoxName.tooltipText = L.SEARCH_NAME_DESC;
+	Name:SetPoint( "RIGHT", me.NPCRemove, "LEFT", -4, 0 );
+	Name:SetPoint( "TOP", NameLabel );
+	Name:SetPoint( "BOTTOM", NameLabel );
+	Name.NextEditBox, Name.tooltipText = NpcID, L.SEARCH_NAME_DESC;
 
-	EditBoxID:SetPoint( "TOP", LabelID );
-	EditBoxID:SetPoint( "LEFT", EditBoxName );
-	EditBoxID:SetPoint( "BOTTOMRIGHT", EditBoxName, "TOPRIGHT" );
-	EditBoxID:SetAutoFocus( false );
-	EditBoxID:SetNumeric( true );
-	EditBoxID:SetMaxLetters( floor( log10( _NPCScan.IDMax ) ) + 1 );
-	EditBoxID:SetScript( "OnTabPressed", function () EditBoxName:SetFocus(); end );
-	EditBoxID:SetScript( "OnEnterPressed", function () AddButton:Click(); end );
-	EditBoxID:SetScript( "OnTextChanged", me.NPCValidateButtons );
-	EditBoxID:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
-	EditBoxID:SetScript( "OnLeave", GameTooltip_Hide );
-	EditBoxID.tooltipText = L.SEARCH_ID_DESC;
+	NpcID:SetPoint( "LEFT", Name );
+	NpcID:SetPoint( "TOP", NpcIDLabel );
+	NpcID:SetPoint( "BOTTOM", NpcIDLabel );
+	NpcID:SetWidth( 64 );
+	NpcID:SetNumeric( true );
+	NpcID:SetMaxLetters( floor( log10( _NPCScan.NpcIDMax ) ) + 1 );
+	NpcID.NextEditBox, NpcID.tooltipText = World, L.SEARCH_ID_DESC;
 
-	NPCControls:SetPoint( "BOTTOMRIGHT", RemoveButton );
-	NPCControls:SetPoint( "LEFT", LabelID );
-	NPCControls:SetPoint( "TOP", AddButton );
+	local WorldLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
+	WorldLabel:SetPoint( "LEFT", NpcID, "RIGHT", 8, 0 );
+	WorldLabel:SetPoint( "TOP", NpcIDLabel );
+	WorldLabel:SetPoint( "BOTTOM", NpcIDLabel );
+	WorldLabel:SetText( L.SEARCH_WORLD );
+
+	World:SetPoint( "LEFT", WorldLabel, "RIGHT", 8, 0 );
+	World:SetPoint( "RIGHT", Name );
+	World:SetPoint( "TOP", NpcIDLabel );
+	World:SetPoint( "BOTTOM", NpcIDLabel );
+	World.NextEditBox, World.tooltipText = Name, L.SEARCH_WORLD_DESC;
+
+	me.NPCControls:SetPoint( "BOTTOMRIGHT", me.NPCRemove );
+	me.NPCControls:SetPoint( "LEFT", NpcIDLabel );
+	me.NPCControls:SetPoint( "TOP", me.NPCAdd );
 
 
 	-- Place table
-	me.TableContainer:SetPoint( "TOP", AddFoundCheckbox, "BOTTOM", 0, -28 );
+	me.TableContainer:SetPoint( "TOP", me.AddFoundCheckbox, "BOTTOM", 0, -28 );
 	me.TableContainer:SetPoint( "LEFT", SubText, -2, 0 );
 	me.TableContainer:SetPoint( "RIGHT", -16, 0 );
-	me.TableContainer:SetPoint( "BOTTOM", NPCControls );
-	me.TableContainer:SetBackdrop( { bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background"; } );
+	me.TableContainer:SetPoint( "BOTTOM", me.NPCControls );
+	me.TableContainer:SetBackdrop( { bgFile = [[Interface\DialogFrame\UI-DialogBox-Background]]; } );
 
 	-- Add all tabs
 	local LastTab;
@@ -502,26 +545,25 @@ do
 		Tab:SetMotionScriptsWhileDisabled( true ); -- Allow tooltip while active
 
 		if ( type( ID ) == "number" ) then -- AchievementID
-			local Size = select( 2, Tab:GetFontString():GetFont() ) + 4;
-			Tab:SetText( "|T:"..Size.."|t"..select( 2, GetAchievementInfo( ID ) ) );
-			Tab.AchievementID = ID;
+			Tab:SetText( ( select( 2, GetAchievementInfo( ID ) ) ) );
+			Tab:GetFontString():SetPoint( "RIGHT", -12, 0 );
 			local Checkbox = CreateFrame( "CheckButton", nil, Tab, "UICheckButtonTemplate" );
-			Tab.Checkbox = Checkbox;
-			Checkbox:SetSize( Size + 2, Size + 2 );
-			Checkbox:SetPoint( "LEFT", _G[ Tab:GetName().."Text" ], -4, 0 );
+			Tab.AchievementID, Tab.Checkbox = ID, Checkbox;
+			Checkbox:SetSize( 20, 20 );
+			Checkbox:SetPoint( "BOTTOMLEFT", 8, 0 );
 			Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
 			Checkbox:SetScript( "OnClick", me.TabCheckOnClick );
 			Checkbox:SetScript( "OnEnter", me.TabCheckOnEnter );
 			Checkbox:SetScript( "OnLeave", GameTooltip_Hide );
 			me.AchievementSetEnabled( ID, false ); -- Initialize the custom "unchecked" texture
+			PanelTemplates_TabResize( Tab, Checkbox:GetWidth() - 12 );
 		else
 			Tab:SetText( L.SEARCH_NPCS );
+			PanelTemplates_TabResize( Tab, -8 );
 		end
-		PanelTemplates_TabResize( Tab, -8 );
 
 		Tab.Update = Update;
-		Tab.Activate = Activate;
-		Tab.Deactivate = Deactivate;
+		Tab.Activate, Tab.Deactivate = Activate, Deactivate;
 
 		PanelTemplates_DeselectTab( Tab );
 		if ( LastTab ) then
