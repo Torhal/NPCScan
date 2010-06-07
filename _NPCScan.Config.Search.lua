@@ -18,6 +18,8 @@ me.NPCControls = CreateFrame( "Frame", nil, me.TableContainer );
 me.NPCName = CreateFrame( "EditBox", "_NPCScanSearchNpcName", me.NPCControls, "InputBoxTemplate" );
 me.NPCNpcID = CreateFrame( "EditBox", "_NPCScanSearchNpcID", me.NPCControls, "InputBoxTemplate" );
 me.NPCWorld = CreateFrame( "EditBox", "_NPCScanSearchNpcWorld", me.NPCControls, "InputBoxTemplate" );
+me.NPCWorldButton = CreateFrame( "Button", nil, me.NPCWorld );
+me.NPCWorldButton.Dropdown = CreateFrame( "Frame", "_NPCScanSearchNPCWorldDropdown", me.NPCWorldButton );
 me.NPCAdd = CreateFrame( "Button", nil, me.NPCControls, "GameMenuButtonTemplate" );
 me.NPCRemove = CreateFrame( "Button", nil, me.NPCControls, "GameMenuButtonTemplate" );
 
@@ -218,6 +220,52 @@ function me:NPCOnSelect ( NpcID )
 		me.NPCName:SetText( _NPCScan.OptionsCharacter.NPCs[ NpcID ] );
 		me.NPCWorld:SetText( GetWorldIDName( _NPCScan.OptionsCharacter.NPCWorldIDs[ NpcID ] ) or "" );
 	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Config.Search.NPCWorldButton.Dropdown:initialize        *
+  ****************************************************************************]]
+function me.NPCWorldButton.Dropdown:initialize ()
+	local Info = UIDropDownMenu_CreateInfo();
+	Info.func = self.OnSelect;
+	for Index = 1, select( "#", GetMapContinents() ) do
+		local World = select( Index, GetMapContinents() );
+		Info.text, Info.arg1 = World, World;
+		UIDropDownMenu_AddButton( Info );
+	end
+	local CurrentWorld = GetInstanceInfo();
+	if ( not _NPCScan.ContinentIDs[ CurrentWorld ] ) then -- Add current instance name
+		-- Spacer
+		Info = UIDropDownMenu_CreateInfo();
+		Info.disabled = 1;
+		UIDropDownMenu_AddButton( Info );
+		-- Current instance
+		Info.disabled = nil;
+		Info.text, Info.arg1 = CurrentWorld, CurrentWorld;
+		Info.colorCode = ORANGE_FONT_COLOR_CODE;
+		Info.func = self.OnSelect;
+		UIDropDownMenu_AddButton( Info );
+	end
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Config.Search.NPCWorldButton.Dropdown:OnSelect          *
+  ****************************************************************************]]
+function me.NPCWorldButton.Dropdown:OnSelect ( Name )
+	me.NPCWorld:SetText( Name );
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Config.Search.NPCWorldButton:OnClick                    *
+  ****************************************************************************]]
+function me.NPCWorldButton:OnClick ()
+	local Parent = self:GetParent();
+	Parent:ClearFocus();
+	ToggleDropDownMenu( nil, nil, self.Dropdown );
+	PlaySound( "igMainMenuOptionCheckBoxOn" );
+end
+--[[****************************************************************************
+  * Function: _NPCScan.Config.Search.NPCWorldButton:OnHide                     *
+  ****************************************************************************]]
+function me.NPCWorldButton:OnHide ()
+	CloseDropDownMenus();
 end
 --[[****************************************************************************
   * Function: _NPCScan.Config.Search:NPCUpdate                                 *
@@ -467,6 +515,9 @@ do
 	me.NPCAdd:SetPoint( "BOTTOMRIGHT", me.NPCRemove, "TOPRIGHT", 0, 4 );
 	me.NPCAdd:SetText( L.SEARCH_ADD );
 	me.NPCAdd:SetScript( "OnClick", me.NPCAdd.OnClick );
+	me.NPCAdd:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
+	me.NPCAdd:SetScript( "OnLeave", GameTooltip_Hide );
+	me.NPCAdd.tooltipText = L.SEARCH_ADD_DESC;
 
 	-- Create edit boxes
 	local NameLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
@@ -517,6 +568,16 @@ do
 	World:SetPoint( "TOP", NpcIDLabel );
 	World:SetPoint( "BOTTOM", NpcIDLabel );
 	World.NextEditBox, World.tooltipText = Name, L.SEARCH_WORLD_DESC;
+
+	local WorldButton = me.NPCWorldButton;
+	WorldButton:SetPoint( "RIGHT", World, 3, 1 );
+	WorldButton:SetSize( 24, 24 );
+	WorldButton:SetNormalTexture( [[Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up]] );
+	WorldButton:SetPushedTexture( [[Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down]] );
+	WorldButton:SetHighlightTexture( [[Interface\Buttons\UI-Common-MouseHilight]], "ADD" );
+	WorldButton:SetScript( "OnClick", WorldButton.OnClick );
+	WorldButton:SetScript( "OnHide", WorldButton.OnHide );
+	UIDropDownMenu_SetAnchor( WorldButton.Dropdown, 0, 0, "TOPRIGHT", WorldButton, "BOTTOMRIGHT" );
 
 	me.NPCControls:SetPoint( "BOTTOMRIGHT", me.NPCRemove );
 	me.NPCControls:SetPoint( "LEFT", NpcIDLabel );

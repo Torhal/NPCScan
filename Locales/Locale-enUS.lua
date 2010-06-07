@@ -81,6 +81,7 @@ do
 		SEARCH_COMPLETED_NO = "";
 
 		SEARCH_ADD = "+";
+		SEARCH_ADD_DESC = "Add new NPC or save changes to existing one.";
 		SEARCH_REMOVE = "-";
 		SEARCH_ADD_TAMABLE_FORMAT = "Note: "..LDQuo.."%s"..RDQuo.." is tamable, so seeing it as a tamed hunter's pet will cause a false alarm.";
 
