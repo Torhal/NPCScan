@@ -9,10 +9,11 @@ if ( GetLocale() ~= "ruRU" ) then
 end
 
 
+-- See http://wow.curseforge.com/addons/npcscan/localization/ruRU/
 _NPCScanLocalization.NPCS = setmetatable( {
-	[ 18684 ] = "Бро'Газ Без Клана"; -- Bro'Gaz the Clanless
-	[ 32491 ] = "Затерянный во времени протодракон"; -- Time-Lost Proto Drake
-	[ 33776 ] = "Гондрия"; -- Gondria
-	[ 35189 ] = "Сколл"; -- Skoll
-	[ 38453 ] = "Арктур"; -- Arcturis
+	[ 18684 ] = "Бро'Газ Без Клана",
+	[ 32491 ] = "Затерянный во времени протодракон",
+	[ 33776 ] = "Гондрия",
+	[ 35189 ] = "Сколл",
+	[ 38453 ] = "Арктур",
 }, { __index = _NPCScanLocalization.NPCS; } );

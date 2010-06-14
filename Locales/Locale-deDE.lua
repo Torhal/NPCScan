@@ -9,10 +9,11 @@ if ( GetLocale() ~= "deDE" ) then
 end
 
 
+-- See http://wow.curseforge.com/addons/npcscan/localization/deDE/
 _NPCScanLocalization.NPCS = setmetatable( {
-	[ 18684 ] = "Bro'Gaz der Klanlose"; -- Bro'Gaz the Clanless
-	[ 32491 ] = "Zeitverlorener Protodrache"; -- Time-Lost Proto Drake
-	[ 33776 ] = "Gondria"; -- Gondria
-	[ 35189 ] = "Skoll"; -- Skoll
-	[ 38453 ] = "Arcturis"; -- Arcturis
+	[ 18684 ] = "Bro'Gaz der Klanlose",
+	[ 32491 ] = "Zeitverlorener Protodrache",
+	[ 33776 ] = "Gondria",
+	[ 35189 ] = "Skoll",
+	[ 38453 ] = "Arcturis",
 }, { __index = _NPCScanLocalization.NPCS; } );

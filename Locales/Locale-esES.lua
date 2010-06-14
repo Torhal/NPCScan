@@ -9,10 +9,11 @@ if ( GetLocale() ~= "esES" and GetLocale() ~= "esMX" ) then
 end
 
 
+-- See http://wow.curseforge.com/addons/npcscan/localization/esES/
 _NPCScanLocalization.NPCS = setmetatable( {
-	[ 18684 ] = "Bro'Gaz sin Clan"; -- Bro'Gaz the Clanless
-	[ 32491 ] = "Protodraco Tiempo Perdido"; -- Time-Lost Proto Drake
-	[ 33776 ] = "Gondria"; -- Gondria
-	[ 35189 ] = "Skoll"; -- Skoll
-	[ 38453 ] = "Arcturis"; -- Arcturis
+	[ 18684 ] = "Bro'Gaz sin Clan",
+	[ 32491 ] = "Protodraco Tiempo Perdido",
+	[ 33776 ] = "Gondria",
+	[ 35189 ] = "Skoll",
+	[ 38453 ] = "Arcturis",
 }, { __index = _NPCScanLocalization.NPCS; } );

@@ -9,10 +9,9 @@ if ( GetLocale() ~= "koKR" ) then
 end
 
 
+-- See http://wow.curseforge.com/addons/npcscan/localization/koKR/
 _NPCScanLocalization.NPCS = setmetatable( {
-	[ 18684 ] = "외톨이 브로가즈"; -- Bro'Gaz the Clanless
-	--[ 32491 ] = ""; -- Time-Lost Proto Drake
-	[ 33776 ] = "곤드리아"; -- Gondria
-	[ 35189 ] = "스콜"; -- Skoll
-	--[ 38453 ] = ""; -- Arcturis
+	[ 18684 ] = "외톨이 브로가즈",
+	[ 33776 ] = "곤드리아",
+	[ 35189 ] = "스콜",
 }, { __index = _NPCScanLocalization.NPCS; } );

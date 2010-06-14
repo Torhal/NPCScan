@@ -9,10 +9,11 @@ if ( GetLocale() ~= "frFR" ) then
 end
 
 
+-- See http://wow.curseforge.com/addons/npcscan/localization/frFR/
 _NPCScanLocalization.NPCS = setmetatable( {
-	[ 18684 ] = "Bro'Gaz Sans-clan"; -- Bro'Gaz the Clanless
-	[ 32491 ] = "Proto-drake perdu dans le temps"; -- Time-Lost Proto Drake
-	[ 33776 ] = "Gondria"; -- Gondria
-	[ 35189 ] = "Skoll"; -- Skoll
-	[ 38453 ] = "Arcturis"; -- Arcturis
+	[ 18684 ] = "Bro'Gaz Sans-clan",
+	[ 32491 ] = "Proto-drake perdu dans le temps",
+	[ 33776 ] = "Gondria",
+	[ 35189 ] = "Skoll",
+	[ 38453 ] = "Arcturis",
 }, { __index = _NPCScanLocalization.NPCS; } );

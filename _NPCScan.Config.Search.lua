@@ -275,7 +275,7 @@ function me:NPCUpdate ()
 	local WorldIDs = _NPCScan.OptionsCharacter.NPCWorldIDs;
 	for NpcID, Name in pairs( _NPCScan.OptionsCharacter.NPCs ) do
 		local Row = me.Table:AddRow( NpcID,
-			L[ _NPCScan.TestID( NpcID ) and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
+			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or nil,
 			Name, NpcID, GetWorldIDName( WorldIDs[ NpcID ] ) );
 
 		if ( not _NPCScan.NPCIsActive( NpcID ) ) then
@@ -339,9 +339,9 @@ function me:AchievementUpdate ()
 		local Name, _, Completed = GetAchievementCriteriaInfo( CriteriaID );
 
 		local Row = me.Table:AddRow( CriteriaID,
-			L[ _NPCScan.TestID( NpcID ) and "SEARCH_CACHED_YES" or "SEARCH_CACHED_NO" ],
+			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or nil,
 			Name, NpcID,
-			L[ Completed and "SEARCH_COMPLETED_YES" or "SEARCH_COMPLETED_NO" ] );
+			Completed and [[|TInterface\RaidFrame\ReadyCheck-Ready:0|t]] or nil );
 
 		if ( not _NPCScan.AchievementNPCIsActive( Achievement, NpcID ) ) then
 			Row:SetAlpha( me.InactiveAlpha );
@@ -406,7 +406,7 @@ if ( LibRareSpawnsData ) then
 			end
 
 			GameTooltip:SetOwner( self, "ANCHOR_TOPRIGHT" );
-			GameTooltip:SetText( L.SEARCH_IMAGE_FORMAT:format( Data.Portrait, Height, Width ) );
+			GameTooltip:SetText( "|T"..Data.Portrait..":"..Height..":"..Width.."|t" );
 			GameTooltip:AddLine( L.SEARCH_LEVEL_TYPE_FORMAT:format( Data.Level, Data.MonsterType ) );
 			GameTooltip:Show();
 		end
