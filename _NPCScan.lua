@@ -79,8 +79,8 @@ end
 do
 	local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip", me );
 	-- Add template text lines
-	local Text = Tooltip:CreateFontString( "$parentTextLeft1", nil, "GameTooltipText" );
-	Tooltip:AddFontStrings( Text, Tooltip:CreateFontString( "$parentTextRight1", nil, "GameTooltipText" ) );
+	local Text = Tooltip:CreateFontString();
+	Tooltip:AddFontStrings( Text, Tooltip:CreateFontString() );
 	function me.TestID ( NpcID )
 		Tooltip:SetOwner( WorldFrame, "ANCHOR_NONE" );
 		Tooltip:SetHyperlink( ( "unit:0xF5300%05X000000" ):format( NpcID ) );
