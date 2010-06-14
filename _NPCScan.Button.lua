@@ -316,141 +316,135 @@ end
 
 
 
---------------------------------------------------------------------------------
--- Function Hooks / Execution
------------------------------
+me:SetScale( 1.25 );
+me:SetSize( 150, 42 );
+me:SetPoint( "BOTTOM", UIParent, 0, 128 );
+me:SetMovable( true );
+me:SetUserPlaced( true );
+me:SetClampedToScreen( true );
+me:SetFrameStrata( "FULLSCREEN_DIALOG" );
+me:SetNormalTexture( [[Interface\AchievementFrame\UI-Achievement-Parchment-Horizontal]] );
+local Background = me:GetNormalTexture();
+Background:SetDrawLayer( "BACKGROUND" );
+Background:ClearAllPoints();
+Background:SetPoint( "BOTTOMLEFT", 3, 3 );
+Background:SetPoint( "TOPRIGHT", -3, -3 );
+Background:SetTexCoord( 0, 1, 0, 0.25 );
 
-do
-	me:SetScale( 1.25 );
-	me:SetSize( 150, 42 );
-	me:SetPoint( "BOTTOM", UIParent, 0, 128 );
-	me:SetMovable( true );
-	me:SetUserPlaced( true );
-	me:SetClampedToScreen( true );
-	me:SetFrameStrata( "FULLSCREEN_DIALOG" );
-	me:SetNormalTexture( [[Interface\AchievementFrame\UI-Achievement-Parchment-Horizontal]] );
-	local Background = me:GetNormalTexture();
-	Background:SetDrawLayer( "BACKGROUND" );
-	Background:ClearAllPoints();
-	Background:SetPoint( "BOTTOMLEFT", 3, 3 );
-	Background:SetPoint( "TOPRIGHT", -3, -3 );
-	Background:SetTexCoord( 0, 1, 0, 0.25 );
+me:SetAttribute( "_onshow", "self:Enable();" );
+me:SetAttribute( "_onhide", "self:Disable();" );
+me:Hide();
 
-	me:SetAttribute( "_onshow", "self:Enable();" );
-	me:SetAttribute( "_onhide", "self:Disable();" );
-	me:Hide();
+local TitleBackground = me:CreateTexture( nil, "BORDER" );
+TitleBackground:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Title]] );
+TitleBackground:SetPoint( "TOPRIGHT", -5, -5 );
+TitleBackground:SetPoint( "LEFT", 5, 0 );
+TitleBackground:SetHeight( 18 );
+TitleBackground:SetTexCoord( 0, 0.9765625, 0, 0.3125 );
+TitleBackground:SetAlpha( 0.8 );
 
-	local TitleBackground = me:CreateTexture( nil, "BORDER" );
-	TitleBackground:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Title]] );
-	TitleBackground:SetPoint( "TOPRIGHT", -5, -5 );
-	TitleBackground:SetPoint( "LEFT", 5, 0 );
-	TitleBackground:SetHeight( 18 );
-	TitleBackground:SetTexCoord( 0, 0.9765625, 0, 0.3125 );
-	TitleBackground:SetAlpha( 0.8 );
+local Title = me:CreateFontString( nil, "OVERLAY", "GameFontHighlightMedium" );
+me.Title = Title;
+Title:SetPoint( "TOPLEFT", TitleBackground );
+Title:SetPoint( "RIGHT", TitleBackground );
+me:SetFontString( Title );
 
-	local Title = me:CreateFontString( nil, "OVERLAY", "GameFontHighlightMedium" );
-	me.Title = Title;
-	Title:SetPoint( "TOPLEFT", TitleBackground );
-	Title:SetPoint( "RIGHT", TitleBackground );
-	me:SetFontString( Title );
+local SubTitle = me:CreateFontString( nil, "OVERLAY", "GameFontBlackTiny" );
+SubTitle:SetPoint( "TOPLEFT", Title, "BOTTOMLEFT", 0, -4 );
+SubTitle:SetPoint( "RIGHT", Title );
+SubTitle:SetText( L.BUTTON_FOUND );
 
-	local SubTitle = me:CreateFontString( nil, "OVERLAY", "GameFontBlackTiny" );
-	SubTitle:SetPoint( "TOPLEFT", Title, "BOTTOMLEFT", 0, -4 );
-	SubTitle:SetPoint( "RIGHT", Title );
-	SubTitle:SetText( L.BUTTON_FOUND );
+-- Border
+me:SetBackdrop( {
+	tile = true; edgeSize = 16;
+	edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]];
+} );
+me:OnLeave(); -- Set non-highlighted colors
 
-	-- Border
-	me:SetBackdrop( {
-		tile = true; edgeSize = 16;
-		edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]];
-	} );
-	me:OnLeave(); -- Set non-highlighted colors
+-- Close button
+local Close = CreateFrame( "Button", nil, me, "UIPanelCloseButton" );
+Close:SetPoint( "TOPRIGHT" );
+Close:SetSize( 32, 32 );
+Close:SetScale( 0.8 );
+Close:SetHitRectInsets( 8, 8, 8, 8 );
 
-	-- Close button
-	local Close = CreateFrame( "Button", nil, me, "UIPanelCloseButton" );
-	Close:SetPoint( "TOPRIGHT" );
-	Close:SetSize( 32, 32 );
-	Close:SetScale( 0.8 );
-	Close:SetHitRectInsets( 8, 8, 8, 8 );
-
-	-- Model view
-	local Model = me.Model;
-	Model:SetPoint( "BOTTOMLEFT", me, "TOPLEFT", 0, -4 );
-	Model:SetPoint( "RIGHT" );
-	Model:SetHeight( me:GetWidth() * 0.6 );
-	me:SetClampRectInsets( 0, 0, Model:GetTop() - me:GetTop(), 0 ); -- Allow room for model
+-- Model view
+local Model = me.Model;
+Model:SetPoint( "BOTTOMLEFT", me, "TOPLEFT", 0, -4 );
+Model:SetPoint( "RIGHT" );
+Model:SetHeight( me:GetWidth() * 0.6 );
+me:SetClampRectInsets( 0, 0, Model:GetTop() - me:GetTop(), 0 ); -- Allow room for model
 
 
-	-- Glow animation
-	local Texture = Model:CreateTexture( nil, "OVERLAY" );
-	Texture:SetPoint( "CENTER", me );
-	Texture:SetSize( 400 / 300 * me:GetWidth(), 171 / 70 * me:GetHeight() );
-	Texture:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Alert-Glow]] );
-	Texture:SetBlendMode( "ADD" );
-	Texture:SetTexCoord( 0, 0.78125, 0, 0.66796875 );
-	Texture:SetAlpha( 0 );
-	me.Glow = Texture:CreateAnimationGroup();
-	local FadeIn = me.Glow:CreateAnimation( "Alpha" );
-	FadeIn:SetChange( 1.0 );
-	FadeIn:SetDuration( 0.2 );
-	local FadeOut = me.Glow:CreateAnimation( "Alpha" );
-	FadeOut:SetOrder( 2 );
-	FadeOut:SetChange( -1.0 );
-	FadeOut:SetDuration( 0.5 );
+-- Glow animation
+local Texture = Model:CreateTexture( nil, "OVERLAY" );
+Texture:SetPoint( "CENTER", me );
+Texture:SetSize( 400 / 300 * me:GetWidth(), 171 / 70 * me:GetHeight() );
+Texture:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Alert-Glow]] );
+Texture:SetBlendMode( "ADD" );
+Texture:SetTexCoord( 0, 0.78125, 0, 0.66796875 );
+Texture:SetAlpha( 0 );
+me.Glow = Texture:CreateAnimationGroup();
+local FadeIn = me.Glow:CreateAnimation( "Alpha" );
+FadeIn:SetChange( 1.0 );
+FadeIn:SetDuration( 0.2 );
+local FadeOut = me.Glow:CreateAnimation( "Alpha" );
+FadeOut:SetOrder( 2 );
+FadeOut:SetChange( -1.0 );
+FadeOut:SetDuration( 0.5 );
 
-	-- Shine animation (reflection swipe)
-	local Texture = me:CreateTexture( nil, "ARTWORK" );
-	Texture:SetPoint( "TOPLEFT", me, 0, 8 );
-	Texture:SetSize( 67 / 300 * me:GetWidth(), 1.28 * me:GetHeight() );
-	Texture:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Alert-Glow]] );
-	Texture:SetBlendMode( "ADD" );
-	Texture:SetTexCoord( 0.78125, 0.912109375, 0, 0.28125 );
-	Texture:SetAlpha( 0 );
-	me.Shine = Texture:CreateAnimationGroup();
-	local Show = me.Shine:CreateAnimation( "Alpha" );
-	Show:SetStartDelay( 0.3 );
-	Show:SetChange( 1.0 );
-	Show:SetDuration( 1e-5 ); -- Note: 0 is invalid
-	local Slide = me.Shine:CreateAnimation( "Translation" );
-	Slide:SetOrder( 2 );
-	Slide:SetOffset( me:GetWidth() - Texture:GetWidth() + 8, 0 );
-	Slide:SetDuration( 0.4 );
-	local FadeOut = me.Shine:CreateAnimation( "Alpha" );
-	FadeOut:SetOrder( 2 );
-	FadeOut:SetStartDelay( 0.2 );
-	FadeOut:SetChange( -1.0 );
-	FadeOut:SetDuration( 0.2 );
-
-
-	-- Full screen flash
-	local Flash = me.Flash;
-	Flash:Hide();
-	Flash:SetAllPoints();
-	Flash:SetAlpha( 0 );
-	Flash:SetFrameStrata( "FULLSCREEN_DIALOG" );
-
-	local Texture = Flash:CreateTexture();
-	Texture:SetBlendMode( "ADD" );
-	Texture:SetAllPoints();
-	Texture:SetTexture( [[Interface\FullScreenTextures\LowHealth]] );
-
-	Flash.Fade = Flash:CreateAnimationGroup();
-	Flash.Fade:SetLooping( "BOUNCE" );
-	Flash.Fade:SetScript( "OnLoop", Flash.OnLoop );
-	Flash.Fade:SetScript( "OnPlay", Flash.OnPlay );
-
-	local FadeIn = Flash.Fade:CreateAnimation( "Alpha" );
-	FadeIn:SetChange( 1.0 );
-	FadeIn:SetDuration( 0.5 );
-	FadeIn:SetEndDelay( 0.25 );
+-- Shine animation (reflection swipe)
+local Texture = me:CreateTexture( nil, "ARTWORK" );
+Texture:SetPoint( "TOPLEFT", me, 0, 8 );
+Texture:SetSize( 67 / 300 * me:GetWidth(), 1.28 * me:GetHeight() );
+Texture:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Alert-Glow]] );
+Texture:SetBlendMode( "ADD" );
+Texture:SetTexCoord( 0.78125, 0.912109375, 0, 0.28125 );
+Texture:SetAlpha( 0 );
+me.Shine = Texture:CreateAnimationGroup();
+local Show = me.Shine:CreateAnimation( "Alpha" );
+Show:SetStartDelay( 0.3 );
+Show:SetChange( 1.0 );
+Show:SetDuration( 1e-5 ); -- Note: 0 is invalid
+local Slide = me.Shine:CreateAnimation( "Translation" );
+Slide:SetOrder( 2 );
+Slide:SetOffset( me:GetWidth() - Texture:GetWidth() + 8, 0 );
+Slide:SetDuration( 0.4 );
+local FadeOut = me.Shine:CreateAnimation( "Alpha" );
+FadeOut:SetOrder( 2 );
+FadeOut:SetStartDelay( 0.2 );
+FadeOut:SetChange( -1.0 );
+FadeOut:SetDuration( 0.2 );
 
 
-	me:SetAttribute( "type", "macro" );
+-- Full screen flash
+local Flash = me.Flash;
+Flash:Hide();
+Flash:SetAllPoints();
+Flash:SetAlpha( 0 );
+Flash:SetFrameStrata( "FULLSCREEN_DIALOG" );
 
-	me:SetScript( "OnEnter", me.OnEnter );
-	me:SetScript( "OnLeave", me.OnLeave );
-	me:SetScript( "OnEvent", _NPCScan.OnEvent );
-	me:HookScript( "OnShow", me.OnShow );
-	me:HookScript( "OnHide", me.OnHide );
-	me:RegisterEvent( "PLAYER_REGEN_ENABLED" );
-end
+local Texture = Flash:CreateTexture();
+Texture:SetBlendMode( "ADD" );
+Texture:SetAllPoints();
+Texture:SetTexture( [[Interface\FullScreenTextures\LowHealth]] );
+
+Flash.Fade = Flash:CreateAnimationGroup();
+Flash.Fade:SetLooping( "BOUNCE" );
+Flash.Fade:SetScript( "OnLoop", Flash.OnLoop );
+Flash.Fade:SetScript( "OnPlay", Flash.OnPlay );
+
+local FadeIn = Flash.Fade:CreateAnimation( "Alpha" );
+FadeIn:SetChange( 1.0 );
+FadeIn:SetDuration( 0.5 );
+FadeIn:SetEndDelay( 0.25 );
+
+
+me:SetAttribute( "type", "macro" );
+
+me:SetScript( "OnEnter", me.OnEnter );
+me:SetScript( "OnLeave", me.OnLeave );
+me:SetScript( "OnEvent", _NPCScan.OnEvent );
+me:HookScript( "OnShow", me.OnShow );
+me:HookScript( "OnHide", me.OnHide );
+me:RegisterEvent( "PLAYER_REGEN_ENABLED" );

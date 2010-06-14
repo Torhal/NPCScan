@@ -4,12 +4,15 @@
   ****************************************************************************]]
 
 
-if ( GetLocale() == "esES" or GetLocale() == "esMX" ) then
-	_NPCScanLocalization.NPCS = setmetatable( {
-		[ 18684 ] = "Bro'Gaz sin Clan"; -- Bro'Gaz the Clanless
-		[ 32491 ] = "Protodraco Tiempo Perdido"; -- Time-Lost Proto Drake
-		[ 33776 ] = "Gondria"; -- Gondria
-		[ 35189 ] = "Skoll"; -- Skoll
-		[ 38453 ] = "Arcturis"; -- Arcturis
-	}, { __index = _NPCScanLocalization.NPCS; } );
+if ( GetLocale() ~= "esES" and GetLocale() ~= "esMX" ) then
+	return;
 end
+
+
+_NPCScanLocalization.NPCS = setmetatable( {
+	[ 18684 ] = "Bro'Gaz sin Clan"; -- Bro'Gaz the Clanless
+	[ 32491 ] = "Protodraco Tiempo Perdido"; -- Time-Lost Proto Drake
+	[ 33776 ] = "Gondria"; -- Gondria
+	[ 35189 ] = "Skoll"; -- Skoll
+	[ 38453 ] = "Arcturis"; -- Arcturis
+}, { __index = _NPCScanLocalization.NPCS; } );

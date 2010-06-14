@@ -5,7 +5,7 @@
 
 
 local AddOnName = ...;
-local me = {};
+local me = LibStub( "AceEvent-3.0" ):Embed( {} );
 _NPCScan.Overlays = me;
 
 local MESSAGE_REGISTER = "NpcOverlay_RegisterScanner";
@@ -30,31 +30,20 @@ end
   * Function: _NPCScan.Overlays.Add                                            *
   * Description: Enables overlay maps for a given NPC ID.                      *
   ****************************************************************************]]
-function me.Add ( ID )
-	me:SendMessage( MESSAGE_ADD, ID, AddOnName );
+function me.Add ( NpcID )
+	me:SendMessage( MESSAGE_ADD, NpcID, AddOnName );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Overlays.Remove                                         *
   * Description: Disables overlay maps for a given NPC ID.                     *
   ****************************************************************************]]
-function me.Remove ( ID )
-	me:SendMessage( MESSAGE_REMOVE, ID, AddOnName );
+function me.Remove ( NpcID )
+	me:SendMessage( MESSAGE_REMOVE, NpcID, AddOnName );
 end
 --[[****************************************************************************
   * Function: _NPCScan.Overlays.Found                                          *
   * Description: Lets overlay mods know the NPC ID was found.                  *
   ****************************************************************************]]
-function me.Found ( ID )
-	me:SendMessage( MESSAGE_FOUND, ID, AddOnName );
-end
-
-
-
-
---------------------------------------------------------------------------------
--- Function Hooks / Execution
------------------------------
-
-do
-	LibStub( "AceEvent-3.0" ):Embed( me );
+function me.Found ( NpcID )
+	me:SendMessage( MESSAGE_FOUND, NpcID, AddOnName );
 end

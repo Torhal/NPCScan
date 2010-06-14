@@ -471,174 +471,168 @@ end
 
 
 
---------------------------------------------------------------------------------
--- Function Hooks / Execution
------------------------------
+me.name = L.SEARCH_TITLE;
+me.parent = L.CONFIG_TITLE;
+me:Hide();
+me:SetScript( "OnShow", me.OnShow );
 
-do
-	me.name = L.SEARCH_TITLE;
-	me.parent = L.CONFIG_TITLE;
-	me:Hide();
-	me:SetScript( "OnShow", me.OnShow );
-
-	-- Pane title
-	me.Title = me:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
-	me.Title:SetPoint( "TOPLEFT", 16, -16 );
-	me.Title:SetText( L.SEARCH_TITLE );
-	local SubText = me:CreateFontString( nil, "ARTWORK", "GameFontHighlightSmall" );
-	me.SubText = SubText;
-	SubText:SetPoint( "TOPLEFT", me.Title, "BOTTOMLEFT", 0, -8 );
-	SubText:SetPoint( "RIGHT", -32, 0 );
-	SubText:SetHeight( 32 );
-	SubText:SetJustifyH( "LEFT" );
-	SubText:SetJustifyV( "TOP" );
-	SubText:SetText( L.SEARCH_DESC );
+-- Pane title
+me.Title = me:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
+me.Title:SetPoint( "TOPLEFT", 16, -16 );
+me.Title:SetText( L.SEARCH_TITLE );
+local SubText = me:CreateFontString( nil, "ARTWORK", "GameFontHighlightSmall" );
+me.SubText = SubText;
+SubText:SetPoint( "TOPLEFT", me.Title, "BOTTOMLEFT", 0, -8 );
+SubText:SetPoint( "RIGHT", -32, 0 );
+SubText:SetHeight( 32 );
+SubText:SetJustifyH( "LEFT" );
+SubText:SetJustifyV( "TOP" );
+SubText:SetText( L.SEARCH_DESC );
 
 
-	-- Settings checkboxes
-	me.AddFoundCheckbox:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
-	me.AddFoundCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC;
-	local Label = _G[ me.AddFoundCheckbox:GetName().."Text" ];
-	Label:SetText( L.SEARCH_ACHIEVEMENTADDFOUND );
-	me.AddFoundCheckbox:SetHitRectInsets( 4, 4 - Label:GetStringWidth(), 4, 4 );
+-- Settings checkboxes
+me.AddFoundCheckbox:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
+me.AddFoundCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC;
+local Label = _G[ me.AddFoundCheckbox:GetName().."Text" ];
+Label:SetText( L.SEARCH_ACHIEVEMENTADDFOUND );
+me.AddFoundCheckbox:SetHitRectInsets( 4, 4 - Label:GetStringWidth(), 4, 4 );
 
 
-	-- Controls for NPCs table
-	me.NPCControls:Hide();
+-- Controls for NPCs table
+me.NPCControls:Hide();
 
-	-- Create add and remove buttons
-	me.NPCRemove:SetSize( 16, 20 );
-	me.NPCRemove:SetPoint( "BOTTOMRIGHT", me, -16, 16 );
-	me.NPCRemove:SetText( L.SEARCH_REMOVE );
-	me.NPCRemove:SetScript( "OnClick", me.NPCRemove.OnClick );
-	me.NPCAdd:SetSize( 16, 20 );
-	me.NPCAdd:SetPoint( "BOTTOMRIGHT", me.NPCRemove, "TOPRIGHT", 0, 4 );
-	me.NPCAdd:SetText( L.SEARCH_ADD );
-	me.NPCAdd:SetScript( "OnClick", me.NPCAdd.OnClick );
-	me.NPCAdd:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
-	me.NPCAdd:SetScript( "OnLeave", GameTooltip_Hide );
-	me.NPCAdd.tooltipText = L.SEARCH_ADD_DESC;
+-- Create add and remove buttons
+me.NPCRemove:SetSize( 16, 20 );
+me.NPCRemove:SetPoint( "BOTTOMRIGHT", me, -16, 16 );
+me.NPCRemove:SetText( L.SEARCH_REMOVE );
+me.NPCRemove:SetScript( "OnClick", me.NPCRemove.OnClick );
+me.NPCAdd:SetSize( 16, 20 );
+me.NPCAdd:SetPoint( "BOTTOMRIGHT", me.NPCRemove, "TOPRIGHT", 0, 4 );
+me.NPCAdd:SetText( L.SEARCH_ADD );
+me.NPCAdd:SetScript( "OnClick", me.NPCAdd.OnClick );
+me.NPCAdd:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
+me.NPCAdd:SetScript( "OnLeave", GameTooltip_Hide );
+me.NPCAdd.tooltipText = L.SEARCH_ADD_DESC;
 
-	-- Create edit boxes
-	local NameLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
-	NameLabel:SetPoint( "LEFT", me, 16, 0 );
-	NameLabel:SetPoint( "TOP", me.NPCRemove );
-	NameLabel:SetPoint( "BOTTOM", me.NPCRemove );
-	NameLabel:SetText( L.SEARCH_NAME );
-	local NpcIDLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
-	NpcIDLabel:SetPoint( "LEFT", NameLabel );
-	NpcIDLabel:SetPoint( "TOP", me.NPCAdd );
-	NpcIDLabel:SetPoint( "BOTTOM", me.NPCAdd );
-	NpcIDLabel:SetText( L.SEARCH_ID );
+-- Create edit boxes
+local NameLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
+NameLabel:SetPoint( "LEFT", me, 16, 0 );
+NameLabel:SetPoint( "TOP", me.NPCRemove );
+NameLabel:SetPoint( "BOTTOM", me.NPCRemove );
+NameLabel:SetText( L.SEARCH_NAME );
+local NpcIDLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
+NpcIDLabel:SetPoint( "LEFT", NameLabel );
+NpcIDLabel:SetPoint( "TOP", me.NPCAdd );
+NpcIDLabel:SetPoint( "BOTTOM", me.NPCAdd );
+NpcIDLabel:SetText( L.SEARCH_ID );
 
-	local function EditBoxSetup ( self )
-		self:SetAutoFocus( false );
-		self:SetScript( "OnTabPressed", me.NPCOnTabPressed );
-		self:SetScript( "OnEnterPressed", me.NPCOnEnterPressed );
-		self:SetScript( "OnTextChanged", me.NPCValidate );
-		self:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
-		self:SetScript( "OnLeave", GameTooltip_Hide );
-		return self;
-	end
-	local NpcID, Name, World = EditBoxSetup( me.NPCNpcID ), EditBoxSetup( me.NPCName ), EditBoxSetup( me.NPCWorld );
-	Name:SetPoint( "LEFT", -- Attach to longest label
-		NameLabel:GetStringWidth() > NpcIDLabel:GetStringWidth() and NameLabel or NpcIDLabel,
-		"RIGHT", 8, 0 );
-	Name:SetPoint( "RIGHT", me.NPCRemove, "LEFT", -4, 0 );
-	Name:SetPoint( "TOP", NameLabel );
-	Name:SetPoint( "BOTTOM", NameLabel );
-	Name.NextEditBox, Name.tooltipText = NpcID, L.SEARCH_NAME_DESC;
-
-	NpcID:SetPoint( "LEFT", Name );
-	NpcID:SetPoint( "TOP", NpcIDLabel );
-	NpcID:SetPoint( "BOTTOM", NpcIDLabel );
-	NpcID:SetWidth( 64 );
-	NpcID:SetNumeric( true );
-	NpcID:SetMaxLetters( floor( log10( _NPCScan.NpcIDMax ) ) + 1 );
-	NpcID.NextEditBox, NpcID.tooltipText = World, L.SEARCH_ID_DESC;
-
-	local WorldLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
-	WorldLabel:SetPoint( "LEFT", NpcID, "RIGHT", 8, 0 );
-	WorldLabel:SetPoint( "TOP", NpcIDLabel );
-	WorldLabel:SetPoint( "BOTTOM", NpcIDLabel );
-	WorldLabel:SetText( L.SEARCH_WORLD );
-
-	World:SetPoint( "LEFT", WorldLabel, "RIGHT", 8, 0 );
-	World:SetPoint( "RIGHT", Name );
-	World:SetPoint( "TOP", NpcIDLabel );
-	World:SetPoint( "BOTTOM", NpcIDLabel );
-	World.NextEditBox, World.tooltipText = Name, L.SEARCH_WORLD_DESC;
-
-	local WorldButton = me.NPCWorldButton;
-	WorldButton:SetPoint( "RIGHT", World, 3, 1 );
-	WorldButton:SetSize( 24, 24 );
-	WorldButton:SetNormalTexture( [[Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up]] );
-	WorldButton:SetPushedTexture( [[Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down]] );
-	WorldButton:SetHighlightTexture( [[Interface\Buttons\UI-Common-MouseHilight]], "ADD" );
-	WorldButton:SetScript( "OnClick", WorldButton.OnClick );
-	WorldButton:SetScript( "OnHide", WorldButton.OnHide );
-	UIDropDownMenu_SetAnchor( WorldButton.Dropdown, 0, 0, "TOPRIGHT", WorldButton, "BOTTOMRIGHT" );
-
-	me.NPCControls:SetPoint( "BOTTOMRIGHT", me.NPCRemove );
-	me.NPCControls:SetPoint( "LEFT", NpcIDLabel );
-	me.NPCControls:SetPoint( "TOP", me.NPCAdd );
-
-
-	-- Place table
-	me.TableContainer:SetPoint( "TOP", me.AddFoundCheckbox, "BOTTOM", 0, -28 );
-	me.TableContainer:SetPoint( "LEFT", SubText, -2, 0 );
-	me.TableContainer:SetPoint( "RIGHT", -16, 0 );
-	me.TableContainer:SetPoint( "BOTTOM", me.NPCControls );
-	me.TableContainer:SetBackdrop( { bgFile = [[Interface\DialogFrame\UI-DialogBox-Background]]; } );
-
-	-- Add all tabs
-	local LastTab;
-	local TabCount = 0;
-	local function AddTab ( ID, Update, Activate, Deactivate )
-		TabCount = TabCount + 1;
-		local Tab = CreateFrame( "Button", "_NPCScanSearchTab"..TabCount, me.TableContainer, "TabButtonTemplate" );
-		Tabs[ ID ] = Tab;
-
-		Tab:SetHitRectInsets( 6, 6, 6, 0 );
-		Tab:SetScript( "OnClick", me.TabOnClick );
-		Tab:SetScript( "OnEnter", me.TabOnEnter );
-		Tab:SetScript( "OnLeave", GameTooltip_Hide );
-		Tab:SetMotionScriptsWhileDisabled( true ); -- Allow tooltip while active
-
-		if ( type( ID ) == "number" ) then -- AchievementID
-			Tab:SetText( ( select( 2, GetAchievementInfo( ID ) ) ) );
-			Tab:GetFontString():SetPoint( "RIGHT", -12, 0 );
-			local Checkbox = CreateFrame( "CheckButton", nil, Tab, "UICheckButtonTemplate" );
-			Tab.AchievementID, Tab.Checkbox = ID, Checkbox;
-			Checkbox:SetSize( 20, 20 );
-			Checkbox:SetPoint( "BOTTOMLEFT", 8, 0 );
-			Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
-			Checkbox:SetScript( "OnClick", me.TabCheckOnClick );
-			Checkbox:SetScript( "OnEnter", me.TabCheckOnEnter );
-			Checkbox:SetScript( "OnLeave", GameTooltip_Hide );
-			me.AchievementSetEnabled( ID, false ); -- Initialize the custom "unchecked" texture
-			PanelTemplates_TabResize( Tab, Checkbox:GetWidth() - 12 );
-		else
-			Tab:SetText( L.SEARCH_NPCS );
-			PanelTemplates_TabResize( Tab, -8 );
-		end
-
-		Tab.Update = Update;
-		Tab.Activate, Tab.Deactivate = Activate, Deactivate;
-
-		PanelTemplates_DeselectTab( Tab );
-		if ( LastTab ) then
-			Tab:SetPoint( "LEFT", LastTab, "RIGHT", -4, 0 );
-		else
-			Tab:SetPoint( "BOTTOMLEFT", me.TableContainer, "TOPLEFT" );
-		end
-		LastTab = Tab;
-	end
-	AddTab( "NPC", me.NPCUpdate, me.NPCActivate, me.NPCDeactivate );
-	for AchievementID in pairs( _NPCScan.Achievements ) do
-		AddTab( AchievementID, me.AchievementUpdate, me.AchievementActivate, me.AchievementDeactivate );
-	end
-
-
-	InterfaceOptions_AddCategory( me );
+local function EditBoxSetup ( self )
+	self:SetAutoFocus( false );
+	self:SetScript( "OnTabPressed", me.NPCOnTabPressed );
+	self:SetScript( "OnEnterPressed", me.NPCOnEnterPressed );
+	self:SetScript( "OnTextChanged", me.NPCValidate );
+	self:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
+	self:SetScript( "OnLeave", GameTooltip_Hide );
+	return self;
 end
+local NpcID, Name, World = EditBoxSetup( me.NPCNpcID ), EditBoxSetup( me.NPCName ), EditBoxSetup( me.NPCWorld );
+Name:SetPoint( "LEFT", -- Attach to longest label
+	NameLabel:GetStringWidth() > NpcIDLabel:GetStringWidth() and NameLabel or NpcIDLabel,
+	"RIGHT", 8, 0 );
+Name:SetPoint( "RIGHT", me.NPCRemove, "LEFT", -4, 0 );
+Name:SetPoint( "TOP", NameLabel );
+Name:SetPoint( "BOTTOM", NameLabel );
+Name.NextEditBox, Name.tooltipText = NpcID, L.SEARCH_NAME_DESC;
+
+NpcID:SetPoint( "LEFT", Name );
+NpcID:SetPoint( "TOP", NpcIDLabel );
+NpcID:SetPoint( "BOTTOM", NpcIDLabel );
+NpcID:SetWidth( 64 );
+NpcID:SetNumeric( true );
+NpcID:SetMaxLetters( floor( log10( _NPCScan.NpcIDMax ) ) + 1 );
+NpcID.NextEditBox, NpcID.tooltipText = World, L.SEARCH_ID_DESC;
+
+local WorldLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
+WorldLabel:SetPoint( "LEFT", NpcID, "RIGHT", 8, 0 );
+WorldLabel:SetPoint( "TOP", NpcIDLabel );
+WorldLabel:SetPoint( "BOTTOM", NpcIDLabel );
+WorldLabel:SetText( L.SEARCH_WORLD );
+
+World:SetPoint( "LEFT", WorldLabel, "RIGHT", 8, 0 );
+World:SetPoint( "RIGHT", Name );
+World:SetPoint( "TOP", NpcIDLabel );
+World:SetPoint( "BOTTOM", NpcIDLabel );
+World.NextEditBox, World.tooltipText = Name, L.SEARCH_WORLD_DESC;
+
+local WorldButton = me.NPCWorldButton;
+WorldButton:SetPoint( "RIGHT", World, 3, 1 );
+WorldButton:SetSize( 24, 24 );
+WorldButton:SetNormalTexture( [[Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up]] );
+WorldButton:SetPushedTexture( [[Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down]] );
+WorldButton:SetHighlightTexture( [[Interface\Buttons\UI-Common-MouseHilight]], "ADD" );
+WorldButton:SetScript( "OnClick", WorldButton.OnClick );
+WorldButton:SetScript( "OnHide", WorldButton.OnHide );
+UIDropDownMenu_SetAnchor( WorldButton.Dropdown, 0, 0, "TOPRIGHT", WorldButton, "BOTTOMRIGHT" );
+
+me.NPCControls:SetPoint( "BOTTOMRIGHT", me.NPCRemove );
+me.NPCControls:SetPoint( "LEFT", NpcIDLabel );
+me.NPCControls:SetPoint( "TOP", me.NPCAdd );
+
+
+-- Place table
+me.TableContainer:SetPoint( "TOP", me.AddFoundCheckbox, "BOTTOM", 0, -28 );
+me.TableContainer:SetPoint( "LEFT", SubText, -2, 0 );
+me.TableContainer:SetPoint( "RIGHT", -16, 0 );
+me.TableContainer:SetPoint( "BOTTOM", me.NPCControls );
+me.TableContainer:SetBackdrop( { bgFile = [[Interface\DialogFrame\UI-DialogBox-Background]]; } );
+
+-- Add all tabs
+local LastTab;
+local TabCount = 0;
+local function AddTab ( ID, Update, Activate, Deactivate )
+	TabCount = TabCount + 1;
+	local Tab = CreateFrame( "Button", "_NPCScanSearchTab"..TabCount, me.TableContainer, "TabButtonTemplate" );
+	Tabs[ ID ] = Tab;
+
+	Tab:SetHitRectInsets( 6, 6, 6, 0 );
+	Tab:SetScript( "OnClick", me.TabOnClick );
+	Tab:SetScript( "OnEnter", me.TabOnEnter );
+	Tab:SetScript( "OnLeave", GameTooltip_Hide );
+	Tab:SetMotionScriptsWhileDisabled( true ); -- Allow tooltip while active
+
+	if ( type( ID ) == "number" ) then -- AchievementID
+		Tab:SetText( ( select( 2, GetAchievementInfo( ID ) ) ) );
+		Tab:GetFontString():SetPoint( "RIGHT", -12, 0 );
+		local Checkbox = CreateFrame( "CheckButton", nil, Tab, "UICheckButtonTemplate" );
+		Tab.AchievementID, Tab.Checkbox = ID, Checkbox;
+		Checkbox:SetSize( 20, 20 );
+		Checkbox:SetPoint( "BOTTOMLEFT", 8, 0 );
+		Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
+		Checkbox:SetScript( "OnClick", me.TabCheckOnClick );
+		Checkbox:SetScript( "OnEnter", me.TabCheckOnEnter );
+		Checkbox:SetScript( "OnLeave", GameTooltip_Hide );
+		me.AchievementSetEnabled( ID, false ); -- Initialize the custom "unchecked" texture
+		PanelTemplates_TabResize( Tab, Checkbox:GetWidth() - 12 );
+	else
+		Tab:SetText( L.SEARCH_NPCS );
+		PanelTemplates_TabResize( Tab, -8 );
+	end
+
+	Tab.Update = Update;
+	Tab.Activate, Tab.Deactivate = Activate, Deactivate;
+
+	PanelTemplates_DeselectTab( Tab );
+	if ( LastTab ) then
+		Tab:SetPoint( "LEFT", LastTab, "RIGHT", -4, 0 );
+	else
+		Tab:SetPoint( "BOTTOMLEFT", me.TableContainer, "TOPLEFT" );
+	end
+	LastTab = Tab;
+end
+AddTab( "NPC", me.NPCUpdate, me.NPCActivate, me.NPCDeactivate );
+for AchievementID in pairs( _NPCScan.Achievements ) do
+	AddTab( AchievementID, me.AchievementUpdate, me.AchievementActivate, me.AchievementDeactivate );
+end
+
+
+InterfaceOptions_AddCategory( me );

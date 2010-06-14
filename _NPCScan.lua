@@ -719,40 +719,34 @@ end
 
 
 
---------------------------------------------------------------------------------
--- Function Hooks / Execution
------------------------------
-
-do
-	-- Create reverse lookup of continent names
-	for Index, Name in ipairs( { GetMapContinents() } ) do
-		me.ContinentIDs[ Name ] = Index;
-	end
-	-- Save achievement criteria data
-	for AchievementID, Achievement in pairs( me.Achievements ) do
-		Achievement.ID = AchievementID;
-		Achievement.Criteria = {}; -- [ CriteriaID ] = NpcID;
-		Achievement.NPCsActive = {}; -- [ NpcID ] = CriteriaID;
-		for Criteria = 1, GetAchievementNumCriteria( AchievementID ) do
-			local _, CriteriaType, _, _, _, _, _, AssetID, _, CriteriaID = GetAchievementCriteriaInfo( AchievementID, Criteria );
-			if ( CriteriaType == 0 ) then -- Mob kill type
-				Achievement.Criteria[ CriteriaID ] = AssetID;
-			end
+-- Create reverse lookup of continent names
+for Index, Name in ipairs( { GetMapContinents() } ) do
+	me.ContinentIDs[ Name ] = Index;
+end
+-- Save achievement criteria data
+for AchievementID, Achievement in pairs( me.Achievements ) do
+	Achievement.ID = AchievementID;
+	Achievement.Criteria = {}; -- [ CriteriaID ] = NpcID;
+	Achievement.NPCsActive = {}; -- [ NpcID ] = CriteriaID;
+	for Criteria = 1, GetAchievementNumCriteria( AchievementID ) do
+		local _, CriteriaType, _, _, _, _, _, AssetID, _, CriteriaID = GetAchievementCriteriaInfo( AchievementID, Criteria );
+		if ( CriteriaType == 0 ) then -- Mob kill type
+			Achievement.Criteria[ CriteriaID ] = AssetID;
 		end
 	end
-
-
-	me:Hide();
-	me:SetScript( "OnEvent", me.OnEvent );
-	me:RegisterEvent( "PLAYER_LOGIN" );
-	me:RegisterEvent( "PLAYER_ENTERING_WORLD" );
-	me:RegisterEvent( "PLAYER_LEAVING_WORLD" );
-	-- Set OnUpdate script after zone info loads
-	if ( GetZoneText() == "" ) then -- Zone information unknown (initial login)
-		me:RegisterEvent( "ZONE_CHANGED_NEW_AREA" );
-	else -- Zone information is known
-		me:ZONE_CHANGED_NEW_AREA( "ZONE_CHANGED_NEW_AREA" );
-	end
-
-	SlashCmdList[ "_NPCSCAN" ] = me.SlashCommand;
 end
+
+
+me:Hide();
+me:SetScript( "OnEvent", me.OnEvent );
+me:RegisterEvent( "PLAYER_LOGIN" );
+me:RegisterEvent( "PLAYER_ENTERING_WORLD" );
+me:RegisterEvent( "PLAYER_LEAVING_WORLD" );
+-- Set OnUpdate script after zone info loads
+if ( GetZoneText() == "" ) then -- Zone information unknown (initial login)
+	me:RegisterEvent( "ZONE_CHANGED_NEW_AREA" );
+else -- Zone information is known
+	me:ZONE_CHANGED_NEW_AREA( "ZONE_CHANGED_NEW_AREA" );
+end
+
+SlashCmdList[ "_NPCSCAN" ] = me.SlashCommand;

@@ -91,64 +91,58 @@ end
 
 
 
---------------------------------------------------------------------------------
--- Function Hooks / Execution
------------------------------
+me.name = L.CONFIG_TITLE;
+me:Hide();
 
-do
-	me.name = L.CONFIG_TITLE;
-	me:Hide();
-
-	-- Pane title
-	me.Title = me:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
-	me.Title:SetPoint( "TOPLEFT", 16, -16 );
-	me.Title:SetText( L.CONFIG_TITLE );
-	local SubText = me:CreateFontString( nil, "ARTWORK", "GameFontHighlightSmall" );
-	me.SubText = SubText;
-	SubText:SetPoint( "TOPLEFT", me.Title, "BOTTOMLEFT", 0, -8 );
-	SubText:SetPoint( "RIGHT", -32, 0 );
-	SubText:SetHeight( 32 );
-	SubText:SetJustifyH( "LEFT" );
-	SubText:SetJustifyV( "TOP" );
-	SubText:SetText( L.CONFIG_DESC );
+-- Pane title
+me.Title = me:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
+me.Title:SetPoint( "TOPLEFT", 16, -16 );
+me.Title:SetText( L.CONFIG_TITLE );
+local SubText = me:CreateFontString( nil, "ARTWORK", "GameFontHighlightSmall" );
+me.SubText = SubText;
+SubText:SetPoint( "TOPLEFT", me.Title, "BOTTOMLEFT", 0, -8 );
+SubText:SetPoint( "RIGHT", -32, 0 );
+SubText:SetHeight( 32 );
+SubText:SetJustifyH( "LEFT" );
+SubText:SetJustifyV( "TOP" );
+SubText:SetText( L.CONFIG_DESC );
 
 
-	-- Miscellaneous checkboxes
-	me.CacheWarnings:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
-	_G[ me.CacheWarnings:GetName().."Text" ]:SetText( L.CONFIG_CACHEWARNINGS );
-	me.CacheWarnings.tooltipText = L.CONFIG_CACHEWARNINGS_DESC;
+-- Miscellaneous checkboxes
+me.CacheWarnings:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
+_G[ me.CacheWarnings:GetName().."Text" ]:SetText( L.CONFIG_CACHEWARNINGS );
+me.CacheWarnings.tooltipText = L.CONFIG_CACHEWARNINGS_DESC;
 
 
-	-- Alert options section
-	AlertOptions:SetPoint( "TOPLEFT", me.CacheWarnings, "BOTTOMLEFT", 0, -16 );
-	AlertOptions:SetPoint( "BOTTOMRIGHT", -14, 16 );
-	_G[ AlertOptions:GetName().."Title" ]:SetText( L.CONFIG_ALERT );
+-- Alert options section
+AlertOptions:SetPoint( "TOPLEFT", me.CacheWarnings, "BOTTOMLEFT", 0, -16 );
+AlertOptions:SetPoint( "BOTTOMRIGHT", -14, 16 );
+_G[ AlertOptions:GetName().."Title" ]:SetText( L.CONFIG_ALERT );
 
-	-- Test button
-	me.Test:SetPoint( "TOPLEFT", 16, -16 );
-	me.Test:SetScript( "OnClick", me.Test.OnClick );
-	me.Test:SetScript( "OnEnter", me.ControlOnEnter );
-	me.Test:SetScript( "OnLeave", GameTooltip_Hide );
-	me.Test:SetText( L.CONFIG_TEST );
-	me.Test.tooltipText = L.CONFIG_TEST_DESC;
+-- Test button
+me.Test:SetPoint( "TOPLEFT", 16, -16 );
+me.Test:SetScript( "OnClick", me.Test.OnClick );
+me.Test:SetScript( "OnEnter", me.ControlOnEnter );
+me.Test:SetScript( "OnLeave", GameTooltip_Hide );
+me.Test:SetText( L.CONFIG_TEST );
+me.Test.tooltipText = L.CONFIG_TEST_DESC;
 
-	me.AlertSoundUnmute:SetPoint( "TOPLEFT", me.Test, "BOTTOMLEFT", -2, -16 );
-	_G[ me.AlertSoundUnmute:GetName().."Text" ]:SetText( L.CONFIG_ALERT_UNMUTE );
-	me.AlertSoundUnmute.tooltipText = L.CONFIG_ALERT_UNMUTE_DESC;
+me.AlertSoundUnmute:SetPoint( "TOPLEFT", me.Test, "BOTTOMLEFT", -2, -16 );
+_G[ me.AlertSoundUnmute:GetName().."Text" ]:SetText( L.CONFIG_ALERT_UNMUTE );
+me.AlertSoundUnmute.tooltipText = L.CONFIG_ALERT_UNMUTE_DESC;
 
-	me.AlertSound:SetPoint( "TOPLEFT", me.AlertSoundUnmute, "BOTTOMLEFT", -12, -18 );
-	me.AlertSound:SetPoint( "RIGHT", -12, 0 );
-	me.AlertSound:EnableMouse( true );
-	me.AlertSound:SetScript( "OnEnter", me.ControlOnEnter );
-	me.AlertSound:SetScript( "OnLeave", GameTooltip_Hide );
-	UIDropDownMenu_JustifyText( me.AlertSound, "LEFT" );
-	_G[ me.AlertSound:GetName().."Middle" ]:SetPoint( "RIGHT", -16, 0 );
-	local Label = me.AlertSound:CreateFontString( nil, "ARTWORK", "GameFontNormalSmall" );
-	Label:SetPoint( "BOTTOMLEFT", me.AlertSound, "TOPLEFT", 16, 3 );
-	Label:SetText( L.CONFIG_ALERT_SOUND );
-	me.AlertSound.tooltipText = L.CONFIG_ALERT_SOUND_DESC;
-	UIDropDownMenu_SetText( me.AlertSound, L.CONFIG_ALERT_SOUND_DEFAULT );
+me.AlertSound:SetPoint( "TOPLEFT", me.AlertSoundUnmute, "BOTTOMLEFT", -12, -18 );
+me.AlertSound:SetPoint( "RIGHT", -12, 0 );
+me.AlertSound:EnableMouse( true );
+me.AlertSound:SetScript( "OnEnter", me.ControlOnEnter );
+me.AlertSound:SetScript( "OnLeave", GameTooltip_Hide );
+UIDropDownMenu_JustifyText( me.AlertSound, "LEFT" );
+_G[ me.AlertSound:GetName().."Middle" ]:SetPoint( "RIGHT", -16, 0 );
+local Label = me.AlertSound:CreateFontString( nil, "ARTWORK", "GameFontNormalSmall" );
+Label:SetPoint( "BOTTOMLEFT", me.AlertSound, "TOPLEFT", 16, 3 );
+Label:SetText( L.CONFIG_ALERT_SOUND );
+me.AlertSound.tooltipText = L.CONFIG_ALERT_SOUND_DESC;
+UIDropDownMenu_SetText( me.AlertSound, L.CONFIG_ALERT_SOUND_DEFAULT );
 
 
-	InterfaceOptions_AddCategory( me );
-end
+InterfaceOptions_AddCategory( me );
