@@ -569,7 +569,7 @@ function me:PLAYER_LOGIN ()
 			Version = "3.3.0.2";
 		end
 		if ( Version == "3.3.0.2" or Version == "3.3.0.3" or Version == "3.3.0.4" ) then
-			-- 3.3.0.5: Custom NPC scans are indexed by ID instead of name, and can now be map-specific
+			-- 3.3.5.1: Custom NPC scans are indexed by ID instead of name, and can now be map-specific
 			local DefaultWorldIDs = me.OptionsCharacterDefault.NPCWorldIDs;
 			local NPCsNew, NPCWorldIDs = {}, {};
 			for Name, NpcID in pairs( OptionsCharacter.NPCs ) do
@@ -577,7 +577,7 @@ function me:PLAYER_LOGIN ()
 				NPCWorldIDs[ NpcID ] = DefaultWorldIDs[ NpcID ];
 			end
 			OptionsCharacter.NPCs, OptionsCharacter.NPCWorldIDs = NPCsNew, NPCWorldIDs;
-			Version = "3.3.0.5";
+			Version = "3.3.5.1";
 		end
 		OptionsCharacter.Version = me.Version;
 	end
