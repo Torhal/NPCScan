@@ -254,7 +254,7 @@ local function AchievementNPCActivate ( Achievement, NpcID, CriteriaID ) -- Star
 		and ( me.Options.AchievementsAddFound or not select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) -- Not completed
 		and ScanAdd( NpcID )
 	) then
-		Achievement.NPCsActive[ NpcID ] = true;
+		Achievement.NPCsActive[ NpcID ] = CriteriaID;
 		me.Config.Search.UpdateTab( Achievement.ID );
 		return true;
 	end
@@ -290,7 +290,7 @@ end
   * Description: Returns true if an achievement NPC is being searched for.     *
   ****************************************************************************]]
 function me.AchievementNPCIsActive ( Achievement, NpcID )
-	return Achievement.NPCsActive[ NpcID ];
+	return Achievement.NPCsActive[ NpcID ] ~= nil;
 end
 --[[****************************************************************************
   * Function: _NPCScan.AchievementAdd                                          *
