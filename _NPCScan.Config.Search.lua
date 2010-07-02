@@ -338,7 +338,7 @@ function me:AchievementUpdate ()
 	for CriteriaID, NpcID in pairs( Achievement.Criteria ) do
 		local Name, _, Completed = GetAchievementCriteriaInfo( CriteriaID );
 
-		local Row = me.Table:AddRow( CriteriaID,
+		local Row = me.Table:AddRow( NpcID,
 			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or nil,
 			Name, NpcID,
 			Completed and [[|TInterface\RaidFrame\ReadyCheck-Ready:0|t]] or nil );
