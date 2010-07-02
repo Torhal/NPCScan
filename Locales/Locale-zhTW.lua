@@ -1,6 +1,6 @@
 --[[****************************************************************************
   * _NPCScan by Saiket                                                         *
-  * Locales/Locale-zhTW.lua - Localized string constants (zh-TW) by s8095324.  *
+  * Locales/Locale-zhTW.lua - Localized string constants (zh-TW).              *
   ****************************************************************************]]
 
 
