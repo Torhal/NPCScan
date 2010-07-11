@@ -12,7 +12,7 @@ _NPCScan.Button = me;
 
 me.Drag = me:CreateTitleRegion();
 me.Model = CreateFrame( "PlayerModel", nil, me );
-me.Flash = CreateFrame( "Frame", nil, me );
+me.Flash = CreateFrame( "Frame" );
 me.Flash.LoopCountMax = 3;
 
 me.PendingName = nil;
