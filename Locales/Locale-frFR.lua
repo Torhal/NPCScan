@@ -10,14 +10,15 @@ end
 
 
 -- See http://wow.curseforge.com/addons/npcscan/localization/frFR/
-_NPCScanLocalization = setmetatable( {
-	NPCS = setmetatable( {
+local _NPCScan = select( 2, ... );
+_NPCScan.L = setmetatable( {
+	NPCs = setmetatable( {
 		[ 18684 ] = "Bro'Gaz Sans-clan",
 		[ 32491 ] = "Proto-drake perdu dans le temps",
 		[ 33776 ] = "Gondria",
 		[ 35189 ] = "Skoll",
 		[ 38453 ] = "Arcturis",
-	}, { __index = _NPCScanLocalization.NPCS; } );
+	}, { __index = _NPCScan.L.NPCs; } );
 
 	BUTTON_FOUND = "PNJ trouvé !",
 	CACHED_FORMAT = "Le(s) unité(s) suivante(s) sont déjà dans le cache : %s.",
@@ -70,7 +71,7 @@ _NPCScanLocalization = setmetatable( {
 	SEARCH_WORLD = "Monde :",
 	SEARCH_WORLD_DESC = "Un nom de monde optionnel afin de limiter les recherches. Peut être un nom de continent ou |cffff7f3fun nom d'instance|r (sensible à la casse).",
 	SEARCH_WORLD_FORMAT = "(%s)",
-}, { __index = _NPCScanLocalization; } );
+}, { __index = _NPCScan.L; } );
 
 
 _G[ "BINDING_NAME_CLICK _NPCScanButton:LeftButton" ] = [=[Cibler dernier monstre trouvé

@@ -10,14 +10,15 @@ end
 
 
 -- See http://wow.curseforge.com/addons/npcscan/localization/zhTW/
-_NPCScanLocalization = setmetatable( {
-	NPCS = setmetatable( {
+local _NPCScan = select( 2, ... );
+_NPCScan.L = setmetatable( {
+	NPCs = setmetatable( {
 		[ 18684 ] = "無氏族的伯卡茲",
 		[ 32491 ] = "時光流逝元龍",
 		[ 33776 ] = "剛卓亞",
 		[ 35189 ] = "史科爾",
 		[ 38453 ] = "大角",
-	}, { __index = _NPCScanLocalization.NPCS; } );
+	}, { __index = _NPCScan.L.NPCs; } );
 
 	BUTTON_FOUND = "NPC 發現!",
 	CACHED_FORMAT = "下列單位已在cache中: %s。",
@@ -70,7 +71,7 @@ _NPCScanLocalization = setmetatable( {
 	SEARCH_WORLD = "世界:",
 	SEARCH_WORLD_DESC = "一個非必要的區域名稱，用來限制搜尋區域。可以是世界地圖名稱或是|cffff7f3f副本名稱|r (較敏感)。",
 	SEARCH_WORLD_FORMAT = "(%s)",
-}, { __index = _NPCScanLocalization; } );
+}, { __index = _NPCScan.L; } );
 
 
 _G["BINDING_NAME_CLICK _NPCScanButton:LeftButton"] = [=[最後找到的目標怪物

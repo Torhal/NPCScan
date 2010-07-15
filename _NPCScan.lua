@@ -4,8 +4,11 @@
   ****************************************************************************]]
 
 
-local L = _NPCScanLocalization;
-local me = CreateFrame( "Frame", "_NPCScan" );
+local me = select( 2, ... );
+_NPCScan = me;
+local L = me.L;
+
+me.Frame = CreateFrame( "Frame" );
 me.Version = GetAddOnMetadata( ..., "Version" ):match( "^([%d.]+)" );
 
 me.Options = {
@@ -28,11 +31,11 @@ me.OptionsDefault = {
 me.OptionsCharacterDefault = {
 	Version = me.Version;
 	NPCs = {
-		[ 18684 ] = L.NPCS[ 18684 ]; -- Bro'Gaz the Clanless
-		[ 32491 ] = L.NPCS[ 32491 ]; -- Time-Lost Proto Drake
-		[ 33776 ] = L.NPCS[ 33776 ]; -- Gondria
-		[ 35189 ] = L.NPCS[ 35189 ]; -- Skoll
-		[ 38453 ] = L.NPCS[ 38453 ]; -- Arcturis
+		[ 18684 ] = L.NPCs[ 18684 ]; -- Bro'Gaz the Clanless
+		[ 32491 ] = L.NPCs[ 32491 ]; -- Time-Lost Proto Drake
+		[ 33776 ] = L.NPCs[ 33776 ]; -- Gondria
+		[ 35189 ] = L.NPCs[ 35189 ]; -- Skoll
+		[ 38453 ] = L.NPCs[ 38453 ]; -- Arcturis
 	};
 	NPCWorldIDs = {
 		[ 18684 ] = 3; -- Bro'Gaz the Clanless
@@ -48,22 +51,19 @@ me.OptionsCharacterDefault = {
 };
 
 
-me.Achievements = { -- Criteria data for each achievement
+me.Achievements = { --- Criteria data for each achievement.
 	[ 1312 ] = { WorldID = 3; }; -- Bloody Rare (Outlands)
 	[ 2257 ] = { WorldID = 4; }; -- Frostbitten (Northrend)
 };
-me.ContinentIDs = {}; -- [ Localized continent name ] = Continent ID (mirrors WorldMapContinent.dbc)
+me.ContinentIDs = {}; --- [ Localized continent name ] = Continent ID (mirrors WorldMapContinent.dbc)
 
-me.NpcIDMax = 0xFFFFF; -- Largest ID that will fit in a GUID's 20-bit NPC ID field
-me.UpdateRate = 0.1;
-
-
+me.NpcIDMax = 0xFFFFF; --- Largest ID that will fit in a GUID's 20-bit NPC ID field.
+me.Frame.UpdateRate = 0.1;
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Print                                                   *
-  * Description: Prints a message in the default chat window.                  *
-  ****************************************************************************]]
+
+
+--- Prints a message in the default chat window.
 function me.Print ( Message, Color )
 	if ( not Color ) then
 		Color = NORMAL_FONT_COLOR;
@@ -72,15 +72,13 @@ function me.Print ( Message, Color )
 end
 
 
---[[****************************************************************************
-  * Function: _NPCScan.TestID                                                  *
-  * Description: Checks for a given NpcID.                                     *
-  ****************************************************************************]]
 do
-	local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip", me );
+	local Tooltip = CreateFrame( "GameTooltip", "_NPCScanTooltip" );
 	-- Add template text lines
 	local Text = Tooltip:CreateFontString();
 	Tooltip:AddFontStrings( Text, Tooltip:CreateFontString() );
+	--- Checks the cache for a given NpcID.
+	-- @return Localized name of the NPC if cached, or nil if not.
 	function me.TestID ( NpcID )
 		Tooltip:SetOwner( WorldFrame, "ANCHOR_NONE" );
 		Tooltip:SetHyperlink( ( "unit:0xF5300%05X000000" ):format( NpcID ) );
@@ -94,21 +92,23 @@ end
 local CacheListAdd, CacheListClear;
 do
 	local CachedIDs, CacheList = {}, {};
-	function CacheListAdd ( NpcID, FoundName ) -- Adds a cached NPC's name to the string builder
+	--- Adds a cached NPC's name to the string builder.
+	function CacheListAdd ( NpcID, FoundName )
 		if ( not CachedIDs[ NpcID ] ) then
 			CachedIDs[ NpcID ], CacheList[ #CacheList + 1 ] = true, FoundName;
 		end
 	end
-	function CacheListClear () -- Clears the string builder's tables
+	--- Clears the string builder's tables.
+	function CacheListClear ()
 		wipe( CachedIDs );
 		wipe( CacheList );
 	end
---[[****************************************************************************
-  * Function: _NPCScan.CacheListPrint                                          *
-  * Description: Prints a standard message listing cached mobs.  Will also     *
-  *   print details about the cache the first time it's called.                *
-  ****************************************************************************]]
 	local FirstPrint = true;
+	--- Prints a standard message listing cached mobs.
+	-- Will also print details about the cache the first time it's called.
+	-- @param ForcePrint  Overrides the user's option to not print cache warnings.
+	-- @param Format  Custom message format.
+	-- @param ...  Arguments to Format.
 	function me.CacheListPrint ( ForcePrint, Format, ... )
 		if ( #CacheList > 0 ) then
 			if ( ForcePrint or me.Options.CacheWarnings ) then
@@ -129,7 +129,8 @@ do
 		end
 	end
 end
-local function CacheListPopulate () -- Fills the cache list with all added NPCs, active or not
+--- Fills the cache list with all added NPCs, active or not.
+local function CacheListPopulate ()
 	for NpcID in pairs( me.OptionsCharacter.NPCs ) do
 		local Name = me.TestID( NpcID );
 		if ( Name ) then
@@ -153,8 +154,10 @@ end
 
 local next, assert = next, assert;
 
-local ScanIDs = {}; -- [ NpcID ] = Number of concurrent scans for this ID
-local function ScanAdd ( NpcID ) -- Begins searching for an NPC, and returns true if successful
+local ScanIDs = {}; --- [ NpcID ] = Number of concurrent scans for this ID
+--- Begins searching for an NPC.
+-- @return True if successfully added.
+local function ScanAdd ( NpcID )
 	local FoundName = me.TestID( NpcID );
 	if ( FoundName ) then -- Already seen
 		CacheListAdd( NpcID, FoundName );
@@ -163,7 +166,7 @@ local function ScanAdd ( NpcID ) -- Begins searching for an NPC, and returns tru
 			ScanIDs[ NpcID ] = ScanIDs[ NpcID ] + 1;
 		else
 			if ( not next( ScanIDs ) ) then -- First
-				me:Show();
+				me.Frame:Show();
 			end
 			ScanIDs[ NpcID ] = 1;
 			me.Overlays.Add( NpcID );
@@ -171,7 +174,8 @@ local function ScanAdd ( NpcID ) -- Begins searching for an NPC, and returns tru
 		return true; -- Successfully added
 	end
 end
-local function ScanRemove ( NpcID ) -- Stops searching for an NPC when nothing is searching for it
+--- Stops searching for an NPC when nothing is searching for it.
+local function ScanRemove ( NpcID )
 	local Count = assert( ScanIDs[ NpcID ], "Attempt to remove inactive scan." );
 	if ( Count > 1 ) then
 		ScanIDs[ NpcID ] = Count - 1;
@@ -179,7 +183,7 @@ local function ScanRemove ( NpcID ) -- Stops searching for an NPC when nothing i
 		ScanIDs[ NpcID ] = nil;
 		me.Overlays.Remove( NpcID );
 		if ( not next( ScanIDs ) ) then -- Last
-			me:Hide();
+			me.Frame:Hide();
 		end
 	end
 end
@@ -187,21 +191,24 @@ end
 
 
 
-local function IsWorldIDActive ( WorldID ) -- Returns true if the given WorldID is active on the current world
+--- @return True if the given WorldID is active on the current world.
+local function IsWorldIDActive ( WorldID )
 	return not WorldID or WorldID == me.WorldID; -- False/nil active on all worlds
 end
 
 local NPCActivate, NPCDeactivate;
 do
 	local NPCsActive = {};
-	function NPCActivate ( NpcID, WorldID ) -- Starts actual scan for NPC when entering a world
+	--- Starts actual scan for NPC if on the right world.
+	function NPCActivate ( NpcID, WorldID )
 		if ( not NPCsActive[ NpcID ] and IsWorldIDActive( WorldID ) and ScanAdd( NpcID ) ) then
 			NPCsActive[ NpcID ] = true;
 			me.Config.Search.UpdateTab( "NPC" );
 			return true; -- Successfully activated
 		end
 	end
-	function NPCDeactivate ( NpcID ) -- Ends actual scan for NPC when leaving a world
+	--- Ends actual scan for NPC.
+	function NPCDeactivate ( NpcID )
 		if ( NPCsActive[ NpcID ] ) then
 			NPCsActive[ NpcID ] = nil;
 			ScanRemove( NpcID );
@@ -209,21 +216,22 @@ do
 			return true; -- Successfully deactivated
 		end
 	end
---[[****************************************************************************
-  * Function: _NPCScan.NPCIsActive                                             *
-  * Description: Returns true if an NPC is actively being searched for.        *
-  ****************************************************************************]]
+	--- @return True if a custom NPC is actively being searched for.
 	function me.NPCIsActive ( NpcID )
 		return NPCsActive[ NpcID ];
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.NPCAdd                                                  *
-  * Description: Adds an NPC name and ID to settings and begins searching.     *
-  ****************************************************************************]]
+--- Adds an NPC name and ID to settings and begins searching.
+-- @param NpcID  Numeric ID of the NPC (See Wowhead.com).
+-- @param Name  Temporary name to identify this NPC by in the search table.
+-- @param WorldID  Number or localized string WorldID to limit this search to.
+-- @return True if custom NPC added.
 function me.NPCAdd ( NpcID, Name, WorldID )
+	NpcID = assert( tonumber( NpcID ), "NpcID must be numeric." );
 	local Options = me.OptionsCharacter;
 	if ( not Options.NPCs[ NpcID ] ) then
+		assert( type( Name ) == "string", "Name must be a string." );
+		assert( WorldID == nil or type( WorldID ) == "string" or type( WorldID ) == "number", "Invalid WorldID." );
 		Options.NPCs[ NpcID ], Options.NPCWorldIDs[ NpcID ] = Name, WorldID;
 		if ( not NPCActivate( NpcID, WorldID ) ) then -- Didn't activate
 			me.Config.Search.UpdateTab( "NPC" ); -- Just add row
@@ -231,11 +239,11 @@ function me.NPCAdd ( NpcID, Name, WorldID )
 		return true;
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.NPCRemove                                               *
-  * Description: Removes an NPC from settings and stops searching for it.      *
-  ****************************************************************************]]
+--- Removes an NPC from settings and stops searching for it.
+-- @param NpcID  Numeric ID of the NPC.
+-- @return True if custom NPC removed.
 function me.NPCRemove ( NpcID )
+	NpcID = tonumber( NpcID );
 	local Options = me.OptionsCharacter;
 	if ( Options.NPCs[ NpcID ] ) then
 		Options.NPCs[ NpcID ], Options.NPCWorldIDs[ NpcID ] = nil;
@@ -249,7 +257,8 @@ end
 
 
 
-local function AchievementNPCActivate ( Achievement, NpcID, CriteriaID ) -- Starts searching for an achievement's NPC
+--- Starts searching for an achievement's NPC if it meets all settings.
+local function AchievementNPCActivate ( Achievement, NpcID, CriteriaID )
 	if ( Achievement.Active and not Achievement.NPCsActive[ NpcID ]
 		and ( me.Options.AchievementsAddFound or not select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) -- Not completed
 		and ScanAdd( NpcID )
@@ -259,7 +268,8 @@ local function AchievementNPCActivate ( Achievement, NpcID, CriteriaID ) -- Star
 		return true;
 	end
 end
-local function AchievementNPCDeactivate ( Achievement, NpcID ) -- Stops searching for an achievement's NPC
+--- Stops searching for an achievement's NPC.
+local function AchievementNPCDeactivate ( Achievement, NpcID )
 	if ( Achievement.NPCsActive[ NpcID ] ) then
 		Achievement.NPCsActive[ NpcID ] = nil;
 		ScanRemove( NpcID );
@@ -267,7 +277,8 @@ local function AchievementNPCDeactivate ( Achievement, NpcID ) -- Stops searchin
 		return true;
 	end
 end
-local function AchievementActivate ( Achievement ) -- Starts actual scans for achievement NPCs when entering a world
+--- Starts actual scans for achievement NPCs if on the right world.
+local function AchievementActivate ( Achievement )
 	if ( not Achievement.Active and IsWorldIDActive( Achievement.WorldID ) ) then
 		Achievement.Active = true;
 		for CriteriaID, NpcID in pairs( Achievement.Criteria ) do
@@ -276,7 +287,8 @@ local function AchievementActivate ( Achievement ) -- Starts actual scans for ac
 		return true;
 	end
 end
-local function AchievementDeactivate ( Achievement ) -- Ends actual scans for achievement NPCs when leaving a world
+-- Ends actual scans for achievement NPCs.
+local function AchievementDeactivate ( Achievement )
 	if ( Achievement.Active ) then
 		Achievement.Active = nil;
 		for NpcID in pairs( Achievement.NPCsActive ) do
@@ -285,23 +297,21 @@ local function AchievementDeactivate ( Achievement ) -- Ends actual scans for ac
 		return true;
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.AchievementNPCIsActive                                  *
-  * Description: Returns true if an achievement NPC is being searched for.     *
-  ****************************************************************************]]
+--- @param Achievement  Achievement data table from me.Achievements.
+-- @return True if the achievement NPC is being searched for.
 function me.AchievementNPCIsActive ( Achievement, NpcID )
 	return Achievement.NPCsActive[ NpcID ] ~= nil;
 end
---[[****************************************************************************
-  * Function: _NPCScan.AchievementAdd                                          *
-  * Description: Adds a kill-related achievement to track.                     *
-  ****************************************************************************]]
+--- Adds a kill-related achievement to track.
+-- @param AchievementID  Numeric ID of achievement.
+-- @return True if achievement added.
 function me.AchievementAdd ( AchievementID )
+	AchievementID = assert( tonumber( AchievementID ), "AchievementID must be numeric." );
 	local Achievement = me.Achievements[ AchievementID ];
 	if ( Achievement and not me.OptionsCharacter.Achievements[ AchievementID ] ) then
 		if ( not next( me.OptionsCharacter.Achievements ) ) then -- First
-			me:RegisterEvent( "ACHIEVEMENT_EARNED" );
-			me:RegisterEvent( "CRITERIA_UPDATE" );
+			me.Frame:RegisterEvent( "ACHIEVEMENT_EARNED" );
+			me.Frame:RegisterEvent( "CRITERIA_UPDATE" );
 		end
 		me.OptionsCharacter.Achievements[ AchievementID ] = true;
 		me.Config.Search.AchievementSetEnabled( AchievementID, true );
@@ -309,17 +319,16 @@ function me.AchievementAdd ( AchievementID )
 		return true;
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.AchievementRemove                                       *
-  * Description: Removes an achievement from settings and stops tracking it.   *
-  ****************************************************************************]]
+--- Removes an achievement from settings and stops tracking it.
+-- @param AchievementID  Numeric ID of achievement.
+-- @return True if achievement removed.
 function me.AchievementRemove ( AchievementID )
 	if ( me.OptionsCharacter.Achievements[ AchievementID ] ) then
 		AchievementDeactivate( me.Achievements[ AchievementID ] );
 		me.OptionsCharacter.Achievements[ AchievementID ] = nil;
 		if ( not next( me.OptionsCharacter.Achievements ) ) then -- Last
-			me:UnregisterEvent( "ACHIEVEMENT_EARNED" );
-			me:UnregisterEvent( "CRITERIA_UPDATE" );
+			me.Frame:UnregisterEvent( "ACHIEVEMENT_EARNED" );
+			me.Frame:UnregisterEvent( "CRITERIA_UPDATE" );
 		end
 		me.Config.Search.AchievementSetEnabled( AchievementID, false );
 		return true;
@@ -329,10 +338,8 @@ end
 
 
 
---[[****************************************************************************
-  * Function: _NPCScan.SetCacheWarnings                                        *
-  * Description: Enables printing cache lists on login.                        *
-  ****************************************************************************]]
+--- Enables printing cache lists on login.
+-- @return True if changed.
 function me.SetCacheWarnings ( Enable )
 	if ( not Enable ~= not me.Options.CacheWarnings ) then
 		me.Options.CacheWarnings = Enable or nil;
@@ -341,10 +348,8 @@ function me.SetCacheWarnings ( Enable )
 		return true;
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.SetAchievementsAddFound                                 *
-  * Description: Enables tracking of unneeded achievement NPCs.                *
-  ****************************************************************************]]
+--- Enables tracking of unneeded achievement NPCs.
+-- @return True if changed.
 function me.SetAchievementsAddFound ( Enable )
 	if ( not Enable ~= not me.Options.AchievementsAddFound ) then
 		me.Options.AchievementsAddFound = Enable or nil;
@@ -358,10 +363,8 @@ function me.SetAchievementsAddFound ( Enable )
 		return true;
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.SetAlertSoundUnmute                                     *
-  * Description: Enables unmuting sound to play found alerts.                  *
-  ****************************************************************************]]
+--- Enables unmuting sound to play found alerts.
+-- @return True if changed.
 function me.SetAlertSoundUnmute ( Enable )
 	if ( not Enable ~= not me.Options.AlertSoundUnmute ) then
 		me.Options.AlertSoundUnmute = Enable or nil;
@@ -370,11 +373,10 @@ function me.SetAlertSoundUnmute ( Enable )
 		return true;
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.SetAlertSound                                           *
-  * Description: Sets the sound to play when NPCs are found.                   *
-  ****************************************************************************]]
+--- Sets the sound to play when NPCs are found.
+-- @return True if changed.
 function me.SetAlertSound ( AlertSound )
+	assert( AlertSound == nil or type( AlertSound ) == "string", "AlertSound must be a string or nil." );
 	if ( AlertSound ~= me.Options.AlertSound ) then
 		me.Options.AlertSound = AlertSound;
 
@@ -386,10 +388,7 @@ end
 
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Synchronize                                             *
-  * Description: Resets the scanning list and reloads it from saved settings.  *
-  ****************************************************************************]]
+--- Resets the scanning list and reloads it from saved settings.
 function me.Synchronize ( Options, OptionsCharacter )
 	-- Load defaults if settings omitted
 	local IsDefaultScan, IsHunter;
@@ -434,14 +433,11 @@ function me.Synchronize ( Options, OptionsCharacter )
 end
 
 
---[[****************************************************************************
-  * Function: _NPCScan:OnUpdate                                                *
-  * Description: Scans all NPCs and alerts if any are found.                   *
-  ****************************************************************************]]
 do
 	local pairs = pairs;
 	local GetAchievementCriteriaInfo = GetAchievementCriteriaInfo;
-	local function AchievementCriteriaUpdate () -- Scans all active criteria and removes any completed NPCs
+	--- Scans all active criteria and removes any completed NPCs.
+	local function AchievementCriteriaUpdate ()
 		if ( not me.Options.AchievementsAddFound ) then
 			for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
 				local Achievement = me.Achievements[ AchievementID ];
@@ -455,7 +451,8 @@ do
 		end
 	end
 
-	local function OnFound ( NpcID, Name ) -- Validates found mobs before showing alerts
+	--- Validates found mobs before showing alerts.
+	local function OnFound ( NpcID, Name )
 		NPCDeactivate( NpcID );
 		for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
 			AchievementNPCDeactivate( me.Achievements[ AchievementID ], NpcID );
@@ -496,14 +493,15 @@ do
 		end
 	end
 
-	local LastUpdate = 0;
-	function me:OnUpdate ( Elapsed )
-		LastUpdate = LastUpdate + Elapsed;
-		if ( LastUpdate >= me.UpdateRate ) then
-			LastUpdate = 0;
+	local NextUpdate = 0;
+	--- Scans all NPCs on a timer and alerts if any are found.
+	function me.Frame:OnUpdate ( Elapsed )
+		NextUpdate = NextUpdate - Elapsed;
+		if ( NextUpdate <= 0 ) then
+			LastUpdate = self.UpdateRate;
 
-			if ( me.CriteriaUpdateRequested ) then -- CRITERIA_UPDATE bucket
-				me.CriteriaUpdateRequested = nil;
+			if ( self.CriteriaUpdateRequested ) then -- CRITERIA_UPDATE bucket
+				self.CriteriaUpdateRequested = nil;
 				AchievementCriteriaUpdate();
 			end
 
@@ -516,12 +514,10 @@ do
 		end
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan:PLAYER_LOGIN                                            *
-  * Description: Loads defaults, validates settings, and starts scan.          *
-  ****************************************************************************]]
-function me:PLAYER_LOGIN ()
-	me.PLAYER_LOGIN = nil;
+--- Loads defaults, validates settings, and starts scan.
+-- Used instead of ADDON_LOADED to give overlay mods a chance to load and register for messages.
+function me.Frame:PLAYER_LOGIN ( Event )
+	self[ Event ] = nil;
 
 	local Options = _NPCScanOptions;
 	local OptionsCharacter = _NPCScanOptionsCharacter;
@@ -560,12 +556,12 @@ function me:PLAYER_LOGIN ()
 		end
 		if ( Version == "3.1.0.1" or Version == "3.2.0.1" or Version == "3.2.0.2" ) then
 			-- 3.2.0.3: Added default scan for Skoll
-			OptionsCharacter.NPCs[ L.NPCS[ 35189 ] ] = 35189;
+			OptionsCharacter.NPCs[ L.NPCs[ 35189 ] ] = 35189;
 			Version = "3.2.0.3";
 		end
 		if ( "3.2.0.3" <= Version and Version <= "3.3.0.1" ) then
 			-- 3.3.0.2: Added default scan for Arcturis
-			OptionsCharacter.NPCs[ L.NPCS[ 38453 ] ] = 38453;
+			OptionsCharacter.NPCs[ L.NPCs[ 38453 ] ] = 38453;
 			Version = "3.3.0.2";
 		end
 		if ( Version == "3.3.0.2" or Version == "3.3.0.3" or Version == "3.3.0.4" ) then
@@ -585,12 +581,10 @@ function me:PLAYER_LOGIN ()
 	me.Overlays.Register();
 	me.Synchronize( Options, OptionsCharacter ); -- Loads defaults if either are nil
 end
---[[****************************************************************************
-  * Function: _NPCScan:PLAYER_ENTERING_WORLD                                   *
-  ****************************************************************************]]
 do
 	local FirstWorld = true;
-	function me:PLAYER_ENTERING_WORLD ()
+	--- Starts world-specific scans when entering a world.
+	function me.Frame:PLAYER_ENTERING_WORLD ()
 		-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
 		local MapName = GetInstanceInfo();
 		me.WorldID = me.ContinentIDs[ MapName ] or MapName;
@@ -613,10 +607,8 @@ do
 		end
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan:PLAYER_LEAVING_WORLD                                    *
-  ****************************************************************************]]
-function me:PLAYER_LEAVING_WORLD ()
+--- Stops world-specific scans when leaving a world.
+function me.Frame:PLAYER_LEAVING_WORLD ()
 	-- Stop scans that were only active on the previous world
 	for NpcID in pairs( me.OptionsCharacter.NPCWorldIDs ) do
 		NPCDeactivate( NpcID );
@@ -629,50 +621,34 @@ function me:PLAYER_LEAVING_WORLD ()
 	end
 	me.WorldID = nil;
 end
---[[****************************************************************************
-  * Function: _NPCScan:ACHIEVEMENT_EARNED                                      *
-  ****************************************************************************]]
-function me:ACHIEVEMENT_EARNED ( _, AchievementID )
+--- Stops tracking achievements when they finish.
+function me.Frame:ACHIEVEMENT_EARNED ( _, AchievementID )
 	if ( not me.Options.AchievementsAddFound ) then
 		me.AchievementRemove( AchievementID );
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan:CRITERIA_UPDATE                                         *
-  ****************************************************************************]]
-function me:CRITERIA_UPDATE ()
-	me.CriteriaUpdateRequested = true;
+--- Stops tracking individual achievement NPCs when the player gets kill credit.
+function me.Frame:CRITERIA_UPDATE ()
+	self.CriteriaUpdateRequested = true;
 end
---[[****************************************************************************
-  * Function: _NPCScan:ZONE_CHANGED_NEW_AREA                                   *
-  * Description: Sets the OnUpdate handler only after zone info is known.      *
-  ****************************************************************************]]
-function me:ZONE_CHANGED_NEW_AREA ( Event )
+--- Sets the OnUpdate handler only after zone info is known.
+function me.Frame:ZONE_CHANGED_NEW_AREA ( Event )
 	self:UnregisterEvent( Event );
 	self[ Event ] = nil;
 
-	self:SetScript( "OnUpdate", me.OnUpdate );
+	self:SetScript( "OnUpdate", self.OnUpdate );
 end
---[[****************************************************************************
-  * Function: _NPCScan:OnEvent                                                 *
-  ****************************************************************************]]
-do
-	local type = type;
-	function me:OnEvent ( Event, ... )
-		if ( type( self[ Event ] ) == "function" ) then
-			self[ Event ]( self, Event, ... );
-		end
+--- Global event handler.
+function me.Frame:OnEvent ( Event, ... )
+	if ( self[ Event ] ) then
+		return self[ Event ]( self, Event, ... );
 	end
 end
 
 
 
 
---[[****************************************************************************
-  * Function: _NPCScan.SlashCommand                                            *
-  * Description: Slash command chat handler to open the options pane.  Also    *
-  *   supports various subcommands for managing the NPC list.                  *
-  ****************************************************************************]]
+--- Slash command chat handler to open the options pane and manage the NPC list.
 function me.SlashCommand ( Input )
 	local Command, Arguments = Input:match( "^(%S+)%s*(.-)%s*$" );
 	if ( Command ) then
@@ -737,16 +713,21 @@ for AchievementID, Achievement in pairs( me.Achievements ) do
 end
 
 
-me:Hide();
-me:SetScript( "OnEvent", me.OnEvent );
-me:RegisterEvent( "PLAYER_LOGIN" );
-me:RegisterEvent( "PLAYER_ENTERING_WORLD" );
-me:RegisterEvent( "PLAYER_LEAVING_WORLD" );
+local Frame = me.Frame;
+Frame:Hide();
+Frame:SetScript( "OnEvent", Frame.OnEvent );
+if ( not IsLoggedIn() ) then
+	Frame:RegisterEvent( "PLAYER_LOGIN" );
+else
+	Frame:PLAYER_LOGIN( "PLAYER_LOGIN" );
+end
+Frame:RegisterEvent( "PLAYER_ENTERING_WORLD" );
+Frame:RegisterEvent( "PLAYER_LEAVING_WORLD" );
 -- Set OnUpdate script after zone info loads
 if ( GetZoneText() == "" ) then -- Zone information unknown (initial login)
-	me:RegisterEvent( "ZONE_CHANGED_NEW_AREA" );
+	Frame:RegisterEvent( "ZONE_CHANGED_NEW_AREA" );
 else -- Zone information is known
-	me:ZONE_CHANGED_NEW_AREA( "ZONE_CHANGED_NEW_AREA" );
+	Frame:ZONE_CHANGED_NEW_AREA( "ZONE_CHANGED_NEW_AREA" );
 end
 
 SlashCmdList[ "_NPCSCAN" ] = me.SlashCommand;

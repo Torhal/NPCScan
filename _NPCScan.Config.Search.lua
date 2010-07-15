@@ -5,8 +5,8 @@
   ****************************************************************************]]
 
 
-local _NPCScan = _NPCScan;
-local L = _NPCScanLocalization;
+local _NPCScan = select( 2, ... );
+local L = _NPCScan.L;
 local me = CreateFrame( "Frame" );
 _NPCScan.Config.Search = me;
 
@@ -33,9 +33,7 @@ end
 
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.AddFoundCheckbox.setFunc                  *
-  ****************************************************************************]]
+--- Sets the search for found achievement mobs option when its checkbox is clicked.
 function me.AddFoundCheckbox.setFunc ( Enable )
 	if ( _NPCScan.SetAchievementsAddFound( Enable == "1" ) ) then
 		_NPCScan.CacheListPrint( true );
@@ -45,18 +43,17 @@ end
 
 
 
-local function GetWorldID ( World ) -- Converts a localized world name into a WorldID
+--- Converts a localized world name into a WorldID.
+local function GetWorldID ( World )
 	if ( World ~= "" ) then
 		return _NPCScan.ContinentIDs[ World ] or World;
 	end
 end
-local function GetWorldIDName ( WorldID ) -- Converts a WorldID into a localized world name
+-- Converts a WorldID into a localized world name.
+local function GetWorldIDName ( WorldID )
 	return type( WorldID ) == "number" and select( WorldID, GetMapContinents() ) or WorldID;
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.TabSelect                                 *
-  * Description: Selects the given tab.                                        *
-  ****************************************************************************]]
+--- Selects the given table tab.
 function me.TabSelect ( NewTab )
 	local OldTab = me.TabSelected;
 	if ( NewTab ~= OldTab ) then
@@ -80,16 +77,12 @@ function me.TabSelect ( NewTab )
 		NewTab:Update();
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:TabOnClick                                *
-  ****************************************************************************]]
+--- Selects a tab's table view when clicked.
 function me:TabOnClick ()
 	PlaySound( "igCharacterInfoTab" );
 	me.TabSelect( self );
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:TabOnEnter                                *
-  ****************************************************************************]]
+--- Displays a tooltip for a table tab when moused over.
 function me:TabOnEnter ()
 	GameTooltip:SetOwner( self, "ANCHOR_TOPLEFT", 0, -8 );
 	if ( self.AchievementID ) then
@@ -115,9 +108,7 @@ function me:TabOnEnter ()
 	end
 	GameTooltip:Show();
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:TabCheckOnClick                           *
-  ****************************************************************************]]
+--- Enables or disables tracking an achievement when its tab checkbox is clicked.
 function me:TabCheckOnClick ()
 	local Enable = self:GetChecked();
 	PlaySound( Enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff" );
@@ -130,9 +121,7 @@ function me:TabCheckOnClick ()
 		_NPCScan.CacheListPrint( true );
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:TabCheckOnEnter                           *
-  ****************************************************************************]]
+--- Show's the tab's tooltip when mousing over the tab's checkbox.
 function me:TabCheckOnEnter ()
 	me.TabOnEnter( self:GetParent() );
 end
@@ -141,10 +130,7 @@ end
 
 
 local Tabs = {}; -- [ "NPC" or AchievementID ] = Tab;
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCValidate                               *
-  * Description: Validates ability to use add and remove buttons.              *
-  ****************************************************************************]]
+--- Validates ability to use add and remove buttons for NPCs.
 function me.NPCValidate ()
 	local NpcID, Name, WorldID = me.NPCNpcID:GetNumber(), me.NPCName:GetText(), GetWorldID( me.NPCWorld:GetText() );
 
@@ -164,19 +150,13 @@ function me.NPCValidate ()
 	me.NPCAdd[ CanAdd and "Enable" or "Disable" ]( me.NPCAdd );
 	me.NPCRemove[ OldName and "Enable" or "Disable" ]( me.NPCRemove );
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCClear                                  *
-  * Description: Clears the NPC controls.                                      *
-  ****************************************************************************]]
+--- Clears the NPC controls.
 function me.NPCClear ()
 	me.NPCNpcID:SetText( "" );
 	me.NPCName:SetText( "" );
 	me.NPCWorld:SetText( "" );
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCAdd:OnClick                            *
-  * Description: Adds a Custom NPC list element.                               *
-  ****************************************************************************]]
+--- Adds a Custom NPC list element.
 function me.NPCAdd:OnClick ()
 	local NpcID, Name, WorldID = me.NPCNpcID:GetNumber(), me.NPCName:GetText(), GetWorldID( me.NPCWorld:GetText() );
 	if ( _NPCScan.TamableIDs[ NpcID ] ) then
@@ -188,32 +168,21 @@ function me.NPCAdd:OnClick ()
 	end
 	me.NPCClear();
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCRemove:OnClick                         *
-  * Description: Removes a Custom NPC list element.                            *
-  ****************************************************************************]]
+--- Removes a Custom NPC list element.
 function me.NPCRemove:OnClick ()
 	_NPCScan.NPCRemove( me.NPCNpcID:GetNumber() );
 	me.NPCClear();
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:NPCOnTabPressed                           *
-  * Description: Cycles through edit box controls.                             *
-  ****************************************************************************]]
+--- Cycles through edit box controls.
 function me:NPCOnTabPressed ()
 	self.NextEditBox:SetFocus();
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:NPCOnEnterPressed                         *
-  ****************************************************************************]]
+--- Attempts to add the entered NPC when enter is pressed in any edit box.
 function me:NPCOnEnterPressed ()
 	self:ClearFocus();
 	me.NPCAdd:Click();
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:NPCOnSelect                               *
-  * Description: Updates the edit boxes when a table row is selected.          *
-  ****************************************************************************]]
+--- Fills in the edit boxes when a table row is selected.
 function me:NPCOnSelect ( NpcID )
 	if ( NpcID ~= nil ) then
 		me.NPCNpcID:SetNumber( NpcID );
@@ -221,9 +190,7 @@ function me:NPCOnSelect ( NpcID )
 		me.NPCWorld:SetText( GetWorldIDName( _NPCScan.OptionsCharacter.NPCWorldIDs[ NpcID ] ) or "" );
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCWorldButton.Dropdown:initialize        *
-  ****************************************************************************]]
+--- Builds a dropdown of continent names.
 function me.NPCWorldButton.Dropdown:initialize ()
 	local Info = UIDropDownMenu_CreateInfo();
 	Info.func = self.OnSelect;
@@ -246,30 +213,22 @@ function me.NPCWorldButton.Dropdown:initialize ()
 		UIDropDownMenu_AddButton( Info );
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCWorldButton.Dropdown:OnSelect          *
-  ****************************************************************************]]
+--- Selects a preset world name from the dropdown.
 function me.NPCWorldButton.Dropdown:OnSelect ( Name )
 	me.NPCWorld:SetText( Name );
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCWorldButton:OnClick                    *
-  ****************************************************************************]]
+--- Opens a dropdown with world name presets.
 function me.NPCWorldButton:OnClick ()
 	local Parent = self:GetParent();
 	Parent:ClearFocus();
 	ToggleDropDownMenu( nil, nil, self.Dropdown );
 	PlaySound( "igMainMenuOptionCheckBoxOn" );
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.NPCWorldButton:OnHide                     *
-  ****************************************************************************]]
+--- Hides the dropdown if its button is hidden.
 function me.NPCWorldButton:OnHide ()
 	CloseDropDownMenus();
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:NPCUpdate                                 *
-  ****************************************************************************]]
+--- Fills the search table with custom NPCs.
 function me:NPCUpdate ()
 	me.NPCValidate();
 	local WorldIDs = _NPCScan.OptionsCharacter.NPCWorldIDs;
@@ -283,9 +242,7 @@ function me:NPCUpdate ()
 		end
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:NPCActivate                               *
-  ****************************************************************************]]
+--- Customizes the table when the NPCs tab is selected.
 function me:NPCActivate ()
 	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD );
 	me.Table:SetSortHandlers( true, true, true, true );
@@ -296,9 +253,7 @@ function me:NPCActivate ()
 	me.TableContainer:SetPoint( "BOTTOM", me.NPCControls, "TOP", 0, 4 );
 	me.Table.OnSelect = me.NPCOnSelect;
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:NPCDeactivate                             *
-  ****************************************************************************]]
+--- Undoes customization to the table when leaving the NPCs tab.
 function me:NPCDeactivate ()
 	me.NPCControls:Hide();
 	me.TableContainer:SetPoint( "BOTTOM", me.NPCControls );
@@ -308,10 +263,7 @@ end
 
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.AchievementSetEnabled                     *
-  * Description: Enables/disables the achievement related to a tab.            *
-  ****************************************************************************]]
+--- Enables/disables the achievement related to a tab.
 function me.AchievementSetEnabled ( AchievementID, Enable )
 	local Tab = Tabs[ AchievementID ];
 	Tab.Checkbox:SetChecked( Enable );
@@ -330,9 +282,7 @@ function me.AchievementSetEnabled ( AchievementID, Enable )
 		me.Table.Header:SetAlpha( Enable and 1.0 or me.InactiveAlpha );
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:AchievementUpdate                         *
-  ****************************************************************************]]
+--- Fills the search table with achievement NPCs.
 function me:AchievementUpdate ()
 	local Achievement = _NPCScan.Achievements[ self.AchievementID ];
 	for CriteriaID, NpcID in pairs( Achievement.Criteria ) do
@@ -348,9 +298,7 @@ function me:AchievementUpdate ()
 		end
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:AchievementActivate                       *
-  ****************************************************************************]]
+--- Customizes the table when an achievement tab is selected.
 function me:AchievementActivate ()
 	me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED );
 	me.Table:SetSortHandlers( true, true, true, true );
@@ -358,9 +306,7 @@ function me:AchievementActivate ()
 
 	me.Table.Header:SetAlpha( _NPCScan.OptionsCharacter.Achievements[ self.AchievementID ] and 1.0 or me.InactiveAlpha );
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:AchievementDeactivate                     *
-  ****************************************************************************]]
+--- Undoes customization to the table when leaving an achievement tab.
 function me:AchievementDeactivate ()
 	me.Table.Header:SetAlpha( 1.0 );
 end
@@ -368,12 +314,9 @@ end
 
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search.UpdateTab                                 *
-  * Description: Updates the table for a given tab if it is displayed.         *
-  ****************************************************************************]]
 do
-	local function OnUpdate ( self ) -- Recreates table data at most once per frame
+	--- Recreates table data at most once per frame.
+	local function OnUpdate ( self )
 		self:SetScript( "OnUpdate", nil );
 
 		for _, Row in ipairs( me.Table.Rows ) do
@@ -382,18 +325,18 @@ do
 		me.Table:Clear();
 		me.TabSelected:Update();
 	end
+	--- Updates the table for a given tab if it is displayed.
 	function me.UpdateTab ( ID )
 		if ( not ID or Tabs[ ID ] == me.TabSelected ) then
 			me.TableContainer:SetScript( "OnUpdate", OnUpdate );
 		end;
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:TableRowOnEnter                           *
-  * Description: Adds mob info from LibRareSpawns.                             *
-  ****************************************************************************]]
+
+
 if ( LibRareSpawnsData ) then
 	local MaxSize = 160; -- Larger images are forced to this max width and height
+	--- Adds mob info from LibRareSpawns to each row.
 	function me:TableRowOnEnter ()
 		local Data = LibRareSpawnsData[ self:GetData() ];
 		if ( Data ) then
@@ -412,25 +355,22 @@ if ( LibRareSpawnsData ) then
 		end
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:TableCreateRow                            *
-  ****************************************************************************]]
 do
 	local CreateRowBackup;
 	if ( LibRareSpawnsData ) then
+		--- Adds mouseover tooltip hooks to new rows.
 		local function AddTooltipHooks( Row, ... )
 			Row:SetScript( "OnEnter", me.TableRowOnEnter );
 			Row:SetScript( "OnLeave", GameTooltip_Hide );
 
 			return Row, ...;
 		end
+		--- Hooks new table rows.
 		function me:TableCreateRow ( ... )
 			return AddTooltipHooks( CreateRowBackup( self, ... ) );
 		end
 	end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:TableCreate                               *
-  ****************************************************************************]]
+	--- Creates the NPC table frame at most once.
 	function me:TableCreate ()
 		-- Note: Keep late bound so _NPCScan.Overlay can hook into the table as it's created
 		if ( not self.Table ) then
@@ -447,9 +387,7 @@ do
 		end
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:OnShow                                    *
-  ****************************************************************************]]
+--- Creates the NPC table when first shown, and selects the Custom NPCs tab.
 function me:OnShow ()
 	if ( not me.Table ) then
 		me:TableCreate();
@@ -461,9 +399,7 @@ function me:OnShow ()
 		me.TabSelect( Tabs[ "NPC" ] );
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Config.Search:default                                   *
-  ****************************************************************************]]
+--- Reverts to default options.
 function me:default ()
 	_NPCScan.Synchronize( _NPCScan.Options ); -- Resets only character settings
 end
@@ -477,12 +413,11 @@ me:Hide();
 me:SetScript( "OnShow", me.OnShow );
 
 -- Pane title
-me.Title = me:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
-me.Title:SetPoint( "TOPLEFT", 16, -16 );
-me.Title:SetText( L.SEARCH_TITLE );
+local Title = me:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
+Title:SetPoint( "TOPLEFT", 16, -16 );
+Title:SetText( L.SEARCH_TITLE );
 local SubText = me:CreateFontString( nil, "ARTWORK", "GameFontHighlightSmall" );
-me.SubText = SubText;
-SubText:SetPoint( "TOPLEFT", me.Title, "BOTTOMLEFT", 0, -8 );
+SubText:SetPoint( "TOPLEFT", Title, "BOTTOMLEFT", 0, -8 );
 SubText:SetPoint( "RIGHT", -32, 0 );
 SubText:SetHeight( 32 );
 SubText:SetJustifyH( "LEFT" );

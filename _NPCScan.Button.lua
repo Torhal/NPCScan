@@ -4,9 +4,7 @@
   ****************************************************************************]]
 
 
-local _NPCScan = _NPCScan;
-local L = _NPCScanLocalization;
-local LSM = LibStub( "LibSharedMedia-3.0" );
+local _NPCScan = select( 2, ... );
 local me = CreateFrame( "Button", "_NPCScanButton", UIParent, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate" );
 _NPCScan.Button = me;
 
@@ -15,14 +13,13 @@ me.Model = CreateFrame( "PlayerModel", nil, me );
 me.Flash = CreateFrame( "Frame" );
 me.Flash.LoopCountMax = 3;
 
-me.PendingName = nil;
-me.PendingID = nil;
+me.PendingName, me.PendingID = nil;
 
 me.RotationRate = math.pi / 4;
 me.RaidTargetIcon = 4; -- Green triangle
 
 me.ModelDefaultScale = 0.75;
--- Key is lowercase, value = "[Scale]|[X]|[Y]|[Z]", where any parameter can be left empty
+--- @description Key is lowercase, value = "[Scale]|[X]|[Y]|[Z]", where any parameter can be left empty
 me.ModelCameras = {
 	[ [[creature\spectraltigerferal\spectraltigerferal.m2]] ] = "||-.25|1"; -- Gondria
 	[ [[creature\abyssaloutland\abyssal_outland.m2]] ] = "|.3|1|-8"; -- Kraator
@@ -45,9 +42,8 @@ me.ModelCameras = {
 
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Button.PlaySound                                        *
-  ****************************************************************************]]
+--- Plays an alert sound, temporarily enabling sound if necessary.
+-- @param AlertSound  A LibSharedMedia sound key, or nil to play the default.
 function me.PlaySound ( AlertSound )
 	local SoundEnableChanged, SoundInBGChanged;
 	if ( _NPCScan.Options.AlertSoundUnmute ) then
@@ -61,9 +57,10 @@ function me.PlaySound ( AlertSound )
 		end
 	end
 	if ( AlertSound == nil ) then -- Default
-		PlaySoundFile( [[sound\event sounds\event_wardrum_ogre.wav]] );
-		PlaySoundFile( [[sound\events\scourge_horn.wav]] );
+		PlaySoundFile( [[Sound\Event Sounds\Event_wardrum_ogre.wav]] );
+		PlaySoundFile( [[Sound\Events\scourge_horn.wav]] );
 	else
+		local LSM = LibStub( "LibSharedMedia-3.0" );
 		PlaySoundFile( LSM:Fetch( LSM.MediaType.SOUND, AlertSound ) );
 	end
 	if ( SoundEnableChanged ) then
@@ -75,10 +72,9 @@ function me.PlaySound ( AlertSound )
 end
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Button:SetNPC                                           *
-  * Description: Sets the button to a given NPC and shows it.                  *
-  ****************************************************************************]]
+--- Plays alerts and sets the targetting button if not in combat.
+-- If in combat, queues the button to appear when combat ends.
+-- @see me:Update
 function me:SetNPC ( ID, Name )
 	if ( tonumber( ID ) ) then
 		ID = tonumber( ID );
@@ -102,10 +98,9 @@ function me:SetNPC ( ID, Name )
 		self:Update( ID, Name );
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Button:Update                                           *
-  * Description: Updates the button based on its Name and ID fields.           *
-  ****************************************************************************]]
+--- Updates the button out of combat to target a given unit.
+-- @param ID  A numeric NpcID or string UnitID.
+-- @param Name  Localized name of the unit.  If ID is an NpcID, Name is used in the targetting macro.
 function me:Update ( ID, Name )
 	if ( type( self.ID ) == "number" ) then -- Remove last overlay
 		_NPCScan.Overlays.Remove( self.ID );
@@ -133,10 +128,8 @@ function me:Update ( ID, Name )
 	self.Glow:Play();
 	self.Shine:Play();
 end
---[[****************************************************************************
-  * Function: _NPCScan.Button:EnableDrag                                       *
-  * Description: Enables or disables dragging the button.                      *
-  ****************************************************************************]]
+--- Enables or disables dragging the button.
+-- Not a secure function; Can be run in combat.
 function me:EnableDrag ( Enable )
 	local Drag = self.Drag;
 	Drag:ClearAllPoints();
@@ -148,42 +141,34 @@ function me:EnableDrag ( Enable )
 end
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Button:OnShow                                           *
-  ****************************************************************************]]
+--- Starts dragging or waits for drag key when shown.
 function me:OnShow ()
 	self:RegisterEvent( "MODIFIER_STATE_CHANGED" );
 	self:RegisterEvent( "PLAYER_TARGET_CHANGED" );
 	self:EnableDrag( IsModifiedClick( "_NPCSCAN_BUTTONDRAG" ) );
 end
---[[****************************************************************************
-  * Function: _NPCScan.Button:OnHide                                           *
-  ****************************************************************************]]
+--- Stops listening for events when hidden.
 function me:OnHide ()
 	self:UnregisterEvent( "MODIFIER_STATE_CHANGED" );
 	self:UnregisterEvent( "PLAYER_TARGET_CHANGED" );
 	self:UnregisterEvent( "UNIT_MODEL_CHANGED" );
+	self:EnableDrag( false );
 
 	if ( type( self.ID ) == "number" ) then -- Remove current overlay
 		_NPCScan.Overlays.Remove( self.ID );
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Button:OnEnter                                          *
-  ****************************************************************************]]
+--- Highlights the button's border when moused over.
 function me:OnEnter ()
 	self:SetBackdropBorderColor( 1, 1, 0.15 ); -- Yellow
 end
---[[****************************************************************************
-  * Function: _NPCScan.Button:OnLeave                                          *
-  ****************************************************************************]]
+--- Removes border highlights when mousing out.
 function me:OnLeave ()
 	self:SetBackdropBorderColor( 0.7, 0.15, 0.05 ); -- Brown
 end
 
---[[****************************************************************************
-  * Function: _NPCScan.Button:PLAYER_REGEN_ENABLED                             *
-  ****************************************************************************]]
+
+--- Shows the button queued by me:SetNPC when combat ends.
 function me:PLAYER_REGEN_ENABLED ()
 	-- Update button after leaving combat
 	if ( self.PendingName and self.PendingID ) then
@@ -191,17 +176,13 @@ function me:PLAYER_REGEN_ENABLED ()
 		self.PendingID, self.PendingName = nil;
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Button:MODIFIER_STATE_CHANGED                           *
-  ****************************************************************************]]
+--- Enables or disables dragging when the drag modifier is held.
 function me:MODIFIER_STATE_CHANGED ()
 	self:EnableDrag( IsModifiedClick( "_NPCSCAN_BUTTONDRAG" ) );
 end
---[[****************************************************************************
-  * Function: _NPCScan.Button:PLAYER_TARGET_CHANGED                            *
-  * Description: Raid marks the rare when it's targetted.                      *
-  ****************************************************************************]]
 do
+	--- @param ID  A numeric NpcID or string UnitID.
+	-- @return True if the given ID represents the current target.
 	local function TargetIsFoundRare ( ID ) -- Returns true if the button targetted its rare
 		if ( type( ID ) == "number" ) then
 			local GUID = UnitGUID( "target" );
@@ -212,6 +193,7 @@ do
 			return UnitIsUnit( ID, "target" );
 		end
 	end
+	--- Raid marks the rare when it's targetted.
 	function me:PLAYER_TARGET_CHANGED ()
 		local ID = self.ID;
 		if ( TargetIsFoundRare( ID ) ) then
@@ -232,9 +214,7 @@ do
 		end
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Button:UNIT_MODEL_CHANGED                               *
-  ****************************************************************************]]
+--- Updates the 3D preview display if the targetted rare changes appearance.
 function me:UNIT_MODEL_CHANGED ( _, UnitID )
 	if ( UnitIsUnit( UnitID, self.Model.UnitID ) ) then
 		self.Model:Reset( true ); -- Don't reset rotation
@@ -243,10 +223,7 @@ function me:UNIT_MODEL_CHANGED ( _, UnitID )
 end
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Button.Flash:OnLoop                                     *
-  * Description: Stops the animation after a number of loops.                  *
-  ****************************************************************************]]
+--- Stops the animation after a number of loops.
 function me.Flash:OnLoop ( Direction )
 	if ( Direction == "FORWARD" ) then
 		self.LoopCount = self.LoopCount + 1;
@@ -257,20 +234,14 @@ function me.Flash:OnLoop ( Direction )
 		end
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Button.Flash:OnPlay                                     *
-  * Description: Resets the loop count when resumed/restarted.                 *
-  ****************************************************************************]]
+--- Resets the loop count when resumed/restarted.
 function me.Flash:OnPlay ()
 	self.LoopCount = 0;
 end
 
 
---[[****************************************************************************
-  * Function: _NPCScan.Button.Model:Reset                                      *
-  * Description: Clears the model and readies it for a SetCreature/Unit call.  *
-  ****************************************************************************]]
 do
+	--- Fires one frame after the 3D model is loaded, at which point it can safely be manipulated.
 	local function OnUpdate ( self )
 		local Path = self:GetModel();
 		if ( type( Path ) == "string" ) then
@@ -287,11 +258,13 @@ do
 			end
 		end
 	end
+	--- Fires when the 3D model mesh loads and is ready to display.
 	local function OnUpdateModel ( self )
 		-- Mesh is loaded; Wait one more frame
 		self:SetScript( "OnUpdateModel", nil );
 		self:SetScript( "OnUpdate", OnUpdate );
 	end
+	--- Clears the model and readies it for a SetCreature/Unit call.
 	function me.Model:Reset ( KeepFacing )
 		self:ClearModel();
 		self:SetModelScale( 1 );
@@ -306,9 +279,7 @@ do
 		self:SetScript( "OnUpdateModel", OnUpdateModel );
 	end
 end
---[[****************************************************************************
-  * Function: _NPCScan.Button.Model:OnUpdate                                   *
-  ****************************************************************************]]
+--- Slowly rotates the 3D model preview.
 function me.Model:OnUpdate ( Elapsed )
 	self:SetFacing( self:GetFacing() + Elapsed * me.RotationRate );
 end
@@ -344,7 +315,6 @@ TitleBackground:SetTexCoord( 0, 0.9765625, 0, 0.3125 );
 TitleBackground:SetAlpha( 0.8 );
 
 local Title = me:CreateFontString( nil, "OVERLAY", "GameFontHighlightMedium" );
-me.Title = Title;
 Title:SetPoint( "TOPLEFT", TitleBackground );
 Title:SetPoint( "RIGHT", TitleBackground );
 me:SetFontString( Title );
@@ -352,7 +322,7 @@ me:SetFontString( Title );
 local SubTitle = me:CreateFontString( nil, "OVERLAY", "GameFontBlackTiny" );
 SubTitle:SetPoint( "TOPLEFT", Title, "BOTTOMLEFT", 0, -4 );
 SubTitle:SetPoint( "RIGHT", Title );
-SubTitle:SetText( L.BUTTON_FOUND );
+SubTitle:SetText( _NPCScan.L.BUTTON_FOUND );
 
 -- Border
 me:SetBackdrop( {
@@ -373,7 +343,7 @@ local Model = me.Model;
 Model:SetPoint( "BOTTOMLEFT", me, "TOPLEFT", 0, -4 );
 Model:SetPoint( "RIGHT" );
 Model:SetHeight( me:GetWidth() * 0.6 );
-me:SetClampRectInsets( 0, 0, Model:GetTop() - me:GetTop(), 0 ); -- Allow room for model
+me:SetClampRectInsets( 0, 0, Model:GetHeight(), 0 ); -- Allow room for model
 
 
 -- Glow animation
@@ -444,7 +414,7 @@ me:SetAttribute( "type", "macro" );
 
 me:SetScript( "OnEnter", me.OnEnter );
 me:SetScript( "OnLeave", me.OnLeave );
-me:SetScript( "OnEvent", _NPCScan.OnEvent );
+me:SetScript( "OnEvent", _NPCScan.Frame.OnEvent );
 me:HookScript( "OnShow", me.OnShow );
 me:HookScript( "OnHide", me.OnHide );
 me:RegisterEvent( "PLAYER_REGEN_ENABLED" );

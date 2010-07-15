@@ -5,8 +5,8 @@
 
 
 -- See http://wow.curseforge.com/addons/npcscan/localization/enUS/
-_NPCScanLocalization = setmetatable( {
-	NPCS = {
+select( 2, ... ).L = setmetatable( {
+	NPCs = {
 		[ 18684 ] = "Bro'Gaz the Clanless",
 		[ 32491 ] = "Time-Lost Proto Drake",
 		[ 33776 ] = "Gondria",

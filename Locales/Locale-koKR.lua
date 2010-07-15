@@ -10,14 +10,15 @@ end
 
 
 -- See http://wow.curseforge.com/addons/npcscan/localization/koKR/
-_NPCScanLocalization = setmetatable( {
-	NPCS = setmetatable( {
+local _NPCScan = select( 2, ... );
+_NPCScan.L = setmetatable( {
+	NPCs = setmetatable( {
 		[ 18684 ] = "외톨이 브로가즈",
 		[ 32491 ] = "잃어비린 시간의 원시비룡",
 		[ 33776 ] = "곤드리아",
 		[ 35189 ] = "스콜",
 		[ 38453 ] = "아크튜리스",
-	}, { __index = _NPCScanLocalization.NPCS; } );
+	}, { __index = _NPCScan.L.NPCs; } );
 
 	BUTTON_FOUND = "NPC 탐색!",
 	CACHED_FORMAT = "다음 NPC들은 이미 캐쉬에 저장되어 있습니다: %s.",
@@ -70,7 +71,7 @@ _NPCScanLocalization = setmetatable( {
 	SEARCH_WORLD = "큰 지역",
 	SEARCH_WORLD_DESC = "지역을 한정하여 조금 더 효율적으로 탐색할 수 있도록 합니다.  큰 지역의 이름이나 던전 이름을 사용할 수 있습니다. (대소문자 정확하게)",
 	SEARCH_WORLD_FORMAT = "(%s)",
-}, { __index = _NPCScanLocalization; } );
+}, { __index = _NPCScan.L; } );
 
 
 _G[ "BINDING_NAME_CLICK _NPCScanButton:LeftButton" ] = [=[마지막으로 탐색된 NPC 타겟

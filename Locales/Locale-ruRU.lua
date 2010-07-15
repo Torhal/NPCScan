@@ -10,14 +10,15 @@ end
 
 
 -- See http://wow.curseforge.com/addons/npcscan/localization/ruRU/
-_NPCScanLocalization = setmetatable( {
-	_NPCScanLocalization.NPCS = setmetatable( {
+local _NPCScan = select( 2, ... );
+_NPCScan.L = setmetatable( {
+	NPCs = setmetatable( {
 		[ 18684 ] = "Бро'Газ Без Клана",
 		[ 32491 ] = "Затерянный во времени протодракон",
 		[ 33776 ] = "Гондрия",
 		[ 35189 ] = "Сколл",
 		[ 38453 ] = "Арктур",
-	}, { __index = _NPCScanLocalization.NPCS; } );
+	}, { __index = _NPCScan.L.NPCs; } );
 
 	BUTTON_FOUND = "Найден НИП!",
 	CACHED_FORMAT = "Следующие юниты уже находятся в кэше: %s.",
@@ -66,4 +67,4 @@ _NPCScanLocalization = setmetatable( {
 	SEARCH_TITLE = "Поиск",
 	SEARCH_WORLD = "Мир:",
 	SEARCH_WORLD_FORMAT = "(%s)",
-}, { __index = _NPCScanLocalization; } );
+}, { __index = _NPCScan.L; } );
