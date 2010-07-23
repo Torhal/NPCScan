@@ -89,62 +89,69 @@ do
 end
 
 
-local CacheListAdd, CacheListClear;
+local CacheListBuild;
 do
-	local CachedIDs, CacheList = {}, {};
-	--- Adds a cached NPC's name to the string builder.
-	function CacheListAdd ( NpcID, FoundName )
-		if ( not CachedIDs[ NpcID ] ) then
-			CachedIDs[ NpcID ], CacheList[ #CacheList + 1 ] = true, FoundName;
+	local TempList, AlreadyListed = {}, {};
+	--- Compiles a cache list into a printable list string.
+	-- @param Relist  True to relist NPC names that have already been printed.
+	-- @return List string, or nil if the list was empty.
+	function CacheListBuild ( self, Relist )
+		if ( next( self ) ) then
+			-- Build and sort list
+			for NpcID, Name in pairs( self ) do
+				if ( Relist or not AlreadyListed[ NpcID ] ) then
+					if ( not Relist ) then -- Filtered to show NPCs only once
+						AlreadyListed[ NpcID ] = true; -- Don't list again
+					end
+					-- Add quotes to all entries
+					TempList[ #TempList + 1 ] = L.CACHELIST_ENTRY_FORMAT:format( Name );
+				end
+			end
+
+			wipe( self );
+			if ( #TempList > 0 ) then
+				sort( TempList );
+				local ListString = table.concat( TempList, L.CACHELIST_SEPARATOR );
+				wipe( TempList );
+				return ListString;
+			end
 		end
 	end
-	--- Clears the string builder's tables.
-	function CacheListClear ()
-		wipe( CachedIDs );
-		wipe( CacheList );
+end
+local CacheList = {};
+do
+	--- Fills a cache list with all added NPCs, active or not.
+	local function CacheListPopulate ( self )
+		for NpcID in pairs( me.OptionsCharacter.NPCs ) do
+			self[ NpcID ] = me.TestID( NpcID );
+		end
+		for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
+			for CriteriaID, NpcID in pairs( me.Achievements[ AchievementID ].Criteria ) do
+				if ( me.Options.AchievementsAddFound or not select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) then -- Not completed
+					self[ NpcID ] = me.TestID( NpcID );
+				end
+			end
+		end
 	end
 	local FirstPrint = true;
 	--- Prints a standard message listing cached mobs.
 	-- Will also print details about the cache the first time it's called.
 	-- @param ForcePrint  Overrides the user's option to not print cache warnings.
-	-- @param Format  Custom message format.
-	-- @param ...  Arguments to Format.
-	function me.CacheListPrint ( ForcePrint, Format, ... )
-		if ( #CacheList > 0 ) then
-			if ( ForcePrint or me.Options.CacheWarnings ) then
-				if ( not Format ) then
-					Format = L[ FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT" ];
-					FirstPrint = false;
-				end
-
-				sort( CacheList );
-				-- Add quotes to all names
-				for Index, Name in ipairs( CacheList ) do
-					CacheList[ Index ] = L.CACHED_NAME_FORMAT:format( Name );
-				end
-				me.Print( Format:format( table.concat( CacheList, L.CACHED_SEPARATOR ), ... ), ForcePrint and RED_FONT_COLOR );
+	-- @param FullListing  Adds all cached NPCs before printing, active or not.
+	-- @return True if list printed.
+	function me.CacheListPrint ( ForcePrint, FullListing )
+		if ( ForcePrint or me.Options.CacheWarnings ) then
+			if ( FullListing ) then
+				CacheListPopulate( CacheList );
 			end
-			CacheListClear();
-			return true;
-		end
-	end
-end
---- Fills the cache list with all added NPCs, active or not.
-local function CacheListPopulate ()
-	for NpcID in pairs( me.OptionsCharacter.NPCs ) do
-		local Name = me.TestID( NpcID );
-		if ( Name ) then
-			CacheListAdd( NpcID, Name );
-		end
-	end
-	for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
-		for CriteriaID, NpcID in pairs( me.Achievements[ AchievementID ].Criteria ) do
-			if ( me.Options.AchievementsAddFound or not select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) then -- Not completed
-				local Name = me.TestID( NpcID );
-				if ( Name ) then
-					CacheListAdd( NpcID, Name );
-				end
+			local ListString = CacheListBuild( CacheList, ForcePrint or FullListing ); -- Allow printing an NPC a second time if forced or full listing
+			if ( ListString ) then
+				me.Print( L[ FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT" ]:format( ListString ), ForcePrint and RED_FONT_COLOR );
+				FirstPrint = false;
+				return true;
 			end
+		else
+			wipe( CacheList );
 		end
 	end
 end
@@ -158,9 +165,9 @@ local ScanIDs = {}; --- [ NpcID ] = Number of concurrent scans for this ID
 --- Begins searching for an NPC.
 -- @return True if successfully added.
 local function ScanAdd ( NpcID )
-	local FoundName = me.TestID( NpcID );
-	if ( FoundName ) then -- Already seen
-		CacheListAdd( NpcID, FoundName );
+	local Name = me.TestID( NpcID );
+	if ( Name ) then -- Already seen
+		CacheList[ NpcID ] = Name;
 	else -- Increment
 		if ( ScanIDs[ NpcID ] ) then
 			ScanIDs[ NpcID ] = ScanIDs[ NpcID ] + 1;
@@ -428,12 +435,85 @@ function me.Synchronize ( Options, OptionsCharacter )
 			me.AchievementAdd( AchievementID );
 		end
 	end
-	CacheListPopulate(); -- Adds inactive mobs to printed list as well
-	me.CacheListPrint();
+	me.CacheListPrint( false, true ); -- Populates cache list with inactive mobs too before printing
 end
 
 
+
+
 do
+	local PetList = {};
+
+	--- Prints the list of cached pets when leaving a city or inn.
+	function me.Frame:PLAYER_UPDATE_RESTING ()
+		if ( not IsResting() and next( PetList ) ) then
+			if ( me.Options.CacheWarnings ) then
+				local ListString = CacheListBuild( PetList );
+				if ( ListString ) then
+					me.Print( L.CACHED_PET_RESTING_FORMAT:format( ListString ), RED_FONT_COLOR );
+				end
+			else
+				wipe( PetList );
+			end
+		end
+	end
+
+	--- @return True if the tamable mob is in its correct zone, else false with an optional reason string.
+	local function OnFoundTamable ( NpcID, Name )
+		local ExpectedZone = me.TamableIDs[ NpcID ];
+		local ZoneIDBackup = GetCurrentMapAreaID() - 1;
+		SetMapToCurrentZone();
+
+		local InCorrectZone, InvalidReason =
+			ExpectedZone == true -- Expected zone is unknown (instance mob, etc.)
+			or ExpectedZone == GetCurrentMapAreaID() - 1;
+
+		if ( not InCorrectZone ) then
+			if ( IsResting() ) then -- Assume any tamable mob found in a city/inn is a hunter pet
+				PetList[ NpcID ] = Name;  -- Suppress error message until the player stops resting
+			else
+				-- Get details about expected zone
+				local ExpectedZoneName;
+				SetMapByID( ExpectedZone );
+				local Continent = GetCurrentMapContinent();
+				if ( Continent >= 1 ) then
+					local Zone = GetCurrentMapZone();
+					if ( Zone == 0 ) then
+						ExpectedZoneName = select( Continent, GetMapContinents() );
+					else
+						ExpectedZoneName = select( Zone, GetMapZones( Continent ) );
+					end
+				end
+				InvalidReason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(
+					Name, GetZoneText(), ExpectedZoneName or L.FOUND_ZONE_UNKNOWN, ExpectedZone );
+			end
+		end
+
+		SetMapByID( ZoneIDBackup ); -- Restore previous map view
+		return InCorrectZone, InvalidReason;
+	end
+	--- Validates found mobs before showing alerts.
+	local function OnFound ( NpcID, Name )
+		-- Disable active scans
+		NPCDeactivate( NpcID );
+		for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
+			AchievementNPCDeactivate( me.Achievements[ AchievementID ], NpcID );
+		end
+
+		local Valid, InvalidReason;
+		local Tamable = me.TamableIDs[ NpcID ];
+		if ( Tamable ) then
+			Valid, InvalidReason = OnFoundTamable( NpcID, Name );
+		end
+
+		if ( Valid ) then
+			me.Print( L[ Tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
+			me.Button:SetNPC( NpcID, Name ); -- Sends added and found overlay messages
+		elseif ( InvalidReason ) then
+			me.Print( InvalidReason );
+		end
+	end
+
 	local pairs = pairs;
 	local GetAchievementCriteriaInfo = GetAchievementCriteriaInfo;
 	--- Scans all active criteria and removes any completed NPCs.
@@ -450,47 +530,10 @@ do
 			end
 		end
 	end
-
-	--- Validates found mobs before showing alerts.
-	local function OnFound ( NpcID, Name )
-		NPCDeactivate( NpcID );
-		for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
-			AchievementNPCDeactivate( me.Achievements[ AchievementID ], NpcID );
-		end
-
-		local ZoneIDExpected, InvalidMessage = me.TamableIDs[ NpcID ];
-		if ( ZoneIDExpected == true ) then -- Tamable, but expected zone is unknown (instance mob, etc.)
-			if ( IsResting() ) then -- Most likely a hunter pet in town
-				InvalidMessage = L.FOUND_TAMABLE_RESTING_FORMAT:format( Name );
-			end
-		elseif ( ZoneIDExpected ) then -- Expected zone of the mob is known
-			local ZoneIDBackup = GetCurrentMapAreaID() - 1;
-			SetMapToCurrentZone();
-
-			if ( ZoneIDExpected ~= GetCurrentMapAreaID() - 1 ) then -- Definitely a pet; Found in wrong zone
-				-- Find the name of the expected zone
-				local ZoneTextExpected;
-				SetMapByID( ZoneIDExpected );
-				local Continent = GetCurrentMapContinent();
-				if ( Continent >= 1 ) then
-					local Zone = GetCurrentMapZone();
-					if ( Zone == 0 ) then
-						ZoneTextExpected = select( Continent, GetMapContinents() );
-					else
-						ZoneTextExpected = select( Zone, GetMapZones( Continent ) );
-					end
-				end
-				InvalidMessage = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format( Name, GetZoneText(),
-					ZoneTextExpected or L.FOUND_ZONE_UNKNOWN, ZoneIDExpected );
-			end
-
-			SetMapByID( ZoneIDBackup ); -- Restore previous map view
-		end
-
-		me.Print( InvalidMessage or L[ ZoneIDExpected and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
-		if ( not InvalidMessage ) then
-			me.Button:SetNPC( NpcID, Name ); -- Sends added and found overlay messages
-		end
+	local CriteriaUpdated = false;
+	--- Stops tracking individual achievement NPCs when the player gets kill credit.
+	function me.Frame:CRITERIA_UPDATE ()
+		CriteriaUpdated = true;
 	end
 
 	local NextUpdate = 0;
@@ -500,8 +543,8 @@ do
 		if ( NextUpdate <= 0 ) then
 			LastUpdate = self.UpdateRate;
 
-			if ( self.CriteriaUpdateRequested ) then -- CRITERIA_UPDATE bucket
-				self.CriteriaUpdateRequested = nil;
+			if ( CriteriaUpdated ) then -- CRITERIA_UPDATE bucket
+				CriteriaUpdated = false;
 				AchievementCriteriaUpdate();
 			end
 
@@ -514,6 +557,10 @@ do
 		end
 	end
 end
+
+
+
+
 --- Loads defaults, validates settings, and starts scan.
 -- Used instead of ADDON_LOADED to give overlay mods a chance to load and register for messages.
 function me.Frame:PLAYER_LOGIN ( Event )
@@ -585,6 +632,9 @@ do
 	local FirstWorld = true;
 	--- Starts world-specific scans when entering a world.
 	function me.Frame:PLAYER_ENTERING_WORLD ()
+		-- Print cached pets if player ported out of a city
+		self:PLAYER_UPDATE_RESTING();
+
 		-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
 		local MapName = GetInstanceInfo();
 		me.WorldID = me.ContinentIDs[ MapName ] or MapName;
@@ -599,11 +649,15 @@ do
 				AchievementActivate( Achievement );
 			end
 		end
-		if ( FirstWorld ) then -- Full listing of cached mobs gets printed on login
+
+		if ( FirstWorld or not me.Options.CacheWarnings ) then -- Full listing of cached mobs gets printed on login
 			FirstWorld = false;
-			CacheListClear();
+			wipe( CacheList );
 		else -- Print list of cached mobs specific to new world
-			me.CacheListPrint( false, L.CACHED_WORLD_FORMAT, MapName );
+			local ListString = CacheListBuild( CacheList );
+			if ( ListString ) then
+				me.Print( L.CACHED_WORLD_FORMAT:format( ListString, MapName ) );
+			end
 		end
 	end
 end
@@ -626,10 +680,6 @@ function me.Frame:ACHIEVEMENT_EARNED ( _, AchievementID )
 	if ( not me.Options.AchievementsAddFound ) then
 		me.AchievementRemove( AchievementID );
 	end
-end
---- Stops tracking individual achievement NPCs when the player gets kill credit.
-function me.Frame:CRITERIA_UPDATE ()
-	self.CriteriaUpdateRequested = true;
 end
 --- Sets the OnUpdate handler only after zone info is known.
 function me.Frame:ZONE_CHANGED_NEW_AREA ( Event )
@@ -677,9 +727,8 @@ function me.SlashCommand ( Input )
 				me.Print( L.CMD_REMOVENOTFOUND_FORMAT:format( Arguments ), RED_FONT_COLOR );
 			end
 			return;
-		elseif ( Command == L.CMD_CACHE ) then
-			CacheListPopulate();
-			if ( not me.CacheListPrint( true ) ) then -- Nothing in cache
+		elseif ( Command == L.CMD_CACHE ) then -- Force print full cache list
+			if ( not me.CacheListPrint( true, true ) ) then -- Nothing in cache
 				me.Print( L.CMD_CACHE_EMPTY, GREEN_FONT_COLOR );
 			end
 			return;
@@ -723,6 +772,7 @@ else
 end
 Frame:RegisterEvent( "PLAYER_ENTERING_WORLD" );
 Frame:RegisterEvent( "PLAYER_LEAVING_WORLD" );
+Frame:RegisterEvent( "PLAYER_UPDATE_RESTING" );
 -- Set OnUpdate script after zone info loads
 if ( GetZoneText() == "" ) then -- Zone information unknown (initial login)
 	Frame:RegisterEvent( "ZONE_CHANGED_NEW_AREA" );
