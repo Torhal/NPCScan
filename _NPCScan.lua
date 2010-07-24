@@ -500,7 +500,7 @@ do
 			AchievementNPCDeactivate( me.Achievements[ AchievementID ], NpcID );
 		end
 
-		local Valid, InvalidReason;
+		local Valid, InvalidReason = true;
 		local Tamable = me.TamableIDs[ NpcID ];
 		if ( Tamable ) then
 			Valid, InvalidReason = OnFoundTamable( NpcID, Name );
