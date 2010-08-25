@@ -23,11 +23,13 @@ _NPCScan.L = setmetatable( {
 	BUTTON_FOUND = "Найден НИП!",
 	CACHED_FORMAT = "Следующие юниты уже находятся в кэше: %s.",
 	CACHED_LONG_FORMAT = "Следующие юниты уже находятся в кэше. Попробуйте удалить их с помощью команды |cff808080“/npcscan”|r или сбросить их очистив ваш кэш: %s.",
+	CACHED_PET_RESTING_FORMAT = "Следующие питомцы попали в КЕШ пока Вы отдыхали: %s.",
 	CACHED_WORLD_FORMAT = "Следующий(ие) %2$s юнит(ы) уже находятся в кэше: %1$s.",
 	CACHELIST_ENTRY_FORMAT = "|cff808080“%s”|r",
 	CACHELIST_SEPARATOR = ", ",
 	CMD_ADD = "ADD",
 	CMD_CACHE = "CACHE",
+	CMD_CACHE_EMPTY = "Ни один монстр не найден в Вашем КЕШе.",
 	CMD_HELP = "Команды |cff808080“/npcscan add <IDНИПа> <Название>”|r, |cff808080“/npcscan remove <IDНИПа или название>”|r, |cff808080“/npcscan cache”|r выводит список существ из кеша, и просто |cff808080“/npcscan”|r открывает меню настроек.",
 	CMD_REMOVE = "REMOVE",
 	CMD_REMOVENOTFOUND_FORMAT = "НИП |cff808080“%s”|r не найден.",
@@ -38,9 +40,11 @@ _NPCScan.L = setmetatable( {
 	CONFIG_ALERT_UNMUTE = "Включить звук для звукового сигнала",
 	CONFIG_ALERT_UNMUTE_DESC = "Если у вас приглушённый звук в игре, то ето позволяет кратко проиграть звук при обнаружении НИПа.",
 	CONFIG_CACHEWARNINGS = "Выводить напоминания о кеше при входе/изменении мира",
+	CONFIG_CACHEWARNINGS_DESC = "Если НИП уже находиться в КЕШе, когда вы войдете\\смените мир будет выведено напоминание о монстрах которых не возможно найти.",
 	CONFIG_DESC = "Эти параметры позволяют настроить для вас способ оповещения _NPCScan, при обнаружении им редкого НИПа.",
 	CONFIG_TEST = "Тест сигнала обнаружения",
 	CONFIG_TEST_DESC = "Имитирует оповещение |cff808080“Найден НИП!|r, которое информирует вас что имеено надо искать.",
+	CONFIG_TEST_HELP_FORMAT = "Нажмите на кнопку цели или используйте комбинацию клавиш для взятия в цель найденного монстра.  Держите |cffffffff<%s>|r и двигайте мышью, для перемещения кнопки цели.  Если Вы находитесь в бою когда НИП был найден, предупреждение появиться только после выхода из боя.",
 	CONFIG_TEST_NAME = "Вы! (Тест)",
 	CONFIG_TITLE = "_|cffCCCC88NPCScan|r",
 	FOUND_FORMAT = "Найдено: |cff808080“%s”|r!",
@@ -65,5 +69,10 @@ _NPCScan.L = setmetatable( {
 	SEARCH_REMOVE = "-",
 	SEARCH_TITLE = "Поиск",
 	SEARCH_WORLD = "Мир:",
+	SEARCH_WORLD_DESC = "Опция ограничения поиска в мире.  Может быть континентом или |cffff7f3fзоной|r (с учетом регистра).",
 	SEARCH_WORLD_FORMAT = "(%s)",
 }, { __index = _NPCScan.L; } );
+
+
+_G[ "BINDING_NAME_CLICK _NPCScanButton:LeftButton" ] = [=[Выбрать последнего найденного монстра
+|cff808080(Используйте когда _NPCScan известит Вас)|r]=];
