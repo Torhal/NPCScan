@@ -234,8 +234,8 @@ function me:NPCUpdate ()
 	local WorldIDs = _NPCScan.OptionsCharacter.NPCWorldIDs;
 	for NpcID, Name in pairs( _NPCScan.OptionsCharacter.NPCs ) do
 		local Row = me.Table:AddRow( NpcID,
-			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or nil,
-			Name, NpcID, GetWorldIDName( WorldIDs[ NpcID ] ) );
+			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
+			Name, NpcID, GetWorldIDName( WorldIDs[ NpcID ] ) or "" );
 
 		if ( not _NPCScan.NPCIsActive( NpcID ) ) then
 			Row:SetAlpha( me.InactiveAlpha );
@@ -289,9 +289,9 @@ function me:AchievementUpdate ()
 		local Name, _, Completed = GetAchievementCriteriaInfo( CriteriaID );
 
 		local Row = me.Table:AddRow( NpcID,
-			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or nil,
+			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
 			Name, NpcID,
-			Completed and [[|TInterface\RaidFrame\ReadyCheck-Ready:0|t]] or nil );
+			Completed and [[|TInterface\RaidFrame\ReadyCheck-Ready:0|t]] or "" );
 
 		if ( not _NPCScan.AchievementNPCIsActive( Achievement, NpcID ) ) then
 			Row:SetAlpha( me.InactiveAlpha );
@@ -374,7 +374,7 @@ do
 	function me:TableCreate ()
 		-- Note: Keep late bound so _NPCScan.Overlay can hook into the table as it's created
 		if ( not self.Table ) then
-			self.Table = LibStub( "LibTextTable-1.0" ).New( nil, self.TableContainer );
+			self.Table = LibStub( "LibTextTable-1.1" ).New( nil, self.TableContainer );
 			self.Table:SetAllPoints();
 
 			if ( LibRareSpawnsData ) then

@@ -11,7 +11,7 @@
 ## X-Credits-ruRU: Localization: StingerSoft, Sarymian
 ## X-Credits-zhTW: Localization: s8095324, pepper_ep
 ## Version: 3.3.5.5
-## X-Date: 2010-08-25
+## X-Date: 2010-08-26
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com
@@ -21,10 +21,10 @@
 ## X-Curse-Project-ID: npcscan
 ## X-Localizations: enUS, frFR, koKR, ruRU, zhTW
 ## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, koKR, ruRU, zhCN, zhTW
-## X-Embeds: LibTextTable-1.0, LibSharedMedia-3.0
+## X-Embeds: LibTextTable-1.1, LibSharedMedia-3.0
 ## SavedVariables: _NPCScanOptions
 ## SavedVariablesPerCharacter: _NPCScanOptionsCharacter
-## OptionalDeps: Ace3, LibTextTable-1.0, LibSharedMedia-3.0, LibRareSpawns
+## OptionalDeps: Ace3, LibTextTable-1.1, LibSharedMedia-3.0, LibRareSpawns
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
 
