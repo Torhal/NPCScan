@@ -55,7 +55,16 @@ me.Achievements = { --- Criteria data for each achievement.
 	[ 1312 ] = { WorldID = 3; }; -- Bloody Rare (Outlands)
 	[ 2257 ] = { WorldID = 4; }; -- Frostbitten (Northrend)
 };
-me.ContinentIDs = {}; --- [ Localized continent name ] = Continent ID (mirrors WorldMapContinent.dbc)
+do
+	local VirtualContinents = { --- Continents without physical maps aren't used.
+		[ 5 ] = true; -- The Maelstrom
+	};
+	me.ContinentNames = { GetMapContinents() };
+	for ContinentID in pairs( VirtualContinents ) do
+		me.ContinentNames[ ContinentID ] = nil;
+	end
+	me.ContinentIDs = {}; --- Reverse lookup of me.ContinentNames.
+end
 
 me.NpcIDMax = 0xFFFFF; --- Largest ID that will fit in a GUID's 20-bit NPC ID field.
 me.Frame.UpdateRate = 0.1;
@@ -81,7 +90,7 @@ do
 	-- @return Localized name of the NPC if cached, or nil if not.
 	function me.TestID ( NpcID )
 		Tooltip:SetOwner( WorldFrame, "ANCHOR_NONE" );
-		Tooltip:SetHyperlink( ( "unit:0xF5300%05X000000" ):format( NpcID ) );
+		Tooltip:SetHyperlink( ( "unit:0xF53%05X00000000" ):format( NpcID ) );
 		if ( Tooltip:IsShown() ) then
 			return Text:GetText();
 		end
@@ -461,12 +470,12 @@ do
 	--- @return True if the tamable mob is in its correct zone, else false with an optional reason string.
 	local function OnFoundTamable ( NpcID, Name )
 		local ExpectedZone = me.TamableIDs[ NpcID ];
-		local ZoneIDBackup = GetCurrentMapAreaID() - 1;
+		local ZoneIDBackup = GetCurrentMapAreaID();
 		SetMapToCurrentZone();
 
 		local InCorrectZone, InvalidReason =
 			ExpectedZone == true -- Expected zone is unknown (instance mob, etc.)
-			or ExpectedZone == GetCurrentMapAreaID() - 1;
+			or ExpectedZone == GetCurrentMapAreaID();
 
 		if ( not InCorrectZone ) then
 			if ( IsResting() ) then -- Assume any tamable mob found in a city/inn is a hunter pet
@@ -745,7 +754,7 @@ end
 
 
 -- Create reverse lookup of continent names
-for Index, Name in ipairs( { GetMapContinents() } ) do
+for Index, Name in pairs( me.ContinentNames ) do
 	me.ContinentIDs[ Name ] = Index;
 end
 -- Save achievement criteria data

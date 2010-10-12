@@ -12,7 +12,7 @@ _NPCScan.Config = me;
 me.CacheWarnings = CreateFrame( "CheckButton", "_NPCScanConfigCacheWarningsCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
 
 local AlertOptions = CreateFrame( "Frame", "_NPCScanConfigAlert", me, "OptionsBoxTemplate" );
-me.Test = CreateFrame( "Button", "_NPCScanTest", AlertOptions, "GameMenuButtonTemplate" );
+me.Test = CreateFrame( "Button", "_NPCScanTest", AlertOptions, "UIPanelButtonTemplate" );
 me.AlertSoundUnmute = CreateFrame( "CheckButton", "_NPCScanConfigUnmuteCheckbox", AlertOptions, "InterfaceOptionsCheckButtonTemplate" );
 me.AlertSound = CreateFrame( "Frame", "_NPCScanConfigSoundDropdown", AlertOptions, "UIDropDownMenuTemplate" );
 
@@ -104,6 +104,7 @@ _G[ AlertOptions:GetName().."Title" ]:SetText( L.CONFIG_ALERT );
 
 -- Test button
 me.Test:SetPoint( "TOPLEFT", 16, -16 );
+me.Test:SetSize( 144, 21 );
 me.Test:SetScript( "OnClick", me.Test.OnClick );
 me.Test:SetScript( "OnEnter", me.ControlOnEnter );
 me.Test:SetScript( "OnLeave", GameTooltip_Hide );

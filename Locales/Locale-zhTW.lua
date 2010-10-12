@@ -61,6 +61,7 @@ _NPCScan.L = setmetatable( {
 	SEARCH_DESC = "你可以在下表中新增或移除NPC，或是選擇需要搜尋NPC的相關成就。",
 	SEARCH_ID = "NPC ID",
 	SEARCH_ID_DESC = "想尋找的NPC的ID。這個編號可以在類似Wowhead.com的資料庫網站上找到。",
+	SEARCH_MAP = "地區:",
 	SEARCH_NAME = "名稱",
 	SEARCH_NAME_DESC = "NPC的稱呼。這個稱呼不需要和NPC原來的名字完全相同。",
 	SEARCH_NPCS = "自訂NPC",

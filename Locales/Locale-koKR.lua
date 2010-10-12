@@ -61,6 +61,7 @@ _NPCScan.L = setmetatable( {
 	SEARCH_DESC = "이 표에서 탐색하려는 NPC와 업적에 관련된 몹을 추가 / 삭제할 수 있습니다.",
 	SEARCH_ID = "NPC ID:",
 	SEARCH_ID_DESC = "탐색할 NPC의 ID입니다.  WowHead.com과 같은 싸이트를 통하여 찾을 수 있습니다.",
+	SEARCH_MAP = "지역:",
 	SEARCH_NAME = "이름:",
 	SEARCH_NAME_DESC = "NPC에 붙일 이름입니다. 내부적으로 NPC ID를 사용하므로, 희귀몹의 실제 이름과 일치하지 않아도 됩니다.",
 	SEARCH_NPCS = "직접 추가",

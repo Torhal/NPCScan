@@ -45,14 +45,13 @@ me.ModelCameras = {
 --- Plays an alert sound, temporarily enabling sound if necessary.
 -- @param AlertSound  A LibSharedMedia sound key, or nil to play the default.
 function me.PlaySound ( AlertSound )
-	local SoundEnableChanged, SoundInBGChanged;
 	if ( _NPCScan.Options.AlertSoundUnmute ) then
-		if ( not GetCVarBool( "Sound_EnableAllSound" ) ) then
-			SoundEnableChanged = true;
-			SetCVar( "Sound_EnableAllSound", 1 );
+		if ( not me.SoundEnableChanged and not GetCVarBool( "Sound_EnableAllSound" ) ) then
+			me.SoundEnableChanged = true;
+			SetCVar( "Sound_EnableAllSound", 1 ); -- Restored when alert is closed
 		end
-		if ( not GetCVarBool( "Sound_EnableSoundWhenGameIsInBG" ) ) then
-			SoundInBGChanged = true;
+		if ( not me.SoundInBGChanged and not GetCVarBool( "Sound_EnableSoundWhenGameIsInBG" ) ) then
+			me.SoundInBGChanged = true;
 			SetCVar( "Sound_EnableSoundWhenGameIsInBG", 1 );
 		end
 	end
@@ -62,12 +61,6 @@ function me.PlaySound ( AlertSound )
 	else
 		local LSM = LibStub( "LibSharedMedia-3.0" );
 		PlaySoundFile( LSM:Fetch( LSM.MediaType.SOUND, AlertSound ) );
-	end
-	if ( SoundEnableChanged ) then
-		SetCVar( "Sound_EnableAllSound", 0 );
-	end
-	if ( SoundInBGChanged ) then
-		SetCVar( "Sound_EnableSoundWhenGameIsInBG", 0 );
 	end
 end
 
@@ -154,6 +147,14 @@ function me:OnHide ()
 	self:UnregisterEvent( "UNIT_MODEL_CHANGED" );
 	self:EnableDrag( false );
 
+	if ( me.SoundEnableChanged ) then
+		me.SoundEnableChanged = nil;
+		SetCVar( "Sound_EnableAllSound", 0 );
+	end
+	if ( me.SoundInBGChanged ) then
+		me.SoundInBGChanged = nil;
+		SetCVar( "Sound_EnableSoundWhenGameIsInBG", 0 );
+	end
 	if ( type( self.ID ) == "number" ) then -- Remove current overlay
 		_NPCScan.Overlays.Remove( self.ID );
 	end
@@ -186,7 +187,7 @@ do
 	local function TargetIsFoundRare ( ID ) -- Returns true if the button targetted its rare
 		if ( type( ID ) == "number" ) then
 			local GUID = UnitGUID( "target" );
-			if ( GUID and ID == tonumber( GUID:sub( 8, 12 ), 16 ) ) then
+			if ( GUID and ID == tonumber( GUID:sub( 6, 10 ), 16 ) ) then
 				return true;
 			end
 		else -- UnitID
