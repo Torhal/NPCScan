@@ -9,6 +9,7 @@ _NPCScan = me;
 local L = me.L;
 
 me.Frame = CreateFrame( "Frame" );
+me.Updater = me.Frame:CreateAnimationGroup();
 me.Version = GetAddOnMetadata( ..., "Version" ):match( "^([%d.]+)" );
 
 me.Options = {
@@ -67,7 +68,7 @@ do
 end
 
 me.NpcIDMax = 0xFFFFF; --- Largest ID that will fit in a GUID's 20-bit NPC ID field.
-me.Frame.UpdateRate = 0.1;
+me.Updater.UpdateRate = 0.1;
 
 
 
@@ -182,7 +183,7 @@ local function ScanAdd ( NpcID )
 			ScanIDs[ NpcID ] = ScanIDs[ NpcID ] + 1;
 		else
 			if ( not next( ScanIDs ) ) then -- First
-				me.Frame:Show();
+				me.Updater:Play();
 			end
 			ScanIDs[ NpcID ] = 1;
 			me.Overlays.Add( NpcID );
@@ -199,7 +200,7 @@ local function ScanRemove ( NpcID )
 		ScanIDs[ NpcID ] = nil;
 		me.Overlays.Remove( NpcID );
 		if ( not next( ScanIDs ) ) then -- Last
-			me.Frame:Hide();
+			me.Updater:Stop();
 		end
 	end
 end
@@ -545,23 +546,17 @@ do
 		CriteriaUpdated = true;
 	end
 
-	local NextUpdate = 0;
 	--- Scans all NPCs on a timer and alerts if any are found.
-	function me.Frame:OnUpdate ( Elapsed )
-		NextUpdate = NextUpdate - Elapsed;
-		if ( NextUpdate <= 0 ) then
-			LastUpdate = self.UpdateRate;
+	function me.Updater:OnLoop ()
+		if ( CriteriaUpdated ) then -- CRITERIA_UPDATE bucket
+			CriteriaUpdated = false;
+			AchievementCriteriaUpdate();
+		end
 
-			if ( CriteriaUpdated ) then -- CRITERIA_UPDATE bucket
-				CriteriaUpdated = false;
-				AchievementCriteriaUpdate();
-			end
-
-			for NpcID in pairs( ScanIDs ) do
-				local Name = me.TestID( NpcID );
-				if ( Name ) then
-					OnFound( NpcID, Name );
-				end
+		for NpcID in pairs( ScanIDs ) do
+			local Name = me.TestID( NpcID );
+			if ( Name ) then
+				OnFound( NpcID, Name );
 			end
 		end
 	end
@@ -725,12 +720,12 @@ function me.Frame:ACHIEVEMENT_EARNED ( _, AchievementID )
 		me.AchievementRemove( AchievementID );
 	end
 end
---- Sets the OnUpdate handler only after zone info is known.
+--- Sets the update handler only after zone info is known.
 function me.Frame:ZONE_CHANGED_NEW_AREA ( Event )
 	self:UnregisterEvent( Event );
 	self[ Event ] = nil;
 
-	self:SetScript( "OnUpdate", self.OnUpdate );
+	me.Updater:SetScript( "OnLoop", me.Updater.OnLoop );
 end
 --- Global event handler.
 function me.Frame:OnEvent ( Event, ... )
@@ -807,7 +802,6 @@ end
 
 
 local Frame = me.Frame;
-Frame:Hide();
 Frame:SetScript( "OnEvent", Frame.OnEvent );
 if ( not IsLoggedIn() ) then
 	Frame:RegisterEvent( "PLAYER_LOGIN" );
@@ -817,7 +811,10 @@ end
 Frame:RegisterEvent( "PLAYER_ENTERING_WORLD" );
 Frame:RegisterEvent( "PLAYER_LEAVING_WORLD" );
 Frame:RegisterEvent( "PLAYER_UPDATE_RESTING" );
--- Set OnUpdate script after zone info loads
+
+me.Updater:CreateAnimation( "Animation" ):SetDuration( me.Updater.UpdateRate );
+me.Updater:SetLooping( "REPEAT" );
+-- Set update handler after zone info loads
 if ( GetZoneText() == "" ) then -- Zone information unknown (initial login)
 	Frame:RegisterEvent( "ZONE_CHANGED_NEW_AREA" );
 else -- Zone information is known
