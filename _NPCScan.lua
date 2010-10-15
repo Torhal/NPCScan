@@ -566,6 +566,41 @@ do
 		end
 	end
 end
+if ( select( 2, UnitClass( "player" ) ) == "HUNTER" ) then
+	local StableUpdater = CreateFrame( "Frame" );
+
+	local StabledList = {};
+	--- Stops scans for stabled hunter pets before a bogus alert can fire.
+	function me.Frame:PET_STABLE_UPDATE ()
+		for NpcID in pairs( ScanIDs ) do
+			local Name = me.TestID( NpcID );
+			if ( Name ) then
+				StabledList[ NpcID ] = Name;
+				NPCDeactivate( NpcID );
+				for AchievementID in pairs( me.OptionsCharacter.Achievements ) do
+					AchievementNPCDeactivate( me.Achievements[ AchievementID ], NpcID );
+				end
+			end
+		end
+		StableUpdater:Show();
+	end
+	--- Bucket to print cached stabled pets on one line.
+	function StableUpdater:OnUpdate ()
+		self:Hide();
+		if ( me.Options.CacheWarnings ) then
+			local ListString = CacheListBuild( StabledList );
+			if ( ListString ) then
+				me.Print( L.CACHED_STABLED_FORMAT:format( ListString ) );
+			end
+		else
+			wipe( StabledList );
+		end
+	end
+
+	StableUpdater:Hide();
+	StableUpdater:SetScript( "OnUpdate", StableUpdater.OnUpdate );
+	me.Frame:RegisterEvent( "PET_STABLE_UPDATE" );
+end
 
 
 

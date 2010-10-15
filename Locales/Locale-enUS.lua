@@ -18,6 +18,7 @@ select( 2, ... ).L = setmetatable( {
 	CACHED_FORMAT = "The following unit(s) are already cached: %s.",
 	CACHED_LONG_FORMAT = "The following unit(s) are already cached.  Consider removing them using |cff808080“/npcscan”|r's menu or resetting them by clearing your cache: %s.",
 	CACHED_PET_RESTING_FORMAT = "The following tamable pet(s) were cached while resting: %s.",
+	CACHED_STABLED_FORMAT = "The following unit(s) cannot be searched for while tamed: %s.",
 	CACHED_WORLD_FORMAT = "The following %2$s unit(s) are already cached: %1$s.",
 	CACHELIST_ENTRY_FORMAT = "|cff808080“%s”|r",
 	CACHELIST_SEPARATOR = ", ",
