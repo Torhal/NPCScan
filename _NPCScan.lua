@@ -595,6 +595,14 @@ if ( select( 2, UnitClass( "player" ) ) == "HUNTER" ) then
 	StableUpdater:Hide();
 	StableUpdater:SetScript( "OnUpdate", StableUpdater.OnUpdate );
 	me.Frame:RegisterEvent( "PET_STABLE_UPDATE" );
+
+	local Backup = GetStablePetInfo;
+	--- Prevents the pet UI from querying (and caching) pets until actually viewing the stables.
+	function GetStablePetInfo ( ... )
+		if ( IsAtStableMaster() ) then
+			return Backup( ... );
+		end
+	end
 end
 
 
