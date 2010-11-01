@@ -46,9 +46,13 @@ me.ModelCameras = {
 -- @param AlertSound  A LibSharedMedia sound key, or nil to play the default.
 function me.PlaySound ( AlertSound )
 	if ( _NPCScan.Options.AlertSoundUnmute ) then
-		if ( not me.SoundEnableChanged and not GetCVarBool( "Sound_EnableAllSound" ) ) then
-			me.SoundEnableChanged = true;
+		if ( not me.SoundEnableAllChanged and not GetCVarBool( "Sound_EnableAllSound" ) ) then
+			me.SoundEnableAllChanged = true;
 			SetCVar( "Sound_EnableAllSound", 1 ); -- Restored when alert is closed
+		end
+		if ( not me.SoundEnableSFXChanged and not GetCVarBool( "Sound_EnableSFX" ) ) then
+			me.SoundEnableSFXChanged = true;
+			SetCVar( "Sound_EnableSFX", 1 );
 		end
 		if ( not me.SoundInBGChanged and not GetCVarBool( "Sound_EnableSoundWhenGameIsInBG" ) ) then
 			me.SoundInBGChanged = true;
@@ -147,9 +151,13 @@ function me:OnHide ()
 	self:UnregisterEvent( "UNIT_MODEL_CHANGED" );
 	self:EnableDrag( false );
 
-	if ( me.SoundEnableChanged ) then
-		me.SoundEnableChanged = nil;
+	if ( me.SoundEnableAllChanged ) then
+		me.SoundEnableAllChanged = nil;
 		SetCVar( "Sound_EnableAllSound", 0 );
+	end
+	if ( me.SoundEnableSFXChanged ) then
+		me.SoundEnableSFXChanged = nil;
+		SetCVar( "Sound_EnableSFX", 0 );
 	end
 	if ( me.SoundInBGChanged ) then
 		me.SoundInBGChanged = nil;
