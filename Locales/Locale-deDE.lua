@@ -24,6 +24,7 @@ _NPCScan.L = setmetatable( {
 	CACHED_FORMAT = "Die folgende(n) Einheit(en) befinden sich bereits im Cache: %s.",
 	CACHED_LONG_FORMAT = "Die folgende(n) Einheit(en) befinden sich bereits im Cache. Entweder über |cff808080“/npcscan”|rs Menü entfernen oder deine Cache-Datei leeren: %s.",
 	CACHED_PET_RESTING_FORMAT = "Die folgenden zähmbaren Begleiter wurden während des Ausruhens dem Cache hinzugefügt: %s.",
+	CACHED_STABLED_FORMAT = "Nach den folgenden Einheiten kann nicht gesucht werden, weil schon gezähmt: %s.",
 	CACHED_WORLD_FORMAT = "Die folgende(n) %2$s Einheite(n) befinden sich bereits im Cache: %1$s.",
 	CACHELIST_ENTRY_FORMAT = "|cff808080“%s”|r",
 	CACHELIST_SEPARATOR = ",",
