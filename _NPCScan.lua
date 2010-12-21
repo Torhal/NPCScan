@@ -68,7 +68,7 @@ me.OptionsCharacterDefault = {
 		[ 50060 ] = L.NPCs[ 50060 ]; -- Terborus
 		[ 50061 ] = L.NPCs[ 50061 ]; -- Xariona
 		[ 50062 ] = L.NPCs[ 50062 ]; -- Aeonaxx
-		[ 50063 ] = L.NPCs[ 50063 ]; -- Akmahat
+		[ 50063 ] = L.NPCs[ 50063 ]; -- Akma'hat
 		[ 50064 ] = L.NPCs[ 50064 ]; -- Cyrus the Black
 		[ 50065 ] = L.NPCs[ 50065 ]; -- Armagedillo
 		[ 50085 ] = L.NPCs[ 50085 ]; -- Overlord Sunderfury
@@ -108,7 +108,7 @@ me.OptionsCharacterDefault = {
 		[ 50060 ] = DEEPHOLM; -- Terborus
 		[ 50061 ] = DEEPHOLM; -- Xariona
 		[ 50062 ] = DEEPHOLM; -- Aeonaxx
-		[ 50063 ] = 1; -- Akmahat
+		[ 50063 ] = 1; -- Akma'hat
 		[ 50064 ] = 1; -- Cyrus the Black
 		[ 50065 ] = 1; -- Armagedillo
 		[ 50085 ] = 2; -- Overlord Sunderfury
@@ -787,7 +787,7 @@ function me.Frame:PLAYER_LOGIN ( Event )
 			AddNpc( 50060, DEEPHOLM ); -- Terborus
 			AddNpc( 50061, DEEPHOLM ); -- Xariona
 			AddNpc( 50062, DEEPHOLM ); -- Aeonaxx
-			AddNpc( 50063, 1 ); -- Akmahat
+			AddNpc( 50063, 1 ); -- Akma'hat
 			AddNpc( 50064, 1 ); -- Cyrus the Black
 			AddNpc( 50065, 1 ); -- Armagedillo
 			AddNpc( 50085, 2 ); -- Overlord Sunderfury
