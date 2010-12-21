@@ -29,6 +29,22 @@ me.OptionsDefault = {
 	AlertSoundUnmute = nil;
 	AlertSound = nil; -- Default sound
 };
+
+local DEEPHOLM;
+do
+	local ContinentID, MapID = WORLDMAP_MAELSTROM_ID, 640;
+	--- @return The localized name of Deepholm.
+	local function FindDeepholm ( ... )
+		for ZoneIndex = 1, select( "#", ... ) do
+			SetMapZoom( ContinentID, ZoneIndex );
+			if ( GetCurrentMapAreaID() == MapID ) then
+				return select( ZoneIndex, ... );
+			end
+		end
+	end
+	DEEPHOLM = FindDeepholm( GetMapZones( ContinentID ) );
+end
+
 me.OptionsCharacterDefault = {
 	Version = me.Version;
 	NPCs = {
@@ -37,6 +53,39 @@ me.OptionsCharacterDefault = {
 		[ 33776 ] = L.NPCs[ 33776 ]; -- Gondria
 		[ 35189 ] = L.NPCs[ 35189 ]; -- Skoll
 		[ 38453 ] = L.NPCs[ 38453 ]; -- Arcturis
+
+		[ 49822 ] = L.NPCs[ 49822 ]; -- Jadefang
+		[ 49913 ] = L.NPCs[ 49913 ]; -- Lady LaLa
+		[ 50005 ] = L.NPCs[ 50005 ]; -- Poseidus
+		[ 50009 ] = L.NPCs[ 50009 ]; -- Mobus
+		[ 50050 ] = L.NPCs[ 50050 ]; -- Shok'sharak
+		[ 50052 ] = L.NPCs[ 50052 ]; -- Burgy Blackheart
+		[ 50053 ] = L.NPCs[ 50053 ]; -- Thartuk the Exile
+		[ 50056 ] = L.NPCs[ 50056 ]; -- Garr
+		[ 50057 ] = L.NPCs[ 50057 ]; -- Blazewing
+		[ 50058 ] = L.NPCs[ 50058 ]; -- Terrorpene
+		[ 50059 ] = L.NPCs[ 50059 ]; -- Golgarok
+		[ 50060 ] = L.NPCs[ 50060 ]; -- Terborus
+		[ 50061 ] = L.NPCs[ 50061 ]; -- Xariona
+		[ 50062 ] = L.NPCs[ 50062 ]; -- Aeonaxx
+		[ 50063 ] = L.NPCs[ 50063 ]; -- Akmahat
+		[ 50064 ] = L.NPCs[ 50064 ]; -- Cyrus the Black
+		[ 50065 ] = L.NPCs[ 50065 ]; -- Armagedillo
+		[ 50085 ] = L.NPCs[ 50085 ]; -- Overlord Sunderfury
+		[ 50086 ] = L.NPCs[ 50086 ]; -- Tarvus the Vile
+		[ 50089 ] = L.NPCs[ 50089 ]; -- Julak-Doom
+		[ 50138 ] = L.NPCs[ 50138 ]; -- Karoma
+		[ 50154 ] = L.NPCs[ 50154 ]; -- Madexx
+		[ 50159 ] = L.NPCs[ 50159 ]; -- Sambas
+		[ 50409 ] = L.NPCs[ 50409 ]; -- Camel Figurine
+		[ 50410 ] = L.NPCs[ 50410 ]; -- Camel Figurine
+		[ 50411 ] = L.NPCs[ 50411 ]; -- Camel Figurine
+		[ 51071 ] = L.NPCs[ 51071 ]; -- Captain Florence
+		[ 51079 ] = L.NPCs[ 51079 ]; -- Captain Foulwind
+		[ 51401 ] = L.NPCs[ 51401 ]; -- Madexx
+		[ 51402 ] = L.NPCs[ 51402 ]; -- Madexx
+		[ 51403 ] = L.NPCs[ 51403 ]; -- Madexx
+		[ 51404 ] = L.NPCs[ 51404 ]; -- Madexx
 	};
 	NPCWorldIDs = {
 		[ 18684 ] = 3; -- Bro'Gaz the Clanless
@@ -44,6 +93,39 @@ me.OptionsCharacterDefault = {
 		[ 33776 ] = 4; -- Gondria
 		[ 35189 ] = 4; -- Skoll
 		[ 38453 ] = 4; -- Arcturis
+
+		[ 49822 ] = DEEPHOLM; -- Jadefang
+		[ 49913 ] = 2; -- Lady LaLa
+		[ 50005 ] = 2; -- Poseidus
+		[ 50009 ] = 2; -- Mobus
+		[ 50050 ] = 2; -- Shok'sharak
+		[ 50052 ] = 2; -- Burgy Blackheart
+		[ 50053 ] = 1; -- Thartuk the Exile
+		[ 50056 ] = 1; -- Garr
+		[ 50057 ] = 1; -- Blazewing
+		[ 50058 ] = 1; -- Terrorpene
+		[ 50059 ] = DEEPHOLM; -- Golgarok
+		[ 50060 ] = DEEPHOLM; -- Terborus
+		[ 50061 ] = DEEPHOLM; -- Xariona
+		[ 50062 ] = DEEPHOLM; -- Aeonaxx
+		[ 50063 ] = 1; -- Akmahat
+		[ 50064 ] = 1; -- Cyrus the Black
+		[ 50065 ] = 1; -- Armagedillo
+		[ 50085 ] = 2; -- Overlord Sunderfury
+		[ 50086 ] = 2; -- Tarvus the Vile
+		[ 50089 ] = 2; -- Julak-Doom
+		[ 50138 ] = 2; -- Karoma
+		[ 50154 ] = 1; -- Madexx
+		[ 50159 ] = 2; -- Sambas
+		[ 50409 ] = 1; -- Camel Figurine
+		[ 50410 ] = 1; -- Camel Figurine
+		[ 50411 ] = 1; -- Camel Figurine
+		[ 51071 ] = 2; -- Captain Florence
+		[ 51079 ] = 2; -- Captain Foulwind
+		[ 51401 ] = 1; -- Madexx
+		[ 51402 ] = 1; -- Madexx
+		[ 51403 ] = 1; -- Madexx
+		[ 51404 ] = 1; -- Madexx
 	};
 	Achievements = {
 		[ 1312 ] = true; -- Bloody Rare (Outlands)
@@ -405,16 +487,26 @@ end
 
 
 
+local IsDefaultNPCValid;
+do
+	local IsHunter = select( 2, UnitClass( "player" ) ) == "HUNTER";
+	local TamableExceptions = {
+		[ 49822 ] = true; -- Jadefang drops a pet
+	};
+	--- @return True if NpcID should be a default for this character.
+	function IsDefaultNPCValid ( NpcID )
+		return IsHunter or not me.TamableIDs[ NpcID ] or TamableExceptions[ NpcID ];
+	end
+end
 --- Resets the scanning list and reloads it from saved settings.
 function me.Synchronize ( Options, OptionsCharacter )
 	-- Load defaults if settings omitted
-	local IsDefaultScan, IsHunter;
+	local IsDefaultScan;
 	if ( not Options ) then
 		Options = me.OptionsDefault;
 	end
 	if ( not OptionsCharacter ) then
-		OptionsCharacter = me.OptionsCharacterDefault;
-		IsDefaultScan, IsHunter = true, IsShiftKeyDown() or select( 2, UnitClass( "player" ) ) == "HUNTER";
+		OptionsCharacter, IsDefaultScan = me.OptionsCharacterDefault, true;
 	end
 
 	-- Clear all scans
@@ -431,9 +523,10 @@ function me.Synchronize ( Options, OptionsCharacter )
 	me.SetAlertSoundUnmute( Options.AlertSoundUnmute );
 	me.SetAlertSound( Options.AlertSound );
 
+	local AddAllDefaults = IsShiftKeyDown();
 	for NpcID, Name in pairs( OptionsCharacter.NPCs ) do
 		-- If defaults, only add tamable custom mobs if the player is a hunter
-		if ( not IsDefaultScan or IsHunter or not me.TamableIDs[ NpcID ] ) then
+		if ( AddAllDefaults or not IsDefaultScan or IsDefaultNPCValid( NpcID ) ) then
 			me.NPCAdd( NpcID, Name, OptionsCharacter.NPCWorldIDs[ NpcID ] );
 		end
 	end
@@ -668,6 +761,51 @@ function me.Frame:PLAYER_LOGIN ( Event )
 			end
 			OptionsCharacter.NPCs, OptionsCharacter.NPCWorldIDs = NPCsNew, NPCWorldIDs;
 			Version = "3.3.5.1";
+		end
+		if ( Version < "4.0.3.1" ) then
+			-- 4.0.3.1: Added default scans for Cataclysm rares
+			--- Add NpcID if not already being searched for.
+			local function AddNpc ( NpcID, WorldID )
+				if ( not OptionsCharacter.NPCs[ NpcID ] -- Not already searched for
+					and IsDefaultNPCValid( NpcID )
+				) then
+					OptionsCharacter.NPCs[ NpcID ] = L.NPCs[ NpcID ];
+					OptionsCharacter.NPCWorldIDs[ NpcID ] = WorldID;
+				end
+			end
+			AddNpc( 49822, DEEPHOLM ); -- Jadefang
+			AddNpc( 49913, 2 ); -- Lady LaLa
+			AddNpc( 50005, 2 ); -- Poseidus
+			AddNpc( 50009, 2 ); -- Mobus
+			AddNpc( 50050, 2 ); -- Shok'sharak
+			AddNpc( 50052, 2 ); -- Burgy Blackheart
+			AddNpc( 50053, 1 ); -- Thartuk the Exile
+			AddNpc( 50056, 1 ); -- Garr
+			AddNpc( 50057, 1 ); -- Blazewing
+			AddNpc( 50058, 1 ); -- Terrorpene
+			AddNpc( 50059, DEEPHOLM ); -- Golgarok
+			AddNpc( 50060, DEEPHOLM ); -- Terborus
+			AddNpc( 50061, DEEPHOLM ); -- Xariona
+			AddNpc( 50062, DEEPHOLM ); -- Aeonaxx
+			AddNpc( 50063, 1 ); -- Akmahat
+			AddNpc( 50064, 1 ); -- Cyrus the Black
+			AddNpc( 50065, 1 ); -- Armagedillo
+			AddNpc( 50085, 2 ); -- Overlord Sunderfury
+			AddNpc( 50086, 2 ); -- Tarvus the Vile
+			AddNpc( 50089, 2 ); -- Julak-Doom
+			AddNpc( 50138, 2 ); -- Karoma
+			AddNpc( 50154, 1 ); -- Madexx
+			AddNpc( 50159, 2 ); -- Sambas
+			AddNpc( 50409, 1 ); -- Camel Figurine
+			AddNpc( 50410, 1 ); -- Camel Figurine
+			AddNpc( 50411, 1 ); -- Camel Figurine
+			AddNpc( 51071, 2 ); -- Captain Florence
+			AddNpc( 51079, 2 ); -- Captain Foulwind
+			AddNpc( 51401, 1 ); -- Madexx
+			AddNpc( 51402, 1 ); -- Madexx
+			AddNpc( 51403, 1 ); -- Madexx
+			AddNpc( 51404, 1 ); -- Madexx
+			Version = "4.0.3.1";
 		end
 		OptionsCharacter.Version = me.Version;
 	end
