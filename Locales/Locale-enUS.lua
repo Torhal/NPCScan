@@ -17,6 +17,7 @@ select( 2, ... ).L = setmetatable( {
 		[ 50005 ] = "Poseidus",
 		[ 50009 ] = "Mobus",
 		[ 50050 ] = "Shok'sharak",
+		[ 50051 ] = "Ghostcrawler",
 		[ 50052 ] = "Burgy Blackheart",
 		[ 50053 ] = "Thartuk the Exile",
 		[ 50056 ] = "Garr",
