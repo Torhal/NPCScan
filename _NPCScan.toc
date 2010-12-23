@@ -19,7 +19,7 @@
 ## X-Credits-ruRU: Localization: StingerSoft, Sarymian
 ## X-Credits-zhCN: Localization: digmouse
 ## X-Credits-zhTW: Localization: s8095324, pepper_ep
-## Version: 4.0.3.1
+## Version: 4.0.3.2
 ## X-Date: 2010-12-23
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
