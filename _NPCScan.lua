@@ -716,19 +716,20 @@ function me.Frame:PLAYER_LOGIN ( Event )
 	-- Character settings
 	if ( OptionsCharacter and OptionsCharacter.Version ~= me.Version ) then
 		local Version = OptionsCharacter.Version;
+
+		local WorldIDs = me.OptionsCharacterDefault.NPCWorldIDs;
+		--- Add NpcID if not already being searched for.
+		local function AddDefault ( NpcID )
+			if ( not OptionsCharacter.NPCs[ NpcID ] -- Not already searched for
+				and IsDefaultNPCValid( NpcID )
+			) then
+				OptionsCharacter.NPCs[ NpcID ] = L.NPCs[ NpcID ];
+				OptionsCharacter.NPCWorldIDs[ NpcID ] = WorldIDs[ NpcID ];
+			end
+		end
+
 		if ( Version < "4.0.3.1" ) then
 			-- 4.0.3.1: Added default scans for Cataclysm rares
-			local WorldIDs = me.OptionsCharacterDefault.NPCWorldIDs;
-			--- Add NpcID if not already being searched for.
-			local function AddDefault ( NpcID )
-				if ( not OptionsCharacter.NPCs[ NpcID ] -- Not already searched for
-					and IsDefaultNPCValid( NpcID )
-				) then
-					OptionsCharacter.NPCs[ NpcID ] = L.NPCs[ NpcID ];
-					OptionsCharacter.NPCWorldIDs[ NpcID ] = WorldIDs[ NpcID ];
-				end
-			end
-			AddDefault( 49822 ); -- Jadefang
 			AddDefault( 49913 ); -- Lady LaLa
 			AddDefault( 50005 ); -- Poseidus
 			AddDefault( 50009 ); -- Mobus
@@ -762,6 +763,11 @@ function me.Frame:PLAYER_LOGIN ( Event )
 			AddDefault( 51403 ); -- Madexx
 			AddDefault( 51404 ); -- Madexx
 			Version = "4.0.3.1";
+		end
+		if ( Version < "4.0.3.3" ) then
+			-- 4.0.3.3: Fixed omission of Jadefang.
+			AddDefault( 49822 ); -- Jadefang
+			Version = "4.0.3.3";
 		end
 		OptionsCharacter.Version = me.Version;
 	end
