@@ -18,6 +18,7 @@ _NPCScan.L = setmetatable( {
 		[ 33776 ] = "Gondria",
 		[ 35189 ] = "Skoll",
 		[ 38453 ] = "Arcturis",
+		[ 49822 ] = "Jadecroc",
 		[ 49913 ] = "Dame LaLa",
 		[ 50005 ] = "Poséidus",
 		[ 50009 ] = "Mobus",

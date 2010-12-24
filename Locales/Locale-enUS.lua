@@ -12,6 +12,7 @@ select( 2, ... ).L = setmetatable( {
 		[ 33776 ] = "Gondria",
 		[ 35189 ] = "Skoll",
 		[ 38453 ] = "Arcturis",
+		[ 49822 ] = "Jadefang",
 		[ 49913 ] = "Lady LaLa",
 		[ 50005 ] = "Poseidus",
 		[ 50009 ] = "Mobus",
