@@ -711,6 +711,10 @@ function me.Frame:PLAYER_LOGIN ( Event )
 
 	-- Update settings incrementally
 	if ( Options and Options.Version ~= me.Version ) then
+		if ( Options.Version == "3.0.9.2" ) then -- 3.1.0.1: Added options for finding already found and tamable mobs
+			Options.CacheWarnings = true;
+			Options.Version = "3.1.0.1";
+		end
 		Options.Version = me.Version;
 	end
 	-- Character settings
@@ -728,6 +732,46 @@ function me.Frame:PLAYER_LOGIN ( Event )
 			end
 		end
 
+		if ( Version == "3.0.9.2" ) then -- 3.1.0.1: Remove NPCs that are duplicated by achievements
+			local NPCs = OptionsCharacter.IDs;
+			OptionsCharacter.IDs = nil;
+			OptionsCharacter.NPCs = NPCs;
+			OptionsCharacter.Achievements = {};
+			local AchievementNPCs = {};
+			for AchievementID, Achievement in pairs( me.Achievements ) do
+				for _, NpcID in pairs( Achievement.Criteria ) do
+					AchievementNPCs[ NpcID ] = AchievementID;
+				end
+			end
+			for Name, NpcID in pairs( NPCs ) do
+				if ( AchievementNPCs[ NpcID ] ) then
+					NPCs[ Name ] = nil;
+					OptionsCharacter.Achievements[ AchievementNPCs[ NpcID ] ] = true;
+				end
+			end
+			Version = "3.1.0.1";
+		end
+		if ( Version == "3.1.0.1" or Version == "3.2.0.1" or Version == "3.2.0.2" ) then
+			-- 3.2.0.3: Added default scan for Skoll
+			OptionsCharacter.NPCs[ L.NPCs[ 35189 ] ] = 35189;
+			Version = "3.2.0.3";
+		end
+		if ( "3.2.0.3" <= Version and Version <= "3.3.0.1" ) then
+			-- 3.3.0.2: Added default scan for Arcturis
+			OptionsCharacter.NPCs[ L.NPCs[ 38453 ] ] = 38453;
+			Version = "3.3.0.2";
+		end
+		if ( Version == "3.3.0.2" or Version == "3.3.0.3" or Version == "3.3.0.4" ) then
+			-- 3.3.5.1: Custom NPC scans are indexed by ID instead of name, and can now be map-specific
+			local DefaultWorldIDs = me.OptionsCharacterDefault.NPCWorldIDs;
+			local NPCsNew, NPCWorldIDs = {}, {};
+			for Name, NpcID in pairs( OptionsCharacter.NPCs ) do
+				NPCsNew[ NpcID ] = Name;
+				NPCWorldIDs[ NpcID ] = DefaultWorldIDs[ NpcID ];
+			end
+			OptionsCharacter.NPCs, OptionsCharacter.NPCWorldIDs = NPCsNew, NPCWorldIDs;
+			Version = "3.3.5.1";
+		end
 		if ( Version < "4.0.3.1" ) then
 			-- 4.0.3.1: Added default scans for Cataclysm rares
 			AddDefault( 49913 ); -- Lady LaLa
