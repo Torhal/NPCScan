@@ -10,6 +10,7 @@ local me = CreateFrame( "Frame" );
 _NPCScan.Config = me;
 
 me.CacheWarnings = CreateFrame( "CheckButton", "_NPCScanConfigCacheWarningsCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
+me.PrintTime = CreateFrame( "CheckButton", "_NPCScanConfigPrintTimeCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
 
 local AlertOptions = CreateFrame( "Frame", "_NPCScanConfigAlert", me, "OptionsBoxTemplate" );
 me.Test = CreateFrame( "Button", "_NPCScanTest", AlertOptions, "UIPanelButtonTemplate" );
@@ -29,6 +30,10 @@ end
 --- Sets the CacheWarnings option when its checkbox is clicked.
 function me.CacheWarnings.setFunc ( Enable )
 	_NPCScan.SetCacheWarnings( Enable == "1" );
+end
+--- Sets the PrintTime option when its checkbox is clicked.
+function me.PrintTime.setFunc ( Enable )
+	_NPCScan.SetPrintTime( Enable == "1" );
 end
 
 --- Plays a fake found alert and shows the target button.
@@ -96,9 +101,13 @@ me.CacheWarnings:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
 _G[ me.CacheWarnings:GetName().."Text" ]:SetText( L.CONFIG_CACHEWARNINGS );
 me.CacheWarnings.tooltipText = L.CONFIG_CACHEWARNINGS_DESC;
 
+me.PrintTime:SetPoint( "TOPLEFT", me.CacheWarnings, "BOTTOMLEFT", 0, -8 );
+_G[ me.PrintTime:GetName().."Text" ]:SetText( L.CONFIG_PRINTTIME );
+me.PrintTime.tooltipText = L.CONFIG_PRINTTIME_DESC;
+
 
 -- Alert options section
-AlertOptions:SetPoint( "TOPLEFT", me.CacheWarnings, "BOTTOMLEFT", 0, -16 );
+AlertOptions:SetPoint( "TOPLEFT", me.PrintTime, "BOTTOMLEFT", 0, -16 );
 AlertOptions:SetPoint( "BOTTOMRIGHT", -14, 16 );
 _G[ AlertOptions:GetName().."Title" ]:SetText( L.CONFIG_ALERT );
 

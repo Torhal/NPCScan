@@ -70,6 +70,8 @@ select( 2, ... ).L = setmetatable( {
 	CONFIG_CACHEWARNINGS = "Print cache reminders on login and world changes",
 	CONFIG_CACHEWARNINGS_DESC = "If an NPC is already cached when you log in or change worlds, this option prints a reminder of which chached mobs can't be searched for.",
 	CONFIG_DESC = "These options let you configure the way _NPCScan alerts you when it finds rare NPCs.",
+	CONFIG_PRINTTIME = "Print timestamps to chat frame",
+	CONFIG_PRINTTIME_DESC = "Adds the current time to all printed messages.  Useful for recording when NPCs were found.",
 	CONFIG_TEST = "Test Found Alert",
 	CONFIG_TEST_DESC = "Simulates an |cff808080“NPC found”|r alert to let you know what to look out for.",
 	CONFIG_TEST_HELP_FORMAT = "Click the target button or use the provided keybinding to target the found mob.  Hold |cffffffff<%s>|r and drag to move the target button.  Note that if an NPC is found while you're in combat, the button will only appear after you exit combat.",
@@ -78,7 +80,7 @@ select( 2, ... ).L = setmetatable( {
 	FOUND_FORMAT = "Found |cff808080“%s”|r!",
 	FOUND_TAMABLE_FORMAT = "Found |cff808080“%s”|r!  |cffff2020(Note: Tamable mob, may only be a pet.)|r",
 	FOUND_TAMABLE_WRONGZONE_FORMAT = "|cffff2020False alarm:|r Found tamable mob |cff808080“%s”|r in %s instead of %s (ID %d); Definitely a pet.",
-	PRINT_FORMAT = "_|cffCCCC88NPCScan|r: %s",
+	PRINT_FORMAT = "%s_|cffCCCC88NPCScan|r: %s",
 	SEARCH_ACHIEVEMENTADDFOUND = "Search for completed Achievement NPCs",
 	SEARCH_ACHIEVEMENTADDFOUND_DESC = "Continues searching for all achievement NPCs, even if you no longer need them.",
 	SEARCH_ACHIEVEMENT_DISABLED = "Disabled",
@@ -100,6 +102,7 @@ select( 2, ... ).L = setmetatable( {
 	SEARCH_WORLD = "World:",
 	SEARCH_WORLD_DESC = "An optional world name to limit searching to.  Can be a continent name or |cffff7f3finstance name|r (case-sensitive).",
 	SEARCH_WORLD_FORMAT = "(%s)",
+	TIME_FORMAT = "|cff808080[%H:%M:%S]|r ",
 
 	-- Phrases localized by default UI
 	FOUND_ZONE_UNKNOWN = UNKNOWN;

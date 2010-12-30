@@ -159,7 +159,9 @@ function me.Print ( Message, Color )
 	if ( not Color ) then
 		Color = NORMAL_FONT_COLOR;
 	end
-	DEFAULT_CHAT_FRAME:AddMessage( L.PRINT_FORMAT:format( Message ), Color.r, Color.g, Color.b );
+	DEFAULT_CHAT_FRAME:AddMessage( L.PRINT_FORMAT:format(
+		me.Options.PrintTime and date( CHAT_TIMESTAMP_FORMAT or L.TIME_FORMAT ) or "",
+		Message ), Color.r, Color.g, Color.b );
 end
 
 
@@ -446,6 +448,16 @@ function me.SetCacheWarnings ( Enable )
 		return true;
 	end
 end
+--- Enables adding a timestamp to printed messages.
+-- @return True if changed.
+function me.SetPrintTime ( Enable )
+	if ( not Enable ~= not me.Options.PrintTime ) then
+		me.Options.PrintTime = Enable or nil;
+
+		me.Config.PrintTime:SetChecked( Enable );
+		return true;
+	end
+end
 --- Enables tracking of unneeded achievement NPCs.
 -- @return True if changed.
 function me.SetAchievementsAddFound ( Enable )
@@ -518,6 +530,7 @@ function me.Synchronize ( Options, OptionsCharacter )
 	assert( not next( ScanIDs ), "Orphan NpcIDs in scan pool!" );
 
 	me.SetCacheWarnings( Options.CacheWarnings );
+	me.SetPrintTime( Options.PrintTime );
 	me.SetAchievementsAddFound( Options.AchievementsAddFound );
 	me.SetAlertSoundUnmute( Options.AlertSoundUnmute );
 	me.SetAlertSound( Options.AlertSound );
