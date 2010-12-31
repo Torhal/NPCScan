@@ -53,8 +53,8 @@ _NPCScan.L = setmetatable( {
 	}, { __index = _NPCScan.L.NPCs; } );
 
 	BUTTON_FOUND = "PNJ trouvé !",
-	CACHED_FORMAT = "Le(s) unité(s) suivante(s) sont déjà dans le cache : %s.",
-	CACHED_LONG_FORMAT = "Le(s) unité(s) suivante(s) sont déjà dans le cache. Pensez à les enlever en utilisant le menu |cff808080“/npcscan”|r ou réinitialiser-les en effacant votre cache : %s.",
+	CACHED_FORMAT = "Les unités suivantes sont déjà dans le cache : %s.",
+	CACHED_LONG_FORMAT = "Les unités suivantes sont déjà dans le cache. Pensez à les enlever en utilisant le menu |cff808080“/npcscan”|r ou réinitialiser-les en effacant votre cache : %s.",
 	CACHED_PET_RESTING_FORMAT = "Le(s) familier(s) domptable(s) ont été ajoutés au cache pendant votre repos : %s.",
 	CACHED_STABLED_FORMAT = "Les unités suivantes ne peuvent être recherchées tant qu'elles sont domptées : %s.",
 	CACHED_WORLD_FORMAT = "Le(s) unité(s) suivante(s) |2 %2$s sont déjà dans le cache : %1$s.",
