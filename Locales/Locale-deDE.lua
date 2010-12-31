@@ -44,7 +44,6 @@ _NPCScan.L = setmetatable( {
 		[ 50159 ] = "Sambas",
 		[ 50409 ] = "Mysteriöse Kamelfigur",
 		[ 50410 ] = "Mysteriöse Kamelfigur",
-		[ 50411 ] = "Mysteriöse Kamelfigur",
 		[ 51071 ] = "Kapitän Florence",
 		[ 51079 ] = "Kapitän Faulwind",
 		[ 51401 ] = "Madexx", -- Needs review

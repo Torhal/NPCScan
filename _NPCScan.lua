@@ -75,9 +75,8 @@ do
 			[ 50138 ] = L.NPCs[ 50138 ]; -- Karoma
 			[ 50154 ] = L.NPCs[ 50154 ]; -- Madexx
 			[ 50159 ] = L.NPCs[ 50159 ]; -- Sambas
-			[ 50409 ] = L.NPCs[ 50409 ]; -- Camel Figurine
-			[ 50410 ] = L.NPCs[ 50410 ]; -- Camel Figurine
-			[ 50411 ] = L.NPCs[ 50411 ]; -- Camel Figurine
+			[ 50409 ] = L.NPCs[ 50409 ]; -- Mysterious Camel Figurine
+			[ 50410 ] = L.NPCs[ 50410 ]; -- Mysterious Camel Figurine
 			[ 51071 ] = L.NPCs[ 51071 ]; -- Captain Florence
 			[ 51079 ] = L.NPCs[ 51079 ]; -- Captain Foulwind
 			[ 51401 ] = L.NPCs[ 51401 ]; -- Madexx
@@ -115,9 +114,8 @@ do
 			[ 50138 ] = 2; -- Karoma
 			[ 50154 ] = 1; -- Madexx
 			[ 50159 ] = 2; -- Sambas
-			[ 50409 ] = 1; -- Camel Figurine
-			[ 50410 ] = 1; -- Camel Figurine
-			[ 50411 ] = 1; -- Camel Figurine
+			[ 50409 ] = 1; -- Mysterious Camel Figurine
+			[ 50410 ] = 1; -- Mysterious Camel Figurine
 			[ 51071 ] = 2; -- Captain Florence
 			[ 51079 ] = 2; -- Captain Foulwind
 			[ 51401 ] = 1; -- Madexx
@@ -810,9 +808,8 @@ function me.Frame:PLAYER_LOGIN ( Event )
 			AddDefault( 50138 ); -- Karoma
 			AddDefault( 50154 ); -- Madexx
 			AddDefault( 50159 ); -- Sambas
-			AddDefault( 50409 ); -- Camel Figurine
-			AddDefault( 50410 ); -- Camel Figurine
-			AddDefault( 50411 ); -- Camel Figurine
+			AddDefault( 50409 ); -- Mysterious Camel Figurine
+			AddDefault( 50410 ); -- Mysterious Camel Figurine
 			AddDefault( 51071 ); -- Captain Florence
 			AddDefault( 51079 ); -- Captain Foulwind
 			AddDefault( 51401 ); -- Madexx

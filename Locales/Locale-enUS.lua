@@ -38,7 +38,6 @@ select( 2, ... ).L = setmetatable( {
 		[ 50159 ] = "Sambas",
 		[ 50409 ] = "Mysterious Camel Figurine",
 		[ 50410 ] = "Mysterious Camel Figurine",
-		[ 50411 ] = "Mysterious Camel Figurine",
 		[ 51071 ] = "Captain Florence",
 		[ 51079 ] = "Captain Foulwind",
 		[ 51401 ] = "Madexx (Red)",

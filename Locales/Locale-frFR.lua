@@ -44,7 +44,6 @@ _NPCScan.L = setmetatable( {
 		[ 50159 ] = "Samba",
 		[ 50409 ] = "Figurine de dromadaire mystérieuse",
 		[ 50410 ] = "Figurine de dromadaire mystérieuse",
-		[ 50411 ] = "Figurine de dromadaire mystérieuse",
 		[ 51071 ] = "Capitaine Florence",
 		[ 51079 ] = "Capitaine Souillaile",
 		[ 51401 ] = "Madexx (rouge)",
