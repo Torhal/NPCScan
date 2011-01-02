@@ -19,24 +19,20 @@ me.RotationRate = math.pi / 4;
 me.RaidTargetIcon = 4; -- Green triangle
 
 me.ModelDefaultScale = 0.75;
---- @description Key is lowercase, value = "[Scale]|[X]|[Y]|[Z]", where any parameter can be left empty
+--- [ Model:lower() ] = "[Scale]|[X]|[Y]|[Z]", where any parameter can be left empty
 me.ModelCameras = {
-	[ [[creature\spectraltigerferal\spectraltigerferal.m2]] ] = "||-.25|1"; -- Gondria
-	[ [[creature\abyssaloutland\abyssal_outland.m2]] ] = "|.3|1|-8"; -- Kraator
-	[ [[creature\ancientofarcane\ancientofarcane.m2]] ] = "1.25"; -- Old Crystalbark
-	[ [[creature\arcanegolem\arcanegolem.m2]] ] = ".6|.25"; -- Ever-Core the Punisher
-	[ [[creature\bonegolem\bonegolem.m2]] ] = "|.4|.6"; -- Crippler
-	[ [[creature\bonespider\bonespider.m2]] ] = "||-1"; -- Terror Spinner
-	[ [[creature\crocodile\crocodile.m2]] ] = ".7||-.5"; -- Goretooth
-	[ [[creature\dragon\northrenddragon.m2]] ] = ".5||20|-14"; -- Hemathion, Vyragosa
-	[ [[creature\fungalmonster\fungalmonster.m2]] ] = ".5|.2|1"; -- Bog Lurker
-	[ [[creature\mammoth\mammoth.m2]] ] = ".35|.9|2.7"; -- Tukemuth
-	[ [[creature\mountaingiantoutland\mountaingiant_bladesedge.m2]] ] = ".19|-.2|1.2"; -- Morcrush
-	[ [[creature\northrendfleshgiant\northrendfleshgiant.m2]] ] = "||2"; -- Putridus the Ancient
-	[ [[creature\protodragon\protodragon.m2]] ] = "1.3||-3"; -- Time-Lost Proto Drake
-	[ [[creature\satyr\satyr.m2]] ] = ".7|.3|.5"; -- Ambassador Jerrikar
+	[ [[creature\alliancelionmount\alliancelion.m2]] ] = ".7|.3|.5"; -- Sambas
+	[ [[creature\arcanegolem\arcanegolem.m2]] ] = "2||-1"; -- Ever-Core the Punisher
+	[ [[creature\armadillo\armadillo.m2]] ] = "2||-.5"; -- Armagedillo
+	[ [[creature\bonegolem\bonegolem.m2]] ] = ".7|.4|.6"; -- Crippler
+	[ [[creature\dragon\northrenddragon.m2]] ] = ".5||3|20"; -- Hemathion, Vyragosa
+	[ [[creature\mammoth\mammoth.m2]] ] = ".3||2"; -- Tukemuth
+	[ [[creature\tolvir\tolvir.m2]] ] = "2||-2"; -- Cyrus the Black
+	[ [[creature\twighlightdragon\twighlightdragon.m2]] ] = ".5||3|20"; -- Xariona
+	[ [[creature\uldumwatcher\uldumwatcherleft.m2]] ] = ".2|.1|3.7"; -- Akma'hat
+	[ [[creature\whaleshark\whaleshark.m2]] ] = ".7|-.5"; -- Mobus
 	[ [[creature\wight\wight.m2]] ] = ".7"; -- Griegen
-	[ [[creature\zuldrakgolem\zuldrakgolem.m2]] ] = ".45|.1|1.3"; -- Zul'drak Sentinel
+	[ [[creature\zuldrakgolem\zuldrakgolem.m2]] ] = ".4|.1|1.2"; -- Zul'drak Sentinel
 };
 
 
@@ -112,9 +108,8 @@ function me:Update ( ID, Name )
 		Model:SetCreature( ID );
 		self:UnregisterEvent( "UNIT_MODEL_CHANGED" );
 	else -- ID is UnitID
-		Model.UnitID = ID;
+		Model.UnitID, Name = ID, ID;
 		Model:SetUnit( ID );
-		Name = ID;
 		self:RegisterEvent( "UNIT_MODEL_CHANGED" );
 	end
 	self:SetAttribute( "macrotext", "/cleartarget\n/targetexact "..Name );
@@ -250,13 +245,10 @@ end
 
 
 do
-	--- Fires one frame after the 3D model is loaded, at which point it can safely be manipulated.
-	local function OnUpdate ( self )
+	--- Adjusts the model camera to compensate for bad default camera angles.
+	local function AdjustModel ( self )
 		local Path = self:GetModel();
 		if ( type( Path ) == "string" ) then
-			-- Restore normal rotation
-			self:SetScript( "OnUpdate", self.OnUpdate );
-
 			local ID = self:GetParent().ID;
 			if ( type( ID ) == "number" or not UnitIsPlayer( ID ) ) then -- Creature
 				local Scale, X, Y, Z = ( "|" ):split( me.ModelCameras[ Path:lower() ] or "" );
@@ -267,23 +259,32 @@ do
 			end
 		end
 	end
+	local FrameCount = 0;
 	--- Fires when the 3D model mesh loads and is ready to display.
 	local function OnUpdateModel ( self )
-		-- Mesh is loaded; Wait one more frame
-		self:SetScript( "OnUpdateModel", nil );
-		self:SetScript( "OnUpdate", OnUpdate );
+		FrameCount = FrameCount - 1;
+		if ( FrameCount <= 0 ) then
+			-- Restore normal rotation
+			self:SetScript( "OnUpdateModel", nil );
+			self:SetScript( "OnUpdate", self.OnUpdate );
+			AdjustModel( self );
+			self:SetAlpha( 1 );
+		end
 	end
 	--- Clears the model and readies it for a SetCreature/Unit call.
 	function me.Model:Reset ( KeepFacing )
-		self:ClearModel();
+		self:SetAlpha( 0 ); -- Keep hidden until scaled properly
+		self:SetScript( "OnUpdateModel", nil );
 		self:SetModelScale( 1 );
 		self:SetPosition( 0, 0, 0 );
 		if ( not KeepFacing ) then
 			self:SetFacing( 0 );
 		end
+		self:ClearModel();
 
-		-- Wait a frame after model changes, or else the current model scale will
+		-- Wait a while after model changes, or else the current model scale will
 		--   display as 100% with later calls scaling relative to it.
+		FrameCount = 10; -- Voodoo!  Larger means less chance of scale bug.
 		self:SetScript( "OnUpdate", nil );
 		self:SetScript( "OnUpdateModel", OnUpdateModel );
 	end
