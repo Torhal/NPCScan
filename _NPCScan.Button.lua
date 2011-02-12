@@ -56,11 +56,11 @@ function me.PlaySound ( AlertSound )
 		end
 	end
 	if ( AlertSound == nil ) then -- Default
-		PlaySoundFile( [[Sound\Event Sounds\Event_wardrum_ogre.wav]] );
-		PlaySoundFile( [[Sound\Events\scourge_horn.wav]] );
+		PlaySoundFile( [[Sound\Event Sounds\Event_wardrum_ogre.wav]], "Master" );
+		PlaySoundFile( [[Sound\Events\scourge_horn.wav]], "Master" );
 	else
 		local LSM = LibStub( "LibSharedMedia-3.0" );
-		PlaySoundFile( LSM:Fetch( LSM.MediaType.SOUND, AlertSound ) );
+		PlaySoundFile( LSM:Fetch( LSM.MediaType.SOUND, AlertSound ), "Master" );
 	end
 end
 
