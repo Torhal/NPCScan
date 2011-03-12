@@ -62,7 +62,7 @@ _NPCScan.L = setmetatable( {
 	CACHELIST_SEPARATOR = ", ",
 	CMD_ADD = "ADD",
 	CMD_CACHE = "CACHE",
-	CMD_CACHE_EMPTY = "Aucune des monstres recherchés n'est dans le cache.",
+	CMD_CACHE_EMPTY = "Aucun des monstres recherchés n'est dans le cache.",
 	CMD_HELP = "Les commandes sont |cff808080“/npcscan add <ID-PNJ> <Nom>”|r, |cff808080“/npcscan remove <ID-PNJ ou Nom>”|r, |cff808080“/npcscan cache”|r pour afficher la liste des monstres en cache, et simplement |cff808080“/npcscan”|r pour le menu des options.",
 	CMD_REMOVE = "REMOVE",
 	CMD_REMOVENOTFOUND_FORMAT = "PNJ |cff808080“%s”|r non trouvé.",
@@ -75,6 +75,8 @@ _NPCScan.L = setmetatable( {
 	CONFIG_CACHEWARNINGS = "Me rappeler de vider mon cache à la connexion",
 	CONFIG_CACHEWARNINGS_DESC = "Si un PNJ est présent dans le cache quand vous vous connectez à ce personnage, cette option affichera un rappel des monstres en cache que l'addon ne pourra pas rechercher.",
 	CONFIG_DESC = "Ces options vous permettent de définir comment _NPCScan vous prévient quand il trouve un PNJ rare.",
+	CONFIG_PRINTTIME = "Afficher l'horodatage dans la fenêtre de discussion",
+	CONFIG_PRINTTIME_DESC = "Ajoute l'heure actuelle à tous les messages affichés dans la fenêtre de discussion. Utile pour enregistrer quand les PNJs ont été trouvés.",
 	CONFIG_TEST = "Test de l'alerte",
 	CONFIG_TEST_DESC = "Simule une alerte |cff808080“PNJ trouvé”|r afin que vous puissez voir à quoi cela ressemble.",
 	CONFIG_TEST_HELP_FORMAT = "Cliquez sur le cadre d'alerte ou utilisez le raccourci clavier prédéfini pour cibler le monstre trouvé. Maintenez enfoncé |cffffffff<%s>|r et saisissez le cadre d'alerte pour déplacer ce dernier. Notez que si un PNJ est trouvé quand vous êtes en combat, le cadre d'alerte n'apparaitra qu'une fois que vous serez hors combat.",
@@ -105,6 +107,7 @@ _NPCScan.L = setmetatable( {
 	SEARCH_WORLD = "Monde :",
 	SEARCH_WORLD_DESC = "Un nom de monde optionnel afin de limiter les recherches. Peut être un nom de continent ou |cffff7f3fun nom d'instance|r (sensible à la casse).",
 	SEARCH_WORLD_FORMAT = "(%s)",
+	TIME_FORMAT = "|cff808080[%H:%M:%S]|r ",
 }, { __index = _NPCScan.L; } );
 
 
