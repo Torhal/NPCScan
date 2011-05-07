@@ -31,18 +31,7 @@ me.OptionsDefault = {
 };
 
 do
-	local ContinentID, MapID = WORLDMAP_MAELSTROM_ID, 640;
-	--- @return The localized name of Deepholm.
-	local function FindDeepholm ( ... )
-		for ZoneIndex = 1, select( "#", ... ) do
-			SetMapZoom( ContinentID, ZoneIndex );
-			if ( GetCurrentMapAreaID() == MapID ) then
-				return select( ZoneIndex, ... );
-			end
-		end
-	end
-	local DEEPHOLM = FindDeepholm( GetMapZones( ContinentID ) );
-
+	local DEEPHOLM = GetMapNameByID( 640 );
 	me.OptionsCharacterDefault = {
 		Version = me.Version;
 		NPCs = {
@@ -586,19 +575,16 @@ do
 				PetList[ NpcID ] = Name;  -- Suppress error message until the player stops resting
 			else
 				-- Get details about expected zone
-				local ExpectedZoneName;
-				SetMapByID( ExpectedZone );
-				local Continent = GetCurrentMapContinent();
-				if ( Continent >= 1 ) then
-					local Zone = GetCurrentMapZone();
-					if ( Zone == 0 ) then
+				local ExpectedZoneName = GetMapNameByID( ExpectedZone );
+				if ( not ExpectedZoneName ) then -- GetMapNameByID returns nil for continent maps
+					SetMapByID( ExpectedZone );
+					local Continent = GetCurrentMapContinent();
+					if ( Continent >= 1 ) then
 						ExpectedZoneName = select( Continent, GetMapContinents() );
-					else
-						ExpectedZoneName = select( Zone, GetMapZones( Continent ) );
 					end
 				end
 				InvalidReason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(
-					Name, GetZoneText(), ExpectedZoneName or L.FOUND_ZONE_UNKNOWN, ExpectedZone );
+					Name, GetRealZoneText(), ExpectedZoneName or L.FOUND_ZONE_UNKNOWN, ExpectedZone );
 			end
 		end
 

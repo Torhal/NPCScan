@@ -242,7 +242,7 @@ function me:NPCUpdate ()
 		local Row = me.Table:AddRow( NpcID,
 			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
 			Name, NpcID, GetWorldIDName( WorldIDs[ NpcID ] ) or "",
-			Map and ( Overlay.GetMapName( Map ) or Map ) or "" );
+			Map and ( GetMapNameByID( Map ) or Map ) or "" );
 
 		if ( not _NPCScan.NPCIsActive( NpcID ) ) then
 			Row:SetAlpha( me.InactiveAlpha );
@@ -305,7 +305,7 @@ function me:AchievementUpdate ()
 			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
 			Name, NpcID,
 			Completed and [[|TInterface\RaidFrame\ReadyCheck-Ready:0|t]] or "",
-			Map and ( Overlay.GetMapName( Map ) or Map ) or "" );
+			Map and ( GetMapNameByID( Map ) or Map ) or "" );
 
 		if ( not _NPCScan.AchievementNPCIsActive( Achievement, NpcID ) ) then
 			Row:SetAlpha( me.InactiveAlpha );
