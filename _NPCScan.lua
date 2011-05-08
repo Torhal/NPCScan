@@ -564,14 +564,17 @@ do
 	local function OnFoundTamable ( NpcID, Name )
 		local ExpectedZone = me.TamableIDs[ NpcID ];
 		local ZoneIDBackup = GetCurrentMapAreaID();
-		SetMapToCurrentZone();
 
-		local InCorrectZone, InvalidReason =
-			ExpectedZone == true -- Expected zone is unknown (instance mob, etc.)
-			or ExpectedZone == GetCurrentMapAreaID();
+		local InCorrectZone, InvalidReason;
+		if ( ExpectedZone == true ) then -- Expected zone is unknown (instance mob, etc.)
+			InCorrectZone = not IsResting(); -- Assume any tamable mob found in a city/inn is a hunter pet
+		else
+			SetMapToCurrentZone();
+			InCorrectZone = ExpectedZone == GetCurrentMapAreaID();
+		end
 
 		if ( not InCorrectZone ) then
-			if ( IsResting() ) then -- Assume any tamable mob found in a city/inn is a hunter pet
+			if ( IsResting() ) then
 				PetList[ NpcID ] = Name;  -- Suppress error message until the player stops resting
 			else
 				-- Get details about expected zone
