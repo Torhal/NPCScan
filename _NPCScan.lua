@@ -491,9 +491,14 @@ do
 	local TamableExceptions = {
 		[ 49822 ] = true; -- Jadefang drops a pet
 	};
+	local FactionRestrictions = { -- [NpcID] = FactionGroup to enable for
+		[ 51071 ] = "Horde"; -- Captain Florence
+		[ 51079 ] = "Alliance"; -- Captain Foulwind
+	};
 	--- @return True if NpcID should be a default for this character.
 	function IsDefaultNPCValid ( NpcID )
-		return IsHunter or not me.TamableIDs[ NpcID ] or TamableExceptions[ NpcID ];
+		return ( IsHunter or not me.TamableIDs[ NpcID ] or TamableExceptions[ NpcID ] )
+			and ( not FactionRestrictions[ NpcID ] or FactionRestrictions[ NpcID ] == UnitFactionGroup( "player" ) );
 	end
 end
 --- Resets the scanning list and reloads it from saved settings.
