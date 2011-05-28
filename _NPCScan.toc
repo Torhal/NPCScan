@@ -19,7 +19,7 @@
 ## X-Credits-ruRU: Localization: StingerSoft, Sarymian, KVVV, The_DimoK, ichik
 ## X-Credits-zhCN: Localization: digmouse, tss1398383123
 ## X-Credits-zhTW: Localization: s8095324, pepper_ep, zhTW, laincat
-## Version: 4.1.0.1
+## Version: 4.1.0.2
 ## X-Date: 2011-05-23
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
