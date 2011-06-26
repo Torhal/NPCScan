@@ -19,7 +19,7 @@ _NPCScan.L = setmetatable( {
 		[ 35189 ] = "史科爾",
 		[ 38453 ] = "大角",
 		[ 49822 ] = "翡翠牙",
-		[ 49913 ] = "拉拉女神",
+		[ 49913 ] = "女神菈菈",
 		[ 50005 ] = "波賽達斯",
 		[ 50009 ] = "莫比斯",
 		[ 50050 ] = "肖克·薩菈克",
@@ -103,6 +103,7 @@ _NPCScan.L = setmetatable( {
 	SEARCH_WORLD = "世界:",
 	SEARCH_WORLD_DESC = "一個非必要的區域名稱，用來限制搜尋區域。可以是世界地圖名稱或是|cffff7f3f副本名稱|r (較敏感)。",
 	SEARCH_WORLD_FORMAT = "(%s)",
+	TIME_FORMAT = "|cff808080[%H:%M:%S]|r ", -- Needs review
 }, { __index = _NPCScan.L; } );
 
 
