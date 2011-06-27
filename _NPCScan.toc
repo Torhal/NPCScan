@@ -1,4 +1,4 @@
-## Interface: 40100
+## Interface: 40200
 ## Title: _|cffCCCC88NPCScan|r
 ## Title-zhCN: _|cffCCCC88稀有怪搜寻NPCScan|r
 ## Notes: Scans NPCs around you for rare ones.
