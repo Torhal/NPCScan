@@ -22,17 +22,12 @@ me.ModelDefaultScale = 0.75;
 --- [ Model:lower() ] = "[Scale]|[X]|[Y]|[Z]", where any parameter can be left empty
 me.ModelCameras = {
 	[ [[creature\alliancelionmount\alliancelion.m2]] ] = ".7|.3|.5"; -- Sambas
-	[ [[creature\arcanegolem\arcanegolem.m2]] ] = "2||-1"; -- Ever-Core the Punisher
-	[ [[creature\armadillo\armadillo.m2]] ] = "2||-.5"; -- Armagedillo
-	[ [[creature\bonegolem\bonegolem.m2]] ] = ".7|.4|.6"; -- Crippler
+	[ [[creature\armadillo\armadillo.m2]] ] = "2||-.3"; -- Armagedillo
 	[ [[creature\dragon\northrenddragon.m2]] ] = ".5||3|20"; -- Hemathion, Vyragosa
-	[ [[creature\mammoth\mammoth.m2]] ] = ".3||2"; -- Tukemuth
-	[ [[creature\tolvir\tolvir.m2]] ] = "2||-2"; -- Cyrus the Black
-	[ [[creature\twighlightdragon\twighlightdragon.m2]] ] = ".5||3|20"; -- Xariona
-	[ [[creature\uldumwatcher\uldumwatcherleft.m2]] ] = ".2|.1|3.7"; -- Akma'hat
+	[ [[creature\mammoth\mammoth.m2]] ] = ".3|.5|2.1"; -- Tukemuth
+	[ [[creature\uldumwatcher\uldumwatcherleft.m2]] ] = "|||16"; -- Akma'hat
 	[ [[creature\whaleshark\whaleshark.m2]] ] = ".7|-.5"; -- Mobus
 	[ [[creature\wight\wight.m2]] ] = ".7"; -- Griegen
-	[ [[creature\zuldrakgolem\zuldrakgolem.m2]] ] = ".4|.1|1.2"; -- Zul'drak Sentinel
 };
 
 
