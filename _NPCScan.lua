@@ -32,6 +32,7 @@ me.OptionsDefault = {
 
 do
 	local DEEPHOLM = GetMapNameByID( 640 );
+	local MOLTEN_FRONT = GetMapNameByID( 795 );
 	me.OptionsCharacterDefault = {
 		Version = me.Version;
 		NPCs = {
@@ -66,12 +67,22 @@ do
 			[ 50159 ] = L.NPCs[ 50159 ]; -- Sambas
 			[ 50409 ] = L.NPCs[ 50409 ]; -- Mysterious Camel Figurine
 			[ 50410 ] = L.NPCs[ 50410 ]; -- Mysterious Camel Figurine
+			[ 50815 ] = L.NPCs[ 50815 ]; -- Skarr
+			[ 50959 ] = L.NPCs[ 50959 ]; -- Karkin
 			[ 51071 ] = L.NPCs[ 51071 ]; -- Captain Florence
 			[ 51079 ] = L.NPCs[ 51079 ]; -- Captain Foulwind
 			[ 51401 ] = L.NPCs[ 51401 ]; -- Madexx
 			[ 51402 ] = L.NPCs[ 51402 ]; -- Madexx
 			[ 51403 ] = L.NPCs[ 51403 ]; -- Madexx
 			[ 51404 ] = L.NPCs[ 51404 ]; -- Madexx
+			[ 54318 ] = L.NPCs[ 54318 ]; -- Ankha
+			[ 54319 ] = L.NPCs[ 54319 ]; -- Magria
+			[ 54320 ] = L.NPCs[ 54320 ]; -- Ban'thalos
+			[ 54321 ] = L.NPCs[ 54321 ]; -- Solix
+			[ 54322 ] = L.NPCs[ 54322 ]; -- Deth'tilac
+			[ 54323 ] = L.NPCs[ 54323 ]; -- Kirix
+			[ 54324 ] = L.NPCs[ 54324 ]; -- Skitterflame
+			[ 54338 ] = L.NPCs[ 54338 ]; -- Anthriss
 		};
 		NPCWorldIDs = {
 			[ 18684 ] = 3; -- Bro'Gaz the Clanless
@@ -105,12 +116,22 @@ do
 			[ 50159 ] = 2; -- Sambas
 			[ 50409 ] = 1; -- Mysterious Camel Figurine
 			[ 50410 ] = 1; -- Mysterious Camel Figurine
+			[ 50815 ] = MOLTEN_FRONT; -- Skarr
+			[ 50959 ] = MOLTEN_FRONT; -- Karkin
 			[ 51071 ] = 2; -- Captain Florence
 			[ 51079 ] = 2; -- Captain Foulwind
 			[ 51401 ] = 1; -- Madexx
 			[ 51402 ] = 1; -- Madexx
 			[ 51403 ] = 1; -- Madexx
 			[ 51404 ] = 1; -- Madexx
+			[ 54318 ] = 1; -- Ankha
+			[ 54319 ] = 1; -- Magria
+			[ 54320 ] = 1; -- Ban'thalos
+			[ 54321 ] = MOLTEN_FRONT; -- Solix
+			[ 54322 ] = MOLTEN_FRONT; -- Deth'tilac
+			[ 54323 ] = MOLTEN_FRONT; -- Kirix
+			[ 54324 ] = MOLTEN_FRONT; -- Skitterflame
+			[ 54338 ] = MOLTEN_FRONT; -- Anthriss
 		};
 		Achievements = {
 			[ 1312 ] = true; -- Bloody Rare (Outlands)
@@ -816,6 +837,20 @@ function me.Frame:PLAYER_LOGIN ( Event )
 			-- 4.0.3.3: Fixed omission of Jadefang.
 			AddDefault( 49822 ); -- Jadefang
 			Version = "4.0.3.3";
+		end
+		if ( Version < "4.2.0.2" ) then
+			-- 4.2.0.2: Added 4.2's rare hunter pets.
+			AddDefault( 50815 ); -- Skarr
+			AddDefault( 50959 ); -- Karkin
+			AddDefault( 54318 ); -- Ankha
+			AddDefault( 54319 ); -- Magria
+			AddDefault( 54320 ); -- Ban'thalos
+			AddDefault( 54321 ); -- Solix
+			AddDefault( 54322 ); -- Deth'tilac
+			AddDefault( 54323 ); -- Kirix
+			AddDefault( 54324 ); -- Skitterflame
+			AddDefault( 54338 ); -- Anthriss
+			Version = "4.2.0.2";
 		end
 		OptionsCharacter.Version = me.Version;
 	end
