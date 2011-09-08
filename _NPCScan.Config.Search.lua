@@ -7,23 +7,23 @@
 
 local _NPCScan = select( 2, ... );
 local L = _NPCScan.L;
-local me = CreateFrame( "Frame" );
-_NPCScan.Config.Search = me;
+local NS = CreateFrame( "Frame" );
+_NPCScan.Config.Search = NS;
 
-me.AddFoundCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchAchievementAddFoundCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
+NS.AddFoundCheckbox = CreateFrame( "CheckButton", "_NPCScanSearchAchievementAddFoundCheckbox", NS, "InterfaceOptionsCheckButtonTemplate" );
 
-me.TableContainer = CreateFrame( "Frame", nil, me );
+NS.TableContainer = CreateFrame( "Frame", nil, NS );
 
-me.NPCControls = CreateFrame( "Frame", nil, me.TableContainer );
-me.NPCName = CreateFrame( "EditBox", "_NPCScanSearchNpcName", me.NPCControls, "InputBoxTemplate" );
-me.NPCNpcID = CreateFrame( "EditBox", "_NPCScanSearchNpcID", me.NPCControls, "InputBoxTemplate" );
-me.NPCWorld = CreateFrame( "EditBox", "_NPCScanSearchNpcWorld", me.NPCControls, "InputBoxTemplate" );
-me.NPCWorldButton = CreateFrame( "Button", nil, me.NPCWorld );
-me.NPCWorldButton.Dropdown = CreateFrame( "Frame", "_NPCScanSearchNPCWorldDropdown", me.NPCWorldButton );
-me.NPCAdd = CreateFrame( "Button", nil, me.NPCControls, "UIPanelButtonTemplate" );
-me.NPCRemove = CreateFrame( "Button", nil, me.NPCControls, "UIPanelButtonTemplate" );
+NS.NPCControls = CreateFrame( "Frame", nil, NS.TableContainer );
+NS.NPCName = CreateFrame( "EditBox", "_NPCScanSearchNpcName", NS.NPCControls, "InputBoxTemplate" );
+NS.NPCNpcID = CreateFrame( "EditBox", "_NPCScanSearchNpcID", NS.NPCControls, "InputBoxTemplate" );
+NS.NPCWorld = CreateFrame( "EditBox", "_NPCScanSearchNpcWorld", NS.NPCControls, "InputBoxTemplate" );
+NS.NPCWorldButton = CreateFrame( "Button", nil, NS.NPCWorld );
+NS.NPCWorldButton.Dropdown = CreateFrame( "Frame", "_NPCScanSearchNPCWorldDropdown", NS.NPCWorldButton );
+NS.NPCAdd = CreateFrame( "Button", nil, NS.NPCControls, "UIPanelButtonTemplate" );
+NS.NPCRemove = CreateFrame( "Button", nil, NS.NPCControls, "UIPanelButtonTemplate" );
 
-me.InactiveAlpha = 0.5;
+NS.InactiveAlpha = 0.5;
 
 local LibRareSpawnsData;
 if ( IsAddOnLoaded( "LibRareSpawns" ) ) then
@@ -34,7 +34,7 @@ end
 
 
 --- Sets the search for found achievement mobs option when its checkbox is clicked.
-function me.AddFoundCheckbox.setFunc ( Enable )
+function NS.AddFoundCheckbox.setFunc ( Enable )
 	if ( _NPCScan.SetAchievementsAddFound( Enable == "1" ) ) then
 		_NPCScan.CacheListPrint( true );
 	end
@@ -54,8 +54,8 @@ local function GetWorldIDName ( WorldID )
 	return type( WorldID ) == "number" and _NPCScan.ContinentNames[ WorldID ] or WorldID;
 end
 --- Selects the given table tab.
-function me.TabSelect ( NewTab )
-	local OldTab = me.TabSelected;
+function NS.TabSelect ( NewTab )
+	local OldTab = NS.TabSelected;
 	if ( NewTab ~= OldTab ) then
 		if ( OldTab ) then
 			if ( OldTab.Deactivate ) then
@@ -64,12 +64,12 @@ function me.TabSelect ( NewTab )
 			PanelTemplates_DeselectTab( OldTab );
 		end
 
-		for _, Row in ipairs( me.Table.Rows ) do
+		for _, Row in ipairs( NS.Table.Rows ) do
 			Row:SetAlpha( 1.0 );
 		end
-		me.Table:Clear();
+		NS.Table:Clear();
 
-		me.TabSelected = NewTab;
+		NS.TabSelected = NewTab;
 		PanelTemplates_SelectTab( NewTab );
 		if ( NewTab.Activate ) then
 			NewTab:Activate();
@@ -78,12 +78,12 @@ function me.TabSelect ( NewTab )
 	end
 end
 --- Selects a tab's table view when clicked.
-function me:TabOnClick ()
+function NS:TabOnClick ()
 	PlaySound( "igCharacterInfoTab" );
-	me.TabSelect( self );
+	NS.TabSelect( self );
 end
 --- Displays a tooltip for a table tab when moused over.
-function me:TabOnEnter ()
+function NS:TabOnEnter ()
 	GameTooltip:SetOwner( self, "ANCHOR_TOPLEFT", 0, -8 );
 	if ( self.AchievementID ) then
 		local _, Name, _, _, _, _, _, Description = GetAchievementInfo( self.AchievementID );
@@ -109,12 +109,12 @@ function me:TabOnEnter ()
 	GameTooltip:Show();
 end
 --- Enables or disables tracking an achievement when its tab checkbox is clicked.
-function me:TabCheckOnClick ()
+function NS:TabCheckOnClick ()
 	local Enable = self:GetChecked();
 	PlaySound( Enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff" );
 
 	local AchievementID = self:GetParent().AchievementID;
-	me.AchievementSetEnabled( AchievementID, Enable );
+	NS.AchievementSetEnabled( AchievementID, Enable );
 	if ( not Enable ) then
 		_NPCScan.AchievementRemove( AchievementID );
 	elseif ( _NPCScan.AchievementAdd( AchievementID ) ) then -- Cache might have changed
@@ -122,8 +122,8 @@ function me:TabCheckOnClick ()
 	end
 end
 --- Show's the tab's tooltip when mousing over the tab's checkbox.
-function me:TabCheckOnEnter ()
-	me.TabOnEnter( self:GetParent() );
+function NS:TabCheckOnEnter ()
+	NS.TabOnEnter( self:GetParent() );
 end
 
 
@@ -131,8 +131,8 @@ end
 
 local Tabs = {}; -- [ "NPC" or AchievementID ] = Tab;
 --- Validates ability to use add and remove buttons for NPCs.
-function me.NPCValidate ()
-	local NpcID, Name, WorldID = me.NPCNpcID:GetNumber(), me.NPCName:GetText(), GetWorldID( me.NPCWorld:GetText() );
+function NS.NPCValidate ()
+	local NpcID, Name, WorldID = NS.NPCNpcID:GetNumber(), NS.NPCName:GetText(), GetWorldID( NS.NPCWorld:GetText() );
 
 	local OldName = _NPCScan.OptionsCharacter.NPCs[ NpcID ];
 	local OldWorldID = _NPCScan.OptionsCharacter.NPCWorldIDs[ NpcID ];
@@ -142,23 +142,23 @@ function me.NPCValidate ()
 
 	-- Color world name orange if not a standard continent
 	local WorldColor = type( WorldID ) == "string" and ORANGE_FONT_COLOR or HIGHLIGHT_FONT_COLOR;
-	me.NPCWorld:SetTextColor( WorldColor.r, WorldColor.g, WorldColor.b );
+	NS.NPCWorld:SetTextColor( WorldColor.r, WorldColor.g, WorldColor.b );
 
-	if ( me.Table ) then
-		me.Table:SetSelectionByKey( OldName and NpcID or nil );
+	if ( NS.Table ) then
+		NS.Table:SetSelectionByKey( OldName and NpcID or nil );
 	end
-	me.NPCAdd[ CanAdd and "Enable" or "Disable" ]( me.NPCAdd );
-	me.NPCRemove[ OldName and "Enable" or "Disable" ]( me.NPCRemove );
+	NS.NPCAdd[ CanAdd and "Enable" or "Disable" ]( NS.NPCAdd );
+	NS.NPCRemove[ OldName and "Enable" or "Disable" ]( NS.NPCRemove );
 end
 --- Clears the NPC controls.
-function me.NPCClear ()
-	me.NPCNpcID:SetText( "" );
-	me.NPCName:SetText( "" );
-	me.NPCWorld:SetText( "" );
+function NS.NPCClear ()
+	NS.NPCNpcID:SetText( "" );
+	NS.NPCName:SetText( "" );
+	NS.NPCWorld:SetText( "" );
 end
 --- Adds a Custom NPC list element.
-function me.NPCAdd:OnClick ()
-	local NpcID, Name, WorldID = me.NPCNpcID:GetNumber(), me.NPCName:GetText(), GetWorldID( me.NPCWorld:GetText() );
+function NS.NPCAdd:OnClick ()
+	local NpcID, Name, WorldID = NS.NPCNpcID:GetNumber(), NS.NPCName:GetText(), GetWorldID( NS.NPCWorld:GetText() );
 	if ( _NPCScan.TamableIDs[ NpcID ] ) then
 		_NPCScan.Print( L.SEARCH_ADD_TAMABLE_FORMAT:format( Name ) );
 	end
@@ -166,32 +166,32 @@ function me.NPCAdd:OnClick ()
 	if ( _NPCScan.NPCAdd( NpcID, Name, WorldID ) ) then
 		_NPCScan.CacheListPrint( true );
 	end
-	me.NPCClear();
+	NS.NPCClear();
 end
 --- Removes a Custom NPC list element.
-function me.NPCRemove:OnClick ()
-	_NPCScan.NPCRemove( me.NPCNpcID:GetNumber() );
-	me.NPCClear();
+function NS.NPCRemove:OnClick ()
+	_NPCScan.NPCRemove( NS.NPCNpcID:GetNumber() );
+	NS.NPCClear();
 end
 --- Cycles through edit box controls.
-function me:NPCOnTabPressed ()
+function NS:NPCOnTabPressed ()
 	self.NextEditBox:SetFocus();
 end
 --- Attempts to add the entered NPC when enter is pressed in any edit box.
-function me:NPCOnEnterPressed ()
+function NS:NPCOnEnterPressed ()
 	self:ClearFocus();
-	me.NPCAdd:Click();
+	NS.NPCAdd:Click();
 end
 --- Fills in the edit boxes when a table row is selected.
-function me:NPCOnSelect ( NpcID )
+function NS:NPCOnSelect ( NpcID )
 	if ( NpcID ~= nil ) then
-		me.NPCNpcID:SetNumber( NpcID );
-		me.NPCName:SetText( _NPCScan.OptionsCharacter.NPCs[ NpcID ] );
-		me.NPCWorld:SetText( GetWorldIDName( _NPCScan.OptionsCharacter.NPCWorldIDs[ NpcID ] ) or "" );
+		NS.NPCNpcID:SetNumber( NpcID );
+		NS.NPCName:SetText( _NPCScan.OptionsCharacter.NPCs[ NpcID ] );
+		NS.NPCWorld:SetText( GetWorldIDName( _NPCScan.OptionsCharacter.NPCWorldIDs[ NpcID ] ) or "" );
 	end
 end
 --- Builds a dropdown of continent names.
-function me.NPCWorldButton.Dropdown:initialize ()
+function NS.NPCWorldButton.Dropdown:initialize ()
 	local Info = UIDropDownMenu_CreateInfo();
 	Info.notCheckable = true;
 	Info.func = self.OnSelect;
@@ -218,64 +218,64 @@ function me.NPCWorldButton.Dropdown:initialize ()
 	end
 end
 --- Selects a preset world name from the dropdown.
-function me.NPCWorldButton.Dropdown:OnSelect ( Name )
-	me.NPCWorld:SetText( Name );
+function NS.NPCWorldButton.Dropdown:OnSelect ( Name )
+	NS.NPCWorld:SetText( Name );
 end
 --- Opens a dropdown with world name presets.
-function me.NPCWorldButton:OnClick ()
+function NS.NPCWorldButton:OnClick ()
 	local Parent = self:GetParent();
 	Parent:ClearFocus();
 	ToggleDropDownMenu( nil, nil, self.Dropdown );
 	PlaySound( "igMainMenuOptionCheckBoxOn" );
 end
 --- Hides the dropdown if its button is hidden.
-function me.NPCWorldButton:OnHide ()
+function NS.NPCWorldButton:OnHide ()
 	CloseDropDownMenus();
 end
 --- Fills the search table with custom NPCs.
-function me:NPCUpdate ()
-	me.NPCValidate();
+function NS:NPCUpdate ()
+	NS.NPCValidate();
 	local WorldIDs = _NPCScan.OptionsCharacter.NPCWorldIDs;
 	local Overlay = IsAddOnLoaded( "_NPCScan.Overlay" ) and _NPCScan.Overlay;
 	for NpcID, Name in pairs( _NPCScan.OptionsCharacter.NPCs ) do
 		local Map = Overlay and Overlay.GetNPCMapID( NpcID );
-		local Row = me.Table:AddRow( NpcID,
+		local Row = NS.Table:AddRow( NpcID,
 			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
 			Name, NpcID, GetWorldIDName( WorldIDs[ NpcID ] ) or "",
 			Map and ( GetMapNameByID( Map ) or Map ) or "" );
 
 		if ( not _NPCScan.NPCIsActive( NpcID ) ) then
-			Row:SetAlpha( me.InactiveAlpha );
+			Row:SetAlpha( NS.InactiveAlpha );
 		end
 	end
 end
 --- Customizes the table when the NPCs tab is selected.
-function me:NPCActivate ()
+function NS:NPCActivate ()
 	if ( IsAddOnLoaded( "_NPCScan.Overlay" ) ) then
-		me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP );
+		NS.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP );
 	else
-		me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD );
+		NS.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD );
 	end
-	me.Table:SetSortHandlers( true, true, true, true, true );
-	me.Table:SetSortColumn( 2 ); -- Default by name
+	NS.Table:SetSortHandlers( true, true, true, true, true );
+	NS.Table:SetSortColumn( 2 ); -- Default by name
 
-	me.NPCClear();
-	me.NPCControls:Show();
-	me.TableContainer:SetPoint( "BOTTOM", me.NPCControls, "TOP", 0, 4 );
-	me.Table.OnSelect = me.NPCOnSelect;
+	NS.NPCClear();
+	NS.NPCControls:Show();
+	NS.TableContainer:SetPoint( "BOTTOM", NS.NPCControls, "TOP", 0, 4 );
+	NS.Table.OnSelect = NS.NPCOnSelect;
 end
 --- Undoes customization to the table when leaving the NPCs tab.
-function me:NPCDeactivate ()
-	me.NPCControls:Hide();
-	me.TableContainer:SetPoint( "BOTTOM", me.NPCControls );
-	me.Table.OnSelect = nil;
+function NS:NPCDeactivate ()
+	NS.NPCControls:Hide();
+	NS.TableContainer:SetPoint( "BOTTOM", NS.NPCControls );
+	NS.Table.OnSelect = nil;
 end
 
 
 
 
 --- Enables/disables the achievement related to a tab.
-function me.AchievementSetEnabled ( AchievementID, Enable )
+function NS.AchievementSetEnabled ( AchievementID, Enable )
 	local Tab = Tabs[ AchievementID ];
 	Tab.Checkbox:SetChecked( Enable );
 	local Texture = Tab.Checkbox:GetCheckedTexture();
@@ -286,47 +286,47 @@ function me.AchievementSetEnabled ( AchievementID, Enable )
 
 	-- Update tooltip if shown
 	if ( GameTooltip:GetOwner() == Tab ) then
-		me.TabOnEnter( Tab );
+		NS.TabOnEnter( Tab );
 	end
 
-	if ( me.TabSelected == Tab ) then
-		me.Table.Header:SetAlpha( Enable and 1.0 or me.InactiveAlpha );
+	if ( NS.TabSelected == Tab ) then
+		NS.Table.Header:SetAlpha( Enable and 1.0 or NS.InactiveAlpha );
 	end
 end
 --- Fills the search table with achievement NPCs.
-function me:AchievementUpdate ()
+function NS:AchievementUpdate ()
 	local Achievement = _NPCScan.Achievements[ self.AchievementID ];
 	local Overlay = IsAddOnLoaded( "_NPCScan.Overlay" ) and _NPCScan.Overlay;
 	for CriteriaID, NpcID in pairs( Achievement.Criteria ) do
 		local Name, _, Completed = GetAchievementCriteriaInfo( CriteriaID );
 
 		local Map = Overlay and Overlay.GetNPCMapID( NpcID );
-		local Row = me.Table:AddRow( NpcID,
+		local Row = NS.Table:AddRow( NpcID,
 			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
 			Name, NpcID,
 			Completed and [[|TInterface\RaidFrame\ReadyCheck-Ready:0|t]] or "",
 			Map and ( GetMapNameByID( Map ) or Map ) or "" );
 
 		if ( not _NPCScan.AchievementNPCIsActive( Achievement, NpcID ) ) then
-			Row:SetAlpha( me.InactiveAlpha );
+			Row:SetAlpha( NS.InactiveAlpha );
 		end
 	end
 end
 --- Customizes the table when an achievement tab is selected.
-function me:AchievementActivate ()
+function NS:AchievementActivate ()
 	if ( IsAddOnLoaded( "_NPCScan.Overlay" ) ) then
-		me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED, L.SEARCH_MAP );
+		NS.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED, L.SEARCH_MAP );
 	else
-		me.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED );
+		NS.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED );
 	end
-	me.Table:SetSortHandlers( true, true, true, true, true );
-	me.Table:SetSortColumn( 2 ); -- Default by name
+	NS.Table:SetSortHandlers( true, true, true, true, true );
+	NS.Table:SetSortColumn( 2 ); -- Default by name
 
-	me.Table.Header:SetAlpha( _NPCScan.OptionsCharacter.Achievements[ self.AchievementID ] and 1.0 or me.InactiveAlpha );
+	NS.Table.Header:SetAlpha( _NPCScan.OptionsCharacter.Achievements[ self.AchievementID ] and 1.0 or NS.InactiveAlpha );
 end
 --- Undoes customization to the table when leaving an achievement tab.
-function me:AchievementDeactivate ()
-	me.Table.Header:SetAlpha( 1.0 );
+function NS:AchievementDeactivate ()
+	NS.Table.Header:SetAlpha( 1.0 );
 end
 
 
@@ -337,16 +337,16 @@ do
 	local function OnUpdate ( self )
 		self:SetScript( "OnUpdate", nil );
 
-		for _, Row in ipairs( me.Table.Rows ) do
+		for _, Row in ipairs( NS.Table.Rows ) do
 			Row:SetAlpha( 1.0 );
 		end
-		me.Table:Clear();
-		me.TabSelected:Update();
+		NS.Table:Clear();
+		NS.TabSelected:Update();
 	end
 	--- Updates the table for a given tab if it is displayed.
-	function me.UpdateTab ( ID )
-		if ( not ID or Tabs[ ID ] == me.TabSelected ) then
-			me.TableContainer:SetScript( "OnUpdate", OnUpdate );
+	function NS.UpdateTab ( ID )
+		if ( not ID or Tabs[ ID ] == NS.TabSelected ) then
+			NS.TableContainer:SetScript( "OnUpdate", OnUpdate );
 		end;
 	end
 end
@@ -355,7 +355,7 @@ end
 if ( LibRareSpawnsData ) then
 	local MaxSize = 160; -- Larger images are forced to this max width and height
 	--- Adds mob info from LibRareSpawns to each row.
-	function me:TableRowOnEnter ()
+	function NS:TableRowOnEnter ()
 		local Data = LibRareSpawnsData[ self:GetData() ];
 		if ( Data ) then
 			local Width, Height = Data.PortraitWidth, Data.PortraitHeight;
@@ -378,54 +378,54 @@ do
 	if ( LibRareSpawnsData ) then
 		--- Adds mouseover tooltip hooks to new rows.
 		local function AddTooltipHooks( Row, ... )
-			Row:SetScript( "OnEnter", me.TableRowOnEnter );
+			Row:SetScript( "OnEnter", NS.TableRowOnEnter );
 			Row:SetScript( "OnLeave", GameTooltip_Hide );
 
 			return Row, ...;
 		end
 		--- Hooks new table rows.
-		function me:TableCreateRow ( ... )
+		function NS:TableCreateRow ( ... )
 			return AddTooltipHooks( CreateRowBackup( self, ... ) );
 		end
 	end
 	--- Creates the NPC table when first shown, and selects the Custom NPCs tab.
-	function me:OnShow ()
-		if ( not me.Table ) then
-			me.Table = LibStub( "LibTextTable-1.1" ).New( nil, me.TableContainer );
-			me.Table:SetAllPoints();
+	function NS:OnShow ()
+		if ( not NS.Table ) then
+			NS.Table = LibStub( "LibTextTable-1.1" ).New( nil, NS.TableContainer );
+			NS.Table:SetAllPoints();
 
 			if ( LibRareSpawnsData ) then
 				-- Hook row creation to add mouseover tooltips
-				CreateRowBackup = me.Table.CreateRow;
-				me.Table.CreateRow = me.TableCreateRow;
+				CreateRowBackup = NS.Table.CreateRow;
+				NS.Table.CreateRow = NS.TableCreateRow;
 			end
 		end
 
-		if ( me.TabSelected ) then
-			me.UpdateTab();
+		if ( NS.TabSelected ) then
+			NS.UpdateTab();
 		else
-			me.TabSelect( Tabs[ "NPC" ] );
+			NS.TabSelect( Tabs[ "NPC" ] );
 		end
 	end
 end
 --- Reverts to default options.
-function me:default ()
+function NS:default ()
 	_NPCScan.Synchronize( _NPCScan.Options ); -- Resets only character settings
 end
 
 
 
 
-me.name = L.SEARCH_TITLE;
-me.parent = L.CONFIG_TITLE;
-me:Hide();
-me:SetScript( "OnShow", me.OnShow );
+NS.name = L.SEARCH_TITLE;
+NS.parent = L.CONFIG_TITLE;
+NS:Hide();
+NS:SetScript( "OnShow", NS.OnShow );
 
 -- Pane title
-local Title = me:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
+local Title = NS:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
 Title:SetPoint( "TOPLEFT", 16, -16 );
 Title:SetText( L.SEARCH_TITLE );
-local SubText = me:CreateFontString( nil, "ARTWORK", "GameFontHighlightSmall" );
+local SubText = NS:CreateFontString( nil, "ARTWORK", "GameFontHighlightSmall" );
 SubText:SetPoint( "TOPLEFT", Title, "BOTTOMLEFT", 0, -8 );
 SubText:SetPoint( "RIGHT", -32, 0 );
 SubText:SetHeight( 32 );
@@ -435,55 +435,55 @@ SubText:SetText( L.SEARCH_DESC );
 
 
 -- Settings checkboxes
-me.AddFoundCheckbox:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
-me.AddFoundCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC;
-local Label = _G[ me.AddFoundCheckbox:GetName().."Text" ];
+NS.AddFoundCheckbox:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
+NS.AddFoundCheckbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC;
+local Label = _G[ NS.AddFoundCheckbox:GetName().."Text" ];
 Label:SetText( L.SEARCH_ACHIEVEMENTADDFOUND );
-me.AddFoundCheckbox:SetHitRectInsets( 4, 4 - Label:GetStringWidth(), 4, 4 );
+NS.AddFoundCheckbox:SetHitRectInsets( 4, 4 - Label:GetStringWidth(), 4, 4 );
 
 
 -- Controls for NPCs table
-me.NPCControls:Hide();
+NS.NPCControls:Hide();
 
 -- Create add and remove buttons
-me.NPCRemove:SetSize( 16, 20 );
-me.NPCRemove:SetPoint( "BOTTOMRIGHT", me, -16, 16 );
-me.NPCRemove:SetText( L.SEARCH_REMOVE );
-me.NPCRemove:SetScript( "OnClick", me.NPCRemove.OnClick );
-me.NPCAdd:SetSize( 16, 20 );
-me.NPCAdd:SetPoint( "BOTTOMRIGHT", me.NPCRemove, "TOPRIGHT", 0, 4 );
-me.NPCAdd:SetText( L.SEARCH_ADD );
-me.NPCAdd:SetScript( "OnClick", me.NPCAdd.OnClick );
-me.NPCAdd:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
-me.NPCAdd:SetScript( "OnLeave", GameTooltip_Hide );
-me.NPCAdd.tooltipText = L.SEARCH_ADD_DESC;
+NS.NPCRemove:SetSize( 16, 20 );
+NS.NPCRemove:SetPoint( "BOTTOMRIGHT", NS, -16, 16 );
+NS.NPCRemove:SetText( L.SEARCH_REMOVE );
+NS.NPCRemove:SetScript( "OnClick", NS.NPCRemove.OnClick );
+NS.NPCAdd:SetSize( 16, 20 );
+NS.NPCAdd:SetPoint( "BOTTOMRIGHT", NS.NPCRemove, "TOPRIGHT", 0, 4 );
+NS.NPCAdd:SetText( L.SEARCH_ADD );
+NS.NPCAdd:SetScript( "OnClick", NS.NPCAdd.OnClick );
+NS.NPCAdd:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
+NS.NPCAdd:SetScript( "OnLeave", GameTooltip_Hide );
+NS.NPCAdd.tooltipText = L.SEARCH_ADD_DESC;
 
 -- Create edit boxes
-local NameLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
-NameLabel:SetPoint( "LEFT", me, 16, 0 );
-NameLabel:SetPoint( "TOP", me.NPCRemove );
-NameLabel:SetPoint( "BOTTOM", me.NPCRemove );
+local NameLabel = NS.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
+NameLabel:SetPoint( "LEFT", NS, 16, 0 );
+NameLabel:SetPoint( "TOP", NS.NPCRemove );
+NameLabel:SetPoint( "BOTTOM", NS.NPCRemove );
 NameLabel:SetText( L.SEARCH_NAME );
-local NpcIDLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
+local NpcIDLabel = NS.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
 NpcIDLabel:SetPoint( "LEFT", NameLabel );
-NpcIDLabel:SetPoint( "TOP", me.NPCAdd );
-NpcIDLabel:SetPoint( "BOTTOM", me.NPCAdd );
+NpcIDLabel:SetPoint( "TOP", NS.NPCAdd );
+NpcIDLabel:SetPoint( "BOTTOM", NS.NPCAdd );
 NpcIDLabel:SetText( L.SEARCH_ID );
 
 local function EditBoxSetup ( self )
 	self:SetAutoFocus( false );
-	self:SetScript( "OnTabPressed", me.NPCOnTabPressed );
-	self:SetScript( "OnEnterPressed", me.NPCOnEnterPressed );
-	self:SetScript( "OnTextChanged", me.NPCValidate );
+	self:SetScript( "OnTabPressed", NS.NPCOnTabPressed );
+	self:SetScript( "OnEnterPressed", NS.NPCOnEnterPressed );
+	self:SetScript( "OnTextChanged", NS.NPCValidate );
 	self:SetScript( "OnEnter", _NPCScan.Config.ControlOnEnter );
 	self:SetScript( "OnLeave", GameTooltip_Hide );
 	return self;
 end
-local NpcID, Name, World = EditBoxSetup( me.NPCNpcID ), EditBoxSetup( me.NPCName ), EditBoxSetup( me.NPCWorld );
+local NpcID, Name, World = EditBoxSetup( NS.NPCNpcID ), EditBoxSetup( NS.NPCName ), EditBoxSetup( NS.NPCWorld );
 Name:SetPoint( "LEFT", -- Attach to longest label
 	NameLabel:GetStringWidth() > NpcIDLabel:GetStringWidth() and NameLabel or NpcIDLabel,
 	"RIGHT", 8, 0 );
-Name:SetPoint( "RIGHT", me.NPCRemove, "LEFT", -4, 0 );
+Name:SetPoint( "RIGHT", NS.NPCRemove, "LEFT", -4, 0 );
 Name:SetPoint( "TOP", NameLabel );
 Name:SetPoint( "BOTTOM", NameLabel );
 Name.NextEditBox, Name.tooltipText = NpcID, L.SEARCH_NAME_DESC;
@@ -496,7 +496,7 @@ NpcID:SetNumeric( true );
 NpcID:SetMaxLetters( floor( log10( _NPCScan.NpcIDMax ) ) + 1 );
 NpcID.NextEditBox, NpcID.tooltipText = World, L.SEARCH_ID_DESC;
 
-local WorldLabel = me.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
+local WorldLabel = NS.NPCControls:CreateFontString( nil, "ARTWORK", "GameFontHighlight" );
 WorldLabel:SetPoint( "LEFT", NpcID, "RIGHT", 8, 0 );
 WorldLabel:SetPoint( "TOP", NpcIDLabel );
 WorldLabel:SetPoint( "BOTTOM", NpcIDLabel );
@@ -508,7 +508,7 @@ World:SetPoint( "TOP", NpcIDLabel );
 World:SetPoint( "BOTTOM", NpcIDLabel );
 World.NextEditBox, World.tooltipText = Name, L.SEARCH_WORLD_DESC;
 
-local WorldButton = me.NPCWorldButton;
+local WorldButton = NS.NPCWorldButton;
 WorldButton:SetPoint( "RIGHT", World, 3, 1 );
 WorldButton:SetSize( 24, 24 );
 WorldButton:SetNormalTexture( [[Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up]] );
@@ -518,29 +518,29 @@ WorldButton:SetScript( "OnClick", WorldButton.OnClick );
 WorldButton:SetScript( "OnHide", WorldButton.OnHide );
 UIDropDownMenu_SetAnchor( WorldButton.Dropdown, 0, 0, "TOPRIGHT", WorldButton, "BOTTOMRIGHT" );
 
-me.NPCControls:SetPoint( "BOTTOMRIGHT", me.NPCRemove );
-me.NPCControls:SetPoint( "LEFT", NpcIDLabel );
-me.NPCControls:SetPoint( "TOP", me.NPCAdd );
+NS.NPCControls:SetPoint( "BOTTOMRIGHT", NS.NPCRemove );
+NS.NPCControls:SetPoint( "LEFT", NpcIDLabel );
+NS.NPCControls:SetPoint( "TOP", NS.NPCAdd );
 
 
 -- Place table
-me.TableContainer:SetPoint( "TOP", me.AddFoundCheckbox, "BOTTOM", 0, -28 );
-me.TableContainer:SetPoint( "LEFT", SubText, -2, 0 );
-me.TableContainer:SetPoint( "RIGHT", -16, 0 );
-me.TableContainer:SetPoint( "BOTTOM", me.NPCControls );
-me.TableContainer:SetBackdrop( { bgFile = [[Interface\DialogFrame\UI-DialogBox-Background]]; } );
+NS.TableContainer:SetPoint( "TOP", NS.AddFoundCheckbox, "BOTTOM", 0, -28 );
+NS.TableContainer:SetPoint( "LEFT", SubText, -2, 0 );
+NS.TableContainer:SetPoint( "RIGHT", -16, 0 );
+NS.TableContainer:SetPoint( "BOTTOM", NS.NPCControls );
+NS.TableContainer:SetBackdrop( { bgFile = [[Interface\DialogFrame\UI-DialogBox-Background]]; } );
 
 -- Add all tabs
 local LastTab;
 local TabCount = 0;
 local function AddTab ( ID, Update, Activate, Deactivate )
 	TabCount = TabCount + 1;
-	local Tab = CreateFrame( "Button", "_NPCScanSearchTab"..TabCount, me.TableContainer, "TabButtonTemplate" );
+	local Tab = CreateFrame( "Button", "_NPCScanSearchTab"..TabCount, NS.TableContainer, "TabButtonTemplate" );
 	Tabs[ ID ] = Tab;
 
 	Tab:SetHitRectInsets( 6, 6, 6, 0 );
-	Tab:SetScript( "OnClick", me.TabOnClick );
-	Tab:SetScript( "OnEnter", me.TabOnEnter );
+	Tab:SetScript( "OnClick", NS.TabOnClick );
+	Tab:SetScript( "OnEnter", NS.TabOnEnter );
 	Tab:SetScript( "OnLeave", GameTooltip_Hide );
 	Tab:SetMotionScriptsWhileDisabled( true ); -- Allow tooltip while active
 
@@ -552,10 +552,10 @@ local function AddTab ( ID, Update, Activate, Deactivate )
 		Checkbox:SetSize( 20, 20 );
 		Checkbox:SetPoint( "BOTTOMLEFT", 8, 0 );
 		Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
-		Checkbox:SetScript( "OnClick", me.TabCheckOnClick );
-		Checkbox:SetScript( "OnEnter", me.TabCheckOnEnter );
+		Checkbox:SetScript( "OnClick", NS.TabCheckOnClick );
+		Checkbox:SetScript( "OnEnter", NS.TabCheckOnEnter );
 		Checkbox:SetScript( "OnLeave", GameTooltip_Hide );
-		me.AchievementSetEnabled( ID, false ); -- Initialize the custom "unchecked" texture
+		NS.AchievementSetEnabled( ID, false ); -- Initialize the custom "unchecked" texture
 		PanelTemplates_TabResize( Tab, Checkbox:GetWidth() - 12 );
 	else
 		Tab:SetText( L.SEARCH_NPCS );
@@ -569,14 +569,14 @@ local function AddTab ( ID, Update, Activate, Deactivate )
 	if ( LastTab ) then
 		Tab:SetPoint( "LEFT", LastTab, "RIGHT", -4, 0 );
 	else
-		Tab:SetPoint( "BOTTOMLEFT", me.TableContainer, "TOPLEFT" );
+		Tab:SetPoint( "BOTTOMLEFT", NS.TableContainer, "TOPLEFT" );
 	end
 	LastTab = Tab;
 end
-AddTab( "NPC", me.NPCUpdate, me.NPCActivate, me.NPCDeactivate );
+AddTab( "NPC", NS.NPCUpdate, NS.NPCActivate, NS.NPCDeactivate );
 for AchievementID in pairs( _NPCScan.Achievements ) do
-	AddTab( AchievementID, me.AchievementUpdate, me.AchievementActivate, me.AchievementDeactivate );
+	AddTab( AchievementID, NS.AchievementUpdate, NS.AchievementActivate, NS.AchievementDeactivate );
 end
 
 
-InterfaceOptions_AddCategory( me );
+InterfaceOptions_AddCategory( NS );

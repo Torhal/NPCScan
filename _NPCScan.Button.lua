@@ -5,22 +5,22 @@
 
 
 local _NPCScan = select( 2, ... );
-local me = CreateFrame( "Button", "_NPCScanButton", UIParent, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate" );
-_NPCScan.Button = me;
+local NS = CreateFrame( "Button", "_NPCScanButton", UIParent, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate" );
+_NPCScan.Button = NS;
 
-me.Drag = me:CreateTitleRegion();
-me.Model = CreateFrame( "PlayerModel", nil, me );
-me.Flash = CreateFrame( "Frame" );
-me.Flash.LoopCountMax = 3;
+NS.Drag = NS:CreateTitleRegion();
+NS.Model = CreateFrame( "PlayerModel", nil, NS );
+NS.Flash = CreateFrame( "Frame" );
+NS.Flash.LoopCountMax = 3;
 
-me.PendingName, me.PendingID = nil;
+NS.PendingName, NS.PendingID = nil;
 
-me.RotationRate = math.pi / 4;
-me.RaidTargetIcon = 4; -- Green triangle
+NS.RotationRate = math.pi / 4;
+NS.RaidTargetIcon = 4; -- Green triangle
 
-me.ModelDefaultScale = 0.75;
+NS.ModelDefaultScale = 0.75;
 --- [ Model:lower() ] = "[Scale]|[X]|[Y]|[Z]", where any parameter can be left empty
-me.ModelCameras = {
+NS.ModelCameras = {
 	[ [[creature\alliancelionmount\alliancelion.m2]] ] = ".7|.3|.5"; -- Sambas
 	[ [[creature\armadillo\armadillo.m2]] ] = "2||-.3"; -- Armagedillo
 	[ [[creature\dragon\northrenddragon.m2]] ] = ".5||3|20"; -- Hemathion, Vyragosa
@@ -35,18 +35,18 @@ me.ModelCameras = {
 
 --- Plays an alert sound, temporarily enabling sound if necessary.
 -- @param AlertSound  A LibSharedMedia sound key, or nil to play the default.
-function me.PlaySound ( AlertSound )
+function NS.PlaySound ( AlertSound )
 	if ( _NPCScan.Options.AlertSoundUnmute ) then
-		if ( not me.SoundEnableAllChanged and not GetCVarBool( "Sound_EnableAllSound" ) ) then
-			me.SoundEnableAllChanged = true;
+		if ( not NS.SoundEnableAllChanged and not GetCVarBool( "Sound_EnableAllSound" ) ) then
+			NS.SoundEnableAllChanged = true;
 			SetCVar( "Sound_EnableAllSound", 1 ); -- Restored when alert is closed
 		end
-		if ( not me.SoundEnableSFXChanged and not GetCVarBool( "Sound_EnableSFX" ) ) then
-			me.SoundEnableSFXChanged = true;
+		if ( not NS.SoundEnableSFXChanged and not GetCVarBool( "Sound_EnableSFX" ) ) then
+			NS.SoundEnableSFXChanged = true;
 			SetCVar( "Sound_EnableSFX", 1 );
 		end
-		if ( not me.SoundInBGChanged and not GetCVarBool( "Sound_EnableSoundWhenGameIsInBG" ) ) then
-			me.SoundInBGChanged = true;
+		if ( not NS.SoundInBGChanged and not GetCVarBool( "Sound_EnableSoundWhenGameIsInBG" ) ) then
+			NS.SoundInBGChanged = true;
 			SetCVar( "Sound_EnableSoundWhenGameIsInBG", 1 );
 		end
 	end
@@ -62,8 +62,8 @@ end
 
 --- Plays alerts and sets the targetting button if not in combat.
 -- If in combat, queues the button to appear when combat ends.
--- @see me:Update
-function me:SetNPC ( ID, Name )
+-- @see NS:Update
+function NS:SetNPC ( ID, Name )
 	if ( tonumber( ID ) ) then
 		ID = tonumber( ID );
 		_NPCScan.Overlays.Add( ID );
@@ -89,7 +89,7 @@ end
 --- Updates the button out of combat to target a given unit.
 -- @param ID  A numeric NpcID or string UnitID.
 -- @param Name  Localized name of the unit.  If ID is an NpcID, Name is used in the targetting macro.
-function me:Update ( ID, Name )
+function NS:Update ( ID, Name )
 	if ( type( self.ID ) == "number" ) then -- Remove last overlay
 		_NPCScan.Overlays.Remove( self.ID );
 	end
@@ -117,7 +117,7 @@ function me:Update ( ID, Name )
 end
 --- Enables or disables dragging the button.
 -- Not a secure function; Can be run in combat.
-function me:EnableDrag ( Enable )
+function NS:EnableDrag ( Enable )
 	local Drag = self.Drag;
 	Drag:ClearAllPoints();
 	if ( Enable ) then
@@ -129,28 +129,28 @@ end
 
 
 --- Starts dragging or waits for drag key when shown.
-function me:OnShow ()
+function NS:OnShow ()
 	self:RegisterEvent( "MODIFIER_STATE_CHANGED" );
 	self:RegisterEvent( "PLAYER_TARGET_CHANGED" );
 	self:EnableDrag( IsModifiedClick( "_NPCSCAN_BUTTONDRAG" ) );
 end
 --- Stops listening for events when hidden.
-function me:OnHide ()
+function NS:OnHide ()
 	self:UnregisterEvent( "MODIFIER_STATE_CHANGED" );
 	self:UnregisterEvent( "PLAYER_TARGET_CHANGED" );
 	self:UnregisterEvent( "UNIT_MODEL_CHANGED" );
 	self:EnableDrag( false );
 
-	if ( me.SoundEnableAllChanged ) then
-		me.SoundEnableAllChanged = nil;
+	if ( NS.SoundEnableAllChanged ) then
+		NS.SoundEnableAllChanged = nil;
 		SetCVar( "Sound_EnableAllSound", 0 );
 	end
-	if ( me.SoundEnableSFXChanged ) then
-		me.SoundEnableSFXChanged = nil;
+	if ( NS.SoundEnableSFXChanged ) then
+		NS.SoundEnableSFXChanged = nil;
 		SetCVar( "Sound_EnableSFX", 0 );
 	end
-	if ( me.SoundInBGChanged ) then
-		me.SoundInBGChanged = nil;
+	if ( NS.SoundInBGChanged ) then
+		NS.SoundInBGChanged = nil;
 		SetCVar( "Sound_EnableSoundWhenGameIsInBG", 0 );
 	end
 	if ( type( self.ID ) == "number" ) then -- Remove current overlay
@@ -158,17 +158,17 @@ function me:OnHide ()
 	end
 end
 --- Highlights the button's border when moused over.
-function me:OnEnter ()
+function NS:OnEnter ()
 	self:SetBackdropBorderColor( 1, 1, 0.15 ); -- Yellow
 end
 --- Removes border highlights when mousing out.
-function me:OnLeave ()
+function NS:OnLeave ()
 	self:SetBackdropBorderColor( 0.7, 0.15, 0.05 ); -- Brown
 end
 
 
---- Shows the button queued by me:SetNPC when combat ends.
-function me:PLAYER_REGEN_ENABLED ()
+--- Shows the button queued by NS:SetNPC when combat ends.
+function NS:PLAYER_REGEN_ENABLED ()
 	-- Update button after leaving combat
 	if ( self.PendingName and self.PendingID ) then
 		self:Update( self.PendingID, self.PendingName );
@@ -176,7 +176,7 @@ function me:PLAYER_REGEN_ENABLED ()
 	end
 end
 --- Enables or disables dragging when the drag modifier is held.
-function me:MODIFIER_STATE_CHANGED ()
+function NS:MODIFIER_STATE_CHANGED ()
 	self:EnableDrag( IsModifiedClick( "_NPCSCAN_BUTTONDRAG" ) );
 end
 do
@@ -193,7 +193,7 @@ do
 		end
 	end
 	--- Raid marks the rare when it's targetted.
-	function me:PLAYER_TARGET_CHANGED ()
+	function NS:PLAYER_TARGET_CHANGED ()
 		local ID = self.ID;
 		if ( TargetIsFoundRare( ID ) ) then
 			if ( GetRaidTargetIndex( "target" ) ~= self.RaidTargetIcon -- Wrong mark
@@ -214,7 +214,7 @@ do
 	end
 end
 --- Updates the 3D preview display if the targetted rare changes appearance.
-function me:UNIT_MODEL_CHANGED ( _, UnitID )
+function NS:UNIT_MODEL_CHANGED ( _, UnitID )
 	if ( UnitIsUnit( UnitID, self.Model.UnitID ) ) then
 		self.Model:Reset( true ); -- Don't reset rotation
 		self.Model:SetUnit( UnitID );
@@ -223,7 +223,7 @@ end
 
 
 --- Stops the animation after a number of loops.
-function me.Flash:OnLoop ( Direction )
+function NS.Flash:OnLoop ( Direction )
 	if ( Direction == "FORWARD" ) then
 		self.LoopCount = self.LoopCount + 1;
 		local Flash = self:GetParent();
@@ -234,7 +234,7 @@ function me.Flash:OnLoop ( Direction )
 	end
 end
 --- Resets the loop count when resumed/restarted.
-function me.Flash:OnPlay ()
+function NS.Flash:OnPlay ()
 	self.LoopCount = 0;
 end
 
@@ -246,11 +246,11 @@ do
 		if ( type( Path ) == "string" ) then
 			local ID = self:GetParent().ID;
 			if ( type( ID ) == "number" or not UnitIsPlayer( ID ) ) then -- Creature
-				local Scale, X, Y, Z = ( "|" ):split( me.ModelCameras[ Path:lower() ] or "" );
-				self:SetModelScale( me.ModelDefaultScale * ( tonumber( Scale ) or 1 ) );
+				local Scale, X, Y, Z = ( "|" ):split( NS.ModelCameras[ Path:lower() ] or "" );
+				self:SetModelScale( NS.ModelDefaultScale * ( tonumber( Scale ) or 1 ) );
 				self:SetPosition( tonumber( Z ) or 0, tonumber( X ) or 0, tonumber( Y ) or 0 );
 			else -- Player
-				self:SetModelScale( me.ModelDefaultScale );
+				self:SetModelScale( NS.ModelDefaultScale );
 			end
 		end
 	end
@@ -267,7 +267,7 @@ do
 		end
 	end
 	--- Clears the model and readies it for a SetCreature/Unit call.
-	function me.Model:Reset ( KeepFacing )
+	function NS.Model:Reset ( KeepFacing )
 		self:SetAlpha( 0 ); -- Keep hidden until scaled properly
 		self:SetScript( "OnUpdateModel", nil );
 		self:SetModelScale( 1 );
@@ -285,33 +285,33 @@ do
 	end
 end
 --- Slowly rotates the 3D model preview.
-function me.Model:OnUpdate ( Elapsed )
-	self:SetFacing( self:GetFacing() + Elapsed * me.RotationRate );
+function NS.Model:OnUpdate ( Elapsed )
+	self:SetFacing( self:GetFacing() + Elapsed * NS.RotationRate );
 end
 
 
 
 
-me:SetScale( 1.25 );
-me:SetSize( 150, 42 );
-me:SetPoint( "BOTTOM", UIParent, 0, 128 );
-me:SetMovable( true );
-me:SetUserPlaced( true );
-me:SetClampedToScreen( true );
-me:SetFrameStrata( "FULLSCREEN_DIALOG" );
-me:SetNormalTexture( [[Interface\AchievementFrame\UI-Achievement-Parchment-Horizontal]] );
-local Background = me:GetNormalTexture();
+NS:SetScale( 1.25 );
+NS:SetSize( 150, 42 );
+NS:SetPoint( "BOTTOM", UIParent, 0, 128 );
+NS:SetMovable( true );
+NS:SetUserPlaced( true );
+NS:SetClampedToScreen( true );
+NS:SetFrameStrata( "FULLSCREEN_DIALOG" );
+NS:SetNormalTexture( [[Interface\AchievementFrame\UI-Achievement-Parchment-Horizontal]] );
+local Background = NS:GetNormalTexture();
 Background:SetDrawLayer( "BACKGROUND" );
 Background:ClearAllPoints();
 Background:SetPoint( "BOTTOMLEFT", 3, 3 );
 Background:SetPoint( "TOPRIGHT", -3, -3 );
 Background:SetTexCoord( 0, 1, 0, 0.25 );
 
-me:SetAttribute( "_onshow", "self:Enable();" );
-me:SetAttribute( "_onhide", "self:Disable();" );
-me:Hide();
+NS:SetAttribute( "_onshow", "self:Enable();" );
+NS:SetAttribute( "_onhide", "self:Disable();" );
+NS:Hide();
 
-local TitleBackground = me:CreateTexture( nil, "BORDER" );
+local TitleBackground = NS:CreateTexture( nil, "BORDER" );
 TitleBackground:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Title]] );
 TitleBackground:SetPoint( "TOPRIGHT", -5, -5 );
 TitleBackground:SetPoint( "LEFT", 5, 0 );
@@ -319,73 +319,73 @@ TitleBackground:SetHeight( 18 );
 TitleBackground:SetTexCoord( 0, 0.9765625, 0, 0.3125 );
 TitleBackground:SetAlpha( 0.8 );
 
-local Title = me:CreateFontString( nil, "OVERLAY", "GameFontHighlightMedium" );
+local Title = NS:CreateFontString( nil, "OVERLAY", "GameFontHighlightMedium" );
 Title:SetPoint( "TOPLEFT", TitleBackground );
 Title:SetPoint( "RIGHT", TitleBackground );
-me:SetFontString( Title );
+NS:SetFontString( Title );
 
-local SubTitle = me:CreateFontString( nil, "OVERLAY", "GameFontBlackTiny" );
+local SubTitle = NS:CreateFontString( nil, "OVERLAY", "GameFontBlackTiny" );
 SubTitle:SetPoint( "TOPLEFT", Title, "BOTTOMLEFT", 0, -4 );
 SubTitle:SetPoint( "RIGHT", Title );
 SubTitle:SetText( _NPCScan.L.BUTTON_FOUND );
 
 -- Border
-me:SetBackdrop( {
+NS:SetBackdrop( {
 	tile = true; edgeSize = 16;
 	edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]];
 } );
-me:OnLeave(); -- Set non-highlighted colors
+NS:OnLeave(); -- Set non-highlighted colors
 
 -- Close button
-local Close = CreateFrame( "Button", nil, me, "UIPanelCloseButton" );
+local Close = CreateFrame( "Button", nil, NS, "UIPanelCloseButton" );
 Close:SetPoint( "TOPRIGHT" );
 Close:SetSize( 32, 32 );
 Close:SetScale( 0.8 );
 Close:SetHitRectInsets( 8, 8, 8, 8 );
 
 -- Model view
-local Model = me.Model;
-Model:SetPoint( "BOTTOMLEFT", me, "TOPLEFT", 0, -4 );
+local Model = NS.Model;
+Model:SetPoint( "BOTTOMLEFT", NS, "TOPLEFT", 0, -4 );
 Model:SetPoint( "RIGHT" );
-Model:SetHeight( me:GetWidth() * 0.6 );
-me:SetClampRectInsets( 0, 0, Model:GetHeight(), 0 ); -- Allow room for model
+Model:SetHeight( NS:GetWidth() * 0.6 );
+NS:SetClampRectInsets( 0, 0, Model:GetHeight(), 0 ); -- Allow room for model
 
 
 -- Glow animation
 local Texture = Model:CreateTexture( nil, "OVERLAY" );
-Texture:SetPoint( "CENTER", me );
-Texture:SetSize( 400 / 300 * me:GetWidth(), 171 / 70 * me:GetHeight() );
+Texture:SetPoint( "CENTER", NS );
+Texture:SetSize( 400 / 300 * NS:GetWidth(), 171 / 70 * NS:GetHeight() );
 Texture:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Alert-Glow]] );
 Texture:SetBlendMode( "ADD" );
 Texture:SetTexCoord( 0, 0.78125, 0, 0.66796875 );
 Texture:SetAlpha( 0 );
-me.Glow = Texture:CreateAnimationGroup();
-local FadeIn = me.Glow:CreateAnimation( "Alpha" );
+NS.Glow = Texture:CreateAnimationGroup();
+local FadeIn = NS.Glow:CreateAnimation( "Alpha" );
 FadeIn:SetChange( 1.0 );
 FadeIn:SetDuration( 0.2 );
-local FadeOut = me.Glow:CreateAnimation( "Alpha" );
+local FadeOut = NS.Glow:CreateAnimation( "Alpha" );
 FadeOut:SetOrder( 2 );
 FadeOut:SetChange( -1.0 );
 FadeOut:SetDuration( 0.5 );
 
 -- Shine animation (reflection swipe)
-local Texture = me:CreateTexture( nil, "ARTWORK" );
-Texture:SetPoint( "TOPLEFT", me, 0, 8 );
-Texture:SetSize( 67 / 300 * me:GetWidth(), 1.28 * me:GetHeight() );
+local Texture = NS:CreateTexture( nil, "ARTWORK" );
+Texture:SetPoint( "TOPLEFT", NS, 0, 8 );
+Texture:SetSize( 67 / 300 * NS:GetWidth(), 1.28 * NS:GetHeight() );
 Texture:SetTexture( [[Interface\AchievementFrame\UI-Achievement-Alert-Glow]] );
 Texture:SetBlendMode( "ADD" );
 Texture:SetTexCoord( 0.78125, 0.912109375, 0, 0.28125 );
 Texture:SetAlpha( 0 );
-me.Shine = Texture:CreateAnimationGroup();
-local Show = me.Shine:CreateAnimation( "Alpha" );
+NS.Shine = Texture:CreateAnimationGroup();
+local Show = NS.Shine:CreateAnimation( "Alpha" );
 Show:SetStartDelay( 0.3 );
 Show:SetChange( 1.0 );
 Show:SetDuration( 1e-5 ); -- Note: 0 is invalid
-local Slide = me.Shine:CreateAnimation( "Translation" );
+local Slide = NS.Shine:CreateAnimation( "Translation" );
 Slide:SetOrder( 2 );
-Slide:SetOffset( me:GetWidth() - Texture:GetWidth() + 8, 0 );
+Slide:SetOffset( NS:GetWidth() - Texture:GetWidth() + 8, 0 );
 Slide:SetDuration( 0.4 );
-local FadeOut = me.Shine:CreateAnimation( "Alpha" );
+local FadeOut = NS.Shine:CreateAnimation( "Alpha" );
 FadeOut:SetOrder( 2 );
 FadeOut:SetStartDelay( 0.2 );
 FadeOut:SetChange( -1.0 );
@@ -393,7 +393,7 @@ FadeOut:SetDuration( 0.2 );
 
 
 -- Full screen flash
-local Flash = me.Flash;
+local Flash = NS.Flash;
 Flash:Hide();
 Flash:SetAllPoints();
 Flash:SetAlpha( 0 );
@@ -415,11 +415,11 @@ FadeIn:SetDuration( 0.5 );
 FadeIn:SetEndDelay( 0.25 );
 
 
-me:SetAttribute( "type", "macro" );
+NS:SetAttribute( "type", "macro" );
 
-me:SetScript( "OnEnter", me.OnEnter );
-me:SetScript( "OnLeave", me.OnLeave );
-me:SetScript( "OnEvent", _NPCScan.Frame.OnEvent );
-me:HookScript( "OnShow", me.OnShow );
-me:HookScript( "OnHide", me.OnHide );
-me:RegisterEvent( "PLAYER_REGEN_ENABLED" );
+NS:SetScript( "OnEnter", NS.OnEnter );
+NS:SetScript( "OnLeave", NS.OnLeave );
+NS:SetScript( "OnEvent", _NPCScan.Frame.OnEvent );
+NS:HookScript( "OnShow", NS.OnShow );
+NS:HookScript( "OnHide", NS.OnHide );
+NS:RegisterEvent( "PLAYER_REGEN_ENABLED" );

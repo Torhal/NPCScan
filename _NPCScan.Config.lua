@@ -6,38 +6,38 @@
 
 local _NPCScan = select( 2, ... );
 local L = _NPCScan.L;
-local me = CreateFrame( "Frame" );
-_NPCScan.Config = me;
+local NS = CreateFrame( "Frame" );
+_NPCScan.Config = NS;
 
-me.CacheWarnings = CreateFrame( "CheckButton", "_NPCScanConfigCacheWarningsCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
-me.PrintTime = CreateFrame( "CheckButton", "_NPCScanConfigPrintTimeCheckbox", me, "InterfaceOptionsCheckButtonTemplate" );
+NS.CacheWarnings = CreateFrame( "CheckButton", "_NPCScanConfigCacheWarningsCheckbox", NS, "InterfaceOptionsCheckButtonTemplate" );
+NS.PrintTime = CreateFrame( "CheckButton", "_NPCScanConfigPrintTimeCheckbox", NS, "InterfaceOptionsCheckButtonTemplate" );
 
-local AlertOptions = CreateFrame( "Frame", "_NPCScanConfigAlert", me, "OptionsBoxTemplate" );
-me.Test = CreateFrame( "Button", "_NPCScanTest", AlertOptions, "UIPanelButtonTemplate" );
-me.AlertSoundUnmute = CreateFrame( "CheckButton", "_NPCScanConfigUnmuteCheckbox", AlertOptions, "InterfaceOptionsCheckButtonTemplate" );
-me.AlertSound = CreateFrame( "Frame", "_NPCScanConfigSoundDropdown", AlertOptions, "UIDropDownMenuTemplate" );
+local AlertOptions = CreateFrame( "Frame", "_NPCScanConfigAlert", NS, "OptionsBoxTemplate" );
+NS.Test = CreateFrame( "Button", "_NPCScanTest", AlertOptions, "UIPanelButtonTemplate" );
+NS.AlertSoundUnmute = CreateFrame( "CheckButton", "_NPCScanConfigUnmuteCheckbox", AlertOptions, "InterfaceOptionsCheckButtonTemplate" );
+NS.AlertSound = CreateFrame( "Frame", "_NPCScanConfigSoundDropdown", AlertOptions, "UIDropDownMenuTemplate" );
 
 
 
 
 --- Builds a standard tooltip for a control.
-function me:ControlOnEnter ()
+function NS:ControlOnEnter ()
 	GameTooltip:SetOwner( self, "ANCHOR_TOPRIGHT" );
 	GameTooltip:SetText( self.tooltipText, nil, nil, nil, nil, 1 );
 end
 
 
 --- Sets the CacheWarnings option when its checkbox is clicked.
-function me.CacheWarnings.setFunc ( Enable )
+function NS.CacheWarnings.setFunc ( Enable )
 	_NPCScan.SetCacheWarnings( Enable == "1" );
 end
 --- Sets the PrintTime option when its checkbox is clicked.
-function me.PrintTime.setFunc ( Enable )
+function NS.PrintTime.setFunc ( Enable )
 	_NPCScan.SetPrintTime( Enable == "1" );
 end
 
 --- Plays a fake found alert and shows the target button.
-function me.Test:OnClick ()
+function NS.Test:OnClick ()
 	local Name = L.CONFIG_TEST_NAME;
 	_NPCScan.Print( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
 	_NPCScan.Print( L.CONFIG_TEST_HELP_FORMAT:format( GetModifiedClick( "_NPCSCAN_BUTTONDRAG" ) ) );
@@ -45,16 +45,16 @@ function me.Test:OnClick ()
 	_NPCScan.Button:SetNPC( "player", Name );
 end
 --- Sets the AlertSoundUnmute option when its checkbox is clicked.
-function me.AlertSoundUnmute.setFunc ( Enable )
+function NS.AlertSoundUnmute.setFunc ( Enable )
 	_NPCScan.SetAlertSoundUnmute( Enable == "1" );
 end
 --- Sets an alert sound chosen from the LibSharedMedia dropdown.
-function me.AlertSound:OnSelect ( NewValue )
+function NS.AlertSound:OnSelect ( NewValue )
 	_NPCScan.Button.PlaySound( NewValue ); -- Play sample
 	_NPCScan.SetAlertSound( NewValue );
 end
 --- Builds a dropdown menu for alert sounds with LibSharedMedia options.
-function me.AlertSound:initialize ()
+function NS.AlertSound:initialize ()
 	local Value = _NPCScan.Options.AlertSound;
 
 	local Info = UIDropDownMenu_CreateInfo();
@@ -73,21 +73,21 @@ end
 
 
 --- Reverts to default options.
-function me:default ()
+function NS:default ()
 	_NPCScan.Synchronize(); -- Resets all
 end
 
 
 
 
-me.name = L.CONFIG_TITLE;
-me:Hide();
+NS.name = L.CONFIG_TITLE;
+NS:Hide();
 
 -- Pane title
-local Title = me:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
+local Title = NS:CreateFontString( nil, "ARTWORK", "GameFontNormalLarge" );
 Title:SetPoint( "TOPLEFT", 16, -16 );
 Title:SetText( L.CONFIG_TITLE );
-local SubText = me:CreateFontString( nil, "ARTWORK", "GameFontHighlightSmall" );
+local SubText = NS:CreateFontString( nil, "ARTWORK", "GameFontHighlightSmall" );
 SubText:SetPoint( "TOPLEFT", Title, "BOTTOMLEFT", 0, -8 );
 SubText:SetPoint( "RIGHT", -32, 0 );
 SubText:SetHeight( 32 );
@@ -97,45 +97,45 @@ SubText:SetText( L.CONFIG_DESC );
 
 
 -- Miscellaneous checkboxes
-me.CacheWarnings:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
-_G[ me.CacheWarnings:GetName().."Text" ]:SetText( L.CONFIG_CACHEWARNINGS );
-me.CacheWarnings.tooltipText = L.CONFIG_CACHEWARNINGS_DESC;
+NS.CacheWarnings:SetPoint( "TOPLEFT", SubText, "BOTTOMLEFT", -2, -8 );
+_G[ NS.CacheWarnings:GetName().."Text" ]:SetText( L.CONFIG_CACHEWARNINGS );
+NS.CacheWarnings.tooltipText = L.CONFIG_CACHEWARNINGS_DESC;
 
-me.PrintTime:SetPoint( "TOPLEFT", me.CacheWarnings, "BOTTOMLEFT", 0, -8 );
-_G[ me.PrintTime:GetName().."Text" ]:SetText( L.CONFIG_PRINTTIME );
-me.PrintTime.tooltipText = L.CONFIG_PRINTTIME_DESC;
+NS.PrintTime:SetPoint( "TOPLEFT", NS.CacheWarnings, "BOTTOMLEFT", 0, -8 );
+_G[ NS.PrintTime:GetName().."Text" ]:SetText( L.CONFIG_PRINTTIME );
+NS.PrintTime.tooltipText = L.CONFIG_PRINTTIME_DESC;
 
 
 -- Alert options section
-AlertOptions:SetPoint( "TOPLEFT", me.PrintTime, "BOTTOMLEFT", 0, -16 );
+AlertOptions:SetPoint( "TOPLEFT", NS.PrintTime, "BOTTOMLEFT", 0, -16 );
 AlertOptions:SetPoint( "BOTTOMRIGHT", -14, 16 );
 _G[ AlertOptions:GetName().."Title" ]:SetText( L.CONFIG_ALERT );
 
 -- Test button
-me.Test:SetPoint( "TOPLEFT", 16, -16 );
-me.Test:SetSize( 144, 21 );
-me.Test:SetScript( "OnClick", me.Test.OnClick );
-me.Test:SetScript( "OnEnter", me.ControlOnEnter );
-me.Test:SetScript( "OnLeave", GameTooltip_Hide );
-me.Test:SetText( L.CONFIG_TEST );
-me.Test.tooltipText = L.CONFIG_TEST_DESC;
+NS.Test:SetPoint( "TOPLEFT", 16, -16 );
+NS.Test:SetSize( 144, 21 );
+NS.Test:SetScript( "OnClick", NS.Test.OnClick );
+NS.Test:SetScript( "OnEnter", NS.ControlOnEnter );
+NS.Test:SetScript( "OnLeave", GameTooltip_Hide );
+NS.Test:SetText( L.CONFIG_TEST );
+NS.Test.tooltipText = L.CONFIG_TEST_DESC;
 
-me.AlertSoundUnmute:SetPoint( "TOPLEFT", me.Test, "BOTTOMLEFT", -2, -16 );
-_G[ me.AlertSoundUnmute:GetName().."Text" ]:SetText( L.CONFIG_ALERT_UNMUTE );
-me.AlertSoundUnmute.tooltipText = L.CONFIG_ALERT_UNMUTE_DESC;
+NS.AlertSoundUnmute:SetPoint( "TOPLEFT", NS.Test, "BOTTOMLEFT", -2, -16 );
+_G[ NS.AlertSoundUnmute:GetName().."Text" ]:SetText( L.CONFIG_ALERT_UNMUTE );
+NS.AlertSoundUnmute.tooltipText = L.CONFIG_ALERT_UNMUTE_DESC;
 
-me.AlertSound:SetPoint( "TOPLEFT", me.AlertSoundUnmute, "BOTTOMLEFT", -12, -18 );
-me.AlertSound:SetPoint( "RIGHT", -12, 0 );
-me.AlertSound:EnableMouse( true );
-me.AlertSound:SetScript( "OnEnter", me.ControlOnEnter );
-me.AlertSound:SetScript( "OnLeave", GameTooltip_Hide );
-UIDropDownMenu_JustifyText( me.AlertSound, "LEFT" );
-_G[ me.AlertSound:GetName().."Middle" ]:SetPoint( "RIGHT", -16, 0 );
-local Label = me.AlertSound:CreateFontString( nil, "ARTWORK", "GameFontNormalSmall" );
-Label:SetPoint( "BOTTOMLEFT", me.AlertSound, "TOPLEFT", 16, 3 );
+NS.AlertSound:SetPoint( "TOPLEFT", NS.AlertSoundUnmute, "BOTTOMLEFT", -12, -18 );
+NS.AlertSound:SetPoint( "RIGHT", -12, 0 );
+NS.AlertSound:EnableMouse( true );
+NS.AlertSound:SetScript( "OnEnter", NS.ControlOnEnter );
+NS.AlertSound:SetScript( "OnLeave", GameTooltip_Hide );
+UIDropDownMenu_JustifyText( NS.AlertSound, "LEFT" );
+_G[ NS.AlertSound:GetName().."Middle" ]:SetPoint( "RIGHT", -16, 0 );
+local Label = NS.AlertSound:CreateFontString( nil, "ARTWORK", "GameFontNormalSmall" );
+Label:SetPoint( "BOTTOMLEFT", NS.AlertSound, "TOPLEFT", 16, 3 );
 Label:SetText( L.CONFIG_ALERT_SOUND );
-me.AlertSound.tooltipText = L.CONFIG_ALERT_SOUND_DESC;
-UIDropDownMenu_SetText( me.AlertSound, L.CONFIG_ALERT_SOUND_DEFAULT );
+NS.AlertSound.tooltipText = L.CONFIG_ALERT_SOUND_DESC;
+UIDropDownMenu_SetText( NS.AlertSound, L.CONFIG_ALERT_SOUND_DEFAULT );
 
 
-InterfaceOptions_AddCategory( me );
+InterfaceOptions_AddCategory( NS );
