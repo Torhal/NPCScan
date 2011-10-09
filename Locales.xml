@@ -5,6 +5,7 @@
 	<Script file="Locales\Locale-esES.lua"/>
 	<Script file="Locales\Locale-frFR.lua"/>
 	<Script file="Locales\Locale-koKR.lua"/>
+	<Script file="Locales\Locale-ptBR.lua"/>
 	<Script file="Locales\Locale-ruRU.lua"/>
 	<Script file="Locales\Locale-zhCN.lua"/>
 	<Script file="Locales\Locale-zhTW.lua"/>

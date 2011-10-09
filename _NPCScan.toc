@@ -16,11 +16,12 @@
 ## X-Credits-esMX: Localization: galen2, hugojcastro
 ## X-Credits-frFR: Localization: Pettigrow, Xprit
 ## X-Credits-koKR: Localization: kdw112, yuk6196, netaras, fwdmusso
+## X-Credits-ptBR: Localization: Omukeka
 ## X-Credits-ruRU: Localization: StingerSoft, Sarymian, KVVV, The_DimoK, ichik, Ant1dotE
 ## X-Credits-zhCN: Localization: digmouse, tss1398383123, ananhaid, redsaru
-## X-Credits-zhTW: Localization: s8095324, pepper_ep, zhTW, laincat
+## X-Credits-zhTW: Localization: s8095324, pepper_ep, zhTW, laincat, alpha2009, machihchung
 ## Version: 4.2.0.2
-## X-Date: 2011-07-14
+## X-Date: 2011-10-08
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com
@@ -28,8 +29,8 @@
 ## X-Feedback: http://code.google.com/p/wow-saiket/issues/list?can=1&q=AddOn:NPCScan
 ## X-WoWI-ID: 12995
 ## X-Curse-Project-ID: npcscan
-## X-Localizations: deDE, enUS, esES, esMX, frFR, koKR, ruRU, zhCN, zhTW
-## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, koKR, ruRU, zhCN, zhTW
+## X-Localizations: deDE, enUS, esES, esMX, frFR, koKR, ptBR, ruRU, zhCN, zhTW
+## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, koKR, ptBR, ruRU, zhCN, zhTW
 ## X-Embeds: LibTextTable-1.1, LibSharedMedia-3.0
 ## SavedVariables: _NPCScanOptions
 ## SavedVariablesPerCharacter: _NPCScanOptionsCharacter
