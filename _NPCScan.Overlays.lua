@@ -30,7 +30,7 @@ end
 function NS.Remove ( NpcID )
 	NS:SendMessage( MESSAGE_REMOVE, NpcID, AddOnName );
 end
--- Lets overlay mods know the NPC ID was found.
+--- Lets overlay mods know the NPC ID was found.
 function NS.Found ( NpcID )
 	NS:SendMessage( MESSAGE_FOUND, NpcID, AddOnName );
 end
