@@ -4,7 +4,7 @@
   ****************************************************************************]]
 
 
-if ( GetLocale() ~= "zhCN" ) then
+if ( GetLocale() ~= "enCN" or GetLocale() ~= "zhCN" ) then
 	return;
 end
 

@@ -4,7 +4,7 @@
   ****************************************************************************]]
 
 
-if ( GetLocale() ~= "ptBR" ) then
+if ( GetLocale() ~= "ptBR" and GetLocale() ~= "ptPT" ) then
 	return;
 end
 
