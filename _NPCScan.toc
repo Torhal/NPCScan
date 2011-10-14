@@ -30,7 +30,7 @@
 ## X-WoWI-ID: 12995
 ## X-Curse-Project-ID: npcscan
 ## X-Localizations: deDE, enUS, esES, esMX, frFR, koKR, ptBR, ruRU, zhCN, zhTW
-## X-CompatibleLocales: deDE, enUS, esES, esMX, frFR, koKR, ptBR, ruRU, zhCN, zhTW
+## X-CompatibleLocales: deDE, enCN, enTW, enUS, esES, esMX, frFR, koKR, ptBR, ptPT, ruRU, zhCN, zhTW
 ## X-Embeds: LibTextTable-1.1, LibSharedMedia-3.0
 ## SavedVariables: _NPCScanOptions
 ## SavedVariablesPerCharacter: _NPCScanOptionsCharacter
