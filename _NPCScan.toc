@@ -40,16 +40,27 @@
 ## SavedVariables: _NPCScanOptions
 ## SavedVariablesPerCharacter: _NPCScanOptionsCharacter
 ## OptionalDeps: Ace3, LibTextTable-1.1, LibSharedMedia-3.0, LibRareSpawns
+
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\LibTextTable-1.1\Lib.xml
+Libs\LibSharedMedia-3.0\lib.xml
+Libs\AceEvent-3.0\AceEvent-3.0.xml
 
-Embeds.xml
-Locales.xml
+# See http://wow.curseforge.com/addons/npcscan/localization/
+Locales\Locale-enUS.lua
+Locales\Locale-deDE.lua
+Locales\Locale-esES.lua
+Locales\Locale-frFR.lua
+Locales\Locale-koKR.lua
+Locales\Locale-ptBR.lua
+Locales\Locale-ruRU.lua
+Locales\Locale-zhCN.lua
+Locales\Locale-zhTW.lua
 
 _NPCScan.lua
 _NPCScan.Button.lua
 _NPCScan.Overlays.lua
 _NPCScan.TamableIDs.lua
-
 _NPCScan.Config.lua
 _NPCScan.Config.Search.lua
