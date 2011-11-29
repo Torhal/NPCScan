@@ -1,6 +1,5 @@
 ## Interface: 40300
 ## Title: _|cffCCCC88NPCScan|r
-## Title-zhCN: _|cffCCCC88稀有怪搜寻NPCScan|r
 ## Notes: Scans NPCs around you for rare ones.
 ## Notes-deDE: Scant NSCs in deiner Nähe nach seltenen.
 ## Notes-enCN: 搜索附近的 NPC 寻找稀有怪物。
@@ -14,7 +13,7 @@
 ## Notes-zhTW: 搜尋出沒在你附近的稀有怪。
 ## Author: Saiket
 ## X-Credits-deDE: Localization: Freydis88
-## X-Credits-enCN: Localization: digmouse, tss1398383123, ananhaid, redsaru
+## X-Credits-enCN: Localization: digmouse, tss1398383123, ananhaid, redsaru, dh0000
 ## X-Credits-enTW: Localization: s8095324, pepper_ep, zhTW, laincat, alpha2009, machihchung
 ## X-Credits-esES: Localization: galen2, hugojcastro
 ## X-Credits-esMX: Localization: galen2, hugojcastro
@@ -22,11 +21,11 @@
 ## X-Credits-koKR: Localization: kdw112, yuk6196, netaras, fwdmusso
 ## X-Credits-ptBR: Localization: Omukeka
 ## X-Credits-ptPT: Localization: Omukeka
-## X-Credits-ruRU: Localization: StingerSoft, Sarymian, KVVV, The_DimoK, ichik, Ant1dotE
-## X-Credits-zhCN: Localization: digmouse, tss1398383123, ananhaid, redsaru
+## X-Credits-ruRU: Localization: StingerSoft, Sarymian, KVVV, The_DimoK, ichik, Ant1dotE, tick095
+## X-Credits-zhCN: Localization: digmouse, tss1398383123, ananhaid, redsaru, dh0000
 ## X-Credits-zhTW: Localization: s8095324, pepper_ep, zhTW, laincat, alpha2009, machihchung
 ## Version: 4.2.0.2
-## X-Date: 2011-10-08
+## X-Date: 2011-11-29
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com
