@@ -139,3 +139,15 @@ UIDropDownMenu_SetText( NS.AlertSound, L.CONFIG_ALERT_SOUND_DEFAULT );
 
 
 InterfaceOptions_AddCategory( NS );
+if ( select( 4, GetAddOnInfo( "_NPCScan.Tools" ) ) ) then
+	-- Add stub panel to load tools UI
+	local Panel = CreateFrame( "Frame" );
+	_NPCScan.ToolsPanel = Panel;
+	Panel.name, Panel.parent = L.TOOLS_TITLE, NS.name;
+	Panel:Hide();
+	Panel:SetScript( "OnShow", function ( self )
+		self:SetScript( "OnShow", nil );
+		UIParentLoadAddOn( "_NPCScan.Tools" );
+	end );
+	InterfaceOptions_AddCategory( Panel );
+end
