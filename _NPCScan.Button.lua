@@ -197,7 +197,7 @@ do
 		local ID = self.ID;
 		if ( TargetIsFoundRare( ID ) ) then
 			if ( GetRaidTargetIndex( "target" ) ~= self.RaidTargetIcon -- Wrong mark
-				and ( GetNumRaidMembers() == 0 or IsRaidOfficer() ) -- Player can mark
+				and ( not IsInRaid() or ( IsGroupAssistant() or IsGroupLeader() ) ) -- Player can mark
 			) then
 				SetRaidTarget( "target", self.RaidTargetIcon );
 			end

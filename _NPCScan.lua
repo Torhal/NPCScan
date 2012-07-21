@@ -228,7 +228,7 @@ do
 		end
 		for AchievementID in pairs( NS.OptionsCharacter.Achievements ) do
 			for CriteriaID, NpcID in pairs( NS.Achievements[ AchievementID ].Criteria ) do
-				if ( NS.Options.AchievementsAddFound or not select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) then -- Not completed
+				if ( NS.Options.AchievementsAddFound or not select( 3, GetAchievementCriteriaInfoByID( AchievementID, CriteriaID ) ) ) then -- Not completed
 					self[ NpcID ] = NS.TestID( NpcID );
 				end
 			end
@@ -368,7 +368,7 @@ end
 --- Starts searching for an achievement's NPC if it meets all settings.
 local function AchievementNPCActivate ( Achievement, NpcID, CriteriaID )
 	if ( Achievement.Active and not Achievement.NPCsActive[ NpcID ]
-		and ( NS.Options.AchievementsAddFound or not select( 3, GetAchievementCriteriaInfo( CriteriaID ) ) ) -- Not completed
+		and ( NS.Options.AchievementsAddFound or not select( 3, GetAchievementCriteriaInfoByID( Achievement.ID, CriteriaID ) ) ) -- Not completed
 		and ScanAdd( NpcID )
 	) then
 		Achievement.NPCsActive[ NpcID ] = CriteriaID;
@@ -643,14 +643,14 @@ do
 	end
 
 	local pairs = pairs;
-	local GetAchievementCriteriaInfo = GetAchievementCriteriaInfo;
+	local GetAchievementCriteriaInfoByID = GetAchievementCriteriaInfoByID;
 	--- Scans all active criteria and removes any completed NPCs.
 	local function AchievementCriteriaUpdate ()
 		if ( not NS.Options.AchievementsAddFound ) then
 			for AchievementID in pairs( NS.OptionsCharacter.Achievements ) do
 				local Achievement = NS.Achievements[ AchievementID ];
 				for NpcID, CriteriaID in pairs( Achievement.NPCsActive ) do
-					local _, _, Complete = GetAchievementCriteriaInfo( CriteriaID );
+					local _, _, Complete = GetAchievementCriteriaInfoByID( AchievementID, CriteriaID );
 					if ( Complete ) then
 						AchievementNPCDeactivate( Achievement, NpcID );
 					end
@@ -994,10 +994,10 @@ end
 
 local Frame = NS.Frame;
 Frame:SetScript( "OnEvent", Frame.OnEvent );
-if ( not IsLoggedIn() ) then
-	Frame:RegisterEvent( "PLAYER_LOGIN" );
-else
+if ( IsLoggedIn() ) then
 	Frame:PLAYER_LOGIN( "PLAYER_LOGIN" );
+else
+	Frame:RegisterEvent( "PLAYER_LOGIN" );
 end
 Frame:RegisterEvent( "PLAYER_ENTERING_WORLD" );
 Frame:RegisterEvent( "PLAYER_LEAVING_WORLD" );

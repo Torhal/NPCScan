@@ -298,7 +298,7 @@ function NS:AchievementUpdate ()
 	local Achievement = _NPCScan.Achievements[ self.AchievementID ];
 	local Overlay = IsAddOnLoaded( "_NPCScan.Overlay" ) and _NPCScan.Overlay;
 	for CriteriaID, NpcID in pairs( Achievement.Criteria ) do
-		local Name, _, Completed = GetAchievementCriteriaInfo( CriteriaID );
+		local Name, _, Completed = GetAchievementCriteriaInfoByID( self.AchievementID, CriteriaID );
 
 		local Map = Overlay and Overlay.GetNPCMapID( NpcID );
 		local Row = NS.Table:AddRow( NpcID,
