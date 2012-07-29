@@ -136,6 +136,7 @@ do
 		Achievements = {
 			[ 1312 ] = true; -- Bloody Rare (Outlands)
 			[ 2257 ] = true; -- Frostbitten (Northrend)
+			[ 7439 ] = true; -- Glorious! (Pandaria)
 		};
 	};
 end
@@ -144,6 +145,7 @@ end
 NS.Achievements = { --- Criteria data for each achievement.
 	[ 1312 ] = { WorldID = 3; }; -- Bloody Rare (Outlands)
 	[ 2257 ] = { WorldID = 4; }; -- Frostbitten (Northrend)
+	[ 7439 ] = { WorldID = 6; }; -- Glorious! (Pandaria)
 };
 do
 	local VirtualContinents = { --- Continents without physical maps aren't used.
@@ -851,6 +853,11 @@ function NS.Frame:PLAYER_LOGIN ( Event )
 			AddDefault( 54324 ); -- Skitterflame
 			AddDefault( 54338 ); -- Anthriss
 			Version = "4.2.0.2";
+		end
+		if ( Version < "5.0.0.1" ) then
+			-- 5.0.0.1: Added MoP's rare achievement.
+			OptionsCharacter.Achievements[ 7439 ] = true; -- Glorious!
+			Version = "5.0.0.1";
 		end
 		OptionsCharacter.Version = NS.Version;
 	end
