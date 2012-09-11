@@ -717,10 +717,10 @@ if ( select( 2, UnitClass( "player" ) ) == "HUNTER" ) then
 	NS.Frame:RegisterEvent( "PET_STABLE_UPDATE" );
 
 	local Backup = GetStablePetInfo;
-	--- Prevents the pet UI from querying (and caching) pets until actually viewing the stables.
+	--- Prevents the pet UI from querying (and caching) stabled pets until actually viewing the stables.
 	-- @param Override  Forces a normal query even if the stables aren't open.
 	function GetStablePetInfo ( Slot, Override, ... )
-		if ( Override or IsAtStableMaster() ) then
+		if ( Override or Slot <= NUM_PET_ACTIVE_SLOTS or IsAtStableMaster() ) then
 			return Backup( Slot, Override, ... );
 		end
 	end
