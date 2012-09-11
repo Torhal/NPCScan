@@ -99,7 +99,7 @@ function NS:TabOnEnter ()
 		end
 		GameTooltip:AddLine( Description, nil, nil, nil, true );
 
-		if ( not _NPCScan.OptionsCharacter.Achievements[ self.AchievementID ] ) then
+		if ( not _NPCScan.Options.Achievements[ self.AchievementID ] ) then
 			local Color = RED_FONT_COLOR;
 			GameTooltip:AddLine( L.SEARCH_ACHIEVEMENT_DISABLED, Color.r, Color.g, Color.b );
 		end
@@ -322,7 +322,7 @@ function NS:AchievementActivate ()
 	NS.Table:SetSortHandlers( true, true, true, true, true );
 	NS.Table:SetSortColumn( 2 ); -- Default by name
 
-	NS.Table.Header:SetAlpha( _NPCScan.OptionsCharacter.Achievements[ self.AchievementID ] and 1.0 or NS.InactiveAlpha );
+	NS.Table.Header:SetAlpha( _NPCScan.Options.Achievements[ self.AchievementID ] and 1.0 or NS.InactiveAlpha );
 end
 --- Undoes customization to the table when leaving an achievement tab.
 function NS:AchievementDeactivate ()
