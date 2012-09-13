@@ -743,6 +743,11 @@ function NS.Frame:PLAYER_LOGIN ( Event )
 			Options.CacheWarnings = true;
 			Options.Version = "3.1.0.1";
 		end
+		if ( Options.Version < "5.0.0.3" ) then
+			-- 5.0.0.3: Made the achievement checkbox settings global
+			Options.Achievements = CopyTable( NS.OptionsDefault.Achievements );
+			Options.Version = "5.0.0.3";
+		end
 		Options.Version = NS.Version;
 	end
 	-- Character settings
@@ -861,15 +866,6 @@ function NS.Frame:PLAYER_LOGIN ( Event )
 		end
 		if ( Version < "5.0.0.2" ) then
 			-- 5.0.0.2: Made the achievement checkbox settings global
-			if ( Options ) then
-				if ( not Options.Achievements ) then
-					Options.Achievements = {};
-				end
-				-- Merge character achievement settings into global ones
-				for AchievementID, Enabled in pairs( OptionsCharacter.Achievements ) do
-					Options.Achievements[ AchievementID ] = Enabled or Options.Achievements[ AchievementID ];
-				end
-			end
 			OptionsCharacter.Achievements = nil;
 			Version = "5.0.0.2";
 		end

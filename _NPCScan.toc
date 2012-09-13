@@ -27,8 +27,8 @@
 ## X-Credits-ruRU: Localization: StingerSoft, Sarymian, KVVV, The_DimoK, ichik, Ant1dotE, tick095
 ## X-Credits-zhCN: Localization: digmouse, tss1398383123, ananhaid, redsaru, dh0000
 ## X-Credits-zhTW: Localization: s8095324, pepper_ep, zhTW, laincat, alpha2009, machihchung
-## Version: 5.0.0.2
-## X-Date: 2012-09-10
+## Version: 5.0.0.3
+## X-Date: 2012-09-12
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com
