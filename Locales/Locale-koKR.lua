@@ -83,7 +83,7 @@ _NPCScan.L = setmetatable( {
 	CONFIG_ALERT_UNMUTE = "경보시에는 음향효과 꺼짐 무시",
 	CONFIG_ALERT_UNMUTE_DESC = "음향효과를 꺼 두었다면, NPC를 탐색하게 되었을 때 음향효과를 자동으로 켭니다.",
 	CONFIG_CACHEWARNINGS = "로그인 / 큰 지역 이동시 캐쉬 내용 알림",
-	CONFIG_CACHEWARNINGS_DESC = "로그인시나 큰 지역을 이동시 이미 캐쉬된 NPC가 있다면, 해당 NPC들이 탐색되지 않음을 알립니다.",
+	CONFIG_CACHEWARNINGS_DESC = "로그인시나 큰 지역을 이동시 이미 캐쉬된 NPC가 있다면, 해당 NPC들이 탐색되지 않음을 알립니다.", -- Needs review
 	CONFIG_DESC = "_NPCScan에서 NPC를 탐색하였을때의 경보 옵션을 설정할 수 있습니다.",
 	CONFIG_PRINTTIME = "대화창에 시간 표시하기",
 	CONFIG_PRINTTIME_DESC = "모든 출력 메시지에 현재 시간을 추가합니다. NPC가 발견됐을 때 기록하기 위해 사용됩니다.",
@@ -117,7 +117,8 @@ _NPCScan.L = setmetatable( {
 	SEARCH_WORLD = "큰 지역",
 	SEARCH_WORLD_DESC = "지역을 한정하여 조금 더 효율적으로 탐색할 수 있도록 합니다.  큰 지역의 이름이나 던전 이름을 사용할 수 있습니다. (대소문자 정확하게)",
 	SEARCH_WORLD_FORMAT = "(%s)",
-	TIME_FORMAT = "|cff808080[%시:%분:%초]|r ",
+	TIME_FORMAT = "|cff808080[%H:%M:%S]|r",
+	TOOLS_TITLE = "|cff808080도구|r",
 }, { __index = _NPCScan.L; } );
 
 

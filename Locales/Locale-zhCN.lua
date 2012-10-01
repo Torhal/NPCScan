@@ -64,9 +64,9 @@ _NPCScan.L = setmetatable( {
 
 	BUTTON_FOUND = "发现 NPC！",
 	CACHED_FORMAT = "下列目标已经存入缓存：%s",
-	CACHED_LONG_FORMAT = "下列目标已经存入缓存，请考虑使用 |cff808080“/npcscan”|r 设置菜单将其移除，或通过清空缓存来重置：%s",
+	CACHED_LONG_FORMAT = "下列目标已经存入缓存。请考虑使用 |cff808080“/npcscan”|r' 设置菜单将其移除，或通过清空缓存来重置：%s",
 	CACHED_PET_RESTING_FORMAT = "下列可驯服宠物在休息时加入缓存：%s",
-	CACHED_STABLED_FORMAT = "以下怪物已被你驯服，无法继续侦测：%s",
+	CACHED_STABLED_FORMAT = "以下怪物已被你驯服，无法继续侦测：%s。",
 	CACHED_WORLD_FORMAT = "以下位于%2$s的怪物已经缓存：%1$s",
 	CACHELIST_ENTRY_FORMAT = "|cff808080“%s”|r",
 	CACHELIST_SEPARATOR = "，",
@@ -83,10 +83,10 @@ _NPCScan.L = setmetatable( {
 	CONFIG_ALERT_UNMUTE = "报警时取消游戏静音",
 	CONFIG_ALERT_UNMUTE_DESC = "如果你静音了游戏，则在找到 NPC 时解除静音。",
 	CONFIG_CACHEWARNINGS = "在登录和切换区域时显示缓存提示",
-	CONFIG_CACHEWARNINGS_DESC = "如果某个 NPC 在你登录或改变区域时已经在缓存中了，这一选项将显示一条关于已缓存怪物无法搜索的提示。",
+	CONFIG_CACHEWARNINGS_DESC = "如果某个 NPC 在你登录或改变区域时已经在缓存中了，这一选项将显示一条关于已缓存怪物无法搜索的提示。", -- Needs review
 	CONFIG_DESC = "这些选项可定制 _NPCScan 在找到稀有 NPC 时的警示方式。",
 	CONFIG_PRINTTIME = "发送时间戳到聊天窗口",
-	CONFIG_PRINTTIME_DESC = "发送消息添加当前时间，用于记录何时何地发现。",
+	CONFIG_PRINTTIME_DESC = "发送消息添加当前时间。用于记录何时何地发现。",
 	CONFIG_TEST = "测试警报",
 	CONFIG_TEST_DESC = "模拟一次|cff808080“发现 NPC”|r警报让你知道它看起来什么样子。",
 	CONFIG_TEST_HELP_FORMAT = "点击目标按钮或使用快捷键选定找到的怪物。按住|cffffffff<%s>|r并拖动可以移动目标按钮。注意，如果在战斗中发现 NPC，目标按钮只会在离开战斗后显示。",
@@ -115,9 +115,10 @@ _NPCScan.L = setmetatable( {
 	SEARCH_REMOVE = "-",
 	SEARCH_TITLE = "搜索",
 	SEARCH_WORLD = "世界：",
-	SEARCH_WORLD_DESC = "一个可选的世界名称用来限制搜索，可以是一个大陆名称或|cffff7f3f副本名称|r。",
+	SEARCH_WORLD_DESC = "一个可选的世界名称用来限制搜索。大陆可以是一个名称或|cffff7f3f副本名称|r（区分大小写）。",
 	SEARCH_WORLD_FORMAT = "（%s）",
 	TIME_FORMAT = "|cff808080[%H:%M:%S]|r ",
+	TOOLS_TITLE = "|cff808080工具|r",
 }, { __index = _NPCScan.L; } );
 
 

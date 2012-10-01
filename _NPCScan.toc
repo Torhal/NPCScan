@@ -7,28 +7,29 @@
 ## Notes-esES: Busca raros de entre los NPCs alrededor tuyo
 ## Notes-esMX: Busca raros de entre los NPCs alrededor tuyo
 ## Notes-frFR: Analyse les PNJs autour de vous à la recherche de ceux qui sont rares.
+## Notes-itIT: Cerca gli NPC vicino a te per trovare quelli rari.
 ## Notes-koKR: 근처에 있는 희귀몹을 탐색합니다.
 ## Notes-ptBR: Busca PNJs raros próximos a você.
 ## Notes-ptPT: Busca PNJs raros próximos a você.
-## Notes-ruRU: Сканирует облость вокруг вас на наличие редких НИПов.
+## Notes-ruRU: Сканирует область вокруг вас на наличие редких НИПов.
 ## Notes-zhCN: 搜索附近的 NPC 寻找稀有怪物。
 ## Notes-zhTW: 搜尋出沒在你附近的稀有怪。
 ## Author: Saiket
-## X-Credits-deDE: Localization: Freydis88
+## X-Credits-deDE: Localization: Freydis88, DirtyHarryGermany
 ## X-Credits-enCN: Localization: digmouse, tss1398383123, ananhaid, redsaru, dh0000
 ## X-Credits-enTW: Localization: s8095324, pepper_ep, zhTW, laincat, alpha2009, machihchung
 ## X-Credits-esES: Localization: galen2, hugojcastro
 ## X-Credits-esMX: Localization: galen2, hugojcastro
-## X-Credits-frFR: Localization: Pettigrow, Xprit, Noeudtribal
-## X-Credits-itIT: Localization: bER92
-## X-Credits-koKR: Localization: kdw112, yuk6196, netaras, fwdmusso
+## X-Credits-frFR: Localization: Pettigrow, Xprit, Noeudtribal, Nener141
+## X-Credits-itIT: Localization: bER92, _YuSaKu_
+## X-Credits-koKR: Localization: kdw112, yuk6196, netaras, fwdmusso, nfrog
 ## X-Credits-ptBR: Localization: Omukeka, htgome
 ## X-Credits-ptPT: Localization: Omukeka, htgome
-## X-Credits-ruRU: Localization: StingerSoft, Sarymian, KVVV, The_DimoK, ichik, Ant1dotE, tick095
+## X-Credits-ruRU: Localization: StingerSoft, Sarymian, KVVV, The_DimoK, ichik, Ant1dotE, tick095, dartraiden
 ## X-Credits-zhCN: Localization: digmouse, tss1398383123, ananhaid, redsaru, dh0000
 ## X-Credits-zhTW: Localization: s8095324, pepper_ep, zhTW, laincat, alpha2009, machihchung
-## Version: 5.0.0.3
-## X-Date: 2012-09-12
+## Version: 5.0.0.4
+## X-Date: 2012-09-30
 ## X-Category: Miscellaneous
 ## X-License: GPLv3
 ## X-Email: saiket.wow@gmail.com
