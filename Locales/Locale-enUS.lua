@@ -54,6 +54,7 @@ select( 2, ... ).L = setmetatable( {
 		[ 54323 ] = "Kirix",
 		[ 54324 ] = "Skitterflame",
 		[ 54338 ] = "Anthriss",
+		[ 62346 ] = "Galleon",
 	};
 
 	BUTTON_FOUND = "NPC found!",

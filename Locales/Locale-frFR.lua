@@ -60,6 +60,7 @@ _NPCScan.L = setmetatable( {
 		[ 54323 ] = "Kirix",
 		[ 54324 ] = "Rampeflamme",
 		[ 54338 ] = "Anthriss",
+		[ 62346 ] = "Galion",
 	}, { __index = _NPCScan.L.NPCs; } );
 
 	BUTTON_FOUND = "PNJ trouvé !",

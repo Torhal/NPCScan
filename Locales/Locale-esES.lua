@@ -50,6 +50,7 @@ _NPCScan.L = setmetatable( {
 		[ 51402 ] = "Madexx", -- Needs review
 		[ 51403 ] = "Madexx", -- Needs review
 		[ 51404 ] = "Madexx", -- Needs review
+		[ 62346 ] = "Galeón", -- Needs review
 	}, { __index = _NPCScan.L.NPCs; } );
 
 	BUTTON_FOUND = "NPC Encontrado!",

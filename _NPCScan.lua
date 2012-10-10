@@ -88,6 +88,7 @@ do
 			[ 54323 ] = L.NPCs[ 54323 ]; -- Kirix
 			[ 54324 ] = L.NPCs[ 54324 ]; -- Skitterflame
 			[ 54338 ] = L.NPCs[ 54338 ]; -- Anthriss
+			[ 62346 ] = L.NPCs[ 62346 ]; -- Galleon
 		};
 		NPCWorldIDs = {
 			[ 18684 ] = 3; -- Bro'Gaz the Clanless
@@ -137,6 +138,7 @@ do
 			[ 54323 ] = MOLTEN_FRONT; -- Kirix
 			[ 54324 ] = MOLTEN_FRONT; -- Skitterflame
 			[ 54338 ] = MOLTEN_FRONT; -- Anthriss
+			[ 62346 ] = 6; -- Galleon
 		};
 	};
 end
@@ -868,6 +870,11 @@ function NS.Frame:PLAYER_LOGIN ( Event )
 			-- 5.0.0.2: Made the achievement checkbox settings global
 			OptionsCharacter.Achievements = nil;
 			Version = "5.0.0.2";
+		end
+		if ( Version < "5.0.0.5" ) then
+			-- 5.0.0.5: Added Galleon.
+			AddDefault( 62346 ); -- Galleon
+			Version = "5.0.0.5";
 		end
 		OptionsCharacter.Version = NS.Version;
 	end

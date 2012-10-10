@@ -60,6 +60,7 @@ _NPCScan.L = setmetatable( {
 		[ 54323 ] = "Kirix", -- Needs review
 		[ 54324 ] = "Skitterflame", -- Needs review
 		[ 54338 ] = "Anthriss", -- Needs review
+		[ 62346 ] = "Gailleon", -- Needs review
 	}, { __index = _NPCScan.L.NPCs; } );
 
 	BUTTON_FOUND = "PNJ encontrado!",
