@@ -42,7 +42,7 @@ function NS.Test:OnClick ()
 	_NPCScan.Print( L.FOUND_FORMAT:format( Name ), GREEN_FONT_COLOR );
 	_NPCScan.Print( L.CONFIG_TEST_HELP_FORMAT:format( GetModifiedClick( "_NPCSCAN_BUTTONDRAG" ) ) );
 
-	_NPCScan.Button:SetNPC( "player", Name );
+	_NPCScan.Button:SetNPC( "player", Name, L.CONFIG_TEST );
 end
 --- Sets the AlertSoundUnmute option when its checkbox is clicked.
 function NS.AlertSoundUnmute.setFunc ( Enable )

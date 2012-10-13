@@ -13,7 +13,7 @@ NS.Model = CreateFrame( "PlayerModel", nil, NS );
 NS.Flash = CreateFrame( "Frame" );
 NS.Flash.LoopCountMax = 3;
 
-NS.PendingName, NS.PendingID = nil;
+NS.PendingName, NS.PendingID, NS.PendingSource = nil;
 
 NS.RotationRate = math.pi / 4;
 NS.RaidTargetIcon = 4; -- Green triangle
@@ -63,7 +63,7 @@ end
 --- Plays alerts and sets the targetting button if not in combat.
 -- If in combat, queues the button to appear when combat ends.
 -- @see NS:Update
-function NS:SetNPC ( ID, Name )
+function NS:SetNPC ( ID, Name, Source )
 	if ( tonumber( ID ) ) then
 		ID = tonumber( ID );
 		_NPCScan.Overlays.Add( ID );
@@ -81,21 +81,26 @@ function NS:SetNPC ( ID, Name )
 		if ( type( self.PendingID ) == "number" ) then -- Remove old pending NPC
 			_NPCScan.Overlays.Remove( self.PendingID );
 		end
-		self.PendingID, self.PendingName = ID, Name;
+		self.PendingID, self.PendingName, self.PendingSource = ID, Name, Source;
 	else
-		self:Update( ID, Name );
+		self:Update( ID, Name, Source );
 	end
 end
 --- Updates the button out of combat to target a given unit.
 -- @param ID  A numeric NpcID or string UnitID.
 -- @param Name  Localized name of the unit.  If ID is an NpcID, Name is used in the targetting macro.
-function NS:Update ( ID, Name )
+-- @param Source  Name of the scan, custom or achievement, that set off this alert.
+function NS:Update ( ID, Name, Source )
 	if ( type( self.ID ) == "number" ) then -- Remove last overlay
 		_NPCScan.Overlays.Remove( self.ID );
 	end
 	self.ID = ID;
 
 	self:SetText( Name );
+	if ( Source == Name ) then
+		Source = nil;
+	end
+	self.Source:SetText( Source );
 	local Model = self.Model;
 	Model:Reset();
 	if ( type( ID ) == "number" ) then -- ID is NPC ID
@@ -171,8 +176,8 @@ end
 function NS:PLAYER_REGEN_ENABLED ()
 	-- Update button after leaving combat
 	if ( self.PendingName and self.PendingID ) then
-		self:Update( self.PendingID, self.PendingName );
-		self.PendingID, self.PendingName = nil;
+		self:Update( self.PendingID, self.PendingName, self.PendingSource );
+		self.PendingID, self.PendingName, self.PendingSource = nil;
 	end
 end
 --- Enables or disables dragging when the drag modifier is held.
@@ -319,14 +324,21 @@ TitleBackground:SetHeight( 18 );
 TitleBackground:SetTexCoord( 0, 0.9765625, 0, 0.3125 );
 TitleBackground:SetAlpha( 0.8 );
 
-local Title = NS:CreateFontString( nil, "OVERLAY", "GameFontHighlightMedium" );
-Title:SetPoint( "TOPLEFT", TitleBackground );
+local Title = NS:CreateFontString( nil, "OVERLAY", "GameFontHighlightMedium", 1 );
+Title:SetPoint( "TOPLEFT", TitleBackground, 0, 2 );
 Title:SetPoint( "RIGHT", TitleBackground );
 NS:SetFontString( Title );
 
+NS.Source = NS:CreateFontString( nil, "OVERLAY", "SystemFont_Tiny" );
+NS.Source:SetPoint( "BOTTOMLEFT", TitleBackground );
+NS.Source:SetPoint( "RIGHT", -8, 0 );
+NS.Source:SetTextHeight( 6 );
+local Color = NORMAL_FONT_COLOR;
+NS.Source:SetTextColor( Color.r, Color.g, Color.b );
+
 local SubTitle = NS:CreateFontString( nil, "OVERLAY", "GameFontBlackTiny" );
-SubTitle:SetPoint( "TOPLEFT", Title, "BOTTOMLEFT", 0, -4 );
-SubTitle:SetPoint( "RIGHT", Title );
+SubTitle:SetPoint( "TOPLEFT", NS.Source, "BOTTOMLEFT", 0, -4 );
+SubTitle:SetPoint( "RIGHT", NS.Source );
 SubTitle:SetText( _NPCScan.L.BUTTON_FOUND );
 
 -- Border

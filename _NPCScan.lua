@@ -340,11 +340,11 @@ end
 -- @return True if custom NPC added.
 function NS.NPCAdd ( NpcID, Name, WorldID )
 	NpcID = assert( tonumber( NpcID ), "NpcID must be numeric." );
-	local Options = NS.OptionsCharacter;
-	if ( not Options.NPCs[ NpcID ] ) then
+	local OptionsCharacter = NS.OptionsCharacter;
+	if ( not OptionsCharacter.NPCs[ NpcID ] ) then
 		assert( type( Name ) == "string", "Name must be a string." );
 		assert( WorldID == nil or type( WorldID ) == "string" or type( WorldID ) == "number", "Invalid WorldID." );
-		Options.NPCs[ NpcID ], Options.NPCWorldIDs[ NpcID ] = Name, WorldID;
+		OptionsCharacter.NPCs[ NpcID ], OptionsCharacter.NPCWorldIDs[ NpcID ] = Name, WorldID;
 		if ( not NPCActivate( NpcID, WorldID ) ) then -- Didn't activate
 			NS.Config.Search.UpdateTab( "NPC" ); -- Just add row
 		end
@@ -356,9 +356,9 @@ end
 -- @return True if custom NPC removed.
 function NS.NPCRemove ( NpcID )
 	NpcID = tonumber( NpcID );
-	local Options = NS.OptionsCharacter;
-	if ( Options.NPCs[ NpcID ] ) then
-		Options.NPCs[ NpcID ], Options.NPCWorldIDs[ NpcID ] = nil;
+	local OptionsCharacter = NS.OptionsCharacter;
+	if ( OptionsCharacter.NPCs[ NpcID ] ) then
+		OptionsCharacter.NPCs[ NpcID ], OptionsCharacter.NPCWorldIDs[ NpcID ] = nil;
 		if ( not NPCDeactivate( NpcID ) ) then -- Wasn't active
 			NS.Config.Search.UpdateTab( "NPC" ); -- Just remove row
 		end
@@ -624,6 +624,19 @@ do
 		SetMapByID( ZoneIDBackup ); -- Restore previous map view
 		return InCorrectZone, InvalidReason;
 	end
+	--- @return Name of the source of NpcID's scan--either a custom name or achievement name.
+	local function GetScanSource ( NpcID )
+		local CustomName = NS.OptionsCharacter.NPCs[ NpcID ];
+		if ( CustomName ) then
+			return CustomName;
+		end
+		-- Must have been from an achievement
+		for AchievementID in pairs( NS.Options.Achievements ) do
+			if ( NS.Achievements[ AchievementID ].NPCsActive[ NpcID ] ) then
+				return GetAchievementLink( AchievementID ); -- Colored link to distinguish from a custom name
+			end
+		end
+	end
 	--- Validates found mobs before showing alerts.
 	local function OnFound ( NpcID, Name )
 		-- Disable active scans
@@ -640,7 +653,7 @@ do
 
 		if ( Valid ) then
 			NS.Print( L[ Tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT" ]:format( Name ), GREEN_FONT_COLOR );
-			NS.Button:SetNPC( NpcID, Name ); -- Sends added and found overlay messages
+			NS.Button:SetNPC( NpcID, Name, GetScanSource( NpcID ) ); -- Sends added and found overlay messages
 		elseif ( InvalidReason ) then
 			NS.Print( InvalidReason );
 		end
