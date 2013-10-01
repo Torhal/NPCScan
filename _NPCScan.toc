@@ -15,6 +15,7 @@
 ## Notes-zhCN: 搜索附近的 NPC 寻找稀有怪物。
 ## Notes-zhTW: 搜尋出沒在你附近的稀有怪。
 ## Author: Saiket
+## X-Credits-Maintainer: SLOKnightfall
 ## X-Credits-deDE: Localization: Freydis88, DirtyHarryGermany
 ## X-Credits-enCN: Localization: digmouse, tss1398383123, ananhaid, redsaru, dh0000
 ## X-Credits-enTW: Localization: s8095324, pepper_ep, zhTW, laincat, alpha2009, machihchung
@@ -58,6 +59,7 @@ Locales\Locale-ruRU.lua
 Locales\Locale-zhCN.lua
 Locales\Locale-zhTW.lua
 
+_NPCScan.NPCData.lua
 _NPCScan.lua
 _NPCScan.Button.lua
 _NPCScan.Overlays.lua

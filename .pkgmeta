@@ -2,6 +2,8 @@ package-as: _NPCScan
 
 enable-nolib-creation: yes
 
+manual-changelog: Changelog.txt
+
 externals:
   Libs/LibStub:
     url: svn://svn.wowace.com/wow/libstub/mainline/trunk
@@ -13,4 +15,3 @@ externals:
     url: svn://svn.wowace.com/wow/libsharedmedia-3-0/mainline/trunk
   Libs/AceEvent-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0
-
