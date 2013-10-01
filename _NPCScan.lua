@@ -13,6 +13,7 @@ NS.Updater = NS.Frame:CreateAnimationGroup();
 --NS.Version = GetAddOnMetadata( ..., "Version" ):match( "^([%d.]+)" );
 NS.Version = 5.1.1;
 
+
 NS.Options = {
 	Version = NS.Version;
 	NPCs = {
