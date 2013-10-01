@@ -2639,6 +2639,15 @@ NPCMapIDs = {
 	[ 73293 ] = 951;
 	[ 73666 ] = 951;
 	[ 73704 ] = 951;
+	-- Non Standard Mobs
+	[ 64004 ] = 807;-- "Ghostly Pandaren Fisherman";
+	[ 64191 ] = 807; --"Ghostly Pandaren Craftsman";
+	[ 50409 ] = 720; --"Mysterious Camel Figurine";
+	[ 50410 ] = 720; --"Mysterious Camel Figurine";
+	[ 62346 ] = 807; --"Galleon";
+	[ 60491 ] = 809; --"Sha of Anger";
+	[ 69099 ] = 928; --"Nalak";
+	[ 69161 ] = 929; --"Oondasta";
 };
 
 };

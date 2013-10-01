@@ -55,7 +55,6 @@ NS.OptionsCharacter = {
 	ModulesSaved = {};
 	NPCWorldIDs = {};
 	ShowAll = false;
-	ShowMobKey = true;
 };
 
 NS.OptionsDefault = {
@@ -103,7 +102,6 @@ NS.OptionsCharacterDefault = {
 	ModulesExtra = {};
 	NPCWorldIDs = {};
 	ShowAll = false;
-	ShowMobKey = true;
 };
 --[[
 do
@@ -808,7 +806,7 @@ function NS.Frame:PLAYER_LOGIN ( Event )
 	-- Update settings incrementally
 	if ( Options and Options.Version ~= NS.Version ) then
 	--Clears old settings and updates to new variables
-		if ( Options.Version < "5.1" ) then
+		if ( (Options.Version == nil) or (Options.Version < "5.1") ) then
 		Options = NS.OptionsDefault;
 		OptionsCharacter = NS.OptionsCharacterDefault;
 		Options.Version = NS.Version;
