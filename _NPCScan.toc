@@ -60,6 +60,7 @@ Locales\Locale-zhCN.lua
 Locales\Locale-zhTW.lua
 
 _NPCScan.NPCData.lua
+
 _NPCScan.lua
 _NPCScan.Button.lua
 _NPCScan.Overlays.lua

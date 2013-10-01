@@ -23,9 +23,8 @@ NS.Options = {
 		[ 60491 ] = "Sha of Anger";
 		[ 69099 ] = "Nalak";
 		[ 69161 ] = "Oondasta";
+		};
 
-		
-	};
 	NPCWorldIDs = {			
 		[ 50409 ] = 1; -- Mysterious Camel Figurine
 		[ 50410 ] = 1; -- Mysterious Camel Figurine
