@@ -1,3 +1,9 @@
+V5.1.1
+SLOKnightFall:
+-Fixed bug that prevented default sound from being changed
+-Fixed onclick bug on the Rare & Tameable mobs tabs
+-Fixed bug where the test alert would play the default sound and not the currently selected one.
+
 V5.1
 SLOKnightFall
 -Fixed bug where achievement tab title would not initially appear 

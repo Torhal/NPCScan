@@ -11,7 +11,7 @@ local L = NS.L;
 NS.Frame = CreateFrame( "Frame" );
 NS.Updater = NS.Frame:CreateAnimationGroup();
 --NS.Version = GetAddOnMetadata( ..., "Version" ):match( "^([%d.]+)" );
-NS.Version = 5.1;
+NS.Version = 5.1.1;
 
 NS.Options = {
 	Version = NS.Version;
@@ -31,7 +31,7 @@ NS.Options = {
 		[ 50410 ] = 1; -- Mysterious Camel Figurine
 		[ 62346 ] = 6; -- Galleon
 		[ 60491 ] = 6; --"Sha of Anger";
-		[ 64004 ] =  6; --"Ghostly Pandaren Fisherman";
+		[ 64004 ] = 6; --"Ghostly Pandaren Fisherman";
 		[ 64191 ] = 6; --"Ghostly Pandaren Craftsman";
 		[ 69099 ] = 6; -- "Nalak";
 		[ 69161 ] = 6; -- "Oondasta";
@@ -49,6 +49,10 @@ NS.OptionsCharacter = {
 		[ 8714 ] = true;  --Timeless Champion
 
 			};
+	AchievementsAddFound = nil;
+	AlertSoundUnmute = nil;
+	AlertSound = nil; -- Default sound
+	CacheWarnings = true;
 	FlightSupress = true;
 	Modules = {};
 	ModulesAlpha = {};
@@ -75,7 +79,7 @@ NS.OptionsDefault = {
 		[ 50410 ] = 1; -- Mysterious Camel Figurine
 		[ 62346 ] = 6; -- Galleon
 		[ 60491 ] = 6; --"Sha of Anger";
-		[ 64004 ] =  6; --"Ghostly Pandaren Fisherman";
+		[ 64004 ] = 6; --"Ghostly Pandaren Fisherman";
 		[ 64191 ] = 6; --"Ghostly Pandaren Craftsman";
 		[ 69099 ] = 6; -- "Nalak";
 		[ 69161 ] = 6; -- "Oondasta";

@@ -36,7 +36,7 @@ NS.ModelCameras = {
 --- Plays an alert sound, temporarily enabling sound if necessary.
 -- @param AlertSound  A LibSharedMedia sound key, or nil to play the default.
 function NS.PlaySound ( AlertSound )
-	if ( _NPCScan.Options.AlertSoundUnmute ) then
+	if ( _NPCScan.OptionsCharacter.AlertSoundUnmute ) then
 		if ( not NS.SoundEnableAllChanged and not GetCVarBool( "Sound_EnableAllSound" ) ) then
 			NS.SoundEnableAllChanged = true;
 			SetCVar( "Sound_EnableAllSound", 1 ); -- Restored when alert is closed
@@ -70,7 +70,7 @@ function NS:SetNPC ( ID, Name, Source )
 		_NPCScan.Overlays.Found( ID );
 	end
 
-	self.PlaySound( _NPCScan.Options.AlertSound );
+	self.PlaySound( _NPCScan.OptionsCharacter.AlertSound );
 	if ( GetCVarBool( "screenEdgeFlash" ) ) then
 		self.Flash:Show();
 		self.Flash.Fade:Pause(); -- Forces OnPlay to fire again if it was already playing

@@ -55,7 +55,7 @@ function NS.AlertSound:OnSelect ( NewValue )
 end
 --- Builds a dropdown menu for alert sounds with LibSharedMedia options.
 function NS.AlertSound:initialize ()
-	local Value = _NPCScan.Options.AlertSound;
+	local Value = _NPCScan.OptionsCharacter.AlertSound;
 
 	local Info = UIDropDownMenu_CreateInfo();
 	Info.func = self.OnSelect;

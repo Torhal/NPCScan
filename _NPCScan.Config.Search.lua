@@ -321,7 +321,7 @@ function NS:DefultNPCActivate ()
 	NS.NPCClear();
 	--NS.NPCControls:Show();
 	NS.TableContainer:SetPoint( "BOTTOM", NS.NPCControls, "TOP", 0, 4 );
-	NS.Table.OnSelect = NS.NPCOnSelect;
+	--NS.Table.OnSelect = NS.NPCOnSelect;
 end
 --- Undoes customization to the table when leaving the NPCs tab.
 function NS:NPCDeactivate ()
