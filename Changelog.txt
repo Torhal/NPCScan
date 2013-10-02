@@ -1,3 +1,10 @@
+v5.1.2
+SLOKnightFall:
+-Fixed versioning bug introduced in 5.1.1 (ticekt 11) & the test button error caused from it (ticket 12)
+-Fixed "Achievements" error for characters loading the new version for the first time. (ticket 8)
+-Removed raid bosses as loaded by default.
+
+
 V5.1.1
 SLOKnightFall:
 -Fixed bug that prevented default sound from being changed

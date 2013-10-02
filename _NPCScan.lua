@@ -11,7 +11,7 @@ local L = NS.L;
 NS.Frame = CreateFrame( "Frame" );
 NS.Updater = NS.Frame:CreateAnimationGroup();
 --NS.Version = GetAddOnMetadata( ..., "Version" ):match( "^([%d.]+)" );
-NS.Version = 5.1.1;
+NS.Version = "5.1.2";
 
 
 NS.Options = {
@@ -21,10 +21,10 @@ NS.Options = {
 		[ 64191 ] = "Ghostly Pandaren Craftsman";
 		[ 50409 ] ="Mysterious Camel Figurine";
 		[ 50410 ] = "Mysterious Camel Figurine";
-		[ 62346 ] = "Galleon";
-		[ 60491 ] = "Sha of Anger";
-		[ 69099 ] = "Nalak";
-		[ 69161 ] = "Oondasta";
+		--[ 62346 ] = "Galleon";
+		--[ 60491 ] = "Sha of Anger";
+		--[ 69099 ] = "Nalak";
+		--[ 69161 ] = "Oondasta";
 		};
 
 	NPCWorldIDs = {			
@@ -70,10 +70,10 @@ NS.OptionsDefault = {
 		[ 64191 ] = "Ghostly Pandaren Craftsman";
 		[ 50409 ] ="Mysterious Camel Figurine";
 		[ 50410 ] = "Mysterious Camel Figurine";
-		[ 62346 ] = "Galleon";
-		[ 60491 ] = "Sha of Anger";
-		[ 69099 ] = "Nalak";
-		[ 69161 ] = "Oondasta";
+		--[ 62346 ] = "Galleon";
+		--[ 60491 ] = "Sha of Anger";
+		--[ 69099 ] = "Nalak";
+		--[ 69161 ] = "Oondasta";
 	};
 	NPCWorldIDs = {			
 		[ 50409 ] = 1; -- Mysterious Camel Figurine
@@ -809,14 +809,25 @@ function NS.Frame:PLAYER_LOGIN ( Event )
 	local Options, OptionsCharacter = _NPCScanOptions, _NPCScanOptionsCharacter;
 	_NPCScanOptions, _NPCScanOptionsCharacter = NS.Options, NS.OptionsCharacter;
 
+	--fix to correct 5.1.1 verson saved as iterger instead of string 
+	Options.Version = tostring(Options.Version )
+	OptionsCharacter.Version  = tostring(OptionsCharacter.Version )
+
 	-- Update settings incrementally
 	if ( Options and Options.Version ~= NS.Version ) then
-	--Clears old settings and updates to new variables
-		if ( (Options.Version == nil) or (Options.Version < "5.1") ) then
-		Options = NS.OptionsDefault;
-		OptionsCharacter = NS.OptionsCharacterDefault;
-		Options.Version = NS.Version;
+	--Clears old global settings and updates to new variables
+		if ( (Options.Version == nil) or (Options.Version < "5.1.3") ) then
+			Options = NS.OptionsDefault;
 		end
+		Options.Version = NS.Version;
+	end
+
+		if ( OptionsCharacter and OptionsCharacter.Version ~= NS.Version ) then
+	--Clears old character settings and updates to new variables
+		if ( (OptionsCharacter.Version == nil) or (OptionsCharacter.Version < "5.1") ) then
+			OptionsCharacter = NS.OptionsCharacterDefault;
+		end
+		OptionsCharacter.Version = NS.Version;
 	end
 	-- Character settings
 	--[[if ( OptionsCharacter and OptionsCharacter.Version ~= NS.Version ) then
