@@ -30,12 +30,12 @@ NS.Options = {
 	NPCWorldIDs = {			
 		[ 50409 ] = 1; -- Mysterious Camel Figurine
 		[ 50410 ] = 1; -- Mysterious Camel Figurine
-		[ 62346 ] = 6; -- Galleon
-		[ 60491 ] = 6; --"Sha of Anger";
+		--[ 62346 ] = 6; -- Galleon
+		--[ 60491 ] = 6; --"Sha of Anger";
 		[ 64004 ] = 6; --"Ghostly Pandaren Fisherman";
 		[ 64191 ] = 6; --"Ghostly Pandaren Craftsman";
-		[ 69099 ] = 6; -- "Nalak";
-		[ 69161 ] = 6; -- "Oondasta";
+		--[ 69099 ] = 6; -- "Nalak";
+		--[ 69161 ] = 6; -- "Oondasta";
 		};
 };
 
@@ -78,12 +78,12 @@ NS.OptionsDefault = {
 	NPCWorldIDs = {			
 		[ 50409 ] = 1; -- Mysterious Camel Figurine
 		[ 50410 ] = 1; -- Mysterious Camel Figurine
-		[ 62346 ] = 6; -- Galleon
+		--[ 62346 ] = 6; -- Galleon
 		[ 60491 ] = 6; --"Sha of Anger";
 		[ 64004 ] = 6; --"Ghostly Pandaren Fisherman";
-		[ 64191 ] = 6; --"Ghostly Pandaren Craftsman";
-		[ 69099 ] = 6; -- "Nalak";
-		[ 69161 ] = 6; -- "Oondasta";
+		--[ 64191 ] = 6; --"Ghostly Pandaren Craftsman";
+		--[ 69099 ] = 6; -- "Nalak";
+		--[ 69161 ] = 6; -- "Oondasta";
 		};
 };
 
