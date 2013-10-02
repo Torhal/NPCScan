@@ -11,7 +11,7 @@ local L = NS.L;
 NS.Frame = CreateFrame( "Frame" );
 NS.Updater = NS.Frame:CreateAnimationGroup();
 --NS.Version = GetAddOnMetadata( ..., "Version" ):match( "^([%d.]+)" );
-NS.Version = "5.1.2";
+NS.Version = "5.1.3";
 
 
 NS.Options = {
@@ -810,13 +810,11 @@ function NS.Frame:PLAYER_LOGIN ( Event )
 	_NPCScanOptions, _NPCScanOptionsCharacter = NS.Options, NS.OptionsCharacter;
 
 	--fix to correct 5.1.1 verson saved as iterger instead of string 
-	Options.Version = tostring(Options.Version )
-	OptionsCharacter.Version  = tostring(OptionsCharacter.Version )
 
 	-- Update settings incrementally
 	if ( Options and Options.Version ~= NS.Version ) then
 	--Clears old global settings and updates to new variables
-		if ( (Options.Version == nil) or (Options.Version < "5.1.3") ) then
+		if ( (Options.Version == nil) or (tostring(Options.Version) < "5.1.3") ) then
 			Options = NS.OptionsDefault;
 		end
 		Options.Version = NS.Version;
@@ -824,7 +822,7 @@ function NS.Frame:PLAYER_LOGIN ( Event )
 
 		if ( OptionsCharacter and OptionsCharacter.Version ~= NS.Version ) then
 	--Clears old character settings and updates to new variables
-		if ( (OptionsCharacter.Version == nil) or (OptionsCharacter.Version < "5.1") ) then
+		if ( (OptionsCharacter.Version == nil) or (tostring(OptionsCharacter.Version) < "5.1") ) then
 			OptionsCharacter = NS.OptionsCharacterDefault;
 		end
 		OptionsCharacter.Version = NS.Version;
@@ -967,8 +965,14 @@ do
 		self:PLAYER_UPDATE_RESTING();
 
 		-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
-		local MapName = GetInstanceInfo();
-		NS.WorldID = NS.ContinentIDs[ MapName ] or MapName;
+		local MapName,_,_,_,_,_,_,MapID = GetInstanceInfo();
+		--print(MapID)
+
+		if (MapID == 1064) then --Fix for Isle of Thunder having a diffrent Instance name
+			NS.WorldID = 6; 
+		else
+			NS.WorldID = NS.ContinentIDs[ MapName ] or MapName;
+		end
 
 		-- Activate scans on this world
 		--Loads Any Custom Mobs
