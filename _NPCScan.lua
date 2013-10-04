@@ -11,45 +11,18 @@ local L = NS.L;
 NS.Frame = CreateFrame( "Frame" );
 NS.Updater = NS.Frame:CreateAnimationGroup();
 --NS.Version = GetAddOnMetadata( ..., "Version" ):match( "^([%d.]+)" );
-NS.Version = "5.1.3";
+NS.Version = "5.2";
 
 
 NS.Options = {
 	Version = NS.Version;
-	NPCs = {
-		[ 64004 ] = "Ghostly Pandaren Fisherman";
-		[ 64191 ] = "Ghostly Pandaren Craftsman";
-		[ 50409 ] ="Mysterious Camel Figurine";
-		[ 50410 ] = "Mysterious Camel Figurine";
-		--[ 62346 ] = "Galleon";
-		--[ 60491 ] = "Sha of Anger";
-		--[ 69099 ] = "Nalak";
-		--[ 69161 ] = "Oondasta";
-		};
-
-	NPCWorldIDs = {			
-		[ 50409 ] = 1; -- Mysterious Camel Figurine
-		[ 50410 ] = 1; -- Mysterious Camel Figurine
-		--[ 62346 ] = 6; -- Galleon
-		--[ 60491 ] = 6; --"Sha of Anger";
-		[ 64004 ] = 6; --"Ghostly Pandaren Fisherman";
-		[ 64191 ] = 6; --"Ghostly Pandaren Craftsman";
-		--[ 69099 ] = 6; -- "Nalak";
-		--[ 69161 ] = 6; -- "Oondasta";
-		};
+	NPCs = {};
+	NPCWorldIDs = {};
 };
 
 NS.OptionsCharacter = {
 	Version = NS.Version;
-	Achievements = {		
-		[ 1312 ] = true; -- Bloody Rare (Outlands)
-		[ 2257 ] = true; -- Frostbitten (Northrend)
-		[ 7317 ] = true; -- One Of Many
-		[ 7439 ] = true; -- Glorious! (Pandaria)
-		[ 8103 ] = true; -- Champions of Lei Shen
-		[ 8714 ] = true;  --Timeless Champion
-
-			};
+	Achievements = {};
 	AchievementsAddFound = nil;
 	AlertSoundUnmute = nil;
 	AlertSound = nil; -- Default sound
@@ -61,6 +34,8 @@ NS.OptionsCharacter = {
 	ModulesSaved = {};
 	NPCWorldIDs = {};
 	ShowAll = false;
+	TrackBeasts = true;
+	TrackRares = true;
 };
 
 NS.OptionsDefault = {
@@ -78,10 +53,10 @@ NS.OptionsDefault = {
 	NPCWorldIDs = {			
 		[ 50409 ] = 1; -- Mysterious Camel Figurine
 		[ 50410 ] = 1; -- Mysterious Camel Figurine
-		--[ 62346 ] = 6; -- Galleon
-		[ 60491 ] = 6; --"Sha of Anger";
 		[ 64004 ] = 6; --"Ghostly Pandaren Fisherman";
-		--[ 64191 ] = 6; --"Ghostly Pandaren Craftsman";
+		[ 64191 ] = 6; --"Ghostly Pandaren Craftsman";
+		--[ 62346 ] = 6; -- Galleon
+		--[ 60491 ] = 6; --"Sha of Anger";
 		--[ 69099 ] = 6; -- "Nalak";
 		--[ 69161 ] = 6; -- "Oondasta";
 		};
@@ -108,6 +83,8 @@ NS.OptionsCharacterDefault = {
 	ModulesExtra = {};
 	NPCWorldIDs = {};
 	ShowAll = false;
+	TrackBeasts = true;
+	TrackRares = true;
 };
 --[[
 do
@@ -261,6 +238,14 @@ do
 		for NpcID in pairs( NS.Options.NPCs ) do
 			self[ NpcID ] = NS.TestID( NpcID );
 		end
+
+		for NpcID in pairs( NS.TamableIDs) do
+			self[ NpcID ] = NS.TestID( NpcID );
+		end
+		for NpcID in pairs( NS.RareMobData.RareNPCs) do
+			self[ NpcID ] = NS.TestID( NpcID );
+		end
+
 		for AchievementID in pairs( NS.OptionsCharacter.Achievements ) do
 			for CriteriaID, NpcID in pairs( NS.Achievements[ AchievementID ].Criteria ) do
 				if ( NS.OptionsCharacter.AchievementsAddFound or not select( 3, GetAchievementCriteriaInfoByID( AchievementID, CriteriaID ) ) ) then -- Not completed
@@ -413,7 +398,7 @@ local function AchievementNPCActivate ( Achievement, NpcID, CriteriaID )
 end
 --- Stops searching for an achievement's NPC.
 local function AchievementNPCDeactivate ( Achievement, NpcID )
-	if ( Achievement.NPCsActive[ NpcID ] ) then
+	if ( Achievement.NPCsActive[ NpcID ]  ) then
 		Achievement.NPCsActive[ NpcID ] = nil;
 		ScanRemove( NpcID );
 		NS.Config.Search.UpdateTab( Achievement.ID );
@@ -480,6 +465,47 @@ end
 
 
 
+
+
+--NEW
+--- Adds a kill-related achievement to track.
+-- @param AchievementID  Numeric ID of achievement.
+-- @return True if achievement added.
+function NS.SetRareMob ( ID, enable )
+	if ( ID == "BEASTS" )  then
+		NS.OptionsCharacter.TrackBeasts = enable or nil;
+		NS.Config.Search.AchievementSetEnabled( ID, enable );
+		return true;
+	elseif ( ID == "RARENPC" )  then
+		NS.OptionsCharacter.TrackRares = enable or nil;
+		NS.Config.Search.AchievementSetEnabled( ID, enable );
+		return true;
+	end
+end
+
+function NS.RareMobToggle(ID, enable)
+	local Mobs
+
+	if ( ID == "BEASTS" )  then
+		Mobs = NS.TamableIDs;
+	elseif ( ID == "RARENPC" )  then
+		Mobs = NS.RareMobData.RareNPCs;
+	end
+
+	if (enable) then
+			--Loads Rare Mob Databas
+		for NpcID, _ in pairs( Mobs ) do
+			local WorldID = NS.RareMobData.NPCWorldIDs[NpcID]
+			NPCActivate( NpcID, WorldID );
+		end
+	else
+		for NpcID, _ in pairs( Mobs ) do
+			local WorldID = NS.RareMobData.NPCWorldIDs[NpcID]
+			NPCDeactivate( NpcID );
+		end
+	end
+
+end
 
 --- Enables printing cache lists on login.
 -- @return True if changed.
@@ -567,13 +593,16 @@ end
 --- Resets the scanning list and reloads it from saved settings.
 function NS.Synchronize ( Options, OptionsCharacter )
 	-- Load defaults if settings omitted
-	local IsDefaultScan;
+	local IsDefaultScan = false;
 	if ( not Options ) then
 		Options = NS.OptionsDefault;
 	end
 	if ( not OptionsCharacter ) then
 		OptionsCharacter, IsDefaultScan = NS.OptionsCharacterDefault, true;
 	end
+	--NS.Options, NS.OptionsCharacter = Options, OptionsCharacter;
+	--_NPCScanOptions, _NPCScanOptionsCharacter = NS.Options, NS.OptionsCharacter;
+
 
 	-- Clear all scans
 	for AchievementID in pairs( NS.Achievements ) do
@@ -594,6 +623,10 @@ function NS.Synchronize ( Options, OptionsCharacter )
 	NS.SetAlertSoundUnmute( OptionsCharacter.AlertSoundUnmute );
 	NS.SetAlertSound( OptionsCharacter.AlertSound );
 	NS.SetBlockFlightScan(OptionsCharacter.FlightSupress);
+	NS.SetRareMob ( "BEASTS", OptionsCharacter.TrackBeasts)
+	NS.SetRareMob ( "RARENPC", OptionsCharacter.TrackRares)
+	--NS.Config.Search.AchievementSetEnabled("BEASTS", OptionsCharacter.TrackBeasts );
+	--NS.Config.Search.AchievementSetEnabled("RARENPC", OptionsCharacter.TrackRares );
 
 	local AddAllDefaults = IsShiftKeyDown();
 	for NpcID, Name in pairs( Options.NPCs ) do
@@ -610,7 +643,10 @@ function NS.Synchronize ( Options, OptionsCharacter )
 			NS.AchievementAdd( AchievementID );
 		end
 	end
+
+
 	NS.CacheListPrint( false, true ); -- Populates cache list with inactive mobs too before printing
+
 end
 
 
@@ -814,15 +850,28 @@ function NS.Frame:PLAYER_LOGIN ( Event )
 	-- Update settings incrementally
 	if ( Options and Options.Version ~= NS.Version ) then
 	--Clears old global settings and updates to new variables
-		if ( (Options.Version == nil) or (tostring(Options.Version) < "5.1.3") ) then
+		if ( (Options.Version == nil) or (tostring(Options.Version) < "5.1.2") ) then
 			Options = NS.OptionsDefault;
+		end
+			if (tostring(Options.Version) < "5.2") then
+			for NPCid , Name in pairs(NS.OptionsDefault.NPCs) do
+				Options.NPCs[NPCid] = Name;
+			end
+			for NPCid , WorldID in pairs(NS.OptionsDefault.NPCWorldIDs) do
+				Options.NPCWorldIDs[NPCid] = WorldID;
+				Options.NPCWorldIDs[ 62346 ] = nil;
+				Options.NPCWorldIDs[ 60491 ] = nil;
+				Options.NPCWorldIDs[ 69099 ] = nil;
+				Options.NPCWorldIDs[ 69161 ] = nil;
+			end
+
 		end
 		Options.Version = NS.Version;
 	end
 
 		if ( OptionsCharacter and OptionsCharacter.Version ~= NS.Version ) then
 	--Clears old character settings and updates to new variables
-		if ( (OptionsCharacter.Version == nil) or (tostring(OptionsCharacter.Version) < "5.1") ) then
+		if ( (OptionsCharacter.Version == nil) or (tostring(OptionsCharacter.Version) < "5.1.2") ) then
 			OptionsCharacter = NS.OptionsCharacterDefault;
 		end
 		OptionsCharacter.Version = NS.Version;
@@ -974,15 +1023,23 @@ do
 			NS.WorldID = NS.ContinentIDs[ MapName ] or MapName;
 		end
 
-		-- Activate scans on this world
-		--Loads Any Custom Mobs
-		for NpcID, WorldID in pairs( NS.Options.NPCWorldIDs ) do
-			NPCActivate( NpcID, WorldID );
+
+				-- Activate scans on this world
+
+		if (NS.OptionsCharacter.TrackRares) then
+			--Loads Rare Mob Databas
+			for NpcID, _ in pairs( NS.RareMobData.RareNPCs ) do
+				local WorldID = NS.RareMobData.NPCWorldIDs[NpcID]
+				NPCActivate( NpcID, WorldID );
+			end
 		end
 
-		--Loads Rare Mob Databas
-		for NpcID, WorldID in pairs( NS.RareMobData.NPCWorldIDs ) do
-			NPCActivate( NpcID, WorldID );
+		if (NS.OptionsCharacter.TrackBeasts) then
+			--Loads Rare Beasts Databas
+			for NpcID, _ in pairs( NS.TamableIDs) do
+				local WorldID = NS.RareMobData.NPCWorldIDs[NpcID]
+				NPCActivate( NpcID, WorldID );
+			end
 		end
 
 		for AchievementID in pairs( NS.OptionsCharacter.Achievements ) do
@@ -990,6 +1047,12 @@ do
 			if ( Achievement.WorldID ) then
 				AchievementActivate( Achievement );
 			end
+		end
+
+		--Loads Any Custom Mobs
+		for NpcID, _ in pairs( NS.Options.NPCs ) do
+			local WorldID = NS.Options.NPCWorldIDs[NpcID]
+			NPCActivate( NpcID, WorldID );
 		end
 
 		if ( FirstWorld or not NS.Options.CacheWarnings ) then -- Full listing of cached mobs gets printed on login

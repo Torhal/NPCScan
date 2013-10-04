@@ -31,9 +31,6 @@ if ( IsAddOnLoaded( "LibRareSpawns" ) ) then
 	LibRareSpawnsData = LibRareSpawns.ByNPCID;
 end
 
-
-
-
 --- Sets the search for found achievement mobs option when its checkbox is clicked.
 function NS.AddFoundCheckbox.setFunc ( Enable )
 	if ( _NPCScan.SetAchievementsAddFound( Enable == "1" ) ) then
@@ -140,6 +137,26 @@ end
 function NS:TabCheckOnEnter ()
 	NS.TabOnEnter( self:GetParent() );
 end
+
+
+
+function NS:RareTabCheckOnClick ()
+	local Enable = self:GetChecked();
+	PlaySound( Enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff" );
+	local TabID = self:GetParent().TabID;
+	local Tab = self:GetParent()
+	NS.AchievementSetEnabled(TabID, Enable );
+
+	if TabID == "BEASTS" then
+		_NPCScan.OptionsCharacter.TrackBeasts = Enable or nil;
+	elseif TabID == "RARENPC" then 
+		_NPCScan.OptionsCharacter.TrackRares = Enable or nil;
+	end
+		_NPCScan.RareMobToggle(TabID, Enable)
+		NS.UpdateTab ( TabID )
+
+end
+
 
 
 
@@ -269,14 +286,14 @@ end
 function NS:RareNPCUpdate ()
 	NS.NPCValidate();
 	local WorldIDs = _NPCScan.RareMobData.NPCWorldIDs;
-	for NpcID, Name in pairs( _NPCScan.RareMobData.NPCs ) do
+	for NpcID, Name in pairs( _NPCScan.RareMobData.RareNPCs ) do
 		local Map =_NPCScan.RareMobData.NPCMapIDs[ NpcID] ;
 		local Row = NS.Table:AddRow( NpcID,
 			_NPCScan.TestID( NpcID ) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
 			Name, NpcID, GetWorldIDName( WorldIDs[ NpcID ] ) or "",
 			Map and ( GetMapNameByID( Map ) or Map ) or "" );
 
-		if ( not _NPCScan.NPCIsActive( NpcID ) ) then
+		if ( not _NPCScan.NPCIsActive( NpcID ) ) then --or (not _NPCScan.OptionsCharacter.TrackRares) then
 			Row:SetAlpha( NS.InactiveAlpha );
 		end
 	end
@@ -294,7 +311,7 @@ function NS:TameableNPCUpdate ()
 			Name, NpcID, GetWorldIDName( WorldIDs[ NpcID ] ) or "",
 			Map and ( GetMapNameByID( Map ) or Map ) or "" );
 
-		if ( not _NPCScan.NPCIsActive( NpcID ) ) then
+		if ( not _NPCScan.NPCIsActive( NpcID ) ) then --or (not _NPCScan.OptionsCharacter.TrackBeasts) then
 			Row:SetAlpha( NS.InactiveAlpha );
 		end
 	end
@@ -302,7 +319,7 @@ end
 
 --- Customizes the table when the NPCs tab is selected.
 function NS:CustomNPCActivate ()
-		NS.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD,  L.SEARCH_MAP );
+	NS.Table:SetHeader( L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD,  L.SEARCH_MAP );
 	NS.Table:SetSortHandlers( true, true, true, true, true );
 	NS.Table:SetSortColumn( 2 ); -- Default by name
 
@@ -628,21 +645,31 @@ local function AddTab ( ID, Update, Activate, Deactivate )
 		PanelTemplates_TabResize( Tab, Checkbox:GetWidth() - 12 );
 	elseif ( ID  == "BEASTS") then
 		Tab:SetText(L.TAMEDBEASTS );
-		PanelTemplates_TabResize( Tab, -8 );
+		Tab:GetFontString():SetPoint( "RIGHT", -12, 0 );
+		local Checkbox = CreateFrame( "CheckButton", nil, Tab, "UICheckButtonTemplate" );
+		Tab.TabID, Tab.Checkbox = ID, Checkbox;
+		Checkbox:SetSize( 20, 20 );
+		Checkbox:SetPoint( "BOTTOMLEFT", 8, 0 );
+		Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
+		Checkbox:SetScript( "OnClick", NS.RareTabCheckOnClick );
+		--Checkbox:SetScript( "OnEnter", NS.TabCheckOnEnter );
+		Checkbox:SetScript( "OnLeave", GameTooltip_Hide );
+		NS.AchievementSetEnabled( ID, false ); -- Initialize the custom "unchecked" texture
+		PanelTemplates_TabResize( Tab, Checkbox:GetWidth() - 12 );
+
 	elseif ( ID  == "RARENPC") then
 		Tab:SetText("Rare Mobs" );
-		PanelTemplates_TabResize( Tab, -8 );
-		--Tab:GetFontString():SetPoint( "RIGHT", -12, 0 );
-		--local Checkbox = CreateFrame( "CheckButton", nil, Tab, "UICheckButtonTemplate" );
-		--Tab.AchievementID, Tab.Checkbox = ID, Checkbox;
-		--Checkbox:SetSize( 20, 20 );
-		--Checkbox:SetPoint( "BOTTOMLEFT", 8, 0 );
-		--Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
-		--Checkbox:SetScript( "OnClick", NS.TabCheckOnClick2 );
+		Tab:GetFontString():SetPoint( "RIGHT", -12, 0 );
+		local Checkbox = CreateFrame( "CheckButton", nil, Tab, "UICheckButtonTemplate" );
+		Tab.TabID, Tab.Checkbox = ID, Checkbox;
+		Checkbox:SetSize( 20, 20 );
+		Checkbox:SetPoint( "BOTTOMLEFT", 8, 0 );
+		Checkbox:SetHitRectInsets( 4, 4, 4, 4 );
+		Checkbox:SetScript( "OnClick", NS.RareTabCheckOnClick );
 		--Checkbox:SetScript( "OnEnter", NS.TabCheckOnEnter );
-		--Checkbox:SetScript( "OnLeave", GameTooltip_Hide );
-		--NS.AchievementSetEnabled( ID, false ); -- Initialize the custom "unchecked" texture
-		--PanelTemplates_TabResize( Tab, Checkbox:GetWidth() - 12 );
+		Checkbox:SetScript( "OnLeave", GameTooltip_Hide );
+		NS.AchievementSetEnabled( ID, false ); -- Initialize the custom "unchecked" texture
+		PanelTemplates_TabResize( Tab, Checkbox:GetWidth() - 12 );
 	
 	else
 		Tab:SetText( L.SEARCH_NPCS );
