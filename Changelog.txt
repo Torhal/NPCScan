@@ -1,3 +1,8 @@
+v5.2.1
+-Stopped Tamable Beasts and Default Rares from being displayed in the cache list when not being tracked.
+-Added warning for users that are running the unsupported _NPCScan.Autoadd
+-Removed the rare beasts that can not currently be tamed due to being level 91+ from the Tamable Alert List.
+
 v5.2
 -Made rare mobs & tameable beasts tracking toggelable
 

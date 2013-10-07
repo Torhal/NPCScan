@@ -239,11 +239,16 @@ do
 			self[ NpcID ] = NS.TestID( NpcID );
 		end
 
-		for NpcID in pairs( NS.TamableIDs) do
-			self[ NpcID ] = NS.TestID( NpcID );
+		if ( NS.OptionsCharacter.TrackBeasts) then
+			for NpcID in pairs( NS.TamableIDs) do
+				self[ NpcID ] = NS.TestID( NpcID );
+			end
 		end
-		for NpcID in pairs( NS.RareMobData.RareNPCs) do
-			self[ NpcID ] = NS.TestID( NpcID );
+
+		if ( NS.OptionsCharacter.TrackRares) then
+			for NpcID in pairs( NS.RareMobData.RareNPCs) do
+				self[ NpcID ] = NS.TestID( NpcID );
+			end
 		end
 
 		for AchievementID in pairs( NS.OptionsCharacter.Achievements ) do
@@ -840,6 +845,13 @@ end
 --- Loads defaults, validates settings, and starts scan.
 -- Used instead of ADDON_LOADED to give overlay mods a chance to load and register for messages.
 function NS.Frame:PLAYER_LOGIN ( Event )
+
+	--Warning message for users running _NPCScan.AutoAdd
+	if IsAddOnLoaded("_NPCScan.AutoAdd") then
+		StaticPopup_Show("NPCSCAN_AUTOADD_WARNING")
+	
+	end
+
 	self[ Event ] = nil;
 
 	local Options, OptionsCharacter = _NPCScanOptions, _NPCScanOptionsCharacter;
@@ -1189,3 +1201,14 @@ else -- Zone information is known
 end
 
 SlashCmdList[ "_NPCSCAN" ] = NS.SlashCommand;
+
+--Warning Popup for users running _NPCScan.AutoAdd.
+StaticPopupDialogs["NPCSCAN_AUTOADD_WARNING"] = {
+  text = "_NPCScan has detected that you are running _NPCScan.AutoAdd.  This addon is not supported and may prevent _NPCScan from working properly.  It is reccomended that you disable _NPCScan.AutoAdd.",
+  button1 = "Ok",
+  OnAccept = function()
+        end,
+  timeout = 0,
+  whileDead = true,
+  hideOnEscape = true,
+}

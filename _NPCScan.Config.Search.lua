@@ -154,6 +154,7 @@ function NS:RareTabCheckOnClick ()
 	end
 		_NPCScan.RareMobToggle(TabID, Enable)
 		NS.UpdateTab ( TabID )
+		_NPCScan.CacheListPrint( true );
 
 end
 
