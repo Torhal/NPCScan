@@ -115,7 +115,10 @@ end
 private.NpcIDMax = 0xFFFFF --- Largest ID that will fit in a GUID's 20-bit NPC ID field.
 private.Updater.UpdateRate = 0.1
 
-
+-------------------------------------------------------------------------------
+-- Constants.
+-------------------------------------------------------------------------------
+local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
 
 
 --- Prints a message in the default chat window.
@@ -532,21 +535,19 @@ end
 
 local IsDefaultNPCValid
 do
-	local IsHunter = select(2, UnitClass("player")) == "HUNTER"
-	local TamableExceptions = {
+	local TAMABLE_EXCEPTIONS = {
 		[49822] = true -- Jadefang drops a pet
 	}
 
-	local FactionRestrictions = {
-		-- [NpcID] = FactionGroup to enable for
+	local NPC_FACTION = {
 		[51071] = "Horde", -- Captain Florence
 		[51079] = "Alliance", -- Captain Foulwind
 	}
 
 	--- @return True if NpcID should be a default for this character.
 	function IsDefaultNPCValid(NpcID)
-		return (IsHunter or not private.TamableIDs[NpcID] or TamableExceptions[NpcID])
-			and (not FactionRestrictions[NpcID] or FactionRestrictions[NpcID] == UnitFactionGroup("player"))
+		return (PLAYER_CLASS == "HUNTER" or not private.TamableIDs[NpcID] or TAMABLE_EXCEPTIONS[NpcID])
+			and (not NPC_FACTION[NpcID] or NPC_FACTION[NpcID] == _G.UnitFactionGroup("player"))
 	end
 end
 --- Resets the scanning list and reloads it from saved settings.
@@ -744,7 +745,7 @@ do
 	end
 end
 
-if select(2, UnitClass("player")) == "HUNTER" then
+if PLAYER_CLASS == "HUNTER" then
 	local StableUpdater = _G.CreateFrame("Frame")
 
 	local StabledList = {}
