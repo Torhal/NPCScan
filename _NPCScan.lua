@@ -1,15 +1,27 @@
---[[****************************************************************************
-  * _NPCScan by Saiket                                                         *
-  * _NPCScan.lua - Scans NPCs near you for specific rare NPC IDs.              *
-  ****************************************************************************]]
+-------------------------------------------------------------------------------
+-- Localized Lua globals.
+-------------------------------------------------------------------------------
+local _G = getfenv(0)
 
+-- Functions
+local next = _G.next
+local pairs = _G.pairs
+local tonumber = _G.tonumber
+local tostring = _G.tostring
+local type = _G.type
 
+-- Libraries
+local string = _G.string
+local table = _G.table
+
+-------------------------------------------------------------------------------
+-- AddOn namespace.
+-------------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
-
-_NPCScan = private
 local L = private.L
+_G._NPCScan = private
 
-private.Frame = CreateFrame("Frame")
+private.Frame = _G.CreateFrame("Frame")
 private.Updater = private.Frame:CreateAnimationGroup()
 private.Version = "5.2"
 
@@ -93,7 +105,7 @@ do
 		--- Continents without physical maps aren't used.
 		[5] = true -- The Maelstrom
 	}
-	private.ContinentNames = { GetMapContinents() }
+	private.ContinentNames = { _G.GetMapContinents() }
 	for ContinentID in pairs(VirtualContinents) do
 		private.ContinentNames[ContinentID] = nil
 	end
@@ -109,15 +121,14 @@ private.Updater.UpdateRate = 0.1
 --- Prints a message in the default chat window.
 function private.Print(Message, Color)
 	if not Color then
-		Color = NORMAL_FONT_COLOR
+		Color = _G.NORMAL_FONT_COLOR
 	end
-	DEFAULT_CHAT_FRAME:AddMessage(L.PRINT_FORMAT:format(private.Options.PrintTime and date(CHAT_TIMESTAMP_FORMAT or L.TIME_FORMAT) or "",
-		Message), Color.r, Color.g, Color.b)
+	_G.DEFAULT_CHAT_FRAME:AddMessage(L.PRINT_FORMAT:format(private.Options.PrintTime and _G.date(_G.CHAT_TIMESTAMP_FORMAT or L.TIME_FORMAT) or "", Message), Color.r, Color.g, Color.b)
 end
 
 
 do
-	local Tooltip = CreateFrame("GameTooltip", "_NPCScanTooltip")
+	local Tooltip = _G.CreateFrame("GameTooltip", "_NPCScanTooltip")
 
 	-- Add template text lines
 	local Text = Tooltip:CreateFontString()
@@ -125,7 +136,7 @@ do
 	--- Checks the cache for a given NpcID.
 	-- @return Localized name of the NPC if cached, or nil if not.
 	function private.TestID(NpcID)
-		Tooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
+		Tooltip:SetOwner(_G.WorldFrame, "ANCHOR_NONE")
 		Tooltip:SetHyperlink(("unit:0xF53%05X00000000"):format(NpcID))
 
 		if Tooltip:IsShown() then
@@ -154,11 +165,11 @@ do
 				end
 			end
 
-			wipe(self)
+			table.wipe(self)
 			if #TempList > 0 then
-				sort(TempList)
+				table.sort(TempList)
 				local ListString = table.concat(TempList, L.CACHELIST_SEPARATOR)
-				wipe(TempList)
+				table.wipe(TempList)
 				return ListString
 			end
 		end
@@ -208,20 +219,15 @@ do
 			local ListString = CacheListBuild(CacheList, ForcePrint or FullListing) -- Allow printing an NPC a second time if forced or full listing
 
 			if ListString then
-				private.Print(L[FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT"]:format(ListString), ForcePrint and RED_FONT_COLOR)
+				private.Print(L[FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT"]:format(ListString), ForcePrint and _G.RED_FONT_COLOR)
 				FirstPrint = false
 				return true
 			end
 		else
-			wipe(CacheList)
+			table.wipe(CacheList)
 		end
 	end
 end
-
-
-
-
-local next, assert = next, assert
 
 local ScanIDs = {} --- [ NpcID ] = Number of concurrent scans for this ID
 --- Begins searching for an NPC.
@@ -415,11 +421,6 @@ function private.AchievementRemove(AchievementID)
 	end
 end
 
-
-
-
-
---NEW
 --- Adds a kill-related achievement to track.
 -- @param AchievementID Numeric ID of achievement.
 -- @return True if achievement added.
@@ -580,7 +581,7 @@ function private.Synchronize(Options, OptionsCharacter)
 	private.SetRareMob("BEASTS", OptionsCharacter.TrackBeasts)
 	private.SetRareMob("RARENPC", OptionsCharacter.TrackRares)
 
-	local AddAllDefaults = IsShiftKeyDown()
+	local AddAllDefaults = _G.IsShiftKeyDown()
 	for NpcID, Name in pairs(Options.NPCs) do
 		-- If defaults, only add tamable custom mobs if the player is a hunter
 		if AddAllDefaults or not IsDefaultScan or IsDefaultNPCValid(NpcID) then
@@ -606,14 +607,14 @@ do
 
 	--- Prints the list of cached pets when leaving a city or inn.
 	function private.Frame:PLAYER_UPDATE_RESTING()
-		if not IsResting() and next(PetList) then
+		if not _G.IsResting() and next(PetList) then
 			if private.Options.CacheWarnings then
 				local ListString = CacheListBuild(PetList)
 				if ListString then
-					private.Print(L.CACHED_PET_RESTING_FORMAT:format(ListString), RED_FONT_COLOR)
+					private.Print(L.CACHED_PET_RESTING_FORMAT:format(ListString), _G.RED_FONT_COLOR)
 				end
 			else
-				wipe(PetList)
+				table.wipe(PetList)
 			end
 		end
 	end
@@ -621,34 +622,35 @@ do
 	--- @return True if the tamable mob is in its correct zone, else false with an optional reason string.
 	local function OnFoundTamable(NpcID, Name)
 		local ExpectedZone = private.TamableIDs[NpcID]
-		local ZoneIDBackup = GetCurrentMapAreaID()
+		local ZoneIDBackup = _G.GetCurrentMapAreaID()
 
 		local InCorrectZone, InvalidReason
 		if ExpectedZone == true then -- Expected zone is unknown (instance mob, etc.)
-			InCorrectZone = not IsResting() -- Assume any tamable mob found in a city/inn is a hunter pet
+			InCorrectZone = not _G.IsResting() -- Assume any tamable mob found in a city/inn is a hunter pet
 		else
-			SetMapToCurrentZone()
-			InCorrectZone = ExpectedZone == GetCurrentMapAreaID()
+			_G.SetMapToCurrentZone()
+			InCorrectZone = ExpectedZone == _G.GetCurrentMapAreaID()
 		end
 
 		if not InCorrectZone then
-			if IsResting() then
+			if _G.IsResting() then
 				PetList[NpcID] = Name -- Suppress error message until the player stops resting
 			else
 				-- Get details about expected zone
-				local ExpectedZoneName = GetMapNameByID(ExpectedZone)
+				local ExpectedZoneName = _G.GetMapNameByID(ExpectedZone)
 				if not ExpectedZoneName then -- GetMapNameByID returns nil for continent maps
-					SetMapByID(ExpectedZone)
-					local Continent = GetCurrentMapContinent()
+					_G.SetMapByID(ExpectedZone)
+					local Continent = _G.GetCurrentMapContinent()
+
 					if Continent >= 1 then
-						ExpectedZoneName = select(Continent, GetMapContinents())
+						ExpectedZoneName = select(Continent, _G.GetMapContinents())
 					end
 				end
-				InvalidReason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(Name, GetRealZoneText(), ExpectedZoneName or L.FOUND_ZONE_UNKNOWN, ExpectedZone)
+				InvalidReason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(Name, _G.GetRealZoneText(), ExpectedZoneName or L.FOUND_ZONE_UNKNOWN, ExpectedZone)
 			end
 		end
 
-		SetMapByID(ZoneIDBackup) -- Restore previous map view
+		_G.SetMapByID(ZoneIDBackup) -- Restore previous map view
 		return InCorrectZone, InvalidReason
 	end
 
@@ -661,7 +663,7 @@ do
 		-- Must have been from an achievement
 		for AchievementID in pairs(private.OptionsCharacter.Achievements) do
 			if private.Achievements[AchievementID].NPCsActive[NpcID] then
-				return GetAchievementLink(AchievementID) -- Colored link to distinguish from a custom name
+				return _G.GetAchievementLink(AchievementID) -- Colored link to distinguish from a custom name
 			end
 		end
 	end
@@ -684,35 +686,33 @@ do
 
 		--Checks to see if player is on flightpath, this will block possible cross realm alerts
 		if private.OptionsCharacter.FlightSupress then
-			local onTaxi = UnitOnTaxi("player")
+			local onTaxi = _G.UnitOnTaxi("player")
 			if onTaxi then
 				Valid = false
-				SetMapToCurrentZone()
-				local posX, posY = GetPlayerMapPosition("player")
-				local zoneName = GetZoneText()
+				_G.SetMapToCurrentZone()
+				local posX, posY = _G.GetPlayerMapPosition("player")
+				local zoneName = _G.GetZoneText()
 				InvalidReason = L.FOUND_UNIT_TAXI:format(Name, posX * 100, posY * 100, zoneName)
 				--NS.PlaySound ( AlertSound )
-				PlaySound("TellMessage", "master")
+				_G.PlaySound("TellMessage", "master")
 			end
 		end
 
 		if Valid then
-			private.Print(L[Tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(Name), GREEN_FONT_COLOR)
+			private.Print(L[Tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(Name), _G.GREEN_FONT_COLOR)
 			private.Button:SetNPC(NpcID, Name, GetScanSource(NpcID)) -- Sends added and found overlay messages
 		elseif InvalidReason then
 			private.Print(InvalidReason)
 		end
 	end
 
-	local pairs = pairs
-	local GetAchievementCriteriaInfoByID = GetAchievementCriteriaInfoByID
 	--- Scans all active criteria and removes any completed NPCs.
 	local function AchievementCriteriaUpdate()
 		if not private.OptionsCharacter.AchievementsAddFound then
 			for AchievementID in pairs(private.OptionsCharacter.Achievements) do
 				local Achievement = private.Achievements[AchievementID]
 				for NpcID, CriteriaID in pairs(Achievement.NPCsActive) do
-					local _, _, Complete = GetAchievementCriteriaInfoByID(AchievementID, CriteriaID)
+					local _, _, Complete = _G.GetAchievementCriteriaInfoByID(AchievementID, CriteriaID)
 					if Complete then
 						AchievementNPCDeactivate(Achievement, NpcID)
 					end
@@ -744,7 +744,7 @@ do
 end
 
 if select(2, UnitClass("player")) == "HUNTER" then
-	local StableUpdater = CreateFrame("Frame")
+	local StableUpdater = _G.CreateFrame("Frame")
 
 	local StabledList = {}
 	--- Stops scans for stabled hunter pets before a bogus alert can fire.
@@ -771,7 +771,7 @@ if select(2, UnitClass("player")) == "HUNTER" then
 				private.Print(L.CACHED_STABLED_FORMAT:format(ListString))
 			end
 		else
-			wipe(StabledList)
+			table.wipe(StabledList)
 		end
 	end
 
@@ -779,11 +779,11 @@ if select(2, UnitClass("player")) == "HUNTER" then
 	StableUpdater:SetScript("OnUpdate", StableUpdater.OnUpdate)
 	private.Frame:RegisterEvent("PET_STABLE_UPDATE")
 
-	local Backup = GetStablePetInfo
+	local Backup = _G.GetStablePetInfo
 	--- Prevents the pet UI from querying (and caching) stabled pets until actually viewing the stables.
 	-- @param Override Forces a normal query even if the stables aren't open.
-	function GetStablePetInfo(Slot, Override, ...)
-		if Override or Slot <= NUM_PET_ACTIVE_SLOTS or IsAtStableMaster() then
+	function _G.GetStablePetInfo(Slot, Override, ...)
+		if Override or Slot <= _G.NUM_PET_ACTIVE_SLOTS or _G.IsAtStableMaster() then
 			return Backup(Slot, Override, ...)
 		end
 	end
@@ -797,7 +797,7 @@ end
 function private.Frame:PLAYER_LOGIN(Event)
 
 	--Warning message for users running _NPCScan.AutoAdd
-	if IsAddOnLoaded("_NPCScan.AutoAdd") then
+	if _G.IsAddOnLoaded("_NPCScan.AutoAdd") then
 		StaticPopup_Show("NPCSCAN_AUTOADD_WARNING")
 	end
 
@@ -850,7 +850,7 @@ do
 		self:PLAYER_UPDATE_RESTING()
 
 		-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
-		local MapName, _, _, _, _, _, _, MapID = GetInstanceInfo()
+		local MapName, _, _, _, _, _, _, MapID = _G.GetInstanceInfo()
 
 		if MapID == 1064 then --Fix for Isle of Thunder having a diffrent Instance name
 			private.WorldID = 6
@@ -892,7 +892,7 @@ do
 
 		if FirstWorld or not private.Options.CacheWarnings then -- Full listing of cached mobs gets printed on login
 			FirstWorld = false
-			wipe(CacheList)
+			table.wipe(CacheList)
 		else -- Print list of cached mobs specific to new world
 			local ListString = CacheListBuild(CacheList)
 			if ListString then
@@ -939,9 +939,6 @@ function private.Frame:OnEvent(Event, ...)
 	end
 end
 
-
-
-
 --- Slash command chat handler to open the options pane and manage the NPC list.
 function private.SlashCommand(Input)
 	local Command, Arguments = Input:match("^(%S+)%s*(.-)%s*$")
@@ -968,12 +965,12 @@ function private.SlashCommand(Input)
 				end
 			end
 			if not private.NPCRemove(ID) then
-				private.Print(L.CMD_REMOVENOTFOUND_FORMAT:format(Arguments), RED_FONT_COLOR)
+				private.Print(L.CMD_REMOVENOTFOUND_FORMAT:format(Arguments), _G.RED_FONT_COLOR)
 			end
 			return
 		elseif Command == L.CMD_CACHE then -- Force print full cache list
 			if not private.CacheListPrint(true, true) then -- Nothing in cache
-				private.Print(L.CMD_CACHE_EMPTY, GREEN_FONT_COLOR)
+				private.Print(L.CMD_CACHE_EMPTY, _G.GREEN_FONT_COLOR)
 			end
 			return
 		end
@@ -981,7 +978,7 @@ function private.SlashCommand(Input)
 		private.Print(L.CMD_HELP)
 
 	else -- No subcommand
-		InterfaceOptionsFrame_OpenToCategory(private.Config.Search)
+		_G.InterfaceOptionsFrame_OpenToCategory(private.Config.Search)
 	end
 end
 
@@ -1011,7 +1008,7 @@ end
 local Frame = private.Frame
 Frame:SetScript("OnEvent", Frame.OnEvent)
 
-if IsLoggedIn() then
+if _G.IsLoggedIn() then
 	Frame:PLAYER_LOGIN("PLAYER_LOGIN")
 else
 	Frame:RegisterEvent("PLAYER_LOGIN")
@@ -1024,16 +1021,16 @@ private.Updater:CreateAnimation("Animation"):SetDuration(private.Updater.UpdateR
 private.Updater:SetLooping("REPEAT")
 
 -- Set update handler after zone info loads
-if GetZoneText() == "" then -- Zone information unknown (initial login)
+if _G.GetZoneText() == "" then -- Zone information unknown (initial login)
 	Frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 else -- Zone information is known
 	Frame:ZONE_CHANGED_NEW_AREA("ZONE_CHANGED_NEW_AREA")
 end
 
-SlashCmdList["_NPCSCAN"] = private.SlashCommand
+_G.SlashCmdList["_NPCSCAN"] = private.SlashCommand
 
 --Warning Popup for users running _NPCScan.AutoAdd.
-StaticPopupDialogs["NPCSCAN_AUTOADD_WARNING"] = {
+_G.StaticPopupDialogs["NPCSCAN_AUTOADD_WARNING"] = {
 	text = "_NPCScan has detected that you are running _NPCScan.AutoAdd.  This addon is not supported and may prevent _NPCScan from working properly.  It is reccomended that you disable _NPCScan.AutoAdd.",
 	button1 = "Ok",
 	OnAccept = function()
