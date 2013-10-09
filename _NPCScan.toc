@@ -14,7 +14,7 @@
 ## Notes-ruRU: Сканирует область вокруг вас на наличие редких НИПов.
 ## Notes-zhCN: 搜索附近的 NPC 寻找稀有怪物。
 ## Notes-zhTW: 搜尋出沒在你附近的稀有怪。
-## Author: Saiket
+## Author: Torhal, Saiket
 ## X-Credits-Maintainer: SLOKnightfall
 ## X-Credits-deDE: Localization: Freydis88, DirtyHarryGermany
 ## X-Credits-enCN: Localization: digmouse, tss1398383123, ananhaid, redsaru, dh0000
@@ -41,13 +41,15 @@
 ## SavedVariablesPerCharacter: _NPCScanOptionsCharacter
 ## OptionalDeps: Ace3, LibTextTable-1.1, LibSharedMedia-3.0
 
+#@no-lib-strip@
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
 Libs\LibTextTable-1.1\Lib.xml
 Libs\LibSharedMedia-3.0\lib.xml
 Libs\AceEvent-3.0\AceEvent-3.0.xml
+#@end-no-lib-strip@
 
-# See http://wow.curseforge.com/addons/npcscan/localization/
+# See http://wow.wowace.com/addons/npcscan/localization/
 Locales\Locale-enUS.lua
 Locales\Locale-deDE.lua
 Locales\Locale-esES.lua
