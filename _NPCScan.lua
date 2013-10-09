@@ -148,30 +148,31 @@ end
 
 local CacheListBuild
 do
-	local TempList, AlreadyListed = {}, {}
+	local build_list = {}
+	local id_registry = {}
+
 	--- Compiles a cache list into a printable list string.
 	-- @param Relist True to relist NPC names that have already been printed.
 	-- @return List string, or nil if the list was empty.
-	function CacheListBuild(self, Relist)
-		if next(self) then
-			-- Build and sort list
-			for NpcID, Name in pairs(self) do
-				if Relist or not AlreadyListed[NpcID] then
-					if not Relist then -- Filtered to show NPCs only once
-						AlreadyListed[NpcID] = true -- Don't list again
-					end
-					-- Add quotes to all entries
-					TempList[#TempList + 1] = L.CACHELIST_ENTRY_FORMAT:format(Name)
-				end
-			end
+	function CacheListBuild(source_data, should_relist)
+		if not next(source_data) then
+			return
+		end
+		table.wipe(build_list)
 
-			table.wipe(self)
-			if #TempList > 0 then
-				table.sort(TempList)
-				local ListString = table.concat(TempList, L.CACHELIST_SEPARATOR)
-				table.wipe(TempList)
-				return ListString
+		for npc_id, npc_name in pairs(source_data) do
+			if should_relist or not id_registry[npc_id] then
+				if not should_relist then
+					id_registry[npc_id] = true
+				end
+				build_list[#build_list + 1] = L.CACHELIST_ENTRY_FORMAT:format(npc_name)
 			end
+		end
+		table.wipe(source_data)
+
+		if #build_list > 0 then
+			table.sort(build_list)
+			return table.concat(build_list, L.CACHELIST_SEPARATOR)
 		end
 	end
 end
