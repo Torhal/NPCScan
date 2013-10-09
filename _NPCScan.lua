@@ -10,7 +10,6 @@ local L = NS.L;
 
 NS.Frame = CreateFrame( "Frame" );
 NS.Updater = NS.Frame:CreateAnimationGroup();
---NS.Version = GetAddOnMetadata( ..., "Version" ):match( "^([%d.]+)" );
 NS.Version = "5.2";
 
 
@@ -45,20 +44,12 @@ NS.OptionsDefault = {
 		[ 64191 ] = "Ghostly Pandaren Craftsman";
 		[ 50409 ] ="Mysterious Camel Figurine";
 		[ 50410 ] = "Mysterious Camel Figurine";
-		--[ 62346 ] = "Galleon";
-		--[ 60491 ] = "Sha of Anger";
-		--[ 69099 ] = "Nalak";
-		--[ 69161 ] = "Oondasta";
 	};
 	NPCWorldIDs = {			
 		[ 50409 ] = 1; -- Mysterious Camel Figurine
 		[ 50410 ] = 1; -- Mysterious Camel Figurine
 		[ 64004 ] = 6; --"Ghostly Pandaren Fisherman";
 		[ 64191 ] = 6; --"Ghostly Pandaren Craftsman";
-		--[ 62346 ] = 6; -- Galleon
-		--[ 60491 ] = 6; --"Sha of Anger";
-		--[ 69099 ] = 6; -- "Nalak";
-		--[ 69161 ] = 6; -- "Oondasta";
 		};
 };
 
@@ -86,68 +77,6 @@ NS.OptionsCharacterDefault = {
 	TrackBeasts = true;
 	TrackRares = true;
 };
---[[
-do
-	local DEEPHOLM = GetMapNameByID( 640 );
-	local MOLTEN_FRONT = GetMapNameByID( 795 );
-	NS.OptionsCharacterDefault = {
-		Version = NS.Version;
-			NPCs = {
-		
-	};
-		NPCWorldIDs = {
-			[ 18684 ] = 3; -- Bro'Gaz the Clanless
-			[ 32491 ] = 4; -- Time-Lost Proto Drake
-			[ 33776 ] = 4; -- Gondria
-			[ 35189 ] = 4; -- Skoll
-			[ 38453 ] = 4; -- Arcturis
-			[ 49822 ] = DEEPHOLM; -- Jadefang
-			[ 49913 ] = 2; -- Lady LaLa
-			[ 50005 ] = 2; -- Poseidus
-			[ 50009 ] = 2; -- Mobus
-			[ 50050 ] = 2; -- Shok'sharak
-			[ 50051 ] = 2; -- Ghostcrawler
-			[ 50052 ] = 2; -- Burgy Blackheart
-			[ 50053 ] = 1; -- Thartuk the Exile
-			[ 50056 ] = 1; -- Garr
-			[ 50057 ] = 1; -- Blazewing
-			[ 50058 ] = 1; -- Terrorpene
-			[ 50059 ] = DEEPHOLM; -- Golgarok
-			[ 50060 ] = DEEPHOLM; -- Terborus
-			[ 50061 ] = DEEPHOLM; -- Xariona
-			[ 50062 ] = DEEPHOLM; -- Aeonaxx
-			[ 50063 ] = 1; -- Akma'hat
-			[ 50064 ] = 1; -- Cyrus the Black
-			[ 50065 ] = 1; -- Armagedillo
-			[ 50085 ] = 2; -- Overlord Sunderfury
-			[ 50086 ] = 2; -- Tarvus the Vile
-			[ 50089 ] = 2; -- Julak-Doom
-			[ 50138 ] = 2; -- Karoma
-			[ 50154 ] = 1; -- Madexx
-			[ 50159 ] = 2; -- Sambas
-			[ 50409 ] = 1; -- Mysterious Camel Figurine
-			[ 50410 ] = 1; -- Mysterious Camel Figurine
-			[ 50815 ] = MOLTEN_FRONT; -- Skarr
-			[ 50959 ] = MOLTEN_FRONT; -- Karkin
-			[ 51071 ] = 2; -- Captain Florence
-			[ 51079 ] = 2; -- Captain Foulwind
-			[ 51401 ] = 1; -- Madexx
-			[ 51402 ] = 1; -- Madexx
-			[ 51403 ] = 1; -- Madexx
-			[ 51404 ] = 1; -- Madexx
-			[ 54318 ] = 1; -- Ankha
-			[ 54319 ] = 1; -- Magria
-			[ 54320 ] = 1; -- Ban'thalos
-			[ 54321 ] = MOLTEN_FRONT; -- Solix
-			[ 54322 ] = MOLTEN_FRONT; -- Deth'tilac
-			[ 54323 ] = MOLTEN_FRONT; -- Kirix
-			[ 54324 ] = MOLTEN_FRONT; -- Skitterflame
-			[ 54338 ] = MOLTEN_FRONT; -- Anthriss
-			[ 62346 ] = 6; -- Galleon
-		};
-	};
-end
-]]--
 
 NS.Achievements = { --- Criteria data for each achievement.
 	[ 1312 ] = { WorldID = 3; }; -- Bloody Rare (Outlands)
@@ -605,9 +534,6 @@ function NS.Synchronize ( Options, OptionsCharacter )
 	if ( not OptionsCharacter ) then
 		OptionsCharacter, IsDefaultScan = NS.OptionsCharacterDefault, true;
 	end
-	--NS.Options, NS.OptionsCharacter = Options, OptionsCharacter;
-	--_NPCScanOptions, _NPCScanOptionsCharacter = NS.Options, NS.OptionsCharacter;
-
 
 	-- Clear all scans
 	for AchievementID in pairs( NS.Achievements ) do
@@ -630,8 +556,6 @@ function NS.Synchronize ( Options, OptionsCharacter )
 	NS.SetBlockFlightScan(OptionsCharacter.FlightSupress);
 	NS.SetRareMob ( "BEASTS", OptionsCharacter.TrackBeasts)
 	NS.SetRareMob ( "RARENPC", OptionsCharacter.TrackRares)
-	--NS.Config.Search.AchievementSetEnabled("BEASTS", OptionsCharacter.TrackBeasts );
-	--NS.Config.Search.AchievementSetEnabled("RARENPC", OptionsCharacter.TrackRares );
 
 	local AddAllDefaults = IsShiftKeyDown();
 	for NpcID, Name in pairs( Options.NPCs ) do
@@ -888,133 +812,7 @@ function NS.Frame:PLAYER_LOGIN ( Event )
 		end
 		OptionsCharacter.Version = NS.Version;
 	end
-	-- Character settings
-	--[[if ( OptionsCharacter and OptionsCharacter.Version ~= NS.Version ) then
-		local Version = OptionsCharacter.Version;
 
-		local WorldIDs = NS.OptionsCharacterDefault.NPCWorldIDs;
-		--- Add NpcID if not already being searched for.
-		local function AddDefault ( NpcID )
-			if ( not OptionsCharacter.NPCs[ NpcID ] -- Not already searched for
-				and IsDefaultNPCValid( NpcID )
-			) then
-				OptionsCharacter.NPCs[ NpcID ] = L.NPCs[ NpcID ];
-				OptionsCharacter.NPCWorldIDs[ NpcID ] = WorldIDs[ NpcID ];
-			end
-		end
-
-		if ( Version == "3.0.9.2" ) then -- 3.1.0.1: Remove NPCs that are duplicated by achievements
-			local NPCs = OptionsCharacter.IDs;
-			OptionsCharacter.IDs = nil;
-			OptionsCharacter.NPCs = NPCs;
-			OptionsCharacter.Achievements = {};
-			local AchievementNPCs = {};
-			for AchievementID, Achievement in pairs( NS.Achievements ) do
-				for _, NpcID in pairs( Achievement.Criteria ) do
-					AchievementNPCs[ NpcID ] = AchievementID;
-				end
-			end
-			for Name, NpcID in pairs( NPCs ) do
-				if ( AchievementNPCs[ NpcID ] ) then
-					NPCs[ Name ] = nil;
-					OptionsCharacter.Achievements[ AchievementNPCs[ NpcID ] ] = true;
-				end
-			end
-			Version = "3.1.0.1";
-		end
-		if ( Version == "3.1.0.1" or Version == "3.2.0.1" or Version == "3.2.0.2" ) then
-			-- 3.2.0.3: Added default scan for Skoll
-			OptionsCharacter.NPCs[ L.NPCs[ 35189 ] ] = 35189;
-			Version = "3.2.0.3";
-		end
-		if ( "3.2.0.3" <= Version and Version <= "3.3.0.1" ) then
-			-- 3.3.0.2: Added default scan for Arcturis
-			OptionsCharacter.NPCs[ L.NPCs[ 38453 ] ] = 38453;
-			Version = "3.3.0.2";
-		end
-		if ( Version == "3.3.0.2" or Version == "3.3.0.3" or Version == "3.3.0.4" ) then
-			-- 3.3.5.1: Custom NPC scans are indexed by ID instead of name, and can now be map-specific
-			local DefaultWorldIDs = NS.OptionsCharacterDefault.NPCWorldIDs;
-			local NPCsNew, NPCWorldIDs = {}, {};
-			for Name, NpcID in pairs( OptionsCharacter.NPCs ) do
-				NPCsNew[ NpcID ] = Name;
-				NPCWorldIDs[ NpcID ] = DefaultWorldIDs[ NpcID ];
-			end
-			OptionsCharacter.NPCs, OptionsCharacter.NPCWorldIDs = NPCsNew, NPCWorldIDs;
-			Version = "3.3.5.1";
-		end
-		if ( Version < "4.0.3.1" ) then
-			-- 4.0.3.1: Added default scans for Cataclysm rares
-			AddDefault( 49913 ); -- Lady LaLa
-			AddDefault( 50005 ); -- Poseidus
-			AddDefault( 50009 ); -- Mobus
-			AddDefault( 50050 ); -- Shok'sharak
-			AddDefault( 50051 ); -- Ghostcrawler
-			AddDefault( 50052 ); -- Burgy Blackheart
-			AddDefault( 50053 ); -- Thartuk the Exile
-			AddDefault( 50056 ); -- Garr
-			AddDefault( 50057 ); -- Blazewing
-			AddDefault( 50058 ); -- Terrorpene
-			AddDefault( 50059 ); -- Golgarok
-			AddDefault( 50060 ); -- Terborus
-			AddDefault( 50061 ); -- Xariona
-			AddDefault( 50062 ); -- Aeonaxx
-			AddDefault( 50063 ); -- Akma'hat
-			AddDefault( 50064 ); -- Cyrus the Black
-			AddDefault( 50065 ); -- Armagedillo
-			AddDefault( 50085 ); -- Overlord Sunderfury
-			AddDefault( 50086 ); -- Tarvus the Vile
-			AddDefault( 50089 ); -- Julak-Doom
-			AddDefault( 50138 ); -- Karoma
-			AddDefault( 50154 ); -- Madexx
-			AddDefault( 50159 ); -- Sambas
-			AddDefault( 50409 ); -- Mysterious Camel Figurine
-			AddDefault( 50410 ); -- Mysterious Camel Figurine
-			AddDefault( 51071 ); -- Captain Florence
-			AddDefault( 51079 ); -- Captain Foulwind
-			AddDefault( 51401 ); -- Madexx
-			AddDefault( 51402 ); -- Madexx
-			AddDefault( 51403 ); -- Madexx
-			AddDefault( 51404 ); -- Madexx
-			Version = "4.0.3.1";
-		end
-		if ( Version < "4.0.3.3" ) then
-			-- 4.0.3.3: Fixed omission of Jadefang.
-			AddDefault( 49822 ); -- Jadefang
-			Version = "4.0.3.3";
-		end
-		if ( Version < "4.2.0.2" ) then
-			-- 4.2.0.2: Added 4.2's rare hunter pets.
-			AddDefault( 50815 ); -- Skarr
-			AddDefault( 50959 ); -- Karkin
-			AddDefault( 54318 ); -- Ankha
-			AddDefault( 54319 ); -- Magria
-			AddDefault( 54320 ); -- Ban'thalos
-			AddDefault( 54321 ); -- Solix
-			AddDefault( 54322 ); -- Deth'tilac
-			AddDefault( 54323 ); -- Kirix
-			AddDefault( 54324 ); -- Skitterflame
-			AddDefault( 54338 ); -- Anthriss
-			Version = "4.2.0.2";
-		end
-		if ( Version < "5.0.0.1" ) then
-			-- 5.0.0.1: Added MoP's rare achievement.
-			OptionsCharacter.Achievements[ 7439 ] = true; -- Glorious!
-			Version = "5.0.0.1";
-		end
-		if ( Version < "5.0.0.2" ) then
-			-- 5.0.0.2: Made the achievement checkbox settings global
-			OptionsCharacter.Achievements = nil;
-			Version = "5.0.0.2";
-		end
-		if ( Version < "5.0.0.5" ) then
-			-- 5.0.0.5: Added Galleon.
-			AddDefault( 62346 ); -- Galleon
-			Version = "5.0.0.5";
-		end
-		OptionsCharacter.Version = NS.Version;
-	end
---]]
 	NS.Overlays.Register();
 	NS.Synchronize( Options, OptionsCharacter ); -- Loads defaults if either are nil
 end
@@ -1027,7 +825,6 @@ do
 
 		-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
 		local MapName,_,_,_,_,_,_,MapID = GetInstanceInfo();
-		--print(MapID)
 
 		if (MapID == 1064) then --Fix for Isle of Thunder having a diffrent Instance name
 			NS.WorldID = 6; 
