@@ -119,7 +119,7 @@ private.Updater.UpdateRate = 0.1
 -- Constants.
 -------------------------------------------------------------------------------
 local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
-
+local PLAYER_FACTION = _G.UnitFactionGroup("player")
 
 --- Prints a message in the default chat window.
 function private.Print(Message, Color)
@@ -546,8 +546,7 @@ do
 
 	--- @return True if NpcID should be a default for this character.
 	function IsDefaultNPCValid(NpcID)
-		return (PLAYER_CLASS == "HUNTER" or not private.TamableIDs[NpcID] or TAMABLE_EXCEPTIONS[NpcID])
-			and (not NPC_FACTION[NpcID] or NPC_FACTION[NpcID] == _G.UnitFactionGroup("player"))
+		return (PLAYER_CLASS == "HUNTER" or not private.TamableIDs[NpcID] or TAMABLE_EXCEPTIONS[NpcID]) and (not NPC_FACTION[NpcID] or NPC_FACTION[NpcID] == PLAYER_FACTION)
 	end
 end
 --- Resets the scanning list and reloads it from saved settings.
