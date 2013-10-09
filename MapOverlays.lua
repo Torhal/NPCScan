@@ -1,6 +1,6 @@
 --[[****************************************************************************
   * _NPCScan by Saiket                                                         *
-  * _NPCScan.Overlays.lua - Integration with NPC map overlay mods.             *
+  * MapOverlays.lua - Integration with NPC map overlay mods.                   *
   ****************************************************************************]]
 
 

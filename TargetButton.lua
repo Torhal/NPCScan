@@ -1,6 +1,6 @@
 --[[****************************************************************************
   * _NPCScan by Saiket                                                         *
-  * _NPCScan.Button.lua - Displays a button to target found NPCs.              *
+  * TargetButton.lua - Displays a button to target found NPCs.                 *
   ****************************************************************************]]
 
 

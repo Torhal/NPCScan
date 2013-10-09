@@ -1,7 +1,7 @@
 --[[****************************************************************************
   * _NPCScan by Saiket                                                         *
-  * _NPCScan.Config.Search.lua - Adds a configuration pane to add/remove NPCs  *
-  *   and achievements to search for.                                          *
+  * ConfigSearch.lua - Adds a configuration pane to add/remove NPCs and        *
+  * achievements to search for.                                                *
   ****************************************************************************]]
 
 
@@ -47,7 +47,7 @@ function NS.BlockFlightScanCheckbox.setFunc ( Enable )
 		_NPCScan.OptionsCharacter.FlightSupress = true
 
 		NS.BlockFlightScanCheckbox:SetChecked( true );
-		
+
 
 	end
 end
@@ -149,7 +149,7 @@ function NS:RareTabCheckOnClick ()
 
 	if TabID == "BEASTS" then
 		_NPCScan.OptionsCharacter.TrackBeasts = Enable or nil;
-	elseif TabID == "RARENPC" then 
+	elseif TabID == "RARENPC" then
 		_NPCScan.OptionsCharacter.TrackRares = Enable or nil;
 	end
 		_NPCScan.RareMobToggle(TabID, Enable)
@@ -671,7 +671,7 @@ local function AddTab ( ID, Update, Activate, Deactivate )
 		Checkbox:SetScript( "OnLeave", GameTooltip_Hide );
 		NS.AchievementSetEnabled( ID, false ); -- Initialize the custom "unchecked" texture
 		PanelTemplates_TabResize( Tab, Checkbox:GetWidth() - 12 );
-	
+
 	else
 		Tab:SetText( L.SEARCH_NPCS );
 		PanelTemplates_TabResize( Tab, -8 );
@@ -682,10 +682,10 @@ local function AddTab ( ID, Update, Activate, Deactivate )
 
 	PanelTemplates_DeselectTab( Tab );
 	if ( LastTab ) then
-		if (TabCount > 5 and TabRow == 0) then 
+		if (TabCount > 5 and TabRow == 0) then
 		Tab:SetPoint( "BOTTOMLEFT", FirstTab, "TOPLEFT", 0,-10 );
 		NS.TableContainer:SetPoint( "TOP", NS.AddFoundCheckbox, "BOTTOM", 0, -60 );
-		TabRow = 1; 
+		TabRow = 1;
 		else
 		Tab:SetPoint( "LEFT", LastTab, "RIGHT", -4, 0 );
 		end

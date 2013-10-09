@@ -61,11 +61,11 @@ Locales\Locale-ruRU.lua
 Locales\Locale-zhCN.lua
 Locales\Locale-zhTW.lua
 
-_NPCScan.NPCData.lua
+NPCData.lua
 
 _NPCScan.lua
-_NPCScan.Button.lua
-_NPCScan.Overlays.lua
-_NPCScan.TamableIDs.lua
-_NPCScan.Config.lua
-_NPCScan.Config.Search.lua
+TargetButton.lua
+MapOverlays.lua
+TamableIDs.lua
+Config.lua
+ConfigSearch.lua

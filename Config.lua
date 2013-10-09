@@ -1,6 +1,6 @@
 --[[****************************************************************************
   * _NPCScan by Saiket                                                         *
-  * _NPCScan.Config.lua - Adds an options pane to the Interface Options menu.  *
+  * Config.lua - Adds an options pane to the Interface Options menu.           *
   ****************************************************************************]]
 
 
