@@ -22,9 +22,21 @@ local L = private.L
 _G._NPCScan = private
 
 private.Frame = _G.CreateFrame("Frame")
-private.Updater = private.Frame:CreateAnimationGroup()
-private.Version = "5.2"
+private.Frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+private.Frame:RegisterEvent("PLAYER_LEAVING_WORLD")
+private.Frame:RegisterEvent("PLAYER_UPDATE_RESTING")
+private.Frame:SetScript("OnEvent", function(self, event_name, ...)
+	if self[event_name] then
+		return self[event_name](self, event_name, ...)
+	end
+end)
 
+private.Updater = private.Frame:CreateAnimationGroup()
+private.Updater.UpdateRate = 0.1
+private.Updater:CreateAnimation("Animation"):SetDuration(private.Updater.UpdateRate)
+private.Updater:SetLooping("REPEAT")
+
+private.Version = "5.2"
 
 private.Options = {
 	Version = private.Version,
@@ -113,7 +125,6 @@ do
 end
 
 private.NpcIDMax = 0xFFFFF --- Largest ID that will fit in a GUID's 20-bit NPC ID field.
-private.Updater.UpdateRate = 0.1
 
 -------------------------------------------------------------------------------
 -- Constants.
@@ -955,14 +966,6 @@ function private.Frame:ZONE_CHANGED_NEW_AREA(Event)
 	private.Updater:SetScript("OnLoop", private.Updater.OnLoop)
 end
 
---- Global event handler.
-function private.Frame:OnEvent(event_name, ...)
-	if self[event_name] then
-		return self[event_name](self, event_name, ...)
-	end
-end
-
---- Slash command chat handler to open the options pane and manage the NPC list.
 do
 	local SUBCOMMAND_FUNCS = {
 		[L.CMD_ADD] = function(arguments)
@@ -1035,26 +1038,17 @@ for AchievementID, Achievement in pairs(private.Achievements) do
 end
 
 
-local Frame = private.Frame
-Frame:SetScript("OnEvent", Frame.OnEvent)
-
 if _G.IsLoggedIn() then
-	Frame:PLAYER_LOGIN("PLAYER_LOGIN")
+	private.Frame:PLAYER_LOGIN("PLAYER_LOGIN")
 else
-	Frame:RegisterEvent("PLAYER_LOGIN")
+	private.Frame:RegisterEvent("PLAYER_LOGIN")
 end
-Frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-Frame:RegisterEvent("PLAYER_LEAVING_WORLD")
-Frame:RegisterEvent("PLAYER_UPDATE_RESTING")
-
-private.Updater:CreateAnimation("Animation"):SetDuration(private.Updater.UpdateRate)
-private.Updater:SetLooping("REPEAT")
 
 -- Set update handler after zone info loads
 if _G.GetZoneText() == "" then -- Zone information unknown (initial login)
-	Frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+	private.Frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 else -- Zone information is known
-	Frame:ZONE_CHANGED_NEW_AREA("ZONE_CHANGED_NEW_AREA")
+	private.Frame:ZONE_CHANGED_NEW_AREA("ZONE_CHANGED_NEW_AREA")
 end
 
 _G.SlashCmdList["_NPCSCAN"] = private.SlashCommand
