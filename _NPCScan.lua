@@ -290,12 +290,13 @@ do
 
 	--- Ends actual scan for NPC.
 	function NPCDeactivate(NpcID)
-		if NPCsActive[NpcID] then
-			NPCsActive[NpcID] = nil
-			ScanRemove(NpcID)
-			private.Config.Search.UpdateTab("NPC")
-			return true -- Successfully deactivated
+		if not NPCsActive[NpcID] then
+			return
 		end
+		NPCsActive[NpcID] = nil
+		ScanRemove(NpcID)
+		private.Config.Search.UpdateTab("NPC")
+		return true -- Successfully deactivated
 	end
 
 	--- @return True if a custom NPC is actively being searched for.
@@ -304,125 +305,139 @@ do
 	end
 end
 --- Adds an NPC name and ID to settings and begins searching.
--- @param NpcID Numeric ID of the NPC (See Wowhead.com).
+-- @param npc_id Numeric ID of the NPC (See Wowhead.com).
 -- @param Name Temporary name to identify this NPC by in the search table.
 -- @param WorldID Number or localized string WorldID to limit this search to.
 -- @return True if custom NPC added.
-function private.NPCAdd(NpcID, Name, WorldID)
-	NpcID = assert(tonumber(NpcID), "NpcID must be numeric.")
-	local Options = private.Options
-	if not Options.NPCs[NpcID] then
-		assert(type(Name) == "string", "Name must be a string.")
-		assert(WorldID == nil or type(WorldID) == "string" or type(WorldID) == "number", "Invalid WorldID.")
-		Options.NPCs[NpcID], Options.NPCWorldIDs[NpcID] = Name, WorldID
-		if not NPCActivate(NpcID, WorldID) then -- Didn't activate
-			private.Config.Search.UpdateTab("NPC") -- Just add row
-		end
-		return true
+function private.NPCAdd(npc_id, npc_name, world_id)
+	local options = private.Options
+	npc_id = assert(tonumber(npc_id), "NpcID must be numeric.")
+
+	if options.NPCs[npc_id] then
+		return
 	end
+	assert(type(npc_name) == "string", "Name must be a string.")
+	assert(world_id == nil or type(world_id) == "string" or type(world_id) == "number", "Invalid WorldID.")
+	options.NPCs[npc_id] = npc_name
+	options.NPCWorldIDs[npc_id] = world_id
+
+	if not NPCActivate(npc_id, world_id) then -- Didn't activate
+		private.Config.Search.UpdateTab("NPC") -- Just add row
+	end
+	return true
 end
 
 --- Removes an NPC from settings and stops searching for it.
 -- @param NpcID Numeric ID of the NPC.
 -- @return True if custom NPC removed.
-function private.NPCRemove(NpcID)
-	NpcID = tonumber(NpcID)
-	local Options = private.Options
-	if Options.NPCs[NpcID] then
-		Options.NPCs[NpcID] = nil
-		Options.NPCWorldIDs[NpcID] = nil
+function private.NPCRemove(npc_id)
+	local options = private.Options
+	npc_id = tonumber(npc_id)
 
-		if not NPCDeactivate(NpcID) then -- Wasn't active
-			private.Config.Search.UpdateTab("NPC") -- Just remove row
-		end
-		return true
+	if not options.NPCs[npc_id] then
+		return
 	end
+	options.NPCs[npc_id] = nil
+	options.NPCWorldIDs[npc_id] = nil
+
+	if not NPCDeactivate(npc_id) then
+		private.Config.Search.UpdateTab("NPC")
+	end
+	return true
 end
 
 
-
-
 --- Starts searching for an achievement's NPC if it meets all settings.
-local function AchievementNPCActivate(Achievement, NpcID, CriteriaID)
-	if (Achievement.Active and not Achievement.NPCsActive[NpcID]
-		and (private.OptionsCharacter.AchievementsAddFound or not select(3, GetAchievementCriteriaInfoByID(Achievement.ID, CriteriaID))) -- Not completed
-		and ScanAdd(NpcID)) then
-		Achievement.NPCsActive[NpcID] = CriteriaID
-		private.Config.Search.UpdateTab(Achievement.ID)
+local function AchievementNPCActivate(achievement, npc_id, criteria_id)
+	if (achievement.Active and not achievement.NPCsActive[npc_id]
+		and (private.OptionsCharacter.AchievementsAddFound or not select(3, GetAchievementCriteriaInfoByID(achievement.ID, criteria_id))) -- Not completed
+		and ScanAdd(npc_id)) then
+		achievement.NPCsActive[npc_id] = criteria_id
+		private.Config.Search.UpdateTab(achievement.ID)
 		return true
 	end
 end
 
 --- Stops searching for an achievement's NPC.
-local function AchievementNPCDeactivate(Achievement, NpcID)
-	if Achievement.NPCsActive[NpcID] then
-		Achievement.NPCsActive[NpcID] = nil
-		ScanRemove(NpcID)
-		private.Config.Search.UpdateTab(Achievement.ID)
-		return true
+local function AchievementNPCDeactivate(achievement, npc_id)
+	if not achievement.NPCsActive[npc_id] then
+		return
 	end
+	achievement.NPCsActive[npc_id] = nil
+	ScanRemove(npc_id)
+	private.Config.Search.UpdateTab(achievement.ID)
+	return true
 end
 
 --- Starts actual scans for achievement NPCs if on the right world.
-local function AchievementActivate(Achievement)
-	if not Achievement.Active and IsWorldIDActive(Achievement.WorldID) then
-		Achievement.Active = true
-		for CriteriaID, NpcID in pairs(Achievement.Criteria) do
-			AchievementNPCActivate(Achievement, NpcID, CriteriaID)
-		end
-		return true
+local function AchievementActivate(achievement)
+	if achievement.Active or not IsWorldIDActive(achievement.WorldID) then
+		return
 	end
+	achievement.Active = true
+
+	for criteria_id, npc_id in pairs(achievement.Criteria) do
+		AchievementNPCActivate(achievement, npc_id, criteria_id)
+	end
+	return true
 end
 
 -- Ends actual scans for achievement NPCs.
-local function AchievementDeactivate(Achievement)
-	if Achievement.Active then
-		Achievement.Active = nil
-		for NpcID in pairs(Achievement.NPCsActive) do
-			AchievementNPCDeactivate(Achievement, NpcID)
-		end
-		return true
+local function AchievementDeactivate(achievement)
+	if not achievement.Active then
+		return
 	end
+	achievement.Active = nil
+
+	for npc_id in pairs(achievement.NPCsActive) do
+		AchievementNPCDeactivate(achievement, npc_id)
+	end
+	return true
 end
 
---- @param Achievement Achievement data table from NS.Achievements.
+--- @param achievement Achievement data table from NS.Achievements.
 -- @return True if the achievement NPC is being searched for.
-function private.AchievementNPCIsActive(Achievement, NpcID)
-	return Achievement.NPCsActive[NpcID] ~= nil
+function private.AchievementNPCIsActive(achievement, npc_id)
+	return achievement.NPCsActive[npc_id] ~= nil
 end
 
 --- Adds a kill-related achievement to track.
--- @param AchievementID Numeric ID of achievement.
+-- @param achievement_id Numeric ID of achievement.
 -- @return True if achievement added.
-function private.AchievementAdd(AchievementID)
-	AchievementID = assert(tonumber(AchievementID), "AchievementID must be numeric.")
-	local Achievement = private.Achievements[AchievementID]
-	if Achievement and not private.OptionsCharacter.Achievements[AchievementID] then
-		if not next(private.OptionsCharacter.Achievements) then -- First
-			private.Frame:RegisterEvent("ACHIEVEMENT_EARNED")
-			private.Frame:RegisterEvent("CRITERIA_UPDATE")
-		end
-		private.OptionsCharacter.Achievements[AchievementID] = true
-		private.Config.Search.AchievementSetEnabled(AchievementID, true)
-		AchievementActivate(Achievement)
-		return true
+function private.AchievementAdd(achievement_id)
+	achievement_id = assert(tonumber(achievement_id), "AchievementID must be numeric.")
+	local achievement = private.Achievements[achievement_id]
+
+	if not achievement or private.OptionsCharacter.Achievements[achievement_id] then
+		return
 	end
+
+	if not next(private.OptionsCharacter.Achievements) then -- First
+		private.Frame:RegisterEvent("ACHIEVEMENT_EARNED")
+		private.Frame:RegisterEvent("CRITERIA_UPDATE")
+	end
+	private.OptionsCharacter.Achievements[achievement_id] = true
+	private.Config.Search.AchievementSetEnabled(achievement_id, true)
+	AchievementActivate(achievement)
+	return true
 end
 
 --- Removes an achievement from settings and stops tracking it.
--- @param AchievementID Numeric ID of achievement.
+-- @param achievement_id Numeric ID of achievement.
 -- @return True if achievement removed.
-function private.AchievementRemove(AchievementID)
-	if private.OptionsCharacter.Achievements[AchievementID] then
-		AchievementDeactivate(private.Achievements[AchievementID])
-		private.OptionsCharacter.Achievements[AchievementID] = nil
-		if not next(private.OptionsCharacter.Achievements) then -- Last
-			private.Frame:UnregisterEvent("ACHIEVEMENT_EARNED")
-			private.Frame:UnregisterEvent("CRITERIA_UPDATE")
-		end
-		private.Config.Search.AchievementSetEnabled(AchievementID, false)
-		return true
+function private.AchievementRemove(achievement_id)
+	if not private.OptionsCharacter.Achievements[achievement_id] then
+		return
 	end
+	AchievementDeactivate(private.Achievements[achievement_id])
+	private.OptionsCharacter.Achievements[achievement_id] = nil
+
+	if not next(private.OptionsCharacter.Achievements) then -- Last
+		private.Frame:UnregisterEvent("ACHIEVEMENT_EARNED")
+		private.Frame:UnregisterEvent("CRITERIA_UPDATE")
+	end
+	private.Config.Search.AchievementSetEnabled(achievement_id, false)
+	return true
 end
 
 --- Adds a kill-related achievement to track.
@@ -465,32 +480,32 @@ end
 
 --- Enables printing cache lists on login.
 -- @return True if changed.
-function private.SetCacheWarnings(Enable)
-	if not Enable ~= not private.Options.CacheWarnings then
-		private.Options.CacheWarnings = Enable or nil
+function private.SetCacheWarnings(enable)
+	if not enable ~= not private.Options.CacheWarnings then
+		private.Options.CacheWarnings = enable or nil
 
-		private.Config.CacheWarnings:SetChecked(Enable)
+		private.Config.CacheWarnings:SetChecked(enable)
 		return true
 	end
 end
 
 --- Enables adding a timestamp to printed messages.
 -- @return True if changed.
-function private.SetPrintTime(Enable)
-	if not Enable ~= not private.Options.PrintTime then
-		private.Options.PrintTime = Enable or nil
+function private.SetPrintTime(enable)
+	if not enable ~= not private.Options.PrintTime then
+		private.Options.PrintTime = enable or nil
 
-		private.Config.PrintTime:SetChecked(Enable)
+		private.Config.PrintTime:SetChecked(enable)
 		return true
 	end
 end
 
 --- Enables tracking of unneeded achievement NPCs.
 -- @return True if changed.
-function private.SetAchievementsAddFound(Enable)
-	if not Enable ~= not private.OptionsCharacter.AchievementsAddFound then
-		private.OptionsCharacter.AchievementsAddFound = Enable or nil
-		private.Config.Search.AddFoundCheckbox:SetChecked(Enable)
+function private.SetAchievementsAddFound(enable)
+	if not enable ~= not private.OptionsCharacter.AchievementsAddFound then
+		private.OptionsCharacter.AchievementsAddFound = enable or nil
+		private.Config.Search.AddFoundCheckbox:SetChecked(enable)
 
 		for _, Achievement in pairs(private.Achievements) do
 			if AchievementDeactivate(Achievement) then -- Was active
@@ -503,11 +518,11 @@ end
 
 --- Enables unmuting sound to play found alerts.
 -- @return True if changed.
-function private.SetAlertSoundUnmute(Enable)
-	if not Enable ~= not private.OptionsCharacter.AlertSoundUnmute then
-		private.OptionsCharacter.AlertSoundUnmute = Enable or nil
+function private.SetAlertSoundUnmute(enable)
+	if not enable ~= not private.OptionsCharacter.AlertSoundUnmute then
+		private.OptionsCharacter.AlertSoundUnmute = enable or nil
 
-		private.Config.AlertSoundUnmute:SetChecked(Enable)
+		private.Config.AlertSoundUnmute:SetChecked(enable)
 		return true
 	end
 end
@@ -549,6 +564,7 @@ do
 		return (PLAYER_CLASS == "HUNTER" or not private.TamableIDs[NpcID] or TAMABLE_EXCEPTIONS[NpcID]) and (not NPC_FACTION[NpcID] or NPC_FACTION[NpcID] == PLAYER_FACTION)
 	end
 end
+
 --- Resets the scanning list and reloads it from saved settings.
 function private.Synchronize(Options, OptionsCharacter)
 	-- Load defaults if settings omitted
@@ -556,14 +572,17 @@ function private.Synchronize(Options, OptionsCharacter)
 	if not Options then
 		Options = private.OptionsDefault
 	end
+
 	if not OptionsCharacter then
-		OptionsCharacter, IsDefaultScan = private.OptionsCharacterDefault, true
+		OptionsCharacter = private.OptionsCharacterDefault
+		IsDefaultScan = true
 	end
 
 	-- Clear all scans
 	for AchievementID in pairs(private.Achievements) do
 		private.AchievementRemove(AchievementID)
 	end
+
 	for NpcID in pairs(private.Options.NPCs) do
 		private.NPCRemove(NpcID)
 	end
@@ -589,6 +608,7 @@ function private.Synchronize(Options, OptionsCharacter)
 			private.NPCAdd(NpcID, Name, Options.NPCWorldIDs[NpcID])
 		end
 	end
+
 	for AchievementID in pairs(private.Achievements) do
 		-- If defaults, don't enable completed achievements unless explicitly allowed
 		if OptionsCharacter.Achievements[AchievementID] and (not IsDefaultScan or OptionsCharacter.AchievementsAddFound or not select(4, GetAchievementInfo(AchievementID))) then -- Not completed
@@ -709,14 +729,16 @@ do
 
 	--- Scans all active criteria and removes any completed NPCs.
 	local function AchievementCriteriaUpdate()
-		if not private.OptionsCharacter.AchievementsAddFound then
-			for AchievementID in pairs(private.OptionsCharacter.Achievements) do
-				local Achievement = private.Achievements[AchievementID]
-				for NpcID, CriteriaID in pairs(Achievement.NPCsActive) do
-					local _, _, Complete = _G.GetAchievementCriteriaInfoByID(AchievementID, CriteriaID)
-					if Complete then
-						AchievementNPCDeactivate(Achievement, NpcID)
-					end
+		if private.OptionsCharacter.AchievementsAddFound then
+			return
+		end
+
+		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
+			local achievement = private.Achievements[achievement_id]
+			for npc_id, criteria_id in pairs(achievement.NPCsActive) do
+				local _, _, is_complete = _G.GetAchievementCriteriaInfoByID(achievement_id, criteria_id)
+				if is_complete then
+					AchievementNPCDeactivate(achievement, npc_id)
 				end
 			end
 		end
@@ -903,12 +925,14 @@ do
 		private.Config.Search:UpdateTabNames()
 	end
 end
+
 --- Stops world-specific scans when leaving a world.
 function private.Frame:PLAYER_LEAVING_WORLD()
 	-- Stop scans that were only active on the previous world
 	for NpcID in pairs(private.Options.NPCWorldIDs) do
 		NPCDeactivate(NpcID)
 	end
+
 	for AchievementID in pairs(private.OptionsCharacter.Achievements) do
 		local Achievement = private.Achievements[AchievementID]
 		if Achievement.WorldID then
@@ -934,9 +958,9 @@ function private.Frame:ZONE_CHANGED_NEW_AREA(Event)
 end
 
 --- Global event handler.
-function private.Frame:OnEvent(Event, ...)
-	if self[Event] then
-		return self[Event](self, Event, ...)
+function private.Frame:OnEvent(event_name, ...)
+	if self[event_name] then
+		return self[event_name](self, event_name, ...)
 	end
 end
 
@@ -982,8 +1006,6 @@ function private.SlashCommand(Input)
 		_G.InterfaceOptionsFrame_OpenToCategory(private.Config.Search)
 	end
 end
-
-
 
 
 -- Create reverse lookup of continent names
