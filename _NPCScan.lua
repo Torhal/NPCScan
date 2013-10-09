@@ -423,11 +423,11 @@ end
 -- @param AchievementID Numeric ID of achievement.
 -- @return True if achievement added.
 function NS.SetRareMob(ID, enable)
-	if (ID == "BEASTS") then
+	if ID == "BEASTS" then
 		NS.OptionsCharacter.TrackBeasts = enable or nil
 		NS.Config.Search.AchievementSetEnabled(ID, enable)
 		return true
-	elseif (ID == "RARENPC") then
+	elseif ID == "RARENPC" then
 		NS.OptionsCharacter.TrackRares = enable or nil
 		NS.Config.Search.AchievementSetEnabled(ID, enable)
 		return true
@@ -437,13 +437,13 @@ end
 function NS.RareMobToggle(ID, enable)
 	local Mobs
 
-	if (ID == "BEASTS") then
+	if ID == "BEASTS" then
 		Mobs = NS.TamableIDs
-	elseif (ID == "RARENPC") then
+	elseif ID == "RARENPC" then
 		Mobs = NS.RareMobData.RareNPCs
 	end
 
-	if (enable) then
+	if enable then
 		--Loads Rare Mob Databas
 		for NpcID, _ in pairs(Mobs) do
 			local WorldID = NS.RareMobData.NPCWorldIDs[NpcID]
@@ -682,7 +682,7 @@ do
 		end
 
 		--Checks to see if player is on flightpath, this will block possible cross realm alerts
-		if (NS.OptionsCharacter.FlightSupress) then
+		if NS.OptionsCharacter.FlightSupress then
 			local onTaxi = UnitOnTaxi("player")
 			if onTaxi then
 				Valid = false
@@ -813,7 +813,7 @@ function NS.Frame:PLAYER_LOGIN(Event)
 		if Options.Version == nil or tostring(Options.Version) < "5.1.2" then
 			Options = NS.OptionsDefault
 		end
-		if (tostring(Options.Version) < "5.2") then
+		if tostring(Options.Version) < "5.2" then
 			for NPCid, Name in pairs(NS.OptionsDefault.NPCs) do
 				Options.NPCs[NPCid] = Name
 			end
