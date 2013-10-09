@@ -4,23 +4,24 @@
   ****************************************************************************]]
 
 
-local NS = select(2, ...)
-_NPCScan = NS
-local L = NS.L
+local FOLDER_NAME, private = ...
 
-NS.Frame = CreateFrame("Frame")
-NS.Updater = NS.Frame:CreateAnimationGroup()
-NS.Version = "5.2"
+_NPCScan = private
+local L = private.L
+
+private.Frame = CreateFrame("Frame")
+private.Updater = private.Frame:CreateAnimationGroup()
+private.Version = "5.2"
 
 
-NS.Options = {
-	Version = NS.Version,
+private.Options = {
+	Version = private.Version,
 	NPCs = {},
 	NPCWorldIDs = {},
 }
 
-NS.OptionsCharacter = {
-	Version = NS.Version,
+private.OptionsCharacter = {
+	Version = private.Version,
 	Achievements = {},
 	AchievementsAddFound = nil,
 	AlertSoundUnmute = nil,
@@ -37,8 +38,8 @@ NS.OptionsCharacter = {
 	TrackRares = true,
 }
 
-NS.OptionsDefault = {
-	Version = NS.Version,
+private.OptionsDefault = {
+	Version = private.Version,
 	NPCs = {
 		[64004] = "Ghostly Pandaren Fisherman",
 		[64191] = "Ghostly Pandaren Craftsman",
@@ -53,8 +54,8 @@ NS.OptionsDefault = {
 	},
 }
 
-NS.OptionsCharacterDefault = {
-	Version = NS.Version,
+private.OptionsCharacterDefault = {
+	Version = private.Version,
 	Achievements = {
 		[1312] = true, -- Bloody Rare (Outlands)
 		[2257] = true, -- Frostbitten (Northrend)
@@ -78,7 +79,7 @@ NS.OptionsCharacterDefault = {
 	TrackRares = true,
 }
 
-NS.Achievements = {
+private.Achievements = {
 	--- Criteria data for each achievement.
 	[1312] = { WorldID = 3 }, -- Bloody Rare (Outlands)
 	[2257] = { WorldID = 4 }, -- Frostbitten (Northrend)
@@ -92,25 +93,25 @@ do
 		--- Continents without physical maps aren't used.
 		[5] = true -- The Maelstrom
 	}
-	NS.ContinentNames = { GetMapContinents() }
+	private.ContinentNames = { GetMapContinents() }
 	for ContinentID in pairs(VirtualContinents) do
-		NS.ContinentNames[ContinentID] = nil
+		private.ContinentNames[ContinentID] = nil
 	end
-	NS.ContinentIDs = {} --- Reverse lookup of NS.ContinentNames.
+	private.ContinentIDs = {} --- Reverse lookup of NS.ContinentNames.
 end
 
-NS.NpcIDMax = 0xFFFFF --- Largest ID that will fit in a GUID's 20-bit NPC ID field.
-NS.Updater.UpdateRate = 0.1
+private.NpcIDMax = 0xFFFFF --- Largest ID that will fit in a GUID's 20-bit NPC ID field.
+private.Updater.UpdateRate = 0.1
 
 
 
 
 --- Prints a message in the default chat window.
-function NS.Print(Message, Color)
+function private.Print(Message, Color)
 	if not Color then
 		Color = NORMAL_FONT_COLOR
 	end
-	DEFAULT_CHAT_FRAME:AddMessage(L.PRINT_FORMAT:format(NS.Options.PrintTime and date(CHAT_TIMESTAMP_FORMAT or L.TIME_FORMAT) or "",
+	DEFAULT_CHAT_FRAME:AddMessage(L.PRINT_FORMAT:format(private.Options.PrintTime and date(CHAT_TIMESTAMP_FORMAT or L.TIME_FORMAT) or "",
 		Message), Color.r, Color.g, Color.b)
 end
 
@@ -123,7 +124,7 @@ do
 	Tooltip:AddFontStrings(Text, Tooltip:CreateFontString())
 	--- Checks the cache for a given NpcID.
 	-- @return Localized name of the NPC if cached, or nil if not.
-	function NS.TestID(NpcID)
+	function private.TestID(NpcID)
 		Tooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
 		Tooltip:SetHyperlink(("unit:0xF53%05X00000000"):format(NpcID))
 
@@ -168,26 +169,26 @@ local CacheList = {}
 do
 	--- Fills a cache list with all added NPCs, active or not.
 	local function CacheListPopulate(self)
-		for NpcID in pairs(NS.Options.NPCs) do
-			self[NpcID] = NS.TestID(NpcID)
+		for NpcID in pairs(private.Options.NPCs) do
+			self[NpcID] = private.TestID(NpcID)
 		end
 
-		if NS.OptionsCharacter.TrackBeasts then
-			for NpcID in pairs(NS.TamableIDs) do
-				self[NpcID] = NS.TestID(NpcID)
+		if private.OptionsCharacter.TrackBeasts then
+			for NpcID in pairs(private.TamableIDs) do
+				self[NpcID] = private.TestID(NpcID)
 			end
 		end
 
-		if NS.OptionsCharacter.TrackRares then
-			for NpcID in pairs(NS.RareMobData.RareNPCs) do
-				self[NpcID] = NS.TestID(NpcID)
+		if private.OptionsCharacter.TrackRares then
+			for NpcID in pairs(private.RareMobData.RareNPCs) do
+				self[NpcID] = private.TestID(NpcID)
 			end
 		end
 
-		for AchievementID in pairs(NS.OptionsCharacter.Achievements) do
-			for CriteriaID, NpcID in pairs(NS.Achievements[AchievementID].Criteria) do
-				if NS.OptionsCharacter.AchievementsAddFound or not select(3, GetAchievementCriteriaInfoByID(AchievementID, CriteriaID)) then -- Not completed
-					self[NpcID] = NS.TestID(NpcID)
+		for AchievementID in pairs(private.OptionsCharacter.Achievements) do
+			for CriteriaID, NpcID in pairs(private.Achievements[AchievementID].Criteria) do
+				if private.OptionsCharacter.AchievementsAddFound or not select(3, GetAchievementCriteriaInfoByID(AchievementID, CriteriaID)) then -- Not completed
+					self[NpcID] = private.TestID(NpcID)
 				end
 			end
 		end
@@ -199,15 +200,15 @@ do
 	-- @param ForcePrint Overrides the user's option to not print cache warnings.
 	-- @param FullListing Adds all cached NPCs before printing, active or not.
 	-- @return True if list printed.
-	function NS.CacheListPrint(ForcePrint, FullListing)
-		if ForcePrint or NS.Options.CacheWarnings then
+	function private.CacheListPrint(ForcePrint, FullListing)
+		if ForcePrint or private.Options.CacheWarnings then
 			if FullListing then
 				CacheListPopulate(CacheList)
 			end
 			local ListString = CacheListBuild(CacheList, ForcePrint or FullListing) -- Allow printing an NPC a second time if forced or full listing
 
 			if ListString then
-				NS.Print(L[FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT"]:format(ListString), ForcePrint and RED_FONT_COLOR)
+				private.Print(L[FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT"]:format(ListString), ForcePrint and RED_FONT_COLOR)
 				FirstPrint = false
 				return true
 			end
@@ -226,7 +227,7 @@ local ScanIDs = {} --- [ NpcID ] = Number of concurrent scans for this ID
 --- Begins searching for an NPC.
 -- @return True if successfully added.
 local function ScanAdd(NpcID)
-	local Name = NS.TestID(NpcID)
+	local Name = private.TestID(NpcID)
 	if Name then -- Already seen
 		CacheList[NpcID] = Name
 	else -- Increment
@@ -234,10 +235,10 @@ local function ScanAdd(NpcID)
 			ScanIDs[NpcID] = ScanIDs[NpcID] + 1
 		else
 			if not next(ScanIDs) then -- First
-				NS.Updater:Play()
+				private.Updater:Play()
 			end
 			ScanIDs[NpcID] = 1
-			NS.Overlays.Add(NpcID)
+			private.Overlays.Add(NpcID)
 		end
 		return true -- Successfully added
 	end
@@ -250,9 +251,9 @@ local function ScanRemove(NpcID)
 		ScanIDs[NpcID] = Count - 1
 	else
 		ScanIDs[NpcID] = nil
-		NS.Overlays.Remove(NpcID)
+		private.Overlays.Remove(NpcID)
 		if not next(ScanIDs) then -- Last
-			NS.Updater:Stop()
+			private.Updater:Stop()
 		end
 	end
 end
@@ -262,7 +263,7 @@ end
 
 --- @return True if the given WorldID is active on the current world.
 local function IsWorldIDActive(WorldID)
-	return not WorldID or WorldID == NS.WorldID -- False/nil active on all worlds
+	return not WorldID or WorldID == private.WorldID -- False/nil active on all worlds
 end
 
 local NPCActivate, NPCDeactivate
@@ -272,7 +273,7 @@ do
 	function NPCActivate(NpcID, WorldID)
 		if not NPCsActive[NpcID] and IsWorldIDActive(WorldID) and ScanAdd(NpcID) then
 			NPCsActive[NpcID] = true
-			NS.Config.Search.UpdateTab("NPC")
+			private.Config.Search.UpdateTab("NPC")
 			return true -- Successfully activated
 		end
 	end
@@ -282,13 +283,13 @@ do
 		if NPCsActive[NpcID] then
 			NPCsActive[NpcID] = nil
 			ScanRemove(NpcID)
-			NS.Config.Search.UpdateTab("NPC")
+			private.Config.Search.UpdateTab("NPC")
 			return true -- Successfully deactivated
 		end
 	end
 
 	--- @return True if a custom NPC is actively being searched for.
-	function NS.NPCIsActive(NpcID)
+	function private.NPCIsActive(NpcID)
 		return NPCsActive[NpcID]
 	end
 end
@@ -297,15 +298,15 @@ end
 -- @param Name Temporary name to identify this NPC by in the search table.
 -- @param WorldID Number or localized string WorldID to limit this search to.
 -- @return True if custom NPC added.
-function NS.NPCAdd(NpcID, Name, WorldID)
+function private.NPCAdd(NpcID, Name, WorldID)
 	NpcID = assert(tonumber(NpcID), "NpcID must be numeric.")
-	local Options = NS.Options
+	local Options = private.Options
 	if not Options.NPCs[NpcID] then
 		assert(type(Name) == "string", "Name must be a string.")
 		assert(WorldID == nil or type(WorldID) == "string" or type(WorldID) == "number", "Invalid WorldID.")
 		Options.NPCs[NpcID], Options.NPCWorldIDs[NpcID] = Name, WorldID
 		if not NPCActivate(NpcID, WorldID) then -- Didn't activate
-			NS.Config.Search.UpdateTab("NPC") -- Just add row
+			private.Config.Search.UpdateTab("NPC") -- Just add row
 		end
 		return true
 	end
@@ -314,15 +315,15 @@ end
 --- Removes an NPC from settings and stops searching for it.
 -- @param NpcID Numeric ID of the NPC.
 -- @return True if custom NPC removed.
-function NS.NPCRemove(NpcID)
+function private.NPCRemove(NpcID)
 	NpcID = tonumber(NpcID)
-	local Options = NS.Options
+	local Options = private.Options
 	if Options.NPCs[NpcID] then
 		Options.NPCs[NpcID] = nil
 		Options.NPCWorldIDs[NpcID] = nil
 
 		if not NPCDeactivate(NpcID) then -- Wasn't active
-			NS.Config.Search.UpdateTab("NPC") -- Just remove row
+			private.Config.Search.UpdateTab("NPC") -- Just remove row
 		end
 		return true
 	end
@@ -334,10 +335,10 @@ end
 --- Starts searching for an achievement's NPC if it meets all settings.
 local function AchievementNPCActivate(Achievement, NpcID, CriteriaID)
 	if (Achievement.Active and not Achievement.NPCsActive[NpcID]
-		and (NS.OptionsCharacter.AchievementsAddFound or not select(3, GetAchievementCriteriaInfoByID(Achievement.ID, CriteriaID))) -- Not completed
+		and (private.OptionsCharacter.AchievementsAddFound or not select(3, GetAchievementCriteriaInfoByID(Achievement.ID, CriteriaID))) -- Not completed
 		and ScanAdd(NpcID)) then
 		Achievement.NPCsActive[NpcID] = CriteriaID
-		NS.Config.Search.UpdateTab(Achievement.ID)
+		private.Config.Search.UpdateTab(Achievement.ID)
 		return true
 	end
 end
@@ -347,7 +348,7 @@ local function AchievementNPCDeactivate(Achievement, NpcID)
 	if Achievement.NPCsActive[NpcID] then
 		Achievement.NPCsActive[NpcID] = nil
 		ScanRemove(NpcID)
-		NS.Config.Search.UpdateTab(Achievement.ID)
+		private.Config.Search.UpdateTab(Achievement.ID)
 		return true
 	end
 end
@@ -376,23 +377,23 @@ end
 
 --- @param Achievement Achievement data table from NS.Achievements.
 -- @return True if the achievement NPC is being searched for.
-function NS.AchievementNPCIsActive(Achievement, NpcID)
+function private.AchievementNPCIsActive(Achievement, NpcID)
 	return Achievement.NPCsActive[NpcID] ~= nil
 end
 
 --- Adds a kill-related achievement to track.
 -- @param AchievementID Numeric ID of achievement.
 -- @return True if achievement added.
-function NS.AchievementAdd(AchievementID)
+function private.AchievementAdd(AchievementID)
 	AchievementID = assert(tonumber(AchievementID), "AchievementID must be numeric.")
-	local Achievement = NS.Achievements[AchievementID]
-	if Achievement and not NS.OptionsCharacter.Achievements[AchievementID] then
-		if not next(NS.OptionsCharacter.Achievements) then -- First
-			NS.Frame:RegisterEvent("ACHIEVEMENT_EARNED")
-			NS.Frame:RegisterEvent("CRITERIA_UPDATE")
+	local Achievement = private.Achievements[AchievementID]
+	if Achievement and not private.OptionsCharacter.Achievements[AchievementID] then
+		if not next(private.OptionsCharacter.Achievements) then -- First
+			private.Frame:RegisterEvent("ACHIEVEMENT_EARNED")
+			private.Frame:RegisterEvent("CRITERIA_UPDATE")
 		end
-		NS.OptionsCharacter.Achievements[AchievementID] = true
-		NS.Config.Search.AchievementSetEnabled(AchievementID, true)
+		private.OptionsCharacter.Achievements[AchievementID] = true
+		private.Config.Search.AchievementSetEnabled(AchievementID, true)
 		AchievementActivate(Achievement)
 		return true
 	end
@@ -401,15 +402,15 @@ end
 --- Removes an achievement from settings and stops tracking it.
 -- @param AchievementID Numeric ID of achievement.
 -- @return True if achievement removed.
-function NS.AchievementRemove(AchievementID)
-	if NS.OptionsCharacter.Achievements[AchievementID] then
-		AchievementDeactivate(NS.Achievements[AchievementID])
-		NS.OptionsCharacter.Achievements[AchievementID] = nil
-		if not next(NS.OptionsCharacter.Achievements) then -- Last
-			NS.Frame:UnregisterEvent("ACHIEVEMENT_EARNED")
-			NS.Frame:UnregisterEvent("CRITERIA_UPDATE")
+function private.AchievementRemove(AchievementID)
+	if private.OptionsCharacter.Achievements[AchievementID] then
+		AchievementDeactivate(private.Achievements[AchievementID])
+		private.OptionsCharacter.Achievements[AchievementID] = nil
+		if not next(private.OptionsCharacter.Achievements) then -- Last
+			private.Frame:UnregisterEvent("ACHIEVEMENT_EARNED")
+			private.Frame:UnregisterEvent("CRITERIA_UPDATE")
 		end
-		NS.Config.Search.AchievementSetEnabled(AchievementID, false)
+		private.Config.Search.AchievementSetEnabled(AchievementID, false)
 		return true
 	end
 end
@@ -422,36 +423,36 @@ end
 --- Adds a kill-related achievement to track.
 -- @param AchievementID Numeric ID of achievement.
 -- @return True if achievement added.
-function NS.SetRareMob(ID, enable)
+function private.SetRareMob(ID, enable)
 	if ID == "BEASTS" then
-		NS.OptionsCharacter.TrackBeasts = enable or nil
-		NS.Config.Search.AchievementSetEnabled(ID, enable)
+		private.OptionsCharacter.TrackBeasts = enable or nil
+		private.Config.Search.AchievementSetEnabled(ID, enable)
 		return true
 	elseif ID == "RARENPC" then
-		NS.OptionsCharacter.TrackRares = enable or nil
-		NS.Config.Search.AchievementSetEnabled(ID, enable)
+		private.OptionsCharacter.TrackRares = enable or nil
+		private.Config.Search.AchievementSetEnabled(ID, enable)
 		return true
 	end
 end
 
-function NS.RareMobToggle(ID, enable)
+function private.RareMobToggle(ID, enable)
 	local Mobs
 
 	if ID == "BEASTS" then
-		Mobs = NS.TamableIDs
+		Mobs = private.TamableIDs
 	elseif ID == "RARENPC" then
-		Mobs = NS.RareMobData.RareNPCs
+		Mobs = private.RareMobData.RareNPCs
 	end
 
 	if enable then
 		--Loads Rare Mob Databas
 		for NpcID, _ in pairs(Mobs) do
-			local WorldID = NS.RareMobData.NPCWorldIDs[NpcID]
+			local WorldID = private.RareMobData.NPCWorldIDs[NpcID]
 			NPCActivate(NpcID, WorldID)
 		end
 	else
 		for NpcID, _ in pairs(Mobs) do
-			local WorldID = NS.RareMobData.NPCWorldIDs[NpcID]
+			local WorldID = private.RareMobData.NPCWorldIDs[NpcID]
 			NPCDeactivate(NpcID)
 		end
 	end
@@ -459,34 +460,34 @@ end
 
 --- Enables printing cache lists on login.
 -- @return True if changed.
-function NS.SetCacheWarnings(Enable)
-	if not Enable ~= not NS.Options.CacheWarnings then
-		NS.Options.CacheWarnings = Enable or nil
+function private.SetCacheWarnings(Enable)
+	if not Enable ~= not private.Options.CacheWarnings then
+		private.Options.CacheWarnings = Enable or nil
 
-		NS.Config.CacheWarnings:SetChecked(Enable)
+		private.Config.CacheWarnings:SetChecked(Enable)
 		return true
 	end
 end
 
 --- Enables adding a timestamp to printed messages.
 -- @return True if changed.
-function NS.SetPrintTime(Enable)
-	if not Enable ~= not NS.Options.PrintTime then
-		NS.Options.PrintTime = Enable or nil
+function private.SetPrintTime(Enable)
+	if not Enable ~= not private.Options.PrintTime then
+		private.Options.PrintTime = Enable or nil
 
-		NS.Config.PrintTime:SetChecked(Enable)
+		private.Config.PrintTime:SetChecked(Enable)
 		return true
 	end
 end
 
 --- Enables tracking of unneeded achievement NPCs.
 -- @return True if changed.
-function NS.SetAchievementsAddFound(Enable)
-	if not Enable ~= not NS.OptionsCharacter.AchievementsAddFound then
-		NS.OptionsCharacter.AchievementsAddFound = Enable or nil
-		NS.Config.Search.AddFoundCheckbox:SetChecked(Enable)
+function private.SetAchievementsAddFound(Enable)
+	if not Enable ~= not private.OptionsCharacter.AchievementsAddFound then
+		private.OptionsCharacter.AchievementsAddFound = Enable or nil
+		private.Config.Search.AddFoundCheckbox:SetChecked(Enable)
 
-		for _, Achievement in pairs(NS.Achievements) do
+		for _, Achievement in pairs(private.Achievements) do
 			if AchievementDeactivate(Achievement) then -- Was active
 				AchievementActivate(Achievement)
 			end
@@ -497,32 +498,32 @@ end
 
 --- Enables unmuting sound to play found alerts.
 -- @return True if changed.
-function NS.SetAlertSoundUnmute(Enable)
-	if not Enable ~= not NS.OptionsCharacter.AlertSoundUnmute then
-		NS.OptionsCharacter.AlertSoundUnmute = Enable or nil
+function private.SetAlertSoundUnmute(Enable)
+	if not Enable ~= not private.OptionsCharacter.AlertSoundUnmute then
+		private.OptionsCharacter.AlertSoundUnmute = Enable or nil
 
-		NS.Config.AlertSoundUnmute:SetChecked(Enable)
+		private.Config.AlertSoundUnmute:SetChecked(Enable)
 		return true
 	end
 end
 
 --- Sets the sound to play when NPCs are found.
 -- @return True if changed.
-function NS.SetAlertSound(AlertSound)
+function private.SetAlertSound(AlertSound)
 	assert(AlertSound == nil or type(AlertSound) == "string", "AlertSound must be a string or nil.")
-	if AlertSound ~= NS.OptionsCharacter.AlertSound then
-		NS.OptionsCharacter.AlertSound = AlertSound
+	if AlertSound ~= private.OptionsCharacter.AlertSound then
+		private.OptionsCharacter.AlertSound = AlertSound
 
-		UIDropDownMenu_SetText(NS.Config.AlertSound, AlertSound == nil and L.CONFIG_ALERT_SOUND_DEFAULT or AlertSound)
+		UIDropDownMenu_SetText(private.Config.AlertSound, AlertSound == nil and L.CONFIG_ALERT_SOUND_DEFAULT or AlertSound)
 		return true
 	end
 end
 
 --- Enables Blocking alerts while on taxi.
 -- @return True if changed.
-function NS.SetBlockFlightScan(Enable)
-	NS.OptionsCharacter.FlightSupress = Enable
-	NS.Config.Search.BlockFlightScanCheckbox:SetChecked(Enable)
+function private.SetBlockFlightScan(Enable)
+	private.OptionsCharacter.FlightSupress = Enable
+	private.Config.Search.BlockFlightScanCheckbox:SetChecked(Enable)
 	return Enable
 end
 
@@ -542,59 +543,59 @@ do
 
 	--- @return True if NpcID should be a default for this character.
 	function IsDefaultNPCValid(NpcID)
-		return (IsHunter or not NS.TamableIDs[NpcID] or TamableExceptions[NpcID])
+		return (IsHunter or not private.TamableIDs[NpcID] or TamableExceptions[NpcID])
 			and (not FactionRestrictions[NpcID] or FactionRestrictions[NpcID] == UnitFactionGroup("player"))
 	end
 end
 --- Resets the scanning list and reloads it from saved settings.
-function NS.Synchronize(Options, OptionsCharacter)
+function private.Synchronize(Options, OptionsCharacter)
 	-- Load defaults if settings omitted
 	local IsDefaultScan = false
 	if not Options then
-		Options = NS.OptionsDefault
+		Options = private.OptionsDefault
 	end
 	if not OptionsCharacter then
-		OptionsCharacter, IsDefaultScan = NS.OptionsCharacterDefault, true
+		OptionsCharacter, IsDefaultScan = private.OptionsCharacterDefault, true
 	end
 
 	-- Clear all scans
-	for AchievementID in pairs(NS.Achievements) do
-		NS.AchievementRemove(AchievementID)
+	for AchievementID in pairs(private.Achievements) do
+		private.AchievementRemove(AchievementID)
 	end
-	for NpcID in pairs(NS.Options.NPCs) do
-		NS.NPCRemove(NpcID)
+	for NpcID in pairs(private.Options.NPCs) do
+		private.NPCRemove(NpcID)
 	end
 
-	for NpcID, WorldID in pairs(NS.RareMobData.NPCWorldIDs) do
-		NS.NPCRemove(NpcID)
+	for NpcID, WorldID in pairs(private.RareMobData.NPCWorldIDs) do
+		private.NPCRemove(NpcID)
 	end
 	assert(not next(ScanIDs), "Orphan NpcIDs in scan pool!")
 
-	NS.SetCacheWarnings(Options.CacheWarnings)
-	NS.SetPrintTime(Options.PrintTime)
-	NS.SetAchievementsAddFound(OptionsCharacter.AchievementsAddFound)
-	NS.SetAlertSoundUnmute(OptionsCharacter.AlertSoundUnmute)
-	NS.SetAlertSound(OptionsCharacter.AlertSound)
-	NS.SetBlockFlightScan(OptionsCharacter.FlightSupress)
-	NS.SetRareMob("BEASTS", OptionsCharacter.TrackBeasts)
-	NS.SetRareMob("RARENPC", OptionsCharacter.TrackRares)
+	private.SetCacheWarnings(Options.CacheWarnings)
+	private.SetPrintTime(Options.PrintTime)
+	private.SetAchievementsAddFound(OptionsCharacter.AchievementsAddFound)
+	private.SetAlertSoundUnmute(OptionsCharacter.AlertSoundUnmute)
+	private.SetAlertSound(OptionsCharacter.AlertSound)
+	private.SetBlockFlightScan(OptionsCharacter.FlightSupress)
+	private.SetRareMob("BEASTS", OptionsCharacter.TrackBeasts)
+	private.SetRareMob("RARENPC", OptionsCharacter.TrackRares)
 
 	local AddAllDefaults = IsShiftKeyDown()
 	for NpcID, Name in pairs(Options.NPCs) do
 		-- If defaults, only add tamable custom mobs if the player is a hunter
 		if AddAllDefaults or not IsDefaultScan or IsDefaultNPCValid(NpcID) then
-			NS.NPCAdd(NpcID, Name, Options.NPCWorldIDs[NpcID])
+			private.NPCAdd(NpcID, Name, Options.NPCWorldIDs[NpcID])
 		end
 	end
-	for AchievementID in pairs(NS.Achievements) do
+	for AchievementID in pairs(private.Achievements) do
 		-- If defaults, don't enable completed achievements unless explicitly allowed
 		if OptionsCharacter.Achievements[AchievementID] and (not IsDefaultScan or OptionsCharacter.AchievementsAddFound or not select(4, GetAchievementInfo(AchievementID))) then -- Not completed
-			NS.AchievementAdd(AchievementID)
+			private.AchievementAdd(AchievementID)
 		end
 	end
 
 
-	NS.CacheListPrint(false, true) -- Populates cache list with inactive mobs too before printing
+	private.CacheListPrint(false, true) -- Populates cache list with inactive mobs too before printing
 end
 
 
@@ -604,12 +605,12 @@ do
 	local PetList = {}
 
 	--- Prints the list of cached pets when leaving a city or inn.
-	function NS.Frame:PLAYER_UPDATE_RESTING()
+	function private.Frame:PLAYER_UPDATE_RESTING()
 		if not IsResting() and next(PetList) then
-			if NS.Options.CacheWarnings then
+			if private.Options.CacheWarnings then
 				local ListString = CacheListBuild(PetList)
 				if ListString then
-					NS.Print(L.CACHED_PET_RESTING_FORMAT:format(ListString), RED_FONT_COLOR)
+					private.Print(L.CACHED_PET_RESTING_FORMAT:format(ListString), RED_FONT_COLOR)
 				end
 			else
 				wipe(PetList)
@@ -619,7 +620,7 @@ do
 
 	--- @return True if the tamable mob is in its correct zone, else false with an optional reason string.
 	local function OnFoundTamable(NpcID, Name)
-		local ExpectedZone = NS.TamableIDs[NpcID]
+		local ExpectedZone = private.TamableIDs[NpcID]
 		local ZoneIDBackup = GetCurrentMapAreaID()
 
 		local InCorrectZone, InvalidReason
@@ -653,13 +654,13 @@ do
 
 	--- @return Name of the source of NpcID's scan--either a custom name or achievement name.
 	local function GetScanSource(NpcID)
-		local CustomName = NS.Options.NPCs[NpcID]
+		local CustomName = private.Options.NPCs[NpcID]
 		if CustomName then
 			return CustomName
 		end
 		-- Must have been from an achievement
-		for AchievementID in pairs(NS.OptionsCharacter.Achievements) do
-			if NS.Achievements[AchievementID].NPCsActive[NpcID] then
+		for AchievementID in pairs(private.OptionsCharacter.Achievements) do
+			if private.Achievements[AchievementID].NPCsActive[NpcID] then
 				return GetAchievementLink(AchievementID) -- Colored link to distinguish from a custom name
 			end
 		end
@@ -669,20 +670,20 @@ do
 	local function OnFound(NpcID, Name)
 		-- Disable active scans
 		NPCDeactivate(NpcID)
-		for AchievementID in pairs(NS.OptionsCharacter.Achievements) do
-			AchievementNPCDeactivate(NS.Achievements[AchievementID], NpcID)
+		for AchievementID in pairs(private.OptionsCharacter.Achievements) do
+			AchievementNPCDeactivate(private.Achievements[AchievementID], NpcID)
 		end
 
 		local Valid = true
 		local InvalidReason
-		local Tamable = NS.TamableIDs[NpcID]
+		local Tamable = private.TamableIDs[NpcID]
 
 		if Tamable then
 			Valid, InvalidReason = OnFoundTamable(NpcID, Name)
 		end
 
 		--Checks to see if player is on flightpath, this will block possible cross realm alerts
-		if NS.OptionsCharacter.FlightSupress then
+		if private.OptionsCharacter.FlightSupress then
 			local onTaxi = UnitOnTaxi("player")
 			if onTaxi then
 				Valid = false
@@ -696,10 +697,10 @@ do
 		end
 
 		if Valid then
-			NS.Print(L[Tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(Name), GREEN_FONT_COLOR)
-			NS.Button:SetNPC(NpcID, Name, GetScanSource(NpcID)) -- Sends added and found overlay messages
+			private.Print(L[Tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(Name), GREEN_FONT_COLOR)
+			private.Button:SetNPC(NpcID, Name, GetScanSource(NpcID)) -- Sends added and found overlay messages
 		elseif InvalidReason then
-			NS.Print(InvalidReason)
+			private.Print(InvalidReason)
 		end
 	end
 
@@ -707,9 +708,9 @@ do
 	local GetAchievementCriteriaInfoByID = GetAchievementCriteriaInfoByID
 	--- Scans all active criteria and removes any completed NPCs.
 	local function AchievementCriteriaUpdate()
-		if not NS.OptionsCharacter.AchievementsAddFound then
-			for AchievementID in pairs(NS.OptionsCharacter.Achievements) do
-				local Achievement = NS.Achievements[AchievementID]
+		if not private.OptionsCharacter.AchievementsAddFound then
+			for AchievementID in pairs(private.OptionsCharacter.Achievements) do
+				local Achievement = private.Achievements[AchievementID]
 				for NpcID, CriteriaID in pairs(Achievement.NPCsActive) do
 					local _, _, Complete = GetAchievementCriteriaInfoByID(AchievementID, CriteriaID)
 					if Complete then
@@ -722,19 +723,19 @@ do
 
 	local CriteriaUpdated = false
 	--- Stops tracking individual achievement NPCs when the player gets kill credit.
-	function NS.Frame:CRITERIA_UPDATE()
+	function private.Frame:CRITERIA_UPDATE()
 		CriteriaUpdated = true
 	end
 
 	--- Scans all NPCs on a timer and alerts if any are found.
-	function NS.Updater:OnLoop()
+	function private.Updater:OnLoop()
 		if CriteriaUpdated then -- CRITERIA_UPDATE bucket
 			CriteriaUpdated = false
 			AchievementCriteriaUpdate()
 		end
 
 		for NpcID in pairs(ScanIDs) do
-			local Name = NS.TestID(NpcID)
+			local Name = private.TestID(NpcID)
 			if Name then
 				OnFound(NpcID, Name)
 			end
@@ -747,14 +748,14 @@ if select(2, UnitClass("player")) == "HUNTER" then
 
 	local StabledList = {}
 	--- Stops scans for stabled hunter pets before a bogus alert can fire.
-	function NS.Frame:PET_STABLE_UPDATE()
+	function private.Frame:PET_STABLE_UPDATE()
 		for NpcID in pairs(ScanIDs) do
-			local Name = NS.TestID(NpcID)
+			local Name = private.TestID(NpcID)
 			if Name then
 				StabledList[NpcID] = Name
 				NPCDeactivate(NpcID)
-				for AchievementID in pairs(NS.OptionsCharacter.Achievements) do
-					AchievementNPCDeactivate(NS.Achievements[AchievementID], NpcID)
+				for AchievementID in pairs(private.OptionsCharacter.Achievements) do
+					AchievementNPCDeactivate(private.Achievements[AchievementID], NpcID)
 				end
 			end
 		end
@@ -764,10 +765,10 @@ if select(2, UnitClass("player")) == "HUNTER" then
 	--- Bucket to print cached stabled pets on one line.
 	function StableUpdater:OnUpdate()
 		self:Hide()
-		if NS.Options.CacheWarnings then
+		if private.Options.CacheWarnings then
 			local ListString = CacheListBuild(StabledList)
 			if ListString then
-				NS.Print(L.CACHED_STABLED_FORMAT:format(ListString))
+				private.Print(L.CACHED_STABLED_FORMAT:format(ListString))
 			end
 		else
 			wipe(StabledList)
@@ -776,7 +777,7 @@ if select(2, UnitClass("player")) == "HUNTER" then
 
 	StableUpdater:Hide()
 	StableUpdater:SetScript("OnUpdate", StableUpdater.OnUpdate)
-	NS.Frame:RegisterEvent("PET_STABLE_UPDATE")
+	private.Frame:RegisterEvent("PET_STABLE_UPDATE")
 
 	local Backup = GetStablePetInfo
 	--- Prevents the pet UI from querying (and caching) stabled pets until actually viewing the stables.
@@ -793,7 +794,7 @@ end
 
 --- Loads defaults, validates settings, and starts scan.
 -- Used instead of ADDON_LOADED to give overlay mods a chance to load and register for messages.
-function NS.Frame:PLAYER_LOGIN(Event)
+function private.Frame:PLAYER_LOGIN(Event)
 
 	--Warning message for users running _NPCScan.AutoAdd
 	if IsAddOnLoaded("_NPCScan.AutoAdd") then
@@ -803,21 +804,21 @@ function NS.Frame:PLAYER_LOGIN(Event)
 	self[Event] = nil
 
 	local Options, OptionsCharacter = _NPCScanOptions, _NPCScanOptionsCharacter
-	_NPCScanOptions, _NPCScanOptionsCharacter = NS.Options, NS.OptionsCharacter
+	_NPCScanOptions, _NPCScanOptionsCharacter = private.Options, private.OptionsCharacter
 
 	--fix to correct 5.1.1 verson saved as iterger instead of string
 
 	-- Update settings incrementally
-	if Options and Options.Version ~= NS.Version then
+	if Options and Options.Version ~= private.Version then
 		--Clears old global settings and updates to new variables
 		if Options.Version == nil or tostring(Options.Version) < "5.1.2" then
-			Options = NS.OptionsDefault
+			Options = private.OptionsDefault
 		end
 		if tostring(Options.Version) < "5.2" then
-			for NPCid, Name in pairs(NS.OptionsDefault.NPCs) do
+			for NPCid, Name in pairs(private.OptionsDefault.NPCs) do
 				Options.NPCs[NPCid] = Name
 			end
-			for NPCid, WorldID in pairs(NS.OptionsDefault.NPCWorldIDs) do
+			for NPCid, WorldID in pairs(private.OptionsDefault.NPCWorldIDs) do
 				Options.NPCWorldIDs[NPCid] = WorldID
 				Options.NPCWorldIDs[62346] = nil
 				Options.NPCWorldIDs[60491] = nil
@@ -825,26 +826,26 @@ function NS.Frame:PLAYER_LOGIN(Event)
 				Options.NPCWorldIDs[69161] = nil
 			end
 		end
-		Options.Version = NS.Version
+		Options.Version = private.Version
 	end
 
-	if OptionsCharacter and OptionsCharacter.Version ~= NS.Version then
+	if OptionsCharacter and OptionsCharacter.Version ~= private.Version then
 		--Clears old character settings and updates to new variables
 		if OptionsCharacter.Version == nil or tostring(OptionsCharacter.Version) < "5.1.2" then
-			OptionsCharacter = NS.OptionsCharacterDefault
+			OptionsCharacter = private.OptionsCharacterDefault
 		end
-		OptionsCharacter.Version = NS.Version
+		OptionsCharacter.Version = private.Version
 	end
 
 	-- Character settings
-	NS.Overlays.Register()
-	NS.Synchronize(Options, OptionsCharacter) -- Loads defaults if either are nil
+	private.Overlays.Register()
+	private.Synchronize(Options, OptionsCharacter) -- Loads defaults if either are nil
 end
 
 do
 	local FirstWorld = true
 	--- Starts world-specific scans when entering a world.
-	function NS.Frame:PLAYER_ENTERING_WORLD()
+	function private.Frame:PLAYER_ENTERING_WORLD()
 		-- Print cached pets if player ported out of a city
 		self:PLAYER_UPDATE_RESTING()
 
@@ -852,87 +853,87 @@ do
 		local MapName, _, _, _, _, _, _, MapID = GetInstanceInfo()
 
 		if MapID == 1064 then --Fix for Isle of Thunder having a diffrent Instance name
-			NS.WorldID = 6
+			private.WorldID = 6
 		else
-			NS.WorldID = NS.ContinentIDs[MapName] or MapName
+			private.WorldID = private.ContinentIDs[MapName] or MapName
 		end
 
 
 		-- Activate scans on this world
 
-		if NS.OptionsCharacter.TrackRares then
+		if private.OptionsCharacter.TrackRares then
 			--Loads Rare Mob Databas
-			for NpcID, _ in pairs(NS.RareMobData.RareNPCs) do
-				local WorldID = NS.RareMobData.NPCWorldIDs[NpcID]
+			for NpcID, _ in pairs(private.RareMobData.RareNPCs) do
+				local WorldID = private.RareMobData.NPCWorldIDs[NpcID]
 				NPCActivate(NpcID, WorldID)
 			end
 		end
 
-		if NS.OptionsCharacter.TrackBeasts then
+		if private.OptionsCharacter.TrackBeasts then
 			--Loads Rare Beasts Databas
-			for NpcID, _ in pairs(NS.TamableIDs) do
-				local WorldID = NS.RareMobData.NPCWorldIDs[NpcID]
+			for NpcID, _ in pairs(private.TamableIDs) do
+				local WorldID = private.RareMobData.NPCWorldIDs[NpcID]
 				NPCActivate(NpcID, WorldID)
 			end
 		end
 
-		for AchievementID in pairs(NS.OptionsCharacter.Achievements) do
-			local Achievement = NS.Achievements[AchievementID]
+		for AchievementID in pairs(private.OptionsCharacter.Achievements) do
+			local Achievement = private.Achievements[AchievementID]
 			if Achievement.WorldID then
 				AchievementActivate(Achievement)
 			end
 		end
 
 		--Loads Any Custom Mobs
-		for NpcID, _ in pairs(NS.Options.NPCs) do
-			local WorldID = NS.Options.NPCWorldIDs[NpcID]
+		for NpcID, _ in pairs(private.Options.NPCs) do
+			local WorldID = private.Options.NPCWorldIDs[NpcID]
 			NPCActivate(NpcID, WorldID)
 		end
 
-		if FirstWorld or not NS.Options.CacheWarnings then -- Full listing of cached mobs gets printed on login
+		if FirstWorld or not private.Options.CacheWarnings then -- Full listing of cached mobs gets printed on login
 			FirstWorld = false
 			wipe(CacheList)
 		else -- Print list of cached mobs specific to new world
 			local ListString = CacheListBuild(CacheList)
 			if ListString then
-				NS.Print(L.CACHED_WORLD_FORMAT:format(ListString, MapName))
+				private.Print(L.CACHED_WORLD_FORMAT:format(ListString, MapName))
 			end
 		end
-		NS.Config.Search:UpdateTabNames()
+		private.Config.Search:UpdateTabNames()
 	end
 end
 --- Stops world-specific scans when leaving a world.
-function NS.Frame:PLAYER_LEAVING_WORLD()
+function private.Frame:PLAYER_LEAVING_WORLD()
 	-- Stop scans that were only active on the previous world
-	for NpcID in pairs(NS.Options.NPCWorldIDs) do
+	for NpcID in pairs(private.Options.NPCWorldIDs) do
 		NPCDeactivate(NpcID)
 	end
-	for AchievementID in pairs(NS.OptionsCharacter.Achievements) do
-		local Achievement = NS.Achievements[AchievementID]
+	for AchievementID in pairs(private.OptionsCharacter.Achievements) do
+		local Achievement = private.Achievements[AchievementID]
 		if Achievement.WorldID then
 			AchievementDeactivate(Achievement)
 		end
 	end
-	NS.WorldID = nil
+	private.WorldID = nil
 end
 
 --- Stops tracking achievements when they finish.
-function NS.Frame:ACHIEVEMENT_EARNED(_, AchievementID)
-	if not NS.OptionsCharacter.AchievementsAddFound then
-		NS.AchievementRemove(AchievementID)
+function private.Frame:ACHIEVEMENT_EARNED(_, AchievementID)
+	if not private.OptionsCharacter.AchievementsAddFound then
+		private.AchievementRemove(AchievementID)
 	end
 end
 
 --- Sets the update handler only after zone info is known.
-function NS.Frame:ZONE_CHANGED_NEW_AREA(Event)
+function private.Frame:ZONE_CHANGED_NEW_AREA(Event)
 	self:UnregisterEvent(Event)
 	self[Event] = nil
 
-	NS.Updater:SetScript("OnLoop", NS.Updater.OnLoop)
+	private.Updater:SetScript("OnLoop", private.Updater.OnLoop)
 end
 
 --- Global event handler.
-function NS.Frame:OnEvent(Event, ...)
+function private.Frame:OnEvent(Event, ...)
 	if self[Event] then
 		return self[Event](self, Event, ...)
 	end
@@ -942,7 +943,7 @@ end
 
 
 --- Slash command chat handler to open the options pane and manage the NPC list.
-function NS.SlashCommand(Input)
+function private.SlashCommand(Input)
 	local Command, Arguments = Input:match("^(%S+)%s*(.-)%s*$")
 	if Command then
 		Command = Command:upper()
@@ -950,37 +951,37 @@ function NS.SlashCommand(Input)
 			local ID, Name = Arguments:match("^(%d+)%s+(.+)$")
 			if ID then
 				ID = tonumber(ID)
-				NS.NPCRemove(ID)
-				if NS.NPCAdd(ID, Name) then
-					NS.CacheListPrint(true)
+				private.NPCRemove(ID)
+				if private.NPCAdd(ID, Name) then
+					private.CacheListPrint(true)
 				end
 				return
 			end
 		elseif Command == L.CMD_REMOVE then
 			local ID = tonumber(Arguments)
 			if not ID then -- Search custom names
-				for NpcID, Name in pairs(NS.Options.NPCs) do
+				for NpcID, Name in pairs(private.Options.NPCs) do
 					if Name == Arguments then
 						ID = NpcID
 						break
 					end
 				end
 			end
-			if not NS.NPCRemove(ID) then
-				NS.Print(L.CMD_REMOVENOTFOUND_FORMAT:format(Arguments), RED_FONT_COLOR)
+			if not private.NPCRemove(ID) then
+				private.Print(L.CMD_REMOVENOTFOUND_FORMAT:format(Arguments), RED_FONT_COLOR)
 			end
 			return
 		elseif Command == L.CMD_CACHE then -- Force print full cache list
-			if not NS.CacheListPrint(true, true) then -- Nothing in cache
-				NS.Print(L.CMD_CACHE_EMPTY, GREEN_FONT_COLOR)
+			if not private.CacheListPrint(true, true) then -- Nothing in cache
+				private.Print(L.CMD_CACHE_EMPTY, GREEN_FONT_COLOR)
 			end
 			return
 		end
 		-- Invalid subcommand
-		NS.Print(L.CMD_HELP)
+		private.Print(L.CMD_HELP)
 
 	else -- No subcommand
-		InterfaceOptionsFrame_OpenToCategory(NS.Config.Search)
+		InterfaceOptionsFrame_OpenToCategory(private.Config.Search)
 	end
 end
 
@@ -988,12 +989,12 @@ end
 
 
 -- Create reverse lookup of continent names
-for Index, Name in pairs(NS.ContinentNames) do
-	NS.ContinentIDs[Name] = Index
+for Index, Name in pairs(private.ContinentNames) do
+	private.ContinentIDs[Name] = Index
 end
 
 -- Save achievement criteria data
-for AchievementID, Achievement in pairs(NS.Achievements) do
+for AchievementID, Achievement in pairs(private.Achievements) do
 	Achievement.ID = AchievementID
 	Achievement.Criteria = {} -- [ CriteriaID ] = NpcID
 	Achievement.NPCsActive = {} -- [ NpcID ] = CriteriaID
@@ -1007,7 +1008,7 @@ for AchievementID, Achievement in pairs(NS.Achievements) do
 end
 
 
-local Frame = NS.Frame
+local Frame = private.Frame
 Frame:SetScript("OnEvent", Frame.OnEvent)
 
 if IsLoggedIn() then
@@ -1019,8 +1020,8 @@ Frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 Frame:RegisterEvent("PLAYER_LEAVING_WORLD")
 Frame:RegisterEvent("PLAYER_UPDATE_RESTING")
 
-NS.Updater:CreateAnimation("Animation"):SetDuration(NS.Updater.UpdateRate)
-NS.Updater:SetLooping("REPEAT")
+private.Updater:CreateAnimation("Animation"):SetDuration(private.Updater.UpdateRate)
+private.Updater:SetLooping("REPEAT")
 
 -- Set update handler after zone info loads
 if GetZoneText() == "" then -- Zone information unknown (initial login)
@@ -1029,7 +1030,7 @@ else -- Zone information is known
 	Frame:ZONE_CHANGED_NEW_AREA("ZONE_CHANGED_NEW_AREA")
 end
 
-SlashCmdList["_NPCSCAN"] = NS.SlashCommand
+SlashCmdList["_NPCSCAN"] = private.SlashCommand
 
 --Warning Popup for users running _NPCScan.AutoAdd.
 StaticPopupDialogs["NPCSCAN_AUTOADD_WARNING"] = {
