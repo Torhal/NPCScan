@@ -706,17 +706,15 @@ do
 		end
 
 		--Checks to see if player is on flightpath, this will block possible cross realm alerts
-		if private.OptionsCharacter.FlightSupress then
-			local onTaxi = _G.UnitOnTaxi("player")
-			if onTaxi then
-				Valid = false
-				_G.SetMapToCurrentZone()
-				local posX, posY = _G.GetPlayerMapPosition("player")
-				local zoneName = _G.GetZoneText()
-				InvalidReason = L.FOUND_UNIT_TAXI:format(Name, posX * 100, posY * 100, zoneName)
-				--NS.PlaySound ( AlertSound )
-				_G.PlaySound("TellMessage", "master")
-			end
+		if private.OptionsCharacter.FlightSupress and _G.UnitOnTaxi("player") then
+			Valid = false
+			_G.SetMapToCurrentZone()
+
+			local posX, posY = _G.GetPlayerMapPosition("player")
+			local zoneName = _G.GetZoneText()
+			InvalidReason = L.FOUND_UNIT_TAXI:format(Name, posX * 100, posY * 100, zoneName)
+			--NS.PlaySound ( AlertSound )
+			_G.PlaySound("TellMessage", "master")
 		end
 
 		if Valid then
