@@ -309,7 +309,9 @@ function NS.NPCRemove ( NpcID )
 	NpcID = tonumber( NpcID )
 	local Options = NS.Options
 	if ( Options.NPCs[ NpcID ] ) then
-		Options.NPCs[ NpcID ], Options.NPCWorldIDs[ NpcID ] = nil
+		Options.NPCs[ NpcID ] = nil
+		Options.NPCWorldIDs[ NpcID ] = nil
+
 		if ( not NPCDeactivate( NpcID ) ) then -- Wasn't active
 			NS.Config.Search.UpdateTab( "NPC" ) -- Just remove row
 		end
@@ -656,8 +658,10 @@ do
 			AchievementNPCDeactivate( NS.Achievements[ AchievementID ], NpcID )
 		end
 
-		local Valid, InvalidReason = true
+		local Valid = true
+		local InvalidReason
 		local Tamable = NS.TamableIDs[ NpcID ]
+
 		if ( Tamable ) then
 			Valid, InvalidReason = OnFoundTamable( NpcID, Name )
 		end
