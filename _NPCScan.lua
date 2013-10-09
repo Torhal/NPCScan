@@ -963,48 +963,57 @@ function private.Frame:OnEvent(event_name, ...)
 end
 
 --- Slash command chat handler to open the options pane and manage the NPC list.
-function private.SlashCommand(Input)
-	local Command, Arguments = Input:match("^(%S+)%s*(.-)%s*$")
-	if Command then
-		Command = Command:upper()
-		if Command == L.CMD_ADD then
-			local ID, Name = Arguments:match("^(%d+)%s+(.+)$")
-			if ID then
-				ID = tonumber(ID)
-				private.NPCRemove(ID)
-				if private.NPCAdd(ID, Name) then
-					private.CacheListPrint(true)
-				end
+do
+	local SUBCOMMAND_FUNCS = {
+		[L.CMD_ADD] = function(arguments)
+			local id, name = arguments:match("^(%d+)%s+(.+)$")
+			id = tonumber(id)
+
+			if not id then
 				return
 			end
-		elseif Command == L.CMD_REMOVE then
-			local ID = tonumber(Arguments)
-			if not ID then -- Search custom names
-				for NpcID, Name in pairs(private.Options.NPCs) do
-					if Name == Arguments then
-						ID = NpcID
+			private.NPCRemove(id)
+
+			if private.NPCAdd(id, name) then
+				private.CacheListPrint(true)
+			end
+		end,
+		[L.CMD_REMOVE] = function(arguments)
+			local id = tonumber(arguments)
+			if not id then -- Search custom names
+				for npc_id, npc_name in pairs(private.Options.NPCs) do
+					if npc_name == arguments then
+						id = npc_id
 						break
 					end
 				end
 			end
-			if not private.NPCRemove(ID) then
-				private.Print(L.CMD_REMOVENOTFOUND_FORMAT:format(Arguments), _G.RED_FONT_COLOR)
+
+			if not private.NPCRemove(id) then
+				private.Print(L.CMD_REMOVENOTFOUND_FORMAT:format(arguments), _G.RED_FONT_COLOR)
 			end
-			return
-		elseif Command == L.CMD_CACHE then -- Force print full cache list
-			if not private.CacheListPrint(true, true) then -- Nothing in cache
+		end,
+		[L.CMD_CACHE] = function(arguments)
+			if not private.CacheListPrint(true, true) then
 				private.Print(L.CMD_CACHE_EMPTY, _G.GREEN_FONT_COLOR)
 			end
-			return
+		end,
+	}
+
+	function private.SlashCommand(input)
+		local subcommand, arguments = input:match("^(%S+)%s*(.-)%s*$")
+		if subcommand then
+			local func = SUBCOMMAND_FUNCS[subcommand:upper()]
+			if func then
+				func(arguments)
+			else
+				private.Print(L.CMD_HELP)
+			end
+		else
+			_G.InterfaceOptionsFrame_OpenToCategory(private.Config.Search)
 		end
-		-- Invalid subcommand
-		private.Print(L.CMD_HELP)
-
-	else -- No subcommand
-		_G.InterfaceOptionsFrame_OpenToCategory(private.Config.Search)
 	end
-end
-
+end -- do-block
 
 -- Create reverse lookup of continent names
 for Index, Name in pairs(private.ContinentNames) do
