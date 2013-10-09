@@ -112,6 +112,7 @@ private.Achievements = {
 	[8103] = { WorldID = 6 }, -- Champions of Lei Shen
 	[8714] = { WorldID = 6 }, --Timeless Champion
 }
+
 do
 	local VirtualContinents = {
 		--- Continents without physical maps aren't used.
@@ -652,38 +653,38 @@ do
 	end
 
 	--- @return True if the tamable mob is in its correct zone, else false with an optional reason string.
-	local function OnFoundTamable(NpcID, Name)
-		local ExpectedZone = private.TamableIDs[NpcID]
-		local ZoneIDBackup = _G.GetCurrentMapAreaID()
+	local function OnFoundTamable(npc_id, npc_name)
+		local expected_zone = private.TamableIDs[npc_id]
+		local current_zone_id = _G.GetCurrentMapAreaID()
 
-		local InCorrectZone, InvalidReason
-		if ExpectedZone == true then -- Expected zone is unknown (instance mob, etc.)
-			InCorrectZone = not _G.IsResting() -- Assume any tamable mob found in a city/inn is a hunter pet
+		local in_correct_zone
+		if expected_zone == true then -- Expected zone is unknown (instance mob, etc.)
+            in_correct_zone = not _G.IsResting() -- Assume any tamable mob found in a city/inn is a hunter pet
 		else
 			_G.SetMapToCurrentZone()
-			InCorrectZone = ExpectedZone == _G.GetCurrentMapAreaID()
+            in_correct_zone = expected_zone == _G.GetCurrentMapAreaID()
 		end
+        local invalid_reason
 
-		if not InCorrectZone then
+		if not in_correct_zone then
 			if _G.IsResting() then
-				PetList[NpcID] = Name -- Suppress error message until the player stops resting
+				PetList[npc_id] = npc_name -- Suppress error message until the player stops resting
 			else
-				-- Get details about expected zone
-				local ExpectedZoneName = _G.GetMapNameByID(ExpectedZone)
-				if not ExpectedZoneName then -- GetMapNameByID returns nil for continent maps
-					_G.SetMapByID(ExpectedZone)
-					local Continent = _G.GetCurrentMapContinent()
+				local expected_zone_name = _G.GetMapNameByID(expected_zone)
+				if not expected_zone_name then -- GetMapNameByID returns nil for continent maps
+					_G.SetMapByID(expected_zone)
 
-					if Continent >= 1 then
-						ExpectedZoneName = select(Continent, _G.GetMapContinents())
+					local map_continent = _G.GetCurrentMapContinent()
+					if map_continent >= 1 then
+                        expected_zone_name = select(map_continent, _G.GetMapContinents())
 					end
-				end
-				InvalidReason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(Name, _G.GetRealZoneText(), ExpectedZoneName or L.FOUND_ZONE_UNKNOWN, ExpectedZone)
+                end
+                invalid_reason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(npc_name, _G.GetRealZoneText(), expected_zone_name or L.FOUND_ZONE_UNKNOWN, expected_zone)
 			end
 		end
+		_G.SetMapByID(current_zone_id)
 
-		_G.SetMapByID(ZoneIDBackup) -- Restore previous map view
-		return InCorrectZone, InvalidReason
+		return in_correct_zone, invalid_reason
 	end
 
 	--- @return Name of the source of NpcID's scan--either a custom name or achievement name.
