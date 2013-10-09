@@ -431,7 +431,11 @@ NS:SetAttribute( "type", "macro" );
 
 NS:SetScript( "OnEnter", NS.OnEnter );
 NS:SetScript( "OnLeave", NS.OnLeave );
-NS:SetScript( "OnEvent", _NPCScan.Frame.OnEvent );
+NS:SetScript("OnEvent", function(self, event_name, ...)
+	if self[event_name] then
+		return self[event_name](self, event_name, ...)
+	end
+end)
 NS:HookScript( "OnShow", NS.OnShow );
 NS:HookScript( "OnHide", NS.OnHide );
 NS:RegisterEvent( "PLAYER_REGEN_ENABLED" );
