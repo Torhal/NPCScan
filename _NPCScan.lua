@@ -14,6 +14,7 @@ local type = _G.type
 local string = _G.string
 local table = _G.table
 
+
 -------------------------------------------------------------------------------
 -- AddOn namespace.
 -------------------------------------------------------------------------------
@@ -36,6 +37,17 @@ private.Updater.UpdateRate = 0.1
 private.Updater:CreateAnimation("Animation"):SetDuration(private.Updater.UpdateRate)
 private.Updater:SetLooping("REPEAT")
 
+
+-------------------------------------------------------------------------------
+-- Constants.
+-------------------------------------------------------------------------------
+local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
+local PLAYER_FACTION = _G.UnitFactionGroup("player")
+
+
+-------------------------------------------------------------------------------
+-- Variables.
+-------------------------------------------------------------------------------
 private.Version = "5.2"
 
 private.Options = {
@@ -127,11 +139,6 @@ end
 
 private.NpcIDMax = 0xFFFFF --- Largest ID that will fit in a GUID's 20-bit NPC ID field.
 
--------------------------------------------------------------------------------
--- Constants.
--------------------------------------------------------------------------------
-local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
-local PLAYER_FACTION = _G.UnitFactionGroup("player")
 
 --- Prints a message in the default chat window.
 function private.Print(Message, Color)
