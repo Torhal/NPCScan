@@ -788,13 +788,14 @@ if PLAYER_CLASS == "HUNTER" then
 	local StabledList = {}
 	--- Stops scans for stabled hunter pets before a bogus alert can fire.
 	function private.Frame:PET_STABLE_UPDATE()
-		for NpcID in pairs(ScanIDs) do
-			local Name = private.TestID(NpcID)
-			if Name then
-				StabledList[NpcID] = Name
-				NPCDeactivate(NpcID)
-				for AchievementID in pairs(private.OptionsCharacter.Achievements) do
-					AchievementNPCDeactivate(private.Achievements[AchievementID], NpcID)
+		for npc_id in pairs(ScanIDs) do
+			local npc_name = private.TestID(npc_id)
+			if npc_name then
+				StabledList[npc_id] = npc_name
+				NPCDeactivate(npc_id)
+
+				for achievement_id in pairs(private.OptionsCharacter.Achievements) do
+					AchievementNPCDeactivate(private.Achievements[achievement_id], npc_id)
 				end
 			end
 		end
