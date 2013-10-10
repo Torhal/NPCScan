@@ -33,7 +33,7 @@ private.Frame:SetScript("OnEvent", function(self, event_name, ...)
 end)
 
 private.Updater = private.Frame:CreateAnimationGroup()
-private.Updater.UpdateRate = 0.1
+private.Updater.UpdateRate = 0.5
 private.Updater:CreateAnimation("Animation"):SetDuration(private.Updater.UpdateRate)
 private.Updater:SetLooping("REPEAT")
 
