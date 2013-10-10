@@ -41,6 +41,7 @@ private.Updater:SetLooping("REPEAT")
 -------------------------------------------------------------------------------
 -- Constants.
 -------------------------------------------------------------------------------
+local DB_VERSION = 1
 local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
 local PLAYER_FACTION = _G.UnitFactionGroup("player")
 
@@ -48,16 +49,14 @@ local PLAYER_FACTION = _G.UnitFactionGroup("player")
 -------------------------------------------------------------------------------
 -- Variables.
 -------------------------------------------------------------------------------
-private.Version = "5.2"
-
 private.Options = {
-	Version = private.Version,
+	Version = DB_VERSION,
 	NPCs = {},
 	NPCWorldIDs = {},
 }
 
 private.OptionsCharacter = {
-	Version = private.Version,
+	Version = DB_VERSION,
 	Achievements = {},
 	AchievementsAddFound = nil,
 	AlertSoundUnmute = nil,
@@ -75,7 +74,7 @@ private.OptionsCharacter = {
 }
 
 private.OptionsDefault = {
-	Version = private.Version,
+	Version = DB_VERSION,
 	NPCs = {
 		[64004] = "Ghostly Pandaren Fisherman",
 		[64191] = "Ghostly Pandaren Craftsman",
@@ -91,7 +90,7 @@ private.OptionsDefault = {
 }
 
 private.OptionsCharacterDefault = {
-	Version = private.Version,
+	Version = DB_VERSION,
 	Achievements = {
 		[1312] = true, -- Bloody Rare (Outlands)
 		[2257] = true, -- Frostbitten (Northrend)
@@ -834,52 +833,49 @@ end
 
 --- Loads defaults, validates settings, and starts scan.
 -- Used instead of ADDON_LOADED to give overlay mods a chance to load and register for messages.
-function private.Frame:PLAYER_LOGIN(Event)
-
-	--Warning message for users running _NPCScan.AutoAdd
+function private.Frame:PLAYER_LOGIN(event_name)
 	if _G.IsAddOnLoaded("_NPCScan.AutoAdd") then
 		StaticPopup_Show("NPCSCAN_AUTOADD_WARNING")
 	end
 
-	self[Event] = nil
+	local stored_options = _G._NPCScanOptions
+	local stored_character_options = _G._NPCScanOptionsCharacter
+	_G._NPCScanOptions= private.Options
+	_G._NPCScanOptionsCharacter = private.OptionsCharacter
 
-	local Options, OptionsCharacter = _NPCScanOptions, _NPCScanOptionsCharacter
-	_NPCScanOptions, _NPCScanOptionsCharacter = private.Options, private.OptionsCharacter
+	if stored_options and stored_options.Version ~= DB_VERSION then
+		local stored_version = stored_options.Version
 
-	--fix to correct 5.1.1 verson saved as iterger instead of string
-
-	-- Update settings incrementally
-	if Options and Options.Version ~= private.Version then
-		--Clears old global settings and updates to new variables
-		if Options.Version == nil or tostring(Options.Version) < "5.1.2" then
-			Options = private.OptionsDefault
+		if not stored_version or type(stored_version) == "string" or stored_version < DB_VERSION then
+			stored_options = private.OptionsDefault
 		end
-		if tostring(Options.Version) < "5.2" then
-			for NPCid, Name in pairs(private.OptionsDefault.NPCs) do
-				Options.NPCs[NPCid] = Name
+
+		if type(stored_options.Version) == "string" and stored_options.Version < "5.2" then
+			for npc_id, npc_name in pairs(private.OptionsDefault.NPCs) do
+				stored_options.NPCs[npc_id] = npc_name
 			end
-			for NPCid, WorldID in pairs(private.OptionsDefault.NPCWorldIDs) do
-				Options.NPCWorldIDs[NPCid] = WorldID
-				Options.NPCWorldIDs[62346] = nil
-				Options.NPCWorldIDs[60491] = nil
-				Options.NPCWorldIDs[69099] = nil
-				Options.NPCWorldIDs[69161] = nil
+
+			for npc_id, world_id in pairs(private.OptionsDefault.NPCWorldIDs) do
+				stored_options.NPCWorldIDs[npc_id] = world_id
+				stored_options.NPCWorldIDs[62346] = nil
+				stored_options.NPCWorldIDs[60491] = nil
+				stored_options.NPCWorldIDs[69099] = nil
+				stored_options.NPCWorldIDs[69161] = nil
 			end
 		end
-		Options.Version = private.Version
+		stored_options.Version = DB_VERSION
 	end
 
-	if OptionsCharacter and OptionsCharacter.Version ~= private.Version then
-		--Clears old character settings and updates to new variables
-		if OptionsCharacter.Version == nil or tostring(OptionsCharacter.Version) < "5.1.2" then
-			OptionsCharacter = private.OptionsCharacterDefault
+	if stored_character_options and stored_character_options.Version ~= DB_VERSION then
+		if not stored_character_options.Version or type(stored_character_options.Version) == "string" or stored_character_options < DB_VERSION then
+			stored_character_options = private.OptionsCharacterDefault
 		end
-		OptionsCharacter.Version = private.Version
+		stored_character_options.Version = DB_VERSION
 	end
-
-	-- Character settings
 	private.Overlays.Register()
-	private.Synchronize(Options, OptionsCharacter) -- Loads defaults if either are nil
+	private.Synchronize(stored_options, stored_character_options)
+
+	self[event_name] = nil
 end
 
 do
