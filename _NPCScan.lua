@@ -114,15 +114,31 @@ private.OptionsCharacterDefault = {
 	TrackRares = true,
 }
 
-private.Achievements = {
-	--- Criteria data for each achievement.
-	[1312] = { WorldID = 3 }, -- Bloody Rare (Outlands)
-	[2257] = { WorldID = 4 }, -- Frostbitten (Northrend)
-	[7439] = { WorldID = 6 }, -- Glorious! (Pandaria)
-	[7317] = { WorldID = 6 }, -- One Of Many
-	[8103] = { WorldID = 6 }, -- Champions of Lei Shen
-	[8714] = { WorldID = 6 }, --Timeless Champion
-}
+
+do
+	private.Achievements = {
+		-- Criteria data for each achievement.
+		[1312] = { WorldID = 3 }, -- Bloody Rare (Outlands)
+		[2257] = { WorldID = 4 }, -- Frostbitten (Northrend)
+		[7439] = { WorldID = 6 }, -- Glorious! (Pandaria)
+		[7317] = { WorldID = 6 }, -- One Of Many
+		[8103] = { WorldID = 6 }, -- Champions of Lei Shen
+		[8714] = { WorldID = 6 }, -- Timeless Champion
+	}
+
+	for achievement_id, achievement in pairs(private.Achievements) do
+		achievement.ID = achievement_id
+		achievement.Criteria = {} -- [ CriteriaID ] = NpcID
+		achievement.NPCsActive = {} -- [ NpcID ] = CriteriaID
+
+		for criteria_index = 1, _G.GetAchievementNumCriteria(achievement_id) do
+			local _, criteria_type, _, _, _, _, _, asset_id, _, criteria_id = _G.GetAchievementCriteriaInfo(achievement_id, criteria_index)
+			if criteria_type == 0 then -- Mob kill type
+				achievement.Criteria[criteria_id] = asset_id
+			end
+		end
+	end
+end -- do-block
 
 
 do
@@ -1032,21 +1048,6 @@ do
 		end
 	end
 end -- do-block
-
-
--- Save achievement criteria data
-for AchievementID, Achievement in pairs(private.Achievements) do
-	Achievement.ID = AchievementID
-	Achievement.Criteria = {} -- [ CriteriaID ] = NpcID
-	Achievement.NPCsActive = {} -- [ NpcID ] = CriteriaID
-
-	for Criteria = 1, GetAchievementNumCriteria(AchievementID) do
-		local _, CriteriaType, _, _, _, _, _, AssetID, _, CriteriaID = GetAchievementCriteriaInfo(AchievementID, Criteria)
-		if CriteriaType == 0 then -- Mob kill type
-			Achievement.Criteria[CriteriaID] = AssetID
-		end
-	end
-end
 
 
 if _G.IsLoggedIn() then
