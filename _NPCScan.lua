@@ -42,6 +42,7 @@ private.Updater:SetLooping("REPEAT")
 -- Constants.
 -------------------------------------------------------------------------------
 local DB_VERSION = 1
+local ISLE_OF_THUNDER_MAP_ID = 1064
 local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
 local PLAYER_FACTION = _G.UnitFactionGroup("player")
 
@@ -915,7 +916,7 @@ do
 		-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
 		local MapName, _, _, _, _, _, _, MapID = _G.GetInstanceInfo()
 
-		if MapID == 1064 then --Fix for Isle of Thunder having a diffrent Instance name
+		if map_id == ISLE_OF_THUNDER_MAP_ID then -- Fix for Isle of Thunder having a diffrent Instance name
 			private.WorldID = 6
 		else
 			private.WorldID = private.ContinentIDs[MapName] or MapName
