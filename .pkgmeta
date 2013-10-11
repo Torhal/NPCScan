@@ -2,7 +2,7 @@ package-as: _NPCScan
 
 enable-nolib-creation: yes
 
-manual-changelog: Changelog.txt
+#manual-changelog: Changelog.txt
 
 externals:
   Libs/LibStub:
