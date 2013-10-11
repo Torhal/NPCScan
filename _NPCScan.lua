@@ -124,22 +124,32 @@ private.Achievements = {
 	[8714] = { WorldID = 6 }, --Timeless Champion
 }
 
+
 do
-	local VirtualContinents = {
-		--- Continents without physical maps aren't used.
+	local VIRTUAL_CONTINENTS = {
 		[5] = true -- The Maelstrom
 	}
+
 	private.ContinentNames = { _G.GetMapContinents() }
-	for ContinentID in pairs(VirtualContinents) do
-		private.ContinentNames[ContinentID] = nil
+	for continent_id in pairs(VIRTUAL_CONTINENTS) do
+		-- Continents without physical maps aren't used.
+		private.ContinentNames[continent_id] = nil
 	end
-	private.ContinentIDs = {} --- Reverse lookup of NS.ContinentNames.
+
+	private.ContinentIDs = {}
+	for continent_id, continent_name in pairs(private.ContinentNames) do
+		private.ContinentIDs[continent_name] = continent_id
+	end
+
 end
+
 
 private.NpcIDMax = 0xFFFFF --- Largest ID that will fit in a GUID's 20-bit NPC ID field.
 
 
---- Prints a message in the default chat window.
+-------------------------------------------------------------------------------
+-- Helpers.
+-------------------------------------------------------------------------------
 function private.Print(Message, Color)
 	if not Color then
 		Color = _G.NORMAL_FONT_COLOR
@@ -1023,10 +1033,6 @@ do
 	end
 end -- do-block
 
--- Create reverse lookup of continent names
-for Index, Name in pairs(private.ContinentNames) do
-	private.ContinentIDs[Name] = Index
-end
 
 -- Save achievement criteria data
 for AchievementID, Achievement in pairs(private.Achievements) do
