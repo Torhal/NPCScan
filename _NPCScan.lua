@@ -916,27 +916,36 @@ function private.Frame:PLAYER_LOGIN(event_name)
 		local stored_version = stored_options.Version
 
 		if not stored_version or type(stored_version) == "string" or stored_version < DB_VERSION then
-			stored_options = private.OptionsDefault
+			local new_options = private.OptionsDefault
+			-- ticket 21: try to preserve the custom list from previous DB versions
+			if stored_options.NPCs then
+			  for npc_id, npc_name in pairs(stored_options.NPCs) do
+			    new_options.NPCs[npc_id] = npc_name
+			    local world = stored_options.NPCWorldIDs and stored_options.NPCWorldIDs[npc_id]
+			    if world then
+			      new_options.NPCWorldIDs[npc_id] = world
+			    end
+			  end
+			end
+			stored_options = new_options
 		end
 
-		if type(stored_options.Version) == "string" and stored_options.Version < "5.2" then
-			for npc_id, npc_name in pairs(private.OptionsDefault.NPCs) do
-				stored_options.NPCs[npc_id] = npc_name
-			end
-
-			for npc_id, world_id in pairs(private.OptionsDefault.NPCWorldIDs) do
-				stored_options.NPCWorldIDs[npc_id] = world_id
-				stored_options.NPCWorldIDs[62346] = nil
-				stored_options.NPCWorldIDs[60491] = nil
-				stored_options.NPCWorldIDs[69099] = nil
-				stored_options.NPCWorldIDs[69161] = nil
-			end
-		end
 		stored_options.Version = DB_VERSION
 	end
 
 	if stored_character_options and stored_character_options.Version ~= DB_VERSION then
 		if not stored_character_options.Version or type(stored_character_options.Version) == "string" or stored_character_options < DB_VERSION then
+			if stored_character_options.NPCs then -- versions prior to 5.1 stored the list in character options
+			  for npc_id, npc_name in pairs(stored_character_options.NPCs) do
+			    if not stored_options.NPCs[npc_id] then
+			      stored_options.NPCs[npc_id] = npc_name
+			      local world = stored_character_options.NPCWorldIDs and stored_character_options.NPCWorldIDs[npc_id]
+			      if world then
+			        stored_options.NPCWorldIDs[npc_id] = world
+			      end
+			    end
+			  end
+			end
 			stored_character_options = private.OptionsCharacterDefault
 		end
 		stored_character_options.Version = DB_VERSION
