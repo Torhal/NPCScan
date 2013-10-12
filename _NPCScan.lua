@@ -633,6 +633,12 @@ do
 	local NPC_FACTION = {
 		[51071] = "Horde", -- Captain Florence
 		[51079] = "Alliance", -- Captain Foulwind
+		[68317] = "Horde", -- Mavis Harms
+		[68318] = "Horde", -- Dalan Nightbreaker
+		[68319] = "Horde", -- Disha Fearwarden
+		[68320] = "Alliance", -- Ubunti the Shade
+		[68321] = "Alliance", -- Kar Warmaker
+		[68322] = "Alliance", -- Muerta
 	}
 
 	--- @return True if NpcID should be a default for this character.
