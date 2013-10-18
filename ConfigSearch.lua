@@ -5,10 +5,10 @@
   ****************************************************************************]]
 
 
-local _NPCScan = select(2, ...)
-local L = _NPCScan.L
+local FOLDER_NAME, private = ...
+local L = private.L
 local NS = CreateFrame("Frame")
-_NPCScan.Config.Search = NS
+private.Config.Search = NS
 
 NS.AddFoundCheckbox = CreateFrame("CheckButton", "_NPCScanSearchAchievementAddFoundCheckbox", NS, "InterfaceOptionsCheckButtonTemplate")
 NS.BlockFlightScanCheckbox = CreateFrame("CheckButton", "_NPCScannerBlockFlightScanCheckbox", NS, "InterfaceOptionsCheckButtonTemplate")
@@ -33,18 +33,18 @@ end
 
 -- Sets the search for found achievement mobs option when its checkbox is clicked.
 function NS.AddFoundCheckbox.setFunc(Enable)
-	if _NPCScan.SetAchievementsAddFound(Enable == "1") then
-		_NPCScan.CacheListPrint(true)
+	if private.SetAchievementsAddFound(Enable == "1") then
+		private.CacheListPrint(true)
 	end
 end
 
 --FlightSupress
 function NS.BlockFlightScanCheckbox.setFunc(Enable)
-	if _NPCScan.OptionsCharacter.FlightSupress then
-		_NPCScan.OptionsCharacter.FlightSupress = false
+	if private.OptionsCharacter.FlightSupress then
+		private.OptionsCharacter.FlightSupress = false
 		NS.BlockFlightScanCheckbox:SetChecked(false)
 	else
-		_NPCScan.OptionsCharacter.FlightSupress = true
+		private.OptionsCharacter.FlightSupress = true
 
 		NS.BlockFlightScanCheckbox:SetChecked(true)
 	end
@@ -54,13 +54,13 @@ end
 -- Converts a localized world name into a WorldID.
 local function GetWorldID(World)
 	if World ~= "" then
-		return _NPCScan.ContinentIDs[World] or World
+		return private.LOCALIZED_CONTINENT_IDS[World] or World
 	end
 end
 
 -- Converts a WorldID into a localized world name.
 local function GetWorldIDName(WorldID)
-	return type(WorldID) == "number" and _NPCScan.ContinentNames[WorldID] or WorldID
+	return type(WorldID) == "number" and private.LOCALIZED_CONTINENT_NAMES[WorldID] or WorldID
 end
 
 
@@ -102,7 +102,7 @@ function NS:TabOnEnter()
 	GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, -8)
 	if self.AchievementID then
 		local _, Name, _, _, _, _, _, Description = GetAchievementInfo(self.AchievementID)
-		local WorldID = _NPCScan.Achievements[self.AchievementID].WorldID
+		local WorldID = private.ACHIEVEMENTS[self.AchievementID].WorldID
 		local Highlight = HIGHLIGHT_FONT_COLOR
 		if WorldID then
 			GameTooltip:ClearLines()
@@ -114,7 +114,7 @@ function NS:TabOnEnter()
 		end
 		GameTooltip:AddLine(Description, nil, nil, nil, true)
 
-		if not _NPCScan.OptionsCharacter.Achievements[self.AchievementID] then
+		if not private.OptionsCharacter.Achievements[self.AchievementID] then
 			local Color = RED_FONT_COLOR
 			GameTooltip:AddLine(L.SEARCH_ACHIEVEMENT_DISABLED, Color.r, Color.g, Color.b)
 		end
@@ -135,9 +135,9 @@ function NS:TabCheckOnClick()
 	local AchievementID = self:GetParent().AchievementID
 	NS.AchievementSetEnabled(AchievementID, Enable)
 	if not Enable then
-		_NPCScan.AchievementRemove(AchievementID)
-	elseif _NPCScan.AchievementAdd(AchievementID) then -- Cache might have changed
-		_NPCScan.CacheListPrint(true)
+		private.AchievementRemove(AchievementID)
+	elseif private.AchievementAdd(AchievementID) then -- Cache might have changed
+		private.CacheListPrint(true)
 	end
 end
 
@@ -156,13 +156,13 @@ function NS:RareTabCheckOnClick()
 	NS.AchievementSetEnabled(TabID, Enable)
 
 	if TabID == "BEASTS" then
-		_NPCScan.OptionsCharacter.TrackBeasts = Enable or nil
+		private.OptionsCharacter.TrackBeasts = Enable or nil
 	elseif TabID == "RARENPC" then
-		_NPCScan.OptionsCharacter.TrackRares = Enable or nil
+		private.OptionsCharacter.TrackRares = Enable or nil
 	end
-	_NPCScan.RareMobToggle(TabID, Enable)
+	private.RareMobToggle(TabID, Enable)
 	NS.UpdateTab(TabID)
-	_NPCScan.CacheListPrint(true)
+	private.CacheListPrint(true)
 end
 
 
@@ -173,10 +173,10 @@ local Tabs = {} -- [ "NPC" or AchievementID ] = Tab
 function NS.NPCValidate()
 	local NpcID, Name, WorldID = NS.NPCNpcID:GetNumber(), NS.NPCName:GetText(), GetWorldID(NS.NPCWorld:GetText())
 
-	local OldName = _NPCScan.Options.NPCs[NpcID]
-	local OldWorldID = _NPCScan.Options.NPCWorldIDs[NpcID]
+	local OldName = private.Options.NPCs[NpcID]
+	local OldWorldID = private.Options.NPCWorldIDs[NpcID]
 	local CanAdd = NpcID and Name ~= ""
-		and NpcID >= 1 and NpcID <= _NPCScan.NpcIDMax
+		and NpcID >= 1 and NpcID <= private.NPC_ID_MAX
 		and (Name ~= OldName or WorldID ~= OldWorldID)
 
 	-- Color world name orange if not a standard continent
@@ -202,12 +202,12 @@ end
 -- Adds a Custom NPC list element.
 function NS.NPCAdd:OnClick()
 	local NpcID, Name, WorldID = NS.NPCNpcID:GetNumber(), NS.NPCName:GetText(), GetWorldID(NS.NPCWorld:GetText())
-	if _NPCScan.TamableIDs[NpcID] then
-		_NPCScan.Print(L.SEARCH_ADD_TAMABLE_FORMAT:format(Name))
+	if private.TamableIDs[NpcID] then
+		private.Print(L.SEARCH_ADD_TAMABLE_FORMAT:format(Name))
 	end
-	_NPCScan.NPCRemove(NpcID)
-	if _NPCScan.NPCAdd(NpcID, Name, WorldID) then
-		_NPCScan.CacheListPrint(true)
+	private.NPCRemove(NpcID)
+	if private.NPCAdd(NpcID, Name, WorldID) then
+		private.CacheListPrint(true)
 	end
 	NS.NPCClear()
 end
@@ -215,7 +215,7 @@ end
 
 -- Removes a Custom NPC list element.
 function NS.NPCRemove:OnClick()
-	_NPCScan.NPCRemove(NS.NPCNpcID:GetNumber())
+	private.NPCRemove(NS.NPCNpcID:GetNumber())
 	NS.NPCClear()
 end
 
@@ -237,8 +237,8 @@ end
 function NS:NPCOnSelect(NpcID)
 	if NpcID ~= nil then
 		NS.NPCNpcID:SetNumber(NpcID)
-		NS.NPCName:SetText(_NPCScan.Options.NPCs[NpcID])
-		NS.NPCWorld:SetText(GetWorldIDName(_NPCScan.Options.NPCWorldIDs[NpcID]) or "")
+		NS.NPCName:SetText(private.Options.NPCs[NpcID])
+		NS.NPCWorld:SetText(GetWorldIDName(private.Options.NPCWorldIDs[NpcID]) or "")
 	end
 end
 
@@ -249,14 +249,14 @@ function NS.NPCWorldButton.Dropdown:initialize()
 	Info.notCheckable = true
 	Info.func = self.OnSelect
 	for Index = 1, select("#", GetMapContinents()) do
-		local World = _NPCScan.ContinentNames[Index]
+		local World = private.LOCALIZED_CONTINENT_NAMES[Index]
 		if World then -- Not an excluded virtual continent
 			Info.text, Info.arg1 = World, World
 			UIDropDownMenu_AddButton(Info)
 		end
 	end
 	local CurrentWorld = GetInstanceInfo()
-	if not _NPCScan.ContinentIDs[CurrentWorld] then -- Add current instance name
+	if not private.LOCALIZED_CONTINENT_IDS[CurrentWorld] then -- Add current instance name
 		-- Spacer
 		Info = UIDropDownMenu_CreateInfo()
 		Info.notCheckable = true
@@ -296,17 +296,17 @@ end
 -- Fills the search table with custom NPCs.
 function NS:NPCUpdate()
 	NS.NPCValidate()
-	local WorldIDs = _NPCScan.Options.NPCWorldIDs
-	local Overlay = IsAddOnLoaded("_NPCScan.Overlay") and _NPCScan.Overlay
-	for NpcID, Name in pairs(_NPCScan.Options.NPCs) do
+	local WorldIDs = private.Options.NPCWorldIDs
+	local Overlay = IsAddOnLoaded("_NPCScan.Overlay") and private.Overlay
+	for NpcID, Name in pairs(private.Options.NPCs) do
 		--local Map = Overlay and Overlay.GetNPCMapID( NpcID )
-		local Map = _NPCScan.RareMobData.NPCMapIDs[NpcID]
+		local Map = private.RareMobData.NPCMapIDs[NpcID]
 		local Row = NS.Table:AddRow(NpcID,
-			_NPCScan.TestID(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
+			private.TestID(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
 			Name, NpcID, GetWorldIDName(WorldIDs[NpcID]) or "",
 			Map and (GetMapNameByID(Map) or Map) or "")
 
-		if not _NPCScan.NPCIsActive(NpcID) then
+		if not private.NPCIsActive(NpcID) then
 			Row:SetAlpha(NS.InactiveAlpha)
 		end
 	end
@@ -315,15 +315,15 @@ end
 
 function NS:RareNPCUpdate()
 	NS.NPCValidate()
-	local WorldIDs = _NPCScan.RareMobData.NPCWorldIDs
-	for NpcID, Name in pairs(_NPCScan.RareMobData.RareNPCs) do
-		local Map = _NPCScan.RareMobData.NPCMapIDs[NpcID]
+	local WorldIDs = private.RareMobData.NPCWorldIDs
+	for NpcID, Name in pairs(private.RareMobData.RareNPCs) do
+		local Map = private.RareMobData.NPCMapIDs[NpcID]
 		local Row = NS.Table:AddRow(NpcID,
-			_NPCScan.TestID(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
+			private.TestID(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
 			Name, NpcID, GetWorldIDName(WorldIDs[NpcID]) or "",
 			Map and (GetMapNameByID(Map) or Map) or "")
 
-		if not _NPCScan.NPCIsActive(NpcID) then
+		if not private.NPCIsActive(NpcID) then
 			Row:SetAlpha(NS.InactiveAlpha)
 		end
 	end
@@ -332,16 +332,16 @@ end
 
 function NS:TameableNPCUpdate()
 	NS.NPCValidate()
-	local WorldIDs = _NPCScan.RareMobData.NPCWorldIDs
-	for NpcID, Name in pairs(_NPCScan.TamableNames) do
-		local Map = _NPCScan.TamableIDs[NpcID]
+	local WorldIDs = private.RareMobData.NPCWorldIDs
+	for NpcID, Name in pairs(private.TamableNames) do
+		local Map = private.TamableIDs[NpcID]
 		if type(Map) == "boolean" then Map = false end
 		local Row = NS.Table:AddRow(NpcID,
-			_NPCScan.TestID(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
+			private.TestID(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
 			Name, NpcID, GetWorldIDName(WorldIDs[NpcID]) or "",
 			Map and (GetMapNameByID(Map) or Map) or "")
 
-		if not _NPCScan.NPCIsActive(NpcID) then
+		if not private.NPCIsActive(NpcID) then
 			Row:SetAlpha(NS.InactiveAlpha)
 		end
 	end
@@ -405,20 +405,20 @@ end
 
 -- Fills the search table with achievement NPCs.
 function NS:AchievementUpdate()
-	local Achievement = _NPCScan.Achievements[self.AchievementID]
-	local Overlay = IsAddOnLoaded("_NPCScan.Overlay") and _NPCScan.Overlay
+	local Achievement = private.ACHIEVEMENTS[self.AchievementID]
+	local Overlay = IsAddOnLoaded("_NPCScan.Overlay") and private.Overlay
 	for CriteriaID, NpcID in pairs(Achievement.Criteria) do
 		if NpcID > 1 then
 			local Name, _, Completed = GetAchievementCriteriaInfoByID(self.AchievementID, CriteriaID)
-			local Map = _NPCScan.RareMobData.NPCMapIDs[NpcID]
+			local Map = private.RareMobData.NPCMapIDs[NpcID]
 			--local Map = Overlay and Overlay.GetNPCMapID( NpcID )
 			local Row = NS.Table:AddRow(NpcID,
-				_NPCScan.TestID(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
+				private.TestID(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
 				Name, NpcID,
 				Completed and [[|TInterface\RaidFrame\ReadyCheck-Ready:0|t]] or "",
 				Map and (GetMapNameByID(Map) or Map) or "")
 
-			if not _NPCScan.AchievementNPCIsActive(Achievement, NpcID) then
+			if not private.AchievementNPCIsActive(Achievement, NpcID) then
 				Row:SetAlpha(NS.InactiveAlpha)
 			end
 		end
@@ -433,7 +433,7 @@ function NS:AchievementActivate()
 	NS.Table:SetSortHandlers(true, true, true, true, true)
 	NS.Table:SetSortColumn(2) -- Default by name
 
-	NS.Table.Header:SetAlpha(_NPCScan.OptionsCharacter.Achievements[self.AchievementID] and 1.0 or NS.InactiveAlpha)
+	NS.Table.Header:SetAlpha(private.OptionsCharacter.Achievements[self.AchievementID] and 1.0 or NS.InactiveAlpha)
 end
 
 
@@ -530,7 +530,7 @@ end
 
 -- Reverts to default options.
 function NS:default()
-	_NPCScan.Synchronize(_NPCScan.Options) -- Resets only character settings
+	private.Synchronize(private.Options) -- Resets only character settings
 end
 
 
@@ -579,7 +579,7 @@ NS.NPCAdd:SetSize(16, 20)
 NS.NPCAdd:SetPoint("BOTTOMRIGHT", NS.NPCRemove, "TOPRIGHT", 0, 4)
 NS.NPCAdd:SetText(L.SEARCH_ADD)
 NS.NPCAdd:SetScript("OnClick", NS.NPCAdd.OnClick)
-NS.NPCAdd:SetScript("OnEnter", _NPCScan.Config.ControlOnEnter)
+NS.NPCAdd:SetScript("OnEnter", private.Config.ControlOnEnter)
 NS.NPCAdd:SetScript("OnLeave", GameTooltip_Hide)
 NS.NPCAdd.tooltipText = L.SEARCH_ADD_DESC
 
@@ -601,7 +601,7 @@ local function EditBoxSetup(self)
 	self:SetScript("OnTabPressed", NS.NPCOnTabPressed)
 	self:SetScript("OnEnterPressed", NS.NPCOnEnterPressed)
 	self:SetScript("OnTextChanged", NS.NPCValidate)
-	self:SetScript("OnEnter", _NPCScan.Config.ControlOnEnter)
+	self:SetScript("OnEnter", private.Config.ControlOnEnter)
 	self:SetScript("OnLeave", GameTooltip_Hide)
 	return self
 end
@@ -621,7 +621,7 @@ NpcID:SetPoint("TOP", NpcIDLabel)
 NpcID:SetPoint("BOTTOM", NpcIDLabel)
 NpcID:SetWidth(64)
 NpcID:SetNumeric(true)
-NpcID:SetMaxLetters(floor(log10(_NPCScan.NpcIDMax)) + 1)
+NpcID:SetMaxLetters(floor(log10(private.NPC_ID_MAX)) + 1)
 NpcID.NextEditBox, NpcID.tooltipText = World, L.SEARCH_ID_DESC
 
 local WorldLabel = NS.NPCControls:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
@@ -745,7 +745,7 @@ AddTab("NPC", NS.NPCUpdate, NS.CustomNPCActivate, NS.NPCDeactivate)
 AddTab("RARENPC", NS.RareNPCUpdate, NS.DefultNPCActivate, NS.NPCDeactivate)
 AddTab("BEASTS", NS.TameableNPCUpdate, NS.DefultNPCActivate, NS.NPCDeactivate)
 
-for AchievementID in pairs(_NPCScan.Achievements) do
+for AchievementID in pairs(private.ACHIEVEMENTS) do
 	AddTab(AchievementID, NS.AchievementUpdate, NS.AchievementActivate, NS.AchievementDeactivate)
 end
 
@@ -754,7 +754,7 @@ InterfaceOptions_AddCategory(NS)
 
 
 function NS:UpdateTabNames()
-	for AchievementID in pairs(_NPCScan.Achievements) do
+	for AchievementID in pairs(private.ACHIEVEMENTS) do
 		Tabs[AchievementID]:SetText((select(2, GetAchievementInfo(AchievementID))))
 		Tabs[AchievementID]:GetFontString():SetPoint("RIGHT", -12, 0)
 		PanelTemplates_TabResize(Tabs[AchievementID], 20 - 12)
