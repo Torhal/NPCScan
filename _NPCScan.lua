@@ -909,9 +909,12 @@ end
 -- Loads defaults, validates settings, and starts scan.
 -- Used instead of ADDON_LOADED to give overlay mods a chance to load and register for messages.
 function private.Frame:PLAYER_LOGIN(event_name)
-	local AutoAddVersion = GetAddOnMetadata("_NPCScan.AutoAdd", "Version"):match("^([%d.]+)");
-	if _G.IsAddOnLoaded("_NPCScan.AutoAdd")  and AutoAddVersion <= "1.5" then
-		StaticPopup_Show("NPCSCAN_AUTOADD_WARNING")
+	--Check to see if old version of _NPCScan.AutoAdd is loaded and display warning
+	if _G.IsAddOnLoaded("_NPCScan.AutoAdd") then
+		local AutoAddVersion = GetAddOnMetadata("_NPCScan.AutoAdd", "Version"):match("^([%d.]+)");
+		if  AutoAddVersion <= "1.5" then
+			StaticPopup_Show("NPCSCAN_AUTOADD_WARNING")
+		end
 	end
 
 	local stored_options = _G._NPCScanOptions
