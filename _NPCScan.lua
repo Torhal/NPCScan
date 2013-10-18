@@ -909,7 +909,8 @@ end
 -- Loads defaults, validates settings, and starts scan.
 -- Used instead of ADDON_LOADED to give overlay mods a chance to load and register for messages.
 function private.Frame:PLAYER_LOGIN(event_name)
-	if _G.IsAddOnLoaded("_NPCScan.AutoAdd") then
+	local AutoAddVersion = GetAddOnMetadata("_NPCScan.AutoAdd", "Version"):match("^([%d.]+)");
+	if _G.IsAddOnLoaded("_NPCScan.AutoAdd")  and AutoAddVersion <= "1.5" then
 		StaticPopup_Show("NPCSCAN_AUTOADD_WARNING")
 	end
 
@@ -1123,7 +1124,7 @@ _G.SlashCmdList["_NPCSCAN"] = private.SlashCommand
 
 --Warning Popup for users running _NPCScan.AutoAdd.
 _G.StaticPopupDialogs["NPCSCAN_AUTOADD_WARNING"] = {
-	text = "_NPCScan has detected that you are running _NPCScan.AutoAdd.  This addon is not supported and may prevent _NPCScan from working properly.  It is reccomended that you disable _NPCScan.AutoAdd.",
+	text = "_NPCScan has detected that you are running _NPCScan.AutoAdd v1.5.  This version of the addon is not supported and may prevent _NPCScan from working properly.  It is reccomended that you disable _NPCScan.AutoAdd untill it is updated.",
 	button1 = "Ok",
 	OnAccept = function()
 	end,
