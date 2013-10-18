@@ -80,16 +80,16 @@ private.OptionsCharacter = {
 private.OptionsDefault = {
 	Version = DB_VERSION,
 	NPCs = {
-		[64004] = "Ghostly Pandaren Fisherman",
-		[64191] = "Ghostly Pandaren Craftsman",
 		[50409] = "Mysterious Camel Figurine",
 		[50410] = "Mysterious Camel Figurine",
+		[64004] = "Ghostly Pandaren Fisherman",
+		[64191] = "Ghostly Pandaren Craftsman",
 	},
 	NPCWorldIDs = {
-		[50409] = 1, -- Mysterious Camel Figurine
-		[50410] = 1, -- Mysterious Camel Figurine
-		[64004] = 6, --"Ghostly Pandaren Fisherman"
-		[64191] = 6, --"Ghostly Pandaren Craftsman"
+		[50409] = private.CONTINENT_IDS.KALIMDOR,
+		[50410] = private.CONTINENT_IDS.KALIMDOR,
+		[64004] = private.CONTINENT_IDS.PANDARIA,
+		[64191] = private.CONTINENT_IDS.PANDARIA,
 	},
 }
 
@@ -97,12 +97,12 @@ private.OptionsDefault = {
 private.OptionsCharacterDefault = {
 	Version = DB_VERSION,
 	Achievements = {
-		[1312] = true, -- Bloody Rare (Outlands)
-		[2257] = true, -- Frostbitten (Northrend)
-		[7439] = true, -- Glorious! (Pandaria)
-		[8103] = true, -- Champions of Lei Shen
-		[8714] = true, --Timeless Champion
-		[7317] = true, -- One Of Many
+		[private.ACHIEVEMENT_IDS.BLOODY_RARE]		= true,
+		[private.ACHIEVEMENT_IDS.FROSTBITTEN]		= true,
+		[private.ACHIEVEMENT_IDS.ONE_MANY_ARMY]		= true,
+		[private.ACHIEVEMENT_IDS.GLORIOUS]		= true,
+		[private.ACHIEVEMENT_IDS.CHAMPIONS_OF_LEI_SHEN]	= true,
+		[private.ACHIEVEMENT_IDS.TIMELESS_CHAMPION]	= true,
 	},
 	AchievementsAddFound = nil,
 	AlertSoundUnmute = nil,
@@ -118,53 +118,6 @@ private.OptionsCharacterDefault = {
 	TrackBeasts = true,
 	TrackRares = true,
 }
-
-
-do
-	private.Achievements = {
-		-- Criteria data for each achievement.
-		[1312] = { WorldID = 3 }, -- Bloody Rare (Outlands)
-		[2257] = { WorldID = 4 }, -- Frostbitten (Northrend)
-		[7439] = { WorldID = 6 }, -- Glorious! (Pandaria)
-		[7317] = { WorldID = 6 }, -- One Of Many
-		[8103] = { WorldID = 6 }, -- Champions of Lei Shen
-		[8714] = { WorldID = 6 }, -- Timeless Champion
-	}
-
-	for achievement_id, achievement in pairs(private.Achievements) do
-		achievement.ID = achievement_id
-		achievement.Criteria = {} -- [ CriteriaID ] = NpcID
-		achievement.NPCsActive = {} -- [ NpcID ] = CriteriaID
-
-		for criteria_index = 1, _G.GetAchievementNumCriteria(achievement_id) do
-			local _, criteria_type, _, _, _, _, _, asset_id, _, criteria_id = _G.GetAchievementCriteriaInfo(achievement_id, criteria_index)
-			if criteria_type == 0 then -- Mob kill type
-				achievement.Criteria[criteria_id] = asset_id
-			end
-		end
-	end
-end -- do-block
-
-
-do
-	local VIRTUAL_CONTINENTS = {
-		[5] = true -- The Maelstrom
-	}
-
-	private.ContinentNames = { _G.GetMapContinents() }
-	for continent_id in pairs(VIRTUAL_CONTINENTS) do
-		-- Continents without physical maps aren't used.
-		private.ContinentNames[continent_id] = nil
-	end
-
-	private.ContinentIDs = {}
-	for continent_id, continent_name in pairs(private.ContinentNames) do
-		private.ContinentIDs[continent_name] = continent_id
-	end
-end
-
-
-private.NpcIDMax = 0xFFFFF -- Largest ID that will fit in a GUID's 20-bit NPC ID field.
 
 
 -------------------------------------------------------------------------------
@@ -251,7 +204,7 @@ do
 		end
 
 		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
-			for criteria_id, npc_id in pairs(private.Achievements[achievement_id].Criteria) do
+			for criteria_id, npc_id in pairs(private.ACHIEVEMENTS[achievement_id].Criteria) do
 				if private.OptionsCharacter.AchievementsAddFound or not select(3, GetAchievementCriteriaInfoByID(achievement_id, criteria_id)) then -- Not completed
 					self[npc_id] = private.TestID(npc_id)
 				end
@@ -476,7 +429,7 @@ end
 -- @return True if achievement added.
 function private.AchievementAdd(achievement_id)
 	achievement_id = assert(tonumber(achievement_id), "AchievementID must be numeric.")
-	local achievement = private.Achievements[achievement_id]
+	local achievement = private.ACHIEVEMENTS[achievement_id]
 
 	if not achievement or private.OptionsCharacter.Achievements[achievement_id] then
 		return
@@ -500,7 +453,7 @@ function private.AchievementRemove(achievement_id)
 	if not private.OptionsCharacter.Achievements[achievement_id] then
 		return
 	end
-	AchievementDeactivate(private.Achievements[achievement_id])
+	AchievementDeactivate(private.ACHIEVEMENTS[achievement_id])
 	private.OptionsCharacter.Achievements[achievement_id] = nil
 
 	if not next(private.OptionsCharacter.Achievements) then -- Last
@@ -580,7 +533,7 @@ function private.SetAchievementsAddFound(enable)
 		private.OptionsCharacter.AchievementsAddFound = enable or nil
 		private.Config.Search.AddFoundCheckbox:SetChecked(enable)
 
-		for _, achievement in pairs(private.Achievements) do
+		for _, achievement in pairs(private.ACHIEVEMENTS) do
 			if AchievementDeactivate(achievement) then -- Was active
 				AchievementActivate(achievement)
 			end
@@ -647,6 +600,7 @@ do
 	end
 end
 
+
 --- Resets the scanning list and reloads it from saved settings.
 function private.Synchronize(options, character_options)
 	-- Load defaults if settings omitted
@@ -662,7 +616,7 @@ function private.Synchronize(options, character_options)
 	end
 
 	-- Clear all scans
-	for achievement_id in pairs(private.Achievements) do
+	for achievement_id in pairs(private.ACHIEVEMENTS) do
 		private.AchievementRemove(achievement_id)
 	end
 
@@ -693,7 +647,7 @@ function private.Synchronize(options, character_options)
 		end
 	end
 
-	for achievement_id in pairs(private.Achievements) do
+	for achievement_id in pairs(private.ACHIEVEMENTS) do
 		-- If defaults, don't enable completed achievements unless explicitly allowed
 		if character_options.Achievements[achievement_id] and (not is_default_scan or character_options.AchievementsAddFound or not select(4, GetAchievementInfo(achievement_id))) then -- Not completed
 			private.AchievementAdd(achievement_id)
@@ -768,7 +722,7 @@ do
 		end
 
 		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
-			if private.Achievements[achievement_id].NPCsActive[npc_id] then
+			if private.ACHIEVEMENTS[achievement_id].NPCsActive[npc_id] then
 				return _G.GetAchievementLink(achievement_id)
 			end
 		end
@@ -779,7 +733,7 @@ do
 		NPCDeactivate(npc_id)
 
 		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
-			AchievementNPCDeactivate(private.Achievements[achievement_id], npc_id)
+			AchievementNPCDeactivate(private.ACHIEVEMENTS[achievement_id], npc_id)
 		end
 
 		local is_valid = true
@@ -816,7 +770,7 @@ do
 		end
 
 		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
-			local achievement = private.Achievements[achievement_id]
+			local achievement = private.ACHIEVEMENTS[achievement_id]
 			for npc_id, criteria_id in pairs(achievement.NPCsActive) do
 				local _, _, is_complete = _G.GetAchievementCriteriaInfoByID(achievement_id, criteria_id)
 				if is_complete then
@@ -867,7 +821,7 @@ if PLAYER_CLASS == "HUNTER" then
 				NPCDeactivate(npc_id)
 
 				for achievement_id in pairs(private.OptionsCharacter.Achievements) do
-					AchievementNPCDeactivate(private.Achievements[achievement_id], npc_id)
+					AchievementNPCDeactivate(private.ACHIEVEMENTS[achievement_id], npc_id)
 				end
 			end
 		end
@@ -980,7 +934,7 @@ do
 		if map_id == ISLE_OF_THUNDER_MAP_ID then -- Fix for Isle of Thunder having a diffrent Instance name
 			private.WorldID = 6
 		else
-			private.WorldID = private.ContinentIDs[map_name] or map_name
+			private.WorldID = private.LOCALIZED_CONTINENT_IDS[map_name] or map_name
 		end
 
 
@@ -997,7 +951,7 @@ do
 		end
 
 		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
-			local achievement = private.Achievements[achievement_id]
+			local achievement = private.ACHIEVEMENTS[achievement_id]
 			if achievement.WorldID then
 				AchievementActivate(achievement)
 			end
@@ -1029,7 +983,7 @@ function private.Frame:PLAYER_LEAVING_WORLD()
 	end
 
 	for achievement_id in pairs(private.OptionsCharacter.Achievements) do
-		local achievement = private.Achievements[achievement_id]
+		local achievement = private.ACHIEVEMENTS[achievement_id]
 		if achievement.WorldID then
 			AchievementDeactivate(achievement)
 		end

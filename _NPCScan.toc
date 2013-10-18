@@ -63,6 +63,7 @@ Locales\Locale-zhTW.lua
 
 NPCData.lua
 
+Constants.lua
 _NPCScan.lua
 TargetButton.lua
 MapOverlays.lua
