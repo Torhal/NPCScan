@@ -26,6 +26,9 @@ NS.NPCRemove = CreateFrame("Button", nil, NS.NPCControls, "UIPanelButtonTemplate
 
 NS.InactiveAlpha = 0.5
 
+local TEXTURE_NOT_READY = [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]]
+local TEXTURE_READY = [[|TInterface\RaidFrame\ReadyCheck-Ready:0|t]]
+
 local LibRareSpawnsData
 if IsAddOnLoaded("LibRareSpawns") then
 	LibRareSpawnsData = LibRareSpawns.ByNPCID
@@ -302,7 +305,7 @@ function NS:NPCUpdate()
 		--local Map = Overlay and Overlay.GetNPCMapID( NpcID )
 		local Map = private.RareMobData.NPCMapIDs[NpcID]
 		local Row = NS.Table:AddRow(NpcID,
-			private.NPCNameFromCache(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
+			private.NPCNameFromCache(NpcID) and TEXTURE_NOT_READY or "",
 			Name, NpcID, GetWorldIDName(WorldIDs[NpcID]) or "",
 			Map and (GetMapNameByID(Map) or Map) or "")
 
@@ -319,7 +322,7 @@ function NS:RareNPCUpdate()
 	for NpcID, Name in pairs(private.RareMobData.RareNPCs) do
 		local Map = private.RareMobData.NPCMapIDs[NpcID]
 		local Row = NS.Table:AddRow(NpcID,
-			private.NPCNameFromCache(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
+			private.NPCNameFromCache(NpcID) and TEXTURE_NOT_READY or "",
 			Name, NpcID, GetWorldIDName(WorldIDs[NpcID]) or "",
 			Map and (GetMapNameByID(Map) or Map) or "")
 
@@ -337,7 +340,7 @@ function NS:TameableNPCUpdate()
 		local Map = private.TamableIDs[NpcID]
 		if type(Map) == "boolean" then Map = false end
 		local Row = NS.Table:AddRow(NpcID,
-			private.NPCNameFromCache(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
+			private.NPCNameFromCache(NpcID) and TEXTURE_NOT_READY or "",
 			Name, NpcID, GetWorldIDName(WorldIDs[NpcID]) or "",
 			Map and (GetMapNameByID(Map) or Map) or "")
 
@@ -413,9 +416,9 @@ function NS:AchievementUpdate()
 			local Map = private.RareMobData.NPCMapIDs[NpcID]
 			--local Map = Overlay and Overlay.GetNPCMapID( NpcID )
 			local Row = NS.Table:AddRow(NpcID,
-				private.NPCNameFromCache(NpcID) and [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]] or "",
+				private.NPCNameFromCache(NpcID) and TEXTURE_NOT_READY or "",
 				Name, NpcID,
-				Completed and [[|TInterface\RaidFrame\ReadyCheck-Ready:0|t]] or "",
+				Completed and TEXTURE_READY or "",
 				Map and (GetMapNameByID(Map) or Map) or "")
 
 			if not private.AchievementNPCIsActive(Achievement, NpcID) then
