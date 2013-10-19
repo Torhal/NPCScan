@@ -29,10 +29,6 @@ NS.InactiveAlpha = 0.5
 local TEXTURE_NOT_READY = [[|TInterface\RaidFrame\ReadyCheck-NotReady:0|t]]
 local TEXTURE_READY = [[|TInterface\RaidFrame\ReadyCheck-Ready:0|t]]
 
-local LibRareSpawnsData
-if IsAddOnLoaded("LibRareSpawns") then
-	LibRareSpawnsData = LibRareSpawns.ByNPCID
-end
 
 -- Sets the search for found achievement mobs option when its checkbox is clicked.
 function NS.AddFoundCheckbox.setFunc(Enable)
@@ -467,46 +463,8 @@ do
 end
 
 
-if LibRareSpawnsData then
-	local MaxSize = 160 -- Larger images are forced to this max width and height
-	-- Adds mob info from LibRareSpawns to each row.
-	function NS:TableRowOnEnter()
-		local Data = LibRareSpawnsData[self:GetData()]
-		if Data then
-			local Width, Height = Data.PortraitWidth, Data.PortraitHeight
-			if Width > MaxSize then
-				Width, Height = MaxSize, Height * (MaxSize / Width)
-			end
-			if Height > MaxSize then
-				Width, Height = Width * (MaxSize / Height), MaxSize
-			end
-
-			GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT")
-			GameTooltip:SetText("|T" .. Data.Portrait .. ":" .. Height .. ":" .. Width .. "|t")
-			GameTooltip:AddLine(L.SEARCH_LEVEL_TYPE_FORMAT:format(Data.Level, Data.MonsterType))
-			GameTooltip:Show()
-		end
-	end
-end
-
-
 do
 	local CreateRowBackup
-
-	if LibRareSpawnsData then
-		-- Adds mouseover tooltip hooks to new rows.
-		local function AddTooltipHooks(Row, ...)
-			Row:SetScript("OnEnter", NS.TableRowOnEnter)
-			Row:SetScript("OnLeave", GameTooltip_Hide)
-
-			return Row, ...
-		end
-
-		-- Hooks new table rows.
-		function NS:TableCreateRow(...)
-			return AddTooltipHooks(CreateRowBackup(self, ...))
-		end
-	end
 
 
 	-- Creates the NPC table when first shown, and selects the Custom NPCs tab.
@@ -514,12 +472,6 @@ do
 		if not NS.Table then
 			NS.Table = LibStub("LibTextTable-1.1").New(nil, NS.TableContainer)
 			NS.Table:SetAllPoints()
-
-			if LibRareSpawnsData then
-				-- Hook row creation to add mouseover tooltips
-				CreateRowBackup = NS.Table.CreateRow
-				NS.Table.CreateRow = NS.TableCreateRow
-			end
 		end
 
 		if NS.TabSelected then
