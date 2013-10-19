@@ -292,58 +292,44 @@ function NS.NPCWorldButton:OnHide()
 end
 
 
--- Fills the search table with custom NPCs.
-function NS:NPCUpdate()
+local function GeneralNPCUpdate(world_ids, map_ids, npc_data)
 	NS.NPCValidate()
-	local WorldIDs = private.Options.NPCWorldIDs
-	local Overlay = IsAddOnLoaded("_NPCScan.Overlay") and private.Overlay
-	for NpcID, Name in pairs(private.Options.NPCs) do
-		--local Map = Overlay and Overlay.GetNPCMapID( NpcID )
-		local Map = private.RareMobData.NPCMapIDs[NpcID]
-		local Row = NS.Table:AddRow(NpcID,
-			private.NPCNameFromCache(NpcID) and TEXTURE_NOT_READY or "",
-			Name, NpcID, GetWorldIDName(WorldIDs[NpcID]) or "",
-			Map and (GetMapNameByID(Map) or Map) or "")
 
-		if not private.NPCIsActive(NpcID) then
-			Row:SetAlpha(NS.InactiveAlpha)
+	for npc_id, npc_name in pairs(npc_data) do
+		local map_id = map_ids[npc_id]
+
+		if type(map_id) == "boolean" then
+			map_id = nil
+		end
+
+		local new_row = NS.Table:AddRow(
+			npc_id,
+			private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
+			npc_name,
+			npc_id,
+			GetWorldIDName(world_ids[npc_id]) or "",
+			map_id and (_G.GetMapNameByID(map_id) or map_id) or ""
+		)
+
+		if not private.NPCIsActive(npc_id) then
+			new_row:SetAlpha(NS.InactiveAlpha)
 		end
 	end
+end
+
+
+function NS:NPCUpdate()
+	GeneralNPCUpdate(private.Options.NPCWorldIDs, private.RareMobData.NPCMapIDs, private.Options.NPCs)
 end
 
 
 function NS:RareNPCUpdate()
-	NS.NPCValidate()
-	local WorldIDs = private.RareMobData.NPCWorldIDs
-	for NpcID, Name in pairs(private.RareMobData.RareNPCs) do
-		local Map = private.RareMobData.NPCMapIDs[NpcID]
-		local Row = NS.Table:AddRow(NpcID,
-			private.NPCNameFromCache(NpcID) and TEXTURE_NOT_READY or "",
-			Name, NpcID, GetWorldIDName(WorldIDs[NpcID]) or "",
-			Map and (GetMapNameByID(Map) or Map) or "")
-
-		if not private.NPCIsActive(NpcID) then
-			Row:SetAlpha(NS.InactiveAlpha)
-		end
-	end
+	GeneralNPCUpdate(private.RareMobData.NPCWorldIDs, private.RareMobData.NPCMapIDs, private.RareMobData.RareNPCs)
 end
 
 
 function NS:TameableNPCUpdate()
-	NS.NPCValidate()
-	local WorldIDs = private.RareMobData.NPCWorldIDs
-	for NpcID, Name in pairs(private.TamableNames) do
-		local Map = private.TamableIDs[NpcID]
-		if type(Map) == "boolean" then Map = false end
-		local Row = NS.Table:AddRow(NpcID,
-			private.NPCNameFromCache(NpcID) and TEXTURE_NOT_READY or "",
-			Name, NpcID, GetWorldIDName(WorldIDs[NpcID]) or "",
-			Map and (GetMapNameByID(Map) or Map) or "")
-
-		if not private.NPCIsActive(NpcID) then
-			Row:SetAlpha(NS.InactiveAlpha)
-		end
-	end
+	GeneralNPCUpdate(private.RareMobData.NPCWorldIDs, private.TamableIDs, private.TamableNames)
 end
 
 
