@@ -139,7 +139,7 @@ do
 
 	--- Checks the cache for a given NpcID.
 	-- @return Localized name of the NPC if cached, or nil if not.
-	function private.TestID(npc_id)
+	function private.NPCNameFromCache(npc_id)
 		tooltip:SetOwner(_G.WorldFrame, "ANCHOR_NONE")
 		tooltip:SetHyperlink(("unit:0xF53%05X00000000"):format(npc_id))
 
@@ -188,25 +188,25 @@ do
 	-- Fills a cache list with all added NPCs, active or not.
 	local function CacheListPopulate(self)
 		for npc_id in pairs(private.Options.NPCs) do
-			self[npc_id] = private.TestID(npc_id)
+			self[npc_id] = private.NPCNameFromCache(npc_id)
 		end
 
 		if private.OptionsCharacter.TrackBeasts then
 			for npc_id in pairs(private.TamableIDs) do
-				self[npc_id] = private.TestID(npc_id)
+				self[npc_id] = private.NPCNameFromCache(npc_id)
 			end
 		end
 
 		if private.OptionsCharacter.TrackRares then
 			for npc_id in pairs(private.RareMobData.RareNPCs) do
-				self[npc_id] = private.TestID(npc_id)
+				self[npc_id] = private.NPCNameFromCache(npc_id)
 			end
 		end
 
 		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
 			for criteria_id, npc_id in pairs(private.ACHIEVEMENTS[achievement_id].Criteria) do
 				if private.OptionsCharacter.AchievementsAddFound or not select(3, GetAchievementCriteriaInfoByID(achievement_id, criteria_id)) then -- Not completed
-					self[npc_id] = private.TestID(npc_id)
+					self[npc_id] = private.NPCNameFromCache(npc_id)
 				end
 			end
 		end
@@ -245,7 +245,7 @@ local ScanIDs = {} -- [ NpcID ] = Number of concurrent scans for this ID
 
 -- Begins searching for an NPC.
 local function ScanAdd(npc_id)
-	local name = private.TestID(npc_id)
+	local name = private.NPCNameFromCache(npc_id)
 
 	if name then
 		CacheList[npc_id] = name
@@ -798,9 +798,9 @@ do
 		end
 
 		for npc_id in pairs(ScanIDs) do
-			local Name = private.TestID(npc_id)
-			if Name then
-				OnFound(npc_id, Name)
+			local npc_name = private.NPCNameFromCache(npc_id)
+			if npc_name then
+				OnFound(npc_id, npc_name)
 			end
 		end
 	end
@@ -815,7 +815,7 @@ if PLAYER_CLASS == "HUNTER" then
 	--- Stops scans for stabled hunter pets before a bogus alert can fire.
 	function private.Frame:PET_STABLE_UPDATE()
 		for npc_id in pairs(ScanIDs) do
-			local npc_name = private.TestID(npc_id)
+			local npc_name = private.NPCNameFromCache(npc_id)
 			if npc_name then
 				stabled_list[npc_id] = npc_name
 				NPCDeactivate(npc_id)
