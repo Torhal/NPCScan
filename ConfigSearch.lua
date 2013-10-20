@@ -266,7 +266,7 @@ npc_remove_button:SetPoint("BOTTOMRIGHT", panel, -16, 16)
 npc_remove_button:SetText(L.SEARCH_REMOVE)
 npc_remove_button:SetScript("OnClick", function(self)
 	private.NPCRemove(panel.npc_id_editbox:GetNumber())
-	panel.NPCClear()
+	panel:ClearEditBoxes()
 end)
 
 panel.npc_remove_button = npc_remove_button
@@ -299,7 +299,7 @@ npc_add_button:SetScript("OnClick", function(self)
 	if private.NPCAdd(npc_id, npc_name, world_id) then
 		private.CacheListPrint(true)
 	end
-	panel.NPCClear()
+	panel:ClearEditBoxes()
 end)
 
 panel.npc_add_button = npc_add_button
@@ -467,10 +467,10 @@ function panel:RareTabCheckOnClick()
 end
 
 
-function panel.NPCClear()
-	panel.npc_id_editbox:SetText("")
-	panel.npc_name_editbox:SetText("")
-	panel.npc_world_editbox:SetText("")
+function panel:ClearEditBoxes()
+	self.npc_id_editbox:SetText("")
+	self.npc_name_editbox:SetText("")
+	self.npc_world_editbox:SetText("")
 end
 
 
@@ -532,7 +532,7 @@ function panel:CustomNPCActivate()
 	panel.Table:SetSortHandlers(true, true, true, true, true)
 	panel.Table:SetSortColumn(2) -- Default by name
 
-	panel.NPCClear()
+	panel:ClearEditBoxes()
 	panel.npc_controls:Show()
 	panel.table_container:SetPoint("BOTTOM", panel.npc_controls, "TOP", 0, 4)
 	panel.Table.OnSelect = panel.NPCOnSelect
@@ -545,7 +545,7 @@ function panel:DefultNPCActivate()
 	panel.Table:SetSortHandlers(true, true, true, true, true)
 	panel.Table:SetSortColumn(2) -- Default by name
 
-	panel.NPCClear()
+	panel:ClearEditBoxes()
 	panel.table_container:SetPoint("BOTTOM", panel.npc_controls, "TOP", 0, 4)
 end
 
