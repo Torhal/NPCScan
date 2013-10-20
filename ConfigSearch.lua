@@ -61,8 +61,8 @@ local function UpdateButtonStates()
 	local world_color = type(world_id) == "string" and _G.ORANGE_FONT_COLOR or _G.HIGHLIGHT_FONT_COLOR
 	panel.npc_world_editbox:SetTextColor(world_color.r, world_color.g, world_color.b)
 
-	if panel.Table then
-		panel.Table:SetSelectionByKey(old_npc_name and npc_id or nil)
+	if panel.table then
+		panel.table:SetSelectionByKey(old_npc_name and npc_id or nil)
 	end
 	panel.npc_add_button[can_add and "Enable" or "Disable"](panel.npc_add_button)
 	panel.npc_remove_button[old_npc_name and "Enable" or "Disable"](panel.npc_remove_button)
@@ -101,15 +101,15 @@ panel.parent = L.CONFIG_TITLE
 panel:Hide()
 
 panel:SetScript("OnShow", function(self)
-	if not self.Table then
-		self.Table = _G.LibStub("LibTextTable-1.1").New(nil, self.table_container)
-		self.Table:SetAllPoints()
+	if not self.table then
+		self.table = _G.LibStub("LibTextTable-1.1").New(nil, self.table_container)
+		self.table:SetAllPoints()
 	end
 
-	if self.TabSelected then
+	if self.selected_tab then
 		self.UpdateTab()
 	else
-		self.TabSelect(panel_tabs.NPC)
+		self:SelectTab(panel_tabs.NPC)
 	end
 end)
 
@@ -358,9 +358,11 @@ npc_world_editbox:SetPoint("TOP", npc_id_editbox_label)
 npc_world_editbox:SetPoint("BOTTOM", npc_id_editbox_label)
 
 
--- Selects the given table tab.
-function panel.TabSelect(new_tab)
-	local old_tab = panel.TabSelected
+-------------------------------------------------------------------------------
+-- Panel methods.
+-------------------------------------------------------------------------------
+function panel:SelectTab(new_tab)
+	local old_tab = self.selected_tab
 
 	if new_tab == old_tab then
 		return
@@ -373,97 +375,17 @@ function panel.TabSelect(new_tab)
 		_G.PanelTemplates_DeselectTab(old_tab)
 	end
 
-	for _, row in ipairs(panel.Table.Rows) do
+	for _, row in ipairs(self.table.Rows) do
 		row:SetAlpha(ALPHA_ACTIVE)
 	end
-	panel.Table:Clear()
-
-	panel.TabSelected = new_tab
+	self.selected_tab = new_tab
+	self.table:Clear()
 	_G.PanelTemplates_SelectTab(new_tab)
+
 	if new_tab.Activate then
 		new_tab:Activate()
 	end
 	new_tab:Update()
-end
-
-
--- Selects a tab's table view when clicked.
-function panel:TabOnClick()
-	_G.PlaySound("igCharacterInfoTab")
-	panel.TabSelect(self)
-end
-
-
--- Displays a tooltip for a table tab when moused over.
-function panel:TabOnEnter()
-	local tooltip = _G.GameTooltip
-	tooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, -8)
-
-	if self.AchievementID then
-		local _, name, _, _, _, _, _, description = _G.GetAchievementInfo(self.AchievementID)
-		local world_id = private.ACHIEVEMENTS[self.AchievementID].WorldID
-		local highlight = _G.HIGHLIGHT_FONT_COLOR
-
-		if world_id then
-			local gray = _G.GRAY_FONT_COLOR
-
-			tooltip:ClearLines()
-			tooltip:AddDoubleLine(name, L.SEARCH_WORLD_FORMAT:format(GetWorldIDName(world_id)), highlight.r, highlight.g, highlight.b, gray.r, gray.g, gray.b)
-		else
-			tooltip:SetText(name, highlight.r, highlight.g, highlight.b)
-		end
-		tooltip:AddLine(description, nil, nil, nil, true)
-
-		if not private.OptionsCharacter.Achievements[self.AchievementID] then
-			local color = _G.RED_FONT_COLOR
-			tooltip:AddLine(L.SEARCH_ACHIEVEMENT_DISABLED, color.r, color.g, color.b)
-		end
-	elseif self.AchievementID == "BEASTS" then
-		tooltip:SetText(L.SEARCH_TAMEBEAST_DECS, nil, nil, nil, nil, true)
-	else
-		tooltip:SetText(L.SEARCH_NPCS_DESC, nil, nil, nil, nil, true)
-	end
-	tooltip:Show()
-end
-
-
--- Enables or disables tracking an achievement when its tab checkbox is clicked.
-function panel:TabCheckOnClick()
-	local is_enabled = self:GetChecked()
-	_G.PlaySound(is_enabled and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
-
-	local achievement_id = self:GetParent().AchievementID
-	panel.AchievementSetEnabled(achievement_id, is_enabled)
-
-	if not is_enabled then
-		private.AchievementRemove(achievement_id)
-	elseif private.AchievementAdd(achievement_id) then -- Cache might have changed
-		private.CacheListPrint(true)
-	end
-end
-
-
--- Shows the tab's tooltip when mousing over the tab's checkbox.
-function panel:TabCheckOnEnter()
-	panel.TabOnEnter(self:GetParent())
-end
-
-
-function panel:RareTabCheckOnClick()
-	local is_enabled = self:GetChecked()
-	_G.PlaySound(is_enabled and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
-
-	local tab_id = self:GetParent().TabID
-	panel.AchievementSetEnabled(tab_id, is_enabled)
-
-	if tab_id == "BEASTS" then
-		private.OptionsCharacter.TrackBeasts = is_enabled or nil
-	elseif tab_id == "RARENPC" then
-		private.OptionsCharacter.TrackRares = is_enabled or nil
-	end
-	private.RareMobToggle(tab_id, is_enabled)
-	panel.UpdateTab(tab_id)
-	private.CacheListPrint(true)
 end
 
 
@@ -496,7 +418,7 @@ do
 				map_id = nil
 			end
 
-			local new_row = panel.Table:AddRow(npc_id,
+			local new_row = panel.table:AddRow(npc_id,
 				private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
 				npc_name,
 				npc_id,
@@ -528,22 +450,22 @@ end -- do-block
 
 -- Customizes the table when the NPCs tab is selected.
 function panel:CustomNPCActivate()
-	panel.Table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
-	panel.Table:SetSortHandlers(true, true, true, true, true)
-	panel.Table:SetSortColumn(2) -- Default by name
+	panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
+	panel.table:SetSortHandlers(true, true, true, true, true)
+	panel.table:SetSortColumn(2) -- Default by name
 
 	panel:ClearEditBoxes()
 	panel.npc_controls:Show()
 	panel.table_container:SetPoint("BOTTOM", panel.npc_controls, "TOP", 0, 4)
-	panel.Table.OnSelect = panel.NPCOnSelect
+	panel.table.OnSelect = panel.NPCOnSelect
 end
 
 
 -- Customizes the table when the NPCs tab is selected.
 function panel:DefultNPCActivate()
-	panel.Table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
-	panel.Table:SetSortHandlers(true, true, true, true, true)
-	panel.Table:SetSortColumn(2) -- Default by name
+	panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
+	panel.table:SetSortHandlers(true, true, true, true, true)
+	panel.table:SetSortColumn(2) -- Default by name
 
 	panel:ClearEditBoxes()
 	panel.table_container:SetPoint("BOTTOM", panel.npc_controls, "TOP", 0, 4)
@@ -554,7 +476,7 @@ end
 function panel:NPCDeactivate()
 	panel.npc_controls:Hide()
 	panel.table_container:SetPoint("BOTTOM", panel.npc_controls)
-	panel.Table.OnSelect = nil
+	panel.table.OnSelect = nil
 end
 
 
@@ -568,11 +490,11 @@ function panel.AchievementSetEnabled(achievement_id, is_enabled)
 	checked_texture:Show()
 
 	if _G.GameTooltip:GetOwner() == tab then
-		panel.TabOnEnter(tab)
+		tab:GetScript("OnEnter")(tab)
 	end
 
-	if panel.TabSelected == tab then
-		panel.Table.Header:SetAlpha(is_enabled and ALPHA_ACTIVE or ALPHA_INACTIVE)
+	if panel.selected_tab == tab then
+		panel.table.Header:SetAlpha(is_enabled and ALPHA_ACTIVE or ALPHA_INACTIVE)
 	end
 end
 
@@ -585,7 +507,7 @@ function panel:AchievementUpdate()
 		if npc_id > 1 then
 			local npc_name, _, is_completed = _G.GetAchievementCriteriaInfoByID(self.AchievementID, criteria_id)
 			local map_id = private.RareMobData.NPCMapIDs[npc_id]
-			local new_row = panel.Table:AddRow(npc_id,
+			local new_row = panel.table:AddRow(npc_id,
 				private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
 				npc_name,
 				npc_id,
@@ -603,17 +525,17 @@ end
 -- Customizes the table when an achievement tab is selected.
 function panel:AchievementActivate()
 
-	panel.Table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED, L.SEARCH_MAP)
-	panel.Table:SetSortHandlers(true, true, true, true, true)
-	panel.Table:SetSortColumn(2) -- Default by name
+	panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED, L.SEARCH_MAP)
+	panel.table:SetSortHandlers(true, true, true, true, true)
+	panel.table:SetSortColumn(2) -- Default by name
 
-	panel.Table.Header:SetAlpha(private.OptionsCharacter.Achievements[self.AchievementID] and ALPHA_ACTIVE or ALPHA_INACTIVE)
+	panel.table.Header:SetAlpha(private.OptionsCharacter.Achievements[self.AchievementID] and ALPHA_ACTIVE or ALPHA_INACTIVE)
 end
 
 
 -- Undoes customization to the table when leaving an achievement tab.
 function panel:AchievementDeactivate()
-	panel.Table.Header:SetAlpha(ALPHA_ACTIVE)
+	panel.table.Header:SetAlpha(ALPHA_ACTIVE)
 end
 
 
@@ -622,16 +544,16 @@ do
 	local function OnUpdate(self)
 		self:SetScript("OnUpdate", nil)
 
-		for _, row in ipairs(panel.Table.Rows) do
+		for _, row in ipairs(panel.table.Rows) do
 			row:SetAlpha(ALPHA_ACTIVE)
 		end
-		panel.Table:Clear()
-		panel.TabSelected:Update()
+		panel.table:Clear()
+		panel.selected_tab:Update()
 	end
 
 	-- Updates the table for a given tab if it is displayed.
 	function panel.UpdateTab(tab_id)
-		if not tab_id or panel_tabs[tab_id] == panel.TabSelected then
+		if not tab_id or panel_tabs[tab_id] == panel.selected_tab then
 			panel.table_container:SetScript("OnUpdate", OnUpdate)
 		end
 	end
@@ -652,13 +574,89 @@ do
 	local tab_row = 0
 
 
+	local function Tab_OnEnter(tab)
+		local tooltip = _G.GameTooltip
+		tooltip:SetOwner(tab, "ANCHOR_TOPLEFT", 0, -8)
+
+		if tab.AchievementID then
+			local _, name, _, _, _, _, _, description = _G.GetAchievementInfo(tab.AchievementID)
+			local world_id = private.ACHIEVEMENTS[tab.AchievementID].WorldID
+			local highlight = _G.HIGHLIGHT_FONT_COLOR
+
+			if world_id then
+				local gray = _G.GRAY_FONT_COLOR
+
+				tooltip:ClearLines()
+				tooltip:AddDoubleLine(name, L.SEARCH_WORLD_FORMAT:format(GetWorldIDName(world_id)), highlight.r, highlight.g, highlight.b, gray.r, gray.g, gray.b)
+			else
+				tooltip:SetText(name, highlight.r, highlight.g, highlight.b)
+			end
+			tooltip:AddLine(description, nil, nil, nil, true)
+
+			if not private.OptionsCharacter.Achievements[tab.AchievementID] then
+				local color = _G.RED_FONT_COLOR
+				tooltip:AddLine(L.SEARCH_ACHIEVEMENT_DISABLED, color.r, color.g, color.b)
+			end
+		elseif tab.AchievementID == "BEASTS" then
+			tooltip:SetText(L.SEARCH_TAMEBEAST_DECS, nil, nil, nil, nil, true)
+		else
+			tooltip:SetText(L.SEARCH_NPCS_DESC, nil, nil, nil, nil, true)
+		end
+		tooltip:Show()
+	end
+
+
+	local function Tab_OnClick(tab)
+		_G.PlaySound("igCharacterInfoTab")
+		panel:SelectTab(tab)
+	end
+
+
+	local function CheckBox_OnEnter(checkbox)
+		Tab_OnEnter(checkbox:GetParent())
+	end
+
+
+	local function CheckBoxAchievement_OnClick(checkbox)
+		local is_enabled = checkbox:GetChecked()
+		_G.PlaySound(is_enabled and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
+
+		local achievement_id = checkbox:GetParent().AchievementID
+		panel.AchievementSetEnabled(achievement_id, is_enabled)
+
+		if not is_enabled then
+			private.AchievementRemove(achievement_id)
+		elseif private.AchievementAdd(achievement_id) then -- Cache might have changed
+			private.CacheListPrint(true)
+		end
+	end
+
+
+	local function CheckBoxID_OnClick(checkbox)
+		local is_enabled = checkbox:GetChecked()
+		_G.PlaySound(is_enabled and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
+
+		local tab_id = checkbox:GetParent().TabID
+		panel.AchievementSetEnabled(tab_id, is_enabled)
+
+		if tab_id == "BEASTS" then
+			private.OptionsCharacter.TrackBeasts = is_enabled or nil
+		elseif tab_id == "RARENPC" then
+			private.OptionsCharacter.TrackRares = is_enabled or nil
+		end
+		private.RareMobToggle(tab_id, is_enabled)
+		panel.UpdateTab(tab_id)
+		private.CacheListPrint(true)
+	end
+
+
 	local function CreateTabCheckBox(tab, onclick_script)
 		local checkbox = _G.CreateFrame("CheckButton", nil, tab, "UICheckButtonTemplate")
 		checkbox:SetSize(20, 20)
 		checkbox:SetPoint("BOTTOMLEFT", 8, 0)
 		checkbox:SetHitRectInsets(4, 4, 4, 4)
 		checkbox:SetScript("OnClick", onclick_script)
-		--Checkbox:SetScript( "OnEnter", NS.TabCheckOnEnter )
+		--Checkbox:SetScript( "OnEnter", CheckBox_OnEnter )
 		checkbox:SetScript("OnLeave", _G.GameTooltip_Hide)
 
 		tab.Checkbox = checkbox
@@ -670,8 +668,8 @@ do
 
 		local tab = _G.CreateFrame("Button", "_NPCScanSearchTab" .. num_tabs, panel.table_container, "TabButtonTemplate")
 		tab:SetHitRectInsets(6, 6, 6, 0)
-		tab:SetScript("OnClick", panel.TabOnClick)
-		tab:SetScript("OnEnter", panel.TabOnEnter)
+		tab:SetScript("OnClick", Tab_OnClick)
+		tab:SetScript("OnEnter", Tab_OnEnter)
 		tab:SetScript("OnLeave", _G.GameTooltip_Hide)
 		tab:SetMotionScriptsWhileDisabled(true) -- Allow tooltip while active
 
@@ -683,19 +681,19 @@ do
 			tab:SetText(achievement_name)
 			tab:GetFontString():SetPoint("RIGHT", -12, 0)
 
-			CreateTabCheckBox(tab, panel.TabCheckOnClick)
+			CreateTabCheckBox(tab, CheckBoxAchievement_OnClick)
 		elseif achievement_id == "BEASTS" then
 			tab.TabID = achievement_id
 			tab:SetText(L.TAMEDBEASTS)
 			tab:GetFontString():SetPoint("RIGHT", -12, 0)
 
-			CreateTabCheckBox(tab, panel.RareTabCheckOnClick)
+			CreateTabCheckBox(tab, CheckBoxID_OnClick)
 		elseif achievement_id == "RARENPC" then
 			tab.TabID = achievement_id
 			tab:SetText("Rare Mobs")
 			tab:GetFontString():SetPoint("RIGHT", -12, 0)
 
-			CreateTabCheckBox(tab, panel.RareTabCheckOnClick)
+			CreateTabCheckBox(tab, CheckBoxID_OnClick)
 		end
 
 		if tab.Checkbox then
