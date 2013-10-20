@@ -531,7 +531,7 @@ end
 function private.SetAchievementsAddFound(enable)
 	if not enable ~= not private.OptionsCharacter.AchievementsAddFound then
 		private.OptionsCharacter.AchievementsAddFound = enable or nil
-		private.Config.Search.AddFoundCheckbox:SetChecked(enable)
+		private.Config.Search.add_found_checkbox:SetChecked(enable)
 
 		for _, achievement in pairs(private.ACHIEVEMENTS) do
 			if AchievementDeactivate(achievement) then -- Was active
@@ -572,7 +572,7 @@ end
 -- @return True if changed.
 function private.SetBlockFlightScan(enable)
 	private.OptionsCharacter.FlightSupress = enable
-	private.Config.Search.BlockFlightScanCheckbox:SetChecked(enable)
+	private.Config.Search.block_flight_scan_checkbox:SetChecked(enable)
 	return enable
 end
 
