@@ -375,9 +375,10 @@ function panel:SelectTab(new_tab)
 		_G.PanelTemplates_DeselectTab(old_tab)
 	end
 
-	for _, row in ipairs(self.table.Rows) do
-		row:SetAlpha(ALPHA_ACTIVE)
+	for index = 1, #self.table.Rows do
+		self.table.Rows[index]:SetAlpha(ALPHA_ACTIVE)
 	end
+
 	self.selected_tab = new_tab
 	self.table:Clear()
 	_G.PanelTemplates_SelectTab(new_tab)
@@ -544,8 +545,8 @@ do
 	local function OnUpdate(self)
 		self:SetScript("OnUpdate", nil)
 
-		for _, row in ipairs(panel.table.Rows) do
-			row:SetAlpha(ALPHA_ACTIVE)
+		for index = 1, #panel.table.Rows do
+			panel.table.Rows[index]:SetAlpha(ALPHA_ACTIVE)
 		end
 		panel.table:Clear()
 		panel.selected_tab:Update()
