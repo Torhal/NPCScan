@@ -69,7 +69,7 @@ local function UpdateButtonStates()
 end
 
 
-local InitializeEditBox
+local CreateEditBox
 do
 	local function EditBox_OnEnterPressed(self)
 		self:ClearFocus()
@@ -82,13 +82,17 @@ do
 	end
 
 
-	function InitializeEditBox(editbox)
+	function CreateEditBox(name, parent, tooltip_text, next_editbox)
+		local editbox = _G.CreateFrame("EditBox", name, parent, "InputBoxTemplate")
 		editbox:SetAutoFocus(false)
 		editbox:SetScript("OnTabPressed", EditBox_OnTabPressed)
 		editbox:SetScript("OnEnterPressed", EditBox_OnEnterPressed)
 		editbox:SetScript("OnTextChanged", UpdateButtonStates)
 		editbox:SetScript("OnEnter", private.Config.ControlOnEnter)
 		editbox:SetScript("OnLeave", _G.GameTooltip_Hide)
+		editbox.tooltipText = tooltip_text
+		editbox.next_editbox = next_editbox
+		return editbox
 	end
 end -- do-block
 
@@ -190,11 +194,8 @@ table_container:SetPoint("RIGHT", -16, 0)
 table_container:SetPoint("BOTTOM", npc_controls)
 
 
-local npc_world_editbox = _G.CreateFrame("EditBox", "_NPCScanSearchNpcWorldEditBox", npc_controls, "InputBoxTemplate")
-npc_world_editbox.next_editbox = "npc_name_editbox"
-npc_world_editbox.tooltipText = L.SEARCH_WORLD_DESC
+local npc_world_editbox = CreateEditBox("_NPCScanSearchNpcWorldEditBox", npc_controls, L.SEARCH_WORLD_DESC, "npc_name_editbox")
 
-InitializeEditBox(npc_world_editbox)
 panel.npc_world_editbox = npc_world_editbox
 
 
@@ -318,29 +319,23 @@ npc_controls:SetPoint("LEFT", npc_id_editbox_label)
 npc_controls:SetPoint("TOP", npc_add_button)
 
 
-local npc_name_editbox = _G.CreateFrame("EditBox", "_NPCScanSearchNpcNameEditBox", npc_controls, "InputBoxTemplate")
+local npc_name_editbox = CreateEditBox("_NPCScanSearchNpcNameEditBox", npc_controls, L.SEARCH_NAME_DESC, "npc_id_editbox")
 npc_name_editbox:SetPoint("LEFT", npc_name_editbox_label:GetStringWidth() > npc_id_editbox_label:GetStringWidth() and npc_name_editbox_label or npc_id_editbox_label, "RIGHT", 8, 0)
 npc_name_editbox:SetPoint("RIGHT", npc_remove_button, "LEFT", -4, 0)
 npc_name_editbox:SetPoint("TOP", npc_name_editbox_label)
 npc_name_editbox:SetPoint("BOTTOM", npc_name_editbox_label)
-npc_name_editbox.next_editbox = "npc_id_editbox"
-npc_name_editbox.tooltipText = L.SEARCH_NAME_DESC
 
-InitializeEditBox(npc_name_editbox)
 panel.npc_name_editbox = npc_name_editbox
 
 
-local npc_id_editbox = _G.CreateFrame("EditBox", "_NPCScanSearchNpcIDEditBox", npc_controls, "InputBoxTemplate")
+local npc_id_editbox = CreateEditBox("_NPCScanSearchNpcIDEditBox", npc_controls, L.SEARCH_ID_DESC, "npc_world_editbox")
 npc_id_editbox:SetPoint("LEFT", npc_name_editbox)
 npc_id_editbox:SetPoint("TOP", npc_id_editbox_label)
 npc_id_editbox:SetPoint("BOTTOM", npc_id_editbox_label)
 npc_id_editbox:SetWidth(64)
 npc_id_editbox:SetNumeric(true)
 npc_id_editbox:SetMaxLetters(floor(log10(private.NPC_ID_MAX)) + 1)
-npc_id_editbox.next_editbox = "npc_world_editbox"
-npc_id_editbox.tooltipText = L.SEARCH_ID_DESC
 
-InitializeEditBox(npc_id_editbox)
 panel.npc_id_editbox = npc_id_editbox
 
 
@@ -525,11 +520,9 @@ end
 
 -- Customizes the table when an achievement tab is selected.
 function panel:AchievementActivate()
-
 	panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED, L.SEARCH_MAP)
 	panel.table:SetSortHandlers(true, true, true, true, true)
 	panel.table:SetSortColumn(2) -- Default by name
-
 	panel.table.Header:SetAlpha(private.OptionsCharacter.Achievements[self.AchievementID] and ALPHA_ACTIVE or ALPHA_INACTIVE)
 end
 
