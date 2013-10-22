@@ -8,6 +8,9 @@ local pairs = _G.pairs
 local select = _G.select
 local type = _G.type
 
+-- Libraries
+local math = _G.math
+
 
 -------------------------------------------------------------------------------
 -- AddOn namespace.
@@ -334,7 +337,7 @@ npc_id_editbox:SetPoint("TOP", npc_id_editbox_label)
 npc_id_editbox:SetPoint("BOTTOM", npc_id_editbox_label)
 npc_id_editbox:SetWidth(64)
 npc_id_editbox:SetNumeric(true)
-npc_id_editbox:SetMaxLetters(floor(log10(private.NPC_ID_MAX)) + 1)
+npc_id_editbox:SetMaxLetters(math.floor(math.log10(private.NPC_ID_MAX)) + 1)
 
 panel.npc_id_editbox = npc_id_editbox
 
@@ -356,6 +359,31 @@ npc_world_editbox:SetPoint("BOTTOM", npc_id_editbox_label)
 -------------------------------------------------------------------------------
 -- Panel methods.
 -------------------------------------------------------------------------------
+function panel.AchievementSetEnabled(achievement_id, is_enabled)
+	local tab = panel_tabs[achievement_id]
+	tab.checkbox:SetChecked(is_enabled)
+
+	local checked_texture = tab.checkbox:GetCheckedTexture()
+	checked_texture:SetTexture(is_enabled and [[Interface\Buttons\UI-CheckBox-Check]] or [[Interface\RAIDFRAME\ReadyCheck-NotReady]])
+	checked_texture:Show()
+
+	if _G.GameTooltip:GetOwner() == tab then
+		tab:GetScript("OnEnter")(tab)
+	end
+
+	if panel.selected_tab == tab then
+		panel.table.Header:SetAlpha(is_enabled and ALPHA_ACTIVE or ALPHA_INACTIVE)
+	end
+end
+
+
+function panel:ClearEditBoxes()
+	self.npc_id_editbox:SetText("")
+	self.npc_name_editbox:SetText("")
+	self.npc_world_editbox:SetText("")
+end
+
+
 function panel:SelectTab(new_tab)
 	local old_tab = self.selected_tab
 
@@ -385,25 +413,223 @@ function panel:SelectTab(new_tab)
 end
 
 
-function panel:ClearEditBoxes()
-	self.npc_id_editbox:SetText("")
-	self.npc_name_editbox:SetText("")
-	self.npc_world_editbox:SetText("")
-end
-
-
--- Fills in the edit boxes when a table row is selected.
-function panel:NPCOnSelect(npc_id)
-	if not npc_id then
-		return
-	end
-	panel.npc_id_editbox:SetNumber(npc_id)
-	panel.npc_name_editbox:SetText(private.Options.NPCs[npc_id])
-	panel.npc_world_editbox:SetText(GetWorldIDName(private.Options.NPCWorldIDs[npc_id]) or "")
-end
-
-
 do
+	-- Recreates table data at most once per frame.
+	local function OnUpdate(self)
+		self:SetScript("OnUpdate", nil)
+
+		for index = 1, #panel.table.Rows do
+			panel.table.Rows[index]:SetAlpha(ALPHA_ACTIVE)
+		end
+		panel.table:Clear()
+		panel.selected_tab:Update()
+	end
+
+	function panel.UpdateTab(tab_id)
+		if not tab_id or panel_tabs[tab_id] == panel.selected_tab then
+			panel.table_container:SetScript("OnUpdate", OnUpdate)
+		end
+	end
+end
+
+
+function panel:UpdateTabNames()
+	for achievement_id in pairs(private.ACHIEVEMENTS) do
+		local _, achievement_name = _G.GetAchievementInfo(achievement_id)
+
+		panel_tabs[achievement_id]:SetText(achievement_name)
+		panel_tabs[achievement_id]:GetFontString():SetPoint("RIGHT", -12, 0)
+		_G.PanelTemplates_TabResize(panel_tabs[achievement_id], 20 - 12)
+	end
+end
+
+
+-- Reverts to default options.
+function panel:default()
+	private.Synchronize(private.Options) -- Resets only character settings
+end
+
+
+-------------------------------------------------------------------------------
+-- Tabs.
+-------------------------------------------------------------------------------
+do
+	local TEXT_TAB_TOOLTIPS = {
+		BEASTS = L.SEARCH_TAMEBEAST_DECS,
+		NPC = L.SEARCH_NPCS_DESC,
+		RARENPC = L.SEARCH_NPCS_DESC,
+	}
+
+
+	local TEXT_TAB_CONFIG = {
+		BEASTS = "TrackBeasts",
+		RARENPC = "TrackRares",
+	}
+
+	local function Tab_OnEnter(tab)
+		local tooltip = _G.GameTooltip
+		tooltip:SetOwner(tab, "ANCHOR_TOPLEFT", 0, -8)
+
+		if type(tab.identifier) == "number" then
+			local _, name, _, _, _, _, _, description = _G.GetAchievementInfo(tab.identifier)
+			local world_id = private.ACHIEVEMENTS[tab.identifier].WorldID
+			local highlight = _G.HIGHLIGHT_FONT_COLOR
+
+			if world_id then
+				local gray = _G.GRAY_FONT_COLOR
+
+				tooltip:ClearLines()
+				tooltip:AddDoubleLine(name, L.SEARCH_WORLD_FORMAT:format(GetWorldIDName(world_id)), highlight.r, highlight.g, highlight.b, gray.r, gray.g, gray.b)
+			else
+				tooltip:SetText(name, highlight.r, highlight.g, highlight.b)
+			end
+			tooltip:AddLine(description, nil, nil, nil, true)
+
+			if not private.OptionsCharacter.Achievements[tab.identifier] then
+				local red = _G.RED_FONT_COLOR
+				tooltip:AddLine(L.SEARCH_ACHIEVEMENT_DISABLED, red.r, red.g, red.b)
+			end
+		else
+			tooltip:SetText(TEXT_TAB_TOOLTIPS[tab.identifier] or _G.UNKNOWN, nil, nil, nil, nil, true)
+
+			local config_section = TEXT_TAB_CONFIG[tab.identifier]
+			if config_section and not private.OptionsCharacter[config_section] then
+				local red = _G.RED_FONT_COLOR
+				tooltip:AddLine(L.SEARCH_ACHIEVEMENT_DISABLED, red.r, red.g, red.b)
+			end
+		end
+		tooltip:Show()
+	end
+
+
+	local function Tab_OnClick(tab)
+		_G.PlaySound("igCharacterInfoTab")
+		panel:SelectTab(tab)
+	end
+
+
+	local function CheckBox_OnEnter(checkbox)
+		Tab_OnEnter(checkbox:GetParent())
+	end
+
+
+	local function CheckBoxAchievement_OnClick(checkbox)
+		local is_enabled = checkbox:GetChecked()
+		_G.PlaySound(is_enabled and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
+
+		local identifier = checkbox:GetParent().identifier
+		panel.AchievementSetEnabled(identifier, is_enabled)
+
+		if not is_enabled then
+			private.AchievementRemove(identifier)
+		elseif private.AchievementAdd(identifier) then -- Cache might have changed
+			private.CacheListPrint(true)
+		end
+		Tab_OnEnter(checkbox:GetParent())
+	end
+
+
+	local function CheckBoxID_OnClick(checkbox)
+		local is_enabled = checkbox:GetChecked()
+		_G.PlaySound(is_enabled and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
+
+		local identifier = checkbox:GetParent().identifier
+		panel.AchievementSetEnabled(identifier, is_enabled)
+
+		if identifier == "BEASTS" then
+			private.OptionsCharacter.TrackBeasts = is_enabled or nil
+		elseif identifier == "RARENPC" then
+			private.OptionsCharacter.TrackRares = is_enabled or nil
+		end
+		private.RareMobToggle(identifier, is_enabled)
+		private.CacheListPrint(true)
+		Tab_OnEnter(checkbox:GetParent())
+	end
+
+
+	local function CreateTabCheckBox(tab, onclick_script)
+		local checkbox = _G.CreateFrame("CheckButton", nil, tab, "UICheckButtonTemplate")
+		checkbox:SetSize(20, 20)
+		checkbox:SetPoint("BOTTOMLEFT", 8, 0)
+		checkbox:SetHitRectInsets(4, 4, 4, 4)
+		checkbox:SetScript("OnClick", onclick_script)
+		checkbox:SetScript("OnEnter", CheckBox_OnEnter)
+		checkbox:SetScript("OnLeave", _G.GameTooltip_Hide)
+
+		tab.checkbox = checkbox
+	end
+
+
+	local first_tab
+	local last_tab
+	local num_tabs = 0
+	local tab_row = 0
+
+
+	local TEXT_TAB_LABELS = {
+		BEASTS = L.TAMEDBEASTS,
+		RARENPC = "Rare Mobs",
+	}
+
+
+	local function AddTab(identifier, update_func, activate_func, deactivate_func)
+		num_tabs = num_tabs + 1
+
+		local tab = _G.CreateFrame("Button", "_NPCScanSearchTab" .. num_tabs, table_container, "TabButtonTemplate")
+		tab:SetHitRectInsets(6, 6, 6, 0)
+		tab:SetScript("OnClick", Tab_OnClick)
+		tab:SetScript("OnEnter", Tab_OnEnter)
+		tab:SetScript("OnLeave", _G.GameTooltip_Hide)
+		tab:SetMotionScriptsWhileDisabled(true) -- Allow tooltip while active
+
+		panel_tabs[identifier] = tab
+		tab.identifier = identifier
+		tab:GetFontString():SetPoint("RIGHT", -12, 0)
+
+		if type(identifier) == "number" then
+			local _, achievement_name = _G.GetAchievementInfo(identifier)
+			tab:SetText(achievement_name)
+			CreateTabCheckBox(tab, CheckBoxAchievement_OnClick)
+		elseif TEXT_TAB_LABELS[identifier] then
+			tab:SetText(TEXT_TAB_LABELS[identifier])
+			CreateTabCheckBox(tab, CheckBoxID_OnClick)
+		else
+			tab:SetText(L.SEARCH_NPCS)
+		end
+
+		if tab.checkbox then
+			panel.AchievementSetEnabled(identifier, false)
+			_G.PanelTemplates_TabResize(tab, tab.checkbox:GetWidth() - 12)
+		else
+			_G.PanelTemplates_TabResize(tab, -8)
+		end
+		tab.Update = update_func
+		tab.Activate = activate_func
+		tab.Deactivate = deactivate_func
+
+		_G.PanelTemplates_DeselectTab(tab)
+
+		if last_tab then
+			if num_tabs > 5 and tab_row == 0 then
+				tab:SetPoint("BOTTOMLEFT", first_tab, "TOPLEFT", 0, -10)
+				table_container:SetPoint("TOP", add_found_checkbox, "BOTTOM", 0, -60)
+				tab_row = 1
+			else
+				tab:SetPoint("LEFT", last_tab, "RIGHT", -4, 0)
+			end
+		else
+			tab:SetPoint("BOTTOMLEFT", panel.table_container, "TOPLEFT")
+		end
+
+		if num_tabs == 1 then
+			first_tab = tab
+		end
+		last_tab = tab
+
+		return tab
+	end
+
+
 	local function GeneralNPCUpdate(world_ids, map_ids, npc_data)
 		UpdateButtonStates()
 
@@ -428,320 +654,97 @@ do
 	end
 
 
-	function panel:NPCUpdate()
+	local function UpdateNPCTab(tab)
 		GeneralNPCUpdate(private.Options.NPCWorldIDs, private.RareMobData.NPCMapIDs, private.Options.NPCs)
 	end
 
 
-	function panel:RareNPCUpdate()
+	local function UpdateRareTab(tab)
 		GeneralNPCUpdate(private.RareMobData.NPCWorldIDs, private.RareMobData.NPCMapIDs, private.RareMobData.RareNPCs)
 	end
 
 
-	function panel:TameableNPCUpdate()
+	local function UpdateTameableTab(tab)
 		GeneralNPCUpdate(private.RareMobData.NPCWorldIDs, private.TamableIDs, private.TamableNames)
 	end
-end -- do-block
 
 
--- Customizes the table when the NPCs tab is selected.
-function panel:CustomNPCActivate()
-	panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
-	panel.table:SetSortHandlers(true, true, true, true, true)
-	panel.table:SetSortColumn(2) -- Default by name
+	local function UpdateAchievementTab(tab)
+		local achievement = private.ACHIEVEMENTS[tab.identifier]
 
-	panel:ClearEditBoxes()
-	panel.npc_controls:Show()
-	panel.table_container:SetPoint("BOTTOM", panel.npc_controls, "TOP", 0, 4)
-	panel.table.OnSelect = panel.NPCOnSelect
-end
+		for criteria_id, npc_id in pairs(achievement.Criteria) do
+			if npc_id > 1 then
+				local npc_name, _, is_completed = _G.GetAchievementCriteriaInfoByID(tab.identifier, criteria_id)
+				local map_id = private.RareMobData.NPCMapIDs[npc_id]
+				local new_row = panel.table:AddRow(npc_id,
+					private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
+					npc_name,
+					npc_id,
+					is_completed and TEXTURE_READY or "",
+					map_id and (_G.GetMapNameByID(map_id) or map_id) or "")
 
-
--- Customizes the table when the NPCs tab is selected.
-function panel:DefultNPCActivate()
-	panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
-	panel.table:SetSortHandlers(true, true, true, true, true)
-	panel.table:SetSortColumn(2) -- Default by name
-
-	panel:ClearEditBoxes()
-	panel.table_container:SetPoint("BOTTOM", panel.npc_controls, "TOP", 0, 4)
-end
-
-
--- Undoes customization to the table when leaving the NPCs tab.
-function panel:NPCDeactivate()
-	panel.npc_controls:Hide()
-	panel.table_container:SetPoint("BOTTOM", panel.npc_controls)
-	panel.table.OnSelect = nil
-end
-
-
--- Enables/disables the achievement related to a tab.
-function panel.AchievementSetEnabled(achievement_id, is_enabled)
-	local tab = panel_tabs[achievement_id]
-	tab.Checkbox:SetChecked(is_enabled)
-
-	local checked_texture = tab.Checkbox:GetCheckedTexture()
-	checked_texture:SetTexture(is_enabled and [[Interface\Buttons\UI-CheckBox-Check]] or [[Interface\RAIDFRAME\ReadyCheck-NotReady]])
-	checked_texture:Show()
-
-	if _G.GameTooltip:GetOwner() == tab then
-		tab:GetScript("OnEnter")(tab)
-	end
-
-	if panel.selected_tab == tab then
-		panel.table.Header:SetAlpha(is_enabled and ALPHA_ACTIVE or ALPHA_INACTIVE)
-	end
-end
-
-
--- Fills the search table with achievement NPCs.
-function panel:AchievementUpdate()
-	local achievement = private.ACHIEVEMENTS[self.AchievementID]
-
-	for criteria_id, npc_id in pairs(achievement.Criteria) do
-		if npc_id > 1 then
-			local npc_name, _, is_completed = _G.GetAchievementCriteriaInfoByID(self.AchievementID, criteria_id)
-			local map_id = private.RareMobData.NPCMapIDs[npc_id]
-			local new_row = panel.table:AddRow(npc_id,
-				private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
-				npc_name,
-				npc_id,
-				is_completed and TEXTURE_READY or "",
-				map_id and (_G.GetMapNameByID(map_id) or map_id) or "")
-
-			if not private.AchievementNPCIsActive(achievement, npc_id) then
-				new_row:SetAlpha(ALPHA_INACTIVE)
+				if not private.AchievementNPCIsActive(achievement, npc_id) then
+					new_row:SetAlpha(ALPHA_INACTIVE)
+				end
 			end
 		end
 	end
-end
 
 
--- Customizes the table when an achievement tab is selected.
-function panel:AchievementActivate()
-	panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED, L.SEARCH_MAP)
-	panel.table:SetSortHandlers(true, true, true, true, true)
-	panel.table:SetSortColumn(2) -- Default by name
-	panel.table.Header:SetAlpha(private.OptionsCharacter.Achievements[self.AchievementID] and ALPHA_ACTIVE or ALPHA_INACTIVE)
-end
+	local function ActivateNPCTab(tab)
+		panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
+		panel.table:SetSortHandlers(true, true, true, true, true)
+		panel.table:SetSortColumn(2) -- Default by name
+		panel.table.OnSelect = tab.table_row_on_select
 
+		panel.table_container:SetPoint("BOTTOM", npc_controls, "TOP", 0, 4)
+		panel:ClearEditBoxes()
 
--- Undoes customization to the table when leaving an achievement tab.
-function panel:AchievementDeactivate()
-	panel.table.Header:SetAlpha(ALPHA_ACTIVE)
-end
-
-
-do
-	-- Recreates table data at most once per frame.
-	local function OnUpdate(self)
-		self:SetScript("OnUpdate", nil)
-
-		for index = 1, #panel.table.Rows do
-			panel.table.Rows[index]:SetAlpha(ALPHA_ACTIVE)
-		end
-		panel.table:Clear()
-		panel.selected_tab:Update()
-	end
-
-	-- Updates the table for a given tab if it is displayed.
-	function panel.UpdateTab(tab_id)
-		if not tab_id or panel_tabs[tab_id] == panel.selected_tab then
-			panel.table_container:SetScript("OnUpdate", OnUpdate)
-		end
-	end
-end
-
-
--- Reverts to default options.
-function panel:default()
-	private.Synchronize(private.Options) -- Resets only character settings
-end
-
-
-local AddTab
-do
-	local function Tab_OnEnter(tab)
-		local tooltip = _G.GameTooltip
-		tooltip:SetOwner(tab, "ANCHOR_TOPLEFT", 0, -8)
-
-		if tab.AchievementID then
-			local _, name, _, _, _, _, _, description = _G.GetAchievementInfo(tab.AchievementID)
-			local world_id = private.ACHIEVEMENTS[tab.AchievementID].WorldID
-			local highlight = _G.HIGHLIGHT_FONT_COLOR
-
-			if world_id then
-				local gray = _G.GRAY_FONT_COLOR
-
-				tooltip:ClearLines()
-				tooltip:AddDoubleLine(name, L.SEARCH_WORLD_FORMAT:format(GetWorldIDName(world_id)), highlight.r, highlight.g, highlight.b, gray.r, gray.g, gray.b)
-			else
-				tooltip:SetText(name, highlight.r, highlight.g, highlight.b)
-			end
-			tooltip:AddLine(description, nil, nil, nil, true)
-
-			if not private.OptionsCharacter.Achievements[tab.AchievementID] then
-				local color = _G.RED_FONT_COLOR
-				tooltip:AddLine(L.SEARCH_ACHIEVEMENT_DISABLED, color.r, color.g, color.b)
-			end
-		elseif tab.AchievementID == "BEASTS" then
-			tooltip:SetText(L.SEARCH_TAMEBEAST_DECS, nil, nil, nil, nil, true)
-		else
-			tooltip:SetText(L.SEARCH_NPCS_DESC, nil, nil, nil, nil, true)
-		end
-		tooltip:Show()
-	end
-
-
-	local function Tab_OnClick(tab)
-		_G.PlaySound("igCharacterInfoTab")
-		panel:SelectTab(tab)
-	end
-
-
-	local function CheckBox_OnEnter(checkbox)
-		Tab_OnEnter(checkbox:GetParent())
-	end
-
-
-	local function CheckBoxAchievement_OnClick(checkbox)
-		local is_enabled = checkbox:GetChecked()
-		_G.PlaySound(is_enabled and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
-
-		local achievement_id = checkbox:GetParent().AchievementID
-		panel.AchievementSetEnabled(achievement_id, is_enabled)
-
-		if not is_enabled then
-			private.AchievementRemove(achievement_id)
-		elseif private.AchievementAdd(achievement_id) then -- Cache might have changed
-			private.CacheListPrint(true)
+		if tab.show_controls_on_activate then
+			npc_controls:Show()
 		end
 	end
 
 
-	local function CheckBoxID_OnClick(checkbox)
-		local is_enabled = checkbox:GetChecked()
-		_G.PlaySound(is_enabled and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
-
-		local tab_id = checkbox:GetParent().TabID
-		panel.AchievementSetEnabled(tab_id, is_enabled)
-
-		if tab_id == "BEASTS" then
-			private.OptionsCharacter.TrackBeasts = is_enabled or nil
-		elseif tab_id == "RARENPC" then
-			private.OptionsCharacter.TrackRares = is_enabled or nil
-		end
-		private.RareMobToggle(tab_id, is_enabled)
-		panel.UpdateTab(tab_id)
-		private.CacheListPrint(true)
+	local function ActivateAchievementTab(tab)
+		panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED, L.SEARCH_MAP)
+		panel.table:SetSortHandlers(true, true, true, true, true)
+		panel.table:SetSortColumn(2) -- Default by name
+		panel.table.Header:SetAlpha(private.OptionsCharacter.Achievements[tab.identifier] and ALPHA_ACTIVE or ALPHA_INACTIVE)
 	end
 
 
-	local function CreateTabCheckBox(tab, onclick_script)
-		local checkbox = _G.CreateFrame("CheckButton", nil, tab, "UICheckButtonTemplate")
-		checkbox:SetSize(20, 20)
-		checkbox:SetPoint("BOTTOMLEFT", 8, 0)
-		checkbox:SetHitRectInsets(4, 4, 4, 4)
-		checkbox:SetScript("OnClick", onclick_script)
-		checkbox:SetScript("OnEnter", CheckBox_OnEnter)
-		checkbox:SetScript("OnLeave", _G.GameTooltip_Hide)
-
-		tab.Checkbox = checkbox
+	local function DeactivateNPCTab()
+		npc_controls:Hide()
+		table_container:SetPoint("BOTTOM", npc_controls)
+		panel.table.OnSelect = nil
 	end
 
 
-	local first_tab
-	local last_tab
-	local num_tabs = 0
-	local tab_row = 0
+	local function DeactivateAchievementTab(tab)
+		panel.table.Header:SetAlpha(ALPHA_ACTIVE)
+	end
 
 
-	function AddTab(achievement_id, update_func, activate_func, deactivate_func)
-		num_tabs = num_tabs + 1
-
-		local tab = _G.CreateFrame("Button", "_NPCScanSearchTab" .. num_tabs, panel.table_container, "TabButtonTemplate")
-		tab:SetHitRectInsets(6, 6, 6, 0)
-		tab:SetScript("OnClick", Tab_OnClick)
-		tab:SetScript("OnEnter", Tab_OnEnter)
-		tab:SetScript("OnLeave", _G.GameTooltip_Hide)
-		tab:SetMotionScriptsWhileDisabled(true) -- Allow tooltip while active
-
-		panel_tabs[achievement_id] = tab
-
-		if type(achievement_id) == "number" then
-			local _, achievement_name = _G.GetAchievementInfo(achievement_id)
-			tab.AchievementID = achievement_id
-			tab:SetText(achievement_name)
-			tab:GetFontString():SetPoint("RIGHT", -12, 0)
-
-			CreateTabCheckBox(tab, CheckBoxAchievement_OnClick)
-		elseif achievement_id == "BEASTS" then
-			tab.TabID = achievement_id
-			tab:SetText(L.TAMEDBEASTS)
-			tab:GetFontString():SetPoint("RIGHT", -12, 0)
-
-			CreateTabCheckBox(tab, CheckBoxID_OnClick)
-		elseif achievement_id == "RARENPC" then
-			tab.TabID = achievement_id
-			tab:SetText("Rare Mobs")
-			tab:GetFontString():SetPoint("RIGHT", -12, 0)
-
-			CreateTabCheckBox(tab, CheckBoxID_OnClick)
+	local npc_tab = AddTab("NPC", UpdateNPCTab, ActivateNPCTab, DeactivateNPCTab)
+	npc_tab.show_controls_on_activate = true
+	npc_tab.table_row_on_select = function(text_table, npc_id)
+		if not npc_id then
+			return
 		end
+		npc_id_editbox:SetNumber(npc_id)
+		npc_name_editbox:SetText(private.Options.NPCs[npc_id])
+		npc_world_editbox:SetText(GetWorldIDName(private.Options.NPCWorldIDs[npc_id]) or "")
+	end
 
-		if tab.Checkbox then
-			panel.AchievementSetEnabled(achievement_id, false)
-			_G.PanelTemplates_TabResize(tab, tab.Checkbox:GetWidth() - 12)
-		else
-			tab:SetText(L.SEARCH_NPCS)
-			_G.PanelTemplates_TabResize(tab, -8)
-		end
-		tab.Update = update_func
-		tab.Activate = activate_func
-		tab.Deactivate = deactivate_func
+	AddTab("RARENPC", UpdateRareTab, ActivateNPCTab, DeactivateNPCTab)
+	AddTab("BEASTS", UpdateTameableTab, ActivateNPCTab, DeactivateNPCTab)
 
-		_G.PanelTemplates_DeselectTab(tab)
 
-		if last_tab then
-			if num_tabs > 5 and tab_row == 0 then
-				tab:SetPoint("BOTTOMLEFT", first_tab, "TOPLEFT", 0, -10)
-				panel.table_container:SetPoint("TOP", panel.add_found_checkbox, "BOTTOM", 0, -60)
-				tab_row = 1
-			else
-				tab:SetPoint("LEFT", last_tab, "RIGHT", -4, 0)
-			end
-		else
-			tab:SetPoint("BOTTOMLEFT", panel.table_container, "TOPLEFT")
-		end
-
-		if num_tabs == 1 then
-			first_tab = tab
-		end
-		last_tab = tab
+	for achievement_id in pairs(private.ACHIEVEMENTS) do
+		AddTab(achievement_id, UpdateAchievementTab, ActivateAchievementTab, DeactivateAchievementTab)
 	end
 end -- do-block
-
-
-AddTab("NPC", panel.NPCUpdate, panel.CustomNPCActivate, panel.NPCDeactivate)
-AddTab("RARENPC", panel.RareNPCUpdate, panel.DefultNPCActivate, panel.NPCDeactivate)
-AddTab("BEASTS", panel.TameableNPCUpdate, panel.DefultNPCActivate, panel.NPCDeactivate)
-
-
-for achievement_id in pairs(private.ACHIEVEMENTS) do
-	AddTab(achievement_id, panel.AchievementUpdate, panel.AchievementActivate, panel.AchievementDeactivate)
-end
 
 
 _G.InterfaceOptions_AddCategory(panel)
-
-
-function panel:UpdateTabNames()
-	for achievement_id in pairs(private.ACHIEVEMENTS) do
-		local _, achievement_name = _G.GetAchievementInfo(achievement_id)
-
-		panel_tabs[achievement_id]:SetText(achievement_name)
-		panel_tabs[achievement_id]:GetFontString():SetPoint("RIGHT", -12, 0)
-		_G.PanelTemplates_TabResize(panel_tabs[achievement_id], 20 - 12)
-	end
-end
