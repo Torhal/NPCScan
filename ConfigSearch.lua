@@ -568,12 +568,6 @@ end
 
 local AddTab
 do
-	local first_tab
-	local last_tab
-	local num_tabs = 0
-	local tab_row = 0
-
-
 	local function Tab_OnEnter(tab)
 		local tooltip = _G.GameTooltip
 		tooltip:SetOwner(tab, "ANCHOR_TOPLEFT", 0, -8)
@@ -661,6 +655,12 @@ do
 
 		tab.Checkbox = checkbox
 	end
+
+
+	local first_tab
+	local last_tab
+	local num_tabs = 0
+	local tab_row = 0
 
 
 	function AddTab(achievement_id, update_func, activate_func, deactivate_func)
