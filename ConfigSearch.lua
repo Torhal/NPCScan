@@ -651,7 +651,7 @@ do
 		checkbox:SetPoint("BOTTOMLEFT", 8, 0)
 		checkbox:SetHitRectInsets(4, 4, 4, 4)
 		checkbox:SetScript("OnClick", onclick_script)
-		--Checkbox:SetScript( "OnEnter", CheckBox_OnEnter )
+		checkbox:SetScript("OnEnter", CheckBox_OnEnter)
 		checkbox:SetScript("OnLeave", _G.GameTooltip_Hide)
 
 		tab.Checkbox = checkbox
