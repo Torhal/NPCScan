@@ -137,8 +137,6 @@ do
 	tooltip:AddFontStrings(tooltip_text, tooltip:CreateFontString())
 
 
-	--- Checks the cache for a given NpcID.
-	-- @return Localized name of the NPC if cached, or nil if not.
 	function private.NPCNameFromCache(npc_id)
 		tooltip:SetOwner(_G.WorldFrame, "ANCHOR_NONE")
 		tooltip:SetHyperlink(("unit:0xF53%05X00000000"):format(npc_id))
@@ -715,7 +713,6 @@ do
 	end
 
 
-	--- @return Name of the source of npc_id's scan - either a custom name or achievement name.
 	local function GetScanSource(npc_id)
 		local custom_name = private.Options.NPCs[npc_id]
 
@@ -814,7 +811,7 @@ if PLAYER_CLASS == "HUNTER" then
 	local stabled_list = {}
 
 
-	--- Stops scans for stabled hunter pets before a bogus alert can fire.
+	-- Stops scans for stabled hunter pets before a bogus alert can fire.
 	function private.Frame:PET_STABLE_UPDATE()
 		for npc_id in pairs(ScanIDs) do
 			local npc_name = private.NPCNameFromCache(npc_id)
@@ -831,7 +828,7 @@ if PLAYER_CLASS == "HUNTER" then
 	end
 
 
-	--- Bucket to print cached stabled pets on one line.
+	-- Bucket to print cached stabled pets on one line.
 	function StableUpdater:OnUpdate()
 		self:Hide()
 
@@ -851,9 +848,9 @@ if PLAYER_CLASS == "HUNTER" then
 	private.Frame:RegisterEvent("PET_STABLE_UPDATE")
 
 
-	local Original_GetStablePetInfo = _G.GetStablePetInfo
-	--- Prevents the pet UI from querying (and caching) stabled pets until actually viewing the stables.
+	-- Prevents the pet UI from querying (and caching) stabled pets until actually viewing the stables.
 	-- @param is_override Forces a normal query even if the stables aren't open.
+	local Original_GetStablePetInfo = _G.GetStablePetInfo
 	function _G.GetStablePetInfo(stable_slot, is_override, ...)
 		if is_override or stable_slot <= _G.NUM_PET_ACTIVE_SLOTS or _G.IsAtStableMaster() then
 			return Original_GetStablePetInfo(stable_slot, is_override, ...)
@@ -883,7 +880,7 @@ function private.Frame:PLAYER_LOGIN(event_name)
 
 		if not stored_version or type(stored_version) == "string" or stored_version < DB_VERSION then
 			local new_options = private.OptionsDefault
-			-- ticket 21: try to preserve the custom list from previous DB versions
+
 			if stored_options.NPCs then
 				for npc_id, npc_name in pairs(stored_options.NPCs) do
 					new_options.NPCs[npc_id] = npc_name
@@ -901,7 +898,7 @@ function private.Frame:PLAYER_LOGIN(event_name)
 
 	if stored_character_options and stored_character_options.Version ~= DB_VERSION then
 		if not stored_character_options.Version or type(stored_character_options.Version) == "string" or stored_character_options < DB_VERSION then
-			if stored_character_options.NPCs then -- versions prior to 5.1 stored the list in character options
+			if stored_character_options.NPCs then
 				for npc_id, npc_name in pairs(stored_character_options.NPCs) do
 					if not stored_options.NPCs[npc_id] then
 						stored_options.NPCs[npc_id] = npc_name
@@ -926,7 +923,6 @@ end
 do
 	local FirstWorld = true
 
-	-- Starts world-specific scans when entering a world.
 	function private.Frame:PLAYER_ENTERING_WORLD()
 		self:PLAYER_UPDATE_RESTING()
 
@@ -977,9 +973,7 @@ do
 end
 
 
--- Stops world-specific scans when leaving a world.
 function private.Frame:PLAYER_LEAVING_WORLD()
-	-- Stop scans that were only active on the previous world
 	for npc_id in pairs(private.Options.NPCWorldIDs) do
 		NPCDeactivate(npc_id)
 	end
@@ -994,7 +988,6 @@ function private.Frame:PLAYER_LEAVING_WORLD()
 end
 
 
--- Stops tracking achievements when they finish.
 function private.Frame:ACHIEVEMENT_EARNED(_, achievement_id)
 	if not private.OptionsCharacter.AchievementsAddFound then
 		private.AchievementRemove(achievement_id)
@@ -1002,13 +995,13 @@ function private.Frame:ACHIEVEMENT_EARNED(_, achievement_id)
 end
 
 
--- Sets the update handler only after zone info is known.
 function private.Frame:ZONE_CHANGED_NEW_AREA(event_name)
 	self:UnregisterEvent(event_name)
 	self[event_name] = nil
 
 	private.Updater:SetScript("OnLoop", private.Updater.OnLoop)
 end
+
 
 do
 	local SUBCOMMAND_FUNCS = {
@@ -1027,7 +1020,8 @@ do
 		end,
 		[L.CMD_REMOVE] = function(arguments)
 			local id = tonumber(arguments)
-			if not id then -- Search custom names
+
+			if not id then
 				for npc_id, npc_name in pairs(private.Options.NPCs) do
 					if npc_name == arguments then
 						id = npc_id
@@ -1070,7 +1064,6 @@ else
 end
 
 
--- Set update handler after zone info loads. Zone information is unknown on initial login.
 if _G.GetZoneText() == "" then
 	private.Frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 else
@@ -1078,7 +1071,6 @@ else
 end
 
 
---Warning Popup for users running _NPCScan.AutoAdd.
 _G.StaticPopupDialogs["NPCSCAN_AUTOADD_WARNING"] = {
 	text = "_NPCScan has detected that you are running _NPCScan.AutoAdd v1.5.  This version of the addon is not supported and may prevent _NPCScan from working properly.  It is reccomended that you disable _NPCScan.AutoAdd untill it is updated.",
 	button1 = "Ok",
