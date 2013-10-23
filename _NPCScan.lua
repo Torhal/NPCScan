@@ -664,15 +664,17 @@ do
 
 	-- Prints the list of cached pets when leaving a city or inn.
 	function private.Frame:PLAYER_UPDATE_RESTING()
-		if not _G.IsResting() and next(PetList) then
-			if private.Options.CacheWarnings then
-				local ListString = CacheListBuild(PetList)
-				if ListString then
-					private.Print(L.CACHED_PET_RESTING_FORMAT:format(ListString), _G.RED_FONT_COLOR)
-				end
-			else
-				table.wipe(PetList)
+		if _G.IsResting() or not next(PetList) then
+			return
+		end
+
+		if private.Options.CacheWarnings then
+			local ListString = CacheListBuild(PetList)
+			if ListString then
+				private.Print(L.CACHED_PET_RESTING_FORMAT:format(ListString), _G.RED_FONT_COLOR)
 			end
+		else
+			table.wipe(PetList)
 		end
 	end
 
