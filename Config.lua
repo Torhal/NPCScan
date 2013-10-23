@@ -3,6 +3,12 @@
 -------------------------------------------------------------------------------
 local _G = getfenv(0)
 
+-- Functions
+local pairs = _G.pairs
+
+-- Libraries
+local table = _G.table
+
 
 -------------------------------------------------------------------------------
 -- AddOn namespace.
@@ -105,33 +111,112 @@ alert_sound_dropdown:SetScript("OnLeave", _G.GameTooltip_Hide)
 _G.UIDropDownMenu_SetText(alert_sound_dropdown, L.CONFIG_ALERT_SOUND_DEFAULT)
 _G.UIDropDownMenu_JustifyText(alert_sound_dropdown, "LEFT")
 
+
+local alert_sound_dropdown_button = _G[alert_sound_dropdown:GetName() .. "Button"]
+_G.UIDropDownMenu_SetAnchor(alert_sound_dropdown, 0, 0, "TOPLEFT", alert_sound_dropdown_button, "TOPRIGHT")
+
 _G[alert_sound_dropdown:GetName() .. "Middle"]:SetPoint("RIGHT", -16, 0)
 
 panel.alert_sound_dropdown = alert_sound_dropdown
 
 do
-	local function Entry_OnSelect(sound)
+	local function Entry_OnSelect(info_table, sound)
 		private.Button.PlaySound(sound)
 		private.SetAlertSound(sound)
 	end
 
 
-	function alert_sound_dropdown:initialize()
+	local SORTED_GROUPS = { "A_E", "F_J", "K_O", "P_T", "U_Z", }
+	local GROUPS = {}
+	local DISPLAY_TO_GROUP_MAP = {}
+	for index = 1, #SORTED_GROUPS do
+		local group_key = SORTED_GROUPS[index]
+		GROUPS[group_key] = {}
+		DISPLAY_TO_GROUP_MAP[group_key:gsub("_", "-")] = group_key
+	end
+
+
+	local GROUPINGS = {
+		a = GROUPS.A_E,
+		b = GROUPS.A_E,
+		c = GROUPS.A_E,
+		d = GROUPS.A_E,
+		e = GROUPS.A_E,
+		f = GROUPS.F_J,
+		g = GROUPS.F_J,
+		h = GROUPS.F_J,
+		i = GROUPS.F_J,
+		j = GROUPS.F_J,
+		k = GROUPS.K_O,
+		l = GROUPS.K_O,
+		m = GROUPS.K_O,
+		n = GROUPS.K_O,
+		o = GROUPS.K_O,
+		p = GROUPS.P_T,
+		q = GROUPS.P_T,
+		r = GROUPS.P_T,
+		s = GROUPS.P_T,
+		t = GROUPS.P_T,
+		u = GROUPS.U_Z,
+		v = GROUPS.U_Z,
+		w = GROUPS.U_Z,
+		x = GROUPS.U_Z,
+		y = GROUPS.U_Z,
+		z = GROUPS.U_Z,
+	}
+
+
+	function alert_sound_dropdown:initialize(level)
+		if not level then
+			return
+		end
 		local current_sound = private.OptionsCharacter.AlertSound
 		local info = _G.UIDropDownMenu_CreateInfo()
-		info.func = Entry_OnSelect
-		info.text = L.CONFIG_ALERT_SOUND_DEFAULT
-		info.checked = current_sound == nil
-		_G.UIDropDownMenu_AddButton(info)
 
-		local LSM = _G.LibStub("LibSharedMedia-3.0")
-		local media_list = LSM:List(LSM.MediaType.SOUND)
-		for index = 1, #media_list do
-			local key = media_list[index]
-			info.text = key
-			info.arg1 = key
-			info.checked = current_sound == key
-			_G.UIDropDownMenu_AddButton(info)
+		if level == 1 then
+			info.func = Entry_OnSelect
+			info.text = L.CONFIG_ALERT_SOUND_DEFAULT
+			info.checked = current_sound == nil
+			_G.UIDropDownMenu_AddButton(info, level)
+
+			for group, data in pairs(GROUPS) do
+				table.wipe(data)
+			end
+
+			local LSM = _G.LibStub("LibSharedMedia-3.0")
+			local media_list = LSM:List(LSM.MediaType.SOUND)
+			for index = 1, #media_list do
+				local key = media_list[index]
+				local grouping = GROUPINGS[key:sub(1, 1):lower()]
+
+				if grouping then
+					grouping[#grouping + 1] = key
+				else
+					info.text = key
+					info.arg1 = key
+					info.checked = current_sound == key
+					_G.UIDropDownMenu_AddButton(info, level)
+				end
+			end
+			info.func = nil
+
+			for index = 1, #SORTED_GROUPS do
+				info.text = SORTED_GROUPS[index]:gsub("_", "-")
+				info.hasArrow = true
+				info.notCheckable = true
+				_G.UIDropDownMenu_AddButton(info, level)
+			end
+		else
+			local group = GROUPS[DISPLAY_TO_GROUP_MAP[_G.UIDROPDOWNMENU_MENU_VALUE]]
+			info.func = Entry_OnSelect
+
+			for index = 1, #group do
+				local key = group[index]
+				info.text = key
+				info.arg1 = key
+				info.checked = current_sound == key
+				_G.UIDropDownMenu_AddButton(info, level)
+			end
 		end
 	end
 end -- do-block
