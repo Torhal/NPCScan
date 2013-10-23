@@ -645,9 +645,9 @@ function private.Synchronize(options, character_options)
 		end
 	end
 
-	for achievement_id in pairs(private.ACHIEVEMENTS) do
+	for achievement_id, achievement in pairs(private.ACHIEVEMENTS) do
 		-- If defaults, don't enable completed achievements unless explicitly allowed
-		if character_options.Achievements[achievement_id] and (not is_default_scan or character_options.AchievementsAddFound or not select(4, GetAchievementInfo(achievement_id))) then -- Not completed
+		if character_options.Achievements[achievement_id] and (not is_default_scan or character_options.AchievementsAddFound or not achievement.is_completed) then
 			private.AchievementAdd(achievement_id)
 		end
 	end
@@ -982,6 +982,11 @@ end
 
 
 function private.Frame:ACHIEVEMENT_EARNED(_, achievement_id)
+	if not private.ACHIEVEMENTS[achievement_id] then
+		return
+	end
+	private.ACHIEVEMENTS[achievement_id].is_completed = true
+
 	if not private.OptionsCharacter.AchievementsAddFound then
 		private.AchievementRemove(achievement_id)
 	end

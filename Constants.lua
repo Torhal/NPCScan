@@ -79,6 +79,9 @@ do
 
 		for criteria_index = 1, _G.GetAchievementNumCriteria(achievement_id) do
 			local _, criteria_type, _, _, _, _, _, asset_id, _, criteria_id = _G.GetAchievementCriteriaInfo(achievement_id, criteria_index)
+			local _, _, _, is_completed = _G.GetAchievementInfo(achievement_id)
+
+			achievement.is_completed = is_completed
 
 			if criteria_type == CRITERIA_TYPE_NPC_KILL then
 				achievement.Criteria[criteria_id] = asset_id
