@@ -19,6 +19,7 @@ local FOLDER_NAME, private = ...
 local L = private.L
 
 local panel = _G.CreateFrame("Frame")
+private.Config.Search = panel
 
 
 -------------------------------------------------------------------------------
@@ -119,9 +120,6 @@ panel:SetScript("OnShow", function(self)
 		self:SelectTab(panel_tabs.NPC)
 	end
 end)
-
-
-private.Config.Search = panel
 
 
 local panel_title = panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
