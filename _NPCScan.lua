@@ -508,7 +508,7 @@ function private.SetCacheWarnings(enable)
 	if not enable ~= not private.Options.CacheWarnings then
 		private.Options.CacheWarnings = enable or nil
 
-		private.Config.CacheWarnings:SetChecked(enable)
+		private.Config.cache_warnings_checkbox:SetChecked(enable)
 		return true
 	end
 end
@@ -549,7 +549,7 @@ function private.SetAlertSoundUnmute(enable)
 	if not enable ~= not private.OptionsCharacter.AlertSoundUnmute then
 		private.OptionsCharacter.AlertSoundUnmute = enable or nil
 
-		private.Config.AlertSoundUnmute:SetChecked(enable)
+		private.Config.alert_unmute_checkbox:SetChecked(enable)
 		return true
 	end
 end
