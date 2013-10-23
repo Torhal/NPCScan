@@ -1045,7 +1045,7 @@ do
 		end,
 	}
 
-	function private.SlashCommand(input)
+	_G.SlashCmdList["_NPCSCAN"] = function(input)
 		local subcommand, arguments = input:match("^(%S+)%s*(.-)%s*$")
 		if subcommand then
 			local func = SUBCOMMAND_FUNCS[subcommand:upper()]
@@ -1074,9 +1074,6 @@ if _G.GetZoneText() == "" then
 else
 	private.Frame:ZONE_CHANGED_NEW_AREA("ZONE_CHANGED_NEW_AREA")
 end
-
-
-_G.SlashCmdList["_NPCSCAN"] = private.SlashCommand
 
 
 --Warning Popup for users running _NPCScan.AutoAdd.
