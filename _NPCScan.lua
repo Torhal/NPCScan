@@ -762,38 +762,31 @@ do
 	end
 
 
-	-- Scans all active criteria and removes any completed NPCs.
-	local function AchievementCriteriaUpdate()
-		if private.OptionsCharacter.AchievementsAddFound then
-			return
-		end
-
-		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
-			local achievement = private.ACHIEVEMENTS[achievement_id]
-			for npc_id, criteria_id in pairs(achievement.NPCsActive) do
-				local _, _, is_complete = _G.GetAchievementCriteriaInfoByID(achievement_id, criteria_id)
-				if is_complete then
-					AchievementNPCDeactivate(achievement, npc_id)
-				end
-			end
-		end
-	end
+	local criteria_updated_bucket
 
 
-	local CriteriaUpdated = false
-
-
-	-- Stops tracking individual achievement NPCs when the player gets kill credit.
 	function private.Frame:CRITERIA_UPDATE()
-		CriteriaUpdated = true
+		criteria_updated_bucket = true
 	end
 
 
 	-- Scans all NPCs on a timer and alerts if any are found.
 	function private.Updater:OnLoop()
-		if CriteriaUpdated then -- CRITERIA_UPDATE bucket
-			CriteriaUpdated = false
-			AchievementCriteriaUpdate()
+		if criteria_updated_bucket then
+			if not private.OptionsCharacter.AchievementsAddFound then
+				for achievement_id in pairs(private.OptionsCharacter.Achievements) do
+					local achievement = private.ACHIEVEMENTS[achievement_id]
+
+					for npc_id, criteria_id in pairs(achievement.NPCsActive) do
+						local _, _, is_completed = _G.GetAchievementCriteriaInfoByID(achievement_id, criteria_id)
+
+						if is_completed then
+							AchievementNPCDeactivate(achievement, npc_id)
+						end
+					end
+				end
+			end
+			criteria_updated_bucket = false
 		end
 
 		for npc_id in pairs(ScanIDs) do
