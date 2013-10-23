@@ -266,10 +266,10 @@ end
 
 -- Stops searching for an NPC when nothing is searching for it.
 local function ScanRemove(npc_id)
-	local Count = assert(ScanIDs[npc_id], "Attempt to remove inactive scan.")
+	local count = assert(ScanIDs[npc_id], "Attempt to remove inactive scan.")
 
-	if Count > 1 then
-		ScanIDs[npc_id] = Count - 1
+	if count > 1 then
+		ScanIDs[npc_id] = count - 1
 	else
 		ScanIDs[npc_id] = nil
 		private.Overlays.Remove(npc_id)
@@ -468,29 +468,29 @@ end
 --- Adds a kill-related achievement to track.
 -- @param AchievementID Numeric ID of achievement.
 -- @return True if achievement added.
-function private.SetRareMob(ID, enable)
-	if ID == "BEASTS" then
+function private.SetRareMob(identifier, enable)
+	if identifier == "BEASTS" then
 		private.OptionsCharacter.TrackBeasts = enable or nil
-		private.Config.Search.AchievementSetEnabled(ID, enable)
+		private.Config.Search.AchievementSetEnabled(identifier, enable)
 		return true
-	elseif ID == "RARENPC" then
+	elseif identifier == "RARENPC" then
 		private.OptionsCharacter.TrackRares = enable or nil
-		private.Config.Search.AchievementSetEnabled(ID, enable)
+		private.Config.Search.AchievementSetEnabled(identifier, enable)
 		return true
 	end
 end
 
 
-function private.RareMobToggle(ID, enable)
+function private.RareMobToggle(identifier, enable)
 	local npcs
 
-	if ID == "BEASTS" then
+	if identifier == "BEASTS" then
 		npcs = private.TamableIDs
-	elseif ID == "RARENPC" then
+	elseif identifier == "RARENPC" then
 		npcs = private.RareMobData.RareNPCs
 	end
 
-	if enable then
+	if npcs and enable then
 		for npc_id, _ in pairs(npcs) do
 			NPCActivate(npc_id, private.RareMobData.NPCWorldIDs[npc_id])
 		end
