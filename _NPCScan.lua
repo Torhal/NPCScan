@@ -97,12 +97,12 @@ private.OptionsDefault = {
 private.OptionsCharacterDefault = {
 	Version = DB_VERSION,
 	Achievements = {
-		[private.ACHIEVEMENT_IDS.BLOODY_RARE]		= true,
-		[private.ACHIEVEMENT_IDS.FROSTBITTEN]		= true,
-		[private.ACHIEVEMENT_IDS.ONE_MANY_ARMY]		= true,
-		[private.ACHIEVEMENT_IDS.GLORIOUS]		= true,
-		[private.ACHIEVEMENT_IDS.CHAMPIONS_OF_LEI_SHEN]	= true,
-		[private.ACHIEVEMENT_IDS.TIMELESS_CHAMPION]	= true,
+		[private.ACHIEVEMENT_IDS.BLOODY_RARE] = true,
+		[private.ACHIEVEMENT_IDS.FROSTBITTEN] = true,
+		[private.ACHIEVEMENT_IDS.ONE_MANY_ARMY] = true,
+		[private.ACHIEVEMENT_IDS.GLORIOUS] = true,
+		[private.ACHIEVEMENT_IDS.CHAMPIONS_OF_LEI_SHEN] = true,
+		[private.ACHIEVEMENT_IDS.TIMELESS_CHAMPION] = true,
 	},
 	AchievementsAddFound = nil,
 	AlertSoundUnmute = nil,
@@ -868,7 +868,7 @@ function private.Frame:PLAYER_LOGIN(event_name)
 	--Check to see if old version of _NPCScan.AutoAdd is loaded and display warning
 	if _G.IsAddOnLoaded("_NPCScan.AutoAdd") then
 		local AutoAddVersion = GetAddOnMetadata("_NPCScan.AutoAdd", "Version"):match("^([%d.]+)");
-		if  AutoAddVersion <= "1.5" then
+		if AutoAddVersion <= "1.5" then
 			StaticPopup_Show("NPCSCAN_AUTOADD_WARNING")
 		end
 	end
@@ -885,13 +885,13 @@ function private.Frame:PLAYER_LOGIN(event_name)
 			local new_options = private.OptionsDefault
 			-- ticket 21: try to preserve the custom list from previous DB versions
 			if stored_options.NPCs then
-			  for npc_id, npc_name in pairs(stored_options.NPCs) do
-			    new_options.NPCs[npc_id] = npc_name
-			    local world = stored_options.NPCWorldIDs and stored_options.NPCWorldIDs[npc_id]
-			    if world then
-			      new_options.NPCWorldIDs[npc_id] = world
-			    end
-			  end
+				for npc_id, npc_name in pairs(stored_options.NPCs) do
+					new_options.NPCs[npc_id] = npc_name
+					local world = stored_options.NPCWorldIDs and stored_options.NPCWorldIDs[npc_id]
+					if world then
+						new_options.NPCWorldIDs[npc_id] = world
+					end
+				end
 			end
 			stored_options = new_options
 		end
@@ -902,15 +902,15 @@ function private.Frame:PLAYER_LOGIN(event_name)
 	if stored_character_options and stored_character_options.Version ~= DB_VERSION then
 		if not stored_character_options.Version or type(stored_character_options.Version) == "string" or stored_character_options < DB_VERSION then
 			if stored_character_options.NPCs then -- versions prior to 5.1 stored the list in character options
-			  for npc_id, npc_name in pairs(stored_character_options.NPCs) do
-			    if not stored_options.NPCs[npc_id] then
-			      stored_options.NPCs[npc_id] = npc_name
-			      local world = stored_character_options.NPCWorldIDs and stored_character_options.NPCWorldIDs[npc_id]
-			      if world then
-			        stored_options.NPCWorldIDs[npc_id] = world
-			      end
-			    end
-			  end
+				for npc_id, npc_name in pairs(stored_character_options.NPCs) do
+					if not stored_options.NPCs[npc_id] then
+						stored_options.NPCs[npc_id] = npc_name
+						local world = stored_character_options.NPCWorldIDs and stored_character_options.NPCWorldIDs[npc_id]
+						if world then
+							stored_options.NPCWorldIDs[npc_id] = world
+						end
+					end
+				end
 			end
 			stored_character_options = private.OptionsCharacterDefault
 		end
