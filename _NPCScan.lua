@@ -520,7 +520,7 @@ function private.SetPrintTime(enable)
 	if not enable ~= not private.Options.PrintTime then
 		private.Options.PrintTime = enable or nil
 
-		private.Config.PrintTime:SetChecked(enable)
+		private.Config.print_time_checkbox:SetChecked(enable)
 		return true
 	end
 end
