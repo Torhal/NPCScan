@@ -13,7 +13,6 @@ NS.Model = CreateFrame("PlayerModel", nil, NS)
 NS.Flash = CreateFrame("Frame")
 NS.Flash.LoopCountMax = 3
 
-NS.PendingName, NS.PendingID, NS.PendingSource = nil
 
 NS.RotationRate = math.pi / 4
 NS.RaidTargetIcon = 4 -- Green triangle
