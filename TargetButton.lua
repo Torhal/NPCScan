@@ -25,10 +25,16 @@ target_button:SetUserPlaced(true)
 target_button:SetClampedToScreen(true)
 target_button:SetFrameStrata("FULLSCREEN_DIALOG")
 target_button:SetNormalTexture([[Interface\AchievementFrame\UI-Achievement-Parchment-Horizontal]])
+
 target_button:SetAttribute("type", "macro")
 target_button:SetAttribute("_onshow", "self:Enable()")
 target_button:SetAttribute("_onhide", "self:Disable()")
-target_button:Hide()
+
+target_button:SetBackdrop({
+	tile = true,
+	edgeSize = 16,
+	edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]]
+})
 
 target_button:HookScript("OnShow", function(self)
 	self:RegisterEvent("MODIFIER_STATE_CHANGED")
@@ -75,6 +81,9 @@ target_button:SetScript("OnEvent", function(self, event_name, ...)
 		return self[event_name](self, event_name, ...)
 	end
 end)
+
+target_button:GetScript("OnLeave")(target_button) -- Set non-highlighted colors
+target_button:Hide()
 
 target_button:RegisterEvent("PLAYER_REGEN_ENABLED")
 
@@ -395,15 +404,6 @@ local SubTitle = target_button:CreateFontString(nil, "OVERLAY", "GameFontBlackTi
 SubTitle:SetPoint("TOPLEFT", target_button.Source, "BOTTOMLEFT", 0, -4)
 SubTitle:SetPoint("RIGHT", target_button.Source)
 SubTitle:SetText(private.L.BUTTON_FOUND)
-
--- Border
-target_button:SetBackdrop({
-	tile = true,
-	edgeSize = 16,
-	edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]]
-})
-
-target_button:OnLeave() -- Set non-highlighted colors
 
 -- Close button
 local Close = _G.CreateFrame("Button", nil, target_button, "UIPanelCloseButton")
