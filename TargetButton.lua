@@ -90,6 +90,13 @@ target_button:RegisterEvent("PLAYER_REGEN_ENABLED")
 private.Button = target_button
 
 
+local close_button = _G.CreateFrame("Button", nil, target_button, "UIPanelCloseButton")
+close_button:SetPoint("TOPRIGHT")
+close_button:SetSize(32, 32)
+close_button:SetScale(0.8)
+close_button:SetHitRectInsets(8, 8, 8, 8)
+
+
 target_button.Drag = target_button:CreateTitleRegion()
 target_button.Model = _G.CreateFrame("PlayerModel", nil, target_button)
 target_button.Flash = _G.CreateFrame("Frame")
@@ -126,8 +133,10 @@ do
 end -- do-block
 
 
-
---- Plays an alert sound, temporarily enabling sound if necessary.
+-------------------------------------------------------------------------------
+-- Target button methods.
+-------------------------------------------------------------------------------
+-- Plays an alert sound, temporarily enabling sound if necessary.
 -- @param AlertSound A LibSharedMedia sound key, or nil to play the default.
 function target_button.PlaySound(sound_name)
 	if private.OptionsCharacter.AlertSoundUnmute then
@@ -157,7 +166,7 @@ function target_button.PlaySound(sound_name)
 end
 
 
--- Plays alerts and sets the targetting button if not in combat.
+-- Plays alerts and sets the targeting button if not in combat.
 -- If in combat, queues the button to appear when combat ends.
 -- @see NS:Update
 function target_button:SetNPC(ID, Name, Source)
@@ -187,7 +196,7 @@ end
 
 -- Updates the button out of combat to target a given unit.
 -- @param ID A numeric NpcID or string UnitID.
--- @param Name Localized name of the unit.  If ID is an NpcID, Name is used in the targetting macro.
+-- @param Name Localized name of the unit.  If ID is an NpcID, Name is used in the targeting macro.
 -- @param Source Name of the scan, custom or achievement, that set off this alert.
 function target_button:Update(ID, Name, Source)
 	if type(self.ID) == "number" then
@@ -380,6 +389,7 @@ Background:SetPoint("BOTTOMLEFT", 3, 3)
 Background:SetPoint("TOPRIGHT", -3, -3)
 Background:SetTexCoord(0, 1, 0, 0.25)
 
+
 local TitleBackground = target_button:CreateTexture(nil, "BORDER")
 TitleBackground:SetTexture([[Interface\AchievementFrame\UI-Achievement-Title]])
 TitleBackground:SetPoint("TOPRIGHT", -5, -5)
@@ -388,29 +398,28 @@ TitleBackground:SetHeight(18)
 TitleBackground:SetTexCoord(0, 0.9765625, 0, 0.3125)
 TitleBackground:SetAlpha(0.8)
 
+
 local Title = target_button:CreateFontString(nil, "OVERLAY", "GameFontHighlightMedium", 1)
 Title:SetPoint("TOPLEFT", TitleBackground, 0, 2)
 Title:SetPoint("RIGHT", TitleBackground)
 target_button:SetFontString(Title)
 
+
 target_button.Source = target_button:CreateFontString(nil, "OVERLAY", "SystemFont_Tiny")
 target_button.Source:SetPoint("BOTTOMLEFT", TitleBackground)
 target_button.Source:SetPoint("RIGHT", -8, 0)
 target_button.Source:SetTextHeight(6)
-local Color = NORMAL_FONT_COLOR
-target_button.Source:SetTextColor(Color.r, Color.g, Color.b)
 
-local SubTitle = target_button:CreateFontString(nil, "OVERLAY", "GameFontBlackTiny")
-SubTitle:SetPoint("TOPLEFT", target_button.Source, "BOTTOMLEFT", 0, -4)
-SubTitle:SetPoint("RIGHT", target_button.Source)
-SubTitle:SetText(private.L.BUTTON_FOUND)
 
--- Close button
-local Close = _G.CreateFrame("Button", nil, target_button, "UIPanelCloseButton")
-Close:SetPoint("TOPRIGHT")
-Close:SetSize(32, 32)
-Close:SetScale(0.8)
-Close:SetHitRectInsets(8, 8, 8, 8)
+local source_color = _G.NORMAL_FONT_COLOR
+target_button.Source:SetTextColor(source_color.r, source_color.g, source_color.b)
+
+
+local target_button_subtitle = target_button:CreateFontString(nil, "OVERLAY", "GameFontBlackTiny")
+target_button_subtitle:SetPoint("TOPLEFT", target_button.Source, "BOTTOMLEFT", 0, -4)
+target_button_subtitle:SetPoint("RIGHT", target_button.Source)
+target_button_subtitle:SetText(private.L.BUTTON_FOUND)
+
 
 -- Model view
 local Model = target_button.Model
@@ -429,13 +438,18 @@ Texture:SetBlendMode("ADD")
 Texture:SetTexCoord(0, 0.78125, 0, 0.66796875)
 Texture:SetAlpha(0)
 target_button.Glow = Texture:CreateAnimationGroup()
+
+
 local FadeIn = target_button.Glow:CreateAnimation("Alpha")
 FadeIn:SetChange(1.0)
 FadeIn:SetDuration(0.2)
+
+
 local FadeOut = target_button.Glow:CreateAnimation("Alpha")
 FadeOut:SetOrder(2)
 FadeOut:SetChange(-1.0)
 FadeOut:SetDuration(0.5)
+
 
 -- Shine animation (reflection swipe)
 local Texture = target_button:CreateTexture(nil, "ARTWORK")
@@ -446,14 +460,20 @@ Texture:SetBlendMode("ADD")
 Texture:SetTexCoord(0.78125, 0.912109375, 0, 0.28125)
 Texture:SetAlpha(0)
 target_button.Shine = Texture:CreateAnimationGroup()
+
+
 local Show = target_button.Shine:CreateAnimation("Alpha")
 Show:SetStartDelay(0.3)
 Show:SetChange(1.0)
 Show:SetDuration(1e-5) -- Note: 0 is invalid
+
+
 local Slide = target_button.Shine:CreateAnimation("Translation")
 Slide:SetOrder(2)
 Slide:SetOffset(target_button:GetWidth() - Texture:GetWidth() + 8, 0)
 Slide:SetDuration(0.4)
+
+
 local FadeOut = target_button.Shine:CreateAnimation("Alpha")
 FadeOut:SetOrder(2)
 FadeOut:SetStartDelay(0.2)
@@ -468,15 +488,18 @@ Flash:SetAllPoints()
 Flash:SetAlpha(0)
 Flash:SetFrameStrata("FULLSCREEN_DIALOG")
 
+
 local Texture = Flash:CreateTexture()
 Texture:SetBlendMode("ADD")
 Texture:SetAllPoints()
 Texture:SetTexture([[Interface\FullScreenTextures\LowHealth]])
 
+
 Flash.Fade = Flash:CreateAnimationGroup()
 Flash.Fade:SetLooping("BOUNCE")
 Flash.Fade:SetScript("OnLoop", Flash.OnLoop)
 Flash.Fade:SetScript("OnPlay", Flash.OnPlay)
+
 
 local FadeIn = Flash.Fade:CreateAnimation("Alpha")
 FadeIn:SetChange(1.0)
