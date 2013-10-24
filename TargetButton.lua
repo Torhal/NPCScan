@@ -17,6 +17,7 @@ local math = _G.math
 local FOLDER_NAME, private = ...
 
 local target_button = _G.CreateFrame("Button", "_NPCScanButton", _G.UIParent, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate")
+target_button:Hide()
 target_button:SetPoint("BOTTOM", _G.UIParent, 0, 128)
 target_button:SetSize(150, 42)
 target_button:SetScale(1.25)
@@ -35,6 +36,8 @@ target_button:SetBackdrop({
 	edgeSize = 16,
 	edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]]
 })
+
+target_button:SetBackdropBorderColor(0.7, 0.15, 0.05) -- Brown
 
 target_button:HookScript("OnShow", function(self)
 	self:RegisterEvent("MODIFIER_STATE_CHANGED")
@@ -81,9 +84,6 @@ target_button:SetScript("OnEvent", function(self, event_name, ...)
 		return self[event_name](self, event_name, ...)
 	end
 end)
-
-target_button:GetScript("OnLeave")(target_button) -- Set non-highlighted colors
-target_button:Hide()
 
 target_button:RegisterEvent("PLAYER_REGEN_ENABLED")
 
