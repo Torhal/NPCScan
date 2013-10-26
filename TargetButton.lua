@@ -183,7 +183,7 @@ function target_button:SetNPC(ID, Name, Source)
 		self.Flash.Fade:Play()
 	end
 
-	if _g.InCombatLockdown() then
+	if _G.InCombatLockdown() then
 		if type(self.PendingID) == "number" then -- Remove old pending NPC
 			private.Overlays.Remove(self.PendingID)
 		end
