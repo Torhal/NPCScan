@@ -852,6 +852,10 @@ select( 2, ... ).L = setmetatable( {
 
 	TAMEDBEASTS = "Tameable Beasts",
 	SEARCH_TAMEBEAST_DECS = "Tameable Rare Beasts",
+	RAREMOBS = "Rare Mobs",
+	SEARCH_RAREMOBS_DESC = "Default list of Rare Mobs.",
+
+
 	FOUND_UNIT_DEAD = "%s found but is dead.",
 	FOUND_UNIT_TAXI = "%s found during flight path near %d, %d in %s.",
 	BLOCKFLIGHTSCAN = "Supresses Alerts while on a flight path.",
