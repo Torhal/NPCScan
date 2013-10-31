@@ -61,9 +61,9 @@ Locales\Locale-ruRU.lua
 Locales\Locale-zhCN.lua
 Locales\Locale-zhTW.lua
 
+Constants.lua
 NPCData.lua
 
-Constants.lua
 _NPCScan.lua
 TargetButton.lua
 MapOverlays.lua
