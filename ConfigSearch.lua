@@ -653,12 +653,12 @@ do
 
 
 	local function UpdateNPCTab(tab)
-		GeneralNPCUpdate(private.Options.NPCWorldIDs, private.RareMobData.NPCMapIDs, private.Options.NPCs)
+		GeneralNPCUpdate(private.Options.NPCWorldIDs, private.RareMobData.map_names, private.Options.NPCs)
 	end
 
 
 	local function UpdateRareTab(tab)
-		GeneralNPCUpdate(private.RareMobData.NPCWorldIDs, private.RareMobData.NPCMapIDs, private.RareMobData.RareNPCs)
+		GeneralNPCUpdate(private.RareMobData.NPCWorldIDs, private.RareMobData.map_names, private.RareMobData.RareNPCs)
 	end
 
 
@@ -673,13 +673,13 @@ do
 		for criteria_id, npc_id in pairs(achievement.Criteria) do
 			if npc_id > 1 then
 				local npc_name, _, is_completed = _G.GetAchievementCriteriaInfoByID(tab.identifier, criteria_id)
-				local map_id = private.RareMobData.NPCMapIDs[npc_id]
+				local map_name = private.RareMobData.map_names[npc_id]
 				local new_row = panel.table:AddRow(npc_id,
 					private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
 					npc_name,
 					npc_id,
 					is_completed and TEXTURE_READY or "",
-					map_id and (_G.GetMapNameByID(map_id) or map_id) or "")
+					map_name or _G.UNKNOWN)
 
 				if not private.AchievementNPCIsActive(achievement, npc_id) then
 					new_row:SetAlpha(ALPHA_INACTIVE)
