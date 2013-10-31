@@ -628,13 +628,15 @@ do
 	end
 
 
-	local function GeneralNPCUpdate(world_ids, map_ids, npc_data)
+	local function GeneralNPCUpdate(world_ids, map_names, npc_data)
 		UpdateButtonStates()
 
 		for npc_id, npc_name in pairs(npc_data) do
-			local map_id = map_ids[npc_id]
+			local map_name = map_names[npc_id]
 
-			if type(map_id) == "boolean" then
+			if type(map_name) == "number" then
+				map_id = _G.GetMapNameByID(map_name)
+			elseif type(map_name) == "boolean" then
 				map_id = nil
 			end
 
@@ -643,7 +645,7 @@ do
 				npc_name,
 				npc_id,
 				GetWorldIDName(world_ids[npc_id]) or "",
-				map_id and (_G.GetMapNameByID(map_id) or map_id) or "")
+				map_name or _G.UNKNOWN)
 
 			if not private.NPCIsActive(npc_id) then
 				new_row:SetAlpha(ALPHA_INACTIVE)
