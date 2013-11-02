@@ -897,6 +897,24 @@ local NPC_DATA = {
 	[73704] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false }, -- Stinkbraid
 }
 
+
+private.NPC_ID_TO_MAP_NAME = {}
+private.NPC_ID_TO_NAME = {}
+private.NPC_ID_TO_WORLD_NAME = {}
+private.TAMABLE_NPCS = {}
+
+
+for npc_id, data in pairs(NPC_DATA) do
+	private.NPC_ID_TO_MAP_NAME[npc_id] = data.map_name
+	private.NPC_ID_TO_NAME[npc_id] = L.NPCs[npc_id]
+	private.NPC_ID_TO_WORLD_NAME[npc_id] = data.world_id
+
+	if data.is_tamable then
+		private.TAMABLE_NPCS[npc_id] = true
+	end
+end
+
+
 private.RareMobData = {
 	NPCWorldIDs = {
 		[61] = 2;
