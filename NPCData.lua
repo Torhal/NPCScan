@@ -1,6 +1,120 @@
+-------------------------------------------------------------------------------
+-- Localized Lua globals.
+-------------------------------------------------------------------------------
+local _G = getfenv(0)
+
+-- Functions
+local pairs = _G.pairs
+local tostring = _G.tostring
+local type = _G.type
+
+-- Libraries
+local string = _G.string
+local table = _G.table
+
+
+-------------------------------------------------------------------------------
+-- AddOn namespace.
+-------------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
 local L = private.L;
 local ZN = private.ZONE_NAMES
+
+do
+	local function TableKeyFormat(input)
+		if not input then
+			return ""
+		end
+
+		return input:upper():gsub(" ", "_"):gsub("'", ""):gsub(":", ""):gsub("-", "_"):gsub("%(", ""):gsub("%)", "")
+	end
+
+
+	local function rpad(input, length)
+		return (" "):rep(length - #input)
+	end
+
+
+	local CONTINENT_NAMES = {
+		"KALIMDOR",
+		"EASTERN_KINGDOMS",
+		"OUTLAND",
+		"NORTHREND",
+		"THE_MAELSTROM",
+		"PANDARIA",
+	}
+
+
+	function private.DumpNPCData()
+		if not private.TextDump then
+			return
+		end
+		local output = private.TextDump
+		local data = private.RareMobData
+		local npc_data = {}
+		local longest_world = 0
+		local longest_map = 0
+		local longest_id = 0
+
+		for npc_id, world_id in pairs(data.NPCWorldIDs) do
+			npc_data[npc_id] = { world_id = type(world_id) == "number" and ("ZN.%s"):format(CONTINENT_NAMES[world_id]) or ("ZN.%s"):format(TableKeyFormat(world_id)) }
+			npc_data[npc_id].is_tamable = false
+
+			if #npc_data[npc_id].world_id > longest_world then
+				longest_world = #npc_data[npc_id].world_id
+			end
+
+			local id_str = tostring(npc_id)
+			if #id_str > longest_id then
+				longest_id = #id_str
+			end
+		end
+
+		for npc_id, zone_id in pairs(private.TamableIDs) do
+			npc_data[npc_id] = npc_data[npc_id] or {}
+			npc_data[npc_id].is_tamable = true
+
+			local id_str = tostring(npc_id)
+			if #id_str > longest_id then
+				longest_id = #id_str
+			end
+		end
+
+		for npc_id, map_name in pairs(data.map_names) do
+			if not npc_data[npc_id] then
+				npc_data[npc_id] = {}
+			end
+			npc_data[npc_id].map_name = ("ZN.%s"):format(TableKeyFormat(map_name))
+
+			if #npc_data[npc_id].map_name > longest_map then
+				longest_map = #npc_data[npc_id].map_name
+			end
+
+			local id_str = tostring(npc_id)
+			if #id_str > longest_id then
+				longest_id = #id_str
+			end
+		end
+		local npc_output = {}
+
+		for npc_id in pairs(npc_data) do
+			npc_output[#npc_output + 1] = npc_id
+		end
+		table.sort(npc_output)
+
+		output:Clear()
+		output:AddLine("local NPC_DATA = {")
+
+		for index = 1, #npc_output do
+			local npc_id = npc_output[index]
+			local info = npc_data[npc_id]
+			output:AddLine(("[%d]%s = { world_id = %s,%s map_name = %s,%s is_tamable = %s%s }, -- %s"):format(npc_id, rpad(tostring(npc_id), longest_id), tostring(info.world_id), rpad(tostring(info.world_id), longest_world), tostring(info.map_name), rpad(tostring(info.map_name), longest_map), tostring(info.is_tamable), rpad(tostring(info.is_tamable), 5), private.L.NPCs[npc_id] or "**** NO LOCALIZATION ****"))
+		end
+
+		output:AddLine("}")
+		output:Display()
+	end
+end -- do-block
 
 
 local NPC_DATA = {
