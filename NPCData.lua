@@ -296,7 +296,7 @@ local NPC_DATA = {
 	[8204]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.TANARIS,                     is_tamable = true  }, -- Soriid the Devourer
 	[8205]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.TANARIS,                     is_tamable = true  }, -- Haarka the Ravenous
 	[8207]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.TANARIS,                     is_tamable = true  }, -- Emberwing
-	[8208]  = { world_id = nil,                         map_name = nil,                            is_tamable = true  }, -- **** NO LOCALIZATION ****
+	[8208]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.TANARIS,                     is_tamable = true  }, -- Murderous Blisterpaw
 	[8210]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.THE_HINTERLANDS,             is_tamable = false }, -- Razortalon
 	[8211]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.THE_HINTERLANDS,             is_tamable = true  }, -- Old Cliff Jumper
 	[8212]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.THE_HINTERLANDS,             is_tamable = false }, -- The Reak
@@ -617,8 +617,8 @@ local NPC_DATA = {
 	[50364] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Nal'lak the Ripper
 	[50370] = { world_id = ZN.KALIMDOR,                 map_name = ZN.SILITHUS,                    is_tamable = true  }, -- Karapax
 	[50388] = { world_id = nil,                         map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Torik-Ethis
-	[50409] = { world_id = nil,                         map_name = ZN.ULDUM,                       is_tamable = nil   }, -- **** NO LOCALIZATION ****
-	[50410] = { world_id = nil,                         map_name = ZN.ULDUM,                       is_tamable = nil   }, -- **** NO LOCALIZATION ****
+	[50409] = { world_id = ZN.KALIMDOR,                 map_name = ZN.ULDUM,                       is_tamable = nil   }, -- Mysterious Camel Figurine
+	[50410] = { world_id = ZN.KALIMDOR,                 map_name = ZN.ULDUM,                       is_tamable = nil   }, -- Mysterious Camel Figurine
 	[50724] = { world_id = ZN.KALIMDOR,                 map_name = ZN.FELWOOD,                     is_tamable = true  }, -- Spinecrawl
 	[50725] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true  }, -- Azelisk
 	[50726] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BADLANDS,                    is_tamable = true  }, -- Kalixx
@@ -829,8 +829,8 @@ local NPC_DATA = {
 	[63695] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Baolai the Immolator
 	[63977] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false }, -- Vyraxxis
 	[63978] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Kri'chon
-	[64004] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- **** NO LOCALIZATION ****
-	[64191] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- **** NO LOCALIZATION ****
+	[64004] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Ghostly Pandaren Fisherman
+	[64191] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Ghostly Pandaren Craftsman
 	[68317] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false }, -- Mavis Harms
 	[68318] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false }, -- Dalan Nightbreaker
 	[68319] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false }, -- Disha Fearwarden
@@ -838,7 +838,7 @@ local NPC_DATA = {
 	[68321] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false }, -- Kar Warmaker
 	[68322] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false }, -- Muerta
 	[69099] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Nalak
-	[69161] = { world_id = nil,                         map_name = ZN.ISLE_OF_GIANTS,              is_tamable = nil   }, -- **** NO LOCALIZATION ****
+	[69161] = { world_id = nil,                         map_name = ZN.ISLE_OF_GIANTS,              is_tamable = nil   }, -- Oondasta
 	[69664] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Mumta
 	[69768] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = false }, -- Zandalari Warscout
 	[69769] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = false }, -- Zandalari Warbringer
