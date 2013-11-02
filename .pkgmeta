@@ -15,3 +15,6 @@ externals:
     url: svn://svn.wowace.com/wow/libsharedmedia-3-0/mainline/trunk/LibSharedMedia-3.0
   Libs/AceEvent-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0
+  Libs/LibTextDump-1.0:
+    url: git://git.wowace.com/wow/libtextdump-1-0/mainline.git
+    tag: latest

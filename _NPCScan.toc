@@ -44,6 +44,7 @@
 #@no-lib-strip@
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\LibTextDump-1.0\Lib.xml
 Libs\LibTextTable-1.1\Lib.xml
 Libs\LibSharedMedia-3.0\lib.xml
 Libs\AceEvent-3.0\AceEvent-3.0.xml
