@@ -1037,6 +1037,12 @@ do
 				private.Print(L.CMD_CACHE_EMPTY, _G.GREEN_FONT_COLOR)
 			end
 		end,
+		--@debug@
+		DATADUMP = function()
+			private.TextDump = private.TextDump or _G.LibStub("LibTextDump-1.0"):New(FOLDER_NAME)
+			private.DumpNPCData()
+		end,
+		--@end-debug@
 	}
 
 	_G.SlashCmdList["_NPCSCAN"] = function(input)
