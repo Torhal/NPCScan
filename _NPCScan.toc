@@ -39,7 +39,7 @@
 ## X-CompatibleLocales: deDE, enCN, enTW, enUS, esES, esMX, frFR, itIT, koKR, ptBR, ptPT, ruRU, zhCN, zhTW
 ## SavedVariables: _NPCScanOptions, TESTPRO
 ## SavedVariablesPerCharacter: _NPCScanOptionsCharacter
-## OptionalDeps: Ace3, LibTextTable-1.1, LibSharedMedia-3.0
+## OptionalDeps: Ace3, LibTextDump-1.0, LibTextTable-1.1, LibSharedMedia-3.0
 
 #@no-lib-strip@
 Libs\LibStub\LibStub.lua
