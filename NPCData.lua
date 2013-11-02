@@ -217,7 +217,7 @@ local NPC_DATA = {
 	[3672]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.NORTHERN_BARRENS,            is_tamable = false }, -- Boahn
 	[3735]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.ASHENVALE,                   is_tamable = false }, -- Apothecary Falthis
 	[3736]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.ASHENVALE,                   is_tamable = false }, -- Darkslayer Mordenthal
-	[3773]  = { world_id = ZN.KALIMDOR,                 map_name = nil,                            is_tamable = false }, -- Akkrilus
+	[3773]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.ASHENVALE,                   is_tamable = false }, -- Akkrilus
 	[3792]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.ASHENVALE,                   is_tamable = false }, -- Terrowulf Packlord
 	[3872]  = { world_id = ZN.SHADOWFANG_KEEP,          map_name = ZN.SHADOWFANG_KEEP,             is_tamable = false }, -- Deathsworn Captain
 	[4066]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.STONETALON_MOUNTAINS,        is_tamable = false }, -- Nal'taszar
