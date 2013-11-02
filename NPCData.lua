@@ -166,7 +166,7 @@ local NPC_DATA = {
 	[1847]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.WESTERN_PLAGUELANDS,         is_tamable = false }, -- Foulmane
 	[1848]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.WESTERN_PLAGUELANDS,         is_tamable = false }, -- Lord Maldazzar
 	[1849]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.WESTERN_PLAGUELANDS,         is_tamable = false }, -- Dreadwhisper
-	[1850]  = { world_id = nil,                         map_name = ZN.SCHOLOMANCE,                 is_tamable = nil   }, -- Putridius
+	[1850]  = { world_id = ZN.SCHOLOMANCE,              map_name = ZN.SCHOLOMANCE,                 is_tamable = nil   }, -- Putridius
 	[1851]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.WESTERN_PLAGUELANDS,         is_tamable = false }, -- The Husk
 	[1885]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.WESTERN_PLAGUELANDS,         is_tamable = false }, -- Scarlet Smith
 	[1910]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.TIRISFAL_GLADES,             is_tamable = false }, -- Muad
@@ -371,7 +371,7 @@ local NPC_DATA = {
 	[10817] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = false }, -- Duggan Wildhammer
 	[10818] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = false }, -- Death Knight Soulbearer
 	[10819] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = false }, -- Baron Bloodbane
-	[10820] = { world_id = nil,                         map_name = ZN.STRATHOLME,                  is_tamable = nil   }, -- Duke Ragereaver
+	[10820] = { world_id = ZN.STRATHOLME,               map_name = ZN.STRATHOLME,                  is_tamable = nil   }, -- Duke Ragereaver
 	[10821] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = false }, -- Hed'mush the Rotting
 	[10823] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = false }, -- Zul'Brin Warpbranch
 	[10824] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = false }, -- Death-Hunter Hawkspear
@@ -463,55 +463,55 @@ local NPC_DATA = {
 	[16184] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = false }, -- Nerubian Overseer
 	[16854] = { world_id = ZN.OUTLAND,                  map_name = ZN.EVERSONG_WOODS,              is_tamable = false }, -- Eldinarcus
 	[16855] = { world_id = ZN.OUTLAND,                  map_name = ZN.EVERSONG_WOODS,              is_tamable = false }, -- Tregla
-	[17144] = { world_id = nil,                         map_name = ZN.NAGRAND,                     is_tamable = true  }, -- Goretooth
+	[17144] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND,                     is_tamable = true  }, -- Goretooth
 	[18241] = { world_id = ZN.KALIMDOR,                 map_name = ZN.DESOLACE,                    is_tamable = true  }, -- Crusty
-	[18677] = { world_id = nil,                         map_name = ZN.HELLFIRE_PENINSULA,          is_tamable = nil   }, -- Mekthorg the Wild
-	[18678] = { world_id = nil,                         map_name = ZN.HELLFIRE_PENINSULA,          is_tamable = nil   }, -- Fulgorge
-	[18679] = { world_id = nil,                         map_name = ZN.HELLFIRE_PENINSULA,          is_tamable = nil   }, -- Vorakem Doomspeaker
-	[18680] = { world_id = nil,                         map_name = ZN.ZANGARMARSH,                 is_tamable = nil   }, -- Marticar
-	[18681] = { world_id = nil,                         map_name = ZN.ZANGARMARSH,                 is_tamable = nil   }, -- Coilfang Emissary
-	[18682] = { world_id = nil,                         map_name = ZN.ZANGARMARSH,                 is_tamable = nil   }, -- Bog Lurker
-	[18683] = { world_id = nil,                         map_name = ZN.NAGRAND,                     is_tamable = nil   }, -- Voidhunter Yar
+	[18677] = { world_id = ZN.OUTLAND,                  map_name = ZN.HELLFIRE_PENINSULA,          is_tamable = nil   }, -- Mekthorg the Wild
+	[18678] = { world_id = ZN.OUTLAND,                  map_name = ZN.HELLFIRE_PENINSULA,          is_tamable = nil   }, -- Fulgorge
+	[18679] = { world_id = ZN.OUTLAND,                  map_name = ZN.HELLFIRE_PENINSULA,          is_tamable = nil   }, -- Vorakem Doomspeaker
+	[18680] = { world_id = ZN.OUTLAND,                  map_name = ZN.ZANGARMARSH,                 is_tamable = nil   }, -- Marticar
+	[18681] = { world_id = ZN.OUTLAND,                  map_name = ZN.ZANGARMARSH,                 is_tamable = nil   }, -- Coilfang Emissary
+	[18682] = { world_id = ZN.OUTLAND,                  map_name = ZN.ZANGARMARSH,                 is_tamable = nil   }, -- Bog Lurker
+	[18683] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND,                     is_tamable = nil   }, -- Voidhunter Yar
 	[18684] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND,                     is_tamable = false }, -- Bro'Gaz the Clanless
-	[18685] = { world_id = nil,                         map_name = ZN.TEROKKAR_FOREST,             is_tamable = nil   }, -- Okrek
-	[18686] = { world_id = nil,                         map_name = ZN.TEROKKAR_FOREST,             is_tamable = nil   }, -- Doomsayer Jurim
-	[18689] = { world_id = nil,                         map_name = ZN.TEROKKAR_FOREST,             is_tamable = nil   }, -- Crippler
-	[18690] = { world_id = nil,                         map_name = ZN.BLADES_EDGE_MOUNTAINS,       is_tamable = nil   }, -- Morcrush
-	[18692] = { world_id = nil,                         map_name = ZN.BLADES_EDGE_MOUNTAINS,       is_tamable = nil   }, -- Hemathion
-	[18693] = { world_id = nil,                         map_name = ZN.BLADES_EDGE_MOUNTAINS,       is_tamable = nil   }, -- Speaker Mar'grom
-	[18694] = { world_id = nil,                         map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = nil   }, -- Collidus the Warp-Watcher
-	[18695] = { world_id = nil,                         map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = nil   }, -- Ambassador Jerrikar
-	[18696] = { world_id = nil,                         map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = nil   }, -- Kraator
-	[18697] = { world_id = nil,                         map_name = ZN.NETHERSTORM,                 is_tamable = nil   }, -- Chief Engineer Lorthander
-	[18698] = { world_id = nil,                         map_name = ZN.NETHERSTORM,                 is_tamable = nil   }, -- Ever-Core the Punisher
-	[20932] = { world_id = nil,                         map_name = ZN.NETHERSTORM,                 is_tamable = true  }, -- Nuramoc
+	[18685] = { world_id = ZN.OUTLAND,                  map_name = ZN.TEROKKAR_FOREST,             is_tamable = nil   }, -- Okrek
+	[18686] = { world_id = ZN.OUTLAND,                  map_name = ZN.TEROKKAR_FOREST,             is_tamable = nil   }, -- Doomsayer Jurim
+	[18689] = { world_id = ZN.OUTLAND,                  map_name = ZN.TEROKKAR_FOREST,             is_tamable = nil   }, -- Crippler
+	[18690] = { world_id = ZN.OUTLAND,                  map_name = ZN.BLADES_EDGE_MOUNTAINS,       is_tamable = nil   }, -- Morcrush
+	[18692] = { world_id = ZN.OUTLAND,                  map_name = ZN.BLADES_EDGE_MOUNTAINS,       is_tamable = nil   }, -- Hemathion
+	[18693] = { world_id = ZN.OUTLAND,                  map_name = ZN.BLADES_EDGE_MOUNTAINS,       is_tamable = nil   }, -- Speaker Mar'grom
+	[18694] = { world_id = ZN.OUTLAND,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = nil   }, -- Collidus the Warp-Watcher
+	[18695] = { world_id = ZN.OUTLAND,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = nil   }, -- Ambassador Jerrikar
+	[18696] = { world_id = ZN.OUTLAND,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = nil   }, -- Kraator
+	[18697] = { world_id = ZN.OUTLAND,                  map_name = ZN.NETHERSTORM,                 is_tamable = nil   }, -- Chief Engineer Lorthander
+	[18698] = { world_id = ZN.OUTLAND,                  map_name = ZN.NETHERSTORM,                 is_tamable = nil   }, -- Ever-Core the Punisher
+	[20932] = { world_id = ZN.OUTLAND,                  map_name = ZN.NETHERSTORM,                 is_tamable = true  }, -- Nuramoc
 	[21724] = { world_id = ZN.OUTLAND,                  map_name = ZN.TEROKKAR_FOREST,             is_tamable = true  }, -- Hawkbane
 	[22060] = { world_id = ZN.OUTLAND,                  map_name = ZN.BLOODMYST_ISLE,              is_tamable = false }, -- Fenissa the Assassin
 	[22062] = { world_id = ZN.OUTLAND,                  map_name = ZN.GHOSTLANDS,                  is_tamable = false }, -- Dr. Whitherlimb
-	[32357] = { world_id = nil,                         map_name = ZN.BOREAN_TUNDRA,               is_tamable = nil   }, -- Old Crystalbark
-	[32358] = { world_id = nil,                         map_name = ZN.BOREAN_TUNDRA,               is_tamable = nil   }, -- Fumblub Gearwind
-	[32361] = { world_id = nil,                         map_name = ZN.BOREAN_TUNDRA,               is_tamable = true  }, -- Icehorn
-	[32377] = { world_id = nil,                         map_name = ZN.HOWLING_FJORD,               is_tamable = nil   }, -- Perobas the Bloodthirster
-	[32386] = { world_id = nil,                         map_name = ZN.HOWLING_FJORD,               is_tamable = nil   }, -- Vigdis the War Maiden
-	[32398] = { world_id = nil,                         map_name = ZN.HOWLING_FJORD,               is_tamable = nil   }, -- King Ping
-	[32400] = { world_id = nil,                         map_name = ZN.DRAGONBLIGHT,                is_tamable = nil   }, -- Tukemuth
-	[32409] = { world_id = nil,                         map_name = ZN.DRAGONBLIGHT,                is_tamable = nil   }, -- Crazed Indu'le Survivor
-	[32417] = { world_id = nil,                         map_name = ZN.DRAGONBLIGHT,                is_tamable = nil   }, -- Scarlet Highlord Daion
-	[32422] = { world_id = nil,                         map_name = ZN.GRIZZLY_HILLS,               is_tamable = nil   }, -- Grocklar
-	[32429] = { world_id = nil,                         map_name = ZN.GRIZZLY_HILLS,               is_tamable = nil   }, -- Seething Hate
-	[32438] = { world_id = nil,                         map_name = ZN.GRIZZLY_HILLS,               is_tamable = nil   }, -- Syreian the Bonecarver
-	[32447] = { world_id = nil,                         map_name = ZN.ZULDRAK,                     is_tamable = nil   }, -- Zul'drak Sentinel
-	[32471] = { world_id = nil,                         map_name = ZN.ZULDRAK,                     is_tamable = nil   }, -- Griegen
-	[32475] = { world_id = nil,                         map_name = ZN.ZULDRAK,                     is_tamable = true  }, -- Terror Spinner
-	[32481] = { world_id = nil,                         map_name = ZN.SHOLAZAR_BASIN,              is_tamable = true  }, -- Aotona
-	[32485] = { world_id = nil,                         map_name = ZN.SHOLAZAR_BASIN,              is_tamable = true  }, -- King Krush
-	[32487] = { world_id = nil,                         map_name = ZN.ICECROWN,                    is_tamable = nil   }, -- Putridus the Ancient
+	[32357] = { world_id = ZN.NORTHREND,                map_name = ZN.BOREAN_TUNDRA,               is_tamable = nil   }, -- Old Crystalbark
+	[32358] = { world_id = ZN.NORTHREND,                map_name = ZN.BOREAN_TUNDRA,               is_tamable = nil   }, -- Fumblub Gearwind
+	[32361] = { world_id = ZN.NORTHREND,                map_name = ZN.BOREAN_TUNDRA,               is_tamable = true  }, -- Icehorn
+	[32377] = { world_id = ZN.NORTHREND,                map_name = ZN.HOWLING_FJORD,               is_tamable = nil   }, -- Perobas the Bloodthirster
+	[32386] = { world_id = ZN.NORTHREND,                map_name = ZN.HOWLING_FJORD,               is_tamable = nil   }, -- Vigdis the War Maiden
+	[32398] = { world_id = ZN.NORTHREND,                map_name = ZN.HOWLING_FJORD,               is_tamable = nil   }, -- King Ping
+	[32400] = { world_id = ZN.NORTHREND,                map_name = ZN.DRAGONBLIGHT,                is_tamable = nil   }, -- Tukemuth
+	[32409] = { world_id = ZN.NORTHREND,                map_name = ZN.DRAGONBLIGHT,                is_tamable = nil   }, -- Crazed Indu'le Survivor
+	[32417] = { world_id = ZN.NORTHREND,                map_name = ZN.DRAGONBLIGHT,                is_tamable = nil   }, -- Scarlet Highlord Daion
+	[32422] = { world_id = ZN.NORTHREND,                map_name = ZN.GRIZZLY_HILLS,               is_tamable = nil   }, -- Grocklar
+	[32429] = { world_id = ZN.NORTHREND,                map_name = ZN.GRIZZLY_HILLS,               is_tamable = nil   }, -- Seething Hate
+	[32438] = { world_id = ZN.NORTHREND,                map_name = ZN.GRIZZLY_HILLS,               is_tamable = nil   }, -- Syreian the Bonecarver
+	[32447] = { world_id = ZN.NORTHREND,                map_name = ZN.ZULDRAK,                     is_tamable = nil   }, -- Zul'drak Sentinel
+	[32471] = { world_id = ZN.NORTHREND,                map_name = ZN.ZULDRAK,                     is_tamable = nil   }, -- Griegen
+	[32475] = { world_id = ZN.NORTHREND,                map_name = ZN.ZULDRAK,                     is_tamable = true  }, -- Terror Spinner
+	[32481] = { world_id = ZN.NORTHREND,                map_name = ZN.SHOLAZAR_BASIN,              is_tamable = true  }, -- Aotona
+	[32485] = { world_id = ZN.NORTHREND,                map_name = ZN.SHOLAZAR_BASIN,              is_tamable = true  }, -- King Krush
+	[32487] = { world_id = ZN.NORTHREND,                map_name = ZN.ICECROWN,                    is_tamable = nil   }, -- Putridus the Ancient
 	[32491] = { world_id = ZN.NORTHREND,                map_name = ZN.THE_STORM_PEAKS,             is_tamable = false }, -- Time-Lost Proto-Drake
-	[32495] = { world_id = nil,                         map_name = ZN.ICECROWN,                    is_tamable = nil   }, -- Hildana Deathstealer
-	[32500] = { world_id = nil,                         map_name = ZN.THE_STORM_PEAKS,             is_tamable = nil   }, -- Dirkee
-	[32501] = { world_id = nil,                         map_name = ZN.ICECROWN,                    is_tamable = nil   }, -- High Thane Jorfus
-	[32517] = { world_id = nil,                         map_name = ZN.SHOLAZAR_BASIN,              is_tamable = true  }, -- Loque'nahak
-	[32630] = { world_id = nil,                         map_name = ZN.THE_STORM_PEAKS,             is_tamable = nil   }, -- Vyragosa
+	[32495] = { world_id = ZN.NORTHREND,                map_name = ZN.ICECROWN,                    is_tamable = nil   }, -- Hildana Deathstealer
+	[32500] = { world_id = ZN.NORTHREND,                map_name = ZN.THE_STORM_PEAKS,             is_tamable = nil   }, -- Dirkee
+	[32501] = { world_id = ZN.NORTHREND,                map_name = ZN.ICECROWN,                    is_tamable = nil   }, -- High Thane Jorfus
+	[32517] = { world_id = ZN.NORTHREND,                map_name = ZN.SHOLAZAR_BASIN,              is_tamable = true  }, -- Loque'nahak
+	[32630] = { world_id = ZN.NORTHREND,                map_name = ZN.THE_STORM_PEAKS,             is_tamable = nil   }, -- Vyragosa
 	[33776] = { world_id = ZN.NORTHREND,                map_name = ZN.ZULDRAK,                     is_tamable = true  }, -- Gondria
 	[35189] = { world_id = ZN.NORTHREND,                map_name = ZN.THE_STORM_PEAKS,             is_tamable = true  }, -- Skoll
 	[38453] = { world_id = ZN.NORTHREND,                map_name = ZN.GRIZZLY_HILLS,               is_tamable = true  }, -- Arcturis
@@ -582,41 +582,41 @@ local NPC_DATA = {
 	[50328] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.DEATHKNELL,                  is_tamable = true  }, -- Fangor
 	[50329] = { world_id = ZN.KALIMDOR,                 map_name = ZN.THOUSAND_NEEDLES,            is_tamable = true  }, -- Rrakk
 	[50330] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SILVERPINE_FOREST,           is_tamable = true  }, -- Kree
-	[50331] = { world_id = nil,                         map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Go-Kan
-	[50332] = { world_id = nil,                         map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Korda Torros
-	[50333] = { world_id = nil,                         map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Lon the Bull
-	[50334] = { world_id = nil,                         map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Dak the Breaker
+	[50331] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Go-Kan
+	[50332] = { world_id = ZN.PANDARIA,                 map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Korda Torros
+	[50333] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Lon the Bull
+	[50334] = { world_id = ZN.PANDARIA,                 map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Dak the Breaker
 	[50335] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.HILLSBRAD_FOOTHILLS,         is_tamable = true  }, -- Alitus
-	[50336] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Yorik Sharpeye
+	[50336] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Yorik Sharpeye
 	[50337] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.ARATHI_HIGHLANDS,            is_tamable = true  }, -- Cackle
-	[50338] = { world_id = nil,                         map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Kor'nas Nightsavage
-	[50339] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Sulik'shor
-	[50340] = { world_id = nil,                         map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Gaarn the Toxic
-	[50341] = { world_id = nil,                         map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Borginn Darkfist
+	[50338] = { world_id = ZN.PANDARIA,                 map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Kor'nas Nightsavage
+	[50339] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Sulik'shor
+	[50340] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Gaarn the Toxic
+	[50341] = { world_id = ZN.PANDARIA,                 map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Borginn Darkfist
 	[50342] = { world_id = ZN.KALIMDOR,                 map_name = ZN.DUSTWALLOW_MARSH,            is_tamable = true  }, -- Heronis
 	[50343] = { world_id = ZN.KALIMDOR,                 map_name = ZN.STONETALON_MOUNTAINS,        is_tamable = true  }, -- Quall
-	[50344] = { world_id = nil,                         map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Norlaxx
+	[50344] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Norlaxx
 	[50345] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.WESTERN_PLAGUELANDS,         is_tamable = true  }, -- Alit
 	[50346] = { world_id = ZN.KALIMDOR,                 map_name = ZN.WINTERSPRING,                is_tamable = true  }, -- Ronak
-	[50347] = { world_id = nil,                         map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Karr the Darkener
+	[50347] = { world_id = ZN.PANDARIA,                 map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Karr the Darkener
 	[50348] = { world_id = ZN.KALIMDOR,                 map_name = ZN.WINTERSPRING,                is_tamable = true  }, -- Norissis
-	[50349] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Kang the Soul Thief
-	[50350] = { world_id = nil,                         map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Morgrinn Crackfang
-	[50351] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Jonn-Dar
-	[50352] = { world_id = nil,                         map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Qu'nas
+	[50349] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Kang the Soul Thief
+	[50350] = { world_id = ZN.PANDARIA,                 map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Morgrinn Crackfang
+	[50351] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Jonn-Dar
+	[50352] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Qu'nas
 	[50353] = { world_id = ZN.KALIMDOR,                 map_name = ZN.WINTERSPRING,                is_tamable = true  }, -- Manas
-	[50354] = { world_id = nil,                         map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Havak
-	[50355] = { world_id = nil,                         map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Kah'tir
-	[50356] = { world_id = nil,                         map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Krol the Blade
+	[50354] = { world_id = ZN.PANDARIA,                 map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Havak
+	[50355] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Kah'tir
+	[50356] = { world_id = ZN.PANDARIA,                 map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Krol the Blade
 	[50357] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true  }, -- Sunwing
-	[50358] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Haywire Sunreaver Construct
-	[50359] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Urgolax
+	[50358] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Haywire Sunreaver Construct
+	[50359] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Urgolax
 	[50361] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true  }, -- Ornat
 	[50362] = { world_id = ZN.KALIMDOR,                 map_name = ZN.FELWOOD,                     is_tamable = true  }, -- Blackbog the Fang
-	[50363] = { world_id = nil,                         map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Krax'ik
-	[50364] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Nal'lak the Ripper
+	[50363] = { world_id = ZN.PANDARIA,                 map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Krax'ik
+	[50364] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Nal'lak the Ripper
 	[50370] = { world_id = ZN.KALIMDOR,                 map_name = ZN.SILITHUS,                    is_tamable = true  }, -- Karapax
-	[50388] = { world_id = nil,                         map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Torik-Ethis
+	[50388] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Torik-Ethis
 	[50409] = { world_id = ZN.KALIMDOR,                 map_name = ZN.ULDUM,                       is_tamable = nil   }, -- Mysterious Camel Figurine
 	[50410] = { world_id = ZN.KALIMDOR,                 map_name = ZN.ULDUM,                       is_tamable = nil   }, -- Mysterious Camel Figurine
 	[50724] = { world_id = ZN.KALIMDOR,                 map_name = ZN.FELWOOD,                     is_tamable = true  }, -- Spinecrawl
@@ -626,12 +626,12 @@ local NPC_DATA = {
 	[50728] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BADLANDS,                    is_tamable = true  }, -- Deathstrike
 	[50730] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true  }, -- Venomspine
 	[50731] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BADLANDS,                    is_tamable = true  }, -- Needlefang
-	[50733] = { world_id = nil,                         map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Ski'thik
-	[50734] = { world_id = nil,                         map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Lith'ik the Stalker
+	[50733] = { world_id = ZN.PANDARIA,                 map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Ski'thik
+	[50734] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Lith'ik the Stalker
 	[50735] = { world_id = ZN.KALIMDOR,                 map_name = ZN.DUSTWALLOW_MARSH,            is_tamable = true  }, -- Blinkeye the Rattler
 	[50737] = { world_id = ZN.KALIMDOR,                 map_name = ZN.SILITHUS,                    is_tamable = true  }, -- Acroniss
 	[50738] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SWAMP_OF_SORROWS,            is_tamable = true  }, -- Shimmerscale
-	[50739] = { world_id = nil,                         map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Gar'lok
+	[50739] = { world_id = ZN.PANDARIA,                 map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Gar'lok
 	[50741] = { world_id = ZN.KALIMDOR,                 map_name = ZN.THOUSAND_NEEDLES,            is_tamable = true  }, -- Kaxx
 	[50742] = { world_id = ZN.KALIMDOR,                 map_name = ZN.SILITHUS,                    is_tamable = true  }, -- Qem
 	[50743] = { world_id = ZN.KALIMDOR,                 map_name = ZN.SILITHUS,                    is_tamable = true  }, -- Manax
@@ -640,68 +640,68 @@ local NPC_DATA = {
 	[50746] = { world_id = ZN.KALIMDOR,                 map_name = ZN.SILITHUS,                    is_tamable = true  }, -- Bornix the Burrower
 	[50747] = { world_id = ZN.KALIMDOR,                 map_name = ZN.AHNQIRAJ_THE_FALLEN_KINGDOM, is_tamable = true  }, -- Tix
 	[50748] = { world_id = ZN.KALIMDOR,                 map_name = ZN.THOUSAND_NEEDLES,            is_tamable = true  }, -- Nyaj
-	[50749] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Kal'tik the Blight
-	[50750] = { world_id = nil,                         map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Aethis
+	[50749] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Kal'tik the Blight
+	[50750] = { world_id = ZN.PANDARIA,                 map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Aethis
 	[50752] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.ELWYNN_FOREST,               is_tamable = true  }, -- Tarantis
 	[50759] = { world_id = ZN.KALIMDOR,                 map_name = ZN.STONETALON_MOUNTAINS,        is_tamable = true  }, -- Iriss the Widow
 	[50763] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.TIRISFAL_GLADES,             is_tamable = true  }, -- Shadowstalker
 	[50764] = { world_id = ZN.KALIMDOR,                 map_name = ZN.DUSTWALLOW_MARSH,            is_tamable = true  }, -- Paraliss
 	[50765] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.HILLSBRAD_FOOTHILLS,         is_tamable = true  }, -- Miasmiss
-	[50766] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Sele'na
-	[50768] = { world_id = nil,                         map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Cournith Waterstrider
-	[50769] = { world_id = nil,                         map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Zai the Outcast
+	[50766] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Sele'na
+	[50768] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Cournith Waterstrider
+	[50769] = { world_id = ZN.PANDARIA,                 map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Zai the Outcast
 	[50770] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.HILLSBRAD_FOOTHILLS,         is_tamable = true  }, -- Zorn
-	[50772] = { world_id = nil,                         map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Eshelon
+	[50772] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Eshelon
 	[50775] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = true  }, -- Likk the Hunter
-	[50776] = { world_id = nil,                         map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Nalash Verdantis
+	[50776] = { world_id = ZN.PANDARIA,                 map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Nalash Verdantis
 	[50777] = { world_id = ZN.KALIMDOR,                 map_name = ZN.FELWOOD,                     is_tamable = true  }, -- Needle
 	[50778] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.WESTERN_PLAGUELANDS,         is_tamable = true  }, -- Ironweb
 	[50779] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = true  }, -- Sporeggon
-	[50780] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Sahn Tidehunter
-	[50782] = { world_id = nil,                         map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Sarnak
-	[50783] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Salyin Warscout
+	[50780] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Sahn Tidehunter
+	[50782] = { world_id = ZN.PANDARIA,                 map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Sarnak
+	[50783] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Salyin Warscout
 	[50784] = { world_id = ZN.KALIMDOR,                 map_name = ZN.DUSTWALLOW_MARSH,            is_tamable = true  }, -- Anith
 	[50785] = { world_id = ZN.KALIMDOR,                 map_name = ZN.THOUSAND_NEEDLES,            is_tamable = true  }, -- Skyshadow
 	[50786] = { world_id = ZN.KALIMDOR,                 map_name = ZN.STONETALON_MOUNTAINS,        is_tamable = true  }, -- Sparkwing
-	[50787] = { world_id = nil,                         map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Arness the Scale
+	[50787] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Arness the Scale
 	[50788] = { world_id = ZN.KALIMDOR,                 map_name = ZN.WINTERSPRING,                is_tamable = true  }, -- Quetzl
-	[50789] = { world_id = nil,                         map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Nessos the Oracle
+	[50789] = { world_id = ZN.PANDARIA,                 map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Nessos the Oracle
 	[50790] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SWAMP_OF_SORROWS,            is_tamable = true  }, -- Ionis
-	[50791] = { world_id = nil,                         map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Siltriss the Sharpener
+	[50791] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Siltriss the Sharpener
 	[50792] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true  }, -- Chiaa
 	[50797] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SWAMP_OF_SORROWS,            is_tamable = true  }, -- Yukiko
 	[50803] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.TIRISFAL_GLADES,             is_tamable = true  }, -- Bonechewer
 	[50804] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.ARATHI_HIGHLANDS,            is_tamable = true  }, -- Ripwing
-	[50805] = { world_id = nil,                         map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Omnis Grinlok
-	[50806] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Moldo One-Eye
+	[50805] = { world_id = ZN.PANDARIA,                 map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Omnis Grinlok
+	[50806] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Moldo One-Eye
 	[50807] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true  }, -- Catal
-	[50808] = { world_id = nil,                         map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Urobi the Walker
+	[50808] = { world_id = ZN.PANDARIA,                 map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Urobi the Walker
 	[50809] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.WESTERN_PLAGUELANDS,         is_tamable = true  }, -- Heress
 	[50810] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true  }, -- Favored of Isiset
-	[50811] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Nasra Spothide
+	[50811] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Nasra Spothide
 	[50812] = { world_id = ZN.KALIMDOR,                 map_name = ZN.STONETALON_MOUNTAINS,        is_tamable = true  }, -- Arae
 	[50813] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = true  }, -- Fene-mal
 	[50814] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SILVERPINE_FOREST,           is_tamable = true  }, -- Corpsefeeder
 	[50815] = { world_id = ZN.MOLTEN_FRONT,             map_name = ZN.MOLTEN_FRONT,                is_tamable = true  }, -- Skarr
-	[50816] = { world_id = nil,                         map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Ruun Ghostpaw
-	[50817] = { world_id = nil,                         map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Ahone the Wanderer
+	[50816] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Ruun Ghostpaw
+	[50817] = { world_id = ZN.PANDARIA,                 map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Ahone the Wanderer
 	[50818] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.HILLSBRAD_FOOTHILLS,         is_tamable = true  }, -- The Dark Prowler
 	[50819] = { world_id = ZN.KALIMDOR,                 map_name = ZN.WINTERSPRING,                is_tamable = true  }, -- Iceclaw
-	[50820] = { world_id = nil,                         map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Yul Wildpaw
-	[50821] = { world_id = nil,                         map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Ai-Li Skymirror
-	[50822] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Ai-Ran the Shifting Cloud
-	[50823] = { world_id = nil,                         map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Mister Ferocious
+	[50820] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- Yul Wildpaw
+	[50821] = { world_id = ZN.PANDARIA,                 map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Ai-Li Skymirror
+	[50822] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Ai-Ran the Shifting Cloud
+	[50823] = { world_id = ZN.PANDARIA,                 map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Mister Ferocious
 	[50825] = { world_id = ZN.KALIMDOR,                 map_name = ZN.STONETALON_MOUNTAINS,        is_tamable = true  }, -- Feras
-	[50828] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Bonobos
-	[50830] = { world_id = nil,                         map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Spriggin
-	[50831] = { world_id = nil,                         map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Scritch
-	[50832] = { world_id = nil,                         map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- The Yowler
+	[50828] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Bonobos
+	[50830] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = nil   }, -- Spriggin
+	[50831] = { world_id = ZN.PANDARIA,                 map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Scritch
+	[50832] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = nil   }, -- The Yowler
 	[50833] = { world_id = ZN.KALIMDOR,                 map_name = ZN.FELWOOD,                     is_tamable = true  }, -- Duskcoat
-	[50836] = { world_id = nil,                         map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Ik-Ik the Nimble
+	[50836] = { world_id = ZN.PANDARIA,                 map_name = ZN.DREAD_WASTES,                is_tamable = nil   }, -- Ik-Ik the Nimble
 	[50837] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SWAMP_OF_SORROWS,            is_tamable = true  }, -- Kash
 	[50838] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BADLANDS,                    is_tamable = true  }, -- Tabbs
 	[50839] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = nil,                            is_tamable = true  }, -- Chromehound
-	[50840] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Major Nanners
+	[50840] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Major Nanners
 	[50842] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true  }, -- Magmagan
 	[50846] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SEARING_GORGE,               is_tamable = true  }, -- Slavermaw
 	[50855] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true  }, -- Jaxx the Rabid
@@ -709,7 +709,7 @@ local NPC_DATA = {
 	[50858] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.HILLSBRAD_FOOTHILLS,         is_tamable = true  }, -- Dustwing
 	[50864] = { world_id = ZN.KALIMDOR,                 map_name = ZN.FELWOOD,                     is_tamable = true  }, -- Thicket
 	[50865] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.ARATHI_HIGHLANDS,            is_tamable = true  }, -- Saurix
-	[50874] = { world_id = nil,                         map_name = ZN.STONETALON_MOUNTAINS,        is_tamable = true  }, -- Tenok
+	[50874] = { world_id = ZN.KALIMDOR,                 map_name = ZN.STONETALON_MOUNTAINS,        is_tamable = true  }, -- Tenok
 	[50875] = { world_id = ZN.KALIMDOR,                 map_name = ZN.DUSTWALLOW_MARSH,            is_tamable = true  }, -- Nychus
 	[50876] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SEARING_GORGE,               is_tamable = true  }, -- Avis
 	[50882] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SWAMP_OF_SORROWS,            is_tamable = true  }, -- Chupacabros
@@ -779,7 +779,7 @@ local NPC_DATA = {
 	[51053] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = true  }, -- Quirix
 	[51057] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.HILLSBRAD_FOOTHILLS,         is_tamable = true  }, -- Weevil
 	[51058] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.WESTERN_PLAGUELANDS,         is_tamable = true  }, -- Aphis
-	[51059] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Blackhoof
+	[51059] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Blackhoof
 	[51061] = { world_id = ZN.KALIMDOR,                 map_name = ZN.DUSTWALLOW_MARSH,            is_tamable = true  }, -- Roth-Salam
 	[51062] = { world_id = ZN.KALIMDOR,                 map_name = ZN.STONETALON_MOUNTAINS,        is_tamable = true  }, -- Khep-Re
 	[51063] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.ARATHI_HIGHLANDS,            is_tamable = true  }, -- Phalanax
@@ -789,7 +789,7 @@ local NPC_DATA = {
 	[51071] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SHIMMERING_EXPANSE,          is_tamable = false }, -- Captain Florence
 	[51076] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.HILLSBRAD_FOOTHILLS,         is_tamable = true  }, -- Lopex
 	[51077] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.ELWYNN_FOREST,               is_tamable = true  }, -- Bushtail
-	[51078] = { world_id = nil,                         map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Ferdinand
+	[51078] = { world_id = ZN.PANDARIA,                 map_name = ZN.THE_JADE_FOREST,             is_tamable = nil   }, -- Ferdinand
 	[51079] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.VASHJIR,                     is_tamable = false }, -- Captain Foulwind
 	[51401] = { world_id = ZN.KALIMDOR,                 map_name = ZN.ULDUM,                       is_tamable = true  }, -- Madexx
 	[51402] = { world_id = ZN.KALIMDOR,                 map_name = ZN.ULDUM,                       is_tamable = true  }, -- Madexx
@@ -813,46 +813,46 @@ local NPC_DATA = {
 	[58474] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false }, -- Bloodtip
 	[58768] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false }, -- Cracklefang
 	[58769] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false }, -- Vicejaw
-	[58771] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Quid
+	[58771] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Quid
 	[58778] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false }, -- Aetha
 	[58817] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false }, -- Spirit of Lao-Fe
-	[58949] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Bai-Jin the Butcher
+	[58949] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Bai-Jin the Butcher
 	[59369] = { world_id = ZN.SCHOLOMANCE,              map_name = ZN.SCHOLOMANCE,                 is_tamable = false }, -- Doctor Theolen Krastinov
-	[60491] = { world_id = nil,                         map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Sha of Anger
-	[62346] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Galleon
+	[60491] = { world_id = ZN.PANDARIA,                 map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = nil   }, -- Sha of Anger
+	[62346] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Galleon
 	[62880] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false }, -- Gochao the Ironfist
-	[62881] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Gaohun the Soul-Severer
+	[62881] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Gaohun the Soul-Severer
 	[63101] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false }, -- General Temuja
-	[63240] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Shadowmaster Sydow
+	[63240] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Shadowmaster Sydow
 	[63510] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false }, -- Wulon
 	[63691] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false }, -- Huo-Shuang
-	[63695] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Baolai the Immolator
+	[63695] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Baolai the Immolator
 	[63977] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false }, -- Vyraxxis
-	[63978] = { world_id = nil,                         map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Kri'chon
-	[64004] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Ghostly Pandaren Fisherman
-	[64191] = { world_id = nil,                         map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Ghostly Pandaren Craftsman
+	[63978] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = nil   }, -- Kri'chon
+	[64004] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Ghostly Pandaren Fisherman
+	[64191] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = nil   }, -- Ghostly Pandaren Craftsman
 	[68317] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false }, -- Mavis Harms
 	[68318] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false }, -- Dalan Nightbreaker
 	[68319] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false }, -- Disha Fearwarden
 	[68320] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false }, -- Ubunti the Shade
 	[68321] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false }, -- Kar Warmaker
 	[68322] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false }, -- Muerta
-	[69099] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Nalak
-	[69161] = { world_id = nil,                         map_name = ZN.ISLE_OF_GIANTS,              is_tamable = nil   }, -- Oondasta
-	[69664] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Mumta
+	[69099] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Nalak
+	[69161] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_GIANTS,              is_tamable = nil   }, -- Oondasta
+	[69664] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Mumta
 	[69768] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = false }, -- Zandalari Warscout
 	[69769] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = false }, -- Zandalari Warbringer
 	[69841] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = false }, -- Zandalari Warbringer
 	[69842] = { world_id = ZN.PANDARIA,                 map_name = ZN.DREAD_WASTES,                is_tamable = false }, -- Zandalari Warbringer
 	[69843] = { world_id = ZN.ISLE_OF_THUNDER,          map_name = ZN.THRONE_OF_THUNDER,           is_tamable = false }, -- Zao'cho
-	[69996] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Ku'lai the Skyclaw
-	[69997] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Progenitus
-	[69998] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = true  }, -- Goda
-	[69999] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- God-Hulk Ramuk
-	[70000] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Al'tabim the All-Seeing
-	[70001] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Backbreaker Uru
-	[70002] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Lu-Ban
-	[70003] = { world_id = nil,                         map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Molthor
+	[69996] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Ku'lai the Skyclaw
+	[69997] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Progenitus
+	[69998] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = true  }, -- Goda
+	[69999] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- God-Hulk Ramuk
+	[70000] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Al'tabim the All-Seeing
+	[70001] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Backbreaker Uru
+	[70002] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Lu-Ban
+	[70003] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = nil   }, -- Molthor
 	[70096] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_GIANTS,              is_tamable = false }, -- War-God Dokah
 	[70126] = { world_id = ZN.PANDARIA,                 map_name = ZN.THE_VEILED_STAIR,            is_tamable = false }, -- Willy Wilder
 	[70238] = { world_id = ZN.ISLE_OF_THUNDER,          map_name = ZN.THRONE_OF_THUNDER,           is_tamable = false }, -- Unblinking Eye
@@ -862,39 +862,39 @@ local NPC_DATA = {
 	[70430] = { world_id = ZN.ISLE_OF_THUNDER,          map_name = ZN.THRONE_OF_THUNDER,           is_tamable = false }, -- Rocky Horror
 	[70440] = { world_id = ZN.ISLE_OF_THUNDER,          map_name = ZN.THRONE_OF_THUNDER,           is_tamable = false }, -- Monara
 	[70530] = { world_id = ZN.ISLE_OF_THUNDER,          map_name = ZN.ISLE_OF_THUNDER,             is_tamable = false }, -- Ra'sha
-	[71864] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Spelurk
-	[71919] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Zhu-Gon the Sour
-	[72045] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Chelon
-	[72048] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Rattleskew
+	[71864] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Spelurk
+	[71919] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Zhu-Gon the Sour
+	[72045] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Chelon
+	[72048] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Rattleskew
 	[72049] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false }, -- Cranegnasher
-	[72193] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Karkanos
-	[72245] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Zesqua
-	[72769] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Spirit of Jadefire
-	[72775] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Bufo
-	[72808] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Tsavo'ka
-	[72909] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Gu'chi the Swarmbringer
-	[72970] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Golganarr
-	[73157] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Rock Moss
-	[73158] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Emerald Gander
-	[73160] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Ironfur Steelhorn
-	[73161] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Great Turtle Furyshell
-	[73163] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Imperial Python
-	[73166] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Monstrous Spineclaw
-	[73167] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Huolon
-	[73169] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Jakur of Ordon
-	[73170] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Watcher Osu
-	[73171] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Champion of the Black Flame
-	[73172] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Flintlord Gairan
-	[73173] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Urdur the Cauterizer
-	[73174] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Archiereus of Flame
-	[73175] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Cinderfall
-	[73277] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Leafmender
-	[73279] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Evermaw
-	[73281] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Dread Ship Vazuvius
-	[73282] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Garnia
+	[72193] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Karkanos
+	[72245] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Zesqua
+	[72769] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Spirit of Jadefire
+	[72775] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Bufo
+	[72808] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Tsavo'ka
+	[72909] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Gu'chi the Swarmbringer
+	[72970] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Golganarr
+	[73157] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Rock Moss
+	[73158] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Emerald Gander
+	[73160] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Ironfur Steelhorn
+	[73161] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Great Turtle Furyshell
+	[73163] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Imperial Python
+	[73166] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Monstrous Spineclaw
+	[73167] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Huolon
+	[73169] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Jakur of Ordon
+	[73170] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Watcher Osu
+	[73171] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Champion of the Black Flame
+	[73172] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Flintlord Gairan
+	[73173] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Urdur the Cauterizer
+	[73174] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Archiereus of Flame
+	[73175] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Cinderfall
+	[73277] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Leafmender
+	[73279] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Evermaw
+	[73281] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Dread Ship Vazuvius
+	[73282] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Garnia
 	[73293] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false }, -- Whizzig
 	[73666] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false }, -- Archiereus of Flame
-	[73704] = { world_id = nil,                         map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Stinkbraid
+	[73704] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = nil   }, -- Stinkbraid
 }
 
 private.RareMobData = {
