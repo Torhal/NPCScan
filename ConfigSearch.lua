@@ -669,7 +669,7 @@ do
 		for criteria_id, npc_id in pairs(achievement.Criteria) do
 			if npc_id > 1 then
 				local npc_name, _, is_completed = _G.GetAchievementCriteriaInfoByID(tab.identifier, criteria_id)
-				local map_name = private.RareMobData.map_names[npc_id]
+				local map_name = private.NPC_ID_TO_MAP_NAME[npc_id]
 				local new_row = panel.table:AddRow(npc_id,
 					private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
 					npc_name,
