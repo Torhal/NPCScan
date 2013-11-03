@@ -901,8 +901,16 @@ local NPC_DATA = {
 private.NPC_ID_TO_MAP_NAME = {}
 private.NPC_ID_TO_NAME = {}
 private.NPC_ID_TO_WORLD_NAME = {}
+
+
 private.TAMABLE_NPCS = {}
+private.TAMABLE_ID_TO_MAP_NAME = {}
+private.TAMABLE_ID_TO_WORLD_NAME = {}
+
+
 private.UNTAMABLE_NPCS = {}
+private.UNTAMABLE_ID_TO_MAP_NAME = {}
+private.UNTAMABLE_ID_TO_WORLD_NAME = {}
 
 
 for npc_id, data in pairs(NPC_DATA) do
@@ -912,8 +920,10 @@ for npc_id, data in pairs(NPC_DATA) do
 
 	if data.is_tamable then
 		private.TAMABLE_NPCS[npc_id] = true
+		private.TAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
 	else
 		private.UNTAMABLE_NPCS[npc_id] = true
+		private.UNTAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
 	end
 end
 
