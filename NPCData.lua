@@ -902,6 +902,7 @@ private.NPC_ID_TO_MAP_NAME = {}
 private.NPC_ID_TO_NAME = {}
 private.NPC_ID_TO_WORLD_NAME = {}
 private.TAMABLE_NPCS = {}
+private.UNTAMABLE_NPCS = {}
 
 
 for npc_id, data in pairs(NPC_DATA) do
@@ -911,6 +912,8 @@ for npc_id, data in pairs(NPC_DATA) do
 
 	if data.is_tamable then
 		private.TAMABLE_NPCS[npc_id] = true
+	else
+		private.UNTAMABLE_NPCS[npc_id] = true
 	end
 end
 
