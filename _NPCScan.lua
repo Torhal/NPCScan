@@ -86,10 +86,10 @@ private.OptionsDefault = {
 		[64191] = "Ghostly Pandaren Craftsman",
 	},
 	NPCWorldIDs = {
-		[50409] = private.CONTINENT_IDS.KALIMDOR,
-		[50410] = private.CONTINENT_IDS.KALIMDOR,
-		[64004] = private.CONTINENT_IDS.PANDARIA,
-		[64191] = private.CONTINENT_IDS.PANDARIA,
+		[50409] = private.ZONE_NAMES.KALIMDOR,
+		[50410] = private.ZONE_NAMES.KALIMDOR,
+		[64004] = private.ZONE_NAMES.PANDARIA,
+		[64191] = private.ZONE_NAMES.PANDARIA,
 	},
 }
 
