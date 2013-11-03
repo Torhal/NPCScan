@@ -42,13 +42,8 @@ local panel_tabs = {}
 -------------------------------------------------------------------------------
 local function GetWorldID(localized_name)
 	if localized_name ~= "" then
-		return private.LOCALIZED_CONTINENT_IDS[localized_name] or localized_name
+		return localized_name
 	end
-end
-
-
-local function GetWorldIDName(world_id)
-	return type(world_id) == "number" and private.LOCALIZED_CONTINENT_NAMES[world_id] or world_id
 end
 
 
@@ -477,7 +472,7 @@ do
 				local gray = _G.GRAY_FONT_COLOR
 
 				tooltip:ClearLines()
-				tooltip:AddDoubleLine(name, L.SEARCH_WORLD_FORMAT:format(GetWorldIDName(world_id)), highlight.r, highlight.g, highlight.b, gray.r, gray.g, gray.b)
+				tooltip:AddDoubleLine(name, L.SEARCH_WORLD_FORMAT:format(world_id), highlight.r, highlight.g, highlight.b, gray.r, gray.g, gray.b)
 			else
 				tooltip:SetText(name, highlight.r, highlight.g, highlight.b)
 			end
@@ -638,7 +633,7 @@ do
 				private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
 				npc_name,
 				npc_id,
-				GetWorldIDName(world_ids[npc_id]) or "",
+				world_ids[npc_id] or "",
 				map_name or _G.UNKNOWN)
 
 			if not private.NPCIsActive(npc_id) then
@@ -728,7 +723,7 @@ do
 		end
 		npc_id_editbox:SetNumber(npc_id)
 		npc_name_editbox:SetText(private.Options.NPCs[npc_id])
-		npc_world_editbox:SetText(GetWorldIDName(private.Options.NPCWorldIDs[npc_id]) or "")
+		npc_world_editbox:SetText(private.Options.NPCWorldIDs[npc_id] or "")
 	end
 
 	AddTab("RARENPC", UpdateRareTab, ActivateNPCTab, DeactivateNPCTab)
