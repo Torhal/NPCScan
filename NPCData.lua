@@ -920,11 +920,11 @@ for npc_id, data in pairs(NPC_DATA) do
 
 	if data.is_tamable then
 		private.TAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
-		private.TAMABLE_ID_TO_NAME[npc_id] = true
+		private.TAMABLE_ID_TO_NAME[npc_id] = L.NPCs[npc_id]
 		private.TAMABLE_ID_TO_WORLD_NAME[npc_id] = data.world_id
 	else
 		private.UNTAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
-		private.UNTAMABLE_ID_TO_NAME[npc_id] = true
+		private.UNTAMABLE_ID_TO_NAME[npc_id] = L.NPCs[npc_id]
 		private.UNTAMABLE_ID_TO_WORLD_NAME[npc_id] = data.world_id
 	end
 end
