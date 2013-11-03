@@ -654,18 +654,18 @@ do
 	end
 
 
-	local function UpdateNPCTab(tab)
-		GeneralNPCUpdate(private.Options.NPCWorldIDs, private.RareMobData.map_names, private.Options.NPCs)
+	local function UpdateCustomTab(tab)
+		GeneralNPCUpdate(private.Options.NPCWorldIDs, private.NPC_ID_TO_MAP_NAME, private.Options.NPCs)
 	end
 
 
 	local function UpdateRareTab(tab)
-		GeneralNPCUpdate(private.RareMobData.NPCWorldIDs, private.RareMobData.map_names, private.RareMobData.RareNPCs)
+		GeneralNPCUpdate(private.NPC_ID_TO_WORLD_NAME, private.NPC_ID_TO_MAP_NAME, private.UNTAMABLE_ID_TO_NAME)
 	end
 
 
 	local function UpdateTameableTab(tab)
-		GeneralNPCUpdate(private.RareMobData.NPCWorldIDs, private.TamableIDs, private.TamableNames)
+		GeneralNPCUpdate(private.NPC_ID_TO_WORLD_NAME, private.NPC_ID_TO_MAP_NAME, private.TAMABLE_ID_TO_NAME)
 	end
 
 
@@ -726,7 +726,7 @@ do
 	end
 
 
-	local npc_tab = AddTab("NPC", UpdateNPCTab, ActivateNPCTab, DeactivateNPCTab)
+	local npc_tab = AddTab("NPC", UpdateCustomTab, ActivateNPCTab, DeactivateNPCTab)
 	npc_tab.show_controls_on_activate = true
 	npc_tab.table_row_on_select = function(text_table, npc_id)
 		if not npc_id then
