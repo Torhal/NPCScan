@@ -196,7 +196,7 @@ do
 		end
 
 		if private.OptionsCharacter.TrackRares then
-			for npc_id in pairs(private.RareMobData.RareNPCs) do
+			for npc_id in pairs(private.UNTAMABLE_ID_TO_NAME) do
 				self[npc_id] = private.NPCNameFromCache(npc_id)
 			end
 		end
@@ -485,12 +485,12 @@ function private.RareMobToggle(identifier, enable)
 	if identifier == "BEASTS" then
 		npcs = private.TamableIDs
 	elseif identifier == "RARENPC" then
-		npcs = private.RareMobData.RareNPCs
+		npcs = private.UNTAMABLE_ID_TO_NAME
 	end
 
 	if npcs and enable then
 		for npc_id, _ in pairs(npcs) do
-			NPCActivate(npc_id, private.UNTAMABLE_ID_TO_WORLD_NAME[npc_id])
+			NPCActivate(npc_id, private.NPC_ID_TO_WORLD_NAME[npc_id])
 		end
 	else
 		for npc_id, _ in pairs(npcs) do
