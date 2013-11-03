@@ -490,7 +490,7 @@ function private.RareMobToggle(identifier, enable)
 
 	if npcs and enable then
 		for npc_id, _ in pairs(npcs) do
-			NPCActivate(npc_id, private.RareMobData.NPCWorldIDs[npc_id])
+			NPCActivate(npc_id, private.UNTAMABLE_ID_TO_WORLD_NAME[npc_id])
 		end
 	else
 		for npc_id, _ in pairs(npcs) do
@@ -622,7 +622,7 @@ function private.Synchronize(options, character_options)
 		private.NPCRemove(npc_id)
 	end
 
-	for npc_id, world_id in pairs(private.RareMobData.NPCWorldIDs) do
+	for npc_id, world_id in pairs(private.NPC_ID_TO_WORLD_NAME) do
 		private.NPCRemove(npc_id)
 	end
 	assert(not next(ScanIDs), "Orphan NpcIDs in scan pool!")
@@ -923,21 +923,21 @@ do
 		local map_name, _, _, _, _, _, _, map_id = _G.GetInstanceInfo()
 
 		if map_id == ISLE_OF_THUNDER_MAP_ID then -- Fix for Isle of Thunder having a diffrent Instance name
-			private.WorldID = 6
+			private.WorldID = private.ZONE_NAMES.PANDARIA
 		else
-			private.WorldID = private.LOCALIZED_CONTINENT_IDS[map_name] or map_name
+			private.WorldID = map_name
 		end
 
 
 		if private.OptionsCharacter.TrackRares then
-			for npc_id, _ in pairs(private.RareMobData.RareNPCs) do
-				NPCActivate(npc_id, private.RareMobData.NPCWorldIDs[npc_id])
+			for npc_id, world_name in pairs(private.UNTAMABLE_ID_TO_WORLD_NAME) do
+				NPCActivate(npc_id, world_name)
 			end
 		end
 
 		if private.OptionsCharacter.TrackBeasts then
-			for npc_id, _ in pairs(private.TamableIDs) do
-				NPCActivate(npc_id, private.RareMobData.NPCWorldIDs[npc_id])
+			for npc_id, world_name in pairs(private.TAMABLE_ID_TO_WORLD_NAME) do
+				NPCActivate(npc_id, world_name)
 			end
 		end
 
