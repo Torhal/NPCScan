@@ -55,8 +55,12 @@ private.Options = {
 	Version = DB_VERSION,
 	NPCs = {},
 	NPCWorldIDs = {},
+	IgnoreList = {
+		NPCs = {},
+		MapName = {},
+		WorldID = {},
+		},
 }
-
 
 private.OptionsCharacter = {
 	Version = DB_VERSION,
@@ -91,6 +95,12 @@ private.OptionsDefault = {
 		[64004] = private.ZONE_NAMES.PANDARIA,
 		[64191] = private.ZONE_NAMES.PANDARIA,
 	},
+	IgnoreList = {
+		NPCs = {},
+		MapName = {},
+		WorldID = {},
+	},
+	
 }
 
 
@@ -395,7 +405,12 @@ local function AchievementActivate(achievement)
 	achievement.Active = true
 
 	for criteria_id, npc_id in pairs(achievement.Criteria) do
-		AchievementNPCActivate(achievement, npc_id, criteria_id)
+	--ignore list check
+		if not _NPCScanOptions.IgnoreList.NPCs[npc_id] then
+			AchievementNPCActivate(achievement, npc_id, criteria_id)
+		else
+		--print("ignoreing "..npc_id)
+		end
 	end
 	return true
 end
@@ -478,6 +493,14 @@ function private.SetRareMob(identifier, enable)
 	end
 end
 
+function private.ReavtivateIgnoreMob(npc_id, world_id)
+	NPCActivate(npc_id, world_id)
+end
+
+function private.DeavtivateIgnoreMob(npc_id)
+	NPCDeactivate(npc_id)
+end
+
 
 function private.RareMobToggle(identifier, enable)
 	local npcs
@@ -490,7 +513,12 @@ function private.RareMobToggle(identifier, enable)
 
 	if npcs and enable then
 		for npc_id, _ in pairs(npcs) do
-			NPCActivate(npc_id, private.NPC_ID_TO_WORLD_NAME[npc_id])
+						--ignore list check
+			if not _NPCScanOptions.IgnoreList.NPCs[npc_id] then
+				NPCActivate(npc_id, private.NPC_ID_TO_WORLD_NAME[npc_id])
+			else
+				--print("ignoreing "..npc_id)	
+			end
 		end
 	else
 		for npc_id, _ in pairs(npcs) do
@@ -608,6 +636,10 @@ function private.Synchronize(options, character_options)
 		options = private.OptionsDefault
 	end
 
+	if not options.IgnoreList then
+		options.IgnoreList = private.OptionsDefault.IgnoreList
+	end
+
 	if not character_options then
 		character_options = private.OptionsCharacterDefault
 		is_default_scan = true
@@ -627,6 +659,7 @@ function private.Synchronize(options, character_options)
 	end
 	assert(not next(ScanIDs), "Orphan NpcIDs in scan pool!")
 
+	_NPCScanOptions.IgnoreList = options.IgnoreList
 	private.SetCacheWarnings(options.CacheWarnings)
 	private.SetPrintTime(options.PrintTime)
 	private.SetAchievementsAddFound(character_options.AchievementsAddFound)
@@ -937,13 +970,23 @@ do
 
 		if private.OptionsCharacter.TrackRares then
 			for npc_id, world_name in pairs(private.UNTAMABLE_ID_TO_WORLD_NAME) do
-				NPCActivate(npc_id, world_name)
+				--Ignore list check
+				if not private.Options.IgnoreList.NPCs[npc_id] then
+					NPCActivate(npc_id, world_name)
+				else
+					--print("ignoreing "..npc_id)	
+				end
 			end
 		end
 
 		if private.OptionsCharacter.TrackBeasts then
 			for npc_id, world_name in pairs(private.TAMABLE_ID_TO_WORLD_NAME) do
-				NPCActivate(npc_id, world_name)
+				--Ignore list check
+				if not private.Options.IgnoreList.NPCs[npc_id] then
+					NPCActivate(npc_id, world_name)
+				else
+					--print("ignoreing "..npc_id)	
+				end
 			end
 		end
 

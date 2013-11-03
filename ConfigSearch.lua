@@ -35,6 +35,8 @@ local TEXTURE_READY = [[|TInterface\RaidFrame\ReadyCheck-Ready:0|t]]
 -- Variables.
 -------------------------------------------------------------------------------
 local panel_tabs = {}
+local selected_npc = nil
+local current_tab = nil
 
 
 -------------------------------------------------------------------------------
@@ -180,7 +182,11 @@ panel.table_container = table_container
 local npc_controls = _G.CreateFrame("Frame", nil, table_container)
 npc_controls:Hide()
 
+local ach_npc_controls = _G.CreateFrame("Frame", nil, table_container)
+ach_npc_controls:Hide()
+
 panel.npc_controls = npc_controls
+panel.ach_npc_controls = ach_npc_controls
 
 
 -- Anchor table_container - must be done here since its anchoring depends on the existence of npc_controls. TODO: Fix this insanity.
@@ -268,6 +274,37 @@ end)
 
 panel.npc_remove_button = npc_remove_button
 
+local ach_npc_remove_button = _G.CreateFrame("Button", nil, ach_npc_controls, "UIPanelButtonTemplate")
+--ach_npc_remove_button:SetSize(50, 20)
+ach_npc_remove_button:SetPoint("BOTTOMRIGHT", panel, -16, 16)
+ach_npc_remove_button.tooltipText = L.SEARCH_IGNORE_DESC
+ach_npc_remove_button:SetScript("OnEnter", private.Config.ControlOnEnter)
+ach_npc_remove_button:SetScript("OnLeave", _G.GameTooltip_Hide)
+ach_npc_remove_button:SetText(L.SEARCH_IGNORE)
+ach_npc_remove_button:SetSize(ach_npc_remove_button:GetTextWidth()+25, 20)
+
+ach_npc_remove_button:SetScript("OnClick", function(self)
+					if  selected_npc == nil then return end
+					local npc_name = selected_npc["name"]
+					local npc_id = selected_npc["id"]
+					local world_id = selected_npc["world"]
+					local zone_name = selected_npc["zone"]
+					if current_tab == "IGNORE" then
+						private.Options.IgnoreList.NPCs[npc_id] = nil
+						private.Options.IgnoreList.MapName[npc_id] = nil
+						private.Options.IgnoreList.WorldID[npc_id] = nil
+						private.ReavtivateIgnoreMob(npc_id, world_id)
+					else
+						private.Options.IgnoreList.NPCs[npc_id] = npc_name
+						private.Options.IgnoreList.MapName[npc_id] = zone_name
+						private.Options.IgnoreList.WorldID[npc_id] = world_id
+						private.DeavtivateIgnoreMob(npc_id)
+					end
+					private.Config.Search.UpdateTab(current_tab)
+					selected_npc = nil
+					end)
+
+panel.ach_npc_remove_button = ach_npc_remove_button
 
 local npc_name_editbox_label = npc_controls:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
 npc_name_editbox_label:SetPoint("LEFT", panel, 16, 0)
@@ -451,6 +488,7 @@ do
 		BEASTS = L.SEARCH_TAMEBEAST_DECS,
 		NPC = L.SEARCH_NPCS_DESC,
 		RARENPC = L.SEARCH_RAREMOBS_DESC,
+		IGNORE = L.SEARCH_IGNORE_LIST_DESC,
 	}
 
 
@@ -586,6 +624,8 @@ do
 		elseif TEXT_TAB_LABELS[identifier] then
 			tab:SetText(TEXT_TAB_LABELS[identifier])
 			CreateTabCheckBox(tab, CheckBoxID_OnClick)
+				elseif identifier == "IGNORE" then
+			tab:SetText(L.SEARCH_IGNORE_LIST)
 		else
 			tab:SetText(L.SEARCH_NPCS)
 		end
@@ -627,17 +667,19 @@ do
 		UpdateButtonStates()
 
 		for npc_id, npc_name in pairs(npc_data) do
-			local map_name = map_names[npc_id]
+			if not _NPCScanOptions.IgnoreList.NPCs[npc_id] then
+				local map_name = map_names[npc_id]
 
-			local new_row = panel.table:AddRow(npc_id,
-				private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
-				npc_name,
-				npc_id,
-				world_ids[npc_id] or "",
-				map_name or _G.UNKNOWN)
+				local new_row = panel.table:AddRow(npc_id,
+					private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
+					npc_name,
+					npc_id,
+					world_ids[npc_id] or "",
+					map_name or _G.UNKNOWN)
 
-			if not private.NPCIsActive(npc_id) then
-				new_row:SetAlpha(ALPHA_INACTIVE)
+				if not private.NPCIsActive(npc_id) then
+					new_row:SetAlpha(ALPHA_INACTIVE)
+				end
 			end
 		end
 	end
@@ -657,30 +699,59 @@ do
 		GeneralNPCUpdate(private.NPC_ID_TO_WORLD_NAME, private.NPC_ID_TO_MAP_NAME, private.TAMABLE_ID_TO_NAME)
 	end
 
+	local function UpdateIgnoreTab(tab)
+		local world_ids= private.Options.IgnoreList.WorldID
+		local map_names = private.Options.IgnoreList.MapName
+		local npc_data = private.Options.IgnoreList.NPCs
+		UpdateButtonStates()
+
+		for npc_id, npc_name in pairs(npc_data) do
+			local map_name = map_names[npc_id]
+
+			local new_row = panel.table:AddRow(npc_id,
+				private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
+				npc_name,
+				npc_id,
+				world_ids[npc_id] or "",
+				map_name or _G.UNKNOWN)
+		end
+	end
 
 	local function UpdateAchievementTab(tab)
 		local achievement = private.ACHIEVEMENTS[tab.identifier]
 
 		for criteria_id, npc_id in pairs(achievement.Criteria) do
-			if npc_id > 1 then
-				local npc_name, _, is_completed = _G.GetAchievementCriteriaInfoByID(tab.identifier, criteria_id)
-				local map_name = private.NPC_ID_TO_MAP_NAME[npc_id]
-				local new_row = panel.table:AddRow(npc_id,
-					private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
-					npc_name,
-					npc_id,
-					is_completed and TEXTURE_READY or "",
-					map_name or _G.UNKNOWN)
+			if not _NPCScanOptions.IgnoreList.NPCs[npc_id] then
+				if npc_id > 1 then
+					local npc_name, _, is_completed = _G.GetAchievementCriteriaInfoByID(tab.identifier, criteria_id)
+					local map_name = private.NPC_ID_TO_MAP_NAME[npc_id]
+					local new_row = panel.table:AddRow(npc_id,
+						private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
+						npc_name,
+						npc_id,
+						is_completed and TEXTURE_READY or "",
+						map_name or _G.UNKNOWN)
 
-				if not private.AchievementNPCIsActive(achievement, npc_id) then
-					new_row:SetAlpha(ALPHA_INACTIVE)
+					if not private.AchievementNPCIsActive(achievement, npc_id) then
+						new_row:SetAlpha(ALPHA_INACTIVE)
+					end
 				end
 			end
 		end
 	end
 
-
 	local function ActivateNPCTab(tab)
+		panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
+		panel.table:SetSortHandlers(true, true, true, true, true)
+		panel.table:SetSortColumn(2) -- Default by name
+		panel.table.OnSelect = tab.table_row_on_select
+
+		panel.table_container:SetPoint("BOTTOM", npc_controls, "TOP", 0, 4)
+		panel:ClearEditBoxes()
+		ach_npc_controls:Show()
+	end
+
+	local function ActivateCustomTab(tab)
 		panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
 		panel.table:SetSortHandlers(true, true, true, true, true)
 		panel.table:SetSortColumn(2) -- Default by name
@@ -694,28 +765,42 @@ do
 		end
 	end
 
-
 	local function ActivateAchievementTab(tab)
 		panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED, L.SEARCH_MAP)
 		panel.table:SetSortHandlers(true, true, true, true, true)
 		panel.table:SetSortColumn(2) -- Default by name
 		panel.table.Header:SetAlpha(private.OptionsCharacter.Achievements[tab.identifier] and ALPHA_ACTIVE or ALPHA_INACTIVE)
+		panel.table.OnSelect = tab.table_row_on_select
+		panel.table_container:SetPoint("BOTTOM", npc_controls, "TOP", 0, 0)
+		ach_npc_controls:Show()
 	end
 
-
-	local function DeactivateNPCTab()
+	local function DeactivateCustomTab()
 		npc_controls:Hide()
 		table_container:SetPoint("BOTTOM", npc_controls)
 		panel.table.OnSelect = nil
 	end
 
+	local function DeactivateNPCTab()
+		npc_controls:Hide()
+		ach_npc_controls:Hide()
+		table_container:SetPoint("BOTTOM", npc_controls)
+		panel.table.OnSelect = nil
+	end
 
 	local function DeactivateAchievementTab(tab)
+		ach_npc_controls:Hide()
 		panel.table.Header:SetAlpha(ALPHA_ACTIVE)
 	end
 
+	local function  SetSelectedID(npc_id, npc_name, npc_world, npc_zone)
+		selected_npc = { name = npc_name,
+					id = npc_id,
+					world = npc_world,
+					zone = npc_zone,}
+	end
 
-	local npc_tab = AddTab("NPC", UpdateCustomTab, ActivateNPCTab, DeactivateNPCTab)
+	local npc_tab = AddTab("NPC", UpdateCustomTab, ActivateCustomTab, DeactivateCustomTab)
 	npc_tab.show_controls_on_activate = true
 	npc_tab.table_row_on_select = function(text_table, npc_id)
 		if not npc_id then
@@ -724,16 +809,50 @@ do
 		npc_id_editbox:SetNumber(npc_id)
 		npc_name_editbox:SetText(private.Options.NPCs[npc_id])
 		npc_world_editbox:SetText(private.Options.NPCWorldIDs[npc_id] or "")
+		current_tab = "NPC"
 	end
 
-	AddTab("RARENPC", UpdateRareTab, ActivateNPCTab, DeactivateNPCTab)
-	AddTab("BEASTS", UpdateTameableTab, ActivateNPCTab, DeactivateNPCTab)
+	local rare_npc_tab = AddTab("RARENPC", UpdateRareTab, ActivateNPCTab, DeactivateNPCTab)
+	rare_npc_tab.table_row_on_select = function(text_table, npc_id)
+		if not npc_id then
+			return
+		end
+		current_tab = "RARENPC"
+		SetSelectedID(npc_id, private.UNTAMABLE_ID_TO_NAME[npc_id], private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
+		end
+
+	local beast_tab = AddTab("BEASTS", UpdateTameableTab, ActivateNPCTab, DeactivateNPCTab)
+	beast_tab.table_row_on_select = function(text_table, npc_id)
+		if not npc_id then
+			return
+		end
+		SetSelectedID(npc_id, private.TAMABLE_ID_TO_NAME[npc_id], private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
+		current_tab = "BEASTS"
+		end
 
 
 	for achievement_id in pairs(private.ACHIEVEMENTS) do
-		AddTab(achievement_id, UpdateAchievementTab, ActivateAchievementTab, DeactivateAchievementTab)
-	end
-end -- do-block
+		local Ach_tab = AddTab(achievement_id, UpdateAchievementTab, ActivateAchievementTab, DeactivateAchievementTab)
 
+		Ach_tab.table_row_on_select = function(text_table, npc_id)
+		if not npc_id then
+			return
+		end
+		SetSelectedID(npc_id, L.NPCs[npc_id],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
+		current_tab = achievement_id
+		end
+
+	end
+
+	local ignore_tab = AddTab("IGNORE", UpdateIgnoreTab, ActivateNPCTab, DeactivateNPCTab)
+	ignore_tab.table_row_on_select = function(text_table, npc_id)
+		if not npc_id then
+			return
+		end
+		SetSelectedID(npc_id, L.NPCs[npc_id],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
+		current_tab = "IGNORE"
+		end
+
+end -- do-block
 
 _G.InterfaceOptions_AddCategory(panel)

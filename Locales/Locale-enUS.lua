@@ -850,17 +850,24 @@ select( 2, ... ).L = setmetatable( {
 	SEARCH_NPCS = "Custom NPCs",
 	SEARCH_NPCS_DESC = "Add any NPC to track, even if it has no achievement.",
 	SEARCH_REMOVE = "-",
+	SEARCH_IGNORE = "Remove",
+	SEARCH_IGNORE_DESC = "Remove selected mob from list.",
+
 	SEARCH_TITLE = "Search",
 	SEARCH_WORLD = "World:",
 	SEARCH_WORLD_DESC = "An optional world name to limit searching to.  Can be a continent name or |cffff7f3finstance name|r (case-sensitive).",
 	SEARCH_WORLD_FORMAT = "(%s)",
 	TIME_FORMAT = "|cff808080[%H:%M:%S]|r ",
 	TOOLS_TITLE = "|cff808080Tools|r",
+	SEARCH_IGNORE_LIST = "Ignore List",
+	SEARCH_IGNORE_LIST_DESC = "List of Mobs that NPCScan will not track.",
 
 	TAMEDBEASTS = "Tameable Beasts",
 	SEARCH_TAMEBEAST_DECS = "Tameable Rare Beasts",
 	RAREMOBS = "Rare Mobs",
 	SEARCH_RAREMOBS_DESC = "Default list of Rare Mobs.",
+
+
 
 
 	FOUND_UNIT_DEAD = "%s found but is dead.",
