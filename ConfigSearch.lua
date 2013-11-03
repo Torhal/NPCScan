@@ -634,12 +634,6 @@ do
 		for npc_id, npc_name in pairs(npc_data) do
 			local map_name = map_names[npc_id]
 
-			if type(map_name) == "number" then
-				map_name = _G.GetMapNameByID(map_name)
-			elseif type(map_name) == "boolean" then
-				map_name = nil
-			end
-
 			local new_row = panel.table:AddRow(npc_id,
 				private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
 				npc_name,
