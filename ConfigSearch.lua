@@ -635,9 +635,9 @@ do
 			local map_name = map_names[npc_id]
 
 			if type(map_name) == "number" then
-				map_id = _G.GetMapNameByID(map_name)
+				map_name = _G.GetMapNameByID(map_name)
 			elseif type(map_name) == "boolean" then
-				map_id = nil
+				map_name = nil
 			end
 
 			local new_row = panel.table:AddRow(npc_id,
