@@ -679,32 +679,28 @@ do
 
 	--- @return True if the tamable mob is in its correct zone, else false with an optional reason string.
 	local function OnFoundTamable(npc_id, npc_name)
-		local expected_zone = private.TamableIDs[npc_id]
+		local tamable_zone_name = private.TAMABLE_ID_TO_MAP_NAME[npc_id]
+		local expected_zone_id = tamable_zone_name and private.ZONE_IDS[private.ZONE_NAME_TO_LABEL[tamable_zone_name]]
 		local current_zone_id = _G.GetCurrentMapAreaID()
-		local in_correct_zone
 
-		if expected_zone == true then -- Expected zone is unknown (instance mob, etc.)
-			in_correct_zone = not _G.IsResting() -- Assume any tamable mob found in a city/inn is a hunter pet
-		else
-			_G.SetMapToCurrentZone()
-			in_correct_zone = expected_zone == _G.GetCurrentMapAreaID()
-		end
+		_G.SetMapToCurrentZone()
+		local in_correct_zone = expected_zone_id == _G.GetCurrentMapAreaID()
 		local invalid_reason
 
 		if not in_correct_zone then
 			if _G.IsResting() then
 				PetList[npc_id] = npc_name -- Suppress error message until the player stops resting
 			else
-				local expected_zone_name = _G.GetMapNameByID(expected_zone)
+				local expected_zone_name = _G.GetMapNameByID(expected_zone_id)
 				if not expected_zone_name then -- GetMapNameByID returns nil for continent maps
-					_G.SetMapByID(expected_zone)
+					_G.SetMapByID(expected_zone_id)
 
 					local map_continent = _G.GetCurrentMapContinent()
 					if map_continent >= 1 then
 						expected_zone_name = select(map_continent, _G.GetMapContinents())
 					end
 				end
-				invalid_reason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(npc_name, _G.GetRealZoneText(), expected_zone_name or L.FOUND_ZONE_UNKNOWN, expected_zone)
+				invalid_reason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(npc_name, _G.GetRealZoneText(), expected_zone_name or L.FOUND_ZONE_UNKNOWN, expected_zone_id)
 			end
 		end
 		_G.SetMapByID(current_zone_id)
