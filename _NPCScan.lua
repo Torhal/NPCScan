@@ -896,7 +896,7 @@ function private.Frame:PLAYER_LOGIN(event_name)
 	end
 
 	if stored_character_options and stored_character_options.Version ~= DB_VERSION then
-		if not stored_character_options.Version or type(stored_character_options.Version) == "string" or stored_character_options < DB_VERSION then
+		if not stored_character_options.Version or type(stored_character_options.Version) == "string" or stored_character_options.Version < DB_VERSION then
 			if stored_character_options.NPCs then
 				for npc_id, npc_name in pairs(stored_character_options.NPCs) do
 					if not stored_options.NPCs[npc_id] then
