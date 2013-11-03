@@ -156,10 +156,13 @@ private.ZONE_IDS = {
 
 
 private.ZONE_NAMES = {}
+private.ZONE_NAME_TO_LABEL = {}
 private.ZONE_ID_TO_LABEL = {}
 
 for label, id in pairs(private.ZONE_IDS) do
-	private.ZONE_NAMES[label] = _G.GetMapNameByID(id)
+	local zone_name = _G.GetMapNameByID(id)
+	private.ZONE_NAMES[label] = zone_name
+	private.ZONE_NAME_TO_LABEL[zone_name] = label
 	private.ZONE_ID_TO_LABEL[id] = label
 end
 
