@@ -42,7 +42,7 @@ private.Updater:SetLooping("REPEAT")
 -------------------------------------------------------------------------------
 -- Constants.
 -------------------------------------------------------------------------------
-local DB_VERSION = 1
+local DB_VERSION = 2
 local ISLE_OF_THUNDER_MAP_ID = 1064
 local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
 local PLAYER_FACTION = _G.UnitFactionGroup("player")
@@ -871,11 +871,21 @@ function private.Frame:PLAYER_LOGIN(event_name)
 			local new_options = private.OptionsDefault
 
 			if stored_options.NPCs then
+				local CONTINENT_NAMES = {
+					"KALIMDOR",
+					"EASTERN_KINGDOMS",
+					"OUTLAND",
+					"NORTHREND",
+					"THE_MAELSTROM",
+					"PANDARIA",
+				}
+
 				for npc_id, npc_name in pairs(stored_options.NPCs) do
 					new_options.NPCs[npc_id] = npc_name
+
 					local world = stored_options.NPCWorldIDs and stored_options.NPCWorldIDs[npc_id]
 					if world then
-						new_options.NPCWorldIDs[npc_id] = world
+						new_options.NPCWorldIDs[npc_id] = type(world) == "number" and CONTINENT_NAMES[world] or world
 					end
 				end
 			end
