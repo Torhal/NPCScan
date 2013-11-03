@@ -293,7 +293,7 @@ npc_add_button:SetScript("OnClick", function(self)
 	local npc_name = panel.npc_name_editbox:GetText()
 	local world_id = GetWorldID(panel.npc_world_editbox:GetText())
 
-	if private.TamableIDs[npc_id] then
+	if private.TAMABLE_ID_TO_NAME[npc_id] then
 		private.Print(L.SEARCH_ADD_TAMABLE_FORMAT:format(npc_name))
 	end
 	private.NPCRemove(npc_id)

@@ -190,7 +190,7 @@ do
 		end
 
 		if private.OptionsCharacter.TrackBeasts then
-			for npc_id in pairs(private.TamableIDs) do
+			for npc_id in pairs(private.TAMABLE_ID_TO_NAME) do
 				self[npc_id] = private.NPCNameFromCache(npc_id)
 			end
 		end
@@ -483,7 +483,7 @@ function private.RareMobToggle(identifier, enable)
 	local npcs
 
 	if identifier == "BEASTS" then
-		npcs = private.TamableIDs
+		npcs = private.TAMABLE_ID_TO_NAME
 	elseif identifier == "RARENPC" then
 		npcs = private.UNTAMABLE_ID_TO_NAME
 	end
@@ -594,7 +594,7 @@ do
 
 	--- @return True if NpcID should be a default for this character.
 	function IsDefaultNPCValid(npc_id)
-		return (PLAYER_CLASS == "HUNTER" or not private.TamableIDs[npc_id] or TAMABLE_EXCEPTIONS[npc_id]) and (not NPC_FACTION[npc_id] or NPC_FACTION[npc_id] == PLAYER_FACTION)
+		return (PLAYER_CLASS == "HUNTER" or not private.TAMABLE_ID_TO_NAME[npc_id] or TAMABLE_EXCEPTIONS[npc_id]) and (not NPC_FACTION[npc_id] or NPC_FACTION[npc_id] == PLAYER_FACTION)
 	end
 end
 
@@ -732,7 +732,7 @@ do
 		end
 
 		local is_valid = true
-		local is_tamable = private.TamableIDs[npc_id]
+		local is_tamable = private.TAMABLE_ID_TO_NAME[npc_id]
 		local invalid_reason
 
 		if is_tamable then

@@ -68,6 +68,5 @@ NPCData.lua
 _NPCScan.lua
 TargetButton.lua
 MapOverlays.lua
-TamableIDs.lua
 Config.lua
 ConfigSearch.lua
