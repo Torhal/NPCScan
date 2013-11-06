@@ -1,32 +1,29 @@
 --[[****************************************************************************
-  * Localization test file for Curseforge's localization on build feature                                                         *
+  * _NPCScan by Saiket                                                         *
   * Locales/Locale-enUS.lua - Localized string constants (en-US).              *
   ****************************************************************************]]
-private = select( 2, ... )
+
 
 -- See http://wow.curseforge.com/addons/npcscan/localization/enUS/
-private.L  = setmetatable({
-		NPCs = {},
-	}, -- empty table
-	{
-		__index = function(self, key) -- line 8
-			rawset(self, key, key)
-			return key
+local private = select( 2, ... )
+private.L = setmetatable( {
+	NPCs = {};
+	-- Phrases localized by default UI
+	FOUND_ZONE_UNKNOWN = UNKNOWN;
+	SEARCH_LEVEL_TYPE_FORMAT = UNIT_TYPE_LEVEL_TEMPLATE; -- Level, Type
+}, {
+	__index = function ( self, Key )
+		if ( Key ~= nil ) then
+			rawset( self, Key, Key );
+			return Key;
 		end
-	}
-)
+	end;
+} );
 
---@localization(locale="ruRU", namespace="Localization", format="lua_additive_table", table-name="private.L", handle-unlocalized="comment", escape-non-ascii="true",handle-subnamespaces="none")@
+--@localization(locale="enUS", namespace="Localization", format="lua_additive_table", table-name="private.L", handle-unlocalized="comment", handle-subnamespaces="none")@
+--@localization(locale="enUS", namespace="NPCs", format="lua_additive_table", table-name="private.L.NPCs", handle-unlocalized="comment", handle-subnamespaces="none")@
 
 
---Loads npc id's into a temp file to convert strings into numbers
-local temp = {}
-
---@localization(locale="ruRU", namespace="NPCs ", format="lua_additive_table", table-name="temp", handle-unlocalized="comment", escape-non-ascii="true",handle-subnamespaces="none")@
-
-for ID, Name in pairs(temp) do
-	private.L.NPCs[tonumber(ID)] = Name
-end
 
 SLASH__NPCSCAN1 = "/npcscan";
 SLASH__NPCSCAN2 = "/scan";

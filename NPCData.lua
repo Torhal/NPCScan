@@ -893,7 +893,7 @@ local NPC_DATA = {
 	[73279] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Evermaw
 	[73281] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Dread Ship Vazuvius
 	[73282] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Garnia
-	[73293] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Whizzig
+	--[73293] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = false  }, -- Whizzig
 	[73666] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Archiereus of Flame
 	[73704] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Stinkbraid
 	[73854] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Cranegnasher 
@@ -917,16 +917,16 @@ private.UNTAMABLE_ID_TO_WORLD_NAME = {}
 
 for npc_id, data in pairs(NPC_DATA) do
 	private.NPC_ID_TO_MAP_NAME[npc_id] = data.map_name
-	private.NPC_ID_TO_NAME[npc_id] = L.NPCs[npc_id]
+	private.NPC_ID_TO_NAME[npc_id] = L.NPCs[tostring(npc_id)]
 	private.NPC_ID_TO_WORLD_NAME[npc_id] = data.world_id
 
 	if data.is_tamable  and not data.is_achievement then
 		private.TAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
-		private.TAMABLE_ID_TO_NAME[npc_id] = L.NPCs[npc_id]
+		private.TAMABLE_ID_TO_NAME[npc_id] = L.NPCs[tostring(npc_id)]
 		private.TAMABLE_ID_TO_WORLD_NAME[npc_id] = data.world_id
 	elseif not data.is_achievement then
 		private.UNTAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
-		private.UNTAMABLE_ID_TO_NAME[npc_id] = L.NPCs[npc_id]
+		private.UNTAMABLE_ID_TO_NAME[npc_id] = L.NPCs[tostring(npc_id)]
 		private.UNTAMABLE_ID_TO_WORLD_NAME[npc_id] = data.world_id
 	end
 end

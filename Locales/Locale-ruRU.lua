@@ -10,23 +10,15 @@ end
 
 
 -- See http://wow.curseforge.com/addons/npcscan/localization/ruRU/
-local _NPCScan = select( 2, ... );
-_NPCScan.L = setmetatable( {
-	NPCs = setmetatable( {	
-	}, { __index = _NPCScan.L.NPCs; } );
-	}, { __index = _NPCScan.L; } );
+local private = select( 2, ... );
+private.L = setmetatable( {
+	NPCs = setmetatable( {
+	}, { __index = private.L.NPCs; } );
+}, { __index = private.L; } );
 
---@localization(locale="ruRU", namespace="Localization", format="lua_additive_table", table-name="_NPCScan.L", handle-unlocalized="comment",  handle-subnamespaces="none")@
+--@localization(locale="ruRU", namespace="Localization", format="lua_additive_table", table-name="private.L", handle-unlocalized="comment", handle-subnamespaces="none")@
+--@localization(locale="ruRU", namespace="NPCs", format="lua_additive_table", table-name="private.L.NPCs", handle-unlocalized="comment", handle-subnamespaces="none")@
 
-
---Loads npc id's into a temp file to convert strings into numbers
-local temp = {}
-
---@localization(locale="ruRU", namespace="NPCs", format="lua_additive_table", table-name="temp", handle-unlocalized="comment",  handle-subnamespaces="none")@
-
-for ID, Name in pairs(temp) do
-	_NPCScan.L.NPCs[tonumber(ID)] = Name
-end
 
 _G[ "BINDING_NAME_CLICK _NPCScanButton:LeftButton" ] = [=[Выбрать последнее из найденных существ
 |cff808080(Используйте когда _NPCScan известит Вас)|r]=];

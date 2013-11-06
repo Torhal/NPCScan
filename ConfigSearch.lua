@@ -838,7 +838,7 @@ do
 		if not npc_id then
 			return
 		end
-		SetSelectedID(npc_id, L.NPCs[npc_id],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
+		SetSelectedID(npc_id, L.NPCs[tostring(npc_id)],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
 		current_tab = achievement_id
 		end
 
@@ -849,7 +849,7 @@ do
 		if not npc_id then
 			return
 		end
-		SetSelectedID(npc_id, L.NPCs[npc_id],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
+		SetSelectedID(npc_id, L.NPCs[tostring(npc_id)],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
 		current_tab = "IGNORE"
 		end
 
