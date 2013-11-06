@@ -5,19 +5,29 @@
 private = select( 2, ... )
 
 -- See http://wow.curseforge.com/addons/npcscan/localization/enUS/
-private.L  = setmetatable(
-  {NPCs = {},
-  }, -- empty table
-  {
-    __index = function(self, key) -- line 8
-      rawset(self, key, key)
-      return key
-    end
-  }
+private.L  = setmetatable({
+		NPCs = {},
+	}, -- empty table
+	{
+		__index = function(self, key) -- line 8
+			rawset(self, key, key)
+			return key
+		end
+	}
 )
 
---@localization(locale="enUS", namespace="Localization", format="lua_additive_table", table-name="private.L", handle-unlocalized="comment", escape-non-ascii="true",handle-subnamespaces="none")@
---@localization(locale="enUS", namespace="NPCs ", format="lua_additive_table", table-name="private.L.NPCs", handle-unlocalized="comment", escape-non-ascii="true",handle-subnamespaces="none")@
+--@localization(locale="ruRU", namespace="Localization", format="lua_additive_table", table-name="private.L", handle-unlocalized="comment", escape-non-ascii="true",handle-subnamespaces="none")@
+
+
+--Loads npc id's into a temp file to convert strings into numbers
+local temp = {}
+
+--@localization(locale="ruRU", namespace="NPCs ", format="lua_additive_table", table-name="temp", handle-unlocalized="comment", escape-non-ascii="true",handle-subnamespaces="none")@
+
+for ID, Name in pairs(temp) do
+	private.L.NPCs[tonumber(ID)] = Name
+end
+
 SLASH__NPCSCAN1 = "/npcscan";
 SLASH__NPCSCAN2 = "/scan";
 
