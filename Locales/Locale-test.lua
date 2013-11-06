@@ -5,15 +5,9 @@
 private = select( 2, ... )
 
 -- See http://wow.curseforge.com/addons/npcscan/localization/enUS/
-private.L = setmetatable( {
-} );
-
-
-
-
-
-MyLocalization = setmetatable(
-  {}, -- empty table
+private.L  = setmetatable(
+  {NPCs = {},
+  }, -- empty table
   {
     __index = function(self, key) -- line 8
       rawset(self, key, key)
@@ -22,7 +16,8 @@ MyLocalization = setmetatable(
   }
 )
 
---@localization(locale="enUS", format="lua_additive_table", table-name="MyLocalization", handle-unlocalized="english", escape-non-ascii="true")@
+--@localization(locale="enUS", namespace="Localization", format="lua_additive_table", table-name="private.L", handle-unlocalized="comment", escape-non-ascii="true",handle-subnamespaces="none")@
+--@localization(locale="enUS", namespace="NPCs ", format="lua_additive_table", table-name="private.L.NPCs", handle-unlocalized="comment", escape-non-ascii="true",handle-subnamespaces="none")@
 SLASH__NPCSCAN1 = "/npcscan";
 SLASH__NPCSCAN2 = "/scan";
 
