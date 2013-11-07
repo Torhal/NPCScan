@@ -65,18 +65,6 @@ private.Options = {
 private.OptionsCharacter = {
 	Version = DB_VERSION,
 	Achievements = {},
-	AchievementsAddFound = true,
-	AlertSoundUnmute = nil,
-	AlertSound = nil, -- Default sound
-	CacheWarnings = true,
-	FlightSupress = true,
-	Modules = {},
-	ModulesAlpha = {},
-	ModulesExtra = {},
-	ModulesSaved = {},
-	NPCWorldIDs = {},
-	TrackBeasts = true,
-	TrackRares = true,
 }
 
 
@@ -118,11 +106,6 @@ private.OptionsCharacterDefault = {
 	AlertSound = nil, -- Default sound
 	CacheWarnings = true,
 	FlightSupress = true,
-	Modules = {},
-	ModulesSaved = {},
-	ModulesAlpha = {},
-	ModulesExtra = {},
-	NPCWorldIDs = {},
 	TrackBeasts = true,
 	TrackRares = true,
 }
