@@ -118,6 +118,7 @@ do
 		ULDUM_WATCHER_LEFT = [[creature\uldumwatcher\uldumwatcherleft.m2]],
 		WHALESHARK = [[creature\whaleshark\whaleshark.m2]],
 		WIGHT = [[creature\wight\wight.m2]],
+		UNDEAD_SHIP = [[world\expansion02\doodads\ships\nd_ship_ud_bg.m2]],
 	}
 
 
@@ -129,6 +130,7 @@ do
 		[MODELS.ULDUM_WATCHER_LEFT] = "|||16", -- Akma'hat
 		[MODELS.WHALESHARK] = ".7|-.5", -- Mobus
 		[MODELS.WIGHT] = ".7", -- Griegen
+		[MODELS.UNDEAD_SHIP] = ".15|0|15", -- Dread Ship Vazuvius
 	}
 end -- do-block
 
