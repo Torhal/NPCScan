@@ -16,8 +16,8 @@ private.L = setmetatable( {
 	}, { __index = private.L.NPCs; } );
 }, { __index = private.L; } );
 
---@localization(locale="itIT", namespace="Localization", format="lua_additive_table", table-name="private.L", handle-unlocalized="comment", handle-subnamespaces="none")@
 --@localization(locale="itIT", namespace="NPCs", format="lua_additive_table", table-name="private.L.NPCs", handle-unlocalized="comment", handle-subnamespaces="none")@
+--@localization(locale="itIT", namespace="Localization", format="lua_additive_table", table-name="private.L", handle-unlocalized="comment", handle-subnamespaces="none")@
 
 _G[ "BINDING_NAME_CLICK _NPCScanButton:LeftButton" ] = [=[Targetta l'ultimo NPC trovato
 |cff808080(Usato da _NPCScan per avvisarti)|r]=];
