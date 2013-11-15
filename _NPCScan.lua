@@ -702,7 +702,7 @@ do
 			if _G.IsResting() then
 				PetList[npc_id] = npc_name -- Suppress error message until the player stops resting
 			else
-				local expected_zone_name = _G.GetMapNameByID(expected_zone_id)
+				local expected_zone_name = expected_zone_id and _G.GetMapNameByID(expected_zone_id) or nil
 				if not expected_zone_name then -- GetMapNameByID returns nil for continent maps
 					_G.SetMapByID(expected_zone_id)
 
