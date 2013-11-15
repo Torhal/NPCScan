@@ -667,7 +667,7 @@ do
 		UpdateButtonStates()
 
 		for npc_id, npc_name in pairs(npc_data) do
-			if not _NPCScanOptions.IgnoreList.NPCs[npc_id] then
+			if not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] then
 				local map_name = map_names[npc_id]
 
 				local new_row = panel.table:AddRow(npc_id,
@@ -721,7 +721,7 @@ do
 		local achievement = private.ACHIEVEMENTS[tab.identifier]
 
 		for criteria_id, npc_id in pairs(achievement.Criteria) do
-			if not _NPCScanOptions.IgnoreList.NPCs[npc_id] then
+			if not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] then
 				if npc_id > 1 then
 					local npc_name, _, is_completed = _G.GetAchievementCriteriaInfoByID(tab.identifier, criteria_id)
 					local map_name = private.NPC_ID_TO_MAP_NAME[npc_id]
