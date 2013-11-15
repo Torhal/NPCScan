@@ -296,7 +296,6 @@ local NPC_DATA = {
 	[8204]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.TANARIS,                     is_tamable = true  ,               is_achievement = false }, -- Soriid the Devourer
 	[8205]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.TANARIS,                     is_tamable = true  ,               is_achievement = false }, -- Haarka the Ravenous
 	[8207]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.TANARIS,                     is_tamable = true  ,               is_achievement = false }, -- Emberwing
-	--[8208]  = { world_id = ZN.KALIMDOR,                 map_name = ZN.TANARIS,                     is_tamable = true  ,               is_achievement = false }, -- Murderous Blisterpaw
 	[8210]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.THE_HINTERLANDS,             is_tamable = false ,               is_achievement = false }, -- Razortalon
 	[8211]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.THE_HINTERLANDS,             is_tamable = true  ,               is_achievement = false }, -- Old Cliff Jumper
 	[8212]  = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.THE_HINTERLANDS,             is_tamable = false ,               is_achievement = false }, -- The Reak
