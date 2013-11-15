@@ -387,7 +387,7 @@ local function AchievementActivate(achievement)
 
 	for criteria_id, npc_id in pairs(achievement.Criteria) do
 	--ignore list check
-		if not _NPCScanOptions.IgnoreList.NPCs[npc_id] then
+		if not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] then
 			AchievementNPCActivate(achievement, npc_id, criteria_id)
 		else
 		--print("ignoreing "..npc_id)
@@ -566,7 +566,7 @@ function private.SetAlertSound(alert_sound)
 	if alert_sound ~= private.OptionsCharacter.AlertSound then
 		private.OptionsCharacter.AlertSound = alert_sound
 
-		_G.UIDropDownMenu_SetText(private.Config.alert_sound_dropdown, alert_sound == nil and L.CONFIG_ALERT_SOUND_DEFAULT or alert_sound)
+		_G.UIDropDownMenu_SetText(private.Config.alert_sound_dropdown, alert_sound == nil and _G.MUTE or alert_sound)
 		return true
 	end
 end

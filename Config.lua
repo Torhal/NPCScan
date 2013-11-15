@@ -108,7 +108,7 @@ alert_sound_dropdown.tooltipText = L.CONFIG_ALERT_SOUND_DESC
 alert_sound_dropdown:SetScript("OnEnter", panel.ControlOnEnter)
 alert_sound_dropdown:SetScript("OnLeave", _G.GameTooltip_Hide)
 
-_G.UIDropDownMenu_SetText(alert_sound_dropdown, L.CONFIG_ALERT_SOUND_DEFAULT)
+_G.UIDropDownMenu_SetText(alert_sound_dropdown, _G.MUTE)
 _G.UIDropDownMenu_JustifyText(alert_sound_dropdown, "LEFT")
 
 
@@ -175,7 +175,7 @@ do
 
 		if level == 1 then
 			info.func = Entry_OnSelect
-			info.text = L.CONFIG_ALERT_SOUND_DEFAULT
+			info.text = _G.MUTE
 			info.checked = current_sound == nil
 			_G.UIDropDownMenu_AddButton(info, level)
 
