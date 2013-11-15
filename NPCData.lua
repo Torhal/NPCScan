@@ -506,7 +506,7 @@ local NPC_DATA = {
 	[32481] = { world_id = ZN.NORTHREND,                map_name = ZN.SHOLAZAR_BASIN,              is_tamable = true  ,               is_achievement = true  }, -- Aotona
 	[32485] = { world_id = ZN.NORTHREND,                map_name = ZN.SHOLAZAR_BASIN,              is_tamable = true  ,               is_achievement = true  }, -- King Krush
 	[32487] = { world_id = ZN.NORTHREND,                map_name = ZN.ICECROWN,                    is_tamable = false ,               is_achievement = true  }, -- Putridus the Ancient
-	[32491] = { world_id = ZN.NORTHREND,                map_name = ZN.THE_STORM_PEAKS,             is_tamable = false ,               is_achievement = true  }, -- Time-Lost Proto-Drake
+	[32491] = { world_id = ZN.NORTHREND,                map_name = ZN.THE_STORM_PEAKS,             is_tamable = false ,               is_achievement = false }, -- Time-Lost Proto-Drake
 	[32495] = { world_id = ZN.NORTHREND,                map_name = ZN.ICECROWN,                    is_tamable = false ,               is_achievement = true  }, -- Hildana Deathstealer
 	[32500] = { world_id = ZN.NORTHREND,                map_name = ZN.THE_STORM_PEAKS,             is_tamable = false ,               is_achievement = true  }, -- Dirkee
 	[32501] = { world_id = ZN.NORTHREND,                map_name = ZN.ICECROWN,                    is_tamable = false ,               is_achievement = true  }, -- High Thane Jorfus
@@ -896,7 +896,7 @@ local NPC_DATA = {
 	--[73293] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = false  }, -- Whizzig
 	[73666] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Archiereus of Flame
 	[73704] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Stinkbraid
-	[73854] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Cranegnasher 
+	[73854] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Cranegnasher
 }
 
 
