@@ -71,16 +71,8 @@ private.OptionsCharacter = {
 private.OptionsDefault = {
 	Version = DB_VERSION,
 	NPCs = {
-		[50409] = private.L.NPCs["50409"],--"Mysterious Camel Figurine",
-		[50410] = private.L.NPCs["50410"],--"Mysterious Camel Figurine",
-		[64004] = private.L.NPCs["64004"],--"Ghostly Pandaren Fisherman",
-		[64191] = private.L.NPCs["64191"], --"Ghostly Pandaren Craftsman",
 	},
 	NPCWorldIDs = {
-		[50409] = private.ZONE_NAMES.KALIMDOR,
-		[50410] = private.ZONE_NAMES.KALIMDOR,
-		[64004] = private.ZONE_NAMES.PANDARIA,
-		[64191] = private.ZONE_NAMES.PANDARIA,
 	},
 	IgnoreList = {
 		NPCs = {},

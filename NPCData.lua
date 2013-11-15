@@ -617,8 +617,6 @@ local NPC_DATA = {
 	[50364] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = false ,               is_achievement = true  }, -- Nal'lak the Ripper
 	[50370] = { world_id = ZN.KALIMDOR,                 map_name = ZN.SILITHUS,                    is_tamable = true  ,               is_achievement = false }, -- Karapax
 	[50388] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false ,               is_achievement = true  }, -- Torik-Ethis
-	--[50409] = { world_id = ZN.KALIMDOR,                 map_name = ZN.ULDUM,                       is_tamable = false ,               is_achievement = false }, -- Mysterious Camel Figurine
-	--[50410] = { world_id = ZN.KALIMDOR,                 map_name = ZN.ULDUM,                       is_tamable = false ,               is_achievement = false }, -- Mysterious Camel Figurine
 	[50724] = { world_id = ZN.KALIMDOR,                 map_name = ZN.FELWOOD,                     is_tamable = true  ,               is_achievement = false }, -- Spinecrawl
 	[50725] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true  ,               is_achievement = false }, -- Azelisk
 	[50726] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BADLANDS,                    is_tamable = true  ,               is_achievement = false }, -- Kalixx
@@ -818,8 +816,6 @@ local NPC_DATA = {
 	[58817] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false ,               is_achievement = true  }, -- Spirit of Lao-Fe
 	[58949] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false ,               is_achievement = true  }, -- Bai-Jin the Butcher
 	[59369] = { world_id = ZN.SCHOLOMANCE,              map_name = ZN.SCHOLOMANCE,                 is_tamable = false ,               is_achievement = false }, -- Doctor Theolen Krastinov
-	--[60491] = { world_id = ZN.PANDARIA,                 map_name = ZN.KUN_LAI_SUMMIT,              is_tamable = false ,               is_achievement = false }, -- Sha of Anger
-	--[62346] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = false ,               is_achievement = false }, -- Galleon
 	[62880] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false ,               is_achievement = true  }, -- Gochao the Ironfist
 	[62881] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false ,               is_achievement = true  }, -- Gaohun the Soul-Severer
 	[63101] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false ,               is_achievement = true  }, -- General Temuja
@@ -830,8 +826,6 @@ local NPC_DATA = {
 	[63695] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false ,               is_achievement = true  }, -- Baolai the Immolator
 	[63977] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false ,               is_achievement = true  }, -- Vyraxxis
 	[63978] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false ,               is_achievement = true  }, -- Kri'chon
-	--[64004] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = false ,               is_achievement = false }, -- Ghostly Pandaren Fisherman
-	--[64191] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALLEY_OF_THE_FOUR_WINDS,    is_tamable = false ,               is_achievement = false }, -- Ghostly Pandaren Craftsman
 	[68317] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false ,               is_achievement = false }, -- Mavis Harms
 	[68318] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false ,               is_achievement = false }, -- Dalan Nightbreaker
 	[68319] = { world_id = ZN.PANDARIA,                 map_name = ZN.KRASARANG_WILDS,             is_tamable = false ,               is_achievement = false }, -- Disha Fearwarden
