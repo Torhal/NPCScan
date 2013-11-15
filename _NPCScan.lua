@@ -1051,7 +1051,7 @@ do
 			end
 		end,
 		--@debug@
-		DATADUMP = function()
+		DUMP = function()
 			private.TextDump = private.TextDump or _G.LibStub("LibTextDump-1.0"):New(FOLDER_NAME)
 			private.DumpNPCData()
 		end,
