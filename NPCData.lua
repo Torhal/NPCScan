@@ -893,7 +893,7 @@ local NPC_DATA = {
 	[73279] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Evermaw
 	[73281] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Dread Ship Vazuvius
 	[73282] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Garnia
-	--[73293] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = false  }, -- Whizzig
+	[73293] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = false }, -- Whizzig
 	[73666] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Archiereus of Flame
 	[73704] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Stinkbraid
 	[73854] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false ,               is_achievement = true  }, -- Cranegnasher
