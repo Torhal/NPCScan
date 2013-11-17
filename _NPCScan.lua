@@ -558,7 +558,7 @@ function private.SetAlertSound(alert_sound)
 	if alert_sound ~= private.OptionsCharacter.AlertSound then
 		private.OptionsCharacter.AlertSound = alert_sound
 
-		_G.UIDropDownMenu_SetText(private.Config.alert_sound_dropdown, alert_sound == nil and _G.MUTE or alert_sound)
+		_G.UIDropDownMenu_SetText(private.Config.alert_sound_dropdown, alert_sound == nil and L.CONFIG_ALERT_SOUND_DEFAULT or alert_sound)
 		return true
 	end
 end

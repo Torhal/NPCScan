@@ -815,6 +815,7 @@ select( 2, ... ).L = setmetatable( {
 	CMD_REMOVE = "REMOVE",
 	CMD_REMOVENOTFOUND_FORMAT = "NPC |cff808080“%s”|r not found.",
 	CONFIG_ALERT = "Alert Options",
+	CONFIG_ALERT_SOUND_DEFAULT = "|cffffd200Default|r",
 	CONFIG_ALERT_SOUND = "Alert sound file",
 	CONFIG_ALERT_SOUND_DESC = "Choose the alert sound to play when an NPC is found.  Additional sounds can be added through |cff808080“SharedMedia”|r addons.",
 	CONFIG_ALERT_UNMUTE = "Unmute for alert sound",
