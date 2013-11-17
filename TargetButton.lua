@@ -15,6 +15,7 @@ local math = _G.math
 -- AddOn namespace.
 -------------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
+local L = private.L
 
 local target_button = _G.CreateFrame("Button", "_NPCScanButton", _G.UIParent, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate")
 target_button:Hide()
@@ -159,11 +160,13 @@ function target_button.PlaySound(sound_name)
 	end
 
 	if not sound_name then
-		_G.PlaySoundFile([[Sound\Event Sounds\Event_wardrum_ogre.wav]], "Master")
-		_G.PlaySoundFile([[Sound\Events\scourge_horn.wav]], "Master")
+		_G.PlaySoundFile([[Sound\Event Sounds\Event_wardrum_ogre.wav]], "SFX")
+		_G.PlaySoundFile([[Sound\Events\scourge_horn.wav]], "SFX")
+	elseif sound_name == L.CONFIG_ALERT_SOUND_DEFAULT.."1" then
+		_G.PlaySoundFile([[Sound\Events\gruntling_horn_bb.wav]])
 	else
 		local LSM = _G.LibStub("LibSharedMedia-3.0")
-		_G.PlaySoundFile(LSM:Fetch(LSM.MediaType.SOUND, sound_name), "Master")
+		_G.PlaySoundFile(LSM:Fetch(LSM.MediaType.SOUND, sound_name), "SFX")
 	end
 end
 
