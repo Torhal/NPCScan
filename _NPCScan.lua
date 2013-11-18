@@ -98,6 +98,7 @@ private.OptionsCharacterDefault = {
 	AlertSound = nil, -- Default sound
 	CacheWarnings = true,
 	FlightSupress = true,
+	TargetIcon = 8, --Skull
 	TrackBeasts = true,
 	TrackRares = true,
 }
@@ -563,6 +564,17 @@ function private.SetAlertSound(alert_sound)
 	end
 end
 
+--- Sets the icon to display over found NPC.
+
+function private.SetTargetIcon(icon)
+	if icon == nil then icon = 8 end
+		private.OptionsCharacter.TargetIcon = icon
+		local iconinfo = UnitPopupButtons["RAID_TARGET_"..icon]
+		local text = iconinfo.text
+		local colorCode = string.format("|cFF%02x%02x%02x", iconinfo.color.r*255, iconinfo.color.g*255, iconinfo.color.b*255);
+
+		_G.UIDropDownMenu_SetText(private.Config.alert_icon_dropdown, colorCode..text)
+end
 
 --- Enables Blocking alerts while on taxi.
 -- @return True if changed.
@@ -634,6 +646,7 @@ function private.Synchronize(options, character_options)
 	private.SetPrintTime(options.PrintTime)
 	private.SetAchievementsAddFound(character_options.AchievementsAddFound)
 	private.SetAlertSoundUnmute(character_options.AlertSoundUnmute)
+	private.SetTargetIcon(character_options.TargetIcon)
 	private.SetAlertSound(character_options.AlertSound)
 	private.SetBlockFlightScan(character_options.FlightSupress)
 	private.SetRareMob("BEASTS", character_options.TrackBeasts)

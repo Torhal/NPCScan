@@ -63,9 +63,55 @@ function print_time_checkbox.setFunc(is_enabled)
 	private.SetPrintTime(is_enabled == "1")
 end
 
+local alert_icon_dropdown = _G.CreateFrame("Frame", "_NPCScanConfigIconDropdown", panel, "UIDropDownMenuTemplate")
+alert_icon_dropdown:SetPoint("TOPLEFT", panel.print_time_checkbox , "BOTTOMLEFT", -10, -20)
+alert_icon_dropdown:SetPoint("RIGHT", -12, 0)
+alert_icon_dropdown:EnableMouse(true)
+alert_icon_dropdown.tooltipText = L.CONFIG_ALERT_SOUND_DESC
+
+_G.UIDropDownMenu_JustifyText(alert_icon_dropdown, "LEFT")
+
+panel.alert_icon_dropdown = alert_icon_dropdown
+do
+	local function Icon_Entry_OnSelect(info_table, icon)
+		private.SetTargetIcon(icon)
+	end
+
+
+	function alert_icon_dropdown:initialize(level)
+		if not level then
+			return
+		end
+
+		local current_icon = private.OptionsCharacter.TargetIcon
+		local info = _G.UIDropDownMenu_CreateInfo()
+
+		if level == 1 then
+			info.func = Icon_Entry_OnSelect
+			local index = 1
+			while index < 9 do
+				local iconinfo = UnitPopupButtons["RAID_TARGET_"..index]
+				info.text = iconinfo.text
+				info.arg1 = counter
+				info.checked = current_icon == index
+				info.icon = "Interface\\TargetingFrame\\UI-RaidTargetingIcon_"..index
+				info.colorCode = string.format("|cFF%02x%02x%02x", iconinfo.color.r*255, iconinfo.color.g*255, iconinfo.color.b*255);
+
+				_G.UIDropDownMenu_AddButton(info, level)
+				index = index + 1
+			end
+			
+		end
+	end
+end -- do-block
+
+local alert_icon_label = alert_icon_dropdown:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+alert_icon_label:SetPoint("BOTTOMLEFT", alert_icon_dropdown, "TOPLEFT", 16, 3)
+alert_icon_label:SetText(_G.RAID_TARGET_ICON)
+
 
 local alert_options_panel = _G.CreateFrame("Frame", "_NPCScanConfigAlert", panel, "OptionsBoxTemplate")
-alert_options_panel:SetPoint("TOPLEFT", print_time_checkbox, "BOTTOMLEFT", 0, -16)
+alert_options_panel:SetPoint("TOPLEFT", alert_icon_dropdown, "BOTTOMLEFT", 0, -16)
 alert_options_panel:SetPoint("BOTTOMRIGHT", -14, 16)
 _G[alert_options_panel:GetName() .. "Title"]:SetText(L.CONFIG_ALERT)
 
@@ -179,9 +225,9 @@ do
 			info.checked = current_sound == nil
 			_G.UIDropDownMenu_AddButton(info, level)
 
-			info.text = L.CONFIG_ALERT_SOUND_DEFAULT.."1"
-			info.arg1 = L.CONFIG_ALERT_SOUND_DEFAULT.."1"
-			info.checked = current_sound == L.CONFIG_ALERT_SOUND_DEFAULT.."1"
+			info.text = L.CONFIG_ALERT_SOUND_DEFAULT.." 2"
+			info.arg1 = L.CONFIG_ALERT_SOUND_DEFAULT.." 2"
+			info.checked = current_sound == L.CONFIG_ALERT_SOUND_DEFAULT.." 2"
 
 			_G.UIDropDownMenu_AddButton(info, level)
 

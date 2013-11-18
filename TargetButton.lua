@@ -104,7 +104,6 @@ target_button.Flash = _G.CreateFrame("Frame")
 target_button.Flash.LoopCountMax = 3
 
 target_button.RotationRate = math.pi / 4
-target_button.RaidTargetIcon = 4 -- Green triangle
 
 target_button.ModelDefaultScale = 0.75
 --- [ Model:lower() ] = "[Scale]|[X]|[Y]|[Z]", where any parameter can be left empty
@@ -162,7 +161,7 @@ function target_button.PlaySound(sound_name)
 	if not sound_name then
 		_G.PlaySoundFile([[Sound\Event Sounds\Event_wardrum_ogre.wav]], "SFX")
 		_G.PlaySoundFile([[Sound\Events\scourge_horn.wav]], "SFX")
-	elseif sound_name == L.CONFIG_ALERT_SOUND_DEFAULT.."1" then
+	elseif sound_name == L.CONFIG_ALERT_SOUND_DEFAULT.." 2" then
 		_G.PlaySoundFile([[Sound\Events\gruntling_horn_bb.wav]])
 	else
 		local LSM = _G.LibStub("LibSharedMedia-3.0")
@@ -285,8 +284,8 @@ do
 	function target_button:PLAYER_TARGET_CHANGED()
 		local ID = self.ID
 		if TargetIsFoundRare(ID) then
-			if _G.GetRaidTargetIndex("target") ~= self.RaidTargetIcon and (not _G.IsInRaid() or (_G.UnitIsGroupAssistant("player") or _G.UnitIsGroupLeader("player"))) then
-				_G.SetRaidTarget("target", self.RaidTargetIcon)
+			if _G.GetRaidTargetIndex("target") ~= private.OptionsCharacter.TargetIcon and (not _G.IsInRaid() or (_G.UnitIsGroupAssistant("player") or _G.UnitIsGroupLeader("player"))) then
+				_G.SetRaidTarget("target", private.OptionsCharacter.TargetIcon )
 			end
 
 			if type(ID) == "number" then -- Update model with more accurate visual
