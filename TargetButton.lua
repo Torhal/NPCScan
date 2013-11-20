@@ -159,13 +159,13 @@ function target_button.PlaySound(sound_name)
 	end
 
 	if not sound_name then
-		_G.PlaySoundFile([[Sound\Event Sounds\Event_wardrum_ogre.wav]], "SFX")
-		_G.PlaySoundFile([[Sound\Events\scourge_horn.wav]], "SFX")
+		_G.PlaySoundFile([[Sound\Event Sounds\Event_wardrum_ogre.wav]], "Master")
+		_G.PlaySoundFile([[Sound\Events\scourge_horn.wav]], "Master")
 	elseif sound_name == L.CONFIG_ALERT_SOUND_DEFAULT.." 2" then
-		_G.PlaySoundFile([[Sound\Events\gruntling_horn_bb.wav]])
+		_G.PlaySoundFile([[Sound\Events\gruntling_horn_bb.wav]], "Master")
 	else
 		local LSM = _G.LibStub("LibSharedMedia-3.0")
-		_G.PlaySoundFile(LSM:Fetch(LSM.MediaType.SOUND, sound_name), "SFX")
+		_G.PlaySoundFile(LSM:Fetch(LSM.MediaType.SOUND, sound_name), "Master")
 	end
 end
 

@@ -26,6 +26,7 @@ private.Frame = _G.CreateFrame("Frame")
 private.Frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 private.Frame:RegisterEvent("PLAYER_LEAVING_WORLD")
 private.Frame:RegisterEvent("PLAYER_UPDATE_RESTING")
+--private.Frame:RegisterEvent("VIGNETTE_ADDED")  --Disabled until Blizzard fixes bug with GetVignetteInfoFromInstanceID
 private.Frame:SetScript("OnEvent", function(self, event_name, ...)
 	if self[event_name] then
 		return self[event_name](self, event_name, ...)
@@ -1024,6 +1025,21 @@ function private.Frame:ZONE_CHANGED_NEW_AREA(event_name)
 	self[event_name] = nil
 
 	private.Updater:SetScript("OnLoop", private.Updater.OnLoop)
+end
+
+-- Vignette alert,  Currently does not work due to bugs with instanceid assignment
+-- Will revisit again when 5.4.2 is released to see if issue is resolved
+-- Refrence: http://wowpedia.org/API_C_Vignettes.GetVignetteInfoFromInstanceID
+function private.Frame:VIGNETTE_ADDED (event, instanceid, ...)
+	if not instanceid then
+		return
+	end
+	local x, y, name, iconid = C_Vignettes.GetVignetteInfoFromInstanceID(instanceid)
+	-- iconid seems to be 40:chests, 41:mobs
+	if not name then
+		return
+	end
+--
 end
 
 

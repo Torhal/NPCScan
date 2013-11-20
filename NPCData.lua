@@ -723,8 +723,8 @@ local NPC_DATA = {
 	[62881] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Gaohun the Soul-Severer
 	[63101] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- General Temuja
 	[63240] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Shadowmaster Sydow
-	[63509] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Wulon
-	[63510] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Wulon
+	[63509] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = true,  is_achievement = true  }, -- Wulon
+	[63510] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = true,  is_achievement = true  }, -- Wulon
 	[63691] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Huo-Shuang
 	[63695] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Baolai the Immolator
 	[63977] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Vyraxxis
@@ -799,6 +799,7 @@ local NPC_DATA = {
 private.NPC_ID_TO_MAP_NAME = {}
 private.NPC_ID_TO_NAME = {}
 private.NPC_ID_TO_WORLD_NAME = {}
+private.NPC_NAME_TO_ID = {}
 
 
 private.TAMABLE_ID_TO_MAP_NAME = {}
@@ -815,6 +816,7 @@ for npc_id, data in pairs(NPC_DATA) do
 	private.NPC_ID_TO_MAP_NAME[npc_id] = data.map_name
 	private.NPC_ID_TO_NAME[npc_id] = L.NPCs[tostring(npc_id)]
 	private.NPC_ID_TO_WORLD_NAME[npc_id] = data.world_id
+	private.NPC_NAME_TO_ID[L.NPCs[tostring(npc_id)]] = npc_id
 
 	if data.is_tamable  and not data.is_achievement then
 		private.TAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
