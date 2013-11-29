@@ -92,7 +92,7 @@ do
 			while index < 9 do
 				local iconinfo = UnitPopupButtons["RAID_TARGET_"..index]
 				info.text = iconinfo.text
-				info.arg1 = counter
+				info.arg1 = index
 				info.checked = current_icon == index
 				info.icon = "Interface\\TargetingFrame\\UI-RaidTargetingIcon_"..index
 				info.colorCode = string.format("|cFF%02x%02x%02x", iconinfo.color.r*255, iconinfo.color.g*255, iconinfo.color.b*255);
