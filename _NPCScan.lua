@@ -26,7 +26,6 @@ private.Frame = _G.CreateFrame("Frame")
 private.Frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 private.Frame:RegisterEvent("PLAYER_LEAVING_WORLD")
 private.Frame:RegisterEvent("PLAYER_UPDATE_RESTING")
---private.Frame:RegisterEvent("VIGNETTE_ADDED")  --Disabled until Blizzard fixes bug with GetVignetteInfoFromInstanceID
 private.Frame:SetScript("OnEvent", function(self, event_name, ...)
 	if self[event_name] then
 		return self[event_name](self, event_name, ...)
@@ -43,7 +42,7 @@ private.Updater:SetLooping("REPEAT")
 -------------------------------------------------------------------------------
 -- Constants.
 -------------------------------------------------------------------------------
-local DB_VERSION = 2
+local DB_VERSION = 3
 local ISLE_OF_THUNDER_MAP_ID = 1064
 local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
 local PLAYER_FACTION = _G.UnitFactionGroup("player")
@@ -72,8 +71,16 @@ private.OptionsCharacter = {
 private.OptionsDefault = {
 	Version = DB_VERSION,
 	NPCs = {
+		[50409] = private.L.NPCs["50409"],--"Mysterious Camel Figurine",
+		[50410] = private.L.NPCs["50410"],--"Mysterious Camel Figurine",
+		[64004] = private.L.NPCs["64004"],--"Ghostly Pandaren Fisherman",
+		[64191] = private.L.NPCs["64191"], --"Ghostly Pandaren Craftsman",
 	},
 	NPCWorldIDs = {
+		[50409] = private.ZONE_NAMES.KALIMDOR,
+		[50410] = private.ZONE_NAMES.KALIMDOR,
+		[64004] = private.ZONE_NAMES.PANDARIA,
+		[64191] = private.ZONE_NAMES.PANDARIA,
 	},
 	IgnoreList = {
 		NPCs = {},
@@ -102,6 +109,7 @@ private.OptionsCharacterDefault = {
 	TargetIcon = 8, --Skull
 	TrackBeasts = true,
 	TrackRares = true,
+	TrackVignettes = false,
 }
 
 
@@ -585,6 +593,14 @@ function private.SetBlockFlightScan(enable)
 	return enable
 end
 
+--- Enables Vignette tracking.
+-- @return True if changed.
+function private.SetVignetteScan(enable)
+	private.OptionsCharacter.TrackVignettes = enable
+	private.Config.Search.viginette_scan_checkbox:SetChecked(enable)
+	return enable
+end
+
 
 local IsDefaultNPCValid
 do
@@ -649,6 +665,7 @@ function private.Synchronize(options, character_options)
 	private.SetAlertSoundUnmute(character_options.AlertSoundUnmute)
 	private.SetTargetIcon(character_options.TargetIcon)
 	private.SetAlertSound(character_options.AlertSound)
+	private.SetVignetteScan(character_options.TrackVignettes)
 	private.SetBlockFlightScan(character_options.FlightSupress)
 	private.SetRareMob("BEASTS", character_options.TrackBeasts)
 	private.SetRareMob("RARENPC", character_options.TrackRares)
@@ -1026,22 +1043,6 @@ function private.Frame:ZONE_CHANGED_NEW_AREA(event_name)
 
 	private.Updater:SetScript("OnLoop", private.Updater.OnLoop)
 end
-
--- Vignette alert,  Currently does not work due to bugs with instanceid assignment
--- Will revisit again when 5.4.2 is released to see if issue is resolved
--- Refrence: http://wowpedia.org/API_C_Vignettes.GetVignetteInfoFromInstanceID
-function private.Frame:VIGNETTE_ADDED (event, instanceid, ...)
-	if not instanceid then
-		return
-	end
-	local x, y, name, iconid = C_Vignettes.GetVignetteInfoFromInstanceID(instanceid)
-	-- iconid seems to be 40:chests, 41:mobs
-	if not name then
-		return
-	end
---
-end
-
 
 do
 	local SUBCOMMAND_FUNCS = {

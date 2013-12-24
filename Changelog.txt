@@ -1,3 +1,18 @@
+fixed ticket 34
+fixed ticket 37
+fixed ticket 38
+
+542
+added quid and athea to
+changed alert sound to not play if target button is displayed
+added ability to load coustom sounds via external file
+added vignette support
+readded ghostly pandarens and camel figures
+
+
+
+
+
 v5.2.1
 -Stopped Tamable Beasts and Default Rares from being displayed in the cache list when not being tracked.
 -Added warning for users that are running the unsupported _NPCScan.Autoadd

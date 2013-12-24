@@ -742,6 +742,7 @@ select( 2, ... ).L = setmetatable( {
 	["73293"] = "Whizzig",
 	["73666"] = "Archiereus of Flame",
 	["73704"] = "Stinkbraid",
+	["73854"] = "Cranegnasher",
 	["763"] = "Lost One Chieftain",
 	["7846"] = "Teremus the Devourer",
 	["79"] = "Narg the Taskmaster",
@@ -867,6 +868,8 @@ select( 2, ... ).L = setmetatable( {
 	TAMEDBEASTS = "Tameable Beasts",
 	TIME_FORMAT = "|cff808080[%H:%M:%S]|r ",
 	TOOLS_TITLE = "|cff808080Tools|r",
+	VIGNETTE_SCAN = "Show alerts for Vignette Mobs",
+	VIGNETTE_SCAN_DESC = "Show alerts for Vignette Mobs.  This is a Beta Feature:  There is currently no way to filter mobs, so it will always trigger even if mob not tracked or ignored.",
 
 	-- Phrases localized by default UI
 	FOUND_ZONE_UNKNOWN = UNKNOWN;

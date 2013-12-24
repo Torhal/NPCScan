@@ -134,7 +134,7 @@ panel_subtext:SetText(L.SEARCH_DESC)
 
 
 local add_found_checkbox = _G.CreateFrame("CheckButton", "_NPCScanSearchAchievementAddFoundCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
-add_found_checkbox:SetPoint("TOPLEFT", panel_subtext, "BOTTOMLEFT", -2, -8)
+add_found_checkbox:SetPoint("TOPLEFT", panel_subtext, "BOTTOMLEFT", -2, -32)
 add_found_checkbox.tooltipText = L.SEARCH_ACHIEVEMENTADDFOUND_DESC
 
 panel.add_found_checkbox = add_found_checkbox
@@ -149,9 +149,29 @@ function add_found_checkbox.setFunc(is_enabled)
 	end
 end
 
+local viginette_scan_checkbox = _G.CreateFrame("CheckButton", "_NPCScanVignetteScanCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
+viginette_scan_checkbox:SetPoint("BOTTOMLEFT", add_found_checkbox, "TOPLEFT", 0, 0)
+viginette_scan_checkbox.tooltipText = L.VIGNETTE_SCAN_DESC
 
-local block_flight_scan_checkbox = _G.CreateFrame("CheckButton", "_NPCScannerBlockFlightScanCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
-block_flight_scan_checkbox:SetPoint("BOTTOMLEFT", add_found_checkbox, "TOPLEFT", 0, 0)
+panel.viginette_scan_checkbox = viginette_scan_checkbox
+
+local viginette_scan_label = _G[viginette_scan_checkbox:GetName() .. "Text"]
+viginette_scan_label:SetText(L.VIGNETTE_SCAN)
+viginette_scan_checkbox:SetHitRectInsets(4, 4 - viginette_scan_label:GetStringWidth(), 4, 4)
+
+function viginette_scan_checkbox.setFunc()
+	if private.OptionsCharacter.TrackVignettes then
+		private.OptionsCharacter.TrackVignettes = false
+		panel.viginette_scan_checkbox:SetChecked(false)
+	else
+		private.OptionsCharacter.TrackVignettes = true
+		panel.viginette_scan_checkbox:SetChecked(true)
+	end
+end
+
+
+local block_flight_scan_checkbox = _G.CreateFrame("CheckButton", "_NPCScanBlockFlightScanCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
+block_flight_scan_checkbox:SetPoint("BOTTOMLEFT", viginette_scan_checkbox, "TOPLEFT", 0, 0)
 block_flight_scan_checkbox.tooltipText = L.BLOCKFLIGHTSCAN_DESC
 
 panel.block_flight_scan_checkbox = block_flight_scan_checkbox

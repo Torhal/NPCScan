@@ -601,7 +601,7 @@ local NPC_DATA = {
 	[50836] = { world_id = ZN.PANDARIA,                 map_name = ZN.DREAD_WASTES,                is_tamable = false, is_achievement = true  }, -- Ik-Ik the Nimble
 	[50837] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SWAMP_OF_SORROWS,            is_tamable = true,  is_achievement = false }, -- Kash
 	[50838] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BADLANDS,                    is_tamable = true,  is_achievement = false }, -- Tabbs
-	[50839] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = nil,                            is_tamable = true,  is_achievement = false }, -- Chromehound
+	[50839] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SEARING_GORGE,               is_tamable = true,  is_achievement = false }, -- Chromehound
 	[50840] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Major Nanners
 	[50842] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true,  is_achievement = false }, -- Magmagan
 	[50846] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SEARING_GORGE,               is_tamable = true,  is_achievement = false }, -- Slavermaw
@@ -684,7 +684,7 @@ local NPC_DATA = {
 	[51061] = { world_id = ZN.KALIMDOR,                 map_name = ZN.DUSTWALLOW_MARSH,            is_tamable = true,  is_achievement = false }, -- Roth-Salam
 	[51062] = { world_id = ZN.KALIMDOR,                 map_name = ZN.STONETALON_MOUNTAINS,        is_tamable = true,  is_achievement = false }, -- Khep-Re
 	[51063] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.ARATHI_HIGHLANDS,            is_tamable = true,  is_achievement = false }, -- Phalanax
-	[51066] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = nil,                            is_tamable = true,  is_achievement = false }, -- Crystalfang
+	[51066] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SEARING_GORGE,               is_tamable = true,  is_achievement = false }, -- Crystalfang
 	[51067] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.ARATHI_HIGHLANDS,            is_tamable = true,  is_achievement = false }, -- Glint
 	[51069] = { world_id = ZN.KALIMDOR,                 map_name = ZN.DUSTWALLOW_MARSH,            is_tamable = true,  is_achievement = false }, -- Scintillex
 	[51071] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SHIMMERING_EXPANSE,          is_tamable = false, is_achievement = false }, -- Captain Florence
@@ -714,8 +714,8 @@ local NPC_DATA = {
 	[58474] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = true,  is_achievement = true  }, -- Bloodtip
 	[58768] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Cracklefang
 	[58769] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Vicejaw
-	[58771] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Quid
-	[58778] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Aetha
+	[58771] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = false }, -- Quid
+	[58778] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = false }, -- Aetha
 	[58817] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Spirit of Lao-Fe
 	[58949] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Bai-Jin the Butcher
 	[59369] = { world_id = ZN.SCHOLOMANCE,              map_name = ZN.SCHOLOMANCE,                 is_tamable = false, is_achievement = false }, -- Doctor Theolen Krastinov
@@ -738,7 +738,7 @@ local NPC_DATA = {
 	[69099] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = false, is_achievement = false }, -- Nalak
 	[69161] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_GIANTS,              is_tamable = false, is_achievement = false }, -- Oondasta
 	[69664] = { world_id = ZN.PANDARIA,                 map_name = ZN.ISLE_OF_THUNDER,             is_tamable = false, is_achievement = false }, -- Mumta
-	[69768] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = false, is_achievement = true  }, -- Zandalari Warscout
+	[69768] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = false, is_achievement = false }, -- Zandalari Warscout
 	[69769] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = false, is_achievement = false }, -- Zandalari Warbringer
 	[69841] = { world_id = ZN.PANDARIA,                 map_name = ZN.TOWNLONG_STEPPES,            is_tamable = false, is_achievement = false }, -- Zandalari Warbringer
 	[69842] = { world_id = ZN.PANDARIA,                 map_name = ZN.DREAD_WASTES,                is_tamable = false, is_achievement = false }, -- Zandalari Warbringer
@@ -793,8 +793,8 @@ local NPC_DATA = {
 	[73293] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false, is_achievement = false }, -- Whizzig
 	[73666] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false, is_achievement = true  }, -- Archiereus of Flame
 	[73704] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false, is_achievement = true  }, -- Stinkbraid
+	[73854] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false, is_achievement = true  }, -- Cranegnasher
 }
-
 
 private.NPC_ID_TO_MAP_NAME = {}
 private.NPC_ID_TO_NAME = {}

@@ -141,6 +141,8 @@ end -- do-block
 -- Plays an alert sound, temporarily enabling sound if necessary.
 -- @param AlertSound A LibSharedMedia sound key, or nil to play the default.
 function target_button.PlaySound(sound_name)
+
+	if target_button:IsShown() then return end -- prevents sound alert from playing multiple times if target button is up
 	if private.OptionsCharacter.AlertSoundUnmute then
 		if not target_button.SoundEnableAllChanged and not _G.GetCVarBool("Sound_EnableAllSound") then
 			target_button.SoundEnableAllChanged = true
@@ -197,7 +199,6 @@ function target_button:SetNPC(ID, Name, Source)
 	end
 end
 
-
 -- Updates the button out of combat to target a given unit.
 -- @param ID A numeric NpcID or string UnitID.
 -- @param Name Localized name of the unit.  If ID is an NpcID, Name is used in the targeting macro.
@@ -226,7 +227,13 @@ function target_button:Update(ID, Name, Source)
 		Model:SetUnit(ID)
 		self:RegisterEvent("UNIT_MODEL_CHANGED")
 	end
-	self:SetAttribute("macrotext", "/cleartarget\n/targetexact " .. Name)
+
+	if Source == "Unknown Vignette" then
+		Model:SetDisplayInfo(28089)
+		self:SetAttribute("macrotext", private.macrotext)
+	else
+		self:SetAttribute("macrotext", "/cleartarget\n/targetexact " .. Name)
+	end
 	self:PLAYER_TARGET_CHANGED() -- Updates the target icon
 
 	self:Show()

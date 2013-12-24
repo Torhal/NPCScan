@@ -70,3 +70,4 @@ TargetButton.lua
 MapOverlays.lua
 Config.lua
 ConfigSearch.lua
+Vignette.lua
