@@ -17,6 +17,8 @@ local math = _G.math
 local FOLDER_NAME, private = ...
 local L = private.L
 
+local ALERT_SOUND_DELAY = 8 
+
 local target_button = _G.CreateFrame("Button", "_NPCScanButton", _G.UIParent, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate")
 target_button:Hide()
 target_button:SetPoint("BOTTOM", _G.UIParent, 0, 128)
@@ -140,9 +142,10 @@ end -- do-block
 -------------------------------------------------------------------------------
 -- Plays an alert sound, temporarily enabling sound if necessary.
 -- @param AlertSound A LibSharedMedia sound key, or nil to play the default.
+local AlertIsPlaying = false
 function target_button.PlaySound(sound_name)
 
-	if target_button:IsShown() then return end -- prevents sound alert from playing multiple times if target button is up
+	if AlertIsPlaying then return end -- prevents sound alert from playing multiple times if alert recently played
 	if private.OptionsCharacter.AlertSoundUnmute then
 		if not target_button.SoundEnableAllChanged and not _G.GetCVarBool("Sound_EnableAllSound") then
 			target_button.SoundEnableAllChanged = true
@@ -169,9 +172,24 @@ function target_button.PlaySound(sound_name)
 		local LSM = _G.LibStub("LibSharedMedia-3.0")
 		_G.PlaySoundFile(LSM:Fetch(LSM.MediaType.SOUND, sound_name), "Master")
 	end
+	AlertIsPlaying = true
 end
 
 
+--Timer function to clear AlertIsPlaying flag after a delay set by ALERT_SOUND_DELAY
+local AlertTimer = 0
+local AlertSoundUpdater = _G.CreateFrame("Frame")
+AlertSoundUpdater:Show()
+
+local function AlertSoundUpdater_OnUpdate(self,elapsed)
+	AlertTimer = AlertTimer + elapsed
+	if AlertTimer >= ALERT_SOUND_DELAY then
+		AlertTimer = 0
+		AlertIsPlaying = false
+	end
+end
+AlertSoundUpdater:SetScript("OnUpdate", AlertSoundUpdater_OnUpdate)
+ 
 -- Plays alerts and sets the targeting button if not in combat.
 -- If in combat, queues the button to appear when combat ends.
 -- @see NS:Update
