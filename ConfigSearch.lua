@@ -716,7 +716,7 @@ do
 
 
 	local function UpdateTameableTab(tab)
-		GeneralNPCUpdate(private.NPC_ID_TO_WORLD_NAME, private.NPC_ID_TO_MAP_NAME, private.TAMABLE_ID_TO_NAME)
+		GeneralNPCUpdate(private.NPC_ID_TO_WORLD_NAME, private.NPC_ID_TO_MAP_NAME, private.TAMABLE_NON_ACHIEVMENT_LIST)
 	end
 
 	local function UpdateIgnoreTab(tab)

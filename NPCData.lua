@@ -805,6 +805,7 @@ private.NPC_NAME_TO_ID = {}
 private.TAMABLE_ID_TO_MAP_NAME = {}
 private.TAMABLE_ID_TO_NAME = {}
 private.TAMABLE_ID_TO_WORLD_NAME = {}
+private.TAMABLE_NON_ACHIEVMENT_LIST = {}
 
 
 private.UNTAMABLE_ID_TO_MAP_NAME = {}
@@ -818,10 +819,14 @@ for npc_id, data in pairs(NPC_DATA) do
 	private.NPC_ID_TO_WORLD_NAME[npc_id] = data.world_id
 	private.NPC_NAME_TO_ID[L.NPCs[tostring(npc_id)]] = npc_id
 
-	if data.is_tamable  and not data.is_achievement then
+	if data.is_tamable then
 		private.TAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
 		private.TAMABLE_ID_TO_NAME[npc_id] = L.NPCs[tostring(npc_id)]
 		private.TAMABLE_ID_TO_WORLD_NAME[npc_id] = data.world_id
+		if not data.is_achievement then
+			private.TAMABLE_NON_ACHIEVMENT_LIST = L.NPCs[tostring(npc_id)]
+		end
+
 	elseif not data.is_achievement then
 		private.UNTAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
 		private.UNTAMABLE_ID_TO_NAME[npc_id] = L.NPCs[tostring(npc_id)]
