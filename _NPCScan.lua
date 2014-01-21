@@ -888,7 +888,7 @@ function private.Frame:PLAYER_LOGIN(event_name)
 	--Check to see if old version of _NPCScan.AutoAdd is loaded and display warning
 	if _G.IsAddOnLoaded("_NPCScan.AutoAdd") then
 		local AutoAddVersion = GetAddOnMetadata("_NPCScan.AutoAdd", "Version"):match("^([%d.]+)");
-		if AutoAddVersion <= "1.5" then
+		if AutoAddVersion <= "2.1" then
 			StaticPopup_Show("NPCSCAN_AUTOADD_WARNING")
 		end
 	end
@@ -1119,7 +1119,7 @@ end
 
 
 _G.StaticPopupDialogs["NPCSCAN_AUTOADD_WARNING"] = {
-	text = "_NPCScan has detected that you are running _NPCScan.AutoAdd v1.5.  This version of the addon is not supported and may prevent _NPCScan from working properly.  It is reccomended that you disable _NPCScan.AutoAdd untill it is updated.",
+	text = "_NPCScan has detected that you are running _NPCScan.AutoAdd v2.1.  This version of the addon is not supported and may prevent _NPCScan from working properly.  It is reccomended that you disable _NPCScan.AutoAdd untill it is updated.",
 	button1 = "Ok",
 	OnAccept = function()
 	end,
