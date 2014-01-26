@@ -345,7 +345,7 @@ npc_add_button:SetScript("OnClick", function(self)
 	local npc_name = panel.npc_name_editbox:GetText()
 	local world_id = GetWorldID(panel.npc_world_editbox:GetText())
 
-	if private.TAMABLE_ID_TO_NAME[npc_id] then
+	if private.TAMABLE_NON_ACHIEVMENT_LIST[npc_id] then
 		private.Print(L.SEARCH_ADD_TAMABLE_FORMAT:format(npc_name))
 	end
 	private.NPCRemove(npc_id)
@@ -846,7 +846,7 @@ do
 		if not npc_id then
 			return
 		end
-		SetSelectedID(npc_id, private.TAMABLE_ID_TO_NAME[npc_id], private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
+		SetSelectedID(npc_id, private.TAMABLE_NON_ACHIEVMENT_LIST[npc_id], private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
 		current_tab = "BEASTS"
 		end
 

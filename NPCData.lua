@@ -823,8 +823,9 @@ for npc_id, data in pairs(NPC_DATA) do
 		private.TAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
 		private.TAMABLE_ID_TO_NAME[npc_id] = L.NPCs[tostring(npc_id)]
 		private.TAMABLE_ID_TO_WORLD_NAME[npc_id] = data.world_id
+		--Builds a list of non achievement mobs for the Beast tab
 		if not data.is_achievement then
-			private.TAMABLE_NON_ACHIEVMENT_LIST = L.NPCs[tostring(npc_id)]
+			private.TAMABLE_NON_ACHIEVMENT_LIST[npc_id] = L.NPCs[tostring(npc_id)]
 		end
 
 	elseif not data.is_achievement then
