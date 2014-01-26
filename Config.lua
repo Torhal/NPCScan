@@ -216,7 +216,7 @@ do
 		if not level then
 			return
 		end
-		local current_sound = private.OptionsCharacter.AlertSound
+		local current_sound = private.Options.AlertSound
 		local info = _G.UIDropDownMenu_CreateInfo()
 
 		if level == 1 then
@@ -225,9 +225,9 @@ do
 			info.checked = current_sound == nil
 			_G.UIDropDownMenu_AddButton(info, level)
 
-			info.text = L.CONFIG_ALERT_SOUND_DEFAULT.." 2"
-			info.arg1 = L.CONFIG_ALERT_SOUND_DEFAULT.." 2"
-			info.checked = current_sound == L.CONFIG_ALERT_SOUND_DEFAULT.." 2"
+			info.text = L.CONFIG_ALERT_SOUND_CLASSIC
+			info.arg1 = L.CONFIG_ALERT_SOUND_CLASSIC
+			info.checked = current_sound == L.CONFIG_ALERT_SOUND_CLASSIC
 
 			_G.UIDropDownMenu_AddButton(info, level)
 

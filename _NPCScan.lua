@@ -32,12 +32,10 @@ private.Frame:SetScript("OnEvent", function(self, event_name, ...)
 	end
 end)
 
-
 private.Updater = private.Frame:CreateAnimationGroup()
 private.Updater.UpdateRate = 0.5
 private.Updater:CreateAnimation("Animation"):SetDuration(private.Updater.UpdateRate)
 private.Updater:SetLooping("REPEAT")
-
 
 -------------------------------------------------------------------------------
 -- Constants.
@@ -53,6 +51,7 @@ local PLAYER_FACTION = _G.UnitFactionGroup("player")
 -------------------------------------------------------------------------------
 private.Options = {
 	Version = DB_VERSION,
+	AlertSound = nil, -- Default sound
 	NPCs = {},
 	NPCWorldIDs = {},
 	IgnoreList = {
@@ -70,6 +69,7 @@ private.OptionsCharacter = {
 
 private.OptionsDefault = {
 	Version = DB_VERSION,
+	AlertSound = nil, -- Default sound
 	NPCs = {
 		[50409] = private.L.NPCs["50409"],--"Mysterious Camel Figurine",
 		[50410] = private.L.NPCs["50410"],--"Mysterious Camel Figurine",
@@ -103,7 +103,6 @@ private.OptionsCharacterDefault = {
 	},
 	AchievementsAddFound = true,
 	AlertSoundUnmute = nil,
-	AlertSound = nil, -- Default sound
 	CacheWarnings = true,
 	FlightSupress = true,
 	TargetIcon = 8, --Skull
@@ -564,9 +563,10 @@ end
 --- Sets the sound to play when NPCs are found.
 -- @return True if changed.
 function private.SetAlertSound(alert_sound)
+print(alert_sound)
 	assert(alert_sound == nil or type(alert_sound) == "string", "AlertSound must be a string or nil.")
-	if alert_sound ~= private.OptionsCharacter.AlertSound then
-		private.OptionsCharacter.AlertSound = alert_sound
+	if alert_sound ~= private.Options.AlertSound then
+		private.Options.AlertSound = alert_sound
 
 		_G.UIDropDownMenu_SetText(private.Config.alert_sound_dropdown, alert_sound == nil and L.CONFIG_ALERT_SOUND_DEFAULT or alert_sound)
 		return true
@@ -574,7 +574,6 @@ function private.SetAlertSound(alert_sound)
 end
 
 --- Sets the icon to display over found NPC.
-
 function private.SetTargetIcon(icon)
 	if icon == nil then icon = 8 end
 		private.OptionsCharacter.TargetIcon = icon
@@ -586,7 +585,6 @@ function private.SetTargetIcon(icon)
 end
 
 --- Enables Blocking alerts while on taxi.
--- @return True if changed.
 function private.SetBlockFlightScan(enable)
 	private.OptionsCharacter.FlightSupress = enable
 	private.Config.Search.block_flight_scan_checkbox:SetChecked(enable)
@@ -594,7 +592,6 @@ function private.SetBlockFlightScan(enable)
 end
 
 --- Enables Vignette tracking.
--- @return True if changed.
 function private.SetVignetteScan(enable)
 	private.OptionsCharacter.TrackVignettes = enable
 	private.Config.Search.viginette_scan_checkbox:SetChecked(enable)
@@ -664,7 +661,7 @@ function private.Synchronize(options, character_options)
 	private.SetAchievementsAddFound(character_options.AchievementsAddFound)
 	private.SetAlertSoundUnmute(character_options.AlertSoundUnmute)
 	private.SetTargetIcon(character_options.TargetIcon)
-	private.SetAlertSound(character_options.AlertSound)
+	private.SetAlertSound(options.AlertSound)
 	private.SetVignetteScan(character_options.TrackVignettes)
 	private.SetBlockFlightScan(character_options.FlightSupress)
 	private.SetRareMob("BEASTS", character_options.TrackBeasts)
@@ -923,7 +920,7 @@ function private.Frame:PLAYER_LOGIN(event_name)
 					end
 				end
 			end
-			stored_options = new_options
+			--stored_options = new_options
 		end
 
 		stored_options.Version = DB_VERSION
@@ -942,10 +939,16 @@ function private.Frame:PLAYER_LOGIN(event_name)
 					end
 				end
 			end
-			stored_character_options = private.OptionsCharacterDefault
+			--stored_character_options = private.OptionsCharacterDefault
 		end
 		stored_character_options.Version = DB_VERSION
 	end
+
+	if not stored_options.AlertSound and stored_character_options.AlertSound then
+		stored_options.AlertSound = stored_character_options.AlertSound
+		stored_character_options.AlertSound = nil
+	end
+	
 	private.Overlays.Register()
 	private.Synchronize(stored_options, stored_character_options)
 

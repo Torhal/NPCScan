@@ -164,10 +164,11 @@ function target_button.PlaySound(sound_name)
 	end
 
 	if not sound_name then
+		_G.PlaySoundFile([[Sound\Events\gruntling_horn_bb.wav]], "Master")
+	elseif sound_name == L.CONFIG_ALERT_SOUND_CLASSIC then
 		_G.PlaySoundFile([[Sound\Event Sounds\Event_wardrum_ogre.wav]], "Master")
 		_G.PlaySoundFile([[Sound\Events\scourge_horn.wav]], "Master")
-	elseif sound_name == L.CONFIG_ALERT_SOUND_DEFAULT.." 2" then
-		_G.PlaySoundFile([[Sound\Events\gruntling_horn_bb.wav]], "Master")
+		
 	else
 		local LSM = _G.LibStub("LibSharedMedia-3.0")
 		_G.PlaySoundFile(LSM:Fetch(LSM.MediaType.SOUND, sound_name), "Master")
@@ -199,7 +200,7 @@ function target_button:SetNPC(ID, Name, Source)
 		private.Overlays.Add(ID)
 		private.Overlays.Found(ID)
 	end
-	self.PlaySound(private.OptionsCharacter.AlertSound)
+	self.PlaySound(private.Options.AlertSound)
 
 	if _G.GetCVarBool("screenEdgeFlash") then
 		self.Flash:Show()
