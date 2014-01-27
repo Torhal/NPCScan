@@ -102,6 +102,7 @@ private.OptionsCharacterDefault = {
 		[private.ACHIEVEMENT_IDS.TIMELESS_CHAMPION] = true,
 	},
 	AchievementsAddFound = true,
+	AlertScreenEdgeFlash = true,
 	AlertSoundUnmute = nil,
 	CacheWarnings = true,
 	FlightSupress = true,
@@ -560,6 +561,17 @@ function private.SetAlertSoundUnmute(enable)
 end
 
 
+--- Enables unmuting sound to play found alerts.
+-- @return True if changed.
+function private.SetAlertScreenEdgeFlash(enable)
+	if not enable ~= not private.OptionsCharacter.AlertScreenEdgeFlash then
+		private.OptionsCharacter.AlertScreenEdgeFlash = enable or nil
+
+		private.Config.screen_edge_flash_checkbox:SetChecked(enable)
+		return true
+	end
+end
+
 --- Sets the sound to play when NPCs are found.
 -- @return True if changed.
 function private.SetAlertSound(alert_sound)
@@ -659,6 +671,7 @@ function private.Synchronize(options, character_options)
 	private.SetPrintTime(options.PrintTime)
 	private.SetAchievementsAddFound(character_options.AchievementsAddFound)
 	private.SetAlertSoundUnmute(character_options.AlertSoundUnmute)
+	private.SetAlertScreenEdgeFlash(character_options.AlertScreenEdgeFlash)
 	private.SetTargetIcon(character_options.TargetIcon)
 	private.SetAlertSound(options.AlertSound)
 	private.SetVignetteScan(character_options.TrackVignettes)

@@ -202,7 +202,8 @@ function target_button:SetNPC(ID, Name, Source)
 	end
 	self.PlaySound(private.Options.AlertSound)
 
-	if _G.GetCVarBool("screenEdgeFlash") then
+	--if _G.GetCVarBool("screenEdgeFlash") then
+	if private.OptionsCharacter.AlertScreenEdgeFlash then
 		self.Flash:Show()
 		self.Flash.Fade:Pause() -- Forces OnPlay to fire again if it was already playing
 		self.Flash.Fade:Play()

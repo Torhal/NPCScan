@@ -145,8 +145,19 @@ function alert_unmute_checkbox.setFunc(is_enabled)
 end
 
 
+local screen_edge_flash_checkbox = _G.CreateFrame("CheckButton", "_NPCScanConfigScreenFlashCheckbox", alert_options_panel, "InterfaceOptionsCheckButtonTemplate")
+screen_edge_flash_checkbox:SetPoint("TOPLEFT", alert_unmute_checkbox, "BOTTOMLEFT", 0, -8)
+_G[screen_edge_flash_checkbox:GetName() .. "Text"]:SetText(L.CONFIG_ALERT_SCREEN_EDGE_FLASH)
+screen_edge_flash_checkbox.tooltipText = L.CONFIG_ALERT_SCREEN_EDGE_FLASH_DESC
+
+panel.screen_edge_flash_checkbox = screen_edge_flash_checkbox
+
+function screen_edge_flash_checkbox.setFunc(is_enabled)
+	private.SetAlertScreenEdgeFlash(is_enabled == "1")
+end
+
 local alert_sound_dropdown = _G.CreateFrame("Frame", "_NPCScanConfigSoundDropdown", alert_options_panel, "UIDropDownMenuTemplate")
-alert_sound_dropdown:SetPoint("TOPLEFT", alert_unmute_checkbox, "BOTTOMLEFT", -12, -18)
+alert_sound_dropdown:SetPoint("TOPLEFT", screen_edge_flash_checkbox, "BOTTOMLEFT", -12, -18)
 alert_sound_dropdown:SetPoint("RIGHT", -12, 0)
 alert_sound_dropdown:EnableMouse(true)
 alert_sound_dropdown.tooltipText = L.CONFIG_ALERT_SOUND_DESC
