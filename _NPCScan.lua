@@ -563,7 +563,6 @@ end
 --- Sets the sound to play when NPCs are found.
 -- @return True if changed.
 function private.SetAlertSound(alert_sound)
-print(alert_sound)
 	assert(alert_sound == nil or type(alert_sound) == "string", "AlertSound must be a string or nil.")
 	if alert_sound ~= private.Options.AlertSound then
 		private.Options.AlertSound = alert_sound
@@ -895,37 +894,23 @@ function private.Frame:PLAYER_LOGIN(event_name)
 	_G._NPCScanOptions = private.Options
 	_G._NPCScanOptionsCharacter = private.OptionsCharacter
 
+--Updates custom NPCs to include include new NPCS added in version change
 	if stored_options and stored_options.Version ~= DB_VERSION then
-		local stored_version = stored_options.Version
-
-		if not stored_version or type(stored_version) == "string" or stored_version < DB_VERSION then
-			local new_options = private.OptionsDefault
-
 			if stored_options.NPCs then
-				local CONTINENT_NAMES = {
-					"KALIMDOR",
-					"EASTERN_KINGDOMS",
-					"OUTLAND",
-					"NORTHREND",
-					"THE_MAELSTROM",
-					"PANDARIA",
-				}
-
-				for npc_id, npc_name in pairs(stored_options.NPCs) do
-					new_options.NPCs[npc_id] = npc_name
-
-					local world = stored_options.NPCWorldIDs and stored_options.NPCWorldIDs[npc_id]
-					if world then
-						new_options.NPCWorldIDs[npc_id] = type(world) == "number" and CONTINENT_NAMES[world] or world
+				for npc_id, npc_name in pairs(private.OptionsDefault.NPCs) do
+					if not stored_options.NPCs[npc_id] then
+						stored_options.NPCs[npc_id] = npc_name
+						local world = private.OptionsDefault.NPCWorldIDs and private.OptionsDefault.NPCWorldIDs[npc_id]
+						if world then
+							stored_options.NPCWorldIDs[npc_id] = world
+						end
 					end
 				end
 			end
-			--stored_options = new_options
-		end
-
 		stored_options.Version = DB_VERSION
 	end
 
+--Converts old style per character NPCs to global saved NPCs
 	if stored_character_options and stored_character_options.Version ~= DB_VERSION then
 		if not stored_character_options.Version or type(stored_character_options.Version) == "string" or stored_character_options.Version < DB_VERSION then
 			if stored_character_options.NPCs then
@@ -938,8 +923,8 @@ function private.Frame:PLAYER_LOGIN(event_name)
 						end
 					end
 				end
+				stored_character_options.NPCs = nil
 			end
-			--stored_character_options = private.OptionsCharacterDefault
 		end
 		stored_character_options.Version = DB_VERSION
 	end
