@@ -942,7 +942,7 @@ function private.Frame:PLAYER_LOGIN(event_name)
 		stored_character_options.Version = DB_VERSION
 	end
 
-	if not stored_options.AlertSound and stored_character_options.AlertSound then
+	if stored_options and not stored_options.AlertSound and stored_character_options.AlertSound then
 		stored_options.AlertSound = stored_character_options.AlertSound
 		stored_character_options.AlertSound = nil
 	end
