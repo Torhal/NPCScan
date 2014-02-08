@@ -22,6 +22,8 @@ local FOLDER_NAME, private = ...
 local L = private.L
 _G._NPCScan = private
 
+local debugger -- Only defined if needed.
+
 private.Frame = _G.CreateFrame("Frame")
 private.Frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 private.Frame:RegisterEvent("PLAYER_LEAVING_WORLD")
@@ -111,6 +113,19 @@ private.OptionsCharacterDefault = {
 	TrackRares = true,
 	TrackVignettes = false,
 }
+
+
+-------------------------------------------------------------------------------
+-- Debugger.
+-------------------------------------------------------------------------------
+local function CreateDebugFrame()
+	return _G.LibStub("LibTextDump-1.0"):New(("%s Debug Output"):format(FOLDER_NAME), 640, 480)
+end
+
+function private.Debug(...)
+	debugger = debugger or CreateDebugFrame()
+	debugger:AddLine(string.format(...))
+end
 
 
 -------------------------------------------------------------------------------
@@ -1082,6 +1097,17 @@ do
 			end
 		end,
 		--@debug@
+		DEBUG = function()
+			debugger = debugger or CreateDebugFrame()
+
+			if debugger:Lines() == 0 then
+				debugger:AddLine("Nothing to report.")
+				debugger:Display()
+				debugger:Clear()
+				return
+			end
+			debugger:Display()
+		end,
 		DUMP = function()
 			private.TextDump = private.TextDump or _G.LibStub("LibTextDump-1.0"):New(FOLDER_NAME)
 			private.DumpNPCData()
