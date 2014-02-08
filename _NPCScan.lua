@@ -123,8 +123,10 @@ local function CreateDebugFrame()
 end
 
 function private.Debug(...)
+	--@debug@
 	debugger = debugger or CreateDebugFrame()
 	debugger:AddLine(string.format(...))
+	--@end-debug@
 end
 
 
