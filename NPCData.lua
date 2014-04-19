@@ -604,6 +604,7 @@ local NPC_DATA = {
 	[50839] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true,  is_achievement = false }, -- Chromehound
 	[50840] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = false, is_achievement = true  }, -- Major Nanners
 	[50842] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true,  is_achievement = false }, -- Magmagan
+	[50843] = { world_id = ZN.PANDARIA,                 map_name = ZN.VALE_OF_ETERNAL_BLOSSOMS,    is_tamable = true,  is_achievement = false }, -- Portent
 	[50846] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.SEARING_GORGE,               is_tamable = true,  is_achievement = false }, -- Slavermaw
 	[50855] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BURNING_STEPPES,             is_tamable = true,  is_achievement = false }, -- Jaxx the Rabid
 	[50856] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = true,  is_achievement = false }, -- Snark
