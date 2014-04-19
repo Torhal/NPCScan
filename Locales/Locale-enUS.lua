@@ -469,6 +469,7 @@ select( 2, ... ).L = setmetatable( {
 	["50839"] = "Chromehound",
 	["50840"] = "Major Nanners",
 	["50842"] = "Magmagan",
+	["50843"] = "Portent",
 	["50846"] = "Slavermaw",
 	["50855"] = "Jaxx the Rabid",
 	["50856"] = "Snark",
