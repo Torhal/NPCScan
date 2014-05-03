@@ -88,7 +88,7 @@ do
 
 		info.func = Icon_Entry_OnSelect
 
-		for index = 1, _G.NUM_RAID_ICONS do
+		for index = 1, private.NUM_RAID_ICONS do
 			local icon_info = _G.UnitPopupButtons["RAID_TARGET_" .. index]
 			info.text = icon_info.text
 			info.arg1 = index

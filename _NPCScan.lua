@@ -620,7 +620,7 @@ end
 
 --- Sets the icon to display over found NPC.
 function private.SetTargetIcon(icon_id)
-	icon_id = icon_id or _G.NUM_RAID_ICONS
+	icon_id = icon_id or private.NUM_RAID_ICONS
 	private.OptionsCharacter.TargetIcon = icon_id
 
 	local icon_info = _G.UnitPopupButtons["RAID_TARGET_" .. icon_id]
