@@ -908,18 +908,15 @@ end
 function private.Frame:PLAYER_LOGIN(event_name)
 	--Check to see if old version of _NPCScan.AutoAdd is loaded and display warning
 	if _G.IsAddOnLoaded("_NPCScan.AutoAdd") then
-		local AutoAddVersion = GetAddOnMetadata("_NPCScan.AutoAdd", "Version"):match("^([%d.]+)");
-		if AutoAddVersion <= "2.2" then
-			StaticPopup_Show("NPCSCAN_AUTOADD_WARNING")
+		if _G.GetAddOnMetadata("_NPCScan.AutoAdd", "Version"):match("^([%d.]+)") <= "2.2" then
+			_G.StaticPopup_Show("NPCSCAN_AUTOADD_WARNING")
 		end
 	end
-
-	local stored_options = _G._NPCScanOptions
-	local stored_character_options = _G._NPCScanOptionsCharacter
 	_G._NPCScanOptions = private.Options
 	_G._NPCScanOptionsCharacter = private.OptionsCharacter
 
 	--Updates custom NPCs to include include new NPCS added in version change
+	local stored_options = _G._NPCScanOptions
 	if stored_options and stored_options.Version ~= DB_VERSION then
 		if stored_options.NPCs then
 			for npc_id, npc_name in pairs(private.OptionsDefault.NPCs) do
@@ -936,6 +933,7 @@ function private.Frame:PLAYER_LOGIN(event_name)
 	end
 
 	--Converts old style per character NPCs to global saved NPCs
+	local stored_character_options = _G._NPCScanOptionsCharacter
 	if stored_character_options and stored_character_options.Version ~= DB_VERSION then
 		if not stored_character_options.Version or type(stored_character_options.Version) == "string" or stored_character_options.Version < DB_VERSION then
 			if stored_character_options.NPCs then
@@ -962,7 +960,7 @@ end
 
 
 do
-	local FirstWorld = true
+	local has_initialized = false
 
 	function private.Frame:PLAYER_ENTERING_WORLD()
 		self:PLAYER_UPDATE_RESTING()
@@ -975,7 +973,6 @@ do
 		else
 			private.WorldID = map_name
 		end
-
 
 		if private.OptionsCharacter.TrackRares then
 			for npc_id, world_name in pairs(private.UNTAMABLE_ID_TO_WORLD_NAME) do
@@ -1004,10 +1001,12 @@ do
 			NPCActivate(npc_id, private.Options.NPCWorldIDs[npc_id])
 		end
 
-		if FirstWorld or not private.Options.CacheWarnings then -- Full listing of cached mobs gets printed on login
-			FirstWorld = false
+		if not has_initialized or not private.Options.CacheWarnings then
+			-- Full listing of cached mobs gets printed on login
+			has_initialized = true
 			table.wipe(CacheList)
-		else -- Print list of cached mobs specific to new world
+		else
+			-- Print list of cached mobs specific to new world
 			local list_string = CacheListBuild(CacheList)
 			if list_string then
 				private.Print(L.CACHED_WORLD_FORMAT:format(list_string, map_name))
