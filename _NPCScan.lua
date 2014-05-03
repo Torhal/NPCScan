@@ -598,14 +598,13 @@ function private.SetAlertSound(alert_sound)
 end
 
 --- Sets the icon to display over found NPC.
-function private.SetTargetIcon(icon)
-	if icon == nil then icon = 8 end
-	private.OptionsCharacter.TargetIcon = icon
-	local iconinfo = UnitPopupButtons["RAID_TARGET_" .. icon]
-	local text = iconinfo.text
-	local colorCode = string.format("|cFF%02x%02x%02x", iconinfo.color.r * 255, iconinfo.color.g * 255, iconinfo.color.b * 255);
+function private.SetTargetIcon(icon_id)
+	icon_id = icon_id or _G.NUM_RAID_ICONS
+	private.OptionsCharacter.TargetIcon = icon_id
 
-	_G.UIDropDownMenu_SetText(private.Config.alert_icon_dropdown, colorCode .. text)
+	local icon_info = _G.UnitPopupButtons["RAID_TARGET_" .. icon_id]
+	local colorCode = ("|cFF%02x%02x%02x"):format(icon_info.color.r * 255, icon_info.color.g * 255, icon_info.color.b * 255)
+	_G.UIDropDownMenu_SetText(private.Config.alert_icon_dropdown, colorCode .. icon_info.text)
 end
 
 --- Enables Blocking alerts while on taxi.
