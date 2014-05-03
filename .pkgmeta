@@ -18,3 +18,6 @@ externals:
   Libs/LibTextDump-1.0:
     url: git://git.wowace.com/wow/libtextdump-1-0/mainline.git
     tag: latest
+  Libs/LibDialog-1.0:
+    url: http://hg.wowace.com/wow/libdialog-1-0/mainline
+    tag: latest

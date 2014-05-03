@@ -19,6 +19,8 @@ local table = _G.table
 -- AddOn namespace.
 -------------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
+
+local Dialog = _G.LibStub("LibDialog-1.0")
 local L = private.L
 _G._NPCScan = private
 
@@ -112,6 +114,25 @@ private.OptionsCharacterDefault = {
 	TrackRares = true,
 	TrackVignettes = false,
 }
+
+
+-------------------------------------------------------------------------------
+-- Dialogs.
+-------------------------------------------------------------------------------
+Dialog:Register("NPCSCAN_AUTOADD_WARNING", {
+	text = "You appear to be running _NPCScan.AutoAdd v2.2 or earlier, which may prevent _NPCScan from working properly.\n\nIt is recommended that you disable _NPCScan.AutoAdd until it is updated.",
+	text_justify_h = "left",
+	text_justify_v = "bottom",
+	buttons = {
+		{
+			text = _G.OKAY,
+		},
+	},
+	icon = [[Interface\DialogFrame\UI-Dialog-Icon-AlertNew]],
+	show_while_dead = true,
+	hide_on_escape = true,
+	width = 500,
+})
 
 
 -------------------------------------------------------------------------------
@@ -906,10 +927,9 @@ end
 -- Loads defaults, validates settings, and starts scan.
 -- Used instead of ADDON_LOADED to give overlay mods a chance to load and register for messages.
 function private.Frame:PLAYER_LOGIN(event_name)
-	--Check to see if old version of _NPCScan.AutoAdd is loaded and display warning
 	if _G.IsAddOnLoaded("_NPCScan.AutoAdd") then
 		if _G.GetAddOnMetadata("_NPCScan.AutoAdd", "Version"):match("^([%d.]+)") <= "2.2" then
-			_G.StaticPopup_Show("NPCSCAN_AUTOADD_WARNING")
+			Dialog:Spawn("NPCSCAN_AUTOADD_WARNING")
 		end
 	end
 	_G._NPCScanOptions = private.Options
@@ -1134,14 +1154,3 @@ if _G.GetZoneText() == "" then
 else
 	private.Frame:ZONE_CHANGED_NEW_AREA("ZONE_CHANGED_NEW_AREA")
 end
-
-
-_G.StaticPopupDialogs["NPCSCAN_AUTOADD_WARNING"] = {
-	text = "_NPCScan has detected that you are running _NPCScan.AutoAdd v2.2.  This version of the addon is not supported and may prevent _NPCScan from working properly.  It is reccomended that you disable _NPCScan.AutoAdd untill it is updated.",
-	button1 = "Ok",
-	OnAccept = function()
-	end,
-	timeout = 0,
-	whileDead = true,
-	hideOnEscape = true,
-}
