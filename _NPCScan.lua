@@ -60,7 +60,7 @@ private.Options = {
 		NPCs = {},
 		MapName = {},
 		WorldID = {},
-		},
+	},
 }
 
 private.OptionsCharacter = {
@@ -73,9 +73,9 @@ private.OptionsDefault = {
 	Version = DB_VERSION,
 	AlertSound = nil, -- Default sound
 	NPCs = {
-		[50409] = private.L.NPCs["50409"],--"Mysterious Camel Figurine",
-		[50410] = private.L.NPCs["50410"],--"Mysterious Camel Figurine",
-		[64004] = private.L.NPCs["64004"],--"Ghostly Pandaren Fisherman",
+		[50409] = private.L.NPCs["50409"], --"Mysterious Camel Figurine",
+		[50410] = private.L.NPCs["50410"], --"Mysterious Camel Figurine",
+		[64004] = private.L.NPCs["64004"], --"Ghostly Pandaren Fisherman",
 		[64191] = private.L.NPCs["64191"], --"Ghostly Pandaren Craftsman",
 	},
 	NPCWorldIDs = {
@@ -89,7 +89,6 @@ private.OptionsDefault = {
 		MapName = {},
 		WorldID = {},
 	},
-
 }
 
 
@@ -405,11 +404,8 @@ local function AchievementActivate(achievement)
 	achievement.Active = true
 
 	for criteria_id, npc_id in pairs(achievement.Criteria) do
-	--ignore list check
 		if not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] then
 			AchievementNPCActivate(achievement, npc_id, criteria_id)
-		else
-		--print("ignoreing "..npc_id)
 		end
 	end
 	return true
@@ -604,12 +600,12 @@ end
 --- Sets the icon to display over found NPC.
 function private.SetTargetIcon(icon)
 	if icon == nil then icon = 8 end
-		private.OptionsCharacter.TargetIcon = icon
-		local iconinfo = UnitPopupButtons["RAID_TARGET_"..icon]
-		local text = iconinfo.text
-		local colorCode = string.format("|cFF%02x%02x%02x", iconinfo.color.r*255, iconinfo.color.g*255, iconinfo.color.b*255);
+	private.OptionsCharacter.TargetIcon = icon
+	local iconinfo = UnitPopupButtons["RAID_TARGET_" .. icon]
+	local text = iconinfo.text
+	local colorCode = string.format("|cFF%02x%02x%02x", iconinfo.color.r * 255, iconinfo.color.g * 255, iconinfo.color.b * 255);
 
-		_G.UIDropDownMenu_SetText(private.Config.alert_icon_dropdown, colorCode..text)
+	_G.UIDropDownMenu_SetText(private.Config.alert_icon_dropdown, colorCode .. text)
 end
 
 --- Enables Blocking alerts while on taxi.
@@ -924,23 +920,23 @@ function private.Frame:PLAYER_LOGIN(event_name)
 	_G._NPCScanOptions = private.Options
 	_G._NPCScanOptionsCharacter = private.OptionsCharacter
 
---Updates custom NPCs to include include new NPCS added in version change
+	--Updates custom NPCs to include include new NPCS added in version change
 	if stored_options and stored_options.Version ~= DB_VERSION then
-			if stored_options.NPCs then
-				for npc_id, npc_name in pairs(private.OptionsDefault.NPCs) do
-					if not stored_options.NPCs[npc_id] then
-						stored_options.NPCs[npc_id] = npc_name
-						local world = private.OptionsDefault.NPCWorldIDs and private.OptionsDefault.NPCWorldIDs[npc_id]
-						if world then
-							stored_options.NPCWorldIDs[npc_id] = world
-						end
+		if stored_options.NPCs then
+			for npc_id, npc_name in pairs(private.OptionsDefault.NPCs) do
+				if not stored_options.NPCs[npc_id] then
+					stored_options.NPCs[npc_id] = npc_name
+					local world = private.OptionsDefault.NPCWorldIDs and private.OptionsDefault.NPCWorldIDs[npc_id]
+					if world then
+						stored_options.NPCWorldIDs[npc_id] = world
 					end
 				end
 			end
+		end
 		stored_options.Version = DB_VERSION
 	end
 
---Converts old style per character NPCs to global saved NPCs
+	--Converts old style per character NPCs to global saved NPCs
 	if stored_character_options and stored_character_options.Version ~= DB_VERSION then
 		if not stored_character_options.Version or type(stored_character_options.Version) == "string" or stored_character_options.Version < DB_VERSION then
 			if stored_character_options.NPCs then
