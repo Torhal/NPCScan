@@ -932,11 +932,12 @@ function private.Frame:PLAYER_LOGIN(event_name)
 			Dialog:Spawn("NPCSCAN_AUTOADD_WARNING")
 		end
 	end
+	local stored_options = _G._NPCScanOptions
+	local stored_character_options = _G._NPCScanOptionsCharacter
 	_G._NPCScanOptions = private.Options
 	_G._NPCScanOptionsCharacter = private.OptionsCharacter
 
 	--Updates custom NPCs to include include new NPCS added in version change
-	local stored_options = _G._NPCScanOptions
 	if stored_options and stored_options.Version ~= DB_VERSION then
 		if stored_options.NPCs then
 			for npc_id, npc_name in pairs(private.OptionsDefault.NPCs) do
@@ -953,7 +954,6 @@ function private.Frame:PLAYER_LOGIN(event_name)
 	end
 
 	--Converts old style per character NPCs to global saved NPCs
-	local stored_character_options = _G._NPCScanOptionsCharacter
 	if stored_character_options and stored_character_options.Version ~= DB_VERSION then
 		if not stored_character_options.Version or type(stored_character_options.Version) == "string" or stored_character_options.Version < DB_VERSION then
 			if stored_character_options.NPCs then
