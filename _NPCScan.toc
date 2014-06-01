@@ -1,5 +1,5 @@
 ## Interface: 50400
-## Title: _|cffCCCC88NPCScan|r
+## Title: _NPCScan
 ## Notes: Scans NPCs around you for rare ones.
 ## Notes-deDE: Scant NSCs in deiner Nähe nach seltenen.
 ## Notes-enCN: 搜索附近的 NPC 寻找稀有怪物。
