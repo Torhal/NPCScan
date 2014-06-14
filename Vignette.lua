@@ -18,7 +18,6 @@ local pairs = _G.pairs
 local FOLDER_NAME, private = ...
 local L = private.L
 
-local DEBUGGING = false
 local Debug = private.Debug
 
 -------------------------------------------------------------------------------
@@ -43,9 +42,7 @@ end)
 
 function private.VFrame:ZONE_CHANGED_NEW_AREA(event, ...)
 	if vignette_delay then
-		if DEBUGGING then
-			Debug("Releasing Delay")
-		end
+		Debug("Releasing Delay")
 		private.VFrame:VIGNETTE_ADDED("VIGNETTE_ADDED", vignette_delay)
 		vignette_delay = nil
 	end
@@ -75,9 +72,7 @@ function private.VignetteHandler(instanceid)
 		end
 	end
 
-	if DEBUGGING then
-		Debug("Found: %d  Last ID: %d", vignette_found_count, last_vignette_id)
-	end
+	Debug("Found: %d  Last ID: %d", vignette_found_count, last_vignette_id)
 end
 
 
@@ -86,29 +81,19 @@ local function VignetteFilterByAchievement()
 	local currentzone = _G.GetCurrentMapAreaID()
 
 	if not private.OptionsCharacter.Achievements[private.ACHIEVEMENT_IDS.ONE_MANY_ARMY] and currentzone == private.ZONE_IDS.VALE_OF_ETERNAL_BLOSSOMS then
-		if DEBUGGING then
-			Debug("ONE_MANY_ARMY not tracked")
-		end
+		Debug("ONE_MANY_ARMY not tracked")
 		return false
 	elseif not private.OptionsCharacter.Achievements[private.ACHIEVEMENT_IDS.CHAMPIONS_OF_LEI_SHEN] and currentzone == private.ZONE_IDS.ISLE_OF_THUNDER then
-		if DEBUGGING then
-			Debug("CHAMPIONS_OF_LEI_SHEN not tracked")
-		end
+		Debug("CHAMPIONS_OF_LEI_SHEN not tracked")
 		return false
 	elseif not private.OptionsCharacter.Achievements[private.ACHIEVEMENT_IDS.TIMELESS_CHAMPION] and currentzone == private.ZONE_IDS.TIMELESS_ISLE then
-		if DEBUGGING then
-			Debug("TIMELESS_CHAMPION not tracked")
-		end
+		Debug("TIMELESS_CHAMPION not tracked")
 		return false
 	elseif not private.OptionsCharacter.Achievements[private.ACHIEVEMENT_IDS.GLORIOUS] and (currentzone ~= private.ZONE_IDS.VALE_OF_ETERNAL_BLOSSOMS and currentzone ~= private.ZONE_IDS.TIMELESS_ISLE and currentzone ~= private.ZONE_IDS.ISLE_OF_THUNDER) then
-		if DEBUGGING then
-			Debug("GLORIOUS not tracked")
-		end
+		Debug("GLORIOUS not tracked")
 		return false
 	else
-		if DEBUGGING then
-			Debug("Tracking Mob")
-		end
+		Debug("Tracking Mob")
 		return true
 	end
 end
@@ -124,17 +109,13 @@ function private.SetVignetteTarget()
 		private.VignetteBuildList(npc_id)
 		private.Button:Update(npc_id, "Vignette Mob", "Unknown Vignette")
 
-		if DEBUGGING then
-			Debug("Mob Dead")
-		end
+		Debug("Mob Dead")
 		return
 	end
 
 	if npc_id then
 		if _G.InCombatLockdown() then
-			if DEBUGGING then
-				Debug("Combat LockDown")
-			end
+			Debug("Combat LockDown")
 			private.Button.PendingID, private.Button.PendingName, private.Button.PendingSource = npc_id, npc_name, "Vignette Mob"
 		else
 			private.Button:Update(npc_id, npc_name, "Vignette Mob")
@@ -142,9 +123,7 @@ function private.SetVignetteTarget()
 		last_vignette_id = npc_id
 	end
 
-	if DEBUGGING then
-		Debug("Last ID: " .. last_vignette_id)
-	end
+	Debug("Last ID: " .. last_vignette_id)
 end
 
 --Builds a target macro for every rare mob in the current zone
@@ -169,9 +148,7 @@ function private.VignetteBuildList(instanceid)
 	--Delays alerts on login untill the world so current zone can be properly detected
 	if not zone_name then
 		vignette_delay = instanceid
-		if DEBUGGING then
-			Debug("Build List Delayed")
-		end
+		Debug("Build List Delayed")
 		return false
 	end
 
@@ -215,21 +192,15 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceid, ...)
 	local x, y, name, iconid = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceid)
 	-- iconid seems to be 40:chests, 41:mobs
 	if not iconid then --Use case for broken Mob Info
-		if DEBUGGING then
-			Debug("Nul Mob Data Returned")
-		end
+		Debug("Nul Mob Data Returned")
 		private.Print(L["FOUND_FORMAT"]:format("Vignette Mob"), _G.GREEN_FONT_COLOR)
 		private.Button:SetNPC(67490, "Vignette Mob", "Unknown Vignette")
 	elseif iconid == 41 then --Use Case if AIP returns Mob Info
-		if DEBUGGING then
-			Debug("Correct Mob Data Returned")
-		end
+		Debug("Correct Mob Data Returned")
 		private.Print(L["FOUND_FORMAT"]:format("Vignette Mob"), _G.GREEN_FONT_COLOR)
 		private.Button:SetNPC(private.NPC_NAME_TO_ID[name], name, "Vignette Mob")
 	else -- All other cases
-		if DEBUGGING then
-			Debug("Untracked Vigenette")
-		end
+		Debug("Untracked Vigenette")
 	end
 end
 
