@@ -152,8 +152,51 @@ function screen_edge_flash_checkbox.setFunc(is_enabled)
 	private.SetAlertScreenEdgeFlash(is_enabled == "1")
 end
 
+local viginette_scan_checkbox = _G.CreateFrame("CheckButton", "_NPCScanVignetteScanCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
+viginette_scan_checkbox:SetPoint("TOPLEFT", screen_edge_flash_checkbox, "BOTTOMLEFT", 0, -8)
+viginette_scan_checkbox.tooltipText = L.VIGNETTE_SCAN_DESC
+
+panel.viginette_scan_checkbox = viginette_scan_checkbox
+
+local viginette_scan_label = _G[viginette_scan_checkbox:GetName() .. "Text"]
+viginette_scan_label:SetText(L.VIGNETTE_SCAN)
+viginette_scan_checkbox:SetHitRectInsets(4, 4 - viginette_scan_label:GetStringWidth(), 4, 4)
+
+function viginette_scan_checkbox.setFunc(is_enabled)
+	private.SetVignetteScan(is_enabled == "1")
+end
+
+local mouseover_scan_checkbox = _G.CreateFrame("CheckButton", "_NPCScanMouseoverScanCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
+mouseover_scan_checkbox:SetPoint("TOPLEFT", viginette_scan_checkbox, "BOTTOMLEFT", 0, -8)
+mouseover_scan_checkbox.tooltipText = L.MOUSEOVER_SCAN_DESC
+
+panel.mouseover_scan_checkbox = mouseover_scan_checkbox
+
+local mouseover_scan_label = _G[mouseover_scan_checkbox:GetName() .. "Text"]
+mouseover_scan_label:SetText(L.MOUSEOVER_SCAN)
+mouseover_scan_checkbox:SetHitRectInsets(4, 4 - mouseover_scan_label:GetStringWidth(), 4, 4)
+
+function mouseover_scan_checkbox.setFunc(is_enabled)
+	private.SetMouseoverScan(is_enabled == "1")
+end
+
+
+local block_flight_scan_checkbox = _G.CreateFrame("CheckButton", "_NPCScanBlockFlightScanCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
+block_flight_scan_checkbox:SetPoint("TOPLEFT", mouseover_scan_checkbox, "BOTTOMLEFT", 0, -8)
+block_flight_scan_checkbox.tooltipText = L.BLOCKFLIGHTSCAN_DESC
+
+panel.block_flight_scan_checkbox = block_flight_scan_checkbox
+
+local block_flight_scan_label = _G[block_flight_scan_checkbox:GetName() .. "Text"]
+block_flight_scan_label:SetText(L.BLOCKFLIGHTSCAN)
+block_flight_scan_checkbox:SetHitRectInsets(4, 4 - block_flight_scan_label:GetStringWidth(), 4, 4)
+
+function block_flight_scan_checkbox.setFunc(is_enabled)
+	private.SetBlockFlightScan(is_enabled == "1")
+end
+
 local alert_sound_dropdown = _G.CreateFrame("Frame", "_NPCScanConfigSoundDropdown", alert_options_panel, "UIDropDownMenuTemplate")
-alert_sound_dropdown:SetPoint("TOPLEFT", screen_edge_flash_checkbox, "BOTTOMLEFT", -12, -18)
+alert_sound_dropdown:SetPoint("TOPLEFT", block_flight_scan_checkbox, "BOTTOMLEFT", -12, -18)
 alert_sound_dropdown:SetPoint("RIGHT", -12, 0)
 alert_sound_dropdown:EnableMouse(true)
 alert_sound_dropdown.tooltipText = L.CONFIG_ALERT_SOUND_DESC

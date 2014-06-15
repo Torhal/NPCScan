@@ -26,8 +26,6 @@ _G._NPCScan = private
 
 local debugger -- Only defined if needed.
 
-
-
 private.Frame = _G.CreateFrame("Frame")
 private.Frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 private.Frame:RegisterEvent("PLAYER_LEAVING_WORLD")
@@ -103,7 +101,7 @@ local OptionsCharacterDefault = {
 	TargetIcon = 8, --Skull
 	TrackBeasts = true,
 	TrackRares = true,
-	TrackVignettes = true,
+	TrackVignettes = false,
 	TrackMouseover = true,
 }
 
@@ -595,17 +593,23 @@ end
 --- Enables Blocking alerts while on taxi.
 function private.SetBlockFlightScan(enable)
 	private.OptionsCharacter.FlightSupress = enable
-	private.Config.Search.block_flight_scan_checkbox:SetChecked(enable)
+	private.Config.block_flight_scan_checkbox:SetChecked(enable)
 	return enable
 end
 
 --- Enables Vignette tracking.
 function private.SetVignetteScan(enable)
 	private.OptionsCharacter.TrackVignettes = enable
-	private.Config.Search.viginette_scan_checkbox:SetChecked(enable)
+	private.Config.viginette_scan_checkbox:SetChecked(enable)
 	return enable
 end
 
+--- Enables Mouseover tracking.
+function private.SetMouseoverScan(enable)
+	private.OptionsCharacter.TrackMouseover = enable
+	private.Config.mouseover_scan_checkbox:SetChecked(enable)
+	return enable
+end
 
 local IsDefaultNPCValid
 do
@@ -682,6 +686,7 @@ function private.Synchronize()
 	private.SetTargetIcon(character_options.TargetIcon)
 	private.SetAlertSound(options.AlertSound)
 	private.SetVignetteScan(character_options.TrackVignettes)
+	private.SetMouseoverScan(character_options.TrackMouseover)
 	private.SetBlockFlightScan(character_options.FlightSupress)
 	private.SetRareMob("BEASTS", character_options.TrackBeasts)
 	private.SetRareMob("RARENPC", character_options.TrackRares)
@@ -774,7 +779,7 @@ do
 	end
 
 	-- Validates found mobs before showing alerts.
-	local function OnFound(npc_id, npc_name)
+	function private.OnFound(npc_id, npc_name)
 		NPCDeactivate(npc_id)
 
 		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
@@ -838,7 +843,7 @@ do
 		for npc_id in pairs(ScanIDs) do
 			local npc_name = private.NPCNameFromCache(npc_id)
 			if npc_name then
-				OnFound(npc_id, npc_name)
+				private.OnFound(npc_id, npc_name)
 			end
 		end
 	end
@@ -1156,15 +1161,16 @@ end
 function private.Frame:UPDATE_MOUSEOVER_UNIT()
 	if not private.OptionsCharacter.TrackMouseover then return private.Debug("Not Tracking Mobs by Mouseover") end
 	local unit = "Mouseover"
-	if UnitClassification(unit) == "rare" or "rareelite" then
+	if UnitClassification(unit) == "rare" or "rareelite"  and not UnitIsDead(unit)then
 		local NPC_ID = tonumber((UnitGUID(unit)):sub(6, 10), 16)
 		local identifier  = (UnitGUID(unit)):sub(13)
 
 		if (private.NPC_ID_TO_NAME[NPC_ID] or private.Options["NPCs"][NPC_ID]) and not istargeted(NPC_ID) and timecheck(timefound[NPC_ID]) then
 			timefound[NPC_ID] = GetTime();
-			private.Debug("Mob Foune")
-			print("|cff33ee00Found NPC:|r |cffCCCCCC"..UnitName(unit).."|r")
-			private.Button:SetNPC( NPC_ID, UnitName(unit) )
+			private.Debug("Mob Found")
+			--print("|cff33ee00Found NPC:|r |cffCCCCCC"..UnitName(unit).."|r")
+			--private.Button:SetNPC( NPC_ID, UnitName(unit) )
+			private.OnFound(NPC_ID, UnitName(unit))
 		end
 
 	end
