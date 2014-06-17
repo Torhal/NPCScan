@@ -375,7 +375,7 @@ local NPC_DATA = {
 	[18681] = { world_id = ZN.OUTLAND,                  map_name = ZN.ZANGARMARSH,                 is_tamable = false, is_achievement = true  }, -- Coilfang Emissary
 	[18682] = { world_id = ZN.OUTLAND,                  map_name = ZN.ZANGARMARSH,                 is_tamable = false, is_achievement = true  }, -- Bog Lurker
 	[18683] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = true  }, -- Voidhunter Yar
-	[18684] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = true  }, -- Bro'Gaz the Clanless
+	[18684] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false }, -- Bro'Gaz the Clanless
 	[18685] = { world_id = ZN.OUTLAND,                  map_name = ZN.TEROKKAR_FOREST,             is_tamable = false, is_achievement = true  }, -- Okrek
 	[18686] = { world_id = ZN.OUTLAND,                  map_name = ZN.TEROKKAR_FOREST,             is_tamable = false, is_achievement = true  }, -- Doomsayer Jurim
 	[18689] = { world_id = ZN.OUTLAND,                  map_name = ZN.TEROKKAR_FOREST,             is_tamable = false, is_achievement = true  }, -- Crippler
