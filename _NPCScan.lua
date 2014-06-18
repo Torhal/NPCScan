@@ -49,7 +49,7 @@ local DB_VERSION = 3
 local ISLE_OF_THUNDER_MAP_ID = 1064
 local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
 local PLAYER_FACTION = _G.UnitFactionGroup("player")
-local MOUSEOVER_TARGET_DELAY = 15
+local MOUSEOVER_TARGET_DELAY = 300
 
 
 -------------------------------------------------------------------------------
@@ -778,6 +778,13 @@ do
 		end
 	end
 
+local timefound = {}
+--Check to see if enough time has passed from first found instance
+local function timecheck(recorded)
+	if not recorded then return true end
+	local current_time = GetTime()
+	return (current_time - recorded) > MOUSEOVER_TARGET_DELAY
+end
 	-- Validates found mobs before showing alerts.
 	function private.OnFound(npc_id, npc_name)
 		NPCDeactivate(npc_id)
@@ -802,6 +809,13 @@ do
 
 			local x, y = _G.GetPlayerMapPosition("player")
 			invalid_reason = L.FOUND_UNIT_TAXI:format(npc_name, x * 100, y * 100, _G.GetZoneText())
+		end
+
+		--Checks to see if alert for mob has allready been displayed recently
+		if timecheck(timefound[npc_id]) then
+			timefound[npc_id] = GetTime();
+		else
+			is_valid = false;
 		end
 
 		if is_valid then
@@ -1141,14 +1155,6 @@ end
 
 
 -- Mouseover Trigger Functions
-local timefound = {}
-
---Check to see if enough time has passed from first found instance
-local function timecheck(recorded)
-	if not recorded then return true end
-	local current_time = GetTime()
-	return (current_time - recorded) > MOUSEOVER_TARGET_DELAY
-end
 
 -- Check to see if the user is currently targeting the mouseover mob
 local function istargeted(unit)
@@ -1161,15 +1167,12 @@ end
 function private.Frame:UPDATE_MOUSEOVER_UNIT()
 	if not private.OptionsCharacter.TrackMouseover then return private.Debug("Not Tracking Mobs by Mouseover") end
 	local unit = "Mouseover"
-	if UnitClassification(unit) == "rare" or "rareelite"  and not UnitIsDead(unit)then
+	if (UnitClassification(unit) == ("rare" or "rareelite")) and not UnitIsDead(unit)then
 		local NPC_ID = tonumber((UnitGUID(unit)):sub(6, 10), 16)
 		local identifier  = (UnitGUID(unit)):sub(13)
 
-		if (private.NPC_ID_TO_NAME[NPC_ID] or private.Options["NPCs"][NPC_ID]) and not istargeted(NPC_ID) and timecheck(timefound[NPC_ID]) then
-			timefound[NPC_ID] = GetTime();
+		if (private.NPC_ID_TO_NAME[NPC_ID] or private.Options["NPCs"][NPC_ID]) and not istargeted(NPC_ID) then
 			private.Debug("Mob Found")
-			--print("|cff33ee00Found NPC:|r |cffCCCCCC"..UnitName(unit).."|r")
-			--private.Button:SetNPC( NPC_ID, UnitName(unit) )
 			private.OnFound(NPC_ID, UnitName(unit))
 		end
 
