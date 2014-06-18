@@ -544,11 +544,10 @@ do
 
 		local identifier = checkbox:GetParent().identifier
 		panel.AchievementSetEnabled(identifier, is_enabled)
-
 		if identifier == "BEASTS" then
-			private.OptionsCharacter.TrackBeasts = is_enabled or nil
+			private.OptionsCharacter.TrackBeasts = (is_enabled == "1")
 		elseif identifier == "RARENPC" then
-			private.OptionsCharacter.TrackRares = is_enabled or nil
+			private.OptionsCharacter.TrackRares = (is_enabled == "1")
 		end
 		private.RareMobToggle(identifier, is_enabled)
 		private.CacheListPrint(true)

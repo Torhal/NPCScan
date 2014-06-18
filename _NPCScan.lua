@@ -149,7 +149,7 @@ function private.Print(message, color)
 	if not color then
 		color = _G.NORMAL_FONT_COLOR
 	end
-	_G.DEFAULT_CHAT_FRAME:AddMessage(L.PRINT_FORMAT:format(private.Options.PrintTime and _G.date(_G.CHAT_TIMESTAMP_FORMAT or L.TIME_FORMAT) or "", message), color.r, color.g, color.b)
+	_G.DEFAULT_CHAT_FRAME:AddMessage(L.PRINT_FORMAT:format(private.OptionsCharacter.PrintTime and _G.date(_G.CHAT_TIMESTAMP_FORMAT or L.TIME_FORMAT) or "", message), color.r, color.g, color.b)
 end
 
 
@@ -242,7 +242,7 @@ do
 	-- @param FullListing Adds all cached NPCs before printing, active or not.
 	-- @return True if list printed.
 	function private.CacheListPrint(force_print, full_listing)
-		if force_print or private.Options.CacheWarnings then
+		if force_print or private.OptionsCharacter.CacheWarnings then
 			if full_listing then
 				CacheListPopulate(CacheList)
 			end
@@ -491,11 +491,11 @@ end
 -- @return True if achievement added.
 function private.SetRareMob(identifier, enable)
 	if identifier == "BEASTS" then
-		private.OptionsCharacter.TrackBeasts = enable or nil
+		private.OptionsCharacter.TrackBeasts = enabled
 		private.Config.Search.AchievementSetEnabled(identifier, enable)
 		return true
 	elseif identifier == "RARENPC" then
-		private.OptionsCharacter.TrackRares = enable or nil
+		private.OptionsCharacter.TrackRares = enabled 
 		private.Config.Search.AchievementSetEnabled(identifier, enable)
 		return true
 	end
@@ -535,21 +535,21 @@ end
 
 --- Enables printing cache lists on login.
 function private.SetCacheWarnings(enable)
-		private.Options.CacheWarnings = enable or nil
+		private.OptionsCharacter.CacheWarnings = enable
 		private.Config.cache_warnings_checkbox:SetChecked(enable)
 end
 
 
 --- Enables adding a timestamp to printed messages.
 function private.SetPrintTime(enable)
-		private.Options.PrintTime = enable or nil
+		private.OptionsCharacter.PrintTime = enable
 		private.Config.print_time_checkbox:SetChecked(enable)
 end
 
 
 --- Enables tracking of unneeded achievement NPCs.
 function private.SetAchievementsAddFound(enable)
-		private.OptionsCharacter.AchievementsAddFound = enable or nil
+		private.OptionsCharacter.AchievementsAddFound = enable
 		private.Config.Search.add_found_checkbox:SetChecked(enable)
 
 		for _, achievement in pairs(private.ACHIEVEMENTS) do
@@ -562,14 +562,14 @@ end
 
 --- Enables unmuting sound to play found alerts.
 function private.SetAlertSoundUnmute(enable)
-		private.OptionsCharacter.AlertSoundUnmute = enable or nil
+		private.OptionsCharacter.AlertSoundUnmute = enable
 		private.Config.alert_unmute_checkbox:SetChecked(enable)
 end
 
 
 --- Enables screen edge flash to show on found alerts.
 function private.SetAlertScreenEdgeFlash(enable)
-		private.OptionsCharacter.AlertScreenEdgeFlash = enable or nil
+		private.OptionsCharacter.AlertScreenEdgeFlash = enable
 		private.Config.screen_edge_flash_checkbox:SetChecked(enable)
 end
 
@@ -721,7 +721,7 @@ do
 			return
 		end
 
-		if private.Options.CacheWarnings then
+		if private.OptionsCharacter.CacheWarnings then
 			local ListString = CacheListBuild(PetList)
 			if ListString then
 				private.Print(L.CACHED_PET_RESTING_FORMAT:format(ListString), _G.RED_FONT_COLOR)
@@ -890,7 +890,7 @@ if PLAYER_CLASS == "HUNTER" then
 	function StableUpdater:OnUpdate()
 		self:Hide()
 
-		if private.Options.CacheWarnings then
+		if private.OptionsCharacter.CacheWarnings then
 			local list_string = CacheListBuild(stabled_list)
 			if list_string then
 				private.Print(L.CACHED_STABLED_FORMAT:format(list_string))
@@ -1017,7 +1017,7 @@ do
 			NPCActivate(npc_id, private.Options.NPCWorldIDs[npc_id])
 		end
 
-		if not has_initialized or not private.Options.CacheWarnings then
+		if not has_initialized or not private.OptionsCharacter.CacheWarnings then
 			-- Full listing of cached mobs gets printed on login
 			has_initialized = true
 			table.wipe(CacheList)
