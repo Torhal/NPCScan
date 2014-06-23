@@ -500,11 +500,11 @@ do
 			end
 		else
 			tooltip:SetText(TEXT_TAB_TOOLTIPS[tab.identifier] or _G.UNKNOWN, nil, nil, nil, nil, true)
-
-			local config_section = TEXT_TAB_CONFIG[tab.identifier]
-			if config_section and not private.OptionsCharacter[config_section] then
-				local red = _G.RED_FONT_COLOR
-				tooltip:AddLine(L.SEARCH_ACHIEVEMENT_DISABLED, red.r, red.g, red.b)
+			if tab.checkbox then  
+				if not tab.checkbox:GetChecked() then
+					local red = _G.RED_FONT_COLOR
+					tooltip:AddLine(L.SEARCH_ACHIEVEMENT_DISABLED, red.r, red.g, red.b)
+				end
 			end
 		end
 		tooltip:Show()
@@ -545,9 +545,9 @@ do
 		local identifier = checkbox:GetParent().identifier
 		panel.AchievementSetEnabled(identifier, is_enabled)
 		if identifier == "BEASTS" then
-			private.OptionsCharacter.TrackBeasts = (is_enabled == "1")
+			private.OptionsCharacter.TrackBeasts = (is_enabled == 1)
 		elseif identifier == "RARENPC" then
-			private.OptionsCharacter.TrackRares = (is_enabled == "1")
+			private.OptionsCharacter.TrackRares = (is_enabled == 1)
 		end
 		private.RareMobToggle(identifier, is_enabled)
 		private.CacheListPrint(true)
