@@ -491,11 +491,11 @@ end
 -- @return True if achievement added.
 function private.SetRareMob(identifier, enable)
 	if identifier == "BEASTS" then
-		private.OptionsCharacter.TrackBeasts = enabled
+		private.OptionsCharacter.TrackBeasts = enable
 		private.Config.Search.AchievementSetEnabled(identifier, enable)
 		return true
 	elseif identifier == "RARENPC" then
-		private.OptionsCharacter.TrackRares = enabled 
+		private.OptionsCharacter.TrackRares = enable
 		private.Config.Search.AchievementSetEnabled(identifier, enable)
 		return true
 	end
@@ -671,9 +671,9 @@ function private.Synchronize()
 		--private.NPCRemove(npc_id)
 	--end
 
-	for npc_id, world_id in pairs(private.NPC_ID_TO_WORLD_NAME) do
-		private.NPCRemove(npc_id)
-	end
+	--for npc_id, world_id in pairs(private.NPC_ID_TO_WORLD_NAME) do
+		--private.NPCRemove(npc_id)
+	--end
 
 	assert(not next(ScanIDs), "Orphan NpcIDs in scan pool!")
 
@@ -690,6 +690,10 @@ function private.Synchronize()
 	private.SetBlockFlightScan(character_options.FlightSupress)
 	private.SetRareMob("BEASTS", character_options.TrackBeasts)
 	private.SetRareMob("RARENPC", character_options.TrackRares)
+	private.RareMobToggle("BEASTS", character_options.TrackBeasts)
+	private.RareMobToggle("RARENPC", character_options.TrackRares)
+
+	--private.RareMobToggle(identifier, enable)
 --[[
 	local add_all_defaults = _G.IsShiftKeyDown()
 

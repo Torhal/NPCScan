@@ -27,7 +27,7 @@ local instance_id_registry = {}
 local last_vignette_id = 0
 local vignette_delay
 local vignette_found_count = 0
-local delay_time = 30
+local delay_time = 300
 
 private.VFrame = _G.CreateFrame("Frame")
 private.VFrame:RegisterEvent("VIGNETTE_ADDED")
