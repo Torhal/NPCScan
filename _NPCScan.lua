@@ -56,10 +56,10 @@ local MOUSEOVER_TARGET_DELAY = 300
 -- Variables.
 -------------------------------------------------------------------------------
 private.Options = {}
-_NPCScanOptions= {}
+_NPCScanOptions = {}
 
 private.OptionsCharacter = {}
-_NPCScanOptionsCharacter= {}
+_NPCScanOptionsCharacter = {}
 
 local OptionsDefault = {
 	Version = DB_VERSION,
@@ -226,7 +226,7 @@ do
 		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
 			for criteria_id, npc_id in pairs(private.ACHIEVEMENTS[achievement_id].Criteria) do
 				if private.OptionsCharacter.AchievementsAddFound or not select(3, GetAchievementCriteriaInfoByID(achievement_id, criteria_id)) then -- Not completed
-					self[npc_id] = private.NPCNameFromCache(npc_id)
+				self[npc_id] = private.NPCNameFromCache(npc_id)
 				end
 			end
 		end
@@ -274,7 +274,7 @@ local function ScanAdd(npc_id)
 			ScanIDs[npc_id] = ScanIDs[npc_id] + 1
 		else
 			if not next(ScanIDs) then -- First
-				private.Updater:Play()
+			private.Updater:Play()
 			end
 			ScanIDs[npc_id] = 1
 			private.Overlays.Add(npc_id)
@@ -295,7 +295,7 @@ local function ScanRemove(npc_id)
 		private.Overlays.Remove(npc_id)
 
 		if not next(ScanIDs) then -- Last
-			private.Updater:Stop()
+		private.Updater:Stop()
 		end
 	end
 end
@@ -309,7 +309,6 @@ end
 local NPCActivate, NPCDeactivate
 do
 	local NPCsActive = {}
-
 
 	-- Starts actual scan for NPC if on the right world.
 	function NPCActivate(npc_id, world_id)
@@ -340,7 +339,7 @@ do
 end
 
 
---- Adds an NPC name and ID to settings and begins searching.
+-- Adds an NPC name and ID to settings and begins searching.
 -- @param npc_id Numeric ID of the NPC (See Wowhead.com).
 -- @param Name Temporary name to identify this NPC by in the search table.
 -- @param WorldID Number or localized string WorldID to limit this search to.
@@ -365,7 +364,7 @@ function private.NPCAdd(npc_id, npc_name, world_id)
 end
 
 
---- Removes an NPC from settings and stops searching for it.
+-- Removes an NPC from settings and stops searching for it.
 -- @param NpcID Numeric ID of the NPC.
 -- @return True if custom NPC removed.
 function private.NPCRemove(npc_id)
@@ -439,14 +438,14 @@ local function AchievementDeactivate(achievement)
 end
 
 
---- @param achievement Achievement data table from NS.Achievements.
+-- @param achievement Achievement data table from NS.Achievements.
 -- @return True if the achievement NPC is being searched for.
 function private.AchievementNPCIsActive(achievement, npc_id)
 	return achievement.NPCsActive[npc_id] ~= nil
 end
 
 
---- Adds a kill-related achievement to track.
+-- Adds a kill-related achievement to track.
 -- @param achievement_id Numeric ID of achievement.
 -- @return True if achievement added.
 function private.AchievementAdd(achievement_id)
@@ -456,8 +455,8 @@ function private.AchievementAdd(achievement_id)
 	if not achievement then return false end
 
 	if not next(private.OptionsCharacter.Achievements) then -- First
-		private.Frame:RegisterEvent("ACHIEVEMENT_EARNED")
-		private.Frame:RegisterEvent("CRITERIA_UPDATE")
+	private.Frame:RegisterEvent("ACHIEVEMENT_EARNED")
+	private.Frame:RegisterEvent("CRITERIA_UPDATE")
 	end
 
 	private.OptionsCharacter.Achievements[achievement_id] = true
@@ -467,7 +466,7 @@ function private.AchievementAdd(achievement_id)
 end
 
 
---- Removes an achievement from settings and stops tracking it.
+-- Removes an achievement from settings and stops tracking it.
 -- @param achievement_id Numeric ID of achievement.
 -- @return True if achievement removed.
 function private.AchievementRemove(achievement_id)
@@ -478,15 +477,15 @@ function private.AchievementRemove(achievement_id)
 	private.OptionsCharacter.Achievements[achievement_id] = nil
 
 	if not next(private.OptionsCharacter.Achievements) then -- Last
-		private.Frame:UnregisterEvent("ACHIEVEMENT_EARNED")
-		private.Frame:UnregisterEvent("CRITERIA_UPDATE")
+	private.Frame:UnregisterEvent("ACHIEVEMENT_EARNED")
+	private.Frame:UnregisterEvent("CRITERIA_UPDATE")
 	end
 	private.Config.Search.AchievementSetEnabled(achievement_id, false)
 	return true
 end
 
 
---- Adds a kill-related achievement to track.
+-- Adds a kill-related achievement to track.
 -- @param AchievementID Numeric ID of achievement.
 -- @return True if achievement added.
 function private.SetRareMob(identifier, enable)
@@ -533,54 +532,54 @@ function private.RareMobToggle(identifier, enable)
 end
 
 
---- Enables printing cache lists on login.
+-- Enables printing cache lists on login.
 function private.SetCacheWarnings(enable)
-		private.OptionsCharacter.CacheWarnings = enable
-		private.Config.cache_warnings_checkbox:SetChecked(enable)
+	private.OptionsCharacter.CacheWarnings = enable
+	private.Config.cache_warnings_checkbox:SetChecked(enable)
 end
 
 
---- Enables adding a timestamp to printed messages.
+-- Enables adding a timestamp to printed messages.
 function private.SetPrintTime(enable)
-		private.OptionsCharacter.PrintTime = enable
-		private.Config.print_time_checkbox:SetChecked(enable)
+	private.OptionsCharacter.PrintTime = enable
+	private.Config.print_time_checkbox:SetChecked(enable)
 end
 
 
---- Enables tracking of unneeded achievement NPCs.
+-- Enables tracking of unneeded achievement NPCs.
 function private.SetAchievementsAddFound(enable)
-		private.OptionsCharacter.AchievementsAddFound = enable
-		private.Config.Search.add_found_checkbox:SetChecked(enable)
+	private.OptionsCharacter.AchievementsAddFound = enable
+	private.Config.Search.add_found_checkbox:SetChecked(enable)
 
-		for _, achievement in pairs(private.ACHIEVEMENTS) do
-			if AchievementDeactivate(achievement) then -- Was active
-				AchievementActivate(achievement)
-			end
+	for _, achievement in pairs(private.ACHIEVEMENTS) do
+		if AchievementDeactivate(achievement) then -- Was active
+		AchievementActivate(achievement)
 		end
+	end
 end
 
 
---- Enables unmuting sound to play found alerts.
+-- Enables unmuting sound to play found alerts.
 function private.SetAlertSoundUnmute(enable)
-		private.OptionsCharacter.AlertSoundUnmute = enable
-		private.Config.alert_unmute_checkbox:SetChecked(enable)
+	private.OptionsCharacter.AlertSoundUnmute = enable
+	private.Config.alert_unmute_checkbox:SetChecked(enable)
 end
 
 
---- Enables screen edge flash to show on found alerts.
+-- Enables screen edge flash to show on found alerts.
 function private.SetAlertScreenEdgeFlash(enable)
-		private.OptionsCharacter.AlertScreenEdgeFlash = enable
-		private.Config.screen_edge_flash_checkbox:SetChecked(enable)
+	private.OptionsCharacter.AlertScreenEdgeFlash = enable
+	private.Config.screen_edge_flash_checkbox:SetChecked(enable)
 end
 
---- Sets the sound to play when NPCs are found.
+-- Sets the sound to play when NPCs are found.
 function private.SetAlertSound(alert_sound)
 	assert(alert_sound == nil or type(alert_sound) == "string", "AlertSound must be a string or nil.")
-		private.Options.AlertSound = alert_sound
-		_G.UIDropDownMenu_SetText(private.Config.alert_sound_dropdown, alert_sound == nil and L.CONFIG_ALERT_SOUND_DEFAULT or alert_sound)
+	private.Options.AlertSound = alert_sound
+	_G.UIDropDownMenu_SetText(private.Config.alert_sound_dropdown, alert_sound == nil and L.CONFIG_ALERT_SOUND_DEFAULT or alert_sound)
 end
 
---- Sets the icon to display over found NPC.
+-- Sets the icon to display over found NPC.
 function private.SetTargetIcon(icon_id)
 	icon_id = icon_id or private.NUM_RAID_ICONS
 	private.OptionsCharacter.TargetIcon = icon_id
@@ -590,21 +589,21 @@ function private.SetTargetIcon(icon_id)
 	_G.UIDropDownMenu_SetText(private.Config.alert_icon_dropdown, colorCode .. icon_info.text)
 end
 
---- Enables Blocking alerts while on taxi.
+-- Enables Blocking alerts while on taxi.
 function private.SetBlockFlightScan(enable)
 	private.OptionsCharacter.FlightSupress = enable
 	private.Config.block_flight_scan_checkbox:SetChecked(enable)
 	return enable
 end
 
---- Enables Vignette tracking.
+-- Enables Vignette tracking.
 function private.SetVignetteScan(enable)
 	private.OptionsCharacter.TrackVignettes = enable
 	private.Config.viginette_scan_checkbox:SetChecked(enable)
 	return enable
 end
 
---- Enables Mouseover tracking.
+-- Enables Mouseover tracking.
 function private.SetMouseoverScan(enable)
 	private.OptionsCharacter.TrackMouseover = enable
 	private.Config.mouseover_scan_checkbox:SetChecked(enable)
@@ -628,22 +627,22 @@ do
 		[68322] = "Alliance", -- Muerta
 	}
 
-	--- @return True if NpcID should be a default for this character.
+	-- @return True if NpcID should be a default for this character.
 	function IsDefaultNPCValid(npc_id)
 		return (PLAYER_CLASS == "HUNTER" or not private.TAMABLE_ID_TO_NAME[npc_id] or TAMABLE_EXCEPTIONS[npc_id]) and (not NPC_FACTION[npc_id] or NPC_FACTION[npc_id] == PLAYER_FACTION)
 	end
 end
 
 
---- Resets the scanning list and reloads it from saved settings.
+-- Resets the scanning list and reloads it from saved settings.
 function private.Synchronize()
 
-	for var,value in pairs(OptionsDefault) do
-		private.Options[var] = private.Options[var]==nil and value or private.Options[var]
+	for var, value in pairs(OptionsDefault) do
+		private.Options[var] = private.Options[var] == nil and value or private.Options[var]
 	end
 
-		for var,value in pairs(OptionsCharacterDefault) do
-		private.OptionsCharacter[var] = private.OptionsCharacter[var]==nil and value or private.OptionsCharacter[var]
+	for var, value in pairs(OptionsCharacterDefault) do
+		private.OptionsCharacter[var] = private.OptionsCharacter[var] == nil and value or private.OptionsCharacter[var]
 	end
 
 	local options = private.Options
@@ -697,7 +696,7 @@ do
 	end
 
 
-	--- @return True if the tamable mob is in its correct zone, else false with an optional reason string.
+	-- @return True if the tamable mob is in its correct zone, else false with an optional reason string.
 	local function OnFoundTamable(npc_id, npc_name)
 		local tamable_zone_name = private.TAMABLE_ID_TO_MAP_NAME[npc_id]
 		local expected_zone_id = tamable_zone_name and private.ZONE_IDS[private.ZONE_NAME_TO_LABEL[tamable_zone_name]]
@@ -713,12 +712,12 @@ do
 			else
 				local expected_zone_name = expected_zone_id and _G.GetMapNameByID(expected_zone_id) or nil
 				if not expected_zone_name then -- GetMapNameByID returns nil for continent maps
-					_G.SetMapByID(expected_zone_id)
+				_G.SetMapByID(expected_zone_id)
 
-					local map_continent = _G.GetCurrentMapContinent()
-					if map_continent >= 1 then
-						expected_zone_name = select(map_continent, _G.GetMapContinents())
-					end
+				local map_continent = _G.GetCurrentMapContinent()
+				if map_continent >= 1 then
+					expected_zone_name = select(map_continent, _G.GetMapContinents())
+				end
 				end
 				invalid_reason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(npc_name, _G.GetRealZoneText(), expected_zone_name or L.FOUND_ZONE_UNKNOWN, expected_zone_id)
 			end
@@ -743,13 +742,16 @@ do
 		end
 	end
 
-local timefound = {}
---Check to see if enough time has passed from first found instance
-local function timecheck(recorded)
-	if not recorded then return true end
-	local current_time = GetTime()
-	return (current_time - recorded) > MOUSEOVER_TARGET_DELAY
-end
+	local NPC_RECORDED_TIMES = {}
+
+	--Check to see if enough time has passed from first found instance
+	local function ValidRecordedTime(recorded_time)
+		if not recorded_time then
+			return true
+		end
+		return (_G.GetTime() - recorded_time) > MOUSEOVER_TARGET_DELAY
+	end
+
 	-- Validates found mobs before showing alerts.
 	function private.OnFound(npc_id, npc_name)
 		NPCDeactivate(npc_id)
@@ -777,10 +779,10 @@ end
 		end
 
 		--Checks to see if alert for mob has allready been displayed recently
-		if timecheck(timefound[npc_id]) then
-			timefound[npc_id] = GetTime();
+		if ValidRecordedTime(NPC_RECORDED_TIMES[npc_id]) then
+			NPC_RECORDED_TIMES[npc_id] = _G.GetTime()
 		else
-			is_valid = false;
+			is_valid = false
 		end
 
 		if is_valid then
@@ -791,18 +793,17 @@ end
 		end
 	end
 
-
 	local criteria_updated_bucket
-
 
 	function private.Frame:CRITERIA_UPDATE()
 		criteria_updated_bucket = true
 	end
 
-
 	-- Scans all NPCs on a timer and alerts if any are found.
 	function private.Updater:OnLoop()
 		if criteria_updated_bucket then
+			criteria_updated_bucket = false
+
 			if not private.OptionsCharacter.AchievementsAddFound then
 				for achievement_id in pairs(private.OptionsCharacter.Achievements) do
 					local achievement = private.ACHIEVEMENTS[achievement_id]
@@ -816,7 +817,6 @@ end
 					end
 				end
 			end
-			criteria_updated_bucket = false
 		end
 
 		for npc_id in pairs(ScanIDs) do
@@ -832,7 +832,6 @@ end
 if PLAYER_CLASS == "HUNTER" then
 	local StableUpdater = _G.CreateFrame("Frame")
 	local stabled_list = {}
-
 
 	-- Stops scans for stabled hunter pets before a bogus alert can fire.
 	function private.Frame:PET_STABLE_UPDATE()
@@ -850,7 +849,6 @@ if PLAYER_CLASS == "HUNTER" then
 		StableUpdater:Show()
 	end
 
-
 	-- Bucket to print cached stabled pets on one line.
 	function StableUpdater:OnUpdate()
 		self:Hide()
@@ -865,11 +863,9 @@ if PLAYER_CLASS == "HUNTER" then
 		end
 	end
 
-
 	StableUpdater:Hide()
 	StableUpdater:SetScript("OnUpdate", StableUpdater.OnUpdate)
 	private.Frame:RegisterEvent("PET_STABLE_UPDATE")
-
 
 	-- Prevents the pet UI from querying (and caching) stabled pets until actually viewing the stables.
 	-- @param is_override Forces a normal query even if the stables aren't open.
@@ -908,7 +904,7 @@ do
 		local map_name, _, _, _, _, _, _, map_id = _G.GetInstanceInfo()
 
 		if map_id == ISLE_OF_THUNDER_MAP_ID then -- Fix for Isle of Thunder having a diffrent Instance name
-			private.WorldID = private.ZONE_NAMES.PANDARIA
+		private.WorldID = private.ZONE_NAMES.PANDARIA
 		else
 			private.WorldID = map_name
 		end
@@ -1077,27 +1073,23 @@ end
 -------------------------------------------------------------------------------
 -- Mouseover Trigger Functions
 -------------------------------------------------------------------------------
-
--- Check to see if the user is currently targeting the mouseover mob
-local function istargeted(unit)
-	if not UnitGUID("target") then return false end
-	local NPC_ID = tonumber((UnitGUID("target")):sub(6, 10), 16)
-	return unit == NPC_ID
-end
-
--- Check what kind or mob the player has mouseovered and Trigger alert if tracked rare
 function private.Frame:UPDATE_MOUSEOVER_UNIT()
-	if not private.OptionsCharacter.TrackMouseover then return private.Debug("Not Tracking Mobs by Mouseover") end
-	local unit = "Mouseover"
-	if (UnitClassification(unit) == ("rare" or "rareelite")) and not UnitIsDead(unit)then
-		local NPC_ID = tonumber((UnitGUID(unit)):sub(6, 10), 16)
-		local identifier  = (UnitGUID(unit)):sub(13)
+	if not private.OptionsCharacter.TrackMouseover then
+		private.Debug("Not Tracking Mobs by Mouseover")
+		return
+	end
+	local unit_token = "mouseover"
 
-		if (private.NPC_ID_TO_NAME[NPC_ID] or private.Options["NPCs"][NPC_ID]) and not istargeted(NPC_ID) then
-			private.Debug("Mob Found")
-			private.OnFound(NPC_ID, UnitName(unit))
-		end
+	if _G.UnitClassification(unit_token) ~= ("rare" or "rareelite") or _G.UnitIsDead(unit_token) then
+		return
+	end
+	local mouseover_id = tonumber(_G.UnitGUID(unit_token):sub(6, 10), 16)
+	local target_guid = _G.UnitGUID("target")
+	local target_id = target_guid and tonumber(target_guid:sub(6, 10), 16) or nil
 
+	if (private.NPC_ID_TO_NAME[mouseover_id] or private.Options.NPCs[mouseover_id]) and mouseover_id ~= target_id then
+		private.Debug("Mob Found")
+		private.OnFound(mouseover_id, _G.UnitName(unit_token))
 	end
 end
 
