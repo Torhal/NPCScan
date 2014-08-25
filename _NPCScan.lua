@@ -459,7 +459,7 @@ function private.AchievementAdd(achievement_id)
 		private.Frame:RegisterEvent("ACHIEVEMENT_EARNED")
 		private.Frame:RegisterEvent("CRITERIA_UPDATE")
 	end
-	
+
 	private.OptionsCharacter.Achievements[achievement_id] = true
 	private.Config.Search.AchievementSetEnabled(achievement_id, true)
 	AchievementActivate(achievement)
@@ -648,36 +648,9 @@ function private.Synchronize()
 
 	local options = private.Options
 	local character_options = private.OptionsCharacter
---[[
-	if not options then
-		options = private.OptionsDefault
-	end
-
-	if not options.IgnoreList then
-		options.IgnoreList = private.OptionsDefault.IgnoreList
-	end
-
-	if not character_options then
-		character_options = private.OptionsCharacterDefault
-		is_default_scan = true
-	end
-	--]]
-	-- Clear all scans
-	--for achievement_id in pairs(private.ACHIEVEMENTS) do
-		--private.AchievementRemove(achievement_id)
-	--end
-
-	--for npc_id in pairs(private.Options.NPCs) do
-		--private.NPCRemove(npc_id)
-	--end
-
-	--for npc_id, world_id in pairs(private.NPC_ID_TO_WORLD_NAME) do
-		--private.NPCRemove(npc_id)
-	--end
 
 	assert(not next(ScanIDs), "Orphan NpcIDs in scan pool!")
 
-	--_G._NPCScanOptions.IgnoreList = options.IgnoreList
 	private.SetCacheWarnings(character_options.CacheWarnings)
 	private.SetPrintTime(character_options.PrintTime)
 	private.SetAchievementsAddFound(character_options.AchievementsAddFound)
@@ -693,20 +666,9 @@ function private.Synchronize()
 	private.RareMobToggle("BEASTS", character_options.TrackBeasts)
 	private.RareMobToggle("RARENPC", character_options.TrackRares)
 
-	--private.RareMobToggle(identifier, enable)
---[[
-	local add_all_defaults = _G.IsShiftKeyDown()
-
-	for npc_id, npc_name in pairs(options.NPCs) do
-		-- If defaults, only add tamable custom mobs if the player is a hunter
-		if add_all_defaults or not is_default_scan or IsDefaultNPCValid(npc_id) then
-			private.NPCAdd(npc_id, npc_name, options.NPCWorldIDs[npc_id])
-		end
-	end
---]]
 	for achievement_id, achievement in pairs(private.ACHIEVEMENTS) do
 		-- If defaults, don't enable completed achievements unless explicitly allowed
-		if character_options.Achievements[achievement_id]   then --and (not is_default_scan or character_options.AchievementsAddFound or not achievement.is_completed) then
+		if character_options.Achievements[achievement_id] then
 			private.AchievementAdd(achievement_id)
 		end
 	end
@@ -717,7 +679,6 @@ end
 
 do
 	local PetList = {}
-
 
 	-- Prints the list of cached pets when leaving a city or inn.
 	function private.Frame:PLAYER_UPDATE_RESTING()
@@ -928,50 +889,8 @@ function private.Frame:PLAYER_LOGIN(event_name)
 			Dialog:Spawn("NPCSCAN_AUTOADD_WARNING")
 		end
 	end
-	--local stored_options = _G._NPCScanOptions
-	--local stored_character_options = _G._NPCScanOptionsCharacter
-	--_G._NPCScanOptions = private.Options
-	--_G._NPCScanOptionsCharacter = private.OptionsCharacter
-
 	private.Options = _G._NPCScanOptions
-	private.OptionsCharacter = _G._NPCScanOptionsCharacter 
-
---[[
-	--Updates custom NPCs to include include new NPCS added in version change
-	if stored_options and stored_options.Version ~= DB_VERSION then
-		if stored_options.NPCs then
-			for npc_id, npc_name in pairs(private.OptionsDefault.NPCs) do
-				if not stored_options.NPCs[npc_id] then
-					stored_options.NPCs[npc_id] = npc_name
-					local world = private.OptionsDefault.NPCWorldIDs and private.OptionsDefault.NPCWorldIDs[npc_id]
-					if world then
-						stored_options.NPCWorldIDs[npc_id] = world
-					end
-				end
-			end
-		end
-		stored_options.Version = DB_VERSION
-	end
-
-	--Converts old style per character NPCs to global saved NPCs
-	if stored_character_options and stored_character_options.Version ~= DB_VERSION then
-		if not stored_character_options.Version or type(stored_character_options.Version) == "string" or stored_character_options.Version < DB_VERSION then
-			if stored_character_options.NPCs then
-				for npc_id, npc_name in pairs(stored_character_options.NPCs) do
-					if not stored_options.NPCs[npc_id] then
-						stored_options.NPCs[npc_id] = npc_name
-						local world = stored_character_options.NPCWorldIDs and stored_character_options.NPCWorldIDs[npc_id]
-						if world then
-							stored_options.NPCWorldIDs[npc_id] = world
-						end
-					end
-				end
-				stored_character_options.NPCs = nil
-			end
-		end
-		stored_character_options.Version = DB_VERSION
-	end
---]]
+	private.OptionsCharacter = _G._NPCScanOptionsCharacter
 	private.Overlays.Register()
 	private.Synchronize()
 
@@ -1155,10 +1074,9 @@ else
 	private.Frame:ZONE_CHANGED_NEW_AREA("ZONE_CHANGED_NEW_AREA")
 end
 
-
-
-
+-------------------------------------------------------------------------------
 -- Mouseover Trigger Functions
+-------------------------------------------------------------------------------
 
 -- Check to see if the user is currently targeting the mouseover mob
 local function istargeted(unit)
