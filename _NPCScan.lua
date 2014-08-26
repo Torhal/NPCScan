@@ -81,6 +81,7 @@ local OptionsDefault = {
 		MapName = {},
 		WorldID = {},
 	},
+	CacheWarnings = true,
 }
 
 local OptionsCharacterDefault = {
@@ -96,7 +97,6 @@ local OptionsCharacterDefault = {
 	AchievementsAddFound = true,
 	AlertScreenEdgeFlash = true,
 	AlertSoundUnmute = nil,
-	CacheWarnings = true,
 	FlightSupress = true,
 	TargetIcon = 8, --Skull
 	TrackBeasts = true,
@@ -242,7 +242,7 @@ do
 	-- @param FullListing Adds all cached NPCs before printing, active or not.
 	-- @return True if list printed.
 	function private.CacheListPrint(force_print, full_listing)
-		if force_print or private.OptionsCharacter.CacheWarnings then
+		if force_print or private.Options.CacheWarnings then
 			if full_listing then
 				CacheListPopulate(CacheList)
 			end
@@ -534,7 +534,7 @@ end
 
 -- Enables printing cache lists on login.
 function private.SetCacheWarnings(enable)
-	private.OptionsCharacter.CacheWarnings = enable
+	private.Options.CacheWarnings = enable
 	private.Config.cache_warnings_checkbox:SetChecked(enable)
 end
 
@@ -650,7 +650,7 @@ function private.Synchronize()
 
 	assert(not next(ScanIDs), "Orphan NpcIDs in scan pool!")
 
-	private.SetCacheWarnings(character_options.CacheWarnings)
+	private.SetCacheWarnings(options.CacheWarnings)
 	private.SetPrintTime(character_options.PrintTime)
 	private.SetAchievementsAddFound(character_options.AchievementsAddFound)
 	private.SetAlertSoundUnmute(character_options.AlertSoundUnmute)
@@ -685,7 +685,7 @@ do
 			return
 		end
 
-		if private.OptionsCharacter.CacheWarnings then
+		if private.Options.CacheWarnings then
 			local ListString = CacheListBuild(PetList)
 			if ListString then
 				private.Print(L.CACHED_PET_RESTING_FORMAT:format(ListString), _G.RED_FONT_COLOR)
@@ -853,7 +853,7 @@ if PLAYER_CLASS == "HUNTER" then
 	function StableUpdater:OnUpdate()
 		self:Hide()
 
-		if private.OptionsCharacter.CacheWarnings then
+		if private.Options.CacheWarnings then
 			local list_string = CacheListBuild(stabled_list)
 			if list_string then
 				private.Print(L.CACHED_STABLED_FORMAT:format(list_string))
@@ -903,8 +903,9 @@ do
 		-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
 		local map_name, _, _, _, _, _, _, map_id = _G.GetInstanceInfo()
 
-		if map_id == ISLE_OF_THUNDER_MAP_ID then -- Fix for Isle of Thunder having a diffrent Instance name
-		private.WorldID = private.ZONE_NAMES.PANDARIA
+		-- Fix for Isle of Thunder having a diffrent Instance name
+		if map_id == ISLE_OF_THUNDER_MAP_ID then
+			private.WorldID = private.ZONE_NAMES.PANDARIA
 		else
 			private.WorldID = map_name
 		end
@@ -936,7 +937,7 @@ do
 			NPCActivate(npc_id, private.Options.NPCWorldIDs[npc_id])
 		end
 
-		if not has_initialized or not private.OptionsCharacter.CacheWarnings then
+		if not has_initialized or not private.Options.CacheWarnings then
 			-- Full listing of cached mobs gets printed on login
 			has_initialized = true
 			table.wipe(CacheList)
