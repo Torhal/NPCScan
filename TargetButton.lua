@@ -10,13 +10,11 @@ local type = _G.type
 -- Libraries
 local math = _G.math
 
-
 -------------------------------------------------------------------------------
 -- AddOn namespace.
 -------------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
 local L = private.L
-
 
 -------------------------------------------------------------------------------
 -- Frames.
@@ -257,12 +255,16 @@ function target_button:Update(ID, Name, Source)
 
 	if Source == "Unknown Vignette" then
 		Model:SetDisplayInfo(28089)
-		self:SetAttribute("macrotext", private.macrotext)
+		if Name == "Vignette Mob" then 
+			self:SetAttribute("macrotext", private.macrotext)
+		else
+			self:SetAttribute("macrotext", "/cleartarget\n/targetexact " .. Name)
+		end
 	else
 		self:SetAttribute("macrotext", "/cleartarget\n/targetexact " .. Name)
 	end
-	self:PLAYER_TARGET_CHANGED() -- Updates the target icon
 
+	self:PLAYER_TARGET_CHANGED() -- Updates the target icon
 	self:Show()
 	self:StopAnimating()
 	self.Glow:Play()
@@ -283,7 +285,6 @@ function target_button:EnableDrag(Enable)
 	end
 end
 
-
 function target_button:PLAYER_REGEN_ENABLED()
 	if self.PendingName and self.PendingID then
 		self:Update(self.PendingID, self.PendingName, self.PendingSource)
@@ -293,20 +294,20 @@ function target_button:PLAYER_REGEN_ENABLED()
 	end
 end
 
-
 -- Enables or disables dragging when the drag modifier is held.
 function target_button:MODIFIER_STATE_CHANGED()
 	self:EnableDrag(_G.IsModifiedClick("_NPCSCAN_BUTTONDRAG"))
 end
 
-
 do
 	-- @param ID A numeric NpcID or string UnitID.
 	-- @return True if the given ID represents the current target.
 	local function TargetIsFoundRare(ID) -- Returns true if the button targeted its rare
-		if type(ID) == "number" then
-			local GUID = _G.UnitGUID("target")
-			if GUID and ID == tonumber(GUID:sub(6, 10), 16) then
+		local GUID = _G.UnitGUID("target")
+		if type(ID) == "number"  and GUID then
+			local _,_,_,_,_,_,_,target_id = string.find(GUID, "(%a+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+)")
+
+			if GUID and ID == tonumber(target_id) then
 				return true
 			end
 		else -- UnitID
@@ -317,6 +318,7 @@ do
 	-- Raid marks the rare when it's targeted.
 	function target_button:PLAYER_TARGET_CHANGED()
 		local ID = self.ID
+
 		if TargetIsFoundRare(ID) then
 			if _G.GetRaidTargetIndex("target") ~= private.OptionsCharacter.TargetIcon and (not _G.IsInRaid() or (_G.UnitIsGroupAssistant("player") or _G.UnitIsGroupLeader("player"))) then
 				_G.SetRaidTarget("target", private.OptionsCharacter.TargetIcon)
@@ -334,7 +336,6 @@ do
 	end
 end
 
-
 -- Updates the 3D preview display if the targeted rare changes appearance.
 function target_button:UNIT_MODEL_CHANGED(_, UnitID)
 	if _G.UnitIsUnit(UnitID, self.Model.UnitID) then
@@ -342,7 +343,6 @@ function target_button:UNIT_MODEL_CHANGED(_, UnitID)
 		self.Model:SetUnit(UnitID)
 	end
 end
-
 
 -- Stops the animation after a number of loops.
 function target_button.Flash:OnLoop(Direction)
@@ -356,12 +356,10 @@ function target_button.Flash:OnLoop(Direction)
 	end
 end
 
-
 -- Resets the loop count when resumed/restarted.
 function target_button.Flash:OnPlay()
 	self.LoopCount = 0
 end
-
 
 do
 	-- Adjusts the model camera to compensate for bad default camera angles.
@@ -414,12 +412,10 @@ do
 	end
 end
 
-
 -- Slowly rotates the 3D model preview.
 function target_button.Model:OnUpdate(elapsed)
 	self:SetFacing(self:GetFacing() + elapsed * target_button.RotationRate)
 end
-
 
 local Background = target_button:GetNormalTexture()
 Background:SetDrawLayer("BACKGROUND")
@@ -427,7 +423,6 @@ Background:ClearAllPoints()
 Background:SetPoint("BOTTOMLEFT", 3, 3)
 Background:SetPoint("TOPRIGHT", -3, -3)
 Background:SetTexCoord(0, 1, 0, 0.25)
-
 
 local TitleBackground = target_button:CreateTexture(nil, "BORDER")
 TitleBackground:SetTexture([[Interface\AchievementFrame\UI-Achievement-Title]])
@@ -437,28 +432,23 @@ TitleBackground:SetHeight(18)
 TitleBackground:SetTexCoord(0, 0.9765625, 0, 0.3125)
 TitleBackground:SetAlpha(0.8)
 
-
 local Title = target_button:CreateFontString(nil, "OVERLAY", "GameFontHighlightMedium", 1)
 Title:SetPoint("TOPLEFT", TitleBackground, 0, 2)
 Title:SetPoint("RIGHT", TitleBackground)
 target_button:SetFontString(Title)
-
 
 target_button.Source = target_button:CreateFontString(nil, "OVERLAY", "SystemFont_Tiny")
 target_button.Source:SetPoint("BOTTOMLEFT", TitleBackground)
 target_button.Source:SetPoint("RIGHT", -8, 0)
 target_button.Source:SetTextHeight(6)
 
-
 local source_color = _G.NORMAL_FONT_COLOR
 target_button.Source:SetTextColor(source_color.r, source_color.g, source_color.b)
-
 
 local target_button_subtitle = target_button:CreateFontString(nil, "OVERLAY", "GameFontBlackTiny")
 target_button_subtitle:SetPoint("TOPLEFT", target_button.Source, "BOTTOMLEFT", 0, -4)
 target_button_subtitle:SetPoint("RIGHT", target_button.Source)
 target_button_subtitle:SetText(private.L.BUTTON_FOUND)
-
 
 -- Model view
 local Model = target_button.Model
@@ -466,7 +456,6 @@ Model:SetPoint("BOTTOMLEFT", target_button, "TOPLEFT", 0, -4)
 Model:SetPoint("RIGHT")
 Model:SetHeight(target_button:GetWidth() * 0.6)
 target_button:SetClampRectInsets(0, 0, Model:GetHeight(), 0) -- Allow room for model
-
 
 -- Glow animation
 local Texture = Model:CreateTexture(nil, "OVERLAY")
@@ -478,17 +467,14 @@ Texture:SetTexCoord(0, 0.78125, 0, 0.66796875)
 Texture:SetAlpha(0)
 target_button.Glow = Texture:CreateAnimationGroup()
 
-
 local FadeIn = target_button.Glow:CreateAnimation("Alpha")
 FadeIn:SetChange(1.0)
 FadeIn:SetDuration(0.2)
-
 
 local FadeOut = target_button.Glow:CreateAnimation("Alpha")
 FadeOut:SetOrder(2)
 FadeOut:SetChange(-1.0)
 FadeOut:SetDuration(0.5)
-
 
 -- Shine animation (reflection swipe)
 local Texture = target_button:CreateTexture(nil, "ARTWORK")
@@ -500,25 +486,21 @@ Texture:SetTexCoord(0.78125, 0.912109375, 0, 0.28125)
 Texture:SetAlpha(0)
 target_button.Shine = Texture:CreateAnimationGroup()
 
-
 local Show = target_button.Shine:CreateAnimation("Alpha")
 Show:SetStartDelay(0.3)
 Show:SetChange(1.0)
 Show:SetDuration(1e-5) -- Note: 0 is invalid
-
 
 local Slide = target_button.Shine:CreateAnimation("Translation")
 Slide:SetOrder(2)
 Slide:SetOffset(target_button:GetWidth() - Texture:GetWidth() + 8, 0)
 Slide:SetDuration(0.4)
 
-
 local FadeOut = target_button.Shine:CreateAnimation("Alpha")
 FadeOut:SetOrder(2)
 FadeOut:SetStartDelay(0.2)
 FadeOut:SetChange(-1.0)
 FadeOut:SetDuration(0.2)
-
 
 -- Full screen flash
 local Flash = target_button.Flash
@@ -527,18 +509,15 @@ Flash:SetAllPoints()
 Flash:SetAlpha(0)
 Flash:SetFrameStrata("FULLSCREEN_DIALOG")
 
-
 local Texture = Flash:CreateTexture()
 Texture:SetBlendMode("ADD")
 Texture:SetAllPoints()
 Texture:SetTexture([[Interface\FullScreenTextures\LowHealth]])
 
-
 Flash.Fade = Flash:CreateAnimationGroup()
 Flash.Fade:SetLooping("BOUNCE")
 Flash.Fade:SetScript("OnLoop", Flash.OnLoop)
 Flash.Fade:SetScript("OnPlay", Flash.OnPlay)
-
 
 local FadeIn = Flash.Fade:CreateAnimation("Alpha")
 FadeIn:SetChange(1.0)

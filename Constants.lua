@@ -29,6 +29,7 @@ private.CONTINENT_IDS = {
 	NORTHREND = 4,
 	THE_MAELSTROM = 5,
 	PANDARIA = 6,
+	DRANOR = 7,
 }
 
 
@@ -36,20 +37,27 @@ do
 	local VIRTUAL_CONTINENTS = {
 		[private.CONTINENT_IDS.THE_MAELSTROM] = true
 	}
+ --13, 14,466,485,751,862,962
+
+	local MapContinents = { _G.GetMapContinents() }  --Now returns both mapid and World name
+	private.LOCALIZED_CONTINENT_NAMES = {}
 
 
-	private.LOCALIZED_CONTINENT_NAMES = { _G.GetMapContinents() }
+	for continent_id, continent_name in pairs(MapContinents) do
+		if type(continent_name) == "string" then  --Weeds out the extra map id from names
+		_G.tinsert(private.LOCALIZED_CONTINENT_NAMES,  continent_name)
+		end
+	end
+
 	for continent_id in pairs(VIRTUAL_CONTINENTS) do
 		private.LOCALIZED_CONTINENT_NAMES[continent_id] = nil
 	end
 
-
 	private.LOCALIZED_CONTINENT_IDS = {}
 	for continent_id, continent_name in pairs(private.LOCALIZED_CONTINENT_NAMES) do
-		private.LOCALIZED_CONTINENT_IDS[continent_name] = continent_id
+			private.LOCALIZED_CONTINENT_IDS[continent_name] = continent_id
 	end
 end -- do-block
-
 
 private.ZONE_IDS = {
 	DUROTAR = 4,
@@ -152,6 +160,21 @@ private.ZONE_IDS = {
 	ISLE_OF_GIANTS = 929,
 	THRONE_OF_THUNDER = 930,
 	TIMELESS_ISLE = 951,
+--WoD Areas 
+	FROSTFIRE_RIDGE = 941,
+	TANAAN_JUNGLE = 945,
+	TALADOR = 946,
+	SHADOWMOON_VALLEY = 947,
+	SPIRES_OF_ARAK = 948,
+	GORGROND = 949,
+	NAGRAND = 950,
+	DRAENOR = 962,
+	TANAAN_JUNGLE = 970, -- - ASSAULT ON THE DARK PORTAL
+	LUNARFALL = 971,
+	FROSTWALL = 976, 
+	ASHRAN = 978,
+	STORMSHIELD = 1009,
+	WARSPEAR = 1011,
 }
 
 
@@ -168,13 +191,14 @@ end
 
 do
 	local continent_names = { _G.GetMapContinents() }
-
-	private.ZONE_NAMES.KALIMDOR = continent_names[1]
-	private.ZONE_NAMES.EASTERN_KINGDOMS = continent_names[2]
-	private.ZONE_NAMES.OUTLAND = continent_names[3]
-	private.ZONE_NAMES.NORTHREND = continent_names[4]
-	private.ZONE_NAMES.THE_MAELSTROM = continent_names[5]
-	private.ZONE_NAMES.PANDARIA = continent_names[6]
+--GetMapContinents now returns mapid then map name,  id's below are doubled to correctly pair name
+	private.ZONE_NAMES.KALIMDOR = continent_names[2]
+	private.ZONE_NAMES.EASTERN_KINGDOMS = continent_names[4]
+	private.ZONE_NAMES.OUTLAND = continent_names[6]
+	private.ZONE_NAMES.NORTHREND = continent_names[8]
+	private.ZONE_NAMES.THE_MAELSTROM = continent_names[10]
+	private.ZONE_NAMES.PANDARIA = continent_names[12]
+	private.ZONE_NAMES.DRAENOR = continent_names[14]
 end
 
 
@@ -188,8 +212,8 @@ private.ACHIEVEMENT_IDS = {
 	GLORIOUS = 7439,
 	CHAMPIONS_OF_LEI_SHEN = 8103,
 	TIMELESS_CHAMPION = 8714,
+	--9400/gorgrond-monster-hunter
 }
-
 
 do
 	private.ACHIEVEMENTS = {
@@ -201,9 +225,7 @@ do
 		[private.ACHIEVEMENT_IDS.TIMELESS_CHAMPION]	= { WorldID = private.ZONE_NAMES.PANDARIA },
 	}
 
-
 	local CRITERIA_TYPE_NPC_KILL = 0
-
 
 	for achievement_id, achievement in pairs(private.ACHIEVEMENTS) do
 		achievement.ID = achievement_id
@@ -222,3 +244,15 @@ do
 		end
 	end
 end -- do-block
+
+-------------------------------------------------------------------------------
+-- Macro Items.
+-------------------------------------------------------------------------------
+private.macrotext = "/cleartarget"
+private.MACRO_FORMAT = "%s\n/targetexact %s"
+private.MACRO_FORMAT_CUSTOM_MOB = "%s\n/target %s"
+--Mobs that appear in more that one zone
+private.MANUAL_PANDARIA_ADDITIONS = {
+	69768, -- Zandalari Warscout
+	69769, -- Zandalari Warbringer
+}

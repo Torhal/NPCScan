@@ -81,7 +81,7 @@ local OptionsDefault = {
 		MapName = {},
 		WorldID = {},
 	},
-	CacheWarnings = true,
+	CacheWarnings = false,
 }
 
 local OptionsCharacterDefault = {
@@ -101,7 +101,7 @@ local OptionsCharacterDefault = {
 	TargetIcon = 8, --Skull
 	TrackBeasts = true,
 	TrackRares = true,
-	TrackVignettes = false,
+	TrackVignettes = true,
 	TrackMouseover = true,
 }
 
@@ -125,6 +125,21 @@ Dialog:Register("NPCSCAN_AUTOADD_WARNING", {
 })
 
 
+
+Dialog:Register("NPCSCAN_WOD_CHANGES", {
+	text = L.WOD_CHANGES,
+	text_justify_h = "left",
+	text_justify_v = "bottom",
+	buttons = {
+		{
+			text = _G.OKAY,
+		},
+	},
+	icon = [[Interface\DialogFrame\UI-Dialog-Icon-AlertNew]],
+	show_while_dead = true,
+	hide_on_escape = true,
+	width = 500,
+})
 -------------------------------------------------------------------------------
 -- Debugger.
 -------------------------------------------------------------------------------
@@ -161,7 +176,20 @@ do
 
 	function private.NPCNameFromCache(npc_id)
 		tooltip:SetOwner(_G.WorldFrame, "ANCHOR_NONE")
-		tooltip:SetHyperlink(("unit:0xF53%05X00000000"):format(npc_id))
+		--tooltip:SetHyperlink(("unit:0:0:0:0:%d:0000000000"):format(npc_id))
+		--print(("unit:Creature:0:0:0:0:%d"):format(npc_id))
+
+--Disableing cache checking due to it nolonger working. will revisit
+--tooltip:SetHyperlink(("unit:Creature:0:0:0:0:6:0000000000"):format(npc_id))
+
+--For creatures, pets, objects, and vehicles: [Unit type]:0:[server ID]:[instance ID]:[zone UID]:[ID]:[Spawn UID] (Example: "Creature:0:976:0:11:31146:000136DF91")
+--For vignettes: Vignette:0:[server ID]:[instance ID]:[zone UID]:0:[spawn UID] (Example: "Vignette:0:970:1116:7:0:0017CAE465" for rare mob Sulfurious)
+--GetItemInfo("unit:Creature:0:0:0:0:3717:0000000000")
+		--GameTooltip:SetHyperlink("itemString" or "itemLink")
+		--GameTooltip:SetHyperlink("unit:Creature:0:0:0:0:64403:0000000001")
+		--0xF130FE6D009C5869 old u
+		--tooltip:SetHyperlink(("unit:0xF53%05X00000000"):format(npc_id))
+		--/script DEFAULT_CHAT_FRAME:AddMessage("item:109456:0:0:0:0:0:0:0:0:0:0\124h[6.0 QA Combat Test Agility Polearm]\124h\124r");
 
 		if tooltip:IsShown() then
 			return tooltip_text:GetText()
@@ -226,7 +254,7 @@ do
 		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
 			for criteria_id, npc_id in pairs(private.ACHIEVEMENTS[achievement_id].Criteria) do
 				if private.OptionsCharacter.AchievementsAddFound or not select(3, GetAchievementCriteriaInfoByID(achievement_id, criteria_id)) then -- Not completed
-				self[npc_id] = private.NPCNameFromCache(npc_id)
+					self[npc_id] = private.NPCNameFromCache(npc_id)
 				end
 			end
 		end
@@ -274,7 +302,7 @@ local function ScanAdd(npc_id)
 			ScanIDs[npc_id] = ScanIDs[npc_id] + 1
 		else
 			if not next(ScanIDs) then -- First
-			private.Updater:Play()
+				private.Updater:Play()
 			end
 			ScanIDs[npc_id] = 1
 			private.Overlays.Add(npc_id)
@@ -295,7 +323,7 @@ local function ScanRemove(npc_id)
 		private.Overlays.Remove(npc_id)
 
 		if not next(ScanIDs) then -- Last
-		private.Updater:Stop()
+			private.Updater:Stop()
 		end
 	end
 end
@@ -553,7 +581,7 @@ function private.SetAchievementsAddFound(enable)
 
 	for _, achievement in pairs(private.ACHIEVEMENTS) do
 		if AchievementDeactivate(achievement) then -- Was active
-		AchievementActivate(achievement)
+			AchievementActivate(achievement)
 		end
 	end
 end
@@ -667,7 +695,7 @@ function private.Synchronize()
 
 	for achievement_id, achievement in pairs(private.ACHIEVEMENTS) do
 		-- If defaults, don't enable completed achievements unless explicitly allowed
-		if character_options.Achievements[achievement_id] then
+		if character_options.Achievements[achievement_id] then --and (not is_default_scan or character_options.AchievementsAddFound or not achievement.is_completed) then
 			private.AchievementAdd(achievement_id)
 		end
 	end
@@ -712,12 +740,12 @@ do
 			else
 				local expected_zone_name = expected_zone_id and _G.GetMapNameByID(expected_zone_id) or nil
 				if not expected_zone_name then -- GetMapNameByID returns nil for continent maps
-				_G.SetMapByID(expected_zone_id)
+					_G.SetMapByID(expected_zone_id)
 
-				local map_continent = _G.GetCurrentMapContinent()
-				if map_continent >= 1 then
-					expected_zone_name = select(map_continent, _G.GetMapContinents())
-				end
+					local map_continent = _G.GetCurrentMapContinent()
+					if map_continent >= 1 then
+						expected_zone_name = select(map_continent, _G.GetMapContinents())
+					end
 				end
 				invalid_reason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(npc_name, _G.GetRealZoneText(), expected_zone_name or L.FOUND_ZONE_UNKNOWN, expected_zone_id)
 			end
@@ -749,17 +777,20 @@ do
 		if not recorded_time then
 			return true
 		end
-		return (_G.GetTime() - recorded_time) > MOUSEOVER_TARGET_DELAY
+		local  time_remaining = _G.GetTime() - recorded_time
+		private.Debug(MOUSEOVER_TARGET_DELAY - time_remaining)
+		return time_remaining > MOUSEOVER_TARGET_DELAY
 	end
 
 	-- Validates found mobs before showing alerts.
 	function private.OnFound(npc_id, npc_name)
+--[[  No need to deactivate mobs as cache scanning is deactivated. Re-enable if cache scanning works again.
 		NPCDeactivate(npc_id)
 
 		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
 			AchievementNPCDeactivate(private.ACHIEVEMENTS[achievement_id], npc_id)
 		end
-
+]]--
 		local is_valid = true
 		local is_tamable = private.TAMABLE_ID_TO_NAME[npc_id]
 		local invalid_reason
@@ -891,6 +922,12 @@ function private.Frame:PLAYER_LOGIN(event_name)
 	private.Synchronize()
 
 	self[event_name] = nil
+
+	if not private.Options.ChangeAlertShown then
+	Dialog:Spawn("NPCSCAN_WOD_CHANGES")
+	private.Options.ChangeAlertShown = true
+
+	end
 end
 
 
@@ -1084,14 +1121,96 @@ function private.Frame:UPDATE_MOUSEOVER_UNIT()
 	if _G.UnitClassification(unit_token) ~= ("rare" or "rareelite") or _G.UnitIsDead(unit_token) then
 		return
 	end
-	local mouseover_id = tonumber(_G.UnitGUID(unit_token):sub(6, 10), 16)
-	local target_guid = _G.UnitGUID("target")
-	local target_id = target_guid and tonumber(target_guid:sub(6, 10), 16) or nil
 
-	if (private.NPC_ID_TO_NAME[mouseover_id] or private.Options.NPCs[mouseover_id]) and mouseover_id ~= target_id then
+	--[Unit type]:0:[server ID]:[instance ID]:[zone UID]:[ID]:[Spawn UID] (Example: "Creature:0:976:0:11:31146:000136DF91")
+	local mouseover_guid = _G.UnitGUID(unit_token)
+	local _,_,_,_,_,_,_,mouseover_id = string.find(mouseover_guid, "(%a+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+)")
+	local target_guid = _G.UnitGUID("target")
+	local target_id = nil
+
+	if target_guid then
+		 _,_,_,_,_,_,_,target_id = string.find(target_guid, "(%a+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+)")
+	end
+
+	if (private.NPC_ID_TO_NAME[mouseover_id] or private.Options.NPCs[tonumber(mouseover_id)]) and mouseover_id ~= target_id then
 		private.Debug("Mob Found")
 		private.OnFound(mouseover_id, _G.UnitName(unit_token))
 	end
 end
 
+-------------------------------------------------------------------------------
+-- Dynamic Target Macro Functions
+-------------------------------------------------------------------------------
+
+local target_button = _G.CreateFrame("Button", "_NPCScan_Search_Button", _G.UIParent, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate")
+target_button:Hide()
+
+target_button:SetAttribute("type", "macro")
+target_button:SetAttribute("macrotext", private.macrotext)
+target_button:RegisterEvent("PLAYER_ENTERING_WORLD")
+target_button:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+target_button:RegisterEvent("VARIABLES_LOADED")
+target_button:SetScript("OnEvent", function(self, event_name, ...)
+	private.GenerateTargetMacro()
+end)
+
+function private.GenerateTargetMacro(instanceid)
+	_G.SetMapToCurrentZone()
+	local map_id = _G.GetCurrentMapAreaID()
+	local zone_name = _G.GetMapNameByID(map_id)
+	local continent_id = _G.GetCurrentMapContinent();
+
+	private.macrotext = "/cleartarget"
+
+	-- Generate target macro with tracked mobs in zone 
+	for npc_id, map_zone_name in pairs(private.NPC_ID_TO_MAP_NAME) do
+		if zone_name == map_zone_name and not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] then
+			private.macrotext = private.MACRO_FORMAT:format(private.macrotext, private.NPC_ID_TO_NAME[npc_id])
+		end
+	end
+
+	--Add any custom tracked mobs
+	for npc_id, npc_name in pairs(_G._NPCScanOptions.NPCs) do
+		if not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] and _G._NPCScanOptions.NPCWorldIDs[npc_id] == private.LOCALIZED_CONTINENT_NAMES[continent_id] then
+			private.macrotext = private.MACRO_FORMAT_CUSTOM_MOB:format(private.macrotext, npc_name)
+		end
+	end
+
+	--Add Zandalari Warscout & Warbringer due to them appearing in multiple zones but in only one in the data file.
+	--Ignore if not in Pandaria or on the Timeless Isle
+	if continent_id == 6 and map_id ~= private.ZONE_IDS.TIMELESS_ISLE then
+		for index = 1, #MANUAL_PANDARIA_ADDITIONS do
+			if last_vignette_id ~= MANUAL_PANDARIA_ADDITIONS[index] then
+				private.macrotext = private.MACRO_FORMAT:format(private.macrotext, private.NPC_ID_TO_NAME[MANUAL_NPC_ADDITIONS[index]])
+			end
+		end
+	end
+
+	if instanceid then 
+		private.macrotext = private.macrotext .. "\n/run _G._NPCScan.SetVignetteTarget()"
+	else
+		private.macrotext = private.macrotext .. "\n/run _G._NPCScan.CheckMacroTarget()"
+	end
+
+	target_button:SetAttribute("macrotext", private.macrotext)
+	return true
+end
+
+--Checks target found by macro and triggers NPCScan alert for tracked mobs
+function private.CheckMacroTarget()
+	local target_guid = UnitGUID("target")
+
+	if target_guid then
+		local _,_,_,_,_,_,_,target_id = string.find(target_guid, "(%a+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+)")
+		if (private.NPC_ID_TO_NAME[target_id] or private.Options.NPCs[target_id]) and not UnitIsDeadOrGhost("target") then -- add in ignore list check
+
+			private.Debug("Mob Found Via Macro")
+			private.OnFound(target_id, _G.UnitName("target"))
+
+			if _G.GetRaidTargetIndex("target") ~= private.OptionsCharacter.TargetIcon and (not _G.IsInRaid() or (_G.UnitIsGroupAssistant("player") or _G.UnitIsGroupLeader("player"))) then
+				_G.SetRaidTarget("target", private.OptionsCharacter.TargetIcon)
+			end
+		end
+	end
+end
 

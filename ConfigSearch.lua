@@ -209,14 +209,12 @@ function npc_world_button_dropdown:initialize()
 	info.notCheckable = true
 	info.func = self.OnSelect
 
-	for index = 1, select("#", _G.GetMapContinents()) do
-		local continent_name = private.LOCALIZED_CONTINENT_NAMES[index]
-
-		if continent_name then
-			info.text = continent_name
-			info.arg1 = continent_name
-			_G.UIDropDownMenu_AddButton(info)
-		end
+	for continent_id, continent_name in pairs(private.LOCALIZED_CONTINENT_NAMES) do
+			if continent_name then
+				info.text = continent_name
+				info.arg1 = continent_name
+				_G.UIDropDownMenu_AddButton(info)
+			end
 	end
 	local instance_name = _G.GetInstanceInfo()
 
@@ -815,7 +813,7 @@ do
 		if not npc_id then
 			return
 		end
-		SetSelectedID(npc_id, L.NPCs[tostring(npc_id)],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
+		SetSelectedID(npc_id, L.NPCs[npc_id],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
 		current_tab = achievement_id
 		end
 
@@ -826,7 +824,7 @@ do
 		if not npc_id then
 			return
 		end
-		SetSelectedID(npc_id, L.NPCs[tostring(npc_id)],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
+		SetSelectedID(npc_id, L.NPCs[npc_id],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
 		current_tab = "IGNORE"
 		end
 
