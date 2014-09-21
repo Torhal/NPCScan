@@ -18,6 +18,7 @@ local L = private.L
 local panel = _G.CreateFrame("Frame")
 private.Config = panel
 
+local Toast = _G.LibStub("LibToast-1.0")
 
 -------------------------------------------------------------------------------
 -- Config UI.
@@ -120,8 +121,19 @@ test_button.tooltipText = L.CONFIG_TEST_DESC
 test_button:SetScript("OnEnter", panel.ControlOnEnter)
 test_button:SetScript("OnLeave", _G.GameTooltip_Hide)
 test_button:SetScript("OnClick", function(self)
+<<<<<<< HEAD
 	private.Print(L.FOUND_FORMAT:format(L.CONFIG_TEST_NAME), _G.GREEN_FONT_COLOR)
 	private.Print(L.CONFIG_TEST_HELP_FORMAT:format("CTRL"))
+=======
+	local alert_text = L.FOUND_FORMAT:format(L.CONFIG_TEST_NAME)
+
+	if private.OptionsCharacter.ShowAlertAsToast then
+		Toast:Spawn("_NPCScanAlertToast", alert_text)
+	else
+		private.Print(alert_text, _G.GREEN_FONT_COLOR)
+	end
+	private.Print(L.CONFIG_TEST_HELP_FORMAT:format(_G.GetModifiedClick("_NPCSCAN_BUTTONDRAG")))
+>>>>>>> 728f00359e51ef7007e2179316d6a0d3bf22050a
 
 	private.Button:SetNPC("player", L.CONFIG_TEST_NAME, L.CONFIG_TEST)
 end)
@@ -129,8 +141,19 @@ end)
 panel.test_button = test_button
 
 
+local show_as_toast_checkbox = _G.CreateFrame("CheckButton", "_NPCScanConfigShowAsToastCheckbox", alert_options_panel, "InterfaceOptionsCheckButtonTemplate")
+show_as_toast_checkbox:SetPoint("TOPLEFT", test_button, "BOTTOMLEFT", -2, -16)
+_G[show_as_toast_checkbox:GetName() .. "Text"]:SetText(L.CONFIG_ALERT_SHOW_AS_TOAST)
+show_as_toast_checkbox.tooltipText = L.CONFIG_ALERT_SHOW_AS_TOAST_DESC
+
+panel.show_as_toast_checkbox = show_as_toast_checkbox
+
+function show_as_toast_checkbox.setFunc(is_enabled)
+	private.SetShowAsToast(is_enabled == "1")
+end
+
 local alert_unmute_checkbox = _G.CreateFrame("CheckButton", "_NPCScanConfigUnmuteCheckbox", alert_options_panel, "InterfaceOptionsCheckButtonTemplate")
-alert_unmute_checkbox:SetPoint("TOPLEFT", test_button, "BOTTOMLEFT", -2, -16)
+alert_unmute_checkbox:SetPoint("TOPLEFT", show_as_toast_checkbox, "BOTTOMLEFT", 0, -8)
 _G[alert_unmute_checkbox:GetName() .. "Text"]:SetText(L.CONFIG_ALERT_UNMUTE)
 alert_unmute_checkbox.tooltipText = L.CONFIG_ALERT_UNMUTE_DESC
 
@@ -139,7 +162,6 @@ panel.alert_unmute_checkbox = alert_unmute_checkbox
 function alert_unmute_checkbox.setFunc(is_enabled)
 	private.SetAlertSoundUnmute(is_enabled == "1")
 end
-
 
 local screen_edge_flash_checkbox = _G.CreateFrame("CheckButton", "_NPCScanConfigScreenFlashCheckbox", alert_options_panel, "InterfaceOptionsCheckButtonTemplate")
 screen_edge_flash_checkbox:SetPoint("TOPLEFT", alert_unmute_checkbox, "BOTTOMLEFT", 0, -8)

@@ -21,6 +21,8 @@ local table = _G.table
 local FOLDER_NAME, private = ...
 
 local Dialog = _G.LibStub("LibDialog-1.0")
+local Toast = _G.LibStub("LibToast-1.0")
+
 local L = private.L
 _G._NPCScan = private
 
@@ -81,7 +83,12 @@ local OptionsDefault = {
 		MapName = {},
 		WorldID = {},
 	},
+<<<<<<< HEAD
 	CacheWarnings = false,
+=======
+	CacheWarnings = true,
+	ShowAlertAsToast = true,
+>>>>>>> 728f00359e51ef7007e2179316d6a0d3bf22050a
 }
 
 local OptionsCharacterDefault = {
@@ -113,7 +120,7 @@ local OptionsCharacterDefault = {
 
 
 -------------------------------------------------------------------------------
--- Dialogs.
+-- Dialogs and Toasts.
 -------------------------------------------------------------------------------
 Dialog:Register("NPCSCAN_AUTOADD_WARNING", {
 	text = "You appear to be running _NPCScan.AutoAdd v2.2 or earlier, which may prevent _NPCScan from working properly.\n\nIt is recommended that you disable _NPCScan.AutoAdd until it is updated.",
@@ -130,6 +137,12 @@ Dialog:Register("NPCSCAN_AUTOADD_WARNING", {
 	width = 500,
 })
 
+Toast:Register("_NPCScanAlertToast", function(toast, ...)
+	toast:MakePersistent()
+	toast:SetTitle(L.CONFIG_TITLE)
+	toast:SetFormattedText("%s%s|r", _G.GREEN_FONT_COLOR_CODE, ...)
+	toast:SetIconTexture([[Interface\LFGFRAME\BattlenetWorking0]])
+end)
 
 
 Dialog:Register("NPCSCAN_WOD_CHANGES", {
@@ -593,12 +606,16 @@ function private.SetAchievementsAddFound(enable)
 end
 
 
+function private.SetShowAsToast(enable)
+	private.Options.ShowAlertAsToast = enable
+	private.Config.show_as_toast_checkbox:SetChecked(enable)
+end
+
 -- Enables unmuting sound to play found alerts.
 function private.SetAlertSoundUnmute(enable)
 	private.OptionsCharacter.AlertSoundUnmute = enable
 	private.Config.alert_unmute_checkbox:SetChecked(enable)
 end
-
 
 -- Enables screen edge flash to show on found alerts.
 function private.SetAlertScreenEdgeFlash(enable)
@@ -687,6 +704,7 @@ function private.Synchronize()
 	private.SetCacheWarnings(options.CacheWarnings)
 	private.SetPrintTime(character_options.PrintTime)
 	private.SetAchievementsAddFound(character_options.AchievementsAddFound)
+	private.SetShowAsToast(options.ShowAlertAsToast)
 	private.SetAlertSoundUnmute(character_options.AlertSoundUnmute)
 	private.SetAlertScreenEdgeFlash(character_options.AlertScreenEdgeFlash)
 	private.SetTargetIcon(character_options.TargetIcon)
@@ -805,7 +823,7 @@ do
 			is_valid, invalid_reason = OnFoundTamable(npc_id, npc_name)
 		end
 
-		--Checks to see if player is on flightpath, this will block possible cross realm alerts
+		-- Checks to see if player is on flightpath, this will block possible cross realm alerts
 		if private.OptionsCharacter.FlightSupress and _G.UnitOnTaxi("player") then
 			is_valid = false
 			_G.SetMapToCurrentZone()
@@ -815,7 +833,7 @@ do
 			invalid_reason = L.FOUND_UNIT_TAXI:format(npc_name, x * 100, y * 100, _G.GetZoneText())
 		end
 
-		--Checks to see if alert for mob has allready been displayed recently
+		-- Checks to see if alert for mob has allready been displayed recently
 		if ValidRecordedTime(NPC_RECORDED_TIMES[npc_id]) then
 			NPC_RECORDED_TIMES[npc_id] = _G.GetTime()
 		else
@@ -823,7 +841,13 @@ do
 		end
 
 		if is_valid then
-			private.Print(L[is_tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(npc_name), _G.GREEN_FONT_COLOR)
+			local alert_text = L[is_tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(npc_name)
+
+			if private.Options.ShowAlertAsToast then
+				Toast:Spawn("_NPCScanAlertToast", alert_text)
+			else
+				private.Print(alert_text, _G.GREEN_FONT_COLOR)
+			end
 			private.Button:SetNPC(npc_id, npc_name, GetScanSource(npc_id)) -- Sends added and found overlay messages
 		elseif invalid_reason then
 			private.Print(invalid_reason)
