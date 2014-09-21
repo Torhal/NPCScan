@@ -570,7 +570,7 @@ do
 	local last_tab
 	local num_tabs = 0
 	local tab_row = 0
-
+	local total_Lenght = 0
 
 	local TEXT_TAB_LABELS = {
 		BEASTS = L.TAMEDBEASTS,
@@ -581,7 +581,7 @@ do
 	local function AddTab(identifier, update_func, activate_func, deactivate_func)
 		num_tabs = num_tabs + 1
 
-		local tab = _G.CreateFrame("Button", "_NPCScanSearchTab" .. num_tabs, table_container, "TabButtonTemplate")
+		local tab = _G.CreateFrame("Button", "_NPCScanSearchTab" ..tab_row.. num_tabs, table_container, "TabButtonTemplate")
 		tab:SetHitRectInsets(6, 6, 6, 0)
 		tab:SetScript("OnClick", Tab_OnClick)
 		tab:SetScript("OnEnter", Tab_OnEnter)
@@ -599,12 +599,11 @@ do
 		elseif TEXT_TAB_LABELS[identifier] then
 			tab:SetText(TEXT_TAB_LABELS[identifier])
 			CreateTabCheckBox(tab, CheckBoxID_OnClick)
-				elseif identifier == "IGNORE" then
+		elseif identifier == "IGNORE" then
 			tab:SetText(L.SEARCH_IGNORE_LIST)
 		else
 			tab:SetText(L.SEARCH_NPCS)
 		end
-
 		if tab.checkbox then
 			panel.AchievementSetEnabled(identifier, false)
 			_G.PanelTemplates_TabResize(tab, tab.checkbox:GetWidth() - 12)
@@ -616,12 +615,14 @@ do
 		tab.Deactivate = deactivate_func
 
 		_G.PanelTemplates_DeselectTab(tab)
-
 		if last_tab then
-			if num_tabs > 5 and tab_row == 0 then
+			--if num_tabs > 5  then
+			if total_Lenght > 500 then
 				tab:SetPoint("BOTTOMLEFT", first_tab, "TOPLEFT", 0, -10)
-				table_container:SetPoint("TOP", add_found_checkbox, "BOTTOM", 0, -60)
-				tab_row = 1
+				table_container:SetPoint("TOP", add_found_checkbox, "BOTTOM", 0, -100)
+				tab_row = 1 + tab_row
+				num_tabs =  1
+				total_Lenght = 0
 			else
 				tab:SetPoint("LEFT", last_tab, "RIGHT", -4, 0)
 			end
@@ -633,7 +634,7 @@ do
 			first_tab = tab
 		end
 		last_tab = tab
-
+		total_Lenght = total_Lenght + tab:GetWidth()
 		return tab
 	end
 
@@ -787,6 +788,15 @@ do
 		current_tab = "NPC"
 	end
 
+	local ignore_tab = AddTab("IGNORE", UpdateIgnoreTab, ActivateNPCTab, DeactivateNPCTab)
+	ignore_tab.table_row_on_select = function(text_table, npc_id)
+		if not npc_id then
+			return
+		end
+		SetSelectedID(npc_id, L.NPCs[tostring(npc_id)],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
+		current_tab = "IGNORE"
+		end
+
 	local rare_npc_tab = AddTab("RARENPC", UpdateRareTab, ActivateNPCTab, DeactivateNPCTab)
 	rare_npc_tab.table_row_on_select = function(text_table, npc_id)
 		if not npc_id then
@@ -805,29 +815,31 @@ do
 		current_tab = "BEASTS"
 		end
 
+	function pairsByKeys (t, f)
+		local a = {}
+		for n in pairs(t) do table.insert(a, n) end
+			table.sort(a, f)
+			local i = 0      -- iterator variable
+			local iter = function ()   -- iterator function
+			i = i + 1
+			if a[i] == nil then return nil
+				else return a[i], t[a[i]]
+			end
+		end
+		return iter
+	end
 
-	for achievement_id in pairs(private.ACHIEVEMENTS) do
+--	for achievement_id in pairs(private.ACHIEVEMENTS) do
+	for achievement_id in pairsByKeys(private.ACHIEVEMENTS) do
 		local Ach_tab = AddTab(achievement_id, UpdateAchievementTab, ActivateAchievementTab, DeactivateAchievementTab)
-
 		Ach_tab.table_row_on_select = function(text_table, npc_id)
 		if not npc_id then
 			return
 		end
-		SetSelectedID(npc_id, L.NPCs[npc_id],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
+		SetSelectedID(npc_id, L.NPCs[tostring(npc_id)],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
 		current_tab = achievement_id
 		end
-
 	end
-
-	local ignore_tab = AddTab("IGNORE", UpdateIgnoreTab, ActivateNPCTab, DeactivateNPCTab)
-	ignore_tab.table_row_on_select = function(text_table, npc_id)
-		if not npc_id then
-			return
-		end
-		SetSelectedID(npc_id, L.NPCs[npc_id],  private.NPC_ID_TO_WORLD_NAME[npc_id] , private.NPC_ID_TO_MAP_NAME[npc_id])
-		current_tab = "IGNORE"
-		end
-
 end -- do-block
 
 _G.InterfaceOptions_AddCategory(panel)

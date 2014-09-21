@@ -33,22 +33,36 @@ private.CONTINENT_IDS = {
 }
 
 
+--Many map API calls now return both the map name and map id.  This extracts a table of just map
+--names from the returned data.
+local function extract_map_names(...)
+	local t = {}
+	for i=1, select("#", ...), 2 do
+	k = select(i, ...)
+	v = select(i+1, ...)
+	t[#t+1] = v
+	end
+	return t
+end
+
+
 do
 	local VIRTUAL_CONTINENTS = {
 		[private.CONTINENT_IDS.THE_MAELSTROM] = true
 	}
  --13, 14,466,485,751,862,962
 
+
 	local MapContinents = { _G.GetMapContinents() }  --Now returns both mapid and World name
-	private.LOCALIZED_CONTINENT_NAMES = {}
+	private.LOCALIZED_CONTINENT_NAMES = extract_map_names(_G.GetMapContinents())
 
-
+--[[
 	for continent_id, continent_name in pairs(MapContinents) do
 		if type(continent_name) == "string" then  --Weeds out the extra map id from names
 		_G.tinsert(private.LOCALIZED_CONTINENT_NAMES,  continent_name)
 		end
 	end
-
+--]]
 	for continent_id in pairs(VIRTUAL_CONTINENTS) do
 		private.LOCALIZED_CONTINENT_NAMES[continent_id] = nil
 	end
@@ -190,15 +204,14 @@ for label, id in pairs(private.ZONE_IDS) do
 end
 
 do
-	local continent_names = { _G.GetMapContinents() }
---GetMapContinents now returns mapid then map name,  id's below are doubled to correctly pair name
-	private.ZONE_NAMES.KALIMDOR = continent_names[2]
-	private.ZONE_NAMES.EASTERN_KINGDOMS = continent_names[4]
-	private.ZONE_NAMES.OUTLAND = continent_names[6]
-	private.ZONE_NAMES.NORTHREND = continent_names[8]
-	private.ZONE_NAMES.THE_MAELSTROM = continent_names[10]
-	private.ZONE_NAMES.PANDARIA = continent_names[12]
-	private.ZONE_NAMES.DRAENOR = continent_names[14]
+	local continent_names = extract_map_names(_G.GetMapContinents())
+	private.ZONE_NAMES.KALIMDOR = continent_names[1]
+	private.ZONE_NAMES.EASTERN_KINGDOMS = continent_names[2]
+	private.ZONE_NAMES.OUTLAND = continent_names[3]
+	private.ZONE_NAMES.NORTHREND = continent_names[4]
+	private.ZONE_NAMES.THE_MAELSTROM = continent_names[5]
+	private.ZONE_NAMES.PANDARIA = continent_names[6]
+	private.ZONE_NAMES.DRAENOR = continent_names[7]
 end
 
 
@@ -212,17 +225,29 @@ private.ACHIEVEMENT_IDS = {
 	GLORIOUS = 7439,
 	CHAMPIONS_OF_LEI_SHEN = 8103,
 	TIMELESS_CHAMPION = 8714,
-	--9400/gorgrond-monster-hunter
+	GORGROND_MONSTER_HUNTER = 9400,
+	HIGH_VALUE_TARGETS_ASHRAN = 9216,
+	CUT_OFF_THE_HEAD = 9633,
+	HERALDS_OF_THE_LEGION = 9638,
+	FIGHT_THE_POWER = 9655,
+	ANCIENT_NO_MORE = 9678,
 }
 
 do
 	private.ACHIEVEMENTS = {
-		[private.ACHIEVEMENT_IDS.BLOODY_RARE]		= { WorldID = private.ZONE_NAMES.OUTLAND },
-		[private.ACHIEVEMENT_IDS.FROSTBITTEN]		= { WorldID = private.ZONE_NAMES.NORTHREND },
-		[private.ACHIEVEMENT_IDS.ONE_MANY_ARMY]		= { WorldID = private.ZONE_NAMES.PANDARIA },
-		[private.ACHIEVEMENT_IDS.GLORIOUS]		= { WorldID = private.ZONE_NAMES.PANDARIA },
+		[private.ACHIEVEMENT_IDS.BLOODY_RARE]			= { WorldID = private.ZONE_NAMES.OUTLAND },
+		[private.ACHIEVEMENT_IDS.FROSTBITTEN]			= { WorldID = private.ZONE_NAMES.NORTHREND },
+		[private.ACHIEVEMENT_IDS.ONE_MANY_ARMY]			= { WorldID = private.ZONE_NAMES.PANDARIA },
+		[private.ACHIEVEMENT_IDS.GLORIOUS]				= { WorldID = private.ZONE_NAMES.PANDARIA },
 		[private.ACHIEVEMENT_IDS.CHAMPIONS_OF_LEI_SHEN]	= { WorldID = private.ZONE_NAMES.PANDARIA },
-		[private.ACHIEVEMENT_IDS.TIMELESS_CHAMPION]	= { WorldID = private.ZONE_NAMES.PANDARIA },
+		[private.ACHIEVEMENT_IDS.TIMELESS_CHAMPION]		= { WorldID = private.ZONE_NAMES.PANDARIA },
+		[private.ACHIEVEMENT_IDS.GORGROND_MONSTER_HUNTER]	= { WorldID = private.ZONE_NAMES.DRAENOR },
+		[private.ACHIEVEMENT_IDS.HIGH_VALUE_TARGETS_ASHRAN]	= { WorldID = private.ZONE_NAMES.DRAENOR },
+		[private.ACHIEVEMENT_IDS.CUT_OFF_THE_HEAD] 		= { WorldID = private.ZONE_NAMES.DRAENOR },
+		[private.ACHIEVEMENT_IDS.HERALDS_OF_THE_LEGION]	= { WorldID = private.ZONE_NAMES.DRAENOR },
+		[private.ACHIEVEMENT_IDS.FIGHT_THE_POWER]		= { WorldID = private.ZONE_NAMES.DRAENOR },
+		[private.ACHIEVEMENT_IDS.ANCIENT_NO_MORE]		= { WorldID = private.ZONE_NAMES.DRAENOR },
+
 	}
 
 	local CRITERIA_TYPE_NPC_KILL = 0

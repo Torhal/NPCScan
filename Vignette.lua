@@ -173,12 +173,14 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceid, ...)
 			Debug("Ignored Mob")
 			return
 		end
-		private.Print(L["FOUND_FORMAT"]:format("Vignette Mob"), _G.GREEN_FONT_COLOR)
+		
 		--Check for Vignette mobs that dont exist in our DB
 		if npc_id then 
 			private.Button:SetNPC(npc_id, name, "Vignette Mob")
+			private.Print(L["FOUND_FORMAT"]:format("Vignette Mob: "..name), _G.GREEN_FONT_COLOR)
 		else
 			private.Button:SetNPC(29147, name, "Unknown Vignette")
+			private.Print(L["FOUND_FORMAT"]:format("Vignette Mob"), _G.GREEN_FONT_COLOR)
 		end
 	else -- All other cases
 		Debug("Untracked Vigenette")
