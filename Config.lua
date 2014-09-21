@@ -147,6 +147,18 @@ function show_as_toast_checkbox.setFunc(is_enabled)
 	private.SetShowAsToast(is_enabled == "1")
 end
 
+
+local persistent_toast_checkbox = _G.CreateFrame("CheckButton", "_NPCScanConfigPersistentToastCheckbox", alert_options_panel, "InterfaceOptionsCheckButtonTemplate")
+persistent_toast_checkbox:SetPoint("TOPLEFT", show_as_toast_checkbox, "TOPRIGHT", ( _G[show_as_toast_checkbox:GetName() .. "Text"]:GetStringWidth())+15, 0)
+_G[persistent_toast_checkbox:GetName() .. "Text"]:SetText(L.CONFIG_ALERT_PERSISTENT_TOAST)
+persistent_toast_checkbox.tooltipText = L.CONFIG_ALERT_PERSISTENT_TOAST_DESC
+
+panel.persistent_toast_checkbox = persistent_toast_checkbox
+
+function persistent_toast_checkbox.setFunc(is_enabled)
+	private.SetPersistentToast(is_enabled == "1")
+end
+
 local alert_unmute_checkbox = _G.CreateFrame("CheckButton", "_NPCScanConfigUnmuteCheckbox", alert_options_panel, "InterfaceOptionsCheckButtonTemplate")
 alert_unmute_checkbox:SetPoint("TOPLEFT", show_as_toast_checkbox, "BOTTOMLEFT", 0, -8)
 _G[alert_unmute_checkbox:GetName() .. "Text"]:SetText(L.CONFIG_ALERT_UNMUTE)

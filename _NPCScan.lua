@@ -85,6 +85,7 @@ local OptionsDefault = {
 	},
 	CacheWarnings = true,
 	ShowAlertAsToast = true,
+	PersistentToast = true,
 }
 
 local OptionsCharacterDefault = {
@@ -128,7 +129,9 @@ Dialog:Register("NPCSCAN_AUTOADD_WARNING", {
 })
 
 Toast:Register("_NPCScanAlertToast", function(toast, ...)
-	toast:MakePersistent()
+	if private.Options.PersistentToast then
+		toast:MakePersistent()
+	end
 	toast:SetTitle(L.CONFIG_TITLE)
 	toast:SetFormattedText("%s%s|r", _G.GREEN_FONT_COLOR_CODE, ...)
 	toast:SetIconTexture([[Interface\LFGFRAME\BattlenetWorking0]])
@@ -573,6 +576,11 @@ function private.SetShowAsToast(enable)
 	private.Config.show_as_toast_checkbox:SetChecked(enable)
 end
 
+function private.SetPersistentToast(enable)
+	private.Options.PersistentToast = enable
+	private.Config.persistent_toast_checkbox:SetChecked(enable)
+end
+
 -- Enables unmuting sound to play found alerts.
 function private.SetAlertSoundUnmute(enable)
 	private.OptionsCharacter.AlertSoundUnmute = enable
@@ -667,6 +675,7 @@ function private.Synchronize()
 	private.SetPrintTime(character_options.PrintTime)
 	private.SetAchievementsAddFound(character_options.AchievementsAddFound)
 	private.SetShowAsToast(options.ShowAlertAsToast)
+	private.SetPersistentToast(options.PersistentToast)
 	private.SetAlertSoundUnmute(character_options.AlertSoundUnmute)
 	private.SetAlertScreenEdgeFlash(character_options.AlertScreenEdgeFlash)
 	private.SetTargetIcon(character_options.TargetIcon)
