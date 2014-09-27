@@ -213,9 +213,9 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceid, ...)
 		Debug("Untracked Vigenette")
 	end
 
-	if private.Options.ShowAlertAsToast and  alert_text then
+	if private.Options.ShowAlertAsToast and alert_text then
 		Toast:Spawn("_NPCScanAlertToast", alert_text)
-	else
+	elseif alert_text then
 		private.Print(alert_text, _G.GREEN_FONT_COLOR)
 	end
 end
