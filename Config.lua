@@ -121,10 +121,10 @@ test_button.tooltipText = L.CONFIG_TEST_DESC
 test_button:SetScript("OnEnter", panel.ControlOnEnter)
 test_button:SetScript("OnLeave", _G.GameTooltip_Hide)
 test_button:SetScript("OnClick", function(self)
-<<<<<<< HEAD
+
 	private.Print(L.FOUND_FORMAT:format(L.CONFIG_TEST_NAME), _G.GREEN_FONT_COLOR)
 	private.Print(L.CONFIG_TEST_HELP_FORMAT:format("CTRL"))
-=======
+
 	local alert_text = L.FOUND_FORMAT:format(L.CONFIG_TEST_NAME)
 
 	if private.OptionsCharacter.ShowAlertAsToast then
@@ -133,7 +133,7 @@ test_button:SetScript("OnClick", function(self)
 		private.Print(alert_text, _G.GREEN_FONT_COLOR)
 	end
 	private.Print(L.CONFIG_TEST_HELP_FORMAT:format(_G.GetModifiedClick("_NPCSCAN_BUTTONDRAG")))
->>>>>>> 728f00359e51ef7007e2179316d6a0d3bf22050a
+
 
 	private.Button:SetNPC("player", L.CONFIG_TEST_NAME, L.CONFIG_TEST)
 end)

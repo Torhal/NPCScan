@@ -83,10 +83,7 @@ local OptionsDefault = {
 		MapName = {},
 		WorldID = {},
 	},
-<<<<<<< HEAD
 	CacheWarnings = false,
-=======
-	CacheWarnings = true,
 	ShowAlertAsToast = true,
 	PersistentToast = true,}
 
@@ -1159,17 +1156,17 @@ function private.Frame:UPDATE_MOUSEOVER_UNIT()
 		return
 	end
 
-	--[Unit type]:0:[server ID]:[instance ID]:[zone UID]:[ID]:[Spawn UID] (Example: "Creature:0:976:0:11:31146:000136DF91")
+	--[Unit type]-0-[server ID]-[instance ID]-[zone UID]-[ID]-[Spawn UID] (Example: "Creature-0-976-0-11-31146-000136DF91")
 	local mouseover_guid = _G.UnitGUID(unit_token)
-	local _,_,_,_,_,_,_,mouseover_id = string.find(mouseover_guid, "(%a+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+)")
+	local _,_,_,_,_,_,_,mouseover_id = string.find(mouseover_guid, "(%a+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)")
 	local target_guid = _G.UnitGUID("target")
 	local target_id = nil
 
 	if target_guid then
-		 _,_,_,_,_,_,_,target_id = string.find(target_guid, "(%a+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+)")
+		 _,_,_,_,_,_,_,target_id = string.find(target_guid, "(%a+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)")
 	end
 
-	if (private.NPC_ID_TO_NAME[mouseover_id] or private.Options.NPCs[tonumber(mouseover_id)]) and mouseover_id ~= target_id then
+	if (private.NPC_ID_TO_NAME[tonumber(mouseover_id)] or private.Options.NPCs[tonumber(mouseover_id)]) and mouseover_id ~= target_id then
 		private.Debug("Mob Found")
 		private.OnFound(mouseover_id, _G.UnitName(unit_token))
 	end
