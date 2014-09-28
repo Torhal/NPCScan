@@ -19,6 +19,7 @@ local FOLDER_NAME, private = ...
 local L = private.L
 
 local Debug = private.Debug
+local Toast = _G.LibStub("LibToast-1.0")
 
 -------------------------------------------------------------------------------
 -- Variables.
@@ -158,13 +159,16 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceid, ...)
 		return
 	end
 
+	local x, y, name, iconid = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceid)
+	local alert_text = nil
+
 	-- iconid seems to be 40:chests, 41:mobs
 	local x, y, name, iconid = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceid)
 	local npc_id = private.NPC_NAME_TO_ID[name]
 
 	if not iconid then --Use case for broken Mob Info
 		Debug("Null Mob Data Returned")
-		private.Print(L["FOUND_FORMAT"]:format("Vignette Mob"), _G.GREEN_FONT_COLOR)
+		alert_text = L["FOUND_FORMAT"]:format("Vignette Mob")
 		private.Button:SetNPC(67490, "Vignette Mob", "Unknown Vignette")
 	elseif iconid == 41 then  --Use Case if API returns Mob Info
 		Debug("Correct Mob Data Returned")
@@ -173,17 +177,25 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceid, ...)
 			Debug("Ignored Mob")
 			return
 		end
-		
 		--Check for Vignette mobs that dont exist in our DB
 		if npc_id then 
 			private.Button:SetNPC(npc_id, name, "Vignette Mob")
-			private.Print(L["FOUND_FORMAT"]:format("Vignette Mob: "..name), _G.GREEN_FONT_COLOR)
+			alert_text = L["FOUND_FORMAT"]:format("Vignette Mob: "..name)
 		else
 			private.Button:SetNPC(29147, name, "Unknown Vignette")
-			private.Print(L["FOUND_FORMAT"]:format("Vignette Mob"), _G.GREEN_FONT_COLOR)
+			alert_text = L["FOUND_FORMAT"]:format("Vignette Mob")
 		end
+		--private.Print(L["FOUND_FORMAT"]:format("Vignette Mob"), _G.GREEN_FONT_COLOR)
+		alert_text = L["FOUND_FORMAT"]:format("Vignette Mob")
+		private.Button:SetNPC(private.NPC_NAME_TO_ID[name], name, "Vignette Mob")
 	else -- All other cases
 		Debug("Untracked Vigenette")
+	end
+
+	if private.Options.ShowAlertAsToast and alert_text then
+		Toast:Spawn("_NPCScanAlertToast", alert_text,"GeneralDockManager")
+	else
+		private.Print(alert_text, _G.GREEN_FONT_COLOR)
 	end
 end
 
