@@ -84,8 +84,8 @@ local OptionsDefault = {
 		WorldID = {},
 	},
 	CacheWarnings = false,
-	ShowAlertAsToast = true,
-	PersistentToast = true,}
+	ShowAlertAsToast = false,
+	PersistentToast = false,}
 
 local OptionsCharacterDefault = {
 	Version = DB_VERSION,
@@ -191,22 +191,16 @@ do
 	tooltip:AddFontStrings(tooltip_text, tooltip:CreateFontString())
 
 
-	function private.NPCNameFromCache(npc_id)
-		tooltip:SetOwner(_G.WorldFrame, "ANCHOR_NONE")
-		--tooltip:SetHyperlink(("unit:0:0:0:0:%d:0000000000"):format(npc_id))
-		--print(("unit:Creature:0:0:0:0:%d"):format(npc_id))
+
+--For players: Player-[server ID]-[player UID] (Example: "Player-976-0002FD64")
+--For creatures, pets, objects, and vehicles: [Unit type]-0-[server ID]-[instance ID]-[zone UID]-[ID]-[Spawn UID] (Example: "Creature-0-976-0-11-31146-000136DF91")
+--Unit Type Names: "Creature", "Pet", "GameObject", and "Vehicle"
+--For vignettes: Vignette-0-[server ID]-[instance ID]-[zone UID]-0-[spawn UID] (Example: "Vignette-0-970-1116-7-0-0017CAE465" for rare mob Sulfurious)
 
 --Disableing cache checking due to it nolonger working. will revisit
---tooltip:SetHyperlink(("unit:Creature:0:0:0:0:6:0000000000"):format(npc_id))
-
---For creatures, pets, objects, and vehicles: [Unit type]:0:[server ID]:[instance ID]:[zone UID]:[ID]:[Spawn UID] (Example: "Creature:0:976:0:11:31146:000136DF91")
---For vignettes: Vignette:0:[server ID]:[instance ID]:[zone UID]:0:[spawn UID] (Example: "Vignette:0:970:1116:7:0:0017CAE465" for rare mob Sulfurious)
---GetItemInfo("unit:Creature:0:0:0:0:3717:0000000000")
-		--GameTooltip:SetHyperlink("itemString" or "itemLink")
-		--GameTooltip:SetHyperlink("unit:Creature:0:0:0:0:64403:0000000001")
-		--0xF130FE6D009C5869 old u
-		--tooltip:SetHyperlink(("unit:0xF53%05X00000000"):format(npc_id))
-		--/script DEFAULT_CHAT_FRAME:AddMessage("item:109456:0:0:0:0:0:0:0:0:0:0\124h[6.0 QA Combat Test Agility Polearm]\124h\124r");
+	function private.NPCNameFromCache(npc_id)
+		tooltip:SetOwner(_G.WorldFrame, "ANCHOR_NONE")
+		--tooltip:SetHyperlink(("unit:Creature-0-0-0-0-%d:0000000000"):format(npc_id))
 
 		if tooltip:IsShown() then
 			return tooltip_text:GetText()
@@ -818,7 +812,7 @@ do
 		for achievement_id in pairs(private.OptionsCharacter.Achievements) do
 			AchievementNPCDeactivate(private.ACHIEVEMENTS[achievement_id], npc_id)
 		end
-]]--
+--]]
 		local is_valid = true
 		local is_tamable = private.TAMABLE_ID_TO_NAME[npc_id]
 		local invalid_reason
@@ -1213,9 +1207,9 @@ function private.GenerateTargetMacro(instanceid)
 	--Add Zandalari Warscout & Warbringer due to them appearing in multiple zones but in only one in the data file.
 	--Ignore if not in Pandaria or on the Timeless Isle
 	if continent_id == 6 and map_id ~= private.ZONE_IDS.TIMELESS_ISLE then
-		for index = 1, #MANUAL_PANDARIA_ADDITIONS do
-			if last_vignette_id ~= MANUAL_PANDARIA_ADDITIONS[index] then
-				private.macrotext = private.MACRO_FORMAT:format(private.macrotext, private.NPC_ID_TO_NAME[MANUAL_NPC_ADDITIONS[index]])
+		for index = 1, #private.MANUAL_PANDARIA_ADDITIONS do
+			if last_vignette_id ~= private.MANUAL_PANDARIA_ADDITIONS[index] then
+				private.macrotext = private.MACRO_FORMAT:format(private.macrotext, private.NPC_ID_TO_NAME[private.MANUAL_PANDARIA_ADDITIONS[index]])
 			end
 		end
 	end
