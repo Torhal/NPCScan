@@ -391,8 +391,7 @@ _G.InterfaceOptions_AddCategory(panel)
 
 
 -- Add stub panel to load tools UI
---local _, _, _, tools_enabled = _G.GetAddOnInfo("_NPCScan.Tools")
-local tools_enabled = true
+local _, _, _, tools_enabled = _G.GetAddOnInfo("_NPCScan.Tools")
 
 if tools_enabled then
 	local tools_panel = _G.CreateFrame("Frame")
