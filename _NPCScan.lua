@@ -804,6 +804,15 @@ do
 		return time_remaining > MOUSEOVER_TARGET_DELAY
 	end
 
+	--Check to see if a alert is already shown for the mob
+	function private.DuplicateAlertCheck(npc_id)
+		if _NPCScanButton:IsShown() and tonumber(npc_id) ==  tonumber(_NPCScanButton.ID) then 
+			private.Debug("Alert already shown")
+			return false
+		end
+		return true
+	end
+
 	-- Validates found mobs before showing alerts.
 	function private.OnFound(npc_id, npc_name)
 --[[  No need to deactivate mobs as cache scanning is deactivated. Re-enable if cache scanning works again.
@@ -835,6 +844,10 @@ do
 		if ValidRecordedTime(NPC_RECORDED_TIMES[npc_id]) then
 			NPC_RECORDED_TIMES[npc_id] = _G.GetTime()
 		else
+			is_valid = false
+		end
+
+		if not private.DuplicateAlertCheck(npc_id) then
 			is_valid = false
 		end
 
@@ -1227,11 +1240,10 @@ end
 --Checks target found by macro and triggers NPCScan alert for tracked mobs
 function private.CheckMacroTarget()
 	local target_guid = UnitGUID("target")
-
 	if target_guid then
-		local _,_,_,_,_,_,_,target_id = string.find(target_guid, "(%a+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+)")
-		if (private.NPC_ID_TO_NAME[target_id] or private.Options.NPCs[target_id]) and not UnitIsDeadOrGhost("target") then -- add in ignore list check
-
+		local _,_,_,_,_,_,_,target_id = string.find(target_guid, "(%a+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)")
+		target_id = tonumber(target_id)
+		if (private.NPC_ID_TO_NAME[target_id] or private.Options.NPCs[target_id]) and not UnitIsDeadOrGhost("target") then
 			private.Debug("Mob Found Via Macro")
 			private.OnFound(target_id, _G.UnitName("target"))
 
