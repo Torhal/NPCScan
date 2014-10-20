@@ -1182,7 +1182,7 @@ end
 -------------------------------------------------------------------------------
 -- Dynamic Target Macro Functions
 -------------------------------------------------------------------------------
-
+local MacroDelay = false
 local target_button = _G.CreateFrame("Button", "_NPCScan_Search_Button", _G.UIParent, "SecureActionButtonTemplate,SecureHandlerShowHideTemplate")
 target_button:Hide()
 
@@ -1191,11 +1191,22 @@ target_button:SetAttribute("macrotext", private.macrotext)
 target_button:RegisterEvent("PLAYER_ENTERING_WORLD")
 target_button:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 target_button:RegisterEvent("VARIABLES_LOADED")
+target_button:RegisterEvent("PLAYER_REGEN_ENABLED")
 target_button:SetScript("OnEvent", function(self, event_name, ...)
+	--Only needs to trigger after combat if a delay was set
+	if self == "PLAYER_REGEN_ENABLED" and MacroDelay then
+		MacroDelay = false
+	elseif self == "PLAYER_REGEN_ENABLED" then 
+		return
+	end
 	private.GenerateTargetMacro()
 end)
 
 function private.GenerateTargetMacro(instanceid)
+	if _G.InCombatLockdown() then
+		MacroDelay = true
+		return
+	end
 	_G.SetMapToCurrentZone()
 	local map_id = _G.GetCurrentMapAreaID()
 	local zone_name = _G.GetMapNameByID(map_id)
