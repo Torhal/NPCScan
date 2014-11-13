@@ -962,6 +962,7 @@ private.L = setmetatable( {
 	["82058"] = "Depthroot",
 	["82085"] = "Bashiok",
 	["82207"] = "Faebright",
+	["82221"] = "Shadow Clone",
 	["82247"] = "Nas Dunberlin",
 	["82268"] = "Darkmaster Go'vid",
 	["82311"] = "Char the Burning",
@@ -1077,12 +1078,14 @@ private.L = setmetatable( {
 	["85555"] = "Nagidna",
 	["85568"] = "Avalanche",
 	["85572"] = "Grrbrrgle",
+	["85738"] = "Brokor",
 	["85763"] = "Cursed Ravager",
 	["85765"] = "Cursed Kaliri",
 	["85766"] = "Cursed Sharptalon",
 	["85767"] = "Cursed Harbinger",
 	["85771"] = "Elder Darkweaver Kath",
 	["85837"] = "Slivermaw",
+	["86058"] = "Garrison Ford",
 	["86137"] = "Sunclaw",
 	["86212"] = "Aqualir",
 	["86213"] = "Aqualir",
@@ -1253,7 +1256,7 @@ private.L = setmetatable( {
 	-- Phrases localized by default UI
 	FOUND_ZONE_UNKNOWN = UNKNOWN;
 	SEARCH_LEVEL_TYPE_FORMAT = UNIT_TYPE_LEVEL_TEMPLATE; -- Level, Type
-	
+
 }, {
 	__index = function ( self, Key )
 		if ( Key ~= nil ) then
