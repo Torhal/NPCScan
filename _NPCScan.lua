@@ -1210,7 +1210,7 @@ function private.GenerateTargetMacro(instanceid)
 	_G.SetMapToCurrentZone()
 	local map_id = _G.GetCurrentMapAreaID()
 	local zone_name = _G.GetMapNameByID(map_id)
-	local continent_id = _G.GetCurrentMapContinent();
+	local continent_id = _G.GetCurrentMapContinent()
 
 	private.macrotext = "/cleartarget"
 
