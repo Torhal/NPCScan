@@ -1,4 +1,4 @@
-## Interface: 60000
+## Interface: 60100
 ## Title: _NPCScan
 ## Notes: Scans NPCs around you for rare ones.
 ## Notes-deDE: Scant NSCs in deiner Nähe nach seltenen.
