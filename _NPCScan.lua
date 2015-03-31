@@ -717,7 +717,7 @@ function private.Synchronize()
 
 	for achievement_id, achievement in pairs(private.ACHIEVEMENTS) do
 		-- If defaults, don't enable completed achievements unless explicitly allowed
-		if character_options.Achievements[achievement_id] then --and (not is_default_scan or character_options.AchievementsAddFound or not achievement.is_completed) then
+		if character_options.Achievements[achievement_id] then
 			private.AchievementAdd(achievement_id)
 		end
 	end
