@@ -775,7 +775,7 @@ do
 						expected_zone_name = select(map_continent * 2, _G.GetMapContinents())
 					end
 				end
-				invalid_reason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(npc_name, _G.GetRealZoneText(), expected_zone_name or L.FOUND_ZONE_UNKNOWN, expected_zone_id)
+				invalid_reason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(npc_name, _G.GetRealZoneText(), expected_zone_name or _G.UNKNOWN, expected_zone_id)
 			end
 		end
 		_G.SetMapByID(current_zone_id)

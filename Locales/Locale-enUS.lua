@@ -1254,7 +1254,6 @@ private.L = setmetatable({
 	WOD_CHANGES = "Due to changed to the game cache in WoD, NPCScan can no longer auto detect mobs as it could pre 6.0.  Now alerts can be only be automatically triggered off of vignette rares from MoP & Wod. Rare mobs from previous expansions can only be detected via mouse over or from the dynamic target macro keybind.  For more information please see the NPCScan page on Curse.com",
 	DYNAMIC_TARGET_MACRO_KEYBIND = "Dynamic Target Macro",
 	-- Phrases localized by default UI
-	FOUND_ZONE_UNKNOWN = UNKNOWN,
 	SEARCH_LEVEL_TYPE_FORMAT = UNIT_TYPE_LEVEL_TEMPLATE, -- Level, Type
 }, {
 	__index = function(self, Key)
