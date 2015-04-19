@@ -61,18 +61,19 @@ end
 
 --Checks to see if enough time has elapsed from the first sighting of a vignette before it triggers an alert again.
 function private.CheckDelay(instanceid)
+	local current_time = _G.GetTime()
+
 	if  not instance_id_registry[instanceid] then
-		instance_id_registry[instanceid] = GetTime()
+		instance_id_registry[instanceid] = current_time
 		Debug("Vignette not seen before")
 		return true
 	else
-		local current_time = GetTime()
 		local recorded_time = instance_id_registry[instanceid]
 		if (current_time - recorded_time) < delay_time then
 			Debug("Not enough time elapsed")
 			return false
 		else
-			instance_id_registry[instanceid] = GetTime()
+			instance_id_registry[instanceid] = current_time
 			Debug("Enough time has elapsed, sound alert.")
 			return true
 		end
@@ -154,7 +155,7 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceid, ...)
 		-- private.Button:IsShown() or
 		_G.GetUnitName("target") == last_vignette_id or
 		not VignetteZoneCheck or
-		UnitIsDeadOrGhost("player")  or
+		_G.UnitIsDeadOrGhost("player")  or
 		not private.CheckDelay(instanceid) then
 		return
 	end
@@ -176,7 +177,7 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceid, ...)
 			return
 		end
 		--Check for Vignette mobs that dont exist in our DB
-		if npc_id then 
+		if npc_id then
 			private.Button:SetNPC(npc_id, name, "Vignette Mob")
 			alert_text = L["FOUND_FORMAT"]:format("Vignette Mob: "..name)
 		else
@@ -205,9 +206,3 @@ function private.VFrame:VIGNETTE_REMOVED(event, instanceid, ...)
 		end
 	end
 end
-
---@do-not-package@
-function CurrentMacro()
-	print(private.macrotext)
-end
---@end-do-not-package@
