@@ -6,11 +6,12 @@ local _G = getfenv(0)
 -- Functions
 local pairs = _G.pairs
 local select = _G.select
+local tostring = _G.tostring
 local type = _G.type
 
 -- Libraries
 local math = _G.math
-
+local table = _G.table
 
 -------------------------------------------------------------------------------
 -- AddOn namespace.
@@ -498,7 +499,7 @@ do
 			end
 		else
 			tooltip:SetText(TEXT_TAB_TOOLTIPS[tab.identifier] or _G.UNKNOWN, nil, nil, nil, nil, true)
-			if tab.checkbox then  
+			if tab.checkbox then
 				if not tab.checkbox:GetChecked() then
 					local red = _G.RED_FONT_COLOR
 					tooltip:AddLine(L.SEARCH_ACHIEVEMENT_DISABLED, red.r, red.g, red.b)
@@ -815,15 +816,20 @@ do
 		current_tab = "BEASTS"
 		end
 
-	function pairsByKeys (t, f)
+	local function pairsByKeys(t, f)
 		local a = {}
-		for n in pairs(t) do table.insert(a, n) end
-			table.sort(a, f)
-			local i = 0      -- iterator variable
-			local iter = function ()   -- iterator function
+		for n in pairs(t) do
+			table.insert(a, n)
+		end
+		table.sort(a, f)
+
+		local i = 0
+		local iter = function()
 			i = i + 1
-			if a[i] == nil then return nil
-				else return a[i], t[a[i]]
+			if a[i] == nil then
+				return nil
+			else
+				return a[i], t[a[i]]
 			end
 		end
 		return iter
