@@ -803,6 +803,7 @@ local NPC_DATA = {
 	[74613] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false }, -- Broodmother Reeg'ak
 	[74971] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false }, -- Firefury Giant
 	[75071] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false }, -- Mother Om'ra
+	[75207] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true  }, -- Biolante
 	[75434] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false }, -- Windfang Matriarch
 	[75435] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false }, -- Yggdrel
 	[75482] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false }, -- Veloss
@@ -883,8 +884,10 @@ local NPC_DATA = {
 	[80868] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false }, -- Glut
 	[81038] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false }, -- Gelgor of the Blue Flame
 	[81406] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false }, -- Bahameye
+	[81548] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = true,  is_achievement = true  }, -- Charl Doomwing
 	[81639] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false }, -- Brambleking Fili
 	[82050] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false }, -- Varasha
+	[82058] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true  }, -- Depthroot
 	[82085] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false }, -- Bashiok
 	[82207] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false }, -- Faebright
 	[82221] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.BLASTED_LANDS,               is_tamable = false, is_achievement = false }, -- Shadow Clone
@@ -986,6 +989,9 @@ local NPC_DATA = {
 	[85767] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false }, -- Cursed Harbinger
 	[85771] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = true  }, -- Elder Darkweaver Kath
 	[86058] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false }, -- Garrison Ford
+	[86266] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = true,  is_achievement = true  }, -- Venolasix
+	[86268] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true  }, -- Alkali
+	[86257] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true  }, -- Basten
 	[86549] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = false }, -- Steeltusk
 	[86562] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true  }, -- Maniacal Madgard
 	[86566] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true  }, -- Defector Dazgo
@@ -1022,6 +1028,7 @@ local NPC_DATA = {
 	[88580] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true  }, -- Firestarter Grash
 	[88582] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true  }, -- Swift Onyx Flayer
 	[88583] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true  }, -- Grove Warden Yal
+	[88586] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = true,  is_achievement = true  }, -- Mogamago
 	[88672] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true  }, -- Hunter Bal'ra
 }
 
