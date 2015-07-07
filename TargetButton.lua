@@ -458,7 +458,7 @@ TitleBackground:SetHeight(18)
 TitleBackground:SetTexCoord(0, 0.9765625, 0, 0.3125)
 TitleBackground:SetAlpha(0.8)
 
-local Title = target_button:CreateFontString(nil, "OVERLAY", "GameFontHighlightMedium", 1)
+local Title = target_button:CreateFontString(nil, "OVERLAY", "GameFontHighlight", 1)
 Title:SetPoint("TOPLEFT", TitleBackground, 0, 2)
 Title:SetPoint("RIGHT", TitleBackground)
 target_button:SetFontString(Title)
