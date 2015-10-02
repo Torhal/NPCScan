@@ -66,11 +66,11 @@ function private.VFrame:ZONE_CHANGED_NEW_AREA(event, ...)
 		currentZone = GetCurrentMapAreaID()--Get right info after we set map to right place.
 	end
 
---	if currentZone == TANAAN_ZONE_ID then
---		self:RegisterEvent("WORLD_MAP_UPDATE")
---	else
---		self:UnregisterEvent("WORLD_MAP_UPDATE")
---	end
+	if currentZone == TANAAN_ZONE_ID then
+		self:RegisterEvent("WORLD_MAP_UPDATE")
+	else
+		self:UnregisterEvent("WORLD_MAP_UPDATE")
+	end
 end
 
 --Clears the last found Vignette mob only after combat has ended.
