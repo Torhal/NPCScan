@@ -1100,6 +1100,7 @@ local NPC_DATA = {
 [91695] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Grand Warlock Nethekurse
 [91727] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Executor Riloth
 [91871] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Argosh the Destroyer
+[91921] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false }, -- Wyrmple
 [92197] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Relgor
 [92274] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Painmistress Selora
 [92408] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Xanzith the Everlasting
@@ -1113,6 +1114,7 @@ local NPC_DATA = {
 [92552] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Belgork
 [92574] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Thromma the Gutslicer
 [92606] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Sylissa
+[92627] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = true,  is_achievement = true  }, -- Rendrak
 [92636] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- The Night Haunter
 [92645] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = false }, -- The Night Haunter
 [92647] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Felsmith Damorka
@@ -1136,7 +1138,16 @@ local NPC_DATA = {
 [95053] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Deathtalon
 [95054] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Vengeance
 [95056] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true  }, -- Doomroller
-};
+[96235] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = false }, -- Xemirkol
+[96323] = { world_id = ZN.DRAENOR,                  map_name = ZN.DRAENOR,                     is_tamable = false, is_achievement = false }, -- Arachnis
+[98198] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false }, -- Rukdug
+[98199] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false }, -- Pugg
+[98200] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false }, -- Guk
+[98283] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = false }, -- Drakum
+[98284] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = false }, -- Gondar
+[98285] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = false }, -- Smashum Grabb
+[98408] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = false }, -- Fel Overseer Mudlump
+}
 
 private.NPC_ID_TO_MAP_NAME = {}
 private.NPC_ID_TO_NAME = {}
