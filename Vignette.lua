@@ -86,15 +86,24 @@ function private.VFrame:PLAYER_ENTERING_WORLD()
 	private.VFrame:ZONE_CHANGED_NEW_AREA()
 end
 
+--Scans world map and looks at POI icons that relate to Hellbane mob events
 function private.VFrame:WORLD_MAP_UPDATE()
+
+	if not private.OptionsCharacter.TrackHellbane then return end
+
+	--Finds all POI landmarks on map
 	local numLandmarks = GetNumMapLandmarks()
 	for i = 1, numLandmarks do
 		local name, _, textureIndex = GetMapLandmarkInfo(i)
 
+		--Check to see if POI icon matches Hellbane event
 		if textureIndex == MAP_EVENT_ICON then
 			local alertText = L.EVENT_ACTIVE:format(name)
+			local BloodMoon = private.L.NPCs["91200"]
+			local BloodMoonEvent = string.find(name, BloodMoon) --Determine if event has localized Blood Moon in name
 
-			if private.AntiSpam(ANTI_SPAM_DELAY, name) then
+			--Check spam delay and if event is not the bloodmoon
+			if private.AntiSpam(ANTI_SPAM_DELAY, name) and not BloodMoonEvent then
 				private.Print(alertText, _G.RED_FONT_COLOR)
 				if private.Options.ShowAlertAsToast and alertText then
 					Toast:Spawn("_NPCScanAlertToast", alertText)

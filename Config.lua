@@ -214,7 +214,6 @@ function mouseover_scan_checkbox.setFunc(is_enabled)
 	private.SetMouseoverScan(is_enabled == "1")
 end
 
-
 local block_flight_scan_checkbox = _G.CreateFrame("CheckButton", "_NPCScanBlockFlightScanCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
 block_flight_scan_checkbox:SetPoint("TOPLEFT", mouseover_scan_checkbox, "BOTTOMLEFT", 0, -8)
 block_flight_scan_checkbox.tooltipText = L.BLOCKFLIGHTSCAN_DESC
@@ -229,8 +228,22 @@ function block_flight_scan_checkbox.setFunc(is_enabled)
 	private.SetBlockFlightScan(is_enabled == "1")
 end
 
+local hellbane_scan_checkbox = _G.CreateFrame("CheckButton", "_NPCScanHellbaneCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
+hellbane_scan_checkbox:SetPoint("TOPLEFT", block_flight_scan_checkbox, "BOTTOMLEFT", 0, -8)
+hellbane_scan_checkbox.tooltipText = L.HELLBANE_SCAN
+
+panel.hellbane_scan_checkbox = hellbane_scan_checkbox
+
+local hellbane_label = _G[hellbane_scan_checkbox:GetName() .. "Text"]
+hellbane_label:SetText(L.HELLBANE_SCAN)
+hellbane_scan_checkbox:SetHitRectInsets(4, 4 - hellbane_label:GetStringWidth(), 4, 4)
+
+function hellbane_scan_checkbox.setFunc(is_enabled)
+	private.SetHellbaneScan(is_enabled == "1")
+end
+
 local alert_sound_dropdown = _G.CreateFrame("Frame", "_NPCScanConfigSoundDropdown", alert_options_panel, "UIDropDownMenuTemplate")
-alert_sound_dropdown:SetPoint("TOPLEFT", block_flight_scan_checkbox, "BOTTOMLEFT", -12, -18)
+alert_sound_dropdown:SetPoint("TOPLEFT", hellbane_scan_checkbox, "BOTTOMLEFT", -12, -18)
 alert_sound_dropdown:SetPoint("RIGHT", -12, 0)
 alert_sound_dropdown:EnableMouse(true)
 alert_sound_dropdown.tooltipText = L.CONFIG_ALERT_SOUND_DESC

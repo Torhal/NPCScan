@@ -115,6 +115,7 @@ local OptionsCharacterDefault = {
 	TrackRares = true,
 	TrackVignettes = true,
 	TrackMouseover = true,
+	TrackHellbane = true,
 }
 
 
@@ -651,6 +652,13 @@ function private.SetBlockFlightScan(enable)
 	return enable
 end
 
+-- Enables Hellbane mob tracking.
+function private.SetHellbaneScan(enable)
+	private.OptionsCharacter.TrackHellbane = enable
+	private.Config.hellbane_scan_checkbox:SetChecked(enable)
+	return enable
+end
+
 -- Enables Vignette tracking.
 function private.SetVignetteScan(enable)
 	private.OptionsCharacter.TrackVignettes = enable
@@ -715,6 +723,7 @@ function private.Synchronize()
 	private.SetTargetIcon(character_options.TargetIcon)
 	private.SetAlertSound(options.AlertSound)
 	private.SetVignetteScan(character_options.TrackVignettes)
+	private.SetHellbaneScan(character_options.TrackHellbane)
 	private.SetMouseoverScan(character_options.TrackMouseover)
 	private.SetBlockFlightScan(character_options.FlightSupress)
 	private.SetRareMob("BEASTS", character_options.TrackBeasts)
