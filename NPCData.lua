@@ -1153,6 +1153,7 @@ private.NPC_ID_TO_MAP_NAME = {}
 private.NPC_ID_TO_NAME = {}
 private.NPC_ID_TO_WORLD_NAME = {}
 private.NPC_NAME_TO_ID = {}
+private.NPC_ID_TO_QUEST_ID = {}
 
 
 private.TAMABLE_ID_TO_MAP_NAME = {}
@@ -1164,6 +1165,10 @@ private.TAMABLE_NON_ACHIEVMENT_LIST = {}
 private.UNTAMABLE_ID_TO_MAP_NAME = {}
 private.UNTAMABLE_ID_TO_NAME = {}
 private.UNTAMABLE_ID_TO_WORLD_NAME = {}
+
+private.CUSTOM_NPC_ID_TO_NAME = {}
+private.CUSTOM_NPC_ID_TO_WORLD_NAME = {}
+private.CUSTOM_NPC_NAME_TO_ID = {}
 
 
 for npc_id, data in pairs(NPC_DATA) do
@@ -1187,7 +1192,6 @@ for npc_id, data in pairs(NPC_DATA) do
 		private.UNTAMABLE_ID_TO_WORLD_NAME[npc_id] = data.world_id
 	end
 end
-
 
 do
 	local function TableKeyFormat(input)

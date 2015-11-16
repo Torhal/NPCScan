@@ -113,6 +113,7 @@ local OptionsCharacterDefault = {
 	TargetIcon = 8, --Skull
 	TrackBeasts = true,
 	TrackRares = true,
+	TrackNameplate = true,
 	TrackVignettes = true,
 	TrackMouseover = true,
 	TrackHellbane = true,
@@ -194,8 +195,6 @@ do
 	local tooltip_text = tooltip:CreateFontString()
 	tooltip:AddFontStrings(tooltip_text, tooltip:CreateFontString())
 
-
-
 	--For players: Player-[server ID]-[player UID] (Example: "Player-976-0002FD64")
 	--For creatures, pets, objects, and vehicles: [Unit type]-0-[server ID]-[instance ID]-[zone UID]-[ID]-[Spawn UID] (Example: "Creature-0-976-0-11-31146-000136DF91")
 	--Unit Type Names: "Creature", "Pet", "GameObject", and "Vehicle"
@@ -211,7 +210,6 @@ do
 		end
 	end
 end
-
 
 local CacheListBuild
 do
@@ -304,7 +302,7 @@ do
 end
 
 
-local ScanIDs = {} -- [ NpcID ] = Number of concurrent scans for this ID
+ ScanIDs = {} -- [ NpcID ] = Number of concurrent scans for this ID
 
 
 -- Begins searching for an NPC.
@@ -402,10 +400,15 @@ function private.NPCAdd(npc_id, npc_name, world_id)
 	options.NPCs[npc_id] = npc_name
 	options.NPCWorldIDs[npc_id] = world_id
 
+	private.CUSTOM_NPC_ID_TO_NAME[npc_id] = npc_name
+	private.CUSTOM_NPC_ID_TO_WORLD_NAME[npc_id] = world_id
+	private.CUSTOM_NPC_NAME_TO_ID[npc_name] = npc_id
+
 	if not NPCActivate(npc_id, world_id) then
 		-- Didn't activate; Just add row
 		private.Config.Search.UpdateTab("NPC")
 	end
+
 	return true
 end
 
@@ -422,6 +425,11 @@ function private.NPCRemove(npc_id)
 	end
 	options.NPCs[npc_id] = nil
 	options.NPCWorldIDs[npc_id] = nil
+
+	local npc_name = private.CUSTOM_NPC_ID_TO_NAME[npc_id]
+	private.CUSTOM_NPC_ID_TO_NAME[npc_id] = nil
+	private.CUSTOM_NPC_ID_TO_WORLD_NAME[npc_id] = nil
+	private.CUSTOM_NPC_NAME_TO_ID[npc_name] = nil
 
 	if not NPCDeactivate(npc_id) then
 		private.Config.Search.UpdateTab("NPC")
@@ -530,48 +538,42 @@ function private.AchievementRemove(achievement_id)
 	return true
 end
 
-
--- Adds a kill-related achievement to track.
--- @param AchievementID Numeric ID of achievement.
--- @return True if achievement added.
-function private.SetRareMob(identifier, enable)
-	if identifier == "BEASTS" then
-		private.OptionsCharacter.TrackBeasts = enable
-		private.Config.Search.AchievementSetEnabled(identifier, enable)
-		return true
-	elseif identifier == "RARENPC" then
-		private.OptionsCharacter.TrackRares = enable
-		private.Config.Search.AchievementSetEnabled(identifier, enable)
-		return true
-	end
-end
-
+-- Adds a previously ignored Mob to be tracked.
+-- @param Mob Id & World ID .
 function private.ReavtivateIgnoreMob(npc_id, world_id)
 	NPCActivate(npc_id, world_id)
 end
 
+-- Removes an ignored Mob from being tracked.
+-- @param Mob Id 
 function private.DeavtivateIgnoreMob(npc_id)
 	NPCDeactivate(npc_id)
 end
 
-
+-- Toggles a Mob type to track.
+-- @param Identifier of Type and Toggle State.
+-- @return True if achievement added.
 function private.RareMobToggle(identifier, enable)
-	local npcs
+	local npc_list
 
 	if identifier == "BEASTS" then
-		npcs = private.TAMABLE_ID_TO_NAME
+		private.OptionsCharacter.TrackBeasts = enable
+		private.Config.Search.AchievementSetEnabled(identifier, enable)
+		npc_list = private.TAMABLE_ID_TO_NAME
 	elseif identifier == "RARENPC" then
-		npcs = private.UNTAMABLE_ID_TO_NAME
+		private.OptionsCharacter.TrackRares = enable
+		private.Config.Search.AchievementSetEnabled(identifier, enable)
+		npc_list = private.UNTAMABLE_ID_TO_NAME
 	end
 
-	if npcs and enable then
-		for npc_id, _ in pairs(npcs) do
+	if npc_list and enable then
+		for npc_id, _ in pairs(npc_list) do
 			if not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] then
 				NPCActivate(npc_id, private.NPC_ID_TO_WORLD_NAME[npc_id])
 			end
 		end
 	else
-		for npc_id, _ in pairs(npcs) do
+		for npc_id, _ in pairs(npc_list) do
 			NPCDeactivate(npc_id)
 		end
 	end
@@ -605,12 +607,13 @@ function private.SetAchievementsAddFound(enable)
 	end
 end
 
-
+-- Enables alerts to be displayed as toast display.
 function private.SetShowAsToast(enable)
 	private.Options.ShowAlertAsToast = enable
 	private.Config.show_as_toast_checkbox:SetChecked(enable)
 end
 
+-- Enables displayed toasts to be shown untill closed by the user.
 function private.SetPersistentToast(enable)
 	private.Options.PersistentToast = enable
 	private.Config.persistent_toast_checkbox:SetChecked(enable)
@@ -652,14 +655,21 @@ function private.SetBlockFlightScan(enable)
 	return enable
 end
 
--- Enables Hellbane mob tracking.
+-- Enables Hellbane mob tracking when their icons appear on the world map.
 function private.SetHellbaneScan(enable)
 	private.OptionsCharacter.TrackHellbane = enable
 	private.Config.hellbane_scan_checkbox:SetChecked(enable)
 	return enable
 end
 
--- Enables Vignette tracking.
+-- Enables tracking of mobs by Nameplate.
+function private.SetNameplateScan(enable)
+	private.OptionsCharacter.TrackNameplate = enable
+	private.Config.nameplate_scan_checkbox:SetChecked(enable)
+	return enable
+end
+
+-- Enables tracking of mobs by Vignette.
 function private.SetVignetteScan(enable)
 	private.OptionsCharacter.TrackVignettes = enable
 	private.Config.viginette_scan_checkbox:SetChecked(enable)
@@ -722,12 +732,11 @@ function private.Synchronize()
 	private.SetAlertScreenEdgeFlash(character_options.AlertScreenEdgeFlash)
 	private.SetTargetIcon(character_options.TargetIcon)
 	private.SetAlertSound(options.AlertSound)
+	private.SetNameplateScan(character_options.TrackNameplate)
 	private.SetVignetteScan(character_options.TrackVignettes)
 	private.SetHellbaneScan(character_options.TrackHellbane)
 	private.SetMouseoverScan(character_options.TrackMouseover)
 	private.SetBlockFlightScan(character_options.FlightSupress)
-	private.SetRareMob("BEASTS", character_options.TrackBeasts)
-	private.SetRareMob("RARENPC", character_options.TrackRares)
 	private.RareMobToggle("BEASTS", character_options.TrackBeasts)
 	private.RareMobToggle("RARENPC", character_options.TrackRares)
 
@@ -736,6 +745,13 @@ function private.Synchronize()
 		if character_options.Achievements[achievement_id] then
 			private.AchievementAdd(achievement_id)
 		end
+	end
+
+	--Builds custom NPC lookup tables
+	for npc_id, npc_name in pairs(private.Options.NPCs) do
+		private.CUSTOM_NPC_ID_TO_NAME[npc_id] = npc_name
+		private.CUSTOM_NPC_ID_TO_WORLD_NAME[npc_id] = private.Options.NPCWorldIDs[npc_id]
+		private.CUSTOM_NPC_NAME_TO_ID[npc_name] = npc_id
 	end
 
 	private.CacheListPrint(false, true) -- Populates cache list with inactive mobs too before printing

@@ -1307,6 +1307,8 @@ private.L = setmetatable({
 	HELLBANE_SCAN = "Show alerts when Hellbane mobs appear on world map",
 	MOUSEOVER_SCAN = "Show alerts for mobs you mouseover",
 	MOUSEOVER_SCAN_DESC = "Show alerts for mobs on mouseover, even if they are already in the cache.",
+	NAMEPLATE_SCAN = "Use Mob Nameplates to trigger alerts",
+	NAMEPLATE_SCAN_DESC = "This method is not exact as the nameplate much match the name in the NPCScan database.",
 	PRINT_FORMAT = "%s_|cffCCCC88NPCScan|r: %s",
 	RAREMOBS = "Rare Mobs",
 	SEARCH_ACHIEVEMENTADDFOUND = "Search for completed Achievement NPCs",
@@ -1340,7 +1342,7 @@ private.L = setmetatable({
 	TIME_FORMAT = "|cff808080[%H:%M:%S]|r ",
 	TOOLS_TITLE = "|cff808080Tools|r",
 	VIGNETTE_SCAN = "Show alerts for Vignette Mobs",
-	VIGNETTE_SCAN_DESC = "Show alerts for Vignette Mobs.  This is a Beta Feature:  There is currently no way to filter mobs, so it will always trigger even if mob not tracked or ignored.",
+	VIGNETTE_SCAN_DESC = "Show alerts when Vignette Mobs (Skull Mobs on Minimap) get within range.",
 	WOD_CHANGES = "Due to changed to the game cache in WoD, NPCScan can no longer auto detect mobs as it could pre 6.0.  Now alerts can be only be automatically triggered off of vignette rares from MoP & Wod. Rare mobs from previous expansions can only be detected via mouse over or from the dynamic target macro keybind.  For more information please see the NPCScan page on Curse.com",
 	DYNAMIC_TARGET_MACRO_KEYBIND = "Dynamic Target Macro",
 }, {

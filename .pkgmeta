@@ -24,3 +24,5 @@ externals:
   Libs/LibToast-1.0:
     url: http://hg.curseforge.net/wow/libtoast-1-0/mainline
     tag: latest
+  Libs/LibNameplateRegistry-1.0: 
+    url: git://git.wowace.com/wow/libnameplateregistry-1-0/mainline.git/LibNameplateRegistry-1.0

@@ -186,8 +186,25 @@ function screen_edge_flash_checkbox.setFunc(is_enabled)
 	private.SetAlertScreenEdgeFlash(is_enabled == "1")
 end
 
+
+local nameplate_scan_checkbox = _G.CreateFrame("CheckButton", "_NPCScanNameplateScanCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
+nameplate_scan_checkbox:SetPoint("TOPLEFT", screen_edge_flash_checkbox, "BOTTOMLEFT", 0, -8)
+nameplate_scan_checkbox.tooltipText = L.NAMEPLATE_SCAN_DESC
+
+panel.nameplate_scan_checkbox = nameplate_scan_checkbox
+
+local nameplate_scan_label = _G[nameplate_scan_checkbox:GetName() .. "Text"]
+nameplate_scan_label:SetText(L.NAMEPLATE_SCAN)
+nameplate_scan_checkbox:SetHitRectInsets(4, 4 - nameplate_scan_label:GetStringWidth(), 4, 4)
+
+function nameplate_scan_checkbox.setFunc(is_enabled)
+	private.SetNameplateScan(is_enabled == "1")
+end
+
+--
+
 local viginette_scan_checkbox = _G.CreateFrame("CheckButton", "_NPCScanVignetteScanCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
-viginette_scan_checkbox:SetPoint("TOPLEFT", screen_edge_flash_checkbox, "BOTTOMLEFT", 0, -8)
+viginette_scan_checkbox:SetPoint("TOPLEFT", nameplate_scan_checkbox, "BOTTOMLEFT", 0, -8)
 viginette_scan_checkbox.tooltipText = L.VIGNETTE_SCAN_DESC
 
 panel.viginette_scan_checkbox = viginette_scan_checkbox

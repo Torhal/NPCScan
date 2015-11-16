@@ -536,7 +536,6 @@ do
 		Tab_OnEnter(checkbox:GetParent())
 	end
 
-
 	local function CheckBoxID_OnClick(checkbox)
 		local is_enabled = checkbox:GetChecked()
 		_G.PlaySound(is_enabled and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
@@ -544,15 +543,14 @@ do
 		local identifier = checkbox:GetParent().identifier
 		panel.AchievementSetEnabled(identifier, is_enabled)
 		if identifier == "BEASTS" then
-			private.OptionsCharacter.TrackBeasts = (is_enabled == 1)
+			private.OptionsCharacter.TrackBeasts = is_enabled
 		elseif identifier == "RARENPC" then
-			private.OptionsCharacter.TrackRares = (is_enabled == 1)
+			private.OptionsCharacter.TrackRares = is_enabled
 		end
 		private.RareMobToggle(identifier, is_enabled)
 		private.CacheListPrint(true)
 		Tab_OnEnter(checkbox:GetParent())
 	end
-
 
 	local function CreateTabCheckBox(tab, onclick_script)
 		local checkbox = _G.CreateFrame("CheckButton", nil, tab, "UICheckButtonTemplate")
