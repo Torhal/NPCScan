@@ -1326,6 +1326,7 @@ private.L = setmetatable({
 	SEARCH_IGNORE_DESC = "Remove selected mob from list.",
 	SEARCH_IGNORE_LIST = "Ignore List",
 	SEARCH_IGNORE_LIST_DESC = "List of Mobs that NPCScan will not track.",
+	SEARCH_KILLED = "Killed:",
 	SEARCH_MAP = "Zone:",
 	SEARCH_NAME = "Name:",
 	SEARCH_NAME_DESC = "A label for the NPC.  It doesn't have to match the NPC's actual name.",

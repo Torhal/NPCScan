@@ -474,6 +474,7 @@ do
 		RARENPC = "TrackRares",
 	}
 
+
 	local function Tab_OnEnter(tab)
 		local tooltip = _G.GameTooltip
 		tooltip:SetOwner(tab, "ANCHOR_TOPLEFT", 0, -8)
@@ -536,6 +537,7 @@ do
 		Tab_OnEnter(checkbox:GetParent())
 	end
 
+
 	local function CheckBoxID_OnClick(checkbox)
 		local is_enabled = checkbox:GetChecked()
 		_G.PlaySound(is_enabled and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
@@ -551,6 +553,7 @@ do
 		private.CacheListPrint(true)
 		Tab_OnEnter(checkbox:GetParent())
 	end
+
 
 	local function CreateTabCheckBox(tab, onclick_script)
 		local checkbox = _G.CreateFrame("CheckButton", nil, tab, "UICheckButtonTemplate")
@@ -646,7 +649,8 @@ do
 				local map_name = map_names[npc_id]
 
 				local new_row = panel.table:AddRow(npc_id,
-					private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
+					--private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
+					private.NPCQuestIsComplete(npc_id) and TEXTURE_READY or "",
 					npc_name,
 					npc_id,
 					world_ids[npc_id] or "",
@@ -674,6 +678,7 @@ do
 		GeneralNPCUpdate(private.NPC_ID_TO_WORLD_NAME, private.NPC_ID_TO_MAP_NAME, private.TAMABLE_NON_ACHIEVMENT_LIST)
 	end
 
+
 	local function UpdateIgnoreTab(tab)
 		local world_ids= private.Options.IgnoreList.WorldID
 		local map_names = private.Options.IgnoreList.MapName
@@ -684,13 +689,15 @@ do
 			local map_name = map_names[npc_id]
 
 			local new_row = panel.table:AddRow(npc_id,
-				private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
+				--private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
+				private.NPCQuestIsComplete(npc_id) and TEXTURE_READY or "",
 				npc_name,
 				npc_id,
 				world_ids[npc_id] or "",
 				map_name or _G.UNKNOWN)
 		end
 	end
+
 
 	local function UpdateAchievementTab(tab)
 		local achievement = private.ACHIEVEMENTS[tab.identifier]
@@ -701,7 +708,8 @@ do
 					local npc_name, _, is_completed = _G.GetAchievementCriteriaInfoByID(tab.identifier, criteria_id)
 					local map_name = private.NPC_ID_TO_MAP_NAME[npc_id]
 					local new_row = panel.table:AddRow(npc_id,
-						private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
+						--private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
+						private.NPCQuestIsComplete(npc_id) and TEXTURE_READY or "",
 						npc_name,
 						npc_id,
 						is_completed and TEXTURE_READY or "",
@@ -716,7 +724,7 @@ do
 	end
 
 	local function ActivateNPCTab(tab)
-		panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
+		panel.table:SetHeader(L.SEARCH_KILLED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
 		panel.table:SetSortHandlers(true, true, true, true, true)
 		panel.table:SetSortColumn(2) -- Default by name
 		panel.table.OnSelect = tab.table_row_on_select
@@ -727,7 +735,7 @@ do
 	end
 
 	local function ActivateCustomTab(tab)
-		panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
+		panel.table:SetHeader(L.SEARCH_KILLED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_WORLD, L.SEARCH_MAP)
 		panel.table:SetSortHandlers(true, true, true, true, true)
 		panel.table:SetSortColumn(2) -- Default by name
 		panel.table.OnSelect = tab.table_row_on_select
@@ -741,7 +749,7 @@ do
 	end
 
 	local function ActivateAchievementTab(tab)
-		panel.table:SetHeader(L.SEARCH_CACHED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED, L.SEARCH_MAP)
+		panel.table:SetHeader(L.SEARCH_KILLED, L.SEARCH_NAME, L.SEARCH_ID, L.SEARCH_COMPLETED, L.SEARCH_MAP)
 		panel.table:SetSortHandlers(true, true, true, true, true)
 		panel.table:SetSortColumn(2) -- Default by name
 		panel.table.Header:SetAlpha(private.OptionsCharacter.Achievements[tab.identifier] and ALPHA_ACTIVE or ALPHA_INACTIVE)
@@ -834,7 +842,7 @@ do
 		end
 		return iter
 	end
-
+	
 	for achievement_id in pairsByKeys(private.ACHIEVEMENTS) do
 		local Ach_tab = AddTab(achievement_id, UpdateAchievementTab, ActivateAchievementTab, DeactivateAchievementTab)
 		Ach_tab.table_row_on_select = function(text_table, npc_id)
