@@ -1049,7 +1049,12 @@ do
 		local map_name, _, _, _, _, _, _, map_id = _G.GetInstanceInfo()
 		local map_continent = _G.GetCurrentMapContinent()
 
-		private.WorldID = private.LOCALIZED_CONTINENT_NAMES[map_continent]
+		-- Fix for Deepholm
+		if map_continent == private.CONTINENT_IDS.THE_MAELSTROM then
+			private.WorldID = _NPCScan.ZONE_NAMES.DEEPHOLM
+		else
+			private.WorldID = _NPCScan.LOCALIZED_CONTINENT_NAMES[map_continent]
+		end 
 
 		if private.OptionsCharacter.TrackRares then
 			for npc_id, world_name in pairs(private.UNTAMABLE_ID_TO_WORLD_NAME) do
