@@ -53,14 +53,6 @@ private.Updater:SetLooping("REPEAT")
 -------------------------------------------------------------------------------
 local DB_VERSION = 3
 local ISLE_OF_THUNDER_MAP_ID = 1064
-local HORDE_GARRISON_L1 = 1152
-local HORDE_GARRISON_L2 = 1330
-local HORDE_GARRISON_L3 = 1153
-local HORDE_GARRISON_L4 = 1154
-local ALIANCE_GARRISON_L1 = 1158
-local ALIANCE_GARRISON_L2 = 1331
-local ALIANCE_GARRISON_L3 = 1159
-local ALIANCE_GARRISON_L4 = 1160
 local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
 local PLAYER_FACTION = _G.UnitFactionGroup("player")
 local ANTI_SPAM_DELAY  = 300
@@ -127,7 +119,7 @@ local OptionsCharacterDefault = {
 	TrackRares = true,
 	TrackNameplate = false,
 	TrackVignettes = true,
-	TrackMouseover = true,
+	TrackMouseover = false,
 	TrackHellbane = true,
 }
 
@@ -1057,15 +1049,7 @@ do
 		local map_name, _, _, _, _, _, _, map_id = _G.GetInstanceInfo()
 		local map_continent = _G.GetCurrentMapContinent()
 
-		-- Fix for Isle of Thunder  & Garrisons having a diffrent Instance name
-		if map_id == ISLE_OF_THUNDER_MAP_ID then
-			private.WorldID = private.ZONE_NAMES.PANDARIA
-		elseif map_id == HORDE_GARRISON_L1 or HORDE_GARRISON_L2 or HORDE_GARRISON_L3 or HORDE_GARRISON_L4 
-		  or ALIANCE_GARRISON_L1 or ALIANCE_GARRISON_L2 or ALIANCE_GARRISON_L3 or ALIANCE_GARRISON_L4 then
-			private.WorldID = private.ZONE_NAMES.DRAENOR
-		else
-			private.WorldID = map_name
-		end
+		private.WorldID = private.LOCALIZED_CONTINENT_NAMES[map_continent]
 
 		if private.OptionsCharacter.TrackRares then
 			for npc_id, world_name in pairs(private.UNTAMABLE_ID_TO_WORLD_NAME) do
