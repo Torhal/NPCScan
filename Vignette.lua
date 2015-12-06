@@ -174,7 +174,7 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceId, ...)
 		not instanceId or
 		_G.GetUnitName("target") == last_vignette_id or
 		not VignetteZoneCheck or
-		_G.UnitIsDeadOrGhost("player")  or
+		_G.UnitIsDeadOrGhost("player") or
 		not private.AntiSpam(ANTI_SPAM_DELAY, name) then
 		return false
 	end
@@ -190,16 +190,17 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceId, ...)
 	elseif iconId == VIGNETTE_MOB_ID  or iconId == VIGNETTE_EVENT_MOB_ID then  --Use Case if API returns Mob Info
 		Debug("Correct Mob Data Returned for "..name)
 
-		--Check to see if mob is on the ignore list or not being currently tracked
-		if _G._NPCScanOptions.IgnoreList.NPCs[npc_id] or not private.ScanIDs[npc_id] then
-			Debug("Ignored Mob")
-			return
-		end
-
 		--Check for Vignette mobs that dont exist in our DB
 		if npc_id then
+			Debug("ID found for "..private.NPC_NAME_TO_ID[name])
+			--Check to see if mob is on the ignore list or not being currently tracked
+			if _G._NPCScanOptions.IgnoreList.NPCs[npc_id] or not private.ScanIDs[npc_id] then
+				Debug("Ignored Mob")
+				return
+			end
 			private.Button:SetNPC(npc_id, name, "Vignette Mob")
 		else
+			Debug("No MobID found for "..name)
 			private.Button:SetNPC(29147, name, "Unknown Vignette")
 		end
 		alert_text = L["FOUND_FORMAT"]:format("Vignette Mob: "..name)

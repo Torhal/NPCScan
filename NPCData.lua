@@ -1194,6 +1194,18 @@ for npc_id, data in pairs(NPC_DATA) do
 	end
 end
 
+
+--Update Database with Achievement Mobs info provided by the game.
+for achievement_id, achievement in pairs(private.ACHIEVEMENTS) do
+	for criteria_id, npc_id in pairs(achievement.Criteria) do
+
+	local npc_name = _G.GetAchievementCriteriaInfoByID(achievement_id, criteria_id)
+	private.NPC_ID_TO_NAME[npc_id] = npc_name
+	private.NPC_NAME_TO_ID[npc_name] = npc_id
+	end
+end
+
+
 do
 	local function TableKeyFormat(input)
 		if not input then
