@@ -84,7 +84,7 @@ do
 			return
 		end
 
-		local current_icon = private.OptionsCharacter.TargetIcon
+		local current_icon = private.CharacterOptions.TargetIcon
 		local info = _G.UIDropDownMenu_CreateInfo()
 
 		info.func = Icon_Entry_OnSelect
@@ -127,7 +127,7 @@ test_button:SetScript("OnClick", function(self)
 
 	local alert_text = L.FOUND_FORMAT:format(L.CONFIG_TEST_NAME)
 
-	if private.Options.ShowAlertAsToast then
+	if private.CharacterOptions.ShowAlertAsToast then
 		Toast:Spawn("_NPCScanAlertToast", alert_text)
 	else
 		private.Print(alert_text, _G.GREEN_FONT_COLOR)
@@ -330,7 +330,7 @@ do
 		if not level then
 			return
 		end
-		local current_sound = private.Options.AlertSound
+		local current_sound = private.GlobalOptions.AlertSound
 		local info = _G.UIDropDownMenu_CreateInfo()
 
 		if level == 1 then
@@ -411,7 +411,7 @@ end
 
 -- Reverts to default options.
 function panel:default()
-	private.Synchronize() -- Resets all
+	private.Ace.db:ResetProfile();
 end
 
 _G.InterfaceOptions_AddCategory(panel)

@@ -38,7 +38,7 @@ end
 
 -- Trigger when a new namplate is detected.
 function NameplateScan:LNR_ON_NEW_PLATE(eventname, plateFrame, plateData)
-	if not private.OptionsCharacter.TrackNameplate then return end
+	if not private.CharacterOptions.TrackNameplate then return end
 
 	local  npc_id = private.NPC_NAME_TO_ID[plateData.name] or private.CUSTOM_NPC_NAME_TO_ID[plateData.name] or nil
 

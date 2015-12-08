@@ -37,8 +37,8 @@
 ## X-WoWI-ID: 12995
 ## X-Localizations: deDE, enCN, enTW, enUS, esES, esMX, frFR, itIT, koKR, ptBR, ptPT, ruRU, zhCN, zhTW
 ## X-CompatibleLocales: deDE, enCN, enTW, enUS, esES, esMX, frFR, itIT, koKR, ptBR, ptPT, ruRU, zhCN, zhTW
-## SavedVariables: _NPCScanOptions
-## SavedVariablesPerCharacter: _NPCScanOptionsCharacter
+## SavedVariables: _NPCScanOptions, _NPCScanProfiles
+
 ## OptionalDeps: Ace3, LibDialog-1.0, LibSharedMedia-3.0, LibTextDump-1.0, LibTextTable-1.1, LibToast-1.0, LibNameplateRegistry-1.0
 
 
@@ -49,6 +49,13 @@ Libs\LibTextDump-1.0\Lib.xml
 Libs\LibTextTable-1.1\Lib.xml
 Libs\LibSharedMedia-3.0\lib.xml
 Libs\AceEvent-3.0\AceEvent-3.0.xml
+
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceGUI-3.0\AceGUI-3.0.xml
+Libs\AceConfig-3.0\AceConfig-3.0.xml
+Libs\AceDB-3.0\AceDB-3.0.xml
+Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
+
 Libs\LibDialog-1.0\lib.xml
 Libs\LibToast-1.0\lib.xml
 Libs\LibNameplateRegistry-1.0\LibNameplateRegistry-1.0.xml
