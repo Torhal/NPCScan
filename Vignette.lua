@@ -23,7 +23,6 @@ local Toast = _G.LibStub("LibToast-1.0")
 -- Variables.
 -------------------------------------------------------------------------------
 local EVENT_WARNING_SOUND = "Sound\\Spells\\PVPFlagTaken.ogg"
-local ANTI_SPAM_DELAY  = 300
 local TANAAN_ZONE_ID = 945
 local VIGNETTE_MOB_ID = 41
 local VIGNETTE_EVENT_MOB_ID = 45
@@ -94,7 +93,7 @@ end
 --Scans world map and looks at POI icons that relate to Hellbane mob events
 function private.VFrame:WORLD_MAP_UPDATE()
 
-	if not private.OptionsCharacter.TrackHellbane then return end
+	if not private.CharacterOptions.TrackHellbane then return end
 
 	--Finds all POI landmarks on map
 	local number_landmarks = GetNumMapLandmarks()
@@ -108,9 +107,9 @@ function private.VFrame:WORLD_MAP_UPDATE()
 			local BloodMoonEvent = string.find(name, BLOODMOON) --Determine if event has localized Blood Moon in name
 
 			--Check spam delay and if event is not the Bloodmoon
-			if private.AntiSpam(ANTI_SPAM_DELAY, name) and not BloodMoonEvent then
+			if private.AntiSpam(private.ANTI_SPAM_DELAY, name.."MapAlert") and not BloodMoonEvent then
 				private.Print(alert_text, _G.RED_FONT_COLOR)
-				if private.Options.ShowAlertAsToast and alert_text then
+				if private.CharacterOptions.ShowAlertAsToast and alert_text then
 					Toast:Spawn("_NPCScanAlertToast", alert_text)
 				end
 				_G.PlaySoundFile(EVENT_WARNING_SOUND, "master")
@@ -170,12 +169,12 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceId, ...)
 	Debug("Found: %d  Last ID: %d", vignette_found_count, last_vignette_id)
 	local x, y, name, iconId = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceId)
 
-	if not private.OptionsCharacter.TrackVignettes or
+	if not private.CharacterOptions.TrackVignettes or
 		not instanceId or
 		_G.GetUnitName("target") == last_vignette_id or
 		not VignetteZoneCheck or
 		_G.UnitIsDeadOrGhost("player") or
-		not private.AntiSpam(ANTI_SPAM_DELAY, name) then
+		not private.AntiSpam(private.ANTI_SPAM_DELAY, name) then
 		return false
 	end
 
@@ -209,7 +208,7 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceId, ...)
 		Debug("Untracked Vigenette")
 	end
 
-	if private.Options.ShowAlertAsToast and alert_text then
+	if private.CharacterOptions.ShowAlertAsToast and alert_text then
 		Toast:Spawn("_NPCScanAlertToast", alert_text)
 	elseif alert_text then
 		private.Print(alert_text, _G.GREEN_FONT_COLOR)

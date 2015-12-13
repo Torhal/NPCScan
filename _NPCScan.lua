@@ -55,13 +55,15 @@ private.Updater:SetLooping("REPEAT")
 -------------------------------------------------------------------------------
 local DB_VERSION = 3
 local ISLE_OF_THUNDER_MAP_ID = 1064
+local DARKMOON_ISLAND_MAP_ID = 947
 local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
 local PLAYER_FACTION = _G.UnitFactionGroup("player")
-local ANTI_SPAM_DELAY  = 300
+local ANTI_SPAM_DELAY = 300
 
 --@debug@
 ANTI_SPAM_DELAY  = 30
 --@end-debug@
+private.ANTI_SPAM_DELAY = ANTI_SPAM_DELAY
 
 
 -------------------------------------------------------------------------------
@@ -400,7 +402,7 @@ do
 	-- Ends actual scan for NPC.
 	function NPCDeactivate(npc_id)
 		if not NPCsActive[npc_id] then
-			private.Debug(npc_id.. " not active")
+			--private.Debug(npc_id.. " not active")
 			return
 		end
 		NPCsActive[npc_id] = nil
@@ -628,14 +630,17 @@ function private.RareMobToggle(identifier, enable)
 		end
 	elseif npc_list and not enable then
 		for npc_id, _ in pairs(npc_list) do
-		 if private.NPCIsActive(npc_id) then
-			NPCDeactivate(npc_id)
-		end
+			if private.NPCIsActive(npc_id) then
+				NPCDeactivate(npc_id)
+			end
 		end
 	end
 end
 
 
+-------------------------------------------------------------------------------
+-- Config Menu Toggles.
+-------------------------------------------------------------------------------
 -- Enables printing cache lists on login.
 function private.SetCacheWarnings(enable)
 	private.CharacterOptions.CacheWarnings = enable
@@ -749,25 +754,6 @@ function private.SetMouseoverScan(enable)
 	return enable
 end
 
-
--- An anti spam function to throttle spammy events
--- @param time the time to wait between two events (optional, default 2.5 seconds)
--- @param id the id to distinguish different events (optional, only necessary if your mod keeps track of two different spam events at the same time)
-function private.AntiSpam(time, id)
-	if _G.GetTime() - (id and (antiSpamList["lastAntiSpam" .. tostring(id)] or 0) or lastAntiSpam or 0) > (time or 2.5) then
-		if id then
-			antiSpamList["lastAntiSpam" .. tostring(id)] = _G.GetTime()
-		else
-			lastAntiSpam = _G.GetTime()
-		end
-		return true
-	else
-		private.Debug("Anti-Spam triggered for: "..tostring(id))
-		return false
-	end
-end
-
-
 local IsDefaultNPCValid
 do
 	local TAMABLE_EXCEPTIONS = {
@@ -838,6 +824,24 @@ function private.Synchronize()
 	end
 
 	private.CacheListPrint(false, true) -- Populates cache list with inactive mobs too before printing
+end
+
+
+-- An anti spam function to throttle spammy events
+-- @param time the time to wait between two events (optional, default 2.5 seconds)
+-- @param id the id to distinguish different events (optional, only necessary if your mod keeps track of two different spam events at the same time)
+function private.AntiSpam(time, id)
+	if _G.GetTime() - (id and (antiSpamList["lastAntiSpam" .. tostring(id)] or 0) or lastAntiSpam or 0) > (time or 2.5) then
+		if id then
+			antiSpamList["lastAntiSpam" .. tostring(id)] = _G.GetTime()
+		else
+			lastAntiSpam = _G.GetTime()
+		end
+		return true
+	else
+		private.Debug("Anti-Spam triggered for: "..tostring(id))
+		return false
+	end
 end
 
 
@@ -936,7 +940,7 @@ do
 		end
 
 		-- Checks to see if alert for mob has allready been displayed recently
-		is_valid = private.AntiSpam(ANTI_SPAM_DELAY, npc_name)
+		is_valid = private.AntiSpam(private.ANTI_SPAM_DELAY, npc_name)
 
 		if is_valid then
 			local alert_text = L[is_tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(npc_name)
@@ -1068,7 +1072,6 @@ end
 
 --Called whenever profile is changed to reload new settings
 function private.Ace:RefreshProfile()
-
 	for npc_id , _ in pairs(private.ScanIDs) do
 		NPCDeactivate(npc_id)
 	end
@@ -1119,10 +1122,16 @@ do
 
 		-- Fix for Deepholm
 		if map_continent == private.CONTINENT_IDS.THE_MAELSTROM then
-			private.WorldID = _NPCScan.ZONE_NAMES.DEEPHOLM
+			private.WorldID = private.ZONE_NAMES.DEEPHOLM
+		elseif map_continent == -1 and map_id == DARKMOON_ISLAND_MAP_ID then --Darkmoon Island which doesn't have a continent location
+			private.WorldID = map_name
+
 		else
-			private.WorldID = _NPCScan.LOCALIZED_CONTINENT_NAMES[map_continent]
+			private.WorldID = private.LOCALIZED_CONTINENT_NAMES[map_continent]
 		end 
+		private.Debug(private.WorldID  or "No World")
+private.Debug(map_name or "no map")
+private.Debug(map_continent or "no cont")
 
 		if private.CharacterOptions.TrackRares then
 			for npc_id, world_name in pairs(private.UNTAMABLE_ID_TO_WORLD_NAME) do
@@ -1180,6 +1189,18 @@ end
 function private.Frame:PLAYER_LEAVING_WORLD()
 	if private.GlobalOptions.NPCWorldIDs then 
 		for npc_id in pairs(private.GlobalOptions.NPCWorldIDs) do
+			NPCDeactivate(npc_id)
+		end
+	end
+
+	for npc_id, world_id in pairs(private.TAMABLE_ID_TO_WORLD_NAME) do
+		if world_id == private.WorldID then
+			NPCDeactivate(npc_id)
+		end
+	end
+
+	for npc_id, world_id in pairs(private.UNTAMABLE_ID_TO_WORLD_NAME) do
+		if world_id == private.WorldID then
 			NPCDeactivate(npc_id)
 		end
 	end
