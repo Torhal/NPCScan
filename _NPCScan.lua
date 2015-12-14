@@ -1060,7 +1060,8 @@ function private.Ace:OnInitialize()
 --Save any old setting to character profile
 	local charName = _G.UnitName("player").." - ".._G.GetRealmName()
 	if _G._NPCScanOptionsCharacter then
-	_G._NPCScanProfiles.profiles[charName] = {}
+		if not _G._NPCScanProfiles.profiles then _G._NPCScanProfiles.profiles = {} end
+		_G._NPCScanProfiles.profiles[charName] = {}
 		for var, value in pairs(_G._NPCScanOptionsCharacter) do
 			_NPCScanProfiles.profiles[charName][var] = value
 		end
