@@ -494,12 +494,14 @@ Texture:SetAlpha(0)
 target_button.Glow = Texture:CreateAnimationGroup()
 
 local FadeIn = target_button.Glow:CreateAnimation("Alpha")
-FadeIn:SetChange(1.0)
+FadeIn:SetFromAlpha(0)
+FadeIn:SetToAlpha(1)
 FadeIn:SetDuration(0.2)
 
 local FadeOut = target_button.Glow:CreateAnimation("Alpha")
 FadeOut:SetOrder(2)
-FadeOut:SetChange(-1.0)
+FadeOut:SetFromAlpha(1)
+FadeOut:SetToAlpha(0)
 FadeOut:SetDuration(0.5)
 
 -- Shine animation (reflection swipe)
@@ -514,7 +516,8 @@ target_button.Shine = Texture:CreateAnimationGroup()
 
 local Show = target_button.Shine:CreateAnimation("Alpha")
 Show:SetStartDelay(0.3)
-Show:SetChange(1.0)
+Show:SetFromAlpha(0)
+Show:SetToAlpha(1)
 Show:SetDuration(1e-5) -- Note: 0 is invalid
 
 local Slide = target_button.Shine:CreateAnimation("Translation")
@@ -525,7 +528,8 @@ Slide:SetDuration(0.4)
 local FadeOut = target_button.Shine:CreateAnimation("Alpha")
 FadeOut:SetOrder(2)
 FadeOut:SetStartDelay(0.2)
-FadeOut:SetChange(-1.0)
+FadeOut:SetFromAlpha(1)
+FadeOut:SetToAlpha(0)
 FadeOut:SetDuration(0.2)
 
 -- Full screen flash
@@ -546,6 +550,7 @@ Flash.Fade:SetScript("OnLoop", Flash.OnLoop)
 Flash.Fade:SetScript("OnPlay", Flash.OnPlay)
 
 local FadeIn = Flash.Fade:CreateAnimation("Alpha")
-FadeIn:SetChange(1.0)
+FadeIn:SetFromAlpha(0)
+FadeIn:SetToAlpha(1)
 FadeIn:SetDuration(0.5)
 FadeIn:SetEndDelay(0.25)
