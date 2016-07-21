@@ -1360,32 +1360,14 @@ end
 -- Mouseover Trigger Functions
 -------------------------------------------------------------------------------
 function EventFrame:UPDATE_MOUSEOVER_UNIT()
-	if not private.CharacterOptions.TrackMouseover then
-		private.Debug("Not Tracking Mobs by Mouseover")
-		return
-	end
-	local unit_token = "mouseover"
-
-	if _G.UnitClassification(unit_token) ~= ("rare" or "rareelite") or _G.UnitIsDead(unit_token) then
+	if not private.CharacterOptions.TrackMouseover or _G.UnitIsDead("mouseover") then
 		return
 	end
 
-	--[Unit type]-0-[server ID]-[instance ID]-[zone UID]-[ID]-[Spawn UID] (Example: "Creature-0-976-0-11-31146-000136DF91")
-	local mouseover_guid = _G.UnitGUID(unit_token)
-	local _, _, _, _, _, _, _, mouseover_id = string.find(mouseover_guid, "(%a+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)")
-	local target_guid = _G.UnitGUID("target")
-	local target_id
-	local npc_id = tonumber(mouseover_id)
-
-	if target_guid then
-		_, _, _, _, _, _, _, target_id = string.find(target_guid, "(%a+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)")
-	end
-
-
-	--if (private.NPC_ID_TO_NAME[tonumber(mouseover_id)] or private.GlobalOptions.NPCs[tonumber(mouseover_id)]) and mouseover_id ~= target_id then
-	if (private.ScanIDs[npc_id]) and mouseover_id ~= target_id then
-		private.Debug("Mob Found via Mouseover")
-		private.OnFound(mouseover_id, _G.UnitName(unit_token))
+	local mouseoverID = UnitTokenToCreatureID("mouseover")
+	local targetID = UnitTokenToCreatureID("target")
+	if mouseoverID ~= targetID and private.ScanIDs[mouseoverID] then
+		private.OnFound(mouseoverID, _G.UnitName("mouseover"))
 	end
 end
 
