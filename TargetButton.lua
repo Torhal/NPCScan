@@ -401,9 +401,9 @@ do
 
 		if type(parentID) == "number" or not _G.UnitIsPlayer(parentID) then
 			-- Creature
-			local scale, x, y, z = ("|"):split(target_button.ModelCameras[fileID] or "")
-			self:SetModelScale(target_button.ModelDefaultScale * (tonumber(scale) or 1))
-			self:SetPosition(tonumber(z) or 0, tonumber(x) or 0, tonumber(y) or 0)
+--			local scale, x, y, z = ("|"):split(target_button.ModelCameras[fileID] or "")
+--			self:SetModelScale(target_button.ModelDefaultScale * (tonumber(scale) or 1))
+--			self:SetPosition(tonumber(z) or 0, tonumber(x) or 0, tonumber(y) or 0)
 		else
 			-- Player
 			self:SetModelScale(target_button.ModelDefaultScale)
