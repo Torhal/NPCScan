@@ -1342,16 +1342,12 @@ local function UnitTokenToCreatureID(unitToken)
 end
 
 function EventFrame:NAME_PLATE_UNIT_ADDED(eventName, nameplateUnitToken)
-	if not private.CharacterOptions.TrackNameplate or _G.UnitIsUnit("player", nameplateUnitToken) or _G.UnitIsFriend("player", nameplateUnitToken) or _G.UnitIsDead("mouseover") then
+	if not private.CharacterOptions.TrackNameplate or _G.UnitIsUnit("player", nameplateUnitToken) or _G.UnitIsFriend("player", nameplateUnitToken) or _G.UnitIsDeadOrGhost(nameplateUnitToken) then
 		return
 	end
 
 	local unitID = UnitTokenToCreatureID(nameplateUnitToken)
-	if private.ScanIDs[unitID] then
-		if _G._NPCScanOptions.IgnoreList.NPCs[unitID] then
-			return
-		end
-
+	if private.ScanIDs[unitID] and not _G._NPCScanOptions.IgnoreList.NPCs[unitID] then
 		private.OnFound(unitID, _G.UnitName(nameplateUnitToken))
 	end
 end
@@ -1360,13 +1356,13 @@ end
 -- Mouseover Trigger Functions
 -------------------------------------------------------------------------------
 function EventFrame:UPDATE_MOUSEOVER_UNIT()
-	if not private.CharacterOptions.TrackMouseover or _G.UnitIsDead("mouseover") then
+	if not private.CharacterOptions.TrackMouseover or _G.UnitIsDeadOrGhost("mouseover") then
 		return
 	end
 
 	local mouseoverID = UnitTokenToCreatureID("mouseover")
 	local targetID = UnitTokenToCreatureID("target")
-	if mouseoverID ~= targetID and private.ScanIDs[mouseoverID] then
+	if mouseoverID ~= targetID and private.ScanIDs[mouseoverID] and not _G._NPCScanOptions.IgnoreList.NPCs[mouseoverID] then
 		private.OnFound(mouseoverID, _G.UnitName("mouseover"))
 	end
 end
