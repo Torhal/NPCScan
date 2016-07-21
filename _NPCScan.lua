@@ -912,20 +912,13 @@ do
 	end
 
 	-- Validates found mobs before showing alerts.
-	function private.OnFound(npc_id, npc_name)
-		--[[  No need to deactivate mobs as cache scanning is deactivated. Re-enable if cache scanning works again.
-				NPCDeactivate(npc_id)
-
-				for achievement_id in pairs(private.CharacterOptions.Achievements) do
-					AchievementNPCDeactivate(private.ACHIEVEMENTS[achievement_id], npc_id)
-				end
-		--]]
+	function private.OnFound(npcID, npcName)
 		local is_valid = true
-		local is_tamable = private.TAMABLE_ID_TO_NAME[npc_id]
+		local is_tamable = private.TAMABLE_ID_TO_NAME[npcID]
 		local invalid_reason
 
 		if is_tamable then
-			is_valid, invalid_reason = OnFoundTamable(npc_id, npc_name)
+			is_valid, invalid_reason = OnFoundTamable(npcID, npcName)
 		end
 
 		-- Checks to see if player is on flightpath, this will block possible cross realm alerts
@@ -935,21 +928,21 @@ do
 			_G.PlaySound("TellMessage", "master")
 
 			local x, y = _G.GetPlayerMapPosition("player")
-			invalid_reason = L.FOUND_UNIT_TAXI:format(npc_name, x * 100, y * 100, _G.GetZoneText())
+			invalid_reason = L.FOUND_UNIT_TAXI:format(npcName, x * 100, y * 100, _G.GetZoneText())
 		end
 
 		-- Checks to see if alert for mob has allready been displayed recently
-		is_valid = private.AntiSpam(private.ANTI_SPAM_DELAY, npc_name)
+		is_valid = private.AntiSpam(private.ANTI_SPAM_DELAY, npcName)
 
 		if is_valid then
-			local alert_text = L[is_tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(npc_name)
+			local alert_text = L[is_tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(npcName)
 
 			if private.CharacterOptions.ShowAlertAsToast then
 				Toast:Spawn("_NPCScanAlertToast", alert_text)
 			else
 				private.Print(alert_text, _G.GREEN_FONT_COLOR)
 			end
-			private.Button:SetNPC(npc_id, npc_name, GetScanSource(npc_id)) -- Sends added and found overlay messages
+			private.Button:SetNPC(npcID, npcName, GetScanSource(npcID)) -- Sends added and found overlay messages
 		elseif invalid_reason then
 			private.Print(invalid_reason)
 		end
