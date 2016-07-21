@@ -844,6 +844,7 @@ function private.AntiSpam(time, id)
 end
 
 
+local OnFound
 do
 	local PetList = {}
 
@@ -912,7 +913,7 @@ do
 	end
 
 	-- Validates found mobs before showing alerts.
-	function private.OnFound(npcID, npcName)
+	function OnFound(npcID, npcName, sourceText)
 		local is_valid = true
 		local is_tamable = private.TAMABLE_ID_TO_NAME[npcID]
 		local invalid_reason
@@ -935,12 +936,12 @@ do
 		is_valid = private.AntiSpam(private.ANTI_SPAM_DELAY, npcName)
 
 		if is_valid then
-			local alert_text = L[is_tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(npcName)
+			local alertText = ("%s %s"):format(L[is_tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(npcName), _G.PARENS_TEMPLATE:format(sourceText))
 
 			if private.CharacterOptions.ShowAlertAsToast then
-				Toast:Spawn("_NPCScanAlertToast", alert_text)
+				Toast:Spawn("_NPCScanAlertToast", alertText)
 			else
-				private.Print(alert_text, _G.GREEN_FONT_COLOR)
+				private.Print(alertText, _G.GREEN_FONT_COLOR)
 			end
 			private.Button:SetNPC(npcID, npcName, GetScanSource(npcID)) -- Sends added and found overlay messages
 		elseif invalid_reason then
@@ -980,7 +981,7 @@ do
 		for npc_id in pairs(private.ScanIDs) do
 			local npc_name = private.NPCNameFromCache(npc_id)
 			if npc_name then
-				private.OnFound(npc_id, npc_name)
+				OnFound(npc_id, npc_name, _G.UNKNOWN)
 			end
 		end
 	end
@@ -1348,7 +1349,7 @@ function EventFrame:NAME_PLATE_UNIT_ADDED(eventName, nameplateUnitToken)
 
 	local unitID = UnitTokenToCreatureID(nameplateUnitToken)
 	if private.ScanIDs[unitID] and not _G._NPCScanOptions.IgnoreList.NPCs[unitID] then
-		private.OnFound(unitID, _G.UnitName(nameplateUnitToken))
+		OnFound(unitID, _G.UnitName(nameplateUnitToken), _G.UNIT_NAMEPLATES)
 	end
 end
 
@@ -1363,7 +1364,7 @@ function EventFrame:UPDATE_MOUSEOVER_UNIT()
 	local mouseoverID = UnitTokenToCreatureID("mouseover")
 	local targetID = UnitTokenToCreatureID("target")
 	if mouseoverID ~= targetID and private.ScanIDs[mouseoverID] and not _G._NPCScanOptions.IgnoreList.NPCs[mouseoverID] then
-		private.OnFound(mouseoverID, _G.UnitName("mouseover"))
+		OnFound(mouseoverID, _G.UnitName("mouseover"), _G.MOUSE_LABEL)
 	end
 end
 
@@ -1452,7 +1453,7 @@ function private.CheckMacroTarget()
 	local targetID = UnitTokenToCreatureID("target")
 
 	if private.ScanIDs[targetID] and not _G._NPCScanOptions.IgnoreList.NPCs[targetID] then
-		private.OnFound(targetID, _G.UnitName("target"))
+		OnFound(targetID, _G.UnitName("target"), _G.TARGET)
 
 		if _G.GetRaidTargetIndex("target") ~= private.CharacterOptions.TargetIcon and (not _G.IsInRaid() or (_G.UnitIsGroupAssistant("player") or _G.UnitIsGroupLeader("player"))) then
 			_G.SetRaidTarget("target", private.CharacterOptions.TargetIcon)
