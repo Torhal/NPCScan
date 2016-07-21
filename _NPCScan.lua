@@ -1334,14 +1334,17 @@ end
 -------------------------------------------------------------------------------
 -- Nameplate scanning.
 -------------------------------------------------------------------------------
-local function UnitGUIDToCreatureID(guid)
-	if not guid then
-		return
-	end
+local function UnitTokenToCreatureID(unitToken)
+	if unitToken then
+		local GUID = _G.UnitGUID(unitToken)
+		if not GUID then
+			return
+		end
 
-	local unitTypeName, _, _, _, _, unitID = ("-"):split(guid)
-	if unitTypeName == "Creature" then
-		return tonumber(unitID)
+		local unitTypeName, _, _, _, _, unitID = ("-"):split(GUID)
+		if unitTypeName == "Creature" then
+			return tonumber(unitID)
+		end
 	end
 end
 
@@ -1350,7 +1353,7 @@ function EventFrame:NAME_PLATE_UNIT_ADDED(eventName, nameplateUnitToken)
 		return
 	end
 
-	local unitID = UnitGUIDToCreatureID(_G.UnitGUID(nameplateUnitToken))
+	local unitID = UnitTokenToCreatureID(nameplateUnitToken)
 	if private.ScanIDs[unitID] then
 		if _G._NPCScanOptions.IgnoreList.NPCs[unitID] then
 			return
