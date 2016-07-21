@@ -36,6 +36,7 @@ EventFrame:RegisterEvent("PLAYER_LEAVING_WORLD")
 EventFrame:RegisterEvent("PLAYER_UPDATE_RESTING")
 EventFrame:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 EventFrame:RegisterEvent("LOOT_CLOSED")
+EventFrame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
 
 EventFrame:SetScript("OnEvent", function(self, event_name, ...)
 	if self[event_name] then
@@ -1329,6 +1330,35 @@ else
 	EventFrame:ZONE_CHANGED_NEW_AREA("ZONE_CHANGED_NEW_AREA")
 end
 
+
+-------------------------------------------------------------------------------
+-- Nameplate scanning.
+-------------------------------------------------------------------------------
+local function UnitGUIDToCreatureID(guid)
+	if not guid then
+		return
+	end
+
+	local unitTypeName, _, _, _, _, unitID = ("-"):split(guid)
+	if unitTypeName == "Creature" then
+		return tonumber(unitID)
+	end
+end
+
+function EventFrame:NAME_PLATE_UNIT_ADDED(eventName, nameplateUnitToken)
+	if not private.CharacterOptions.TrackNameplate or _G.UnitIsUnit("player", nameplateUnitToken) or _G.UnitIsFriend("player", nameplateUnitToken) then
+		return
+	end
+
+	local unitID = UnitGUIDToCreatureID(_G.UnitGUID(nameplateUnitToken))
+	if private.ScanIDs[unitID] then
+		if _G._NPCScanOptions.IgnoreList.NPCs[unitID] then
+			return
+		end
+
+		private.OnFound(unitID, _G.UnitName(nameplateUnitToken))
+	end
+end
 
 -------------------------------------------------------------------------------
 -- Mouseover Trigger Functions
