@@ -1349,7 +1349,7 @@ local function UnitTokenToCreatureID(unitToken)
 end
 
 function EventFrame:NAME_PLATE_UNIT_ADDED(eventName, nameplateUnitToken)
-	if not private.CharacterOptions.TrackNameplate or _G.UnitIsUnit("player", nameplateUnitToken) or _G.UnitIsFriend("player", nameplateUnitToken) then
+	if not private.CharacterOptions.TrackNameplate or _G.UnitIsUnit("player", nameplateUnitToken) or _G.UnitIsFriend("player", nameplateUnitToken) or _G.UnitIsDead("mouseover") then
 		return
 	end
 
