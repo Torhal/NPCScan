@@ -47,7 +47,6 @@ target_button:HookScript("OnShow", function(self)
 	self:RegisterEvent("MODIFIER_STATE_CHANGED")
 	self:RegisterEvent("PLAYER_TARGET_CHANGED")
 	self:EnableDrag(_G.IsControlKeyDown())
-
 end)
 
 target_button:HookScript("OnHide", function(self)
@@ -217,9 +216,10 @@ function target_button:SetNPC(ID, Name, Source)
 	end
 
 	if _G.InCombatLockdown() then
-		if type(self.PendingID) == "number" then -- Remove old pending NPC
+		if type(self.PendingID) == "number" then
 			private.Overlays.Remove(self.PendingID)
 		end
+
 		self.PendingID, self.PendingName, self.PendingSource = ID, Name, Source
 	else
 		self:Update(ID, Name, Source)
@@ -249,17 +249,19 @@ function target_button:Update(ID, Name, Source)
 	local Model = self.Model
 	Model:Reset()
 
-	if type(ID) == "number" then -- ID is NPC ID
+	if type(ID) == "number" then
+		-- ID is NPC ID
 		Model.UnitID = nil
 		Model:SetCreature(ID)
 		self:UnregisterEvent("UNIT_MODEL_CHANGED")
-	else -- ID is UnitID
+	else
+		-- ID is UnitID
 		Model.UnitID, Name = ID, ID
 		Model:SetUnit(ID)
 		self:RegisterEvent("UNIT_MODEL_CHANGED")
 	end
 
---Quick fix to not show Haakun's actual model due to it causing the game to crash
+	-- Quick fix to not show Haakun's actual model due to it causing the game to crash
 	if ID == HaakunID or Name == HaakunName then
 		Model:SetCreature(29147)
 		self:UnregisterEvent("UNIT_MODEL_CHANGED")
@@ -292,7 +294,8 @@ function target_button:EnableDrag(Enable)
 
 	if Enable then
 		Drag:SetAllPoints()
-	else -- Position offscreen
+	else
+		-- Position offscreen
 		Drag:SetPoint("TOP", _G.UIParent, 0, math.huge)
 	end
 end
@@ -314,15 +317,16 @@ end
 do
 	-- @param ID A numeric NpcID or string UnitID.
 	-- @return True if the given ID represents the current target.
-	local function TargetIsFoundRare(ID) -- Returns true if the button targeted its rare
+	-- Returns true if the button targeted its rare
+	local function TargetIsFoundRare(ID)
 		local GUID = _G.UnitGUID("target")
-		if type(ID) == "number"  and GUID then
-			local _,_,_,_,_,_,_,target_id = string.find(GUID, "(%a+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)")
+		if type(ID) == "number" and GUID then
+			local _, _, _, _, _, _, _, target_id = string.find(GUID, "(%a+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)")
 
 			if GUID and ID == tonumber(target_id) then
 				return true
 			end
-		else -- UnitID
+		else
 			return _G.UnitIsUnit(ID, "target")
 		end
 	end
@@ -341,13 +345,15 @@ do
 				return
 			end
 
-			if type(ID) == "number" then -- Update model with more accurate visual
+			if type(ID) == "number" then
+				-- Update model with more accurate visual
 				self.Model.UnitID = "target"
 				self:RegisterEvent("UNIT_MODEL_CHANGED")
 				self:UNIT_MODEL_CHANGED(nil, "target")
 			end
 
-		elseif self.Model.UnitID and type(ID) == "number" then -- Quit updating model for creature ID
+		elseif self.Model.UnitID and type(ID) == "number" then
+			-- Quit updating model for creature ID
 			self.Model.UnitID = nil
 			self:UnregisterEvent("UNIT_MODEL_CHANGED")
 		end
@@ -356,8 +362,7 @@ end
 
 -- Updates the 3D preview display if the targeted rare changes appearance.
 function target_button:UNIT_MODEL_CHANGED(_, UnitID)
-
-	--Quick fix to not show Haakun's actual model due to it causing the game to crash
+	-- Quick fix to not show Haakun's actual model due to it causing the game to crash
 	if _G.UnitName(UnitID) == HaakunName then
 		self.Model:SetCreature(29147)
 		self:UnregisterEvent("UNIT_MODEL_CHANGED")
@@ -365,7 +370,8 @@ function target_button:UNIT_MODEL_CHANGED(_, UnitID)
 	end
 
 	if _G.UnitIsUnit(UnitID, self.Model.UnitID) then
-		self.Model:Reset(true) -- Don't reset rotation
+		-- Don't reset rotation
+		self.Model:Reset(true)
 		self.Model:SetUnit(UnitID)
 	end
 end
@@ -390,17 +396,17 @@ end
 do
 	-- Adjusts the model camera to compensate for bad default camera angles.
 	local function AdjustModel(self)
-		local Path = self:GetModel()
+		local fileID = self:GetModelFileID()
+		local parentID = self:GetParent().ID
 
-		if type(Path) == "string" then
-			local ID = self:GetParent().ID
-			if type(ID) == "number" or not _G.UnitIsPlayer(ID) then -- Creature
-				local Scale, X, Y, Z = ("|"):split(target_button.ModelCameras[Path:lower()] or "")
-				self:SetModelScale(target_button.ModelDefaultScale * (tonumber(Scale) or 1))
-				self:SetPosition(tonumber(Z) or 0, tonumber(X) or 0, tonumber(Y) or 0)
-			else -- Player
-				self:SetModelScale(target_button.ModelDefaultScale)
-			end
+		if type(parentID) == "number" or not _G.UnitIsPlayer(parentID) then
+			-- Creature
+			local scale, x, y, z = ("|"):split(target_button.ModelCameras[fileID] or "")
+			self:SetModelScale(target_button.ModelDefaultScale * (tonumber(scale) or 1))
+			self:SetPosition(tonumber(z) or 0, tonumber(x) or 0, tonumber(y) or 0)
+		else
+			-- Player
+			self:SetModelScale(target_button.ModelDefaultScale)
 		end
 	end
 

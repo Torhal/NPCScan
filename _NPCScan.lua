@@ -14,7 +14,6 @@ local type = _G.type
 local string = _G.string
 local table = _G.table
 
-
 -------------------------------------------------------------------------------
 -- AddOn namespace.
 -------------------------------------------------------------------------------
@@ -29,22 +28,22 @@ _G._NPCScan = private
 local debugger -- Only defined if needed.
 
 -- Create a new Add-on object using AceAddon for Profile DB
-private.Ace = LibStub("AceAddon-3.0"):NewAddon(FOLDER_NAME)
+private.Ace = _G.LibStub("AceAddon-3.0"):NewAddon(FOLDER_NAME)
 
-private.Frame = _G.CreateFrame("Frame")
-private.Frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-private.Frame:RegisterEvent("PLAYER_LEAVING_WORLD")
-private.Frame:RegisterEvent("PLAYER_UPDATE_RESTING")
-private.Frame:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
-private.Frame:RegisterEvent("LOOT_CLOSED")
+local EventFrame = _G.CreateFrame("Frame")
+EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+EventFrame:RegisterEvent("PLAYER_LEAVING_WORLD")
+EventFrame:RegisterEvent("PLAYER_UPDATE_RESTING")
+EventFrame:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
+EventFrame:RegisterEvent("LOOT_CLOSED")
 
-private.Frame:SetScript("OnEvent", function(self, event_name, ...)
+EventFrame:SetScript("OnEvent", function(self, event_name, ...)
 	if self[event_name] then
 		return self[event_name](self, event_name, ...)
 	end
 end)
 
-private.Updater = private.Frame:CreateAnimationGroup()
+private.Updater = EventFrame:CreateAnimationGroup()
 private.Updater.UpdateRate = 0.5
 private.Updater:CreateAnimation("Animation"):SetDuration(private.Updater.UpdateRate)
 private.Updater:SetLooping("REPEAT")
@@ -61,7 +60,7 @@ local PLAYER_FACTION = _G.UnitFactionGroup("player")
 local ANTI_SPAM_DELAY = 300
 
 --@debug@
-ANTI_SPAM_DELAY  = 30
+ANTI_SPAM_DELAY = 30
 --@end-debug@
 private.ANTI_SPAM_DELAY = ANTI_SPAM_DELAY
 
@@ -104,7 +103,7 @@ local ProfileOptions = {
 	["type"] = "group",
 	["handler"] = private.Ace,
 	["args"] = {
-		["Profiles"] = nil,  -- Reserved for profile options
+		["Profiles"] = nil, -- Reserved for profile options
 	},
 };
 
@@ -269,7 +268,7 @@ do
 			end
 		end
 		table.wipe(source_data)
- 
+
 		if #build_list > 0 then
 			table.sort(build_list)
 			return table.concat(build_list, L.CACHELIST_SEPARATOR)
@@ -419,7 +418,6 @@ do
 	function private.ClearActiveList()
 		table.wipe(NPCsActive)
 	end
-	
 end
 
 
@@ -547,8 +545,8 @@ function private.NPCQuestIsComplete(npc_id)
 
 	if quest_id then
 		return IsQuestFlaggedCompleted(quest_id)
-	else 
-		return false 
+	else
+		return false
 	end
 end
 
@@ -563,8 +561,8 @@ function private.AchievementAdd(achievement_id)
 	if not achievement then return false end
 
 	if not next(private.CharacterOptions.Achievements) then -- First
-	private.Frame:RegisterEvent("ACHIEVEMENT_EARNED")
-	private.Frame:RegisterEvent("CRITERIA_UPDATE")
+	EventFrame:RegisterEvent("ACHIEVEMENT_EARNED")
+	EventFrame:RegisterEvent("CRITERIA_UPDATE")
 	end
 
 	private.CharacterOptions.Achievements[achievement_id] = true
@@ -585,8 +583,8 @@ function private.AchievementRemove(achievement_id)
 	private.CharacterOptions.Achievements[achievement_id] = false
 
 	if not next(private.CharacterOptions.Achievements) then -- Last
-	private.Frame:UnregisterEvent("ACHIEVEMENT_EARNED")
-	private.Frame:UnregisterEvent("CRITERIA_UPDATE")
+	EventFrame:UnregisterEvent("ACHIEVEMENT_EARNED")
+	EventFrame:UnregisterEvent("CRITERIA_UPDATE")
 	end
 	private.Config.Search.AchievementSetEnabled(achievement_id, false)
 	return true
@@ -601,7 +599,7 @@ end
 
 
 -- Removes an ignored Mob from being tracked.
--- @param Mob Id 
+-- @param Mob Id
 function private.DeavtivateIgnoreMob(npc_id)
 	NPCDeactivate(npc_id)
 end
@@ -839,7 +837,7 @@ function private.AntiSpam(time, id)
 		end
 		return true
 	else
-		private.Debug("Anti-Spam triggered for: "..tostring(id))
+		private.Debug("Anti-Spam triggered for: " .. tostring(id))
 		return false
 	end
 end
@@ -849,7 +847,7 @@ do
 	local PetList = {}
 
 	-- Prints the list of cached pets when leaving a city or inn.
-	function private.Frame:PLAYER_UPDATE_RESTING()
+	function EventFrame:PLAYER_UPDATE_RESTING()
 		if _G.IsResting() or not next(PetList) then
 			return
 		end
@@ -960,7 +958,7 @@ do
 	local criteria_updated_bucket
 
 
-	function private.Frame:CRITERIA_UPDATE()
+	function EventFrame:CRITERIA_UPDATE()
 		criteria_updated_bucket = true
 	end
 
@@ -1000,7 +998,7 @@ if PLAYER_CLASS == "HUNTER" then
 	local stabled_list = {}
 
 	-- Stops scans for stabled hunter pets before a bogus alert can fire.
-	function private.Frame:PET_STABLE_UPDATE()
+	function EventFrame:PET_STABLE_UPDATE()
 		for npc_id in pairs(private.ScanIDs) do
 			local npc_name = private.NPCNameFromCache(npc_id)
 			if npc_name then
@@ -1032,7 +1030,7 @@ if PLAYER_CLASS == "HUNTER" then
 
 	StableUpdater:Hide()
 	StableUpdater:SetScript("OnUpdate", StableUpdater.OnUpdate)
-	private.Frame:RegisterEvent("PET_STABLE_UPDATE")
+	EventFrame:RegisterEvent("PET_STABLE_UPDATE")
 
 
 	-- Prevents the pet UI from querying (and caching) stabled pets until actually viewing the stables.
@@ -1057,40 +1055,38 @@ function private.Ace:OnInitialize()
 	self.db.RegisterCallback(self, "OnProfileCopied", "RefreshProfile")
 	self.db.RegisterCallback(self, "OnProfileReset", "RefreshProfile")
 
---Save any old setting to character profile
-	local charName = _G.UnitName("player").." - ".._G.GetRealmName()
+	--Save any old setting to character profile
+	local charName = _G.UnitName("player") .. " - " .. _G.GetRealmName()
 	if _G._NPCScanOptionsCharacter then
 		if not _G._NPCScanProfiles.profiles then _G._NPCScanProfiles.profiles = {} end
 		_G._NPCScanProfiles.profiles[charName] = {}
 		for var, value in pairs(_G._NPCScanOptionsCharacter) do
 			_NPCScanProfiles.profiles[charName][var] = value
 		end
-
 	end
-
 end
 
 
 --Called whenever profile is changed to reload new settings
 function private.Ace:RefreshProfile()
-	for npc_id , _ in pairs(private.ScanIDs) do
+	for npc_id, _ in pairs(private.ScanIDs) do
 		NPCDeactivate(npc_id)
 	end
 
 	private.CharacterOptions = private.Ace.db.profile
-	private.Frame:PLAYER_LEAVING_WORLD()
+	EventFrame:PLAYER_LEAVING_WORLD()
 
 	table.wipe(private.ScanIDs)
 	private.ClearActiveList()
 
 	private.Synchronize()
-	private.Frame:PLAYER_ENTERING_WORLD()
+	EventFrame:PLAYER_ENTERING_WORLD()
 end
 
 
 -- Loads defaults, validates settings, and starts scan.
 -- Used instead of ADDON_LOADED to give overlay mods a chance to load and register for messages.
-function private.Frame:PLAYER_LOGIN(event_name)
+function EventFrame:PLAYER_LOGIN(event_name)
 	if _G.IsAddOnLoaded("_NPCScan.AutoAdd") then
 		if _G.GetAddOnMetadata("_NPCScan.AutoAdd", "Version"):match("^([%d.]+)") <= "2.2" then
 			Dialog:Spawn("NPCSCAN_AUTOADD_WARNING")
@@ -1114,7 +1110,7 @@ end
 do
 	local has_initialized = false
 
-	function private.Frame:PLAYER_ENTERING_WORLD()
+	function EventFrame:PLAYER_ENTERING_WORLD()
 		self:PLAYER_UPDATE_RESTING()
 
 		-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
@@ -1125,14 +1121,14 @@ do
 		if map_continent == private.CONTINENT_IDS.THE_MAELSTROM then
 			private.WorldID = private.ZONE_NAMES.DEEPHOLM
 		elseif map_continent == -1 and map_id == DARKMOON_ISLAND_MAP_ID then --Darkmoon Island which doesn't have a continent location
-			private.WorldID = map_name
+		private.WorldID = map_name
 
 		else
 			private.WorldID = private.LOCALIZED_CONTINENT_NAMES[map_continent]
-		end 
-		private.Debug(private.WorldID  or "No World")
-private.Debug(map_name or "no map")
-private.Debug(map_continent or "no cont")
+		end
+		private.Debug(private.WorldID or "No World")
+		private.Debug(map_name or "no map")
+		private.Debug(map_continent or "no cont")
 
 		if private.CharacterOptions.TrackRares then
 			for npc_id, world_name in pairs(private.UNTAMABLE_ID_TO_WORLD_NAME) do
@@ -1159,10 +1155,10 @@ private.Debug(map_continent or "no cont")
 
 		--Removes any one time kill / daily kill rares that have been completed
 		for npc_id, quest_id in pairs(private.NPC_ID_TO_QUEST_ID) do
-			if private.NPCQuestIsComplete(npc_id) then 
+			if private.NPCQuestIsComplete(npc_id) then
 				NPCDeactivate(npc_id)
 			else
-				active_tracking_quest_mobs[npc_id] =  quest_id
+				active_tracking_quest_mobs[npc_id] = quest_id
 			end
 		end
 
@@ -1187,8 +1183,8 @@ private.Debug(map_continent or "no cont")
 end
 
 
-function private.Frame:PLAYER_LEAVING_WORLD()
-	if private.GlobalOptions.NPCWorldIDs then 
+function EventFrame:PLAYER_LEAVING_WORLD()
+	if private.GlobalOptions.NPCWorldIDs then
 		for npc_id in pairs(private.GlobalOptions.NPCWorldIDs) do
 			NPCDeactivate(npc_id)
 		end
@@ -1216,7 +1212,7 @@ function private.Frame:PLAYER_LEAVING_WORLD()
 end
 
 
-function private.Frame:ACHIEVEMENT_EARNED(_, achievement_id)
+function EventFrame:ACHIEVEMENT_EARNED(_, achievement_id)
 	if not private.ACHIEVEMENTS[achievement_id] then
 		return
 	end
@@ -1229,10 +1225,10 @@ end
 
 
 --Using this to check for kill track quests as they only complete after looting
-function private.Frame:LOOT_CLOSED(event_name)
+function EventFrame:LOOT_CLOSED(event_name)
 	--Removes any one time kill / daily kill rares that have been completed
 	for npc_id, quest_id in pairs(active_tracking_quest_mobs) do
-		if private.NPCQuestIsComplete(npc_id) then 
+		if private.NPCQuestIsComplete(npc_id) then
 			NPCDeactivate(npc_id)
 			active_tracking_quest_mobs[npc_id] = nil
 		end
@@ -1240,7 +1236,7 @@ function private.Frame:LOOT_CLOSED(event_name)
 end
 
 
-function private.Frame:ZONE_CHANGED_NEW_AREA(event_name)
+function EventFrame:ZONE_CHANGED_NEW_AREA(event_name)
 	self:UnregisterEvent(event_name)
 	self[event_name] = nil
 
@@ -1321,23 +1317,23 @@ end -- do-block
 
 
 if _G.IsLoggedIn() then
-	private.Frame:PLAYER_LOGIN("PLAYER_LOGIN")
+	EventFrame:PLAYER_LOGIN("PLAYER_LOGIN")
 else
-	private.Frame:RegisterEvent("PLAYER_LOGIN")
+	EventFrame:RegisterEvent("PLAYER_LOGIN")
 end
 
 
 if _G.GetZoneText() == "" then
-	private.Frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+	EventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 else
-	private.Frame:ZONE_CHANGED_NEW_AREA("ZONE_CHANGED_NEW_AREA")
+	EventFrame:ZONE_CHANGED_NEW_AREA("ZONE_CHANGED_NEW_AREA")
 end
 
 
 -------------------------------------------------------------------------------
 -- Mouseover Trigger Functions
 -------------------------------------------------------------------------------
-function private.Frame:UPDATE_MOUSEOVER_UNIT()
+function EventFrame:UPDATE_MOUSEOVER_UNIT()
 	if not private.CharacterOptions.TrackMouseover then
 		private.Debug("Not Tracking Mobs by Mouseover")
 		return
