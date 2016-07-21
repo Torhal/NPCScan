@@ -1449,17 +1449,17 @@ end
 
 --Checks target found by macro and triggers NPCScan alert for tracked mobs
 function private.CheckMacroTarget()
-	local target_guid = UnitGUID("target")
-	if target_guid then
-		local _, _, _, _, _, _, _, target_id = string.find(target_guid, "(%a+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)")
-		target_id = tonumber(target_id)
-		if (private.NPC_ID_TO_NAME[target_id] or private.GlobalOptions.NPCs[target_id]) and not UnitIsDeadOrGhost("target") then
-			private.Debug("Mob Found Via Macro")
-			private.OnFound(target_id, _G.UnitName("target"))
+	if _G.UnitIsDeadOrGhost("target") then
+		return
+	end
 
-			if _G.GetRaidTargetIndex("target") ~= private.CharacterOptions.TargetIcon and (not _G.IsInRaid() or (_G.UnitIsGroupAssistant("player") or _G.UnitIsGroupLeader("player"))) then
-				_G.SetRaidTarget("target", private.CharacterOptions.TargetIcon)
-			end
+	local targetID = UnitTokenToCreatureID("target")
+
+	if private.ScanIDs[targetID] and not _G._NPCScanOptions.IgnoreList.NPCs[targetID] then
+		private.OnFound(targetID, _G.UnitName("target"))
+
+		if _G.GetRaidTargetIndex("target") ~= private.CharacterOptions.TargetIcon and (not _G.IsInRaid() or (_G.UnitIsGroupAssistant("player") or _G.UnitIsGroupLeader("player"))) then
+			_G.SetRaidTarget("target", private.CharacterOptions.TargetIcon)
 		end
 	end
 end
