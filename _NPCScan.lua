@@ -1379,9 +1379,8 @@ target_button:Hide()
 target_button:SetAttribute("type", "macro")
 target_button:SetAttribute("macrotext", private.macrotext)
 target_button:RegisterEvent("PLAYER_ENTERING_WORLD")
-target_button:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-target_button:RegisterEvent("VARIABLES_LOADED")
 target_button:RegisterEvent("PLAYER_REGEN_ENABLED")
+target_button:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 target_button:SetScript("OnEvent", function(self, event_name, ...)
 	if event_name == "PLAYER_REGEN_ENABLED" then
 		-- Only needs to trigger after combat if a delay was set
