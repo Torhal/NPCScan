@@ -15,9 +15,10 @@ local pairs = _G.pairs
 local FOLDER_NAME, private = ...
 local L = private.L
 
+local LibStub = _G.LibStub
 local Debug = private.Debug
-local Toast = _G.LibStub("LibToast-1.0")
-
+local HereBeDragons = LibStub("HereBeDragons-1.0")
+local Toast = LibStub("LibToast-1.0")
 
 -------------------------------------------------------------------------------
 -- Variables.
@@ -48,27 +49,14 @@ private.VFrame:SetScript("OnEvent", function(self, event_name, ...)
 end)
 
 
-function private.VFrame:ZONE_CHANGED_NEW_AREA(event, ...)
+function private.VFrame:ZONE_CHANGED_NEW_AREA()
 	if vignette_delay then
 		Debug("Releasing Delay")
 		private.VFrame:VIGNETTE_ADDED("VIGNETTE_ADDED", vignette_delay)
 		vignette_delay = nil
 	end
 
-	local current_zone
-	if WorldMapFrame:IsVisible() then--World Map is open
-		local Z =_G.GetCurrentMapAreaID()
-		_G.SetMapToCurrentZone()
-		current_zone = _G.GetCurrentMapAreaID()
-		if current_zone ~= Z then
-			SetMapByID(Z)--Restore old map settings if they differed to what they were prior to forcing mapchange and user has map open.
-		end
-	else--Map is not open, no reason to go extra miles, just force map to right zone and get right info.
-		_G.SetMapToCurrentZone()
-		current_zone = GetCurrentMapAreaID()--Get right info after we set map to right place.
-	end
-
-	if current_zone == TANAAN_ZONE_ID then
+	if HereBeDragons:GetPlayerZone() == TANAAN_ZONE_ID then
 		self:RegisterEvent("WORLD_MAP_UPDATE")
 	else
 		self:UnregisterEvent("WORLD_MAP_UPDATE")
@@ -92,28 +80,25 @@ end
 
 --Scans world map and looks at POI icons that relate to Hellbane mob events
 function private.VFrame:WORLD_MAP_UPDATE()
+	if not private.CharacterOptions.TrackHellbane then
+		return
+	end
 
-	if not private.CharacterOptions.TrackHellbane then return end
-
-	--Finds all POI landmarks on map
-	local number_landmarks = GetNumMapLandmarks()
-	for i = 1, number_landmarks do
-		local name, _, textureIndex = GetMapLandmarkInfo(i)
+	for landmarkIndex = 1, _G.GetNumMapLandmarks() do
+		local landmarkType, landmarkName, _, textureIndex, mapPositionX, mapPositionY = _G.GetMapLandmarkInfo(landmarkIndex)
 
 		--Check to see if POI icon matches Hellbane event
 		if textureIndex == MAP_EVENT_ICON then
-			local alert_text = L.EVENT_ACTIVE:format(name)
-			
-			local BloodMoonEvent = string.find(name, BLOODMOON) --Determine if event has localized Blood Moon in name
+			local alertText = L.EVENT_ACTIVE:format(landmarkName)
 
-			--Check spam delay and if event is not the Bloodmoon
-			if private.AntiSpam(private.ANTI_SPAM_DELAY, name.."MapAlert") and not BloodMoonEvent then
-				private.Print(alert_text, _G.RED_FONT_COLOR)
-				if private.CharacterOptions.ShowAlertAsToast and alert_text then
-					Toast:Spawn("_NPCScanAlertToast", alert_text)
+			if private.AntiSpam(private.ANTI_SPAM_DELAY, landmarkName .."MapAlert") and not landmarkName:find(BLOODMOON) then
+				private.Print(alertText, _G.RED_FONT_COLOR)
+
+				if private.CharacterOptions.ShowAlertAsToast and alertText then
+					Toast:Spawn("_NPCScanAlertToast", alertText)
 				end
 				_G.PlaySoundFile(EVENT_WARNING_SOUND, "master")
-				_G.RaidNotice_AddMessage(RaidWarningFrame, alert_text, ChatTypeInfo["RAID_WARNING"])
+				_G.RaidNotice_AddMessage(RaidWarningFrame, alertText, ChatTypeInfo["RAID_WARNING"])
 			end
 		end
 	end
@@ -179,7 +164,7 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceId, ...)
 	end
 
 	-- iconId seems to be 40:chests, 41:mobs, 45: Tannan special rares
-	local npc_id = private.NPC_NAME_TO_ID[name]
+	local npcID = private.NPC_NAME_TO_ID[name]
 	local alert_text = nil
 
 	if not iconId then --Use case for broken or unknown Mob Info
@@ -190,14 +175,14 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceId, ...)
 		Debug("Correct Mob Data Returned for "..name)
 
 		--Check for Vignette mobs that dont exist in our DB
-		if npc_id then
+		if npcID then
 			Debug("ID found for "..private.NPC_NAME_TO_ID[name])
 			--Check to see if mob is on the ignore list or not being currently tracked
-			if _G._NPCScanOptions.IgnoreList.NPCs[npc_id] or not private.ScanIDs[npc_id] then
+			if _G._NPCScanOptions.IgnoreList.NPCs[npcID] or not private.ScanIDs[npcID] then
 				Debug("Ignored Mob")
 				return
 			end
-			private.Button:SetNPC(npc_id, name, "Vignette Mob")
+			private.Button:SetNPC(npcID, name, "Vignette Mob")
 		else
 			Debug("No MobID found for "..name)
 			private.Button:SetNPC(29147, name, "Unknown Vignette")

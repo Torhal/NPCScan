@@ -34,3 +34,5 @@ externals:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDB-3.0
   Libs/AceDBOptions-3.0:
     url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDBOptions-3.0
+  Libs/HereBeDragons-1.0:
+    url: git://git.wowace.com/wow/herebedragons/mainline.git
