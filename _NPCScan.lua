@@ -1389,42 +1389,47 @@ target_button:SetScript("OnEvent", function(self, event_name, ...)
 		end
 		MacroDelay = false
 	end
+
 	private.GenerateTargetMacro()
 end)
 
-
-function private.GenerateTargetMacro(instanceid)
+function private.GenerateTargetMacro(instanceID)
 	if _G.InCombatLockdown() then
 		MacroDelay = true
 		return
 	end
 
-	_G.SetMapToCurrentZone()
-	local map_id = _G.GetCurrentMapAreaID()
-	local zone_name = _G.GetMapNameByID(map_id)
-	local continent_id = _G.GetCurrentMapContinent()
+	local mapID = HereBeDragons:GetPlayerZone()
+	if not mapID then
+		return
+	end
+
+	local zoneName = _G.GetMapNameByID(mapID)
+	local continentID = HereBeDragons:GetCZFromMapID(mapID)
 
 	private.macrotext = "/cleartarget"
 
-	-- Generate target macro with tracked mobs in zone
-	for npc_id, map_zone_name in pairs(private.NPC_ID_TO_MAP_NAME) do
-		if zone_name == map_zone_name and not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] and private.ScanIDs[npc_id] then
-			private.macrotext = private.MACRO_FORMAT:format(private.macrotext, private.NPC_ID_TO_NAME[npc_id])
+	for npcID, mapZoneName in pairs(private.NPC_ID_TO_MAP_NAME) do
+		if zoneName == mapZoneName and not _G._NPCScanOptions.IgnoreList.NPCs[npcID] and private.ScanIDs[npcID] then
+			private.macrotext = private.MACRO_FORMAT:format(private.macrotext, private.NPC_ID_TO_NAME[npcID])
 		end
 	end
 
-	--Checks for custom mobs and then add them
 	if _G._NPCScanOptions.NPCs then
-		for npc_id, npc_name in pairs(_G._NPCScanOptions.NPCs) do
-			if not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] and _G._NPCScanOptions.NPCWorldIDs[npc_id] == private.LOCALIZED_CONTINENT_NAMES[continent_id] then
-				private.macrotext = private.MACRO_FORMAT_CUSTOM_MOB:format(private.macrotext, npc_name)
+		for npcID, npcName in pairs(_G._NPCScanOptions.NPCs) do
+			if not _G._NPCScanOptions.IgnoreList.NPCs[npcID] then
+				local npcWorldID = _G._NPCScanOptions.NPCWorldIDs[npcID]
+
+				if not npcWorldID or npcWorldID == private.LOCALIZED_CONTINENT_NAMES[continentID] then
+					private.macrotext = private.MACRO_FORMAT_CUSTOM_MOB:format(private.macrotext, npcName)
+				end
 			end
 		end
 	end
 
 	--Add Zandalari Warscout & Warbringer due to them appearing in multiple zones but in only one in the data file.
 	--Ignore if not in Pandaria or on the Timeless Isle
-	if continent_id == private.CONTINENT_IDS.PANDARIA and map_id ~= private.ZONE_IDS.TIMELESS_ISLE then
+	if continentID == private.CONTINENT_IDS.PANDARIA and mapID ~= private.ZONE_IDS.TIMELESS_ISLE then
 		for index = 1, #private.MANUAL_PANDARIA_ADDITIONS do
 			if last_vignette_id ~= private.MANUAL_PANDARIA_ADDITIONS[index] then
 				private.macrotext = private.MACRO_FORMAT:format(private.macrotext, private.NPC_ID_TO_NAME[private.MANUAL_PANDARIA_ADDITIONS[index]])
@@ -1432,14 +1437,13 @@ function private.GenerateTargetMacro(instanceid)
 		end
 	end
 
-	if instanceid then
+	if instanceID then
 		private.macrotext = private.macrotext .. "\n/run _G._NPCScan.SetVignetteTarget()"
 	else
 		private.macrotext = private.macrotext .. "\n/run _G._NPCScan.CheckMacroTarget()"
 	end
 
 	target_button:SetAttribute("macrotext", private.macrotext)
-	return true
 end
 
 
