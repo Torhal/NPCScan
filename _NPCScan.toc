@@ -39,7 +39,7 @@
 ## X-CompatibleLocales: deDE, enCN, enTW, enUS, esES, esMX, frFR, itIT, koKR, ptBR, ptPT, ruRU, zhCN, zhTW
 ## SavedVariables: _NPCScanOptions, _NPCScanProfiles
 
-## OptionalDeps: Ace3, LibDialog-1.0, LibSharedMedia-3.0, LibTextDump-1.0, LibTextTable-1.1, LibToast-1.0, LibNameplateRegistry-1.0
+## OptionalDeps: Ace3, HereBeDragons-1.0, LibDialog-1.0, LibSharedMedia-3.0, LibTextDump-1.0, LibTextTable-1.1, LibToast-1.0
 
 
 #@no-lib-strip@
