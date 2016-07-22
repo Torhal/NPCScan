@@ -19,8 +19,10 @@ local table = _G.table
 -------------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
 
-local Dialog = _G.LibStub("LibDialog-1.0")
-local Toast = _G.LibStub("LibToast-1.0")
+local LibStub = _G.LibStub
+local Dialog = LibStub("LibDialog-1.0")
+local HereBeDragons = LibStub("HereBeDragons-1.0")
+local Toast = LibStub("LibToast-1.0")
 
 local L = private.L
 _G._NPCScan = private
@@ -865,39 +867,6 @@ do
 	end
 
 
-	-- @return True if the tamable mob is in its correct zone, else false with an optional reason string.
-	local function OnFoundTamable(npc_id, npc_name)
-		local tamable_zone_name = private.TAMABLE_ID_TO_MAP_NAME[npc_id]
-		local expected_zone_id = tamable_zone_name and private.ZONE_IDS[private.ZONE_NAME_TO_LABEL[tamable_zone_name]]
-		local current_zone_id = _G.GetCurrentMapAreaID()
-
-		_G.SetMapToCurrentZone()
-		local in_correct_zone = expected_zone_id == _G.GetCurrentMapAreaID()
-		local invalid_reason
-
-		if not in_correct_zone then
-			if _G.IsResting() then
-				PetList[npc_id] = npc_name -- Suppress error message until the player stops resting
-			else
-				-- GetMapNameByID returns nil for continent maps
-				local expected_zone_name = expected_zone_id and _G.GetMapNameByID(expected_zone_id) or nil
-				if not expected_zone_name then
-					_G.SetMapByID(expected_zone_id)
-
-					local map_continent = _G.GetCurrentMapContinent()
-					if map_continent >= 1 then
-						expected_zone_name = select(map_continent * 2, _G.GetMapContinents())
-					end
-				end
-				invalid_reason = L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(npc_name, _G.GetRealZoneText(), expected_zone_name or _G.UNKNOWN, expected_zone_id)
-			end
-		end
-		_G.SetMapByID(current_zone_id)
-
-		return in_correct_zone, invalid_reason
-	end
-
-
 	local function GetScanSource(npc_id)
 		local custom_name = private.GlobalOptions.NPCs[npc_id]
 
@@ -914,44 +883,49 @@ do
 
 	-- Validates found mobs before showing alerts.
 	function OnFound(npcID, npcName, sourceText)
-		local is_valid = true
-		local is_tamable = private.TAMABLE_ID_TO_NAME[npcID]
-		local invalid_reason
-
-		if is_tamable then
-			is_valid, invalid_reason = OnFoundTamable(npcID, npcName)
-		end
-
-		-- Checks to see if player is on flightpath, this will block possible cross realm alerts
 		if private.CharacterOptions.FlightSupress and _G.UnitOnTaxi("player") then
-			is_valid = false
 			_G.SetMapToCurrentZone()
 			_G.PlaySound("TellMessage", "master")
 
 			local x, y = _G.GetPlayerMapPosition("player")
-			invalid_reason = L.FOUND_UNIT_TAXI:format(npcName, x * 100, y * 100, _G.GetZoneText())
+			private.Print(L.FOUND_UNIT_TAXI:format(npcName, x * 100, y * 100, _G.GetZoneText()))
+
+			return
 		end
 
-		-- Checks to see if alert for mob has allready been displayed recently
-		is_valid = private.AntiSpam(private.ANTI_SPAM_DELAY, npcName)
+		local isTamable = private.TAMABLE_ID_TO_NAME[npcID] or false
+		if isTamable then
+			local currentZoneID = HereBeDragons:GetPlayerZone()
+			local tamableZoneName = private.TAMABLE_ID_TO_MAP_NAME[npcID]
+			local tamableZoneID = tamableZoneName and private.ZONE_IDS[private.ZONE_NAME_TO_LABEL[tamableZoneName]]
 
-		if is_valid then
-			local alertText = ("%s %s"):format(L[is_tamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(npcName), _G.PARENS_TEMPLATE:format(sourceText))
+			if not tamableZoneID == currentZoneID then
+				-- Suppress error message until the player stops resting
+				if _G.IsResting() then
+					PetList[npcID] = npcName
+					return
+				end
+
+				local expected_zone_name = tamableZoneID and _G.GetMapNameByID(tamableZoneID) or _G.UNKNOWN
+				private.Print(L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(npcName, _G.GetRealZoneText(), expected_zone_name or _G.UNKNOWN, tamableZoneID))
+				return
+			end
+		end
+
+		if private.AntiSpam(private.ANTI_SPAM_DELAY, npcName) then
+			local alertText = ("%s %s"):format(L[isTamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(npcName), _G.PARENS_TEMPLATE:format(sourceText))
 
 			if private.CharacterOptions.ShowAlertAsToast then
 				Toast:Spawn("_NPCScanAlertToast", alertText)
 			else
 				private.Print(alertText, _G.GREEN_FONT_COLOR)
 			end
+
 			private.Button:SetNPC(npcID, npcName, GetScanSource(npcID)) -- Sends added and found overlay messages
-		elseif invalid_reason then
-			private.Print(invalid_reason)
 		end
 	end
 
-
 	local criteria_updated_bucket
-
 
 	function EventFrame:CRITERIA_UPDATE()
 		criteria_updated_bucket = true
