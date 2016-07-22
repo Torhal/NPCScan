@@ -58,7 +58,7 @@ Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
 
 Libs\LibDialog-1.0\lib.xml
 Libs\LibToast-1.0\lib.xml
-Libs\LibNameplateRegistry-1.0\LibNameplateRegistry-1.0.xml
+Libs\HereBeDragons-1.0\HereBeDragons-1.0.lua
 #@end-no-lib-strip@
 
 # See http://wow.wowace.com/addons/npcscan/localization/
