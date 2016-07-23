@@ -26,7 +26,8 @@ local EVENT_WARNING_SOUND = "Sound\\Spells\\PVPFlagTaken.ogg"
 local TANAAN_ZONE_ID = 945
 local VIGNETTE_MOB_ID = 41
 local VIGNETTE_EVENT_MOB_ID = 45
-local MAP_EVENT_ICON = 45  --Crossed Swords on Diamond
+local LEGION_VIGNETTE_ICON_ID = 4733
+local MAP_EVENT_ICON = 45 --Crossed Swords on Diamond
 local BLOODMOON = private.L.NPCs["91200"]
 
 local last_vignette_id = 0
@@ -89,7 +90,7 @@ function private.VFrame:WORLD_MAP_UPDATE()
 		if textureIndex == MAP_EVENT_ICON then
 			local alertText = L.EVENT_ACTIVE:format(landmarkName)
 
-			if private.AntiSpam(private.ANTI_SPAM_DELAY, landmarkName .."MapAlert") and not landmarkName:find(BLOODMOON) then
+			if private.AntiSpam(private.ANTI_SPAM_DELAY, landmarkName .. "MapAlert") and not landmarkName:find(BLOODMOON) then
 				private.Print(alertText, _G.RED_FONT_COLOR)
 
 				if private.CharacterOptions.ShowAlertAsToast and alertText then
@@ -148,6 +149,7 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceID, ...)
 
 	local x, y, name, iconID = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceID)
 
+	private.Debug("VIGNETTE_ADDED - %s", instanceID)
 	if not private.CharacterOptions.TrackVignettes or
 		not instanceID or
 		_G.GetUnitName("target") == last_vignette_id or
@@ -164,17 +166,16 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceID, ...)
 	if not iconID then
 		alert_text = L["FOUND_FORMAT"]:format("Vignette Mob")
 		private.Button:SetNPC(29147, "Vignette Mob", "Unknown Vignette")
-	elseif iconID == VIGNETTE_MOB_ID  or iconID == VIGNETTE_EVENT_MOB_ID then
-
+	elseif iconID == VIGNETTE_MOB_ID or iconID == VIGNETTE_EVENT_MOB_ID or iconID == LEGION_VIGNETTE_ICON_ID then
 		if npcID and private.ScanIDs[npcID] and not _G._NPCScanOptions.IgnoreList.NPCs[npcID] then
 			private.Button:SetNPC(npcID, name, "Vignette Mob")
 		else
 			private.Button:SetNPC(29147, name, "Unknown Vignette")
 		end
 
-		alert_text = L["FOUND_FORMAT"]:format("Vignette Mob: "..name)
+		alert_text = L["FOUND_FORMAT"]:format("Vignette Mob: " .. name)
 	else
-		private.Debug("Untracked Vigenette, iconID %s", iconID)
+		private.Debug("Untracked Vigenette: %s - iconID %s", name, iconID)
 	end
 
 	if private.CharacterOptions.ShowAlertAsToast and alert_text then
