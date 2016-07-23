@@ -16,7 +16,6 @@ local FOLDER_NAME, private = ...
 local L = private.L
 
 local LibStub = _G.LibStub
-local Debug = private.Debug
 local HereBeDragons = LibStub("HereBeDragons-1.0")
 local Toast = LibStub("LibToast-1.0")
 
@@ -51,7 +50,6 @@ end)
 
 function private.VFrame:ZONE_CHANGED_NEW_AREA()
 	if vignette_delay then
-		Debug("Releasing Delay")
 		private.VFrame:VIGNETTE_ADDED("VIGNETTE_ADDED", vignette_delay)
 		vignette_delay = nil
 	end
@@ -112,7 +110,6 @@ local function VignetteZoneCheck()
 
 	if not zone_name then
 		vignette_delay = true
-		private.Debug("Build List Delayed")
 		return false
 	else
 		return true
@@ -129,33 +126,30 @@ function private.SetVignetteTarget()
 		last_vignette_id = npc_id
 		private.GenerateTargetMacro(npc_id)
 		private.Button:Update(npc_id, "Vignette Mob", "Unknown Vignette")
-		Debug("Mob Dead")
 		return
 	end
 
 	if npc_id then
 		if _G.InCombatLockdown() then
-			Debug("Combat LockDown")
 			private.Button.PendingID, private.Button.PendingName, private.Button.PendingSource = npc_id, npc_name, "Vignette Mob"
 		else
 			private.Button:Update(npc_id, npc_name, "Vignette Mob")
 		end
+
 		last_vignette_id = npc_id
 	end
-
-	Debug("Last ID: " .. last_vignette_id)
 end
 
 
 -- Vignette alert, Appears to be Fixed in WoD will need to monitor
 -- Refrence: http://wowpedia.org/API_C_Vignettes.GetVignetteInfoFromInstanceID
-function private.VFrame:VIGNETTE_ADDED(event, instanceId, ...)
+function private.VFrame:VIGNETTE_ADDED(event, instanceID, ...)
 	vignette_found_count = vignette_found_count + 1
-	Debug("Found: %d  Last ID: %d", vignette_found_count, last_vignette_id)
-	local x, y, name, iconId = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceId)
+
+	local x, y, name, iconID = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceID)
 
 	if not private.CharacterOptions.TrackVignettes or
-		not instanceId or
+		not instanceID or
 		_G.GetUnitName("target") == last_vignette_id or
 		not VignetteZoneCheck or
 		_G.UnitIsDeadOrGhost("player") or
@@ -165,32 +159,22 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceId, ...)
 
 	-- iconId seems to be 40:chests, 41:mobs, 45: Tannan special rares
 	local npcID = private.NPC_NAME_TO_ID[name]
-	local alert_text = nil
+	local alert_text
 
-	if not iconId then --Use case for broken or unknown Mob Info
-		Debug("Unknown Mob Data Returned")
+	if not iconID then
 		alert_text = L["FOUND_FORMAT"]:format("Vignette Mob")
 		private.Button:SetNPC(29147, "Vignette Mob", "Unknown Vignette")
-	elseif iconId == VIGNETTE_MOB_ID  or iconId == VIGNETTE_EVENT_MOB_ID then  --Use Case if API returns Mob Info
-		Debug("Correct Mob Data Returned for "..name)
+	elseif iconID == VIGNETTE_MOB_ID  or iconID == VIGNETTE_EVENT_MOB_ID then
 
-		--Check for Vignette mobs that dont exist in our DB
-		if npcID then
-			Debug("ID found for "..private.NPC_NAME_TO_ID[name])
-			--Check to see if mob is on the ignore list or not being currently tracked
-			if _G._NPCScanOptions.IgnoreList.NPCs[npcID] or not private.ScanIDs[npcID] then
-				Debug("Ignored Mob")
-				return
-			end
+		if npcID and private.ScanIDs[npcID] and not _G._NPCScanOptions.IgnoreList.NPCs[npcID] then
 			private.Button:SetNPC(npcID, name, "Vignette Mob")
 		else
-			Debug("No MobID found for "..name)
 			private.Button:SetNPC(29147, name, "Unknown Vignette")
 		end
+
 		alert_text = L["FOUND_FORMAT"]:format("Vignette Mob: "..name)
-		--private.Button:SetNPC(private.NPC_NAME_TO_ID[name], name, "Vignette Mob")
-	else -- All other cases
-		Debug("Untracked Vigenette")
+	else
+		private.Debug("Untracked Vigenette, iconID %s", iconID)
 	end
 
 	if private.CharacterOptions.ShowAlertAsToast and alert_text then

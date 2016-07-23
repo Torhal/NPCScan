@@ -395,8 +395,10 @@ do
 		if NPCsActive[npc_id] or not IsWorldIDActive(world_id) or not ScanAdd(npc_id) then
 			return
 		end
+
 		NPCsActive[npc_id] = true
 		private.Config.Search.UpdateTab("NPC")
+
 		return true
 	end
 
@@ -404,12 +406,13 @@ do
 	-- Ends actual scan for NPC.
 	function NPCDeactivate(npc_id)
 		if not NPCsActive[npc_id] then
-			--private.Debug(npc_id.. " not active")
 			return
 		end
+
 		NPCsActive[npc_id] = nil
 		ScanRemove(npc_id)
 		private.Config.Search.UpdateTab("NPC")
+
 		return true -- Successfully deactivated
 	end
 
@@ -840,7 +843,6 @@ function private.AntiSpam(time, id)
 		end
 		return true
 	else
-		private.Debug("Anti-Spam triggered for: " .. tostring(id))
 		return false
 	end
 end
@@ -1095,9 +1097,6 @@ do
 		else
 			private.WorldID = private.LOCALIZED_CONTINENT_NAMES[map_continent]
 		end
-		private.Debug(private.WorldID or "No World")
-		private.Debug(map_name or "no map")
-		private.Debug(map_continent or "no cont")
 
 		if private.CharacterOptions.TrackRares then
 			for npc_id, world_name in pairs(private.UNTAMABLE_ID_TO_WORLD_NAME) do
