@@ -381,8 +381,8 @@ local function ScanRemove(npc_id)
 end
 
 
-local function IsWorldIDActive(world_id)
-	return not world_id or world_id == private.WorldID
+local function IsWorldIDActive(worldID)
+	return not worldID or worldID == private.WorldID
 end
 
 
@@ -1084,18 +1084,22 @@ do
 	function EventFrame:PLAYER_ENTERING_WORLD()
 		self:PLAYER_UPDATE_RESTING()
 
-		-- Since real MapIDs aren't available to addons, a "WorldID" is a universal ContinentID or the map's localized name.
-		local map_name, _, _, _, _, _, _, map_id = _G.GetInstanceInfo()
-		local map_continent = _G.GetCurrentMapContinent()
+		local continentID = HereBeDragons:GetCZFromMapID(HereBeDragons:GetPlayerZone())
 
 		-- Fix for Deepholm
-		if map_continent == private.CONTINENT_IDS.THE_MAELSTROM then
+		if continentID == private.CONTINENT_IDS.THE_MAELSTROM then
 			private.WorldID = private.ZONE_NAMES.DEEPHOLM
-		elseif map_continent == -1 and map_id == DARKMOON_ISLAND_MAP_ID then --Darkmoon Island which doesn't have a continent location
-		private.WorldID = map_name
+		elseif continentID == -1 then
+			local continentName, _, _, _, _, _, _, instanceMapID = _G.GetInstanceInfo()
 
+			--Darkmoon Island doesn't have a continent location
+			if instanceMapID == DARKMOON_ISLAND_MAP_ID then
+				private.WorldID = continentName
+			else
+				private.WorldID = _G.UNKNOWN
+			end
 		else
-			private.WorldID = private.LOCALIZED_CONTINENT_NAMES[map_continent]
+			private.WorldID = private.LOCALIZED_CONTINENT_NAMES[continentID]
 		end
 
 		if private.CharacterOptions.TrackRares then
@@ -1143,7 +1147,7 @@ do
 			-- Print list of cached mobs specific to new world
 			local list_string = CacheListBuild(CacheList)
 			if list_string then
-				private.Print(L.CACHED_WORLD_FORMAT:format(list_string, map_name))
+				private.Print(L.CACHED_WORLD_FORMAT:format(list_string, continentName))
 			end
 		end
 		private.Config.Search:UpdateTabNames()
@@ -1176,6 +1180,7 @@ function EventFrame:PLAYER_LEAVING_WORLD()
 			AchievementDeactivate(achievement)
 		end
 	end
+
 	private.WorldID = nil
 end
 
