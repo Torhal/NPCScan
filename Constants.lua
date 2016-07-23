@@ -219,16 +219,16 @@ do
 		[private.ACHIEVEMENT_IDS.BLOODY_RARE]			= { WorldID = private.ZONE_NAMES.OUTLAND },
 		[private.ACHIEVEMENT_IDS.FROSTBITTEN]			= { WorldID = private.ZONE_NAMES.NORTHREND },
 		[private.ACHIEVEMENT_IDS.ONE_MANY_ARMY]			= { WorldID = private.ZONE_NAMES.PANDARIA },
-		[private.ACHIEVEMENT_IDS.GLORIOUS]				= { WorldID = private.ZONE_NAMES.PANDARIA },
-		[private.ACHIEVEMENT_IDS.CHAMPIONS_OF_LEI_SHEN]	= { WorldID = private.ZONE_NAMES.PANDARIA },
+		[private.ACHIEVEMENT_IDS.GLORIOUS]			= { WorldID = private.ZONE_NAMES.PANDARIA },
+		[private.ACHIEVEMENT_IDS.CHAMPIONS_OF_LEI_SHEN]         = { WorldID = private.ZONE_NAMES.PANDARIA },
 		[private.ACHIEVEMENT_IDS.TIMELESS_CHAMPION]		= { WorldID = private.ZONE_NAMES.PANDARIA },
 		[private.ACHIEVEMENT_IDS.GORGROND_MONSTER_HUNTER]	= { WorldID = private.ZONE_NAMES.DRAENOR },
 		[private.ACHIEVEMENT_IDS.HIGH_VALUE_TARGETS_ASHRAN]	= { WorldID = private.ZONE_NAMES.DRAENOR },
 		[private.ACHIEVEMENT_IDS.CUT_OFF_THE_HEAD] 		= { WorldID = private.ZONE_NAMES.DRAENOR },
-		[private.ACHIEVEMENT_IDS.HERALDS_OF_THE_LEGION]	= { WorldID = private.ZONE_NAMES.DRAENOR },
+		[private.ACHIEVEMENT_IDS.HERALDS_OF_THE_LEGION]         = { WorldID = private.ZONE_NAMES.DRAENOR },
 		[private.ACHIEVEMENT_IDS.FIGHT_THE_POWER]		= { WorldID = private.ZONE_NAMES.DRAENOR },
 		[private.ACHIEVEMENT_IDS.ANCIENT_NO_MORE]		= { WorldID = private.ZONE_NAMES.DRAENOR },
-		[private.ACHIEVEMENT_IDS.HELLBANE]				= { WorldID = private.ZONE_NAMES.DRAENOR },
+		[private.ACHIEVEMENT_IDS.HELLBANE]			= { WorldID = private.ZONE_NAMES.DRAENOR },
 		[private.ACHIEVEMENT_IDS.JUNGLE_STALKER]		= { WorldID = private.ZONE_NAMES.DRAENOR },
 	}
 
@@ -258,7 +258,8 @@ end -- do-block
 private.macrotext = "/cleartarget"
 private.MACRO_FORMAT = "%s\n/targetexact %s"
 private.MACRO_FORMAT_CUSTOM_MOB = "%s\n/target %s"
---Mobs that appear in more that one zone
+
+-- Mobs that appear in more that one zone
 private.MANUAL_PANDARIA_ADDITIONS = {
 	69768, -- Zandalari Warscout
 	69769, -- Zandalari Warbringer
