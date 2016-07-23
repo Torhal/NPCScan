@@ -270,12 +270,12 @@ ach_npc_remove_button:SetScript("OnClick", function(self)
 		private.GlobalOptions.IgnoreList.NPCs[npc_id] = nil
 		private.GlobalOptions.IgnoreList.MapName[npc_id] = nil
 		private.GlobalOptions.IgnoreList.WorldID[npc_id] = nil
-		private.ReavtivateIgnoreMob(npc_id, world_id)
+		private.ReactivateIgnoreMob(npc_id, world_id)
 	else
 		private.GlobalOptions.IgnoreList.NPCs[npc_id] = selected_npc["name"]
 		private.GlobalOptions.IgnoreList.MapName[npc_id] = selected_npc["zone"]
 		private.GlobalOptions.IgnoreList.WorldID[npc_id] = world_id
-		private.DeavtivateIgnoreMob(npc_id)
+		private.DeactivateIgnoreMob(npc_id)
 	end
 	private.Config.Search.UpdateTab(current_tab)
 	selected_npc = nil
@@ -842,7 +842,7 @@ do
 		end
 		return iter
 	end
-	
+
 	for achievement_id in pairsByKeys(private.ACHIEVEMENTS) do
 		local Ach_tab = AddTab(achievement_id, UpdateAchievementTab, ActivateAchievementTab, DeactivateAchievementTab)
 		Ach_tab.table_row_on_select = function(text_table, npc_id)

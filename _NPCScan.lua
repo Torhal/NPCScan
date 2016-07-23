@@ -596,14 +596,14 @@ end
 
 -- Adds a previously ignored Mob to be tracked.
 -- @param Mob Id & World ID .
-function private.ReavtivateIgnoreMob(npc_id, world_id)
+function private.ReactivateIgnoreMob(npc_id, world_id)
 	NPCActivate(npc_id, world_id)
 end
 
 
 -- Removes an ignored Mob from being tracked.
 -- @param Mob Id
-function private.DeavtivateIgnoreMob(npc_id)
+function private.DeactivateIgnoreMob(npc_id)
 	NPCDeactivate(npc_id)
 end
 
