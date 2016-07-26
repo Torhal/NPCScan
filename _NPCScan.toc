@@ -82,4 +82,3 @@ MapOverlays.lua
 Config.lua
 ConfigSearch.lua
 Vignette.lua
-Nameplates.lua
