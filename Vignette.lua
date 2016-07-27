@@ -167,7 +167,7 @@ function private.VFrame:VIGNETTE_ADDED(event, instanceID, ...)
 	if not iconID then
 		alert_text = L["FOUND_FORMAT"]:format("Vignette Mob")
 		private.Button:SetNPC(29147, "Vignette Mob", "Unknown Vignette")
-	elseif iconID == VIGNETTE_MOB_ID or iconID == VIGNETTE_EVENT_MOB_ID or iconID == VIGNETTE_STAR_ICON_ID or iconID == VIGNETTE_TREASURE_ICON_ID then
+	elseif iconID == VIGNETTE_MOB_ID or iconID == VIGNETTE_EVENT_MOB_ID or iconID == VIGNETTE_STAR_ICON_ID then
 		if npcID and private.ScanIDs[npcID] and not _G._NPCScanOptions.IgnoreList.NPCs[npcID] then
 			private.Button:SetNPC(npcID, name, "Vignette Mob")
 		else
