@@ -41,20 +41,8 @@ panel_subtext:SetJustifyV("TOP")
 panel_subtext:SetText(L.CONFIG_DESC)
 
 
-local cache_warnings_checkbox = _G.CreateFrame("CheckButton", "_NPCScanConfigCacheWarningsCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
-cache_warnings_checkbox:SetPoint("TOPLEFT", panel_subtext, "BOTTOMLEFT", -2, -8)
-_G[cache_warnings_checkbox:GetName() .. "Text"]:SetText(L.CONFIG_CACHEWARNINGS)
-cache_warnings_checkbox.tooltipText = L.CONFIG_CACHEWARNINGS_DESC
-
-panel.cache_warnings_checkbox = cache_warnings_checkbox
-
-function cache_warnings_checkbox.setFunc(is_enabled)
-	private.SetCacheWarnings(is_enabled == "1")
-end
-
-
 local print_time_checkbox = _G.CreateFrame("CheckButton", "_NPCScanConfigPrintTimeCheckbox", panel, "InterfaceOptionsCheckButtonTemplate")
-print_time_checkbox:SetPoint("TOPLEFT", panel.cache_warnings_checkbox, "BOTTOMLEFT", 0, -8)
+print_time_checkbox:SetPoint("TOPLEFT", panel_subtext, "BOTTOMLEFT", -2, -8)
 _G[print_time_checkbox:GetName() .. "Text"]:SetText(L.CONFIG_PRINTTIME)
 print_time_checkbox.tooltipText = L.CONFIG_PRINTTIME_DESC
 

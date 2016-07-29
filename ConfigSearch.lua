@@ -145,9 +145,7 @@ add_found_label:SetText(L.SEARCH_ACHIEVEMENTADDFOUND)
 add_found_checkbox:SetHitRectInsets(4, 4 - add_found_label:GetStringWidth(), 4, 4)
 
 function add_found_checkbox.setFunc(is_enabled)
-	if private.SetAchievementsAddFound(is_enabled == "1") then
-		private.CacheListPrint(true)
-	end
+	private.SetAchievementsAddFound(is_enabled == "1")
 end
 
 local table_container = _G.CreateFrame("Frame", nil, panel)
@@ -305,11 +303,10 @@ npc_add_button:SetScript("OnClick", function(self)
 	if private.TAMABLE_NON_ACHIEVMENT_LIST[npc_id] then
 		private.Print(L.SEARCH_ADD_TAMABLE_FORMAT:format(npc_name))
 	end
-	private.NPCRemove(npc_id)
 
-	if private.NPCAdd(npc_id, npc_name, world_id) then
-		private.CacheListPrint(true)
-	end
+	private.NPCRemove(npc_id)
+	private.NPCAdd(npc_id, npc_name, world_id)
+
 	panel:ClearEditBoxes()
 end)
 
@@ -531,8 +528,8 @@ do
 
 		if not is_enabled then
 			private.AchievementRemove(identifier)
-		elseif private.AchievementAdd(identifier) then -- Cache might have changed
-			private.CacheListPrint(true)
+		else
+			private.AchievementAdd(identifier)
 		end
 		Tab_OnEnter(checkbox:GetParent())
 	end
@@ -544,13 +541,14 @@ do
 
 		local identifier = checkbox:GetParent().identifier
 		panel.AchievementSetEnabled(identifier, is_enabled)
+
 		if identifier == "BEASTS" then
 			private.CharacterOptions.TrackBeasts = is_enabled
 		elseif identifier == "RARENPC" then
 			private.CharacterOptions.TrackRares = is_enabled
 		end
+
 		private.RareMobToggle(identifier, is_enabled)
-		private.CacheListPrint(true)
 		Tab_OnEnter(checkbox:GetParent())
 	end
 

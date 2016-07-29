@@ -35,7 +35,6 @@ private.Ace = _G.LibStub("AceAddon-3.0"):NewAddon(FOLDER_NAME)
 local EventFrame = _G.CreateFrame("Frame")
 EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 EventFrame:RegisterEvent("PLAYER_LEAVING_WORLD")
-EventFrame:RegisterEvent("PLAYER_UPDATE_RESTING")
 EventFrame:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 EventFrame:RegisterEvent("LOOT_CLOSED")
 EventFrame:RegisterEvent("NAME_PLATE_UNIT_ADDED")
@@ -224,142 +223,22 @@ function private.Print(message, color)
 	_G.DEFAULT_CHAT_FRAME:AddMessage(L.PRINT_FORMAT:format(private.CharacterOptions.PrintTime and _G.date(_G.CHAT_TIMESTAMP_FORMAT or L.TIME_FORMAT) or "", message), color.r, color.g, color.b)
 end
 
-
-do
-	local tooltip = _G.CreateFrame("GameTooltip", "_NPCScanTooltip")
-	local tooltip_text = tooltip:CreateFontString()
-	tooltip:AddFontStrings(tooltip_text, tooltip:CreateFontString())
-
-	--For players: Player-[server ID]-[player UID] (Example: "Player-976-0002FD64")
-	--For creatures, pets, objects, and vehicles: [Unit type]-0-[server ID]-[instance ID]-[zone UID]-[ID]-[Spawn UID] (Example: "Creature-0-976-0-11-31146-000136DF91")
-	--Unit Type Names: "Creature", "Pet", "GameObject", and "Vehicle"
-	--For vignettes: Vignette-0-[server ID]-[instance ID]-[zone UID]-0-[spawn UID] (Example: "Vignette-0-970-1116-7-0-0017CAE465" for rare mob Sulfurious)
-
-	--Disabling cache checking due to it nolonger working. will revisit
-	function private.NPCNameFromCache(npc_id)
-		tooltip:SetOwner(_G.WorldFrame, "ANCHOR_NONE")
-		--tooltip:SetHyperlink(("unit:Creature-0-0-0-0-%d:0000000000"):format(npc_id))
-
-		if tooltip:IsShown() then
-			return tooltip_text:GetText()
-		end
-	end
-end
-
-
-local CacheListBuild
-do
-	local build_list = {}
-	local id_registry = {}
-
-
-	--- Compiles a cache list into a printable list string.
-	-- @param Relist True to relist NPC names that have already been printed.
-	-- @return List string, or nil if the list was empty.
-	function CacheListBuild(source_data, should_relist)
-		if not next(source_data) then
-			return
-		end
-		table.wipe(build_list)
-
-		for npc_id, npc_name in pairs(source_data) do
-			if should_relist or not id_registry[npc_id] then
-				if not should_relist then
-					id_registry[npc_id] = true
-				end
-				build_list[#build_list + 1] = L.CACHELIST_ENTRY_FORMAT:format(npc_name)
-			end
-		end
-		table.wipe(source_data)
-
-		if #build_list > 0 then
-			table.sort(build_list)
-			return table.concat(build_list, L.CACHELIST_SEPARATOR)
-		end
-	end
-end
-
-
-local CacheList = {}
-do
-	-- Fills a cache list with all added NPCs, active or not.
-	local function CacheListPopulate(self)
-		for npc_id in pairs(private.GlobalOptions.NPCs) do
-			self[npc_id] = private.NPCNameFromCache(npc_id)
-		end
-
-		if private.CharacterOptions.TrackBeasts then
-			for npc_id in pairs(private.TAMABLE_ID_TO_NAME) do
-				self[npc_id] = private.NPCNameFromCache(npc_id)
-			end
-		end
-
-		if private.CharacterOptions.TrackRares then
-			for npc_id in pairs(private.UNTAMABLE_ID_TO_NAME) do
-				self[npc_id] = private.NPCNameFromCache(npc_id)
-			end
-		end
-
-		for achievement_id in pairs(private.CharacterOptions.Achievements) do
-			for criteria_id, npc_id in pairs(private.ACHIEVEMENTS[achievement_id].Criteria) do
-				-- Not completed
-				if private.CharacterOptions.AchievementsAddFound or not select(3, GetAchievementCriteriaInfoByID(achievement_id, criteria_id)) then
-					self[npc_id] = private.NPCNameFromCache(npc_id)
-				end
-			end
-		end
-	end
-
-
-	local FirstPrint = true
-
-
-	--- Prints a standard message listing cached mobs.
-	-- Will also print details about the cache the first time it's called.
-	-- @param force_print Overrides the user's option to not print cache warnings.
-	-- @param FullListing Adds all cached NPCs before printing, active or not.
-	-- @return True if list printed.
-	function private.CacheListPrint(force_print, full_listing)
-		if force_print or private.CharacterOptions.CacheWarnings then
-			if full_listing then
-				CacheListPopulate(CacheList)
-			end
-			local ListString = CacheListBuild(CacheList, force_print or full_listing) -- Allow printing an NPC a second time if forced or full listing
-
-			if ListString then
-				private.Print(L[FirstPrint and "CACHED_LONG_FORMAT" or "CACHED_FORMAT"]:format(ListString), force_print and _G.RED_FONT_COLOR)
-				FirstPrint = false
-				return true
-			end
-		else
-			table.wipe(CacheList)
-		end
-	end
-end
-
-
 private.ScanIDs = {} -- [ NpcID ] = Number of concurrent scans for this ID
-
 
 -- Begins searching for an NPC.
 local function ScanAdd(npc_id)
-	local name = private.NPCNameFromCache(npc_id)
-
-	if name then
-		CacheList[npc_id] = name
+	if private.ScanIDs[npc_id] then
+		private.ScanIDs[npc_id] = private.ScanIDs[npc_id] + 1
 	else
-		if private.ScanIDs[npc_id] then
-			private.ScanIDs[npc_id] = private.ScanIDs[npc_id] + 1
-		else
-			-- First
-			if not next(private.ScanIDs) then
-				private.Updater:Play()
-			end
-			private.ScanIDs[npc_id] = 1
-			private.Overlays.Add(npc_id)
+		-- First
+		if not next(private.ScanIDs) then
+			private.Updater:Play()
 		end
-		return true
+		private.ScanIDs[npc_id] = 1
+		private.Overlays.Add(npc_id)
 	end
+
+	return true
 end
 
 
@@ -645,12 +524,6 @@ end
 -------------------------------------------------------------------------------
 -- Config Menu Toggles.
 -------------------------------------------------------------------------------
--- Enables printing cache lists on login.
-function private.SetCacheWarnings(enable)
-	private.CharacterOptions.CacheWarnings = enable
-	private.Config.cache_warnings_checkbox:SetChecked(enable)
-end
-
 
 -- Enables adding a timestamp to printed messages.
 function private.SetPrintTime(enable)
@@ -793,7 +666,6 @@ function private.Synchronize()
 
 	assert(not next(private.ScanIDs), "Orphan NpcIDs in scan pool!")
 
-	private.SetCacheWarnings(character_options.CacheWarnings)
 	private.SetPrintTime(character_options.PrintTime)
 	private.SetAchievementsAddFound(character_options.AchievementsAddFound)
 	private.SetShowAsToast(character_options.ShowAlertAsToast)
@@ -826,8 +698,6 @@ function private.Synchronize()
 		private.CUSTOM_NPC_ID_TO_WORLD_NAME[npc_id] = private.GlobalOptions.NPCWorldIDs[npc_id]
 		private.CUSTOM_NPC_NAME_TO_ID[npc_name] = npc_id
 	end
-
-	private.CacheListPrint(false, true) -- Populates cache list with inactive mobs too before printing
 end
 
 
@@ -851,23 +721,6 @@ end
 local OnFound
 do
 	local PetList = {}
-
-	-- Prints the list of cached pets when leaving a city or inn.
-	function EventFrame:PLAYER_UPDATE_RESTING()
-		if _G.IsResting() or not next(PetList) then
-			return
-		end
-
-		if private.CharacterOptions.CacheWarnings then
-			local ListString = CacheListBuild(PetList)
-			if ListString then
-				private.Print(L.CACHED_PET_RESTING_FORMAT:format(ListString), _G.RED_FONT_COLOR)
-			end
-		else
-			table.wipe(PetList)
-		end
-	end
-
 
 	local function GetScanSource(npc_id)
 		local custom_name = private.GlobalOptions.NPCs[npc_id]
@@ -904,7 +757,6 @@ do
 			if not tamableZoneID == currentZoneID then
 				-- Suppress error message until the player stops resting
 				if _G.IsResting() then
-					PetList[npcID] = npcName
 					return
 				end
 
@@ -953,67 +805,8 @@ do
 				end
 			end
 		end
-
-		for npc_id in pairs(private.ScanIDs) do
-			local npc_name = private.NPCNameFromCache(npc_id)
-			if npc_name then
-				OnFound(npc_id, npc_name, _G.UNKNOWN)
-			end
-		end
 	end
 end
-
-
-if PLAYER_CLASS == "HUNTER" then
-	local StableUpdater = _G.CreateFrame("Frame")
-	local stabled_list = {}
-
-	-- Stops scans for stabled hunter pets before a bogus alert can fire.
-	function EventFrame:PET_STABLE_UPDATE()
-		for npc_id in pairs(private.ScanIDs) do
-			local npc_name = private.NPCNameFromCache(npc_id)
-			if npc_name then
-				stabled_list[npc_id] = npc_name
-				NPCDeactivate(npc_id)
-
-				for achievement_id in pairs(private.CharacterOptions.Achievements) do
-					AchievementNPCDeactivate(private.ACHIEVEMENTS[achievement_id], npc_id)
-				end
-			end
-		end
-		StableUpdater:Show()
-	end
-
-
-	-- Bucket to print cached stabled pets on one line.
-	function StableUpdater:OnUpdate()
-		self:Hide()
-
-		if private.CharacterOptions.CacheWarnings then
-			local list_string = CacheListBuild(stabled_list)
-			if list_string then
-				private.Print(L.CACHED_STABLED_FORMAT:format(list_string))
-			end
-		else
-			table.wipe(stabled_list)
-		end
-	end
-
-	StableUpdater:Hide()
-	StableUpdater:SetScript("OnUpdate", StableUpdater.OnUpdate)
-	EventFrame:RegisterEvent("PET_STABLE_UPDATE")
-
-
-	-- Prevents the pet UI from querying (and caching) stabled pets until actually viewing the stables.
-	-- @param is_override Forces a normal query even if the stables aren't open.
-	local Original_GetStablePetInfo = _G.GetStablePetInfo
-	function _G.GetStablePetInfo(stable_slot, is_override, ...)
-		if is_override or stable_slot <= _G.NUM_PET_ACTIVE_SLOTS or _G.IsAtStableMaster() then
-			return Original_GetStablePetInfo(stable_slot, is_override, ...)
-		end
-	end
-end
-
 
 --Initializes Ace Database for profile & adds profile menu to Blizzard menu
 function private.Ace:OnInitialize()
@@ -1082,8 +875,6 @@ do
 	local has_initialized = false
 
 	function EventFrame:PLAYER_ENTERING_WORLD()
-		self:PLAYER_UPDATE_RESTING()
-
 		local continentID = HereBeDragons:GetCZFromMapID(HereBeDragons:GetPlayerZone())
 
 		-- Fix for Deepholm
@@ -1139,17 +930,6 @@ do
 			NPCActivate(npc_id, private.GlobalOptions.NPCWorldIDs[npc_id])
 		end
 
-		if not has_initialized or not private.CharacterOptions.CacheWarnings then
-			-- Full listing of cached mobs gets printed on login
-			has_initialized = true
-			table.wipe(CacheList)
-		else
-			-- Print list of cached mobs specific to new world
-			local list_string = CacheListBuild(CacheList)
-			if list_string then
-				private.Print(L.CACHED_WORLD_FORMAT:format(list_string, continentName))
-			end
-		end
 		private.Config.Search:UpdateTabNames()
 	end
 end
@@ -1226,11 +1006,9 @@ do
 			if not id then
 				return
 			end
-			private.NPCRemove(id)
 
-			if private.NPCAdd(id, name) then
-				private.CacheListPrint(true)
-			end
+			private.NPCRemove(id)
+			private.NPCAdd(id, name)
 		end,
 		[L.CMD_REMOVE] = function(arguments)
 			local id = tonumber(arguments)
@@ -1246,11 +1024,6 @@ do
 
 			if not private.NPCRemove(id) then
 				private.Print(L.CMD_REMOVENOTFOUND_FORMAT:format(arguments), _G.RED_FONT_COLOR)
-			end
-		end,
-		[L.CMD_CACHE] = function(arguments)
-			if not private.CacheListPrint(true, true) then
-				private.Print(L.CMD_CACHE_EMPTY, _G.GREEN_FONT_COLOR)
 			end
 		end,
 		--@debug@
