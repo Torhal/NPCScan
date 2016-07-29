@@ -641,12 +641,13 @@ do
 	end
 
 
-	local function GeneralNPCUpdate(world_ids, map_names, npc_data)
+	local function GeneralNPCUpdate(world_ids, npc_data)
+		local mapNames = private.NPC_ID_TO_MAP_NAME
 		UpdateButtonStates()
 
 		for npc_id, npc_name in pairs(npc_data) do
 			if not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] then
-				local map_name = map_names[npc_id]
+				local map_name = mapNames[npc_id]
 
 				local new_row = panel.table:AddRow(npc_id,
 					--private.NPCNameFromCache(npc_id) and TEXTURE_NOT_READY or "",
@@ -665,17 +666,17 @@ do
 
 
 	local function UpdateCustomTab(tab)
-		GeneralNPCUpdate(private.GlobalOptions.NPCWorldIDs, private.NPC_ID_TO_MAP_NAME, private.GlobalOptions.NPCs)
+		GeneralNPCUpdate(private.GlobalOptions.NPCWorldIDs, private.GlobalOptions.NPCs)
 	end
 
 
 	local function UpdateRareTab(tab)
-		GeneralNPCUpdate(private.NPC_ID_TO_WORLD_NAME, private.NPC_ID_TO_MAP_NAME, private.UNTAMABLE_ID_TO_NAME)
+		GeneralNPCUpdate(private.NPC_ID_TO_WORLD_NAME, private.UNTAMABLE_ID_TO_NAME)
 	end
 
 
 	local function UpdateTameableTab(tab)
-		GeneralNPCUpdate(private.NPC_ID_TO_WORLD_NAME, private.NPC_ID_TO_MAP_NAME, private.TAMABLE_NON_ACHIEVMENT_LIST)
+		GeneralNPCUpdate(private.NPC_ID_TO_WORLD_NAME, private.TAMABLE_NON_ACHIEVMENT_LIST)
 	end
 
 
