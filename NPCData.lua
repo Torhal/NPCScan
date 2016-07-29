@@ -365,7 +365,7 @@ local NPC_DATA = {
 [16184] = { world_id = ZN.EASTERN_KINGDOMS,         map_name = ZN.EASTERN_PLAGUELANDS,         is_tamable = false, is_achievement = false, quest_id = false }, -- Nerubian Overseer
 [16854] = { world_id = ZN.OUTLAND,                  map_name = ZN.EVERSONG_WOODS,              is_tamable = false, is_achievement = false, quest_id = false }, -- Eldinarcus
 [16855] = { world_id = ZN.OUTLAND,                  map_name = ZN.EVERSONG_WOODS,              is_tamable = false, is_achievement = false, quest_id = false }, -- Tregla
-[17144] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = true,  quest_id = false }, -- Goretooth
+[17144] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND_OUTLAND,             is_tamable = true,  is_achievement = true,  quest_id = false }, -- Goretooth
 [18241] = { world_id = ZN.KALIMDOR,                 map_name = ZN.DESOLACE,                    is_tamable = true,  is_achievement = false, quest_id = false }, -- Crusty
 [18677] = { world_id = ZN.OUTLAND,                  map_name = ZN.HELLFIRE_PENINSULA,          is_tamable = false, is_achievement = true,  quest_id = false }, -- Mekthorg the Wild
 [18678] = { world_id = ZN.OUTLAND,                  map_name = ZN.HELLFIRE_PENINSULA,          is_tamable = false, is_achievement = true,  quest_id = false }, -- Fulgorge
@@ -373,17 +373,17 @@ local NPC_DATA = {
 [18680] = { world_id = ZN.OUTLAND,                  map_name = ZN.ZANGARMARSH,                 is_tamable = true,  is_achievement = true,  quest_id = false }, -- Marticar
 [18681] = { world_id = ZN.OUTLAND,                  map_name = ZN.ZANGARMARSH,                 is_tamable = false, is_achievement = true,  quest_id = false }, -- Coilfang Emissary
 [18682] = { world_id = ZN.OUTLAND,                  map_name = ZN.ZANGARMARSH,                 is_tamable = false, is_achievement = true,  quest_id = false }, -- Bog Lurker
-[18683] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = true,  quest_id = false }, -- Voidhunter Yar
-[18684] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Bro'Gaz the Clanless
+[18683] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND_OUTLAND,                     is_tamable = false, is_achievement = true,  quest_id = false }, -- Voidhunter Yar
+[18684] = { world_id = ZN.OUTLAND,                  map_name = ZN.NAGRAND_OUTLAND,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Bro'Gaz the Clanless
 [18685] = { world_id = ZN.OUTLAND,                  map_name = ZN.TEROKKAR_FOREST,             is_tamable = false, is_achievement = true,  quest_id = false }, -- Okrek
 [18686] = { world_id = ZN.OUTLAND,                  map_name = ZN.TEROKKAR_FOREST,             is_tamable = false, is_achievement = true,  quest_id = false }, -- Doomsayer Jurim
 [18689] = { world_id = ZN.OUTLAND,                  map_name = ZN.TEROKKAR_FOREST,             is_tamable = false, is_achievement = true,  quest_id = false }, -- Crippler
 [18690] = { world_id = ZN.OUTLAND,                  map_name = ZN.BLADES_EDGE_MOUNTAINS,       is_tamable = false, is_achievement = true,  quest_id = false }, -- Morcrush
 [18692] = { world_id = ZN.OUTLAND,                  map_name = ZN.BLADES_EDGE_MOUNTAINS,       is_tamable = false, is_achievement = true,  quest_id = false }, -- Hemathion
 [18693] = { world_id = ZN.OUTLAND,                  map_name = ZN.BLADES_EDGE_MOUNTAINS,       is_tamable = false, is_achievement = true,  quest_id = false }, -- Speaker Mar'grom
-[18694] = { world_id = ZN.OUTLAND,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = true,  quest_id = false }, -- Collidus the Warp-Watcher
-[18695] = { world_id = ZN.OUTLAND,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = true,  quest_id = false }, -- Ambassador Jerrikar
-[18696] = { world_id = ZN.OUTLAND,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = true,  quest_id = false }, -- Kraator
+[18694] = { world_id = ZN.OUTLAND,                  map_name = ZN.SHADOWMOON_VALLEY_OUTLAND,           is_tamable = false, is_achievement = true,  quest_id = false }, -- Collidus the Warp-Watcher
+[18695] = { world_id = ZN.OUTLAND,                  map_name = ZN.SHADOWMOON_VALLEY_OUTLAND,           is_tamable = false, is_achievement = true,  quest_id = false }, -- Ambassador Jerrikar
+[18696] = { world_id = ZN.OUTLAND,                  map_name = ZN.SHADOWMOON_VALLEY_OUTLAND,           is_tamable = false, is_achievement = true,  quest_id = false }, -- Kraator
 [18697] = { world_id = ZN.OUTLAND,                  map_name = ZN.NETHERSTORM,                 is_tamable = false, is_achievement = true,  quest_id = false }, -- Chief Engineer Lorthander
 [18698] = { world_id = ZN.OUTLAND,                  map_name = ZN.NETHERSTORM,                 is_tamable = false, is_achievement = true,  quest_id = false }, -- Ever-Core the Punisher
 [20932] = { world_id = ZN.OUTLAND,                  map_name = ZN.NETHERSTORM,                 is_tamable = true,  is_achievement = true,  quest_id = false }, -- Nuramoc
@@ -771,10 +771,10 @@ local NPC_DATA = {
 [72193] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false, is_achievement = true,  quest_id = false }, -- Karkanos
 [72245] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false, is_achievement = true,  quest_id = false }, -- Zesqua
 [72294] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 33014 }, -- Cindermaw
-[72362] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 33039 }, -- Ku'targ the Voidseer
+[72362] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 33039 }, -- Ku'targ the Voidseer
 [72364] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 33512 }, -- Gorg'ak the Lava Guzzler
-[72537] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 33055 }, -- Leaf-Reader Kurri
-[72606] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = true,  is_achievement = false, quest_id = 34068 }, -- Rockhoof
+[72537] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 33055 }, -- Leaf-Reader Kurri
+[72606] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = true,  is_achievement = false, quest_id = 34068 }, -- Rockhoof
 [72769] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false, is_achievement = true,  quest_id = false }, -- Spirit of Jadefire
 [72775] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false, is_achievement = true,  quest_id = false }, -- Bufo
 [72808] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = true,  is_achievement = true,  quest_id = false }, -- Tsavo'ka
@@ -802,21 +802,21 @@ local NPC_DATA = {
 [73666] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false, is_achievement = true,  quest_id = false }, -- Archiereus of Flame
 [73704] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false, is_achievement = true,  quest_id = false }, -- Stinkbraid
 [73854] = { world_id = ZN.PANDARIA,                 map_name = ZN.TIMELESS_ISLE,               is_tamable = false, is_achievement = true,  quest_id = false }, -- Cranegnasher
-[74206] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = true,  is_achievement = false, quest_id = 33043 }, -- Killmaw
+[74206] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = true,  is_achievement = false, quest_id = 33043 }, -- Killmaw
 [74613] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 33843 }, -- Broodmother Reeg'ak
 [74971] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 33504 }, -- Firefury Giant
-[75071] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 33642 }, -- Mother Om'ra
-[75434] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 33038 }, -- Windfang Matriarch
-[75435] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 33389 }, -- Yggdrel
-[75482] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = true,  is_achievement = false, quest_id = 33640 }, -- Veloss
-[75492] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 33643 }, -- Venomshade
-[76380] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 33664 }, -- Gorum
+[75071] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 33642 }, -- Mother Om'ra
+[75434] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 33038 }, -- Windfang Matriarch
+[75435] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 33389 }, -- Yggdrel
+[75482] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = true,  is_achievement = false, quest_id = 33640 }, -- Veloss
+[75492] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 33643 }, -- Venomshade
+[76380] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 33664 }, -- Gorum
 [76473] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = true,  is_achievement = false, quest_id = 34726 }, -- Mother Araneae
 [76914] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = true,  is_achievement = false, quest_id = 34131 }, -- Coldtusk
 [76918] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 33938 }, -- Primalist Mur'og
-[77085] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 33064 }, -- Dark Emanation
-[77140] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = true,  is_achievement = false, quest_id = 33061 }, -- Amaukwa
-[77310] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35906 }, -- Mad "King" Sporeon
+[77085] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 33064 }, -- Dark Emanation
+[77140] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = true,  is_achievement = false, quest_id = 33061 }, -- Amaukwa
+[77310] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35906 }, -- Mad "King" Sporeon
 [77513] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = true,  is_achievement = false, quest_id = 34129 }, -- Coldstomp the Griever
 [77519] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = true,  is_achievement = false, quest_id = false }, -- Giantbane
 [77526] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 34132 }, -- Scout Goreseeker
@@ -841,7 +841,7 @@ local NPC_DATA = {
 [78144] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = false }, -- Giantslayer Kimla
 [78150] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = false }, -- Beastcarver Saramor
 [78151] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 34130 }, -- Huntmaster Kuang
-[78161] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 34862 }, -- Hyperious
+[78161] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 34862 }, -- Hyperious
 [78169] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = false }, -- Cloudspeaker Daber
 [78260] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 37412 }, -- King Slime
 [78265] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 34361 }, -- The Bone Crawler
@@ -853,27 +853,27 @@ local NPC_DATA = {
 [78715] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = false, quest_id = 35219 }, -- Sikthiss, Maiden of Slaughter
 [78867] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 34497 }, -- Breathless
 [78872] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = true,  is_achievement = false, quest_id = 34498 }, -- Klikixx
-[79024] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 34645 }, -- Warmaster Blugthol
+[79024] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 34645 }, -- Warmaster Blugthol
 [79104] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 34522 }, -- Ug'lok the Frozen
 [79145] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 34559 }, -- Yaga the Scarred
 [79334] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = true,  is_achievement = false, quest_id = 34859 }, -- No'losh
 [79485] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = false, quest_id = 34668 }, -- Talonpriest Zorkra
-[79524] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35558 }, -- Hypnocroak
+[79524] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35558 }, -- Hypnocroak
 [79543] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = false, quest_id = 34671 }, -- Shirzir
 [79629] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 35910 }, -- Stomper Kreego
-[79686] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = false }, -- Silverleaf Ancient
-[79692] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = false }, -- Silverleaf Ancient
-[79693] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = false }, -- Silverleaf Ancient
-[79725] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 34727 }, -- Captain Ironbeard
+[79686] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = false }, -- Silverleaf Ancient
+[79692] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = false }, -- Silverleaf Ancient
+[79693] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = false }, -- Silverleaf Ancient
+[79725] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 34727 }, -- Captain Ironbeard
 [79938] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 36478 }, -- Shadowbark
-[80057] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 36128 }, -- Soulfang
-[80122] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = 34725 }, -- Gaz'orda
+[80057] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 36128 }, -- Soulfang
+[80122] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = 34725 }, -- Gaz'orda
 [80190] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 34825 }, -- Gruuk
 [80204] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = false, quest_id = 35018 }, -- Felbark
 [80235] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 34839 }, -- Gurun
 [80242] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = true,  is_achievement = false, quest_id = 34843 }, -- Chillfang
 [80312] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 34865 }, -- Grutush the Pillager
-[80370] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = 37408 }, -- Lernaea
+[80370] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = 37408 }, -- Lernaea
 [80371] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 37405 }, -- Typhon
 [80372] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = true,  is_achievement = false, quest_id = 37406 }, -- Echidna
 [80398] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = true,  is_achievement = false, quest_id = 37407 }, -- Keravnos
@@ -883,67 +883,67 @@ local NPC_DATA = {
 [80725] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 36394 }, -- Sulfurious
 [80868] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 36204 }, -- Glut
 [81038] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 36391 }, -- Gelgor of the Blue Flame
-[81406] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35281 }, -- Bahameye
-[81639] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 33383 }, -- Brambleking Fili
+[81406] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35281 }, -- Bahameye
+[81639] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 33383 }, -- Brambleking Fili
 [82050] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = true,  is_achievement = false, quest_id = false }, -- Varasha
 [82058] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true,  quest_id = 37370 }, -- Depthroot
 [82085] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 35335 }, -- Bashiok
-[82207] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35725 }, -- Faebright
+[82207] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35725 }, -- Faebright
 [82247] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 36129 }, -- Nas Dunberlin
-[82268] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35448 }, -- Darkmaster Go'vid
+[82268] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35448 }, -- Darkmaster Go'vid
 [82311] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 35503 }, -- Char the Burning
-[82326] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35731 }, -- Ba'ruun
-[82362] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35523 }, -- Morva Soultwister
-[82374] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35553 }, -- Rai'vosh
-[82411] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35555 }, -- Darktalon
-[82415] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35732 }, -- Shinri
-[82486] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35623 }, -- Explorer Nozzand
+[82326] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35731 }, -- Ba'ruun
+[82362] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35523 }, -- Morva Soultwister
+[82374] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35553 }, -- Rai'vosh
+[82411] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35555 }, -- Darktalon
+[82415] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35732 }, -- Shinri
+[82486] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35623 }, -- Explorer Nozzand
 [82536] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37388 }, -- Gorivax
 [82614] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37387 }, -- Moltnoma
 [82616] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = true,  is_achievement = false, quest_id = 37386 }, -- Jabberjaw
 [82617] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = true,  is_achievement = false, quest_id = 37385 }, -- Slogtusk the Corpse-Eater
 [82618] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37384 }, -- Tor'goroth
 [82620] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37383 }, -- Son of Goramal
-[82676] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35688 }, -- Enavra
-[82742] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35688 }, -- Enavra
-[82755] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35712 }, -- Redclaw the Feral
-[82758] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = 35714 }, -- Greatfeather
-[82764] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35715 }, -- Gar'lua
-[82778] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = 35717 }, -- Gnarlhoof the Rabid
-[82826] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35735 }, -- Berserk T-300 Series Mark II
+[82676] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35688 }, -- Enavra
+[82742] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35688 }, -- Enavra
+[82755] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35712 }, -- Redclaw the Feral
+[82758] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = 35714 }, -- Greatfeather
+[82764] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35715 }, -- Gar'lua
+[82778] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = 35717 }, -- Gnarlhoof the Rabid
+[82826] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35735 }, -- Berserk T-300 Series Mark II
 [82876] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- Grand Marshal Tremblade
 [82877] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- High Warlord Volrath
 [82878] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- Marshal Gabriel
 [82880] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- Marshal Karsh Stormforge
 [82882] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- General Aevd
 [82883] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- Warlord Noktyn
-[82899] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35778 }, -- Ancient Blademaster
-[82912] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = 35784 }, -- Grizzlemaw
+[82899] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35778 }, -- Ancient Blademaster
+[82912] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = 35784 }, -- Grizzlemaw
 [82920] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37345 }, -- Lord Korinak
 [82922] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37343 }, -- Xothear, the Destroyer
 [82930] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37347 }, -- Shadowflame Terrorwalker
 [82942] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37346 }, -- Lady Demlash
-[82975] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35836 }, -- Fangler
+[82975] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35836 }, -- Fangler
 [82988] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37348 }, -- Kurlosh Doomfang
 [82992] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37341 }, -- Felfire Consort
 [82998] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37349 }, -- Matron of Sin
 [83008] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37312 }, -- Haakun the All-Consuming
 [83019] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37340 }, -- Gug'tol
-[83385] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 35847 }, -- Voidseer Kalurg
-[83401] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35865 }, -- Netherspawn
-[83409] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35875 }, -- Ophiis
-[83428] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35877 }, -- Windcaller Korast
-[83483] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = 35893 }, -- Flinthide
-[83509] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35898 }, -- Gorepetal
+[83385] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 35847 }, -- Voidseer Kalurg
+[83401] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35865 }, -- Netherspawn
+[83409] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35875 }, -- Ophiis
+[83428] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35877 }, -- Windcaller Korast
+[83483] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = 35893 }, -- Flinthide
+[83509] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35898 }, -- Gorepetal
 [83522] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = true,  is_achievement = false, quest_id = 35908 }, -- Hive Queen Skrikka
-[83526] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35900 }, -- Ru'klaa
-[83542] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35912 }, -- Sean Whitesea
-[83553] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = true,  is_achievement = false, quest_id = 35909 }, -- Insha'tar
-[83591] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = 35920 }, -- Tura'aka
-[83603] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35923 }, -- Hunter Blacktooth
-[83634] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35931 }, -- Scout Pokhar
-[83643] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35932 }, -- Malroc Stonesunder
-[83680] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 35943 }, -- Outrider Duretha
+[83526] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35900 }, -- Ru'klaa
+[83542] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35912 }, -- Sean Whitesea
+[83553] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = true,  is_achievement = false, quest_id = 35909 }, -- Insha'tar
+[83591] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = 35920 }, -- Tura'aka
+[83603] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35923 }, -- Hunter Blacktooth
+[83634] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35931 }, -- Scout Pokhar
+[83643] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35932 }, -- Malroc Stonesunder
+[83680] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 35943 }, -- Outrider Duretha
 [83683] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = true,  quest_id = false }, -- Mandragoraster
 [83691] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = true,  quest_id = false }, -- Panthora
 [83713] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = true,  quest_id = false }, -- Titarus
@@ -951,7 +951,7 @@ local NPC_DATA = {
 [83990] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 37394 }, -- Solar Magnifier
 [84110] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = true,  quest_id = false }, -- Korthall Soulgorger
 [84196] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- Web-wrapped Soldier
-[84263] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 36159 }, -- Graveltooth
+[84263] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 36159 }, -- Graveltooth
 [84374] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37404 }, -- Kaga the Ironbender
 [84376] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37403 }, -- Earthshaker Holar
 [84378] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37525 }, -- Ak'ox the Slaughterer
@@ -959,7 +959,7 @@ local NPC_DATA = {
 [84406] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 36178 }, -- Mandrakor
 [84417] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 36396 }, -- Mutafen
 [84431] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 36186 }, -- Greldrok the Cunning
-[84435] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 36229 }, -- Mr. Pinchy Sr.
+[84435] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 36229 }, -- Mr. Pinchy Sr.
 [84465] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- Leaping Gorger
 [84746] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- Captured Gor'vosh Stoneshaper
 [84775] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 36254 }, -- Tesska the Broken
@@ -977,31 +977,31 @@ local NPC_DATA = {
 [84890] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 36297 }, -- Festerbloom
 [84893] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = true,  is_achievement = true,  quest_id = false }, -- Goregore
 [84904] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = true,  quest_id = false }, -- Oraggro
-[84911] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 37351 }, -- Demidos
+[84911] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 37351 }, -- Demidos
 [84912] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = true,  is_achievement = false, quest_id = 36298 }, -- Sunderthorn
-[84925] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 37352 }, -- Quartermaster Hershak
+[84925] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 37352 }, -- Quartermaster Hershak
 [84951] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 36305 }, -- Gobblefin
 [84955] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = true,  is_achievement = false, quest_id = 36306 }, -- Jiasska the Sporegorger
-[85001] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 37353 }, -- Master Sergeant Milgra
+[85001] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 37353 }, -- Master Sergeant Milgra
 [85026] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 37358 }, -- Soul-Twister Torek
-[85029] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 37354 }, -- Shadowspeaker Niir
+[85029] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 37354 }, -- Shadowspeaker Niir
 [85036] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 37360 }, -- Formless Nightmare
 [85037] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 37361 }, -- Kenos the Unraveler
 [85078] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 37359 }, -- Voidreaver Urnae
-[85121] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 37355 }, -- Lady Temptessa
+[85121] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 37355 }, -- Lady Temptessa
 [85250] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 36387 }, -- Fossilwood the Petrified
 [85264] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 36393 }, -- Rolkor
-[85451] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 37357 }, -- Malgosh Shadowkeeper
+[85451] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 37357 }, -- Malgosh Shadowkeeper
 [85504] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 36470 }, -- Rotcap
 [85520] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 36472 }, -- Swarmleaf
-[85555] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 37409 }, -- Nagidna
-[85568] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 37410 }, -- Avalanche
+[85555] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 37409 }, -- Nagidna
+[85568] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 37410 }, -- Avalanche
 [85572] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = false, quest_id = 36919 }, -- Grrbrrgle
 [85763] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- Cursed Ravager
 [85766] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- Cursed Sharptalon
 [85767] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = false, quest_id = false }, -- Cursed Harbinger
 [85771] = { world_id = ZN.DRAENOR,                  map_name = ZN.ASHRAN,                      is_tamable = false, is_achievement = true,  quest_id = false }, -- Elder Darkweaver Kath
-[85837] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 37411 }, -- Slivermaw
+[85837] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 37411 }, -- Slivermaw
 [85907] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = true,  is_achievement = false, quest_id = 36597 }, -- Berthora
 [85970] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = true,  is_achievement = false, quest_id = 36600 }, -- Riptar
 [86137] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = false, quest_id = 36656 }, -- Sunclaw
@@ -1021,24 +1021,24 @@ local NPC_DATA = {
 [86579] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true,  quest_id = 37368 }, -- Blademaster Ro'gor
 [86582] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true,  quest_id = 37364 }, -- Morgo Kain
 [86621] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = true,  quest_id = false }, -- Morphed Sentient
-[86689] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY,           is_tamable = false, is_achievement = false, quest_id = 36880 }, -- Sneevel
+[86689] = { world_id = ZN.DRAENOR,                  map_name = ZN.SHADOWMOON_VALLEY_DRAENOR,           is_tamable = false, is_achievement = false, quest_id = 36880 }, -- Sneevel
 [86724] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 36887 }, -- Hermit Palefur
-[86729] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Direhoof
-[86732] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Bergruu
-[86743] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Dekorhan
-[86750] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Thek'talon
-[86771] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Gagrog the Brutal
-[86774] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Aogexon
-[86835] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Xelganak
-[86959] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = true,  quest_id = 37399 }, -- Karosh Blackwind
+[86729] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Direhoof
+[86732] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Bergruu
+[86743] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Dekorhan
+[86750] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Thek'talon
+[86771] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Gagrog the Brutal
+[86774] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Aogexon
+[86835] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Xelganak
+[86959] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = true,  quest_id = 37399 }, -- Karosh Blackwind
 [86978] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = false, quest_id = 36943 }, -- Gaze
 [87019] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = true,  quest_id = 37390 }, -- Gluttonous Giant
 [87026] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = true,  quest_id = 37391 }, -- Mecha Plunderer
 [87027] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = true,  quest_id = 37392 }, -- Shadow Hulk
 [87029] = { world_id = ZN.DRAENOR,                  map_name = ZN.SPIRES_OF_ARAK,              is_tamable = false, is_achievement = true,  quest_id = 37393 }, -- Giga Sentinel
-[87234] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = true,  quest_id = 37400 }, -- Brutag Grimblade
-[87239] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = true,  quest_id = 37473 }, -- Krahl Deadeye
-[87344] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = true,  quest_id = 37472 }, -- Gortag Steelgrip
+[87234] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = true,  quest_id = 37400 }, -- Brutag Grimblade
+[87239] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = true,  quest_id = 37473 }, -- Krahl Deadeye
+[87344] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = true,  quest_id = 37472 }, -- Gortag Steelgrip
 [87348] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37382 }, -- Hoarfrost
 [87351] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37381 }, -- Mother of Goren
 [87352] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37380 }, -- Gibblette the Cowardly
@@ -1048,20 +1048,20 @@ local NPC_DATA = {
 [87597] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37339 }, -- Bombardier Gu'gok
 [87600] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37556 }, -- Jaluk the Pacifist
 [87622] = { world_id = ZN.DRAENOR,                  map_name = ZN.FROSTFIRE_RIDGE,             is_tamable = false, is_achievement = false, quest_id = 37402 }, -- Ogom the Mangler
-[87647] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Aogexon
-[87660] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Dekorhan
-[87661] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Bergruu
-[87666] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Mu'gra
+[87647] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Aogexon
+[87660] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Dekorhan
+[87661] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Bergruu
+[87666] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Mu'gra
 [87668] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37344 }, -- Orumo the Observer
-[87788] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = true,  quest_id = 37395 }, -- Durg Spinecrusher
-[87837] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = true,  quest_id = 37396 }, -- Bonebreaker
-[87846] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = true,  quest_id = 37397 }, -- Pit Slayer
+[87788] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = true,  quest_id = 37395 }, -- Durg Spinecrusher
+[87837] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = true,  quest_id = 37396 }, -- Bonebreaker
+[87846] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = true,  quest_id = 37397 }, -- Pit Slayer
 [88043] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37338 }, -- Avatar of Socrethar
 [88071] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37337 }, -- Strategist Ankor
 [88072] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Archmagus Tekar
 [88083] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = false, quest_id = false }, -- Soulbinder Naylana
-[88208] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 37637 }, -- Pit Beast
-[88210] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = true,  quest_id = 37398 }, -- Krud the Eviscerator
+[88208] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 37637 }, -- Pit Beast
+[88210] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = true,  quest_id = 37398 }, -- Krud the Eviscerator
 [88436] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37350 }, -- Vigilant Paarthos
 [88494] = { world_id = ZN.DRAENOR,                  map_name = ZN.TALADOR,                     is_tamable = false, is_achievement = true,  quest_id = 37342 }, -- Legion Vanguard
 [88580] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true,  quest_id = 37373 }, -- Firestarter Grash
@@ -1069,7 +1069,7 @@ local NPC_DATA = {
 [88583] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true,  quest_id = 37375 }, -- Grove Warden Yal
 [88586] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = true,  is_achievement = true,  quest_id = 37376 }, -- Mogamago
 [88672] = { world_id = ZN.DRAENOR,                  map_name = ZN.GORGROND,                    is_tamable = false, is_achievement = true,  quest_id = 37377 }, -- Hunter Bal'ra
-[88951] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Vileclaw
+[88951] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = true,  is_achievement = false, quest_id = false }, -- Vileclaw
 [89675] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true,  quest_id = 38749 }, -- Commander Org'mok
 [90024] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true,  quest_id = 37953 }, -- Sergeant Mor'grak
 [90094] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true,  quest_id = 39046 }, -- Harbormaster Korak
@@ -1138,9 +1138,9 @@ local NPC_DATA = {
 [95056] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = true,  quest_id = 39289 }, -- Doomroller
 [96235] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = false, quest_id = false }, -- Xemirkol
 [96323] = { world_id = ZN.DRAENOR,                  map_name = _G.GARRISON_LOCATION_TOOLTIP,    is_tamable = false, is_achievement = false, quest_id = 39617 }, -- Arachnis
-[98198] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 40075 }, -- Rukdug
-[98199] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 40073 }, -- Pugg
-[98200] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND,                     is_tamable = false, is_achievement = false, quest_id = 40074 }, -- Guk
+[98198] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 40075 }, -- Rukdug
+[98199] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 40073 }, -- Pugg
+[98200] = { world_id = ZN.DRAENOR,                  map_name = ZN.NAGRAND_DRAENOR,                     is_tamable = false, is_achievement = false, quest_id = 40074 }, -- Guk
 [98283] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = false, quest_id = 40105 }, -- Drakum
 [98284] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = false, quest_id = 40106 }, -- Gondar
 [98285] = { world_id = ZN.DRAENOR,                  map_name = ZN.TANAAN_JUNGLE,               is_tamable = false, is_achievement = false, quest_id = 40104 }, -- Smashum Grabb
@@ -1221,15 +1221,6 @@ do
 	end
 
 
-	local CONTINENT_NAMES = {
-		"KALIMDOR",
-		"EASTERN_KINGDOMS",
-		"OUTLAND",
-		"NORTHREND",
-		"THE_MAELSTROM",
-		"PANDARIA",
-		"DRAENOR",
-	}
 
 
 	function private.DumpNPCData()
