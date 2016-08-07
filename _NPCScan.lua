@@ -221,6 +221,17 @@ function private.Print(message, color)
 	_G.DEFAULT_CHAT_FRAME:AddMessage(L.PRINT_FORMAT:format(private.CharacterOptions.PrintTime and _G.date(_G.CHAT_TIMESTAMP_FORMAT or L.TIME_FORMAT) or "", message), color.r, color.g, color.b)
 end
 
+local function IsNPCQuestComplete(npc_id)
+	local quest_id = private.NPC_ID_TO_QUEST_ID[npc_id]
+
+	if quest_id then
+		return _G.IsQuestFlaggedCompleted(quest_id)
+	else
+		return false
+	end
+end
+private.IsNPCQuestComplete = IsNPCQuestComplete
+
 private.ScanIDs = {} -- [ NpcID ] = Number of concurrent scans for this ID
 
 -- Begins searching for an NPC.
@@ -389,7 +400,7 @@ local function AchievementActivate(achievement)
 	achievement.Active = true
 
 	for criteria_id, npc_id in pairs(achievement.Criteria) do
-		if not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] and not private.NPCQuestIsComplete(npc_id) then
+		if not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] and not IsNPCQuestComplete(npc_id) then
 			AchievementNPCActivate(achievement, npc_id, criteria_id)
 		end
 	end
@@ -416,21 +427,6 @@ end
 function private.AchievementNPCIsActive(achievement, npc_id)
 	return achievement.NPCsActive[npc_id] ~= nil
 end
-
-
--- Checks to see if any associated kill quests have been complted
--- @param NPC Id of mob .
--- @return True if the quest has been completed.
-function private.NPCQuestIsComplete(npc_id)
-	local quest_id = private.NPC_ID_TO_QUEST_ID[npc_id]
-
-	if quest_id then
-		return IsQuestFlaggedCompleted(quest_id)
-	else
-		return false
-	end
-end
-
 
 -- Adds a kill-related achievement to track.
 -- @param achievement_id Numeric ID of achievement.
@@ -911,9 +907,9 @@ do
 			end
 		end
 
-		--Removes any one time kill / daily kill rares that have been completed
+		-- Removes any one time kill / daily kill rares that have been completed
 		for npc_id, quest_id in pairs(private.NPC_ID_TO_QUEST_ID) do
-			if private.NPCQuestIsComplete(npc_id) then
+			if IsNPCQuestComplete(npc_id) then
 				NPCDeactivate(npc_id)
 			else
 				active_tracking_quest_mobs[npc_id] = quest_id
@@ -976,7 +972,7 @@ end
 function EventFrame:LOOT_CLOSED(event_name)
 	--Removes any one time kill / daily kill rares that have been completed
 	for npc_id, quest_id in pairs(active_tracking_quest_mobs) do
-		if private.NPCQuestIsComplete(npc_id) then
+		if IsNPCQuestComplete(npc_id) then
 			NPCDeactivate(npc_id)
 			active_tracking_quest_mobs[npc_id] = nil
 		end

@@ -648,7 +648,7 @@ do
 				local map_name = mapNames[npcID]
 
 				local new_row = panel.table:AddRow(npcID,
-					private.NPCQuestIsComplete(npcID) and TEXTURE_READY or "",
+					private.IsNPCQuestComplete(npcID) and TEXTURE_READY or "",
 					npcName,
 					npcID,
 					worldNames[npcID] or "",
@@ -687,7 +687,7 @@ do
 			local map_name = map_names[npc_id]
 
 			local new_row = panel.table:AddRow(npc_id,
-				private.NPCQuestIsComplete(npc_id) and TEXTURE_READY or "",
+				private.IsNPCQuestComplete(npc_id) and TEXTURE_READY or "",
 				npc_name,
 				npc_id,
 				world_ids[npc_id] or "",
@@ -705,7 +705,7 @@ do
 					local npc_name, _, is_completed = _G.GetAchievementCriteriaInfoByID(tab.identifier, criteria_id)
 					local map_name = private.NPC_ID_TO_MAP_NAME[npc_id]
 					local new_row = panel.table:AddRow(npc_id,
-						private.NPCQuestIsComplete(npc_id) and TEXTURE_READY or "",
+						private.IsNPCQuestComplete(npc_id) and TEXTURE_READY or "",
 						npc_name,
 						npc_id,
 						is_completed and TEXTURE_READY or "",
