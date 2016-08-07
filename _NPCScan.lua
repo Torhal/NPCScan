@@ -325,7 +325,6 @@ function private.NPCAdd(npc_id, npc_name, world_id)
 
 	private.CUSTOM_NPC_ID_TO_NAME[npc_id] = npc_name
 	private.CUSTOM_NPC_ID_TO_WORLD_NAME[npc_id] = world_id
-	private.CUSTOM_NPC_NAME_TO_ID[npc_name] = npc_id
 
 	if not NPCActivate(npc_id, world_id) then
 		-- Didn't activate; Just add row
@@ -352,7 +351,6 @@ function private.NPCRemove(npc_id)
 	local npc_name = private.CUSTOM_NPC_ID_TO_NAME[npc_id]
 	private.CUSTOM_NPC_ID_TO_NAME[npc_id] = nil
 	private.CUSTOM_NPC_ID_TO_WORLD_NAME[npc_id] = nil
-	private.CUSTOM_NPC_NAME_TO_ID[npc_name] = nil
 
 	if not NPCDeactivate(npc_id) then
 		private.Config.Search.UpdateTab("NPC")
@@ -696,7 +694,6 @@ function private.Synchronize()
 	for npc_id, npc_name in pairs(private.GlobalOptions.NPCs) do
 		private.CUSTOM_NPC_ID_TO_NAME[npc_id] = npc_name
 		private.CUSTOM_NPC_ID_TO_WORLD_NAME[npc_id] = private.GlobalOptions.NPCWorldIDs[npc_id]
-		private.CUSTOM_NPC_NAME_TO_ID[npc_name] = npc_id
 	end
 end
 

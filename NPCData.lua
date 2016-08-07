@@ -785,7 +785,6 @@ private.UNTAMABLE_ID_TO_WORLD_NAME = {}
 
 private.CUSTOM_NPC_ID_TO_NAME = {}
 private.CUSTOM_NPC_ID_TO_WORLD_NAME = {}
-private.CUSTOM_NPC_NAME_TO_ID = {}
 
 
 for npc_id, data in pairs(NPC_DATA) do
