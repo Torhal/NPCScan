@@ -1160,7 +1160,6 @@ private.TAMABLE_ID_TO_WORLD_NAME = {}
 private.TAMABLE_NON_ACHIEVMENT_LIST = {}
 
 
-private.UNTAMABLE_ID_TO_MAP_NAME = {}
 private.UNTAMABLE_ID_TO_NAME = {}
 private.UNTAMABLE_ID_TO_WORLD_NAME = {}
 
@@ -1188,7 +1187,6 @@ for npc_id, data in pairs(NPC_DATA) do
 		end
 
 	elseif not data.is_achievement then
-		private.UNTAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
 		private.UNTAMABLE_ID_TO_NAME[npc_id] = L.NPCs[tostring(npc_id)]
 		private.UNTAMABLE_ID_TO_WORLD_NAME[npc_id] = data.world_id
 	end
