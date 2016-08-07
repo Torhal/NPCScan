@@ -232,6 +232,9 @@ local function IsNPCQuestComplete(npc_id)
 end
 private.IsNPCQuestComplete = IsNPCQuestComplete
 
+-- TODO: Fix this abomination. Necessary because _NPCScan.Overlay looks for _NPCScan.NPCQuestIsComplete
+private.NPCQuestIsComplete = IsNPCQuestComplete
+
 private.ScanIDs = {} -- [ NpcID ] = Number of concurrent scans for this ID
 
 -- Begins searching for an NPC.
