@@ -1706,4 +1706,3 @@ local MapNPCs = {
 }
 
 private.MapNPCs = MapNPCs
-
