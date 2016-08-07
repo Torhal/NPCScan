@@ -5,6 +5,7 @@ local _G = getfenv(0)
 
 -- Functions
 local pairs = _G.pairs
+local tonumber = _G.tonumber
 local tostring = _G.tostring
 local type = _G.type
 
@@ -1209,79 +1210,105 @@ do
 	end
 
 
-	local function rpad(input, length)
-		return (" "):rep(length - #input)
+	local function NumericSortString(a, b)
+		local x, y = tonumber(a), tonumber(b)
+
+		if x and y then
+			return x < y
+		end
+
+		return a < b
 	end
 
-
-
-
-	function private.DumpNPCData()
+	function private.DumpNewTables()
 		if not private.TextDump then
 			return
 		end
+
+		local npcData = {}
+		local mapNPCs = {}
+		local npcIDs = {}
+		local mapIDs = {}
+		local mapIDRegistry = {}
+		local mapLabels = {}
+
+		for npcID, source in pairs(NPC_DATA) do
+			local zoneLabel = TableKeyFormat(source.map_name)
+			local mapID = private.ZONE_IDS[zoneLabel]
+
+			if mapID then
+				mapID = tostring(mapID)
+			else
+				mapID = ("%s_%s"):format(source.map_name, private.LOCALIZED_CONTINENT_IDS[source.world_id] or source.world_id)
+			end
+
+			mapLabels[mapID] = source.map_name
+
+			if not mapIDRegistry[mapID] then
+				mapIDRegistry[mapID] = true
+				mapIDs[#mapIDs + 1] = mapID
+			end
+
+			mapNPCs[mapID] = mapNPCs[mapID] or {}
+			mapNPCs[mapID][#mapNPCs[mapID] + 1] = npcID
+
+			if source.is_tamable or source.is_achievement or source.quest_id then
+				npcIDs[#npcIDs + 1] = npcID
+
+				npcData[npcID] = {
+					hasAchievement = source.is_achievement or nil,
+					isTamable = source.is_tamable or nil,
+					questID = source.quest_id or nil
+				}
+			end
+		end
+
+		table.sort(mapIDs, NumericSortString)
+
 		local output = private.TextDump
-		local data = NPC_DATA
-		local dump_data = {}
-		local longest_world = 0
-		local longest_map = 0
-		local longest_id = 0
-
-		for npc_id, data in pairs(NPC_DATA) do
-			local source = NPC_DATA[npc_id]
-			dump_data[npc_id] = {
-				world_id = ("ZN.%s"):format(TableKeyFormat(source.world_id)),
-				map_name = source.map_name and ("ZN.%s"):format(TableKeyFormat(source.map_name)) or tostring(nil),
-				is_tamable = source.is_tamable,
-				is_achievement = source.is_achievement,
-				quest_id = source.quest_id
-			}
-
-			if #dump_data[npc_id].world_id > longest_world then
-				longest_world = #dump_data[npc_id].world_id
-			end
-
-			if #dump_data[npc_id].map_name > longest_map then
-				longest_map = #dump_data[npc_id].map_name
-			end
-
-			local id_str = tostring(npc_id)
-			if #id_str > longest_id then
-				longest_id = #id_str
-			end
-		end
-
-		local npc_output = {}
-
-		for npc_id in pairs(dump_data) do
-			npc_output[#npc_output + 1] = npc_id
-		end
-		table.sort(npc_output)
-
 		output:Clear()
-		output:AddLine("local NPC_DATA = {")
+		output:AddLine("local MapNPCs = {")
 
-		for index = 1, #npc_output do
-			local npc_id = npc_output[index]
-			local info = dump_data[npc_id]
-			output:AddLine(("[%d]%s = { world_id = %s,%s map_name = %s,%s is_tamable = %s,%s is_achievement = %s,%s quest_id = %s%s }, -- %s"):format(
-				npc_id,
-				rpad(tostring(npc_id), longest_id),
-				tostring(info.world_id),
-				rpad(tostring(info.world_id), longest_world),
-				tostring(info.map_name),
-				rpad(tostring(info.map_name), longest_map),
-				tostring(info.is_tamable),
-				rpad(tostring(info.is_tamable), 5),
-				tostring(info.is_achievement),
-				rpad(tostring(info.is_achievement), 5),
-				tostring(info.quest_id),
-				rpad(tostring(info.quest_id), 5),
-				private.L.NPCs[tostring(npc_id)] or "**** NO LOCALIZATION ****")
-			)
+		for index = 1, #mapIDs do
+			local mapID = mapIDs[index]
+			table.sort(mapNPCs[mapID])
+
+			output:AddLine("        -------------------------------------------------------------------------------")
+			output:AddLine(("        -- %s"):format(mapLabels[mapID]))
+			output:AddLine("        -------------------------------------------------------------------------------")
+
+			output:AddLine(("        [%s] = {"):format(mapID))
+
+			for index = 1, #mapNPCs[mapID] do
+				local npcID = mapNPCs[mapID][index]
+				output:AddLine(("                [%s] = true, -- %s"):format(npcID, private.L.NPCs[tostring(npcID)] or "**** NO LOCALIZATION ****"))
+			end
+
+			output:AddLine("        },")
 		end
 
 		output:AddLine("}")
+		output:AddLine(" ")
+
+		table.sort(npcIDs)
+
+		output:AddLine("local NPCData = {")
+
+		for index = 1, #npcIDs do
+			local npcID = npcIDs[index]
+
+
+			local valueString = ""
+
+			for key, value in pairs(npcData[npcID]) do
+				valueString = ("%s %s = %s,"):format(valueString, tostring(key), tostring(value))
+			end
+
+			output:AddLine(("        [%s] = {%s }, -- %s"):format(tostring(npcID), valueString, private.L.NPCs[tostring(npcID)] or "**** NO LOCALIZATION ****"))
+		end
+
+		output:AddLine("}")
+
 		output:Display()
 	end
 end -- do-block
