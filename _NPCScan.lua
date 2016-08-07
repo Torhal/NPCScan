@@ -56,7 +56,6 @@ private.Updater:SetLooping("REPEAT")
 -------------------------------------------------------------------------------
 local DB_VERSION = 3
 local ISLE_OF_THUNDER_MAP_ID = 1064
-local DARKMOON_ISLAND_MAP_ID = 947
 local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
 local PLAYER_FACTION = _G.UnitFactionGroup("player")
 local ANTI_SPAM_DELAY = 300
