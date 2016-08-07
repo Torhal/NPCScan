@@ -50,7 +50,6 @@ private.Updater.UpdateRate = 0.5
 private.Updater:CreateAnimation("Animation"):SetDuration(private.Updater.UpdateRate)
 private.Updater:SetLooping("REPEAT")
 
-
 -------------------------------------------------------------------------------
 -- Constants.
 -------------------------------------------------------------------------------
@@ -74,7 +73,6 @@ private.CharacterOptions = {}
 local GlobalOptionsDefault = {
 	Version = DB_VERSION,
 	AlertSound = nil, -- Default sound
-	ChangeAlertShown = false, -- Has WoD changes alert been shown yet
 	NPCs = {
 		[50409] = private.L.NPCs["50409"], --"Mysterious Camel Figurine",
 		[50410] = private.L.NPCs["50410"], --"Mysterious Camel Figurine",
@@ -153,22 +151,6 @@ local active_tracking_quest_mobs = {}
 -------------------------------------------------------------------------------
 Dialog:Register("NPCSCAN_AUTOADD_WARNING", {
 	text = "You appear to be running _NPCScan.AutoAdd, which may prevent _NPCScan from working properly.\n\nIt is recommended that you disable _NPCScan.AutoAdd.",
-	text_justify_h = "left",
-	text_justify_v = "bottom",
-	buttons = {
-		{
-			text = _G.OKAY,
-		},
-	},
-	icon = [[Interface\DialogFrame\UI-Dialog-Icon-AlertNew]],
-	show_while_dead = true,
-	hide_on_escape = true,
-	width = 500,
-})
-
-
-Dialog:Register("NPCSCAN_WOD_CHANGES", {
-	text = L.WOD_CHANGES,
 	text_justify_h = "left",
 	text_justify_v = "bottom",
 	buttons = {
@@ -857,11 +839,6 @@ function EventFrame:PLAYER_LOGIN(event_name)
 	private.Synchronize()
 
 	self[event_name] = nil
-
-	if not private.GlobalOptions.ChangeAlertShown then
-		Dialog:Spawn("NPCSCAN_WOD_CHANGES")
-		private.GlobalOptions.ChangeAlertShown = true
-	end
 end
 
 
