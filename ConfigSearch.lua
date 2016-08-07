@@ -639,22 +639,22 @@ do
 	end
 
 
-	local function GeneralNPCUpdate(world_ids, npc_data)
+	local function GeneralNPCUpdate(worldNames, npcData)
 		local mapNames = private.NPC_ID_TO_MAP_NAME
 		UpdateButtonStates()
 
-		for npc_id, npc_name in pairs(npc_data) do
-			if not _G._NPCScanOptions.IgnoreList.NPCs[npc_id] then
-				local map_name = mapNames[npc_id]
+		for npcID, npcName in pairs(npcData) do
+			if not _G._NPCScanOptions.IgnoreList.NPCs[npcID] then
+				local map_name = mapNames[npcID]
 
-				local new_row = panel.table:AddRow(npc_id,
-					private.NPCQuestIsComplete(npc_id) and TEXTURE_READY or "",
-					npc_name,
-					npc_id,
-					world_ids[npc_id] or "",
+				local new_row = panel.table:AddRow(npcID,
+					private.NPCQuestIsComplete(npcID) and TEXTURE_READY or "",
+					npcName,
+					npcID,
+					worldNames[npcID] or "",
 					map_name or _G.UNKNOWN)
 
-				if not private.NPCIsActive(npc_id) then
+				if not private.NPCIsActive(npcID) then
 					new_row:SetAlpha(ALPHA_INACTIVE)
 				end
 			end
