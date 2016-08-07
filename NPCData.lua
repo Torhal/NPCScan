@@ -773,40 +773,33 @@ private.NPC_NAME_TO_ID = {}
 private.NPC_ID_TO_QUEST_ID = {}
 
 
-private.TAMABLE_ID_TO_MAP_NAME = {}
 private.TAMABLE_ID_TO_NAME = {}
-private.TAMABLE_ID_TO_WORLD_NAME = {}
 private.TAMABLE_NON_ACHIEVMENT_LIST = {}
 
 
 private.UNTAMABLE_ID_TO_NAME = {}
-private.UNTAMABLE_ID_TO_WORLD_NAME = {}
-
 
 private.CUSTOM_NPC_ID_TO_NAME = {}
 private.CUSTOM_NPC_ID_TO_WORLD_NAME = {}
 
 
-for npc_id, data in pairs(NPC_DATA) do
-	private.NPC_ID_TO_MAP_NAME[npc_id] = data.map_name
-	private.NPC_ID_TO_NAME[npc_id] = L.NPCs[tostring(npc_id)]
-	private.NPC_ID_TO_WORLD_NAME[npc_id] = data.world_id
-	private.NPC_NAME_TO_ID[L.NPCs[tostring(npc_id)]] = npc_id
+for npcID, data in pairs(NPCData) do
+	private.NPC_ID_TO_NAME[npcID] = L.NPCs[tostring(npcID)]
+	private.NPC_NAME_TO_ID[L.NPCs[tostring(npcID)]] = npcID
 
-	if data.quest_id then private.NPC_ID_TO_QUEST_ID[npc_id] = data.quest_id end
+	if data.questID then
+		private.NPC_ID_TO_QUEST_ID[npcID] = data.questID
+	end
 
-	if data.is_tamable then
-		private.TAMABLE_ID_TO_MAP_NAME[npc_id] = data.map_name
-		private.TAMABLE_ID_TO_NAME[npc_id] = L.NPCs[tostring(npc_id)]
-		private.TAMABLE_ID_TO_WORLD_NAME[npc_id] = data.world_id
-		--Builds a list of non achievement mobs for the Beast tab
-		if not data.is_achievement then
-			private.TAMABLE_NON_ACHIEVMENT_LIST[npc_id] = L.NPCs[tostring(npc_id)]
+	if data.isTamable then
+		private.TAMABLE_ID_TO_NAME[npcID] = L.NPCs[tostring(npcID)]
+
+		-- Builds a list of non achievement mobs for the Beast tab
+		if not data.hasAchievement then
+			private.TAMABLE_NON_ACHIEVMENT_LIST[npcID] = L.NPCs[tostring(npcID)]
 		end
-
-	elseif not data.is_achievement then
-		private.UNTAMABLE_ID_TO_NAME[npc_id] = L.NPCs[tostring(npc_id)]
-		private.UNTAMABLE_ID_TO_WORLD_NAME[npc_id] = data.world_id
+	elseif not data.hasAchievement then
+		private.UNTAMABLE_ID_TO_NAME[npcID] = L.NPCs[tostring(npcID)]
 	end
 end
 
