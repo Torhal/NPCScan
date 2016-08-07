@@ -983,14 +983,6 @@ function EventFrame:LOOT_CLOSED(event_name)
 end
 
 
-function EventFrame:ZONE_CHANGED_NEW_AREA(event_name)
-	self:UnregisterEvent(event_name)
-	self[event_name] = nil
-
-	private.Updater:SetScript("OnLoop", private.Updater.OnLoop)
-end
-
-
 do
 	local SUBCOMMAND_FUNCS = {
 		[L.CMD_ADD] = function(arguments)
@@ -1063,13 +1055,6 @@ else
 end
 
 
-if _G.GetZoneText() == "" then
-	EventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-else
-	EventFrame:ZONE_CHANGED_NEW_AREA("ZONE_CHANGED_NEW_AREA")
-end
-
-
 -------------------------------------------------------------------------------
 -- Nameplate scanning.
 -------------------------------------------------------------------------------
@@ -1123,9 +1108,7 @@ target_button:Hide()
 
 target_button:SetAttribute("type", "macro")
 target_button:SetAttribute("macrotext", private.macrotext)
-target_button:RegisterEvent("PLAYER_ENTERING_WORLD")
 target_button:RegisterEvent("PLAYER_REGEN_ENABLED")
-target_button:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 target_button:SetScript("OnEvent", function(self, event_name, ...)
 	if event_name == "PLAYER_REGEN_ENABLED" then
 		-- Only needs to trigger after combat if a delay was set
