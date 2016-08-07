@@ -74,7 +74,8 @@ Locales\Locale-zhCN.lua
 Locales\Locale-zhTW.lua
 
 Constants.lua
-MapNPCs.lua
+
+Data\MapNPCs.lua
 NPCData.lua
 
 _NPCScan.lua

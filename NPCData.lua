@@ -19,7 +19,6 @@ local table = _G.table
 -------------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
 local L = private.L
-local ZN = private.ZONE_NAMES
 
 local NPCData = {
 	[462] = { isTamable = true, }, -- Vultros
@@ -766,6 +765,8 @@ local NPCData = {
 	[98408] = { questID = 40107, }, -- Fel Overseer Mudlump
 }
 
+private.NPCData = NPCData
+
 private.NPC_ID_TO_MAP_NAME = {}
 private.NPC_ID_TO_NAME = {}
 private.NPC_ID_TO_WORLD_NAME = {}
@@ -783,26 +784,30 @@ private.CUSTOM_NPC_ID_TO_NAME = {}
 private.CUSTOM_NPC_ID_TO_WORLD_NAME = {}
 
 
-for npcID, data in pairs(NPCData) do
-	private.NPC_ID_TO_NAME[npcID] = L.NPCs[tostring(npcID)]
-	private.NPC_NAME_TO_ID[L.NPCs[tostring(npcID)]] = npcID
+for mapID, npcs in pairs(private.MapNPCs) do
+	for npcID in pairs(npcs) do
+		private.NPC_ID_TO_NAME[npcID] = L.NPCs[tostring(npcID)]
+		private.NPC_NAME_TO_ID[L.NPCs[tostring(npcID)]] = npcID
 
-	if data.questID then
-		private.NPC_ID_TO_QUEST_ID[npcID] = data.questID
-	end
+		local data = NPCData[npcID]
+		if data then
+			if data.questID then
+				private.NPC_ID_TO_QUEST_ID[npcID] = data.questID
+			end
 
-	if data.isTamable then
-		private.TAMABLE_ID_TO_NAME[npcID] = L.NPCs[tostring(npcID)]
+			if data.isTamable then
+				private.TAMABLE_ID_TO_NAME[npcID] = L.NPCs[tostring(npcID)]
 
-		-- Builds a list of non achievement mobs for the Beast tab
-		if not data.hasAchievement then
-			private.TAMABLE_NON_ACHIEVMENT_LIST[npcID] = L.NPCs[tostring(npcID)]
+				-- Builds a list of non achievement mobs for the Beast tab
+				if not data.hasAchievement then
+					private.TAMABLE_NON_ACHIEVMENT_LIST[npcID] = L.NPCs[tostring(npcID)]
+				end
+			elseif not data.hasAchievement then
+				private.UNTAMABLE_ID_TO_NAME[npcID] = L.NPCs[tostring(npcID)]
+			end
 		end
-	elseif not data.hasAchievement then
-		private.UNTAMABLE_ID_TO_NAME[npcID] = L.NPCs[tostring(npcID)]
 	end
 end
-
 
 --Update Database with Achievement Mobs info provided by the game.
 for achievementID, achievement in pairs(private.ACHIEVEMENTS) do
