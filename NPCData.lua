@@ -1194,23 +1194,18 @@ end
 
 
 --Update Database with Achievement Mobs info provided by the game.
-for achievement_id, achievement in pairs(private.ACHIEVEMENTS) do
-	for criteria_id, npc_id in pairs(achievement.Criteria) do
-
-	local npc_name = _G.GetAchievementCriteriaInfoByID(achievement_id, criteria_id)
-	private.NPC_ID_TO_NAME[npc_id] = npc_name
-	private.NPC_NAME_TO_ID[npc_name] = npc_id
+for achievementID, achievement in pairs(private.ACHIEVEMENTS) do
+	for criteriaID, npcID in pairs(achievement.Criteria) do
+		local npcName = _G.GetAchievementCriteriaInfoByID(achievementID, criteriaID)
+		private.NPC_ID_TO_NAME[npcID] = npcName
+		private.NPC_NAME_TO_ID[npcName] = npcID
 	end
 end
 
 
 do
 	local function TableKeyFormat(input)
-		if not input then
-			return ""
-		end
-
-		return input:upper():gsub(" ", "_"):gsub("'", ""):gsub(":", ""):gsub("-", "_"):gsub("%(", ""):gsub("%)", "")
+		return input and input:upper():gsub(" ", "_"):gsub("'", ""):gsub(":", ""):gsub("-", "_"):gsub("%(", ""):gsub("%)", "") or ""
 	end
 
 
