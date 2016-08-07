@@ -76,7 +76,7 @@ Locales\Locale-zhTW.lua
 Constants.lua
 
 Data\MapNPCs.lua
-NPCData.lua
+Data\NPCData.lua
 
 _NPCScan.lua
 TargetButton.lua
