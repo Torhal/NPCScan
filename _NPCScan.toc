@@ -62,6 +62,7 @@ Constants.lua
 Data\MapNPCs.lua
 Data\NPCData.lua
 
+Core.lua
 _NPCScan.lua
 TargetButton.lua
 MapOverlays.lua

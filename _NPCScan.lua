@@ -171,25 +171,6 @@ Toast:Register("_NPCScanAlertToast", function(toast, ...)
 	toast:SetIconTexture([[Interface\LFGFRAME\BattlenetWorking0]])
 end)
 
-
--------------------------------------------------------------------------------
--- Debugger.
--------------------------------------------------------------------------------
-local function CreateDebugFrame()
-	return _G.LibStub("LibTextDump-1.0"):New(("%s Debug Output"):format(FOLDER_NAME), 640, 480)
-end
-
-
-function private.Debug(...)
-	--@debug@
-	debugger = debugger or CreateDebugFrame()
-	debugger:AddLine(string.format(...))
-	local frame = _G.LibStub("LibTextDump-1.0").frames[debugger]
-	if frame:IsVisible() then debugger:Display() end
-	--@end-debug@
-end
-
-
 -------------------------------------------------------------------------------
 -- Helpers.
 -------------------------------------------------------------------------------
