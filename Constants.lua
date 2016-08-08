@@ -267,9 +267,3 @@ end -- do-block
 private.macrotext = "/cleartarget"
 private.MACRO_FORMAT = "%s\n/targetexact %s"
 private.MACRO_FORMAT_CUSTOM_MOB = "%s\n/target %s"
-
--- Mobs that appear in more that one zone
-private.MANUAL_PANDARIA_ADDITIONS = {
-	69768, -- Zandalari Warscout
-	69769, -- Zandalari Warbringer
-}

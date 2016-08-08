@@ -1132,16 +1132,6 @@ function private.GenerateTargetMacro(instanceID)
 		end
 	end
 
-	--Add Zandalari Warscout & Warbringer due to them appearing in multiple zones but in only one in the data file.
-	--Ignore if not in Pandaria or on the Timeless Isle
-	if continentID == private.CONTINENT_IDS.PANDARIA and mapID ~= private.ZONE_IDS.TIMELESS_ISLE then
-		for index = 1, #private.MANUAL_PANDARIA_ADDITIONS do
-			if last_vignette_id ~= private.MANUAL_PANDARIA_ADDITIONS[index] then
-				private.macrotext = private.MACRO_FORMAT:format(private.macrotext, private.NPC_ID_TO_NAME[private.MANUAL_PANDARIA_ADDITIONS[index]])
-			end
-		end
-	end
-
 	if instanceID then
 		private.macrotext = private.macrotext .. "\n/run _G._NPCScan.SetVignetteTarget()"
 	else

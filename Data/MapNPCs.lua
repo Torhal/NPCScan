@@ -1057,6 +1057,10 @@ local MapNPCs = {
 		[50808] = true, -- Urobi the Walker
 		[50823] = true, -- Mister Ferocious
 		[51078] = true, -- Ferdinand
+		[69768] = true, -- Zandalari Warscout
+		[69769] = true, -- Zandalari Warbringer
+		[69841] = true, -- Zandalari Warbringer
+		[69842] = true, -- Zandalari Warbringer
 	},
 	-------------------------------------------------------------------------------
 	-- Valley of the Four Winds
@@ -1083,6 +1087,10 @@ local MapNPCs = {
 		[50789] = true, -- Nessos the Oracle
 		[50817] = true, -- Ahone the Wanderer
 		[50831] = true, -- Scritch
+		[69768] = true, -- Zandalari Warscout
+		[69769] = true, -- Zandalari Warbringer
+		[69841] = true, -- Zandalari Warbringer
+		[69842] = true, -- Zandalari Warbringer
 		[70323] = true, -- Krakkanon
 	},
 	-------------------------------------------------------------------------------
@@ -1100,6 +1108,7 @@ local MapNPCs = {
 		[69768] = true, -- Zandalari Warscout
 		[69769] = true, -- Zandalari Warbringer
 		[69841] = true, -- Zandalari Warbringer
+		[69842] = true, -- Zandalari Warbringer
 	},
 	-------------------------------------------------------------------------------
 	-- Vale of Eternal Blossoms
@@ -1150,6 +1159,8 @@ local MapNPCs = {
 		[68320] = true, -- Ubunti the Shade
 		[68321] = true, -- Kar Warmaker
 		[68322] = true, -- Muerta
+		[69768] = true, -- Zandalari Warscout
+		[69769] = true, -- Zandalari Warbringer
 	},
 	-------------------------------------------------------------------------------
 	-- Dread Wastes
@@ -1163,6 +1174,9 @@ local MapNPCs = {
 		[50805] = true, -- Omnis Grinlok
 		[50821] = true, -- Ai-Li Skymirror
 		[50836] = true, -- Ik-Ik the Nimble
+		[69768] = true, -- Zandalari Warscout
+		[69769] = true, -- Zandalari Warbringer
+		[69841] = true, -- Zandalari Warbringer
 		[69842] = true, -- Zandalari Warbringer
 	},
 	-------------------------------------------------------------------------------
