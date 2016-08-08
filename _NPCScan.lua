@@ -728,22 +728,6 @@ do
 		end
 
 		local isTamable = private.TAMABLE_ID_TO_NAME[npcID] or false
-		if isTamable then
-			local currentZoneID = HereBeDragons:GetPlayerZone()
-			local tamableZoneName = private.TAMABLE_ID_TO_MAP_NAME[npcID]
-			local tamableZoneID = tamableZoneName and private.ZONE_IDS[private.ZONE_NAME_TO_LABEL[tamableZoneName]]
-
-			if not tamableZoneID == currentZoneID then
-				-- Suppress error message until the player stops resting
-				if _G.IsResting() then
-					return
-				end
-
-				local expected_zone_name = tamableZoneID and _G.GetMapNameByID(tamableZoneID) or _G.UNKNOWN
-				private.Print(L.FOUND_TAMABLE_WRONGZONE_FORMAT:format(npcName, _G.GetRealZoneText(), expected_zone_name or _G.UNKNOWN, tamableZoneID))
-				return
-			end
-		end
 
 		if private.AntiSpam(private.ANTI_SPAM_DELAY, npcName) then
 			local alertText = ("%s %s"):format(L[isTamable and "FOUND_TAMABLE_FORMAT" or "FOUND_FORMAT"]:format(npcName), _G.PARENS_TEMPLATE:format(sourceText))
