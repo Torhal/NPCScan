@@ -713,7 +713,9 @@ do
 	end
 
 	-- Validates found mobs before showing alerts.
-	function OnFound(npcID, npcName, sourceText)
+	function OnFound(npcID, unitToken, sourceText)
+		local npcName = _G.UnitName(unitToken)
+
 		if private.CharacterOptions.FlightSupress and _G.UnitOnTaxi("player") then
 			_G.SetMapToCurrentZone()
 			_G.PlaySound("TellMessage", "master")
@@ -1056,7 +1058,7 @@ function EventFrame:NAME_PLATE_UNIT_ADDED(eventName, nameplateUnitToken)
 
 	local unitID = UnitTokenToCreatureID(nameplateUnitToken)
 	if private.ScanIDs[unitID] and not _G._NPCScanOptions.IgnoreList.NPCs[unitID] then
-		OnFound(unitID, _G.UnitName(nameplateUnitToken), _G.UNIT_NAMEPLATES)
+		OnFound(unitID, nameplateUnitToken, _G.UNIT_NAMEPLATES)
 	end
 end
 
@@ -1071,7 +1073,7 @@ function EventFrame:UPDATE_MOUSEOVER_UNIT()
 	local mouseoverID = UnitTokenToCreatureID("mouseover")
 	local targetID = UnitTokenToCreatureID("target")
 	if mouseoverID ~= targetID and private.ScanIDs[mouseoverID] and not _G._NPCScanOptions.IgnoreList.NPCs[mouseoverID] then
-		OnFound(mouseoverID, _G.UnitName("mouseover"), _G.MOUSE_LABEL)
+		OnFound(mouseoverID, "mouseover", _G.MOUSE_LABEL)
 	end
 end
 
@@ -1141,7 +1143,6 @@ function private.GenerateTargetMacro(instanceID)
 	target_button:SetAttribute("macrotext", private.macrotext)
 end
 
-
 --Checks target found by macro and triggers NPCScan alert for tracked mobs
 function private.CheckMacroTarget()
 	if _G.UnitIsDeadOrGhost("target") then
@@ -1151,10 +1152,10 @@ function private.CheckMacroTarget()
 	local targetID = UnitTokenToCreatureID("target")
 
 	if private.ScanIDs[targetID] and not _G._NPCScanOptions.IgnoreList.NPCs[targetID] then
-		OnFound(targetID, _G.UnitName("target"), _G.TARGET)
 
 		if _G.GetRaidTargetIndex("target") ~= private.CharacterOptions.TargetIcon and (not _G.IsInRaid() or (_G.UnitIsGroupAssistant("player") or _G.UnitIsGroupLeader("player"))) then
 			_G.SetRaidTarget("target", private.CharacterOptions.TargetIcon)
 		end
+		OnFound(targetID, "target", _G.TARGET)
 	end
 end
