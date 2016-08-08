@@ -243,19 +243,19 @@ do
 
 	local CRITERIA_TYPE_NPC_KILL = 0
 
-	for achievement_id, achievement in pairs(private.ACHIEVEMENTS) do
-		achievement.ID = achievement_id
+	for achievementID, achievement in pairs(private.ACHIEVEMENTS) do
+		achievement.ID = achievementID
 		achievement.Criteria = {} -- [ CriteriaID ] = NpcID
 		achievement.NPCsActive = {} -- [ NpcID ] = CriteriaID
 
-		for criteria_index = 1, _G.GetAchievementNumCriteria(achievement_id) do
-			local _, criteria_type, _, _, _, _, _, asset_id, _, criteria_id = _G.GetAchievementCriteriaInfo(achievement_id, criteria_index)
-			local _, _, _, is_completed = _G.GetAchievementInfo(achievement_id)
+		for criteria_index = 1, _G.GetAchievementNumCriteria(achievementID) do
+			local _, criteriaType, _, _, _, _, _, npcID, _, criteriaID = _G.GetAchievementCriteriaInfo(achievementID, criteria_index)
+			local _, _, _, isCompleted = _G.GetAchievementInfo(achievementID)
 
-			achievement.is_completed = is_completed
+			achievement.is_completed = isCompleted
 
-			if criteria_type == CRITERIA_TYPE_NPC_KILL then
-				achievement.Criteria[criteria_id] = asset_id
+			if criteriaType == CRITERIA_TYPE_NPC_KILL then
+				achievement.Criteria[criteriaID] = npcID
 			end
 		end
 	end
