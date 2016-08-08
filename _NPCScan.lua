@@ -33,7 +33,6 @@ local debugger -- Only defined if needed.
 private.Ace = _G.LibStub("AceAddon-3.0"):NewAddon(FOLDER_NAME)
 
 local EventFrame = _G.CreateFrame("Frame")
-EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 EventFrame:RegisterEvent("PLAYER_LEAVING_WORLD")
 EventFrame:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 EventFrame:RegisterEvent("LOOT_CLOSED")
@@ -254,8 +253,10 @@ local function ScanRemove(npc_id)
 end
 
 
-local function IsWorldIDActive(worldID)
-	return not worldID or worldID == private.WorldID
+local currentMapID
+
+local function IsMapIDCurrent(mapID)
+	return not mapID or mapID == currentMapID
 end
 
 
@@ -265,7 +266,7 @@ do
 
 	-- Starts actual scan for NPC if on the right world.
 	function NPCActivate(npc_id, world_id)
-		if NPCsActive[npc_id] or not IsWorldIDActive(world_id) or not ScanAdd(npc_id) then
+		if NPCsActive[npc_id] or not IsMapIDCurrent(world_id) or not ScanAdd(npc_id) then
 			return
 		end
 
@@ -379,7 +380,7 @@ end
 
 -- Starts actual scans for achievement NPCs if on the right world.
 local function AchievementActivate(achievement)
-	if achievement.Active or not IsWorldIDActive(achievement.WorldID) then
+	if achievement.Active or not IsMapIDCurrent(achievement.WorldID) then
 		return
 	end
 	achievement.Active = true
@@ -826,7 +827,6 @@ function private.Ace:RefreshProfile()
 	private.ClearActiveList()
 
 	private.Synchronize()
-	EventFrame:PLAYER_ENTERING_WORLD()
 end
 
 
@@ -848,68 +848,55 @@ function EventFrame:PLAYER_LOGIN(event_name)
 end
 
 
-do
-	local has_initialized = false
+function EventFrame:UpdateScanningData(eventName, mapID)
+	currentMapID = mapID
 
-	function EventFrame:PLAYER_ENTERING_WORLD()
-		local continentID = HereBeDragons:GetCZFromMapID(HereBeDragons:GetPlayerZone())
-
-		-- Fix for Deepholm
-		if continentID == private.CONTINENT_IDS.THE_MAELSTROM then
-			private.WorldID = private.ZONE_NAMES.DEEPHOLM
-		elseif continentID == -1 then
-			local continentName, _, _, _, _, _, _, instanceMapID = _G.GetInstanceInfo()
-
-			--Darkmoon Island doesn't have a continent location
-			if instanceMapID == DARKMOON_ISLAND_MAP_ID then
-				private.WorldID = continentName
-			else
-				private.WorldID = _G.UNKNOWN
-			end
-		else
-			private.WorldID = private.LOCALIZED_CONTINENT_NAMES[continentID]
-		end
-
-		if private.CharacterOptions.TrackRares then
-			for npc_id, world_name in pairs(private.UNTAMABLE_ID_TO_WORLD_NAME) do
-				if not private.GlobalOptions.IgnoreList.NPCs[npc_id] then
-					NPCActivate(npc_id, world_name)
-				end
-			end
-		end
-
-		if private.CharacterOptions.TrackBeasts then
-			for npc_id, world_name in pairs(private.TAMABLE_ID_TO_WORLD_NAME) do
-				if not private.GlobalOptions.IgnoreList.NPCs[npc_id] then
-					NPCActivate(npc_id, world_name)
-				end
-			end
-		end
-
-		for achievement_id, enable in pairs(private.CharacterOptions.Achievements) do
-			local achievement = private.ACHIEVEMENTS[achievement_id]
-			if achievement.WorldID and enable then
-				AchievementActivate(achievement)
-			end
-		end
-
-		-- Removes any one time kill / daily kill rares that have been completed
-		for npc_id, quest_id in pairs(private.NPC_ID_TO_QUEST_ID) do
-			if IsNPCQuestComplete(npc_id) then
-				NPCDeactivate(npc_id)
-			else
-				active_tracking_quest_mobs[npc_id] = quest_id
-			end
-		end
-
-		--Adds any custom mobs
-		for npc_id, _ in pairs(private.GlobalOptions.NPCs) do
-			NPCActivate(npc_id, private.GlobalOptions.NPCWorldIDs[npc_id])
-		end
-
-		private.Config.Search:UpdateTabNames()
+	local currentMapNPCs = private.MapNPCs[mapID]
+	if not currentMapNPCs then
+		return
 	end
+	local characterOptions = private.CharacterOptions
+
+	for npcID in pairs(currentMapNPCs) do
+		if not private.GlobalOptions.IgnoreList.NPCs[npcID] then
+			local npcData = private.NPCData[npcID]
+			local isTamable = npcData and npcData.isTamable
+
+			if characterOptions.TrackRares and not isTamable then
+				NPCActivate(npcID)
+			end
+
+			if characterOptions.TrackBeasts and isTamable then
+				NPCActivate(npcID)
+			end
+		end
+	end
+
+	for achievement_id, enable in pairs(private.CharacterOptions.Achievements) do
+		local achievement = private.ACHIEVEMENTS[achievement_id]
+		if achievement.WorldID and enable then
+			AchievementActivate(achievement)
+		end
+	end
+
+	-- Removes any one time kill / daily kill rares that have been completed
+	for npc_id, quest_id in pairs(private.NPC_ID_TO_QUEST_ID) do
+		if IsNPCQuestComplete(npc_id) then
+			NPCDeactivate(npc_id)
+		else
+			active_tracking_quest_mobs[npc_id] = quest_id
+		end
+	end
+
+	-- Adds any custom mobs
+	for npcID in pairs(private.GlobalOptions.NPCs) do
+		NPCActivate(npcID, private.GlobalOptions.NPCWorldIDs[npcID])
+	end
+
+	private.Config.Search:UpdateTabNames()
 end
+
+HereBeDragons.RegisterCallback(EventFrame, "PlayerZoneChanged", "UpdateScanningData")
 
 
 function EventFrame:PLAYER_LEAVING_WORLD()
@@ -920,13 +907,13 @@ function EventFrame:PLAYER_LEAVING_WORLD()
 	end
 
 	for npc_id, world_id in pairs(private.TAMABLE_ID_TO_WORLD_NAME) do
-		if world_id == private.WorldID then
+		if world_id == currentMapID then
 			NPCDeactivate(npc_id)
 		end
 	end
 
 	for npc_id, world_id in pairs(private.UNTAMABLE_ID_TO_WORLD_NAME) do
-		if world_id == private.WorldID then
+		if world_id == currentMapID then
 			NPCDeactivate(npc_id)
 		end
 	end
@@ -938,7 +925,7 @@ function EventFrame:PLAYER_LEAVING_WORLD()
 		end
 	end
 
-	private.WorldID = nil
+	currentMapID = nil
 end
 
 
