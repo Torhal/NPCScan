@@ -1,10 +1,5 @@
---[[****************************************************************************
-  * _NPCScan by Saiket                                                         *
-  * Locales/Locale-enUS.lua - Localized string constants (en-US).              *
-  ****************************************************************************]]
+-- See https://wow.wowace.com/addons/npcscan/localization/enUS/
 
-
--- See http://wow.curseforge.com/addons/npcscan/localization/enUS/
 local FOLDER_NAME, private = ...
 private.L = setmetatable({
 	NPCs = {
@@ -1290,7 +1285,6 @@ private.L = setmetatable({
 	EVENT_ACTIVE = "%s Has Spawned!",
 	FOUND_FORMAT = "Found |cff808080“%s”|r!",
 	FOUND_TAMABLE_FORMAT = "Found |cff808080“%s”|r!  |cffff2020(Note: Tamable mob, may only be a pet.)|r",
-	FOUND_TAMABLE_WRONGZONE_FORMAT = "|cffff2020False alarm:|r Found tamable mob |cff808080“%s”|r in %s instead of %s (ID %d); Definitely a pet.",
 	FOUND_UNIT_DEAD = "%s found but is dead.",
 	FOUND_UNIT_TAXI = "%s found during flight path near %d, %d in %s.",
 	HELLBANE_SCAN = "Show alerts when Hellbane mobs appear on world map",
@@ -1332,7 +1326,6 @@ private.L = setmetatable({
 	TOOLS_TITLE = "|cff808080Tools|r",
 	VIGNETTE_SCAN = "Show alerts for Vignette Mobs",
 	VIGNETTE_SCAN_DESC = "Show alerts when Vignette Mobs (Skull Mobs on Minimap) get within range.",
-	WOD_CHANGES = "Due to changed to the game cache in WoD, NPCScan can no longer auto detect mobs as it could pre 6.0.  Now alerts can be only be automatically triggered off of vignette rares from MoP & Wod. Rare mobs from previous expansions can only be detected via mouse over or from the dynamic target macro keybind.  For more information please see the NPCScan page on Curse.com",
 	DYNAMIC_TARGET_MACRO_KEYBIND = "Dynamic Target Macro",
 }, {
 	__index = function(self, Key)
