@@ -336,10 +336,6 @@ do
 		local ID = self.ID
 
 		if TargetIsFoundRare(ID) then
-			if _G.GetRaidTargetIndex("target") ~= private.CharacterOptions.TargetIcon and (not _G.IsInRaid() or (_G.UnitIsGroupAssistant("player") or _G.UnitIsGroupLeader("player"))) then
-				_G.SetRaidTarget("target", private.CharacterOptions.TargetIcon)
-			end
-
 			if ID == HaakunID then
 				self:UnregisterEvent("UNIT_MODEL_CHANGED")
 				return

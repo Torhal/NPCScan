@@ -754,6 +754,10 @@ do
 			end
 
 			private.Button:SetNPC(npcID, npcName, GetScanSource(npcID)) -- Sends added and found overlay messages
+
+			if _G.GetRaidTargetIndex(unitToken) ~= private.CharacterOptions.TargetIcon and (not _G.IsInRaid() or (_G.UnitIsGroupAssistant("player") or _G.UnitIsGroupLeader("player"))) then
+				_G.SetRaidTarget(unitToken, private.CharacterOptions.TargetIcon)
+			end
 		end
 	end
 
@@ -1152,10 +1156,6 @@ function private.CheckMacroTarget()
 	local targetID = UnitTokenToCreatureID("target")
 
 	if private.ScanIDs[targetID] and not _G._NPCScanOptions.IgnoreList.NPCs[targetID] then
-
-		if _G.GetRaidTargetIndex("target") ~= private.CharacterOptions.TargetIcon and (not _G.IsInRaid() or (_G.UnitIsGroupAssistant("player") or _G.UnitIsGroupLeader("player"))) then
-			_G.SetRaidTarget("target", private.CharacterOptions.TargetIcon)
-		end
 		OnFound(targetID, "target", _G.TARGET)
 	end
 end
