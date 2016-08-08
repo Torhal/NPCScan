@@ -53,8 +53,6 @@ private.Updater:SetLooping("REPEAT")
 -- Constants.
 -------------------------------------------------------------------------------
 local DB_VERSION = 3
-local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
-local PLAYER_FACTION = _G.UnitFactionGroup("player")
 local ANTI_SPAM_DELAY = 300
 
 --@debug@
@@ -609,6 +607,7 @@ function private.SetMouseoverScan(enable)
 	return enable
 end
 
+-- TODO: Either incorporate this, or scrap it. It's not used anywhere.
 local IsDefaultNPCValid
 do
 	local TAMABLE_EXCEPTIONS = {
@@ -625,6 +624,9 @@ do
 		[68321] = "Alliance", -- Kar Warmaker
 		[68322] = "Alliance", -- Muerta
 	}
+
+	local PLAYER_CLASS = _G.select(2, _G.UnitClass("player"))
+	local PLAYER_FACTION = _G.UnitFactionGroup("player")
 
 	-- @return True if NpcID should be a default for this character.
 	function IsDefaultNPCValid(npc_id)
