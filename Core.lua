@@ -19,7 +19,6 @@ local LibStub = _G.LibStub
 local NPCScan = LibStub("AceAddon-3.0"):NewAddon(FOLDER_NAME, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0", "LibToast-1.0")
 _G._NPCScan = NPCScan
 
-local TextDump = LibStub("LibTextDump-1.0")
 local HereBeDragons = LibStub("HereBeDragons-1.0")
 
 local Dialog = LibStub("LibDialog-1.0")
