@@ -951,7 +951,7 @@ do
 		end,
 		--@debug@
 		DEBUG = function()
-			debugger = debugger or CreateDebugFrame()
+			local debugger = private.GetDebugger()
 
 			if debugger:Lines() == 0 then
 				debugger:AddLine("Nothing to report.")
@@ -959,6 +959,7 @@ do
 				debugger:Clear()
 				return
 			end
+
 			debugger:Display()
 		end,
 		DUMP = function()
