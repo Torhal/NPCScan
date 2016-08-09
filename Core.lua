@@ -36,8 +36,11 @@ local Dialog = LibStub("LibDialog-1.0")
 -- Debugger.
 -----------------------------------------------------------------------
 do
+	local TextDump = LibStub("LibTextDump-1.0")
+
 	local DEBUGGER_WIDTH = 750
 	local DEBUGGER_HEIGHT = 800
+
 	local debugger
 
 	function private.Debug(...)
