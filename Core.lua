@@ -40,25 +40,20 @@ do
 	local DEBUGGER_HEIGHT = 800
 	local debugger
 
-	local function Debug(...)
+	function private.Debug(...)
+		if not debugger then
+			debugger = TextDump:New(("%s Debug Output"):format(FOLDER_NAME), DEBUGGER_WIDTH, DEBUGGER_HEIGHT)
+		end
+
 		local message = string.format(...)
 		debugger:AddLine(message, "%X")
 
 		return message
 	end
 
-	private.Debug = function(...)
-		debugger = TextDump:New(("%s Debug Output"):format(FOLDER_NAME), DEBUGGER_WIDTH, DEBUGGER_HEIGHT)
-		private.Debug = Debug
-
-		return Debug(...)
-	end
-
-	private.GetDebugger = function()
-		debugger = TextDump:New(("%s Debug Output"):format(FOLDER_NAME), DEBUGGER_WIDTH, DEBUGGER_HEIGHT)
-
-		private.GetDebugger = function()
-			return debugger
+	function private.GetDebugger()
+		if not debugger then
+			debugger = TextDump:New(("%s Debug Output"):format(FOLDER_NAME), DEBUGGER_WIDTH, DEBUGGER_HEIGHT)
 		end
 
 		return debugger
