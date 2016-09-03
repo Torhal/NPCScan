@@ -1,71 +1,55 @@
 ## Interface: 70000
 ## Title: NPCScan
+## Notes: Uses various methods to scan your surroundings for rare or specified NPCs.
 ## Author: Torhal
 ## Version: @project-version@
-## Notes: Scans NPCs around you for rare ones.
-## Notes-deDE: Scant NSCs in deiner Nähe nach seltenen.
-## Notes-enCN: 搜索附近的 NPC 寻找稀有怪物。
-## Notes-enTW: 搜尋出沒在你附近的稀有怪。
-## Notes-esES: Busca raros de entre los NPCs alrededor tuyo
-## Notes-esMX: Busca raros de entre los NPCs alrededor tuyo
-## Notes-frFR: Analyse les PNJs autour de vous à la recherche de ceux qui sont rares.
-## Notes-itIT: Cerca gli NPC vicino a te per trovare quelli rari.
-## Notes-koKR: 근처에 있는 희귀몹을 탐색합니다.
-## Notes-ptBR: Busca PNJs raros próximos a você.
-## Notes-ptPT: Busca PNJs raros próximos a você.
-## Notes-ruRU: Сканирует область вокруг вас на наличие редких НИПов.
-## Notes-zhCN: 搜索附近的 NPC 寻找稀有怪物。
-## Notes-zhTW: 搜尋出沒在你附近的稀有怪。
-## X-Credits-Creator: Saiket
-## X-Credits-Maintainer: SLOKnightfall
+## OptionalDeps: Ace3, AceGUI-3.0-SharedMediaWidgets, HereBeDragons-1.0, LibDialog-1.0, LibSharedMedia-3.0, LibTextDump-1.0, LibTextTable-1.1, LibToast-1.0, LibWindow-1.1
+## SavedVariables: NPCScanDB
+
 ## X-Date: @file-date-iso@
-## X-Category: Miscellaneous
+## X-Category: Achievements
 ## X-Email: jcallahan@curse.com
 
-## SavedVariables: _NPCScanOptions, _NPCScanProfiles
-
-## OptionalDeps: Ace3, HereBeDragons-1.0, LibDialog-1.0, LibSharedMedia-3.0, LibTextDump-1.0, LibTextTable-1.1, LibToast-1.0
-
 #@no-lib-strip@
-Libs\LibStub\LibStub.lua
-Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
-Libs\LibTextDump-1.0\Lib.xml
-Libs\LibTextTable-1.1\Lib.xml
-Libs\LibSharedMedia-3.0\lib.xml
-Libs\AceEvent-3.0\AceEvent-3.0.xml
-
-Libs\AceAddon-3.0\AceAddon-3.0.xml
-Libs\AceGUI-3.0\AceGUI-3.0.xml
-Libs\AceConfig-3.0\AceConfig-3.0.xml
-Libs\AceDB-3.0\AceDB-3.0.xml
-Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
-
-Libs\LibDialog-1.0\lib.xml
-Libs\LibToast-1.0\lib.xml
-Libs\HereBeDragons-1.0\HereBeDragons-1.0.lua
+embeds.xml
 #@end-no-lib-strip@
 
 # See http://wow.wowace.com/addons/npcscan/localization/
-Locales\Locale-enUS.lua
-Locales\Locale-deDE.lua
-Locales\Locale-esES.lua
-Locales\Locale-frFR.lua
-Locales\Locale-itIT.lua
-Locales\Locale-koKR.lua
-Locales\Locale-ptBR.lua
-Locales\Locale-ruRU.lua
-Locales\Locale-zhCN.lua
-Locales\Locale-zhTW.lua
+
+#@debug@
+Localization\devel-enUS.lua
+#@end-debug@
+
+#@non-debug@
+Localization\enUS.lua
+#@end-non-debug@
+Localization\deDE.lua
+Localization\esES.lua
+Localization\esMX.lua
+Localization\frFR.lua
+Localization\koKR.lua
+Localization\ptBR.lua
+Localization\ruRU.lua
+Localization\zhCN.lua
+Localization\zhTW.lua
 
 Constants.lua
+Utilities.lua
 
 Data\MapNPCs.lua
 Data\NPCData.lua
 
 Core.lua
 Scanner.lua
-TargetButton.lua
+
+TargetButton\TargetButton.lua
+TargetButton\TargetButtonManager.lua
+
+TargetButton\Decorators\EliteTargetButton.lua
+TargetButton\Decorators\NormalTargetButton.lua
+TargetButton\Decorators\RareTargetButton.lua
+
 MapOverlays.lua
 Config.lua
 ConfigSearch.lua
-Vignette.lua
+Preferences.lua

@@ -1,0 +1,71 @@
+-----------------------------------------------------------------------
+-- Localized Lua globals.
+-----------------------------------------------------------------------
+local _G = getfenv(0)
+
+-----------------------------------------------------------------------
+-- AddOn namespace.
+-----------------------------------------------------------------------
+local AddOnFolderName, private = ...
+
+-----------------------------------------------------------------------
+-- Helpers.
+-----------------------------------------------------------------------
+local function DecorateRareTargetButton(button)
+	button:SetSize(276, 96)
+
+	local raidIcon = button.RaidIcon
+	raidIcon:SetPoint("TOPRIGHT", -20, -18)
+
+	local portrait = button.Portrait
+	portrait:SetPoint("LEFT", 23, -1)
+
+	local portraitBorder = button:CreateTexture(nil, "OVERLAY")
+	portraitBorder:SetSize(60, 60)
+	portraitBorder:SetPoint("CENTER", portrait, "CENTER")
+	portraitBorder:SetAtlas("loottoast-itemborder-artifact")
+
+	local modelDimension = portrait:GetWidth() - 10
+
+	local portraitModel = _G.CreateFrame("PlayerModel", nil, button)
+	portraitModel:SetSize(modelDimension, modelDimension)
+	portraitModel:SetPoint("TOPLEFT", portrait, 5, -5)
+	portraitModel:SetPoint("BOTTOMRIGHT", portrait, -5, 5)
+	button.PortraitModel = portraitModel
+
+	local background = button.Background
+	background:SetSize(302, 97)
+	background:SetAtlas("LootToast-MoreAwesome", true)
+	background:SetPoint("CENTER")
+
+	local sourceText = button.SourceText
+	sourceText:SetPoint("TOPRIGHT", -18, -0)
+
+	local unitName = button.UnitName
+	unitName:SetPoint("TOPLEFT", portrait, "TOPRIGHT", 10, -18)
+
+	local classification = button.Classification
+	classification:SetPoint("BOTTOMRIGHT", -18, 0)
+
+	local specialText = button:CreateFontString(nil, "ARTWORK", 1)
+	specialText:SetSize(150, 20)
+	specialText:SetPoint("TOPLEFT", portrait, "TOPRIGHT", 10, 5)
+	specialText:SetFontObject("GameFontNormal")
+	specialText:SetJustifyH("LEFT")
+	specialText:SetJustifyV("MIDDLE")
+	button.SpecialText = specialText
+
+	local glowTexture = button.glowTexture
+	glowTexture:SetSize(286, 109)
+	glowTexture:SetPoint("CENTER", 0, 0)
+
+	local shineTexture = button.shineTexture
+	shineTexture:SetSize(171, 75)
+	shineTexture:SetPoint("BOTTOMLEFT", -10, 12)
+
+	local killedTexture = button.killedTexture
+	killedTexture:SetPoint("TOPLEFT", button, "TOPLEFT", 10, -10)
+	killedTexture:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -10, 10)
+end
+
+private.DecorateRareTargetButton = DecorateRareTargetButton
