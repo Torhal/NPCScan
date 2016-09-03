@@ -748,6 +748,7 @@ local NPCData = {
 	[112636] = { questID = 44081, }, -- Sinister Leyrunner
 	[112637] = { questID = 44081, }, -- Devious Sunrunner
 	[112802] = { questID = 44124, }, -- Mar'tura
+	[113368] = { questID = 44676, }, -- Llorian
 }
 
 private.NPCData = NPCData

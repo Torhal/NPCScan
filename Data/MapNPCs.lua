@@ -1967,6 +1967,7 @@ local MapNPCs = {
 		[112756] = true, -- Sorallus
 		[112760] = true, -- Volshax, Breaker of Will
 		[112802] = true, -- Mar'tura
+		[113368] = true, -- Llorian
 		[113694] = true, -- Pashya
 	},
 }
