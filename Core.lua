@@ -227,7 +227,7 @@ do
 			end
 		end
 
-		return questName
+		return questName:gsub("Vignette: ", "")
 	end
 end
 
