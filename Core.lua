@@ -161,7 +161,13 @@ function NPCScan:OnInitialize()
 					--					private.Debug("***** AchievementID.%s: NPCKill %s with assetID 0.", private.AchievementLabel[achievementID], assetName)
 				end
 			elseif criteriaType == CriteriaType.Quest then
-				if not private.QuestNPCs[assetID] then
+				if QuestNPCs[assetID] then
+					for npcID in pairs(QuestNPCs[assetID]) do
+						local npcData = private.NPCData[npcID]
+						npcData.achievementID = achievementID
+						npcData.isCriteriaCompleted = private.IsNPCQuestComplete(npcID)
+					end
+				else
 					private.Debug("***** AchievementID.%s: Quest %s with assetID %d", private.AchievementLabel[achievementID], assetName, assetID)
 				end
 			elseif criteriaType == CriteriaType.Spell then
