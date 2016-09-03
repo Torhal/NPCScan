@@ -69,7 +69,7 @@ function NPCScan:OnInitialize()
 
 	self:SetupOptions()
 	self:InitializeTargetButton()
-	self:RegisterChatCommand("npcscan2", "ChatCommand")
+	self:RegisterChatCommand("npcscan", "ChatCommand")
 
 	-----------------------------------------------------------------------
 	-- Build lookup tables.
