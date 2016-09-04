@@ -374,6 +374,9 @@ do
 	local fadeAnimIn = private.CreateAlphaAnimation(fadeAnimationGroup, 0, 1, 0.5)
 	fadeAnimIn:SetEndDelay(0.25)
 
+	local SOUND_INTERVAL_SECONDS = 2
+	local lastSoundTime = time()
+
 	function NPCScan:DispatchSensoryCues(eventName)
 		local alert = private.db.profile.alert
 
@@ -384,7 +387,7 @@ do
 			fadeAnimationGroup:Play()
 		end
 
-		if alert.soundIsEnabled then
+		if alert.soundIsEnabled and time() > lastSoundTime + SOUND_INTERVAL_SECONDS then
 			local soundNames = alert.sharedMediaSoundNames
 
 			for index = 1, #soundNames do
