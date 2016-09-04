@@ -19,6 +19,8 @@ local LibStub = _G.LibStub
 local NPCScan = LibStub("AceAddon-3.0"):NewAddon(AddOnFolderName, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0", "AceBucket-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 
+local HereBeDragons = LibStub("HereBeDragons-1.0")
+
 -----------------------------------------------------------------------
 -- Debugger.
 -----------------------------------------------------------------------
@@ -74,35 +76,6 @@ function NPCScan:OnInitialize()
 	-----------------------------------------------------------------------
 	-- Build lookup tables.
 	-----------------------------------------------------------------------
-	private.NPCIDFromName = {}
-
-	for mapID, npcs in pairs(private.MapNPCs) do
-		for npcID in pairs(npcs) do
-			local npcName = self:GetNPCNameFromID(npcID)
-
-			if not npcName then
-				private.Debug("NPC ID %d not found in localization table.", npcID)
-
-				npcName = ("%s_%d"):format(_G.UNKNOWN, npcID)
-			end
-
-			private.NPCIDFromName[npcName] = npcID
-
-			if mapID >= 1015 then
-				local npcData = private.NPCData[npcID]
-
-				if not npcData or not npcData.questID then
-					private.Debug("NPC %d (%s) has no questID.", npcID, npcName)
-				end
-			end
-		end
-	end
-
-	-- Handle custom additions.
-	for npcID, npcName in pairs(db.locale.npcNames) do
-		private.NPCIDFromName[npcName] = npcID
-	end
-
 	local QuestNPCs = {}
 	private.QuestNPCs = QuestNPCs
 
@@ -192,6 +165,44 @@ function NPCScan:OnInitialize()
 				private.Debug("***** AchievementID.%s: Unknown criteria type %d, assetID %d", private.AchievementLabel[achievementID], criteriaType, assetID)
 			end
 		end
+	end
+
+	private.NPCIDFromName = {}
+
+	for mapID, npcs in pairs(private.MapNPCs) do
+		local mapHeaderPrinted
+
+		for npcID in pairs(npcs) do
+			local npcName = self:GetNPCNameFromID(npcID)
+
+			if not npcName then
+				private.Debug("NPC ID %d not found in localization table.", npcID)
+
+				npcName = ("%s_%d"):format(_G.UNKNOWN, npcID)
+			end
+
+			private.NPCIDFromName[npcName] = npcID
+
+			if mapID >= 1015 then
+				local npcData = private.NPCData[npcID]
+
+				if not npcData or (not npcData.questID and not npcData.achievementID) then
+					if not mapHeaderPrinted then
+						mapHeaderPrinted = true
+						private.Debug("-----------------------------------------------------------------------")
+						private.Debug("-- %s (%d)", HereBeDragons:GetLocalizedMap(mapID), mapID)
+						private.Debug("-----------------------------------------------------------------------")
+					end
+
+					private.Debug("NPC %d (%s) has no questID.", npcID, npcName)
+				end
+			end
+		end
+	end
+
+	-- Handle custom additions.
+	for npcID, npcName in pairs(db.locale.npcNames) do
+		private.NPCIDFromName[npcName] = npcID
 	end
 end
 
