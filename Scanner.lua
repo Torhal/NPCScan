@@ -201,12 +201,12 @@ function NPCScan:UpdateScanList(eventName, mapID)
 	-- No zone or continent specified, so always look for these.
 	MergeUserDefinedWithScanList(userDefined.npcIDs)
 
-	if profile.blacklist.continentIDs[currentContinentID] or profile.blacklist.mapIDs[mapID] then
+	if profile.blacklist.continentIDs[currentContinentID] or profile.blacklist.mapIDs[currentMapID] then
 		_G.NPCScan_SearchMacroButton:ResetMacroText()
 		return
 	end
 
-	local npcList = private.MapNPCs[mapID]
+	local npcList = private.MapNPCs[currentMapID]
 	if npcList then
 		for npcID in pairs(npcList) do
 			if CanAddToScanList(npcID) then
@@ -217,7 +217,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 	end
 
 	MergeUserDefinedWithScanList(userDefined.continentNPCs[currentContinentID])
-	MergeUserDefinedWithScanList(userDefined.mapNPCs[mapID])
+	MergeUserDefinedWithScanList(userDefined.mapNPCs[currentMapID])
 
 	_G.NPCScan_SearchMacroButton:UpdateMacroText(npcScanList)
 end
