@@ -1743,14 +1743,13 @@ local MapNPCs = {
 	[1015] = {
 		[89016] = true, -- Ravyn-Drath
 		[89650] = true, -- Valiyaka the Stormbringer
-		[89816] = true, -- Golza the Iron Fin
-		[89816] = true, -- Horn of the Siren
+		[89816] = true, -- Golza the Iron Fin (Horn of the Siren)
 		[89846] = true, -- Captain Volo'ren
 		[89850] = true, -- The Oracle
 		[89865] = true, -- Mrrgrl the Tide Reaver
 		[89884] = true, -- Flog the Captain-Eater
 		[90057] = true, -- Daggerbeak
-		[90164] = true, -- Seek & Destroy Squad
+		[90164] = true, -- Warbringer Mox'na (Seek & Destroy Squad)
 		[90173] = true, -- Arcana Stalker
 		[90217] = true, -- Normantis the Deposed
 		[90244] = true, -- Arcavellus
@@ -1836,6 +1835,7 @@ local MapNPCs = {
 		[108885] = true, -- Aegir Wavecrusher
 		[109994] = true, -- Stormtalon
 		[110363] = true, -- Roteye
+		[111463] = true, -- Bulvinkel
 	},
 	-----------------------------------------------------------------------
 	-- Val'Sharah
@@ -1911,6 +1911,7 @@ local MapNPCs = {
 		[100495] = true, -- Devouring Darkness
 		[101077] = true, -- Sekhan
 		[101649] = true, -- Frostshard
+		[102863] = true, -- Bruiser
 		[104513] = true, -- Defilia
 		[104517] = true, -- Mawat'aki
 		[104524] = true, -- Ormagrogg

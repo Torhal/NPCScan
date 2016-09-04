@@ -87,6 +87,14 @@ function NPCScan:OnInitialize()
 			end
 
 			private.NPCIDFromName[npcName] = npcID
+
+			if mapID >= 1015 then
+				local npcData = private.NPCData[npcID]
+
+				if not npcData or not npcData.questID then
+					private.Debug("NPC %d (%s) has no questID.", npcID, npcName)
+				end
+			end
 		end
 	end
 
