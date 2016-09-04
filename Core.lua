@@ -101,20 +101,28 @@ function NPCScan:OnInitialize()
 	local QuestIDFromName = {}
 	private.QuestIDFromName = QuestIDFromName
 
+	local function InitializeQuestData(questID, npcID)
+		local npcIDs = QuestNPCs[questID]
+		if not npcIDs then
+			npcIDs = {}
+			QuestNPCs[questID] = npcIDs
+		end
+
+		npcIDs[npcID] = true
+
+		local questName = NPCScan:GetQuestNameFromID(questID)
+		if questName and questName ~= _G.UNKNOWN then
+			QuestIDFromName[questName] = questID
+		end
+	end
+
 	for npcID, data in pairs(private.NPCData) do
 		if data.questID then
-			local npcIDs = QuestNPCs[data.questID]
-			if not npcIDs then
-				npcIDs = {}
-				QuestNPCs[data.questID] = npcIDs
-			end
+			InitializeQuestData(data.questID, npcID)
+		end
 
-			npcIDs[npcID] = true
-
-			local questName = self:GetQuestNameFromID(data.questID)
-			if questName and questName ~= _G.UNKNOWN then
-				QuestIDFromName[questName] = data.questID
-			end
+		if data.vignetteQuestID then
+			InitializeQuestData(data.vignetteQuestID, npcID)
 		end
 	end
 

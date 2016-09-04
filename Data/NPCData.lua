@@ -647,6 +647,7 @@ local NPCData = {
 	[93401] = { questID = 38847, }, -- Urgev the Flayer
 	[93654] = { questID = 38887, }, -- Skul'vrax
 	[93679] = { questID = 44070, }, -- Gathenak the Subjugator
+	[93686] = { questID = 38889, vignetteQuestID = 38885, }, -- Jinikki the Puncturer
 	[93758] = { questID = 38900, }, -- Antydas Nightcaller
 	[94413] = { questID = 39120, }, -- Isel the Hammer
 	[94414] = { questID = 39121, }, -- Kiranys Duskwhisper
