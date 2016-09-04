@@ -51,7 +51,7 @@ end
 -- Variables.
 --------------------------------------------------------------------------------
 local anchorFrame
-local db
+local profile
 
 --------------------------------------------------------------------------------
 -- Helpers.
@@ -115,7 +115,7 @@ local function CreateAnchorFrame()
 
 	anchorFrame:SetHeight(text:GetStringHeight() + title:GetStringHeight() + 25)
 
-	LibWindow.RegisterConfig(anchorFrame, db.profile.targetButtonGroup)
+	LibWindow.RegisterConfig(anchorFrame, profile.targetButtonGroup)
 	LibWindow.RestorePosition(anchorFrame)
 	LibWindow.MakeDraggable(anchorFrame)
 
@@ -144,10 +144,10 @@ local DetectionOptions = {
 			min = 0.5,
 			max = 60,
 			get = function(info)
-				return db.profile.detection.intervalSeconds / 60
+				return profile.detection.intervalSeconds / 60
 			end,
 			set = function(info, value)
-				db.profile.detection.intervalSeconds = value * 60
+				profile.detection.intervalSeconds = value * 60
 			end,
 		},
 		type = {
@@ -162,10 +162,10 @@ local DetectionOptions = {
 					name = _G.BATTLE_PET_BREED_QUALITY4,
 					descStyle = "inline",
 					get = function(info)
-						return db.profile.detection.rares
+						return profile.detection.rares
 					end,
 					set = function(info, value)
-						db.profile.detection.rares = value
+						profile.detection.rares = value
 					end,
 				},
 				tameables = {
@@ -174,10 +174,10 @@ local DetectionOptions = {
 					name = ("%s %s"):format(_G.TAMEABLE, _G.PARENS_TEMPLATE:format(_G.BATTLE_PET_BREED_QUALITY4)),
 					descStyle = "inline",
 					get = function(info)
-						return db.profile.detection.tameables
+						return profile.detection.tameables
 					end,
 					set = function(info, value)
-						db.profile.detection.tameables = value
+						profile.detection.tameables = value
 					end,
 				},
 				userDefined = {
@@ -186,10 +186,10 @@ local DetectionOptions = {
 					name = _G.CUSTOM,
 					descStyle = "inline",
 					get = function(info)
-						return db.profile.detection.userDefined
+						return profile.detection.userDefined
 					end,
 					set = function(info, value)
-						db.profile.detection.userDefined = value
+						profile.detection.userDefined = value
 					end,
 				},
 			},
@@ -207,10 +207,10 @@ local DetectionOptions = {
 					descStyle = "inline",
 					width = "full",
 					get = function(info)
-						return db.profile.detection.ignoreCompletedAchievementCriteria
+						return profile.detection.ignoreCompletedAchievementCriteria
 					end,
 					set = function(info, value)
-						db.profile.detection.ignoreCompletedAchievementCriteria = value
+						profile.detection.ignoreCompletedAchievementCriteria = value
 					end,
 				},
 				completedQuestObjectives = {
@@ -220,10 +220,10 @@ local DetectionOptions = {
 					descStyle = "inline",
 					width = "full",
 					get = function(info)
-						return db.profile.detection.ignoreCompletedQuestObjectives
+						return profile.detection.ignoreCompletedQuestObjectives
 					end,
 					set = function(info, value)
-						db.profile.detection.ignoreCompletedQuestObjectives = value
+						profile.detection.ignoreCompletedQuestObjectives = value
 					end,
 				},
 			},
@@ -246,10 +246,10 @@ local TargetingOptions = {
 			min = 0.5,
 			max = 5,
 			get = function()
-				return db.profile.targetButtonGroup.durationSeconds / 60
+				return profile.targetButtonGroup.durationSeconds / 60
 			end,
 			set = function(info, value)
-				db.profile.targetButtonGroup.durationSeconds = value * 60
+				profile.targetButtonGroup.durationSeconds = value * 60
 			end,
 		},
 		targetButtons = {
@@ -264,10 +264,10 @@ local TargetingOptions = {
 					name = L["Spawn Point"],
 					descStyle = "inline",
 					get = function()
-						return SPAWN_INDICES[db.profile.targetButtonGroup.point]
+						return SPAWN_INDICES[profile.targetButtonGroup.point]
 					end,
 					set = function(info, value)
-						db.profile.targetButtonGroup.point = SPAWN_POINTS[value]
+						profile.targetButtonGroup.point = SPAWN_POINTS[value]
 						LibWindow.RestorePosition(anchorFrame)
 					end,
 					values = LOCALIZED_SPAWN_POINTS,
@@ -278,10 +278,10 @@ local TargetingOptions = {
 					name = L["X Offset"],
 					desc = L["Horizontal offset from the anchor point."],
 					get = function()
-						return tostring(round(db.profile.targetButtonGroup.x))
+						return tostring(round(profile.targetButtonGroup.x))
 					end,
 					set = function(info, value)
-						db.profile.targetButtonGroup.x = tonumber(value)
+						profile.targetButtonGroup.x = tonumber(value)
 						LibWindow.RestorePosition(anchorFrame)
 					end,
 					dialogControl = "EditBox",
@@ -292,10 +292,10 @@ local TargetingOptions = {
 					name = L["Y Offset"],
 					desc = L["Vertical offset from the anchor point."],
 					get = function()
-						return tostring(round(db.profile.targetButtonGroup.y))
+						return tostring(round(profile.targetButtonGroup.y))
 					end,
 					set = function(info, value)
-						db.profile.targetButtonGroup.y = tonumber(value)
+						profile.targetButtonGroup.y = tonumber(value)
 						LibWindow.RestorePosition(anchorFrame)
 					end,
 					dialogControl = "EditBox",
@@ -312,8 +312,8 @@ local TargetingOptions = {
 					name = L["Reset Position"],
 					descStyle = "inline",
 					func = function()
-						db.profile.targetButtonGroup = _G.copyTable(private.DatabaseDefaults.profile.targetButtonGroup)
-						LibWindow.RegisterConfig(anchorFrame, db.profile.targetButtonGroup)
+						profile.targetButtonGroup = _G.copyTable(private.DatabaseDefaults.profile.targetButtonGroup)
+						LibWindow.RegisterConfig(anchorFrame, profile.targetButtonGroup)
 						LibWindow.RestorePosition(anchorFrame)
 					end,
 				},
@@ -342,7 +342,7 @@ do
 	function UpdateAlertNamesOptions()
 		table.wipe(AlertNamesOptions)
 
-		local soundNames = db.profile.alert.sharedMediaSoundNames
+		local soundNames = profile.alert.sharedMediaSoundNames
 		for index = 1, #soundNames do
 			AlertNamesOptions[soundNames[index] .. index] = {
 				order = index,
@@ -395,10 +395,10 @@ do
 				descStyle = "inline",
 				type = "toggle",
 				get = function(info)
-					return db.profile.alert.screenEdgeFlash
+					return profile.alert.screenEdgeFlash
 				end,
 				set = function(info, value)
-					db.profile.alert.screenEdgeFlash = value
+					profile.alert.screenEdgeFlash = value
 				end,
 			},
 			soundOptions = {
@@ -415,10 +415,10 @@ do
 						type = "toggle",
 						width = "full",
 						get = function(info)
-							return db.profile.alert.soundIsEnabled
+							return profile.alert.soundIsEnabled
 						end,
 						set = function(info, value)
-							db.profile.alert.soundIsEnabled = value
+							profile.alert.soundIsEnabled = value
 						end,
 					},
 					soundChannel = {
@@ -428,13 +428,13 @@ do
 						type = "select",
 						values = LOCALIZED_SOUND_CHANNELS,
 						disabled = function()
-							return not db.profile.alert.soundIsEnabled
+							return not profile.alert.soundIsEnabled
 						end,
 						get = function(info)
-							return SOUND_CHANNEL_INDICES[db.profile.alert.soundChannel]
+							return SOUND_CHANNEL_INDICES[profile.alert.soundChannel]
 						end,
 						set = function(info, value)
-							db.profile.alert.soundChannel = SOUND_CHANNELS[value]
+							profile.alert.soundChannel = SOUND_CHANNELS[value]
 						end,
 					},
 					addAlertSound = {
@@ -445,13 +445,13 @@ do
 						dialogControl = "LSM30_Sound",
 						values = _G.AceGUIWidgetLSMlists.sound,
 						disabled = function()
-							return not db.profile.alert.soundIsEnabled
+							return not profile.alert.soundIsEnabled
 						end,
 						get = function(info)
 							-- Intentionally empty, since there can be multiple sounds.
 						end,
 						set = function(info, value)
-							table.insert(db.profile.alert.sharedMediaSoundNames, value)
+							table.insert(profile.alert.sharedMediaSoundNames, value)
 							UpdateAlertNamesOptions()
 						end,
 					},
@@ -461,7 +461,7 @@ do
 						type = "group",
 						inline = true,
 						disabled = function()
-							return not db.profile.alert.soundIsEnabled
+							return not profile.alert.soundIsEnabled
 						end,
 						args = AlertNamesOptions,
 					},
@@ -472,10 +472,10 @@ do
 						type = "execute",
 						width = "normal",
 						disabled = function()
-							return not db.profile.alert.soundIsEnabled
+							return not profile.alert.soundIsEnabled
 						end,
 						func = function()
-							local alert = db.profile.alert
+							local alert = profile.alert
 							local soundNames = alert.sharedMediaSoundNames
 
 							for index = 1, #soundNames do
@@ -526,7 +526,7 @@ do
 					detectionOptions = DetectionOptions,
 					AlertOptions = AlertOptions,
 					targetingOptions = TargetingOptions,
-					profileOptions = LibStub("AceDBOptions-3.0"):GetOptionsTable(db),
+					profileOptions = LibStub("AceDBOptions-3.0"):GetOptionsTable(private.db),
 				}
 			}
 		end
@@ -541,7 +541,7 @@ local function SetupSuboptions(label, optionsTable)
 end
 
 function NPCScan:SetupOptions()
-	db = private.db
+	profile = private.db.profile
 	anchorFrame = CreateAnchorFrame()
 
 	CreateAnchorFrame = nil
