@@ -211,6 +211,7 @@ local DetectionOptions = {
 					end,
 					set = function(info, value)
 						profile.detection.ignoreCompletedAchievementCriteria = value
+						NPCScan:UpdateScanList()
 					end,
 				},
 				completedQuestObjectives = {
@@ -224,6 +225,7 @@ local DetectionOptions = {
 					end,
 					set = function(info, value)
 						profile.detection.ignoreCompletedQuestObjectives = value
+						NPCScan:UpdateScanList()
 					end,
 				},
 			},
