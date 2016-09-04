@@ -658,6 +658,7 @@ local NPCData = {
 	[95056] = { questID = 39289, }, -- Doomroller
 	[95123] = { questID = 40126, }, -- Grelda the Hag
 	[95204] = { questID = 39435, }, -- Oubdob da Smasher
+	[95221] = { questID = 39357, }, -- Mad Henryk
 	[95318] = { questID = 39596, }, -- Perrexx
 	[95872] = { questID = 39465, }, -- Skullhat
 	[96323] = { questID = 39617, }, -- Arachnis
