@@ -223,7 +223,6 @@ function NPCScan:UpdateScanList(eventName, mapID)
 end
 
 HereBeDragons.RegisterCallback(NPCScan, "PlayerZoneChanged", "UpdateScanList")
-NPCScan:RegisterMessage("NPCScan_DetectionOptionsChanged", "UpdateScanList")
 
 -----------------------------------------------------------------------
 -- Events.
