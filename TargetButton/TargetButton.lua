@@ -231,7 +231,7 @@ function TargetButton:Deactivate()
 
 	-- Make certain these are stopped, else they may finish soon after Activate is called again.
 	self.dismissAnimationGroup:Stop()
-	self.durationFadeAnimationGroup.animOut:Stop()
+	self.durationFadeAnimationGroup:Stop()
 	self.killedTexture.animIn:Stop()
 
 	self.killedTexture:Hide()
