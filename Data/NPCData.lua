@@ -567,6 +567,8 @@ local NPCData = {
 	[90057] = { questID = 37869, }, -- Daggerbeak
 	[90122] = { questID = 39045, }, -- Zoug the Heavy
 	[90139] = { questID = 37908, }, -- Inquisitor Ernstenbok
+	[90164] = { questID = 37909, }, -- Warbringer Mox'na (Seek & Destroy Squad)
+	[90173] = { questID = 37909, }, -- Arcana Stalker (Seek & Destroy Squad)
 	[90244] = { questID = 37932, }, -- Arcavellus
 	[90429] = { questID = 38026, }, -- Imp-Master Valessa
 	[90434] = { questID = 38031, }, -- Ceraxas
@@ -628,6 +630,7 @@ local NPCData = {
 	[92604] = { questID = 38627, factionGroup = "Alliance", }, -- Champion Elodie
 	[92606] = { questID = 38628, }, -- Sylissa
 	[92609] = { questID = 38627, factionGroup = "Alliance", }, -- Tracker Jack
+	[92611] = { factionGroup = "Alliance", }, -- Ambusher Daggerfang
 	[92613] = { questID = 38627, factionGroup = "Alliance", }, -- Priestess Liza
 	[92626] = { questID = 38630, factionGroup = "Horde", }, -- Deathguard Adams
 	[92627] = { questID = 38631, isTameable = true, }, -- Rendrak
