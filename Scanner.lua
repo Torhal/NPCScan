@@ -83,7 +83,8 @@ local ProcessDetection
 do
 	local throttledNPCs = {}
 
-	function ProcessDetection(npcID, sourceText, unitClassification, unitLevel, unitCreatureType, unitToken)
+	function ProcessDetection(data)
+		local npcID = data.npcID
 		local profile = private.db.profile
 		local detection = profile.detection
 		local throttleTime = throttledNPCs[npcID]
@@ -95,8 +96,10 @@ do
 
 		throttledNPCs[npcID] = now
 
-		local npcName = NPCScan:GetNPCNameFromID(npcID)
-		NPCScan:SendMessage("NPCScan_DetectedNPC", npcID, sourceText, npcName, unitClassification or "rareelite", unitLevel, unitCreatureType, unitToken)
+		data.npcName = data.npcName or NPCScan:GetNPCNameFromID(npcID)
+		data.unitClassification = data.unitClassification or "rareelite"
+
+		NPCScan:SendMessage("NPCScan_DetectedNPC", data)
 
 		-- TODO: Make the Overlays object listen for the NPCScan_DetectedNPC message and run its own methods
 		private.Overlays.Found(npcID)
@@ -111,13 +114,19 @@ local function ProcessUnit(unitToken, sourceText)
 
 	local npcID = UnitTokenToCreatureID(unitToken)
 	if npcID then
-		local unitCreatureType = _G.UnitCreatureType(unitToken)
-		local unitLevel = _G.UnitLevel(unitToken)
-		local unitClassification = _G.UnitClassification(unitToken)
+		local detectionData = {
+			npcID = npcID,
+			npcName = _G.UnitName(unitToken),
+			sourceText = sourceText,
+			unitClassification = _G.UnitClassification(unitToken),
+			unitCreatureType = _G.UnitCreatureType(unitToken),
+			unitLevel = _G.UnitLevel(unitToken),
+			unitToken = unitToken,
+		}
 
-		ProcessDetection(npcID, sourceText, unitClassification, unitLevel, unitCreatureType, unitToken)
+		ProcessDetection(detectionData)
 
-		NPCScan:SendMessage("NPCScan_UnitInformationAvailable", sourceText, npcID, unitToken, _G.UnitName(unitToken), unitLevel, unitCreatureType, unitClassification)
+		NPCScan:SendMessage("NPCScan_UnitInformationAvailable", detectionData)
 	end
 end
 
@@ -296,7 +305,10 @@ end
 
 local function ProcessQuestDetection(questID, sourceText)
 	for npcID in pairs(private.QuestNPCs[questID]) do
-		ProcessDetection(npcID, sourceText)
+		ProcessDetection({
+			npcID = npcID,
+			sourceText = sourceText
+		})
 	end
 end
 
@@ -305,7 +317,10 @@ function NPCScan:VIGNETTE_ADDED(eventName, instanceID)
 	local npcID = private.NPCIDFromName[vignetteName]
 
 	if npcID then
-		ProcessDetection(npcID, _G.MINIMAP_LABEL)
+		ProcessDetection({
+			npcID = npcID,
+			sourceText = _G.MINIMAP_LABEL
+		})
 	else
 		local questID = private.QuestIDFromName[vignetteName]
 
@@ -325,7 +340,10 @@ function NPCScan:WORLD_MAP_UPDATE()
 			local npcID = private.NPCIDFromName[landmarkName]
 
 			if npcID then
-				ProcessDetection(npcID, _G.WORLD_MAP)
+				ProcessDetection({
+					npcID = npcID,
+					sourceText = _G.WORLD_MAP
+				})
 			else
 				local questID = private.QuestIDFromName[landmarkName]
 

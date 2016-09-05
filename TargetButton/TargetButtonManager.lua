@@ -4,7 +4,6 @@
 local _G = getfenv(0)
 
 -- Functions
-local tonumber = _G.tonumber
 
 -- Libraries
 local table = _G.table
@@ -131,7 +130,7 @@ function TargetButtonManager:ProcessQueue(eventName)
 		local buttonData = table.remove(QueuedData, 1)
 
 		if buttonData then
-			self:Spawn(eventName, _G.unpack(buttonData))
+			self:Spawn(eventName, buttonData)
 		end
 	end
 end
@@ -168,7 +167,7 @@ end
 
 TargetButtonManager:RegisterMessage("NPCScan_TargetButtonDismissed", "Reclaim")
 
-function TargetButtonManager:RespawnAsClassification(eventName, targetButton, unitClassification, unitToken)
+function TargetButtonManager:RespawnAsClassification(eventName, targetButton, data)
 	local targetButtonIndex
 	for index = 1, #ActiveTargetButtons do
 		if ActiveTargetButtons[index] == targetButton then
@@ -177,49 +176,39 @@ function TargetButtonManager:RespawnAsClassification(eventName, targetButton, un
 		end
 	end
 
-	local npcID = targetButton.npcID
-	local npcName = targetButton.npcName
-	local detectionSource = targetButton.detectionSource
-	local unitLevel = targetButton.unitLevel
-	local unitCreatureType = targetButton.unitLevel
-
 	targetButton:Deactivate()
 
 	table.insert(TargetButtonHeap[targetButton.__classification], targetButton)
 	table.remove(ActiveTargetButtons, targetButtonIndex):ClearAllPoints()
 
-	local newButton = AcquireTargetButton(unitClassification)
+	local newButton = AcquireTargetButton(data.unitClassification)
 	table.insert(ActiveTargetButtons, targetButtonIndex, newButton)
 
 	ResetTargetButtonPoints()
 
-	newButton:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, unitToken, true, false)
+	data.isSilent = true
+
+	newButton:Activate(data)
 	newButton.needsUnitData = nil
 end
 
 TargetButtonManager:RegisterMessage("NPCScan_TargetButtonNeedsReclassified", "RespawnAsClassification")
 
-function TargetButtonManager:Spawn(eventName, npcID, detectionSource, npcName, unitClassification, unitLevel, unitCreatureType, unitToken)
-	if ActiveTargetButtonByNPCID[npcID] then
+function TargetButtonManager:Spawn(eventName, data)
+	if ActiveTargetButtonByNPCID[data.npcID] then
 		return
 	end
 
 	if #ActiveTargetButtons >= _G.NUM_RAID_ICONS or _G.InCombatLockdown() then
-		LibToast:Spawn("NPCScanAlertToast", ("%s %s"):format(npcName, _G.PARENS_TEMPLATE:format(detectionSource)))
+		LibToast:Spawn("NPCScanAlertToast", ("%s %s"):format(data.npcName, _G.PARENS_TEMPLATE:format(data.sourceText)))
 
-		table.insert(QueuedData, {
-			npcID,
-			("%s %s"):format(detectionSource, _G.PARENS_TEMPLATE:format(_G.QUEUED_STATUS_QUEUED)),
-			npcName,
-			unitClassification,
-			unitLevel,
-			unitCreatureType
-		})
+		data.sourceText = ("%s %s"):format(data.sourceText, _G.PARENS_TEMPLATE:format(_G.QUEUED_STATUS_QUEUED))
+		table.insert(QueuedData, data)
 
 		return
 	end
 
-	local button = AcquireTargetButton(unitClassification)
+	local button = AcquireTargetButton(data.unitClassification)
 	local spawnPoint, offsetX, offsetY = GetAnchorData()
 
 	if #ActiveTargetButtons > 0 then
@@ -230,9 +219,10 @@ function TargetButtonManager:Spawn(eventName, npcID, detectionSource, npcName, u
 	end
 
 	ActiveTargetButtons[#ActiveTargetButtons + 1] = button
-	ActiveTargetButtonByNPCID[npcID] = true
+	ActiveTargetButtonByNPCID[data.npcID] = true
 
-	button:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, unitToken, false, eventName == "Reclaim")
+	data.isFromQueue = eventName == "Reclaim"
+	button:Activate(data)
 end
 
 TargetButtonManager:RegisterMessage("NPCScan_DetectedNPC", "Spawn")

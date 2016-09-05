@@ -133,17 +133,17 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 	self.pausedAnimations = nil
 end
 
-function TargetButton:UpdateUnitData(eventName, detectionSource, npcID, unitToken, unitName, unitLevel, unitCreatureType, unitClassification)
-	if npcID == self.npcID then
+function TargetButton:UpdateUnitData(eventName, data)
+	if data.npcID == self.npcID then
 		local hasUpdated = false
 
 		if self.needsRaidTarget then
-			hasUpdated = self:SetRaidTarget(unitToken)
+			hasUpdated = self:SetRaidTarget(data.unitToken)
 		end
 
 		if self.needsUnitData then
-			self.PortraitModel:SetUnit(unitToken)
-			self:SetUnitData(unitName, unitLevel, unitCreatureType, detectionSource, unitClassification, unitToken)
+			self.PortraitModel:SetUnit(data.unitToken)
+			self:SetUnitData(data)
 
 			hasUpdated = true
 		end
@@ -158,37 +158,36 @@ end
 -----------------------------------------------------------------------
 -- Methods.
 -----------------------------------------------------------------------
-function TargetButton:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, unitToken, isSilent, isFromQueue)
+function TargetButton:Activate(data)
 	if self.SpecialText then
-		local npcData = private.NPCData[npcID]
+		local npcData = private.NPCData[data.npcID]
 		if npcData and npcData.achievementID then
 			local _, achievementName = _G.GetAchievementInfo(npcData.achievementID)
 			self.SpecialText:SetFormattedText("%s%s|r", npcData.isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE, achievementName)
 		end
 	end
 
-	self.npcID = npcID
-	self.npcName = npcName
-	self.detectionSource = detectionSource
+	self.npcID = data.npcID
+	self.npcName = data.npcName
 
-	self.SourceText:SetText(detectionSource)
+	self.SourceText:SetText(data.sourceText)
 
-	if unitToken then
-		self.PortraitModel:SetUnit(unitToken)
+	if data.unitToken then
+		self.PortraitModel:SetUnit(data.unitToken)
 	else
-		self.PortraitModel:SetCreature(npcID)
+		self.PortraitModel:SetCreature(data.npcID)
 	end
 
 	self.PortraitModel:SetPortraitZoom(1)
 
-	self:SetRaidTarget(unitToken)
-	self:SetUnitData(npcName, unitLevel, unitCreatureType, detectionSource, nil, unitToken)
+	self:SetRaidTarget(data.unitToken)
+	self:SetUnitData(data)
 
-	if isFromQueue then
+	if data.isFromQueue then
 		self.needsRaidTarget = true
 	end
 
-	local macroText = ("/cleartarget\n/targetexact %s"):format(npcName)
+	local macroText = ("/cleartarget\n/targetexact %s"):format(data.npcName)
 	_G.NPCScan_RecentTargetButton:SetAttribute("macrotext", macroText)
 	self:SetAttribute("macrotext", macroText)
 
@@ -220,7 +219,7 @@ function TargetButton:Activate(npcID, npcName, detectionSource, unitLevel, unitC
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self:RegisterMessage("NPCScan_UnitInformationAvailable", "UpdateUnitData")
 
-	if not isSilent then
+	if not data.isSilent then
 		self:SendMessage("NPCScan_TargetButtonActivated", self)
 	end
 end
@@ -253,9 +252,6 @@ function TargetButton:Deactivate()
 
 	self.npcID = nil
 	self.npcName = nil
-	self.detectionSource = nil
-	self.unitLevel = nil
-	self.unitCreatureType = nil
 
 	self.needsUnitData = nil
 	self.isDead = nil
@@ -306,36 +302,31 @@ function TargetButton:SetRaidTarget(unitToken)
 	return not self.needsRaidTarget
 end
 
-function TargetButton:SetUnitData(npcName, unitLevel, unitCreatureType, detectionSource, unitClassification, unitToken)
-	if detectionSource then
-		self.detectionSource = detectionSource
-		self.SourceText:SetText(detectionSource)
+function TargetButton:SetUnitData(data)
+	if data.sourceText then
+		self.SourceText:SetText(data.sourceText)
 	end
 
-	if unitClassification and self.__classification ~= unitClassification then
-		self:SendMessage("NPCScan_TargetButtonNeedsReclassified", self, unitClassification, unitToken)
+	if data.unitClassification and self.__classification ~= data.unitClassification then
+		self:SendMessage("NPCScan_TargetButtonNeedsReclassified", self, data)
 		return
 	end
 
-	if unitCreatureType then
-		self.unitCreatureType = unitCreatureType
-
-		if unitLevel then
-			self.unitLevel = unitLevel
-
+	if data.unitCreatureType then
+		if data.unitLevel then
 			local template = (self.__classification == "elite" or self.__classification == "rareelite") and _G.UNIT_TYPE_PLUS_LEVEL_TEMPLATE or _G.UNIT_TYPE_LEVEL_TEMPLATE
-			self.Classification:SetText(template:format(unitLevel, unitCreatureType))
+			self.Classification:SetText(template:format(data.unitLevel, data.unitCreatureType))
 
-			local color = _G.GetRelativeDifficultyColor(_G.UnitLevel("player"), unitLevel)
-			self.UnitName:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, npcName)
+			local color = _G.GetRelativeDifficultyColor(_G.UnitLevel("player"), data.unitLevel)
+			self.UnitName:SetFormattedText("|cff%02x%02x%02x%s|r", color.r * 255, color.g * 255, color.b * 255, data.npcName)
 		else
-			self.Classification:SetText(_G.UNIT_TYPE_LETHAL_LEVEL_TEMPLATE:format(unitCreatureType))
-			self.UnitName:SetFormattedText("%s%s|r", _G.RED_FONT_COLOR_CODE, npcName)
+			self.Classification:SetText(_G.UNIT_TYPE_LETHAL_LEVEL_TEMPLATE:format(data.unitCreatureType))
+			self.UnitName:SetFormattedText("%s%s|r", _G.RED_FONT_COLOR_CODE, data.npcName)
 		end
 
 		self.needsUnitData = nil
 	else
-		self.UnitName:SetText(npcName)
+		self.UnitName:SetText(data.npcName)
 		self.needsUnitData = true
 	end
 end
