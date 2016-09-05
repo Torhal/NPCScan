@@ -168,7 +168,7 @@ end
 
 TargetButtonManager:RegisterMessage("NPCScan_TargetButtonDismissed", "Reclaim")
 
-function TargetButtonManager:RespawnAsClassification(eventName, targetButton, unitClassification)
+function TargetButtonManager:RespawnAsClassification(eventName, targetButton, unitClassification, unitToken)
 	local targetButtonIndex
 	for index = 1, #ActiveTargetButtons do
 		if ActiveTargetButtons[index] == targetButton then
@@ -193,7 +193,7 @@ function TargetButtonManager:RespawnAsClassification(eventName, targetButton, un
 
 	ResetTargetButtonPoints()
 
-	newButton:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, nil, true, false)
+	newButton:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, unitToken, true, false)
 	newButton.needsUnitData = nil
 end
 

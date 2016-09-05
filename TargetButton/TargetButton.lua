@@ -138,14 +138,12 @@ function TargetButton:UpdateUnitData(eventName, detectionSource, npcID, unitToke
 		local hasUpdated = false
 
 		if self.needsRaidTarget then
-			self:SetRaidTarget(unitToken)
-
-			hasUpdated = true
+			hasUpdated = self:SetRaidTarget(unitToken)
 		end
 
 		if self.needsUnitData then
 			self.PortraitModel:SetUnit(unitToken)
-			self:SetUnitData(unitName, unitLevel, unitCreatureType, detectionSource, unitClassification)
+			self:SetUnitData(unitName, unitLevel, unitCreatureType, detectionSource, unitClassification, unitToken)
 
 			hasUpdated = true
 		end
@@ -184,7 +182,7 @@ function TargetButton:Activate(npcID, npcName, detectionSource, unitLevel, unitC
 	self.PortraitModel:SetPortraitZoom(1)
 
 	self:SetRaidTarget(unitToken)
-	self:SetUnitData(npcName, unitLevel, unitCreatureType, detectionSource)
+	self:SetUnitData(npcName, unitLevel, unitCreatureType, detectionSource, nil, unitToken)
 
 	if isFromQueue then
 		self.needsRaidTarget = true
@@ -304,16 +302,18 @@ function TargetButton:SetRaidTarget(unitToken)
 	else
 		self.needsRaidTarget = true
 	end
+
+	return not self.needsRaidTarget
 end
 
-function TargetButton:SetUnitData(npcName, unitLevel, unitCreatureType, detectionSource, unitClassification)
+function TargetButton:SetUnitData(npcName, unitLevel, unitCreatureType, detectionSource, unitClassification, unitToken)
 	if detectionSource then
 		self.detectionSource = detectionSource
 		self.SourceText:SetText(detectionSource)
 	end
 
 	if unitClassification and self.__classification ~= unitClassification then
-		self:SendMessage("NPCScan_TargetButtonNeedsReclassified", self, unitClassification)
+		self:SendMessage("NPCScan_TargetButtonNeedsReclassified", self, unitClassification, unitToken)
 		return
 	end
 
