@@ -133,8 +133,13 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 	self.pausedAnimations = nil
 end
 
-function TargetButton:UpdateUnitData(eventName, data)
+function TargetButton:UpdateData(eventName, data)
 	if data.npcID == self.npcID then
+		if data.unitClassification and self.__classification ~= data.unitClassification and not self.inCombatLockdown then
+			self:SendMessage("NPCScan_TargetButtonNeedsReclassified", self, data)
+			return
+		end
+
 		local hasUpdated = false
 
 		if self.needsRaidTarget then
@@ -142,11 +147,16 @@ function TargetButton:UpdateUnitData(eventName, data)
 		end
 
 		if self.needsUnitData then
+			if data.sourceText then
+				self.SourceText:SetText(data.sourceText)
+			end
+
 			self.PortraitModel:SetUnit(data.unitToken)
 			self:SetUnitData(data)
 
 			hasUpdated = true
 		end
+
 
 		if hasUpdated then
 			self.shineTexture:Show()
@@ -217,7 +227,7 @@ function TargetButton:Activate(data)
 
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
-	self:RegisterMessage("NPCScan_UnitInformationAvailable", "UpdateUnitData")
+	self:RegisterMessage("NPCScan_UnitInformationAvailable", "UpdateData")
 
 	if not data.isSilent then
 		self:SendMessage("NPCScan_TargetButtonActivated", self)
@@ -303,15 +313,6 @@ function TargetButton:SetRaidTarget(unitToken)
 end
 
 function TargetButton:SetUnitData(data)
-	if data.sourceText then
-		self.SourceText:SetText(data.sourceText)
-	end
-
-	if data.unitClassification and self.__classification ~= data.unitClassification and not self.inCombatLockdown then
-		self:SendMessage("NPCScan_TargetButtonNeedsReclassified", self, data)
-		return
-	end
-
 	if data.unitCreatureType then
 		if data.unitLevel then
 			local template = (self.__classification == "elite" or self.__classification == "rareelite") and _G.UNIT_TYPE_PLUS_LEVEL_TEMPLATE or _G.UNIT_TYPE_LEVEL_TEMPLATE
