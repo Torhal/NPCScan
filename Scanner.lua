@@ -113,10 +113,11 @@ local function ProcessUnit(unitToken, sourceText)
 	if npcID then
 		local unitCreatureType = _G.UnitCreatureType(unitToken)
 		local unitLevel = _G.UnitLevel(unitToken)
+		local unitClassification = _G.UnitClassification(unitToken)
 
-		ProcessDetection(npcID, sourceText, _G.UnitClassification(unitToken), unitLevel, unitCreatureType, unitToken)
+		ProcessDetection(npcID, sourceText, unitClassification, unitLevel, unitCreatureType, unitToken)
 
-		NPCScan:SendMessage("NPCScan_UnitInformationAvailable", npcID, unitToken, _G.UnitName(unitToken), unitLevel, unitCreatureType)
+		NPCScan:SendMessage("NPCScan_UnitInformationAvailable", sourceText, npcID, unitToken, _G.UnitName(unitToken), unitLevel, unitCreatureType, unitClassification)
 	end
 end
 

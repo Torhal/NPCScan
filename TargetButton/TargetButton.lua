@@ -133,7 +133,7 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 	self.pausedAnimations = nil
 end
 
-function TargetButton:UpdateUnitData(eventName, npcID, unitToken, unitName, unitLevel, unitCreatureType)
+function TargetButton:UpdateUnitData(eventName, detectionSource, npcID, unitToken, unitName, unitLevel, unitCreatureType, unitClassification)
 	if npcID == self.npcID then
 		local hasUpdated = false
 
@@ -145,7 +145,7 @@ function TargetButton:UpdateUnitData(eventName, npcID, unitToken, unitName, unit
 
 		if self.needsUnitData then
 			self.PortraitModel:SetUnit(unitToken)
-			self:SetUnitData(unitName, unitLevel, unitCreatureType)
+			self:SetUnitData(unitName, unitLevel, unitCreatureType, detectionSource, unitClassification)
 
 			hasUpdated = true
 		end
@@ -160,7 +160,7 @@ end
 -----------------------------------------------------------------------
 -- Methods.
 -----------------------------------------------------------------------
-function TargetButton:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, unitToken, isFromQueue)
+function TargetButton:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, unitToken, isSilent, isFromQueue)
 	if self.SpecialText then
 		local npcData = private.NPCData[npcID]
 		if npcData and npcData.achievementID then
@@ -171,6 +171,8 @@ function TargetButton:Activate(npcID, npcName, detectionSource, unitLevel, unitC
 
 	self.npcID = npcID
 	self.npcName = npcName
+	self.detectionSource = detectionSource
+
 	self.SourceText:SetText(detectionSource)
 
 	if unitToken then
@@ -182,7 +184,7 @@ function TargetButton:Activate(npcID, npcName, detectionSource, unitLevel, unitC
 	self.PortraitModel:SetPortraitZoom(1)
 
 	self:SetRaidTarget(unitToken)
-	self:SetUnitData(npcName, unitLevel, unitCreatureType)
+	self:SetUnitData(npcName, unitLevel, unitCreatureType, detectionSource)
 
 	if isFromQueue then
 		self.needsRaidTarget = true
@@ -220,7 +222,9 @@ function TargetButton:Activate(npcID, npcName, detectionSource, unitLevel, unitC
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self:RegisterMessage("NPCScan_UnitInformationAvailable", "UpdateUnitData")
 
-	self:SendMessage("NPCScan_TargetButtonActivated", self)
+	if not isSilent then
+		self:SendMessage("NPCScan_TargetButtonActivated", self)
+	end
 end
 
 function TargetButton:Deactivate()
@@ -251,6 +255,10 @@ function TargetButton:Deactivate()
 
 	self.npcID = nil
 	self.npcName = nil
+	self.detectionSource = nil
+	self.unitLevel = nil
+	self.unitCreatureType = nil
+
 	self.needsUnitData = nil
 	self.isDead = nil
 end
@@ -298,9 +306,23 @@ function TargetButton:SetRaidTarget(unitToken)
 	end
 end
 
-function TargetButton:SetUnitData(npcName, unitLevel, unitCreatureType)
+function TargetButton:SetUnitData(npcName, unitLevel, unitCreatureType, detectionSource, unitClassification)
+	if detectionSource then
+		self.detectionSource = detectionSource
+		self.SourceText:SetText(detectionSource)
+	end
+
+	if unitClassification and self.__classification ~= unitClassification then
+		self:SendMessage("NPCScan_TargetButtonNeedsReclassified", self, unitClassification)
+		return
+	end
+
 	if unitCreatureType then
+		self.unitCreatureType = unitCreatureType
+
 		if unitLevel then
+			self.unitLevel = unitLevel
+
 			local template = (self.__classification == "elite" or self.__classification == "rareelite") and _G.UNIT_TYPE_PLUS_LEVEL_TEMPLATE or _G.UNIT_TYPE_LEVEL_TEMPLATE
 			self.Classification:SetText(template:format(unitLevel, unitCreatureType))
 
@@ -505,6 +527,7 @@ local function CreateTargetButton(unitClassification)
 	killedTexture.animIn = killedAnimationGroup
 
 	killedAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissGrandParent)
+	killedAnimationGroup.name = "killedAnimationGroup"
 
 	local killedAnimInShow = CreateAlphaAnimation(killedAnimationGroup, 0, 1, 0.2, nil, 1)
 	local killedAnimInHide = CreateAlphaAnimation(killedAnimationGroup, 1, 0, 0.5, nil, 2)
@@ -534,11 +557,13 @@ local function CreateTargetButton(unitClassification)
 	local dismissAnim = private.CreateAlphaAnimation(dismissAnimationGroup, 1, 0, 0.3, 0.2)
 	dismissAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissParent)
 	button.dismissAnimationGroup = dismissAnimationGroup
+	dismissAnimationGroup.name = "dismissAnimationGroup"
 
 	-- Duration
 	local durationFadeAnimationGroup = button:CreateAnimationGroup()
 	durationFadeAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissParent)
 	button.durationFadeAnimationGroup = durationFadeAnimationGroup
+	durationFadeAnimationGroup.name = "durationFadeAnimationGroup"
 
 	local durationFadeAnim = private.CreateAlphaAnimation(durationFadeAnimationGroup, 1, 0, 1.5, private.db.profile.targetButtonGroup.durationSeconds)
 	durationFadeAnimationGroup.animOut = durationFadeAnim

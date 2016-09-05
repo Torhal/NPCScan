@@ -17,7 +17,6 @@ local AddOnFolderName, private = ...
 local LibStub = _G.LibStub
 
 local TargetButtonManager = LibStub("AceEvent-3.0"):Embed({})
-TargetButtonManager:RegisterMessage("NPCScan_DetectedNPC", "Spawn")
 
 local LibToast = LibStub("LibToast-1.0")
 LibToast:Register("NPCScanAlertToast", function(toast, ...)
@@ -85,6 +84,22 @@ local function GetAnchorData()
 	return spawnPoint, anchorConfig.x or OFFSET_X[spawnPoint], anchorConfig.y or OFFSET_Y[spawnPoint]
 end
 
+local function ResetTargetButtonPoints()
+	local spawnPoint, offsetX, offsetY = GetAnchorData()
+
+	for index = 1, #ActiveTargetButtons do
+		local indexedButton = ActiveTargetButtons[index]
+		indexedButton:ClearAllPoints()
+
+		if index == 1 then
+			indexedButton:SetPoint(spawnPoint, _G.UIParent, spawnPoint, offsetX, offsetY)
+		else
+			spawnPoint = POINT_TRANSLATION[ActiveTargetButtons[1]:GetEffectiveSpawnPoint()]
+			indexedButton:SetPoint(spawnPoint, ActiveTargetButtons[index - 1], SIBLING_ANCHORS[spawnPoint], 0, SIBLING_OFFSET_Y[spawnPoint])
+		end
+	end
+end
+
 local function AcquireTargetButton(unitClassification)
 	local heap = TargetButtonHeap[unitClassification]
 	if not heap then
@@ -103,6 +118,14 @@ end
 -----------------------------------------------------------------------
 -- TargetButtonManager methods.
 -----------------------------------------------------------------------
+function TargetButtonManager:DismissAll()
+	for index = 1, #ActiveTargetButtons do
+		ActiveTargetButtons[index].dismissAnimationGroup:Play()
+	end
+end
+
+LibStub("HereBeDragons-1.0").RegisterCallback(TargetButtonManager, "PlayerZoneChanged", "DismissAll")
+
 function TargetButtonManager:ProcessQueue(eventName)
 	if #ActiveTargetButtons < _G.NUM_RAID_ICONS and not _G.InCombatLockdown() then
 		local buttonData = table.remove(QueuedData, 1)
@@ -134,19 +157,7 @@ function TargetButtonManager:Reclaim(eventName, button)
 		table.remove(ActiveTargetButtons, removalIndex):ClearAllPoints()
 	end
 
-	local spawnPoint, offsetX, offsetY = GetAnchorData()
-
-	for index = 1, #ActiveTargetButtons do
-		local indexedButton = ActiveTargetButtons[index]
-		indexedButton:ClearAllPoints()
-
-		if index == 1 then
-			indexedButton:SetPoint(spawnPoint, _G.UIParent, spawnPoint, offsetX, offsetY)
-		else
-			spawnPoint = POINT_TRANSLATION[ActiveTargetButtons[1]:GetEffectiveSpawnPoint()]
-			indexedButton:SetPoint(spawnPoint, ActiveTargetButtons[index - 1], SIBLING_ANCHORS[spawnPoint], 0, SIBLING_OFFSET_Y[spawnPoint])
-		end
-	end
+	ResetTargetButtonPoints()
 
 	self:ProcessQueue("Reclaim")
 
@@ -156,6 +167,37 @@ function TargetButtonManager:Reclaim(eventName, button)
 end
 
 TargetButtonManager:RegisterMessage("NPCScan_TargetButtonDismissed", "Reclaim")
+
+function TargetButtonManager:RespawnAsClassification(eventName, targetButton, unitClassification)
+	local targetButtonIndex
+	for index = 1, #ActiveTargetButtons do
+		if ActiveTargetButtons[index] == targetButton then
+			targetButtonIndex = index
+			break
+		end
+	end
+
+	local npcID = targetButton.npcID
+	local npcName = targetButton.npcName
+	local detectionSource = targetButton.detectionSource
+	local unitLevel = targetButton.unitLevel
+	local unitCreatureType = targetButton.unitLevel
+
+	targetButton:Deactivate()
+
+	table.insert(TargetButtonHeap[targetButton.__classification], targetButton)
+	table.remove(ActiveTargetButtons, targetButtonIndex):ClearAllPoints()
+
+	local newButton = AcquireTargetButton(unitClassification)
+	table.insert(ActiveTargetButtons, targetButtonIndex, newButton)
+
+	ResetTargetButtonPoints()
+
+	newButton:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, nil, true, false)
+	newButton.needsUnitData = nil
+end
+
+TargetButtonManager:RegisterMessage("NPCScan_TargetButtonNeedsReclassified", "RespawnAsClassification")
 
 function TargetButtonManager:Spawn(eventName, npcID, detectionSource, npcName, unitClassification, unitLevel, unitCreatureType, unitToken)
 	if ActiveTargetButtonByNPCID[npcID] then
@@ -190,13 +232,7 @@ function TargetButtonManager:Spawn(eventName, npcID, detectionSource, npcName, u
 	ActiveTargetButtons[#ActiveTargetButtons + 1] = button
 	ActiveTargetButtonByNPCID[npcID] = true
 
-	button:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, unitToken, eventName == "Reclaim")
+	button:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, unitToken, false, eventName == "Reclaim")
 end
 
-function TargetButtonManager:DismissAll()
-	for index = 1, #ActiveTargetButtons do
-		ActiveTargetButtons[index].dismissAnimationGroup:Play()
-	end
-end
-
-LibStub("HereBeDragons-1.0").RegisterCallback(TargetButtonManager, "PlayerZoneChanged", "DismissAll")
+TargetButtonManager:RegisterMessage("NPCScan_DetectedNPC", "Spawn")
