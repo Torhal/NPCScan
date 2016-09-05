@@ -259,7 +259,7 @@ end
 
 function TargetButton:DismissByAnimationGroup(animationGroup)
 	if self.__isActive then
-		if _G.InCombatLockdown() then
+		if self.inCombatLockdown then
 			self.pausedAnimations = self.pausedAnimations or {}
 			table.insert(self.pausedAnimations, animationGroup)
 
@@ -307,7 +307,7 @@ function TargetButton:SetUnitData(data)
 		self.SourceText:SetText(data.sourceText)
 	end
 
-	if data.unitClassification and self.__classification ~= data.unitClassification then
+	if data.unitClassification and self.__classification ~= data.unitClassification and not self.inCombatLockdown then
 		self:SendMessage("NPCScan_TargetButtonNeedsReclassified", self, data)
 		return
 	end
