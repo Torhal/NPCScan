@@ -530,10 +530,10 @@ local function CreateTargetButton(unitClassification)
 	modelAnimIn:SetChildKey("PortraitModel")
 
 	-- Dismissed
-	local dismissAnimationGroupGroup = button:CreateAnimationGroup()
-	local dismissAnim = private.CreateAlphaAnimation(dismissAnimationGroupGroup, 1, 0, 0.3, 0.2)
-	dismissAnimationGroupGroup:SetScript("OnFinished", AnimationGroup_DismissParent)
-	button.dismissAnimationGroup = dismissAnimationGroupGroup
+	local dismissAnimationGroup = button:CreateAnimationGroup()
+	local dismissAnim = private.CreateAlphaAnimation(dismissAnimationGroup, 1, 0, 0.3, 0.2)
+	dismissAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissParent)
+	button.dismissAnimationGroup = dismissAnimationGroup
 
 	-- Duration
 	local durationFadeAnimationGroup = button:CreateAnimationGroup()
