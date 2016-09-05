@@ -81,7 +81,7 @@ end
 -----------------------------------------------------------------------
 local function TargetButton_OnClick(self, mouseButton)
 	if mouseButton == "RightButton" then
-		self:DismissByAnimationGroup(self.dismissAnimationGroup)
+		self.dismissAnimationGroup:Play()
 	end
 end
 
@@ -545,7 +545,7 @@ local function CreateTargetButton(unitClassification)
 
 	-- Dismissed
 	local dismissAnimationGroup = button:CreateAnimationGroup()
-	local dismissAnim = private.CreateAlphaAnimation(dismissAnimationGroup, 1, 0, 0.3, 0.2)
+	local dismissAnim = private.CreateAlphaAnimation(dismissAnimationGroup, 1, 0, 0.5, 0.5)
 	dismissAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissParent)
 	button.dismissAnimationGroup = dismissAnimationGroup
 	dismissAnimationGroup.name = "dismissAnimationGroup"
