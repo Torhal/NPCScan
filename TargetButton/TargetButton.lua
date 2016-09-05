@@ -213,13 +213,13 @@ function TargetButton:Activate(npcID, npcName, detectionSource, unitLevel, unitC
 		self.durationFadeAnimationGroup:Play()
 	end
 
+	self.__isActive = true
+
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self:RegisterMessage("NPCScan_UnitInformationAvailable", "UpdateUnitData")
 
 	self:SendMessage("NPCScan_TargetButtonActivated", self)
-
-	self.__isActive = true
 end
 
 function TargetButton:Deactivate()
@@ -251,6 +251,7 @@ function TargetButton:Deactivate()
 	self.npcID = nil
 	self.npcName = nil
 	self.needsUnitData = nil
+	self.isDead = nil
 end
 
 function TargetButton:DismissByAnimationGroup(animationGroup)
