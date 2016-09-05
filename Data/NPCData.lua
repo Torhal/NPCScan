@@ -352,6 +352,7 @@ local NPCData = {
 	[77776] = { questID = 34205, }, -- Wandering Vindicator
 	[77784] = { questID = 34208, }, -- Lo'marg Jawcrusher
 	[77795] = { questID = 34221, }, -- Echo of Murmur
+	[77828] = { questID = 34220, }, -- Echo of Murmur
 	[78151] = { questID = 34130, }, -- Huntmaster Kuang
 	[78161] = { questID = 34862, }, -- Hyperious
 	[78260] = { questID = 37412, }, -- King Slime
@@ -585,12 +586,12 @@ local NPCData = {
 	[90936] = { questID = 38266, }, -- Bloodhunter Zulk
 	[91100] = { questID = 38212, }, -- Brogozog
 	[91009] = { questID = 38457, }, -- Putre'thar
-	[91113] = { questID = 38217, }, -- Tide Behemoth
-	[91114] = { questID = 38217, }, -- Tide Behemoth
-	[91115] = { questID = 38217, }, -- Tide Behemoth
 	[91087] = { questID = 38207, }, -- Zeter'el
 	[91093] = { questID = 38209, }, -- Bramblefell
 	[91098] = { questID = 38211, }, -- Felspark
+	[91187] = { questID = 38238, }, -- Beacher
+	[91113] = { questID = 38217, }, -- Tide Behemoth
+	[91114] = { questID = 38217, }, -- Tide Behemoth
 	[91115] = { questID = 38217, }, -- Tide Behemoth
 	[91227] = { questID = 39159, }, -- Remnant of the Blood Moon
 	[91232] = { questID = 38746, }, -- Commander Krag'goth
@@ -633,6 +634,7 @@ local NPCData = {
 	[92631] = { questID = 38630, factionGroup = "Horde", }, -- Dark Ranger Jess
 	[92634] = { questID = 38630, factionGroup = "Horde", }, -- Apothecary Perez
 	[92636] = { questID = 38632, }, -- The Night Haunter
+	[92645] = { questID = 38632, }, -- The Night Haunter
 	[92647] = { questID = 38634, }, -- Felsmith Damorka
 	[92657] = { questID = 38696, }, -- Bleeding Hollow Horror
 	[92682] = { questID = 38642, }, -- Helmouth Raider
@@ -739,11 +741,14 @@ local NPCData = {
 	[105938] = { questID = 42069, }, -- Felwing
 	[106351] = { questID = 43717, }, -- Artificer Lothaire
 	[106526] = { questID = 44675, }, -- Lady Rivantas
+	[106532] = { questID = 44569, }, -- Inquisitor Volitix
 	[106990] = { questID = 42221, }, -- Chief Bitterbrine
 	[107105] = { questID = 44670, }, -- Broodmother Lizax
 	[107113] = { questID = 42280, }, -- Vorthax
 	[107127] = { questID = 42450, }, -- Brawlgoth
+	[107136] = { questID = 42286, }, -- Houndmaster Stroxis
 	[107269] = { questID = 42376, }, -- Inquisitor Tivos
+	[107327] = { questID = 42417, }, -- Bilebrain
 	[107487] = { questID = 42437, isTameable = true, }, -- Starbuck
 	[107657] = { questID = 42505, }, -- Arcanist Shal'iman
 	[107846] = { questID = 43968, isTameable = true, }, -- Pinchshank
@@ -755,6 +760,7 @@ local NPCData = {
 	[109498] = { questID = 40423, }, -- Xaander
 	[109500] = { questID = 40423, }, -- Jak
 	[109501] = { questID = 40423, }, -- Darkful
+	[109504] = { questID = 44108, }, -- Ragemaw
 	[109708] = { questID = 43176, }, -- Undergrell Ringleader
 	[109954] = { questID = 43348, }, -- Magister Phaedris
 	[110024] = { questID = 43351, }, -- Mal'Dreth the Corruptor
