@@ -15,12 +15,16 @@ local table = _G.table
 local AddOnFolderName, private = ...
 
 local LibStub = _G.LibStub
-local AceEvent = LibStub("AceEvent-3.0")
+
+local TargetButtonManager = LibStub("AceEvent-3.0"):Embed({})
+TargetButtonManager:RegisterEvent("PLAYER_REGEN_ENABLED", "ProcessQueue")
+TargetButtonManager:RegisterMessage("NPCScan_TargetButtonDismissed", "Reclaim")
+TargetButtonManager:RegisterMessage("NPCScan_DetectedNPC", "Spawn")
+
 local HereBeDragons = LibStub("HereBeDragons-1.0")
+HereBeDragons.RegisterCallback(TargetButtonManager, "PlayerZoneChanged", "DismissAll")
+
 local LibToast = LibStub("LibToast-1.0")
-
-local TargetButtonManager = AceEvent:Embed({})
-
 LibToast:Register("NPCScanAlertToast", function(toast, ...)
 	toast:SetTitle(AddOnFolderName)
 	toast:SetFormattedText("%s%s|r", _G.GREEN_FONT_COLOR_CODE, ...)
@@ -104,6 +108,16 @@ end
 -----------------------------------------------------------------------
 -- TargetButtonManager methods.
 -----------------------------------------------------------------------
+function TargetButtonManager:ProcessQueue(eventName)
+	if #ActiveTargetButtons < _G.NUM_RAID_ICONS and not _G.InCombatLockdown() then
+		local buttonData = table.remove(QueuedData, 1)
+
+		if buttonData then
+			self:Spawn(eventName, _G.unpack(buttonData))
+		end
+	end
+end
+
 function TargetButtonManager:Reclaim(eventName, button)
 	ActiveTargetButtonByNPCID[button.npcID] = nil
 
@@ -137,17 +151,12 @@ function TargetButtonManager:Reclaim(eventName, button)
 		end
 	end
 
-	local buttonData = table.remove(QueuedData, 1)
-	if buttonData then
-		self:Spawn("ReclaimQueue", _G.unpack(buttonData))
-	end
+	self:ProcessQueue("Reclaim")
 
 	if #ActiveTargetButtons == 0 then
 		_G.NPCScan_RecentTargetButton:ResetMacroText()
 	end
 end
-
-TargetButtonManager:RegisterMessage("NPCScan_TargetButtonDismissed", "Reclaim")
 
 function TargetButtonManager:Spawn(eventName, npcID, detectionSource, npcName, unitClassification, unitLevel, unitCreatureType, unitToken)
 	if ActiveTargetButtonByNPCID[npcID] then
@@ -185,24 +194,8 @@ function TargetButtonManager:Spawn(eventName, npcID, detectionSource, npcName, u
 	button:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, unitToken, eventName == "ReclaimQueue")
 end
 
-TargetButtonManager:RegisterMessage("NPCScan_DetectedNPC", "Spawn")
-
 function TargetButtonManager:DismissAll()
 	for index = 1, #ActiveTargetButtons do
 		ActiveTargetButtons[index].dismissAnimationGroup:Play()
 	end
 end
-
-HereBeDragons.RegisterCallback(TargetButtonManager, "PlayerZoneChanged", "DismissAll")
-
-function TargetButtonManager:PLAYER_REGEN_ENABLED(eventName)
-	if #ActiveTargetButtons < _G.NUM_RAID_ICONS then
-		local buttonData = table.remove(QueuedData, 1)
-
-		if buttonData then
-			self:Spawn(eventName, _G.unpack(buttonData))
-		end
-	end
-end
-
-TargetButtonManager:RegisterEvent("PLAYER_REGEN_ENABLED")
