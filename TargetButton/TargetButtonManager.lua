@@ -17,12 +17,7 @@ local AddOnFolderName, private = ...
 local LibStub = _G.LibStub
 
 local TargetButtonManager = LibStub("AceEvent-3.0"):Embed({})
-TargetButtonManager:RegisterEvent("PLAYER_REGEN_ENABLED", "ProcessQueue")
-TargetButtonManager:RegisterMessage("NPCScan_TargetButtonDismissed", "Reclaim")
 TargetButtonManager:RegisterMessage("NPCScan_DetectedNPC", "Spawn")
-
-local HereBeDragons = LibStub("HereBeDragons-1.0")
-HereBeDragons.RegisterCallback(TargetButtonManager, "PlayerZoneChanged", "DismissAll")
 
 local LibToast = LibStub("LibToast-1.0")
 LibToast:Register("NPCScanAlertToast", function(toast, ...)
@@ -118,6 +113,8 @@ function TargetButtonManager:ProcessQueue(eventName)
 	end
 end
 
+TargetButtonManager:RegisterEvent("PLAYER_REGEN_ENABLED", "ProcessQueue")
+
 function TargetButtonManager:Reclaim(eventName, button)
 	ActiveTargetButtonByNPCID[button.npcID] = nil
 
@@ -158,6 +155,8 @@ function TargetButtonManager:Reclaim(eventName, button)
 	end
 end
 
+TargetButtonManager:RegisterMessage("NPCScan_TargetButtonDismissed", "Reclaim")
+
 function TargetButtonManager:Spawn(eventName, npcID, detectionSource, npcName, unitClassification, unitLevel, unitCreatureType, unitToken)
 	if ActiveTargetButtonByNPCID[npcID] then
 		return
@@ -191,7 +190,7 @@ function TargetButtonManager:Spawn(eventName, npcID, detectionSource, npcName, u
 	ActiveTargetButtons[#ActiveTargetButtons + 1] = button
 	ActiveTargetButtonByNPCID[npcID] = true
 
-	button:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, unitToken, eventName == "ReclaimQueue")
+	button:Activate(npcID, npcName, detectionSource, unitLevel, unitCreatureType, unitToken, eventName == "Reclaim")
 end
 
 function TargetButtonManager:DismissAll()
@@ -199,3 +198,5 @@ function TargetButtonManager:DismissAll()
 		ActiveTargetButtons[index].dismissAnimationGroup:Play()
 	end
 end
+
+LibStub("HereBeDragons-1.0").RegisterCallback(TargetButtonManager, "PlayerZoneChanged", "DismissAll")
