@@ -134,14 +134,14 @@ local function CanAddToScanList(npcID)
 	local profile = private.db.profile
 
 	if profile.blacklist.npcIDs[npcID] then
-		private.Debug("Skipping %s - blacklisted.", NPCScan:GetNPCNameFromID(npcID))
+		private.Debug("Skipping %s (%d) - blacklisted.", NPCScan:GetNPCNameFromID(npcID), npcID)
 		return false
 	end
 
 	local npcData = private.NPCData[npcID]
 
 	if npcData and npcData.factionGroup == playerFactionGroup then
-		private.Debug("Skipping %s - same faction group.", NPCScan:GetNPCNameFromID(npcID))
+		private.Debug("Skipping %s (%d) - same faction group.", NPCScan:GetNPCNameFromID(npcID), npcID)
 		return false
 	end
 
@@ -149,12 +149,12 @@ local function CanAddToScanList(npcID)
 	local detection = profile.detection
 
 	if isTameable and not detection.tameables then
-		private.Debug("Skipping %s - not tracking tameables.", NPCScan:GetNPCNameFromID(npcID))
+		private.Debug("Skipping %s (%d) - not tracking tameables.", NPCScan:GetNPCNameFromID(npcID), npcID)
 		return false
 	end
 
 	if not isTameable and not detection.rares then
-		private.Debug("Skipping %s - not tracking rares.", NPCScan:GetNPCNameFromID(npcID))
+		private.Debug("Skipping %s (%d) - not tracking rares.", NPCScan:GetNPCNameFromID(npcID), npcID)
 		return false
 	end
 
@@ -162,18 +162,18 @@ local function CanAddToScanList(npcID)
 
 	if achievementID then
 		if not detection.achievements[achievementID] then
-			private.Debug("Skipping %s - not tracking the achievement.", NPCScan:GetNPCNameFromID(npcID))
+			private.Debug("Skipping %s (%d) - not tracking the achievement.", NPCScan:GetNPCNameFromID(npcID), npcID)
 			return false
 		end
 
 		if detection.ignoreCompletedAchievementCriteria and (private.ACHIEVEMENTS[achievementID].isCompleted or npcData.isCriteriaCompleted) then
-			private.Debug("Skipping %s - criteria already met or achievement completed.", NPCScan:GetNPCNameFromID(npcID))
+			private.Debug("Skipping %s (%d) - criteria already met or achievement completed.", NPCScan:GetNPCNameFromID(npcID), npcID)
 			return false
 		end
 	end
 
 	if detection.ignoreCompletedQuestObjectives and IsNPCQuestComplete(npcID) then
-		private.Debug("Skipping %s - already killed.", NPCScan:GetNPCNameFromID(npcID))
+		private.Debug("Skipping %s (%d) - already killed.", NPCScan:GetNPCNameFromID(npcID), npcID)
 		return false
 	end
 
