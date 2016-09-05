@@ -391,17 +391,76 @@ do
 		descStyle = "inline",
 		type = "group",
 		args = {
-			screenEdgeFlash = {
+			screenFlash = {
+				type = "group",
 				order = 1,
-				name = _G.SHOW_FULLSCREEN_STATUS_TEXT,
-				descStyle = "inline",
-				type = "toggle",
-				get = function(info)
-					return profile.alert.screenEdgeFlash
-				end,
-				set = function(info, value)
-					profile.alert.screenEdgeFlash = value
-				end,
+				name = L["Screen Flash"],
+				inline = true,
+				args = {
+					isEnabled = {
+						order = 1,
+						name = _G.ENABLE,
+						descStyle = "inline",
+						type = "toggle",
+						get = function(info)
+							return profile.alert.screenFlash.isEnabled
+						end,
+						set = function(info, value)
+							profile.alert.screenFlash.isEnabled = value
+						end,
+					},
+					texture = {
+						order = 2,
+						name = _G.TEXTURES_SUBHEADER,
+						descStyle = "inline",
+						type = "select",
+						dialogControl = 'LSM30_Background',
+						values = _G.AceGUIWidgetLSMlists.background,
+						disabled = function()
+							return not profile.alert.screenFlash.isEnabled
+						end,
+						get = function(info)
+							return profile.alert.screenFlash.texture
+						end,
+						set = function(info, value)
+							profile.alert.screenFlash.texture = value
+						end,
+					},
+					color = {
+						order = 3,
+						name = _G.COLOR,
+						descStyle = "inline",
+						hasAlpha = true,
+						type = "color",
+						disabled = function()
+							return not profile.alert.screenFlash.isEnabled
+						end,
+						get = function(info)
+							local color = profile.alert.screenFlash.color
+
+							if color then
+								return color.r, color.g, color.b, color.a else return 0, 0, 0, 1
+							end
+						end,
+						set = function(info, r, g, b, a)
+							local color = profile.alert.screenFlash.color
+
+							if not color then
+								profile.alert.screenFlash.color = {
+									r = r,
+									g = g,
+									b = b,
+									a = a
+								}
+							else
+								color.r = r
+								color.g = g
+								color.b = b
+								color.a = a
+							end
+						end,
+					},
+				},
 			},
 			soundOptions = {
 				order = 2,
@@ -526,7 +585,7 @@ do
 				childGroups = "tab",
 				args = {
 					detectionOptions = DetectionOptions,
-					AlertOptions = AlertOptions,
+					alertOptions = AlertOptions,
 					targetingOptions = TargetingOptions,
 					profileOptions = LibStub("AceDBOptions-3.0"):GetOptionsTable(private.db),
 				}

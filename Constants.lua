@@ -31,7 +31,16 @@ local DATABASE_DEFAULTS = {
 				"NPCScan Chimes",
 				"NPCScan Ogre War Drums",
 			},
-			screenEdgeFlash = true,
+			screenFlash = {
+				color = {
+					r = 1,
+					g = 1,
+					b = 1,
+					a = 1,
+				},
+				isEnabled = true,
+				texture = "Blizzard Low Health",
+			},
 			soundChannel = "Master",
 			soundIsEnabled = true,
 		},

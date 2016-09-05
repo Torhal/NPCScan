@@ -370,7 +370,6 @@ do
 	local flashTexture = flashFrame:CreateTexture()
 	flashTexture:SetBlendMode("ADD")
 	flashTexture:SetAllPoints()
-	flashTexture:SetTexture([[Interface\FullScreenTextures\LowHealth]])
 
 	local fadeAnimationGroup = flashFrame:CreateAnimationGroup()
 	fadeAnimationGroup:SetLooping("BOUNCE")
@@ -399,7 +398,10 @@ do
 	function NPCScan:DispatchSensoryCues(eventName)
 		local alert = private.db.profile.alert
 
-		if alert.screenEdgeFlash then
+		if alert.screenFlash.isEnabled then
+			local color = alert.screenFlash.color
+			flashTexture:SetTexture(LibSharedMedia:Fetch("background", alert.screenFlash.texture))
+			flashTexture:SetVertexColor(color.r, color.g, color.b, color.a)
 			flashFrame:Show()
 
 			fadeAnimationGroup:Pause() -- Forces OnPlay to fire again if it was already playing
