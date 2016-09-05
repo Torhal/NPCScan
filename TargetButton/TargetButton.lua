@@ -210,8 +210,9 @@ function TargetButton:Activate(npcID, npcName, detectionSource, unitLevel, unitC
 		self.durationFadeAnimationGroup.animOut:SetStartDelay(1)
 	else
 		self.durationFadeAnimationGroup.animOut:SetStartDelay(private.db.profile.targetButtonGroup.durationSeconds)
-		self.durationFadeAnimationGroup:Play()
 	end
+
+	self.durationFadeAnimationGroup:Play()
 
 	self.__isActive = true
 
