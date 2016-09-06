@@ -97,7 +97,7 @@ do
 		throttledNPCs[npcID] = now
 
 		data.npcName = data.npcName or NPCScan:GetNPCNameFromID(npcID)
-		data.unitClassification = data.unitClassification or "rareelite"
+		data.unitClassification = data.unitClassification or "rare"
 
 		NPCScan:SendMessage("NPCScan_DetectedNPC", data)
 
