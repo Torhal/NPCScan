@@ -408,12 +408,16 @@ do
 			fadeAnimationGroup:Play()
 		end
 
-		if alert.soundIsEnabled and time() > lastSoundTime + SOUND_INTERVAL_SECONDS then
+		local now = time()
+
+		if alert.soundIsEnabled and now > lastSoundTime + SOUND_INTERVAL_SECONDS then
 			local soundNames = alert.sharedMediaSoundNames
 
 			for index = 1, #soundNames do
 				_G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundNames[index]), alert.soundChannel)
 			end
+
+			lastSoundTime = now
 		end
 	end
 
