@@ -63,9 +63,9 @@ local function DecorateRareTargetButton(button)
 	shineTexture:SetSize(171, 75)
 	shineTexture:SetPoint("BOTTOMLEFT", -10, 12)
 
-	local killedTexture = button.killedTexture
-	killedTexture:SetPoint("TOPLEFT", button, "TOPLEFT", 10, -10)
-	killedTexture:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -10, 10)
+	local killedBackgroundTexture = button.killedBackgroundTexture
+	killedBackgroundTexture:SetPoint("TOPLEFT", button, "TOPLEFT", 10, -10)
+	killedBackgroundTexture:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -10, 10)
 end
 
 private.DecorateRareTargetButton = DecorateRareTargetButton

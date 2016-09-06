@@ -50,9 +50,9 @@ local function DecorateNormalTargetButton(button)
 	shineTexture:SetSize(171, 60)
 	shineTexture:SetPoint("BOTTOMLEFT", -10, 12)
 
-	local killedTexture = button.killedTexture
-	killedTexture:SetPoint("TOPLEFT", button, "TOPLEFT", 12, -9)
-	killedTexture:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -11, 10)
+	local killedBackgroundTexture = button.killedBackgroundTexture
+	killedBackgroundTexture:SetPoint("TOPLEFT", button, "TOPLEFT", 12, -9)
+	killedBackgroundTexture:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -11, 10)
 end
 
 private.DecorateNormalTargetButton = DecorateNormalTargetButton

@@ -31,8 +31,25 @@ local function CreateAlphaAnimation(animationGroup, fromAlpha, toAlpha, duration
 
 	return animation
 end
-
 private.CreateAlphaAnimation = CreateAlphaAnimation
+
+local function CreateScaleAnimation(animationGroup, fromScaleX, fromScaleY, toScaleX, toScaleY, duration, startDelay, order)
+	local animation = animationGroup:CreateAnimation("Scale")
+	animation:SetFromScale(fromScaleX, fromScaleY)
+	animation:SetToScale(toScaleX, toScaleY)
+	animation:SetDuration(duration)
+
+	if startDelay then
+		animation:SetStartDelay(startDelay)
+	end
+
+	if order then
+		animation:SetOrder(order)
+	end
+
+	return animation
+end
+private.CreateScaleAnimation = CreateScaleAnimation
 
 local function NumericSortString(a, b)
 	local x, y = tonumber(a), tonumber(b)

@@ -123,8 +123,12 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 		self.shineTexture:Show()
 		self.shineTexture.animIn:Play()
 
-		self.killedTexture:Show()
-		self.killedTexture.animIn:Play()
+		self.killedBackgroundTexture:Show()
+		self.killedBackgroundTexture.animIn:Play()
+
+		self.killedTextureFrame.left:Show()
+		self.killedTextureFrame.right:Show()
+		self.killedTextureFrame.animationGroup:Play()
 
 		self.isDead = nil
 	elseif self.pausedAnimations then
@@ -247,11 +251,14 @@ function TargetButton:Deactivate()
 	-- Make certain these are stopped, else they may finish soon after Activate is called again.
 	self.dismissAnimationGroup:Stop()
 	self.durationFadeAnimationGroup:Stop()
-	self.killedTexture.animIn:Stop()
+	self.killedBackgroundTexture.animIn:Stop()
+	self.killedTextureFrame.animationGroup:Stop()
 
 	self.pausedAnimations = nil
 
-	self.killedTexture:Hide()
+	self.killedBackgroundTexture:Hide()
+	self.killedTextureFrame.left:Hide()
+	self.killedTextureFrame.right:Hide()
 	self:Hide()
 
 	table.insert(RaidIconIDs, self.raidIconID)
@@ -412,6 +419,7 @@ end -- do-block
 
 local function CreateTargetButton(unitClassification)
 	local CreateAlphaAnimation = private.CreateAlphaAnimation
+	local CreateScaleAnimation = private.CreateScaleAnimation
 
 	local button = _G.CreateFrame("Button", nil, _G.UIParent, "SecureActionButtonTemplate, SecureHandlerShowHideTemplate")
 	button:SetFrameStrata("DIALOG")
@@ -457,11 +465,30 @@ local function CreateTargetButton(unitClassification)
 	shineTexture:SetAtlas("loottoast-sheen")
 	button.shineTexture = shineTexture
 
-	local killedTexture = button:CreateTexture(nil, "OVERLAY")
-	killedTexture:Hide()
-	killedTexture:SetBlendMode("ADD")
-	killedTexture:SetTexture([[Interface\FullScreenTextures\LowHealth]])
-	button.killedTexture = killedTexture
+	local killedBackgroundTexture = button:CreateTexture(nil, "OVERLAY")
+	killedBackgroundTexture:Hide()
+	killedBackgroundTexture:SetBlendMode("ADD")
+	killedBackgroundTexture:SetTexture([[Interface\FullScreenTextures\LowHealth]])
+	button.killedBackgroundTexture = killedBackgroundTexture
+
+	local killedTextureFrame = _G.CreateFrame("Frame", nil, button)
+	killedTextureFrame:SetSize(48, 48)
+	killedTextureFrame:SetPoint("CENTER")
+	button.killedTextureFrame = killedTextureFrame
+
+	local killLeftTexture = killedTextureFrame:CreateTexture(nil, "OVERLAY", 1)
+	killLeftTexture:SetAlpha(0)
+	killLeftTexture:SetSize(64, 64)
+	killLeftTexture:SetAtlas("GarrMission_EncounterBar-Xleft")
+	killLeftTexture:SetPoint("CENTER")
+	killedTextureFrame.left = killLeftTexture
+
+	local killRightTexture = killedTextureFrame:CreateTexture(nil, "OVERLAY", 1)
+	killRightTexture:SetAlpha(0)
+	killRightTexture:SetSize(64, 64)
+	killRightTexture:SetAtlas("GarrMission_EncounterBar-Xright")
+	killRightTexture:SetPoint("CENTER")
+	killedTextureFrame.right = killRightTexture
 
 	-----------------------------------------------------------------------
 	-- FontStrings.
@@ -512,15 +539,36 @@ local function CreateTargetButton(unitClassification)
 
 	local shineAnimateOut = CreateAlphaAnimation(shineAnimationGroup, 1, 0, 0.25, 0.175, 2)
 
+	-- Killed Background
+	local killedBackgroundAnimationGroup = killedBackgroundTexture:CreateAnimationGroup()
+	killedBackgroundTexture.animIn = killedBackgroundAnimationGroup
+
+	killedBackgroundAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissGrandParent)
+	killedBackgroundAnimationGroup.name = "killedBackgroundAnimationGroup"
+
+	local killedBackgroundAnimInShow = CreateAlphaAnimation(killedBackgroundAnimationGroup, 0, 1, 0.5, nil, 1)
+	local killedBackgroundAnimInHide = CreateAlphaAnimation(killedBackgroundAnimationGroup, 1, 0, 0.8, nil, 2)
+
 	-- Killed
-	local killedAnimationGroup = killedTexture:CreateAnimationGroup()
-	killedTexture.animIn = killedAnimationGroup
+	local killedAnimationGroup = killedTextureFrame:CreateAnimationGroup()
+	killedAnimationGroup:SetToFinalAlpha(true)
+	killedTextureFrame.animationGroup = killedAnimationGroup
 
-	killedAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissGrandParent)
-	killedAnimationGroup.name = "killedAnimationGroup"
+	local killedLeftScaleAnim = CreateScaleAnimation(killedAnimationGroup, 5, 5, 1, 1, 0.15, nil, 1)
+	killedLeftScaleAnim:SetTarget(killedTextureFrame)
+	killedLeftScaleAnim:SetChildKey("left")
 
-	local killedAnimInShow = CreateAlphaAnimation(killedAnimationGroup, 0, 1, 0.2, nil, 1)
-	local killedAnimInHide = CreateAlphaAnimation(killedAnimationGroup, 1, 0, 0.5, nil, 2)
+	local killedLeftAlphaAnim = CreateAlphaAnimation(killedAnimationGroup, 0, 1, 0.1, nil, 1)
+	killedLeftAlphaAnim:SetTarget(killedTextureFrame)
+	killedLeftAlphaAnim:SetChildKey("left")
+
+	local killedRightScaleAnim = CreateScaleAnimation(killedAnimationGroup, 5, 5, 1, 1, 0.15, 0.1, 1)
+	killedRightScaleAnim:SetTarget(killedTextureFrame)
+	killedRightScaleAnim:SetChildKey("right")
+
+	local killedRightAlphaAnim = CreateAlphaAnimation(killedAnimationGroup, 0, 1, 0.1, 0.1, 1)
+	killedRightAlphaAnim:SetTarget(killedTextureFrame)
+	killedRightAlphaAnim:SetChildKey("right")
 
 	-- Background
 	local backgroundAnimIn = CreateAlphaAnimation(buttonAnimIn, 0, 1, 0.4, nil, 1)

@@ -124,9 +124,9 @@ local function DecorateEliteTargetButton(button)
 	shineTexture:SetSize(171, 75)
 	shineTexture:SetPoint("BOTTOMLEFT", 10, 24)
 
-	local killedTexture = button.killedTexture
-	killedTexture:SetPoint("TOPLEFT", button, "TOPLEFT", 40, -20)
-	killedTexture:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -10, 20)
+	local killedBackgroundTexture = button.killedBackgroundTexture
+	killedBackgroundTexture:SetPoint("TOPLEFT", button, "TOPLEFT", 40, -20)
+	killedBackgroundTexture:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -10, 20)
 
 	-----------------------------------------------------------------------
 	-- Button animations.
