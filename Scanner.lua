@@ -232,8 +232,6 @@ function NPCScan:UpdateScanList(eventName, mapID)
 	_G.NPCScan_SearchMacroButton:UpdateMacroText(npcScanList)
 end
 
-HereBeDragons.RegisterCallback(NPCScan, "PlayerZoneChanged", "UpdateScanList")
-
 -----------------------------------------------------------------------
 -- Events.
 -----------------------------------------------------------------------
