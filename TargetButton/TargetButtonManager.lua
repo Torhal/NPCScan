@@ -168,10 +168,6 @@ end
 TargetButtonManager:RegisterMessage("NPCScan_TargetButtonDismissed", "Reclaim")
 
 function TargetButtonManager:RespawnAsClassification(eventName, targetButton, data)
-	if _G.InCombatLockdown() then
-		return
-	end
-
 	local targetButtonIndex
 	for index = 1, #ActiveTargetButtons do
 		if ActiveTargetButtons[index] == targetButton then

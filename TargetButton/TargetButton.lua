@@ -135,7 +135,7 @@ end
 
 function TargetButton:UpdateData(eventName, data)
 	if data.npcID == self.npcID then
-		if data.unitClassification and self.__classification ~= data.unitClassification and not self.inCombatLockdown then
+		if data.unitClassification and self.__classification ~= data.unitClassification and not _G.InCombatLockdown() then
 			self:SendMessage("NPCScan_TargetButtonNeedsReclassified", self, data)
 			return
 		end
@@ -269,7 +269,7 @@ end
 
 function TargetButton:DismissByAnimationGroup(animationGroup)
 	if self.__isActive then
-		if self.inCombatLockdown then
+		if _G.InCombatLockdown() then
 			self.pausedAnimations = self.pausedAnimations or {}
 			table.insert(self.pausedAnimations, animationGroup)
 
@@ -359,13 +359,7 @@ do
 		macroButton.ResetMacroText = ResetMacroText
 		macroButton:ResetMacroText()
 
-		function macroButton:PLAYER_REGEN_DISABLED()
-			self.inCombatLockdown = true
-		end
-
 		function macroButton:PLAYER_REGEN_ENABLED()
-			self.inCombatLockdown = nil
-
 			if self.needsUpdate then
 				self:UpdateMacroText(self.npcScanList)
 
@@ -374,11 +368,10 @@ do
 			end
 		end
 
-		macroButton:RegisterEvent("PLAYER_REGEN_DISABLED")
 		macroButton:RegisterEvent("PLAYER_REGEN_ENABLED")
 
 		function macroButton:UpdateMacroText(npcScanList)
-			if self.inCombatLockdown then
+			if _G.InCombatLockdown() then
 				self.npcScanList = npcScanList
 				self.needsUpdate = true
 				return
