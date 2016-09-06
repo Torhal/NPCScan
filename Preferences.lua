@@ -563,6 +563,7 @@ do
 							local alert = profile.alert
 							local soundNames = alert.sound.sharedMediaNames
 
+							NPCScan:OverrideSoundCVars()
 
 							for index = 1, #soundNames do
 								_G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundNames[index]), alert.sound.channel)
