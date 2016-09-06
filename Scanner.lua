@@ -314,18 +314,18 @@ end
 
 function NPCScan:VIGNETTE_ADDED(eventName, instanceID)
 	local x, y, vignetteName, iconID = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceID)
-	local npcID = private.NPCIDFromName[vignetteName]
+	local questID = private.QuestIDFromName[vignetteName]
 
-	if npcID then
-		ProcessDetection({
-			npcID = npcID,
-			sourceText = _G.MINIMAP_LABEL
-		})
+	if questID then
+		ProcessQuestDetection(questID, _G.MINIMAP_LABEL)
 	else
-		local questID = private.QuestIDFromName[vignetteName]
+		local npcID = private.NPCIDFromName[vignetteName]
 
-		if questID then
-			ProcessQuestDetection(questID, _G.MINIMAP_LABEL)
+		if npcID then
+			ProcessDetection({
+				npcID = npcID,
+				sourceText = _G.MINIMAP_LABEL
+			})
 		else
 			private.Debug("Unknown vignette: %s with iconID %s", vignetteName, tostring(iconID))
 		end
