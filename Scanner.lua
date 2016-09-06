@@ -392,7 +392,8 @@ do
 	local fadeAnimIn = private.CreateAlphaAnimation(fadeAnimationGroup, 0, 1, 0.5)
 	fadeAnimIn:SetEndDelay(0.25)
 
-	local SOUND_INTERVAL_SECONDS = 2
+	local ALERT_SOUND_THROTTLE_INTERVAL_SECONDS = 2
+	local SOUND_RESTORE_INTERVAL_SECONDS = 5
 	local lastSoundTime = time()
 
 	function NPCScan:PlayFlashAnimation(texturePath, color)
@@ -404,6 +405,31 @@ do
 		fadeAnimationGroup:Play()
 	end
 
+	local SoundCVars = {
+		Sound_EnableAllSound = 1,
+		Sound_EnableSFX = 1,
+		Sound_EnableSoundWhenGameIsInBG = 1,
+	}
+
+	local StoredSoundCVars = {}
+
+	local function ResetStoredSoundCVars()
+		for cvar, value in pairs(StoredSoundCVars) do
+			_G.SetCVar(cvar, value)
+		end
+
+	end
+
+	function NPCScan:OverrideSoundCVars()
+		for cvar, value in pairs(SoundCVars) do
+			StoredSoundCVars[cvar] = _G.GetCVar(cvar)
+
+			_G.SetCVar(cvar, value)
+		end
+
+		self:ScheduleTimer(ResetStoredSoundCVars, SOUND_RESTORE_INTERVAL_SECONDS)
+	end
+
 	function NPCScan:DispatchSensoryCues(eventName)
 		local alert = private.db.profile.alert
 		local now = time()
@@ -412,11 +438,15 @@ do
 			self:PlayFlashAnimation(alert.screenFlash.texture, alert.screenFlash.color)
 		end
 
-		if alert.soundIsEnabled and now > lastSoundTime + SOUND_INTERVAL_SECONDS then
-			local soundNames = alert.sharedMediaSoundNames
+		if alert.sound.isEnabled and now > lastSoundTime + ALERT_SOUND_THROTTLE_INTERVAL_SECONDS then
+			if alert.sound.ignoreMute then
+				self:OverrideSoundCvars()
+			end
+
+			local soundNames = alert.sound.sharedMediaNames
 
 			for index = 1, #soundNames do
-				_G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundNames[index]), alert.soundChannel)
+				_G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundNames[index]), alert.sound.channel)
 			end
 
 			lastSoundTime = now

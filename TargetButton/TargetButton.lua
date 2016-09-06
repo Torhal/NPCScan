@@ -113,10 +113,11 @@ end
 
 function TargetButton:PLAYER_REGEN_ENABLED()
 	if self.isDead then
-		self.isDead = nil
 
-		if private.db.profile.alert.soundIsEnabled then
-			_G.PlaySoundFile(LibSharedMedia:Fetch("sound", "NPCScan Killed"), private.db.profile.alert.soundChannel)
+		local sound = private.db.profile.alert.sound
+
+		if sound.isEnabled then
+			_G.PlaySoundFile(LibSharedMedia:Fetch("sound", "NPCScan Killed"), sound.channel)
 		end
 
 		self.shineTexture:Show()
@@ -124,6 +125,8 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 
 		self.killedTexture:Show()
 		self.killedTexture.animIn:Play()
+
+		self.isDead = nil
 	elseif self.pausedAnimations then
 		for index = 1, #self.pausedAnimations do
 			self.pausedAnimations[index]:Play()

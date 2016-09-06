@@ -344,7 +344,7 @@ do
 	function UpdateAlertNamesOptions()
 		table.wipe(AlertNamesOptions)
 
-		local soundNames = profile.alert.sharedMediaSoundNames
+		local soundNames = profile.alert.sound.sharedMediaNames
 		for index = 1, #soundNames do
 			AlertNamesOptions[soundNames[index] .. index] = {
 				order = index,
@@ -383,6 +383,10 @@ do
 
 	for index = 1, #SOUND_CHANNELS do
 		SOUND_CHANNEL_INDICES[SOUND_CHANNELS[index]] = index
+	end
+
+	local function IsSoundDisabled()
+		return not profile.alert.sound.isEnabled
 	end
 
 	AlertOptions = {
@@ -477,85 +481,91 @@ do
 					},
 				},
 			},
-			soundOptions = {
+			sound = {
 				order = 2,
 				name = _G.SOUND,
 				descStyle = "inline",
 				type = "group",
 				guiInline = true,
 				args = {
-					soundIsEnabled = {
+					isEnabled = {
 						order = 10,
 						name = _G.ENABLE,
 						descStyle = "inline",
 						type = "toggle",
-						width = "full",
 						get = function(info)
-							return profile.alert.soundIsEnabled
+							return profile.alert.sound.isEnabled
 						end,
 						set = function(info, value)
-							profile.alert.soundIsEnabled = value
+							profile.alert.sound.isEnabled = value
 						end,
 					},
-					soundChannel = {
+					ignoreMute = {
 						order = 20,
+						name = L["Ignore Mute"],
+						desc = L["Play alert sounds when sound is muted."],
+						type = "toggle",
+						width = "double",
+						disabled = IsSoundDisabled,
+						get = function(info)
+							return profile.alert.sound.ignoreMute
+						end,
+						set = function(info, value)
+							profile.alert.sound.ignoreMute = value
+						end,
+					},
+					channel = {
+						order = 30,
 						name = _G.SOUND_CHANNELS,
 						descStyle = "inline",
 						type = "select",
 						values = LOCALIZED_SOUND_CHANNELS,
-						disabled = function()
-							return not profile.alert.soundIsEnabled
-						end,
+						disabled = IsSoundDisabled,
 						get = function(info)
-							return SOUND_CHANNEL_INDICES[profile.alert.soundChannel]
+							return SOUND_CHANNEL_INDICES[profile.alert.sound.channel]
 						end,
 						set = function(info, value)
-							profile.alert.soundChannel = SOUND_CHANNELS[value]
+							profile.alert.sound.channel = SOUND_CHANNELS[value]
 						end,
 					},
 					addAlertSound = {
-						order = 30,
+						order = 40,
 						name = _G.ADD,
 						descStyle = "inline",
 						type = "select",
 						dialogControl = "LSM30_Sound",
 						values = _G.AceGUIWidgetLSMlists.sound,
-						disabled = function()
-							return not profile.alert.soundIsEnabled
-						end,
+						disabled = IsSoundDisabled,
 						get = function(info)
 							-- Intentionally empty, since there can be multiple sounds.
 						end,
 						set = function(info, value)
-							table.insert(profile.alert.sharedMediaSoundNames, value)
+							table.insert(profile.alert.sound.sharedMediaNames, value)
 							UpdateAlertNamesOptions()
 						end,
 					},
-					sharedMediaSoundNames = {
-						order = 40,
+					sharedMediaNames = {
+						order = 50,
 						name = _G.ASSIGNED_COLON,
 						type = "group",
 						inline = true,
-						disabled = function()
-							return not profile.alert.soundIsEnabled
-						end,
+						disabled = IsSoundDisabled,
 						args = AlertNamesOptions,
 					},
 					preview = {
-						order = 50,
+						order = 60,
 						name = _G.PREVIEW,
 						descStyle = "inline",
 						type = "execute",
 						width = "normal",
-						disabled = function()
-							return not profile.alert.soundIsEnabled
-						end,
+						disabled = IsSoundDisabled,
 						func = function()
 							local alert = profile.alert
-							local soundNames = alert.sharedMediaSoundNames
+							local soundNames = alert.sound.sharedMediaNames
+
 
 							for index = 1, #soundNames do
-								_G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundNames[index]), alert.soundChannel)
+								_G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundNames[index]), alert.sound.channel)
 							end
 						end,
 					},

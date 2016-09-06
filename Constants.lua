@@ -27,10 +27,6 @@ local DATABASE_DEFAULTS = {
 	},
 	profile = {
 		alert = {
-			sharedMediaSoundNames = {
-				"NPCScan Chimes",
-				"NPCScan Ogre War Drums",
-			},
 			screenFlash = {
 				color = {
 					r = 1,
@@ -41,8 +37,15 @@ local DATABASE_DEFAULTS = {
 				isEnabled = true,
 				texture = "Blizzard Low Health",
 			},
-			soundChannel = "Master",
-			soundIsEnabled = true,
+			sound = {
+				channel = "Master",
+				ignoreMute = false,
+				isEnabled = true,
+				sharedMediaNames = {
+					"NPCScan Chimes",
+					"NPCScan Ogre War Drums",
+				},
+			}
 		},
 		blacklist = {
 			continentIDs = {},
