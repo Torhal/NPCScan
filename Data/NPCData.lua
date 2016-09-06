@@ -750,6 +750,8 @@ local NPCData = {
 	[107113] = { questID = 42280, }, -- Vorthax
 	[107127] = { questID = 42450, }, -- Brawlgoth
 	[107136] = { questID = 42286, }, -- Houndmaster Stroxis
+	[107169] = { questID = 42286, }, -- Horux
+	[107170] = { questID = 42286, }, -- Zorux
 	[107269] = { questID = 42376, }, -- Inquisitor Tivos
 	[107327] = { questID = 42417, }, -- Bilebrain
 	[107487] = { questID = 42437, isTameable = true, }, -- Starbuck

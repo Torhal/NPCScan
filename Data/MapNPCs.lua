@@ -1772,6 +1772,7 @@ local MapNPCs = {
 		[107127] = true, -- Brawlgoth
 		[107136] = true, -- Houndmaster Stroxis
 		[107169] = true, -- Horux
+		[107170] = true, -- Zorux
 		[107269] = true, -- Inquisitor Tivos
 		[107327] = true, -- Bilebrain
 		[107657] = true, -- Arcanist Shal'iman
