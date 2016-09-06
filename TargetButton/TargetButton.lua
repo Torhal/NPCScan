@@ -246,6 +246,8 @@ function TargetButton:Deactivate()
 	self.durationFadeAnimationGroup:Stop()
 	self.killedTexture.animIn:Stop()
 
+	self.pausedAnimations = nil
+
 	self.killedTexture:Hide()
 	self:Hide()
 
