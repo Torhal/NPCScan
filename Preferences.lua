@@ -402,6 +402,7 @@ do
 						name = _G.ENABLE,
 						descStyle = "inline",
 						type = "toggle",
+						width = "full",
 						get = function(info)
 							return profile.alert.screenFlash.isEnabled
 						end,
@@ -458,6 +459,20 @@ do
 								color.b = b
 								color.a = a
 							end
+						end,
+					},
+					preview = {
+						order = 4,
+						name = _G.PREVIEW,
+						descStyle = "inline",
+						type = "execute",
+						width = "normal",
+						disabled = function()
+							return not profile.alert.screenFlash.isEnabled
+						end,
+						func = function()
+							local alert = profile.alert
+							NPCScan:PlayFlashAnimation(alert.screenFlash.texture, alert.screenFlash.color)
 						end,
 					},
 				},

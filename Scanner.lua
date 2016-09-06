@@ -395,20 +395,22 @@ do
 	local SOUND_INTERVAL_SECONDS = 2
 	local lastSoundTime = time()
 
+	function NPCScan:PlayFlashAnimation(texturePath, color)
+		flashTexture:SetTexture(LibSharedMedia:Fetch("background", texturePath))
+		flashTexture:SetVertexColor(color.r, color.g, color.b, color.a)
+		flashFrame:Show()
+
+		fadeAnimationGroup:Pause() -- Forces OnPlay to fire again if it was already playing
+		fadeAnimationGroup:Play()
+	end
+
 	function NPCScan:DispatchSensoryCues(eventName)
 		local alert = private.db.profile.alert
+		local now = time()
 
 		if alert.screenFlash.isEnabled then
-			local color = alert.screenFlash.color
-			flashTexture:SetTexture(LibSharedMedia:Fetch("background", alert.screenFlash.texture))
-			flashTexture:SetVertexColor(color.r, color.g, color.b, color.a)
-			flashFrame:Show()
-
-			fadeAnimationGroup:Pause() -- Forces OnPlay to fire again if it was already playing
-			fadeAnimationGroup:Play()
+			self:PlayFlashAnimation(alert.screenFlash.texture, alert.screenFlash.color)
 		end
-
-		local now = time()
 
 		if alert.soundIsEnabled and now > lastSoundTime + SOUND_INTERVAL_SECONDS then
 			local soundNames = alert.sharedMediaSoundNames
