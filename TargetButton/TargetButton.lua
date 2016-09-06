@@ -410,7 +410,7 @@ local function CreateTargetButton(unitClassification)
 
 	local button = _G.CreateFrame("Button", nil, _G.UIParent, "SecureActionButtonTemplate, SecureHandlerShowHideTemplate")
 	button:SetFrameStrata("DIALOG")
-	button:SetAttribute("type", "macro")
+	button:SetAttribute("type1", "macro")
 	button:SetAttribute("_onshow", "self:Enable()")
 	button:SetAttribute("_onhide", "self:Disable()")
 	button:RegisterForClicks("AnyUp")
