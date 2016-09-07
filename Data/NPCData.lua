@@ -565,7 +565,7 @@ local NPCData = {
 	[90437] = { questID = 38030, }, -- Jax'zor
 	[90438] = { questID = 38029, }, -- Lady Oran
 	[90442] = { questID = 38032, }, -- Mistress Thavra
-	[90505] = { questID = 37989, }, -- Syphonus
+	[90505] = { questID = 37989, vignetteName = "Syphonus & Leodrath" }, -- Syphonus
 	[90519] = { questID = 37990, }, -- Cindral the Wildfire
 	[90777] = { questID = 38028, }, -- High Priest Ikzan
 	[90782] = { questID = 38034, }, -- Rasthe

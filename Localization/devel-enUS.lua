@@ -53,6 +53,7 @@ VL["Sea Giant King"] = true
 VL["Seek & Destroy Squad"] = true
 VL["Shivering Ashmaw Cub"] = true
 VL["Stormdrake Matriarch"] = true
+VL["Syphonus & Leodrath"] = true
 VL["Thane's Mead Hall"] = true
 VL["The Beastly Boxer"] = true
 VL["Trecherous Stallions"] = true
