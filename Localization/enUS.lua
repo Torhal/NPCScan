@@ -1,7 +1,5 @@
 local AddOnFolderName, private = ...
 
-local _G = getfenv(0)
-
 local isReleaseVersion = true
 --@debug@
 isReleaseVersion = false

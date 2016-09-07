@@ -1,8 +1,6 @@
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Localized Lua globals.
------------------------------------------------------------------------
-local _G = getfenv(0)
-
+-- ----------------------------------------------------------------------------
 -- Functions
 local pairs = _G.pairs
 local type = _G.type
@@ -11,9 +9,9 @@ local type = _G.type
 local math = _G.math
 local table = _G.table
 
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- AddOn namespace.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
 
 local LibStub = _G.LibStub
@@ -26,9 +24,9 @@ _G.BINDING_HEADER_NPCSCAN = AddOnFolderName
 _G["BINDING_NAME_CLICK NPCScan_RecentTargetButton:LeftButton"] = "Target latest NPC"
 _G["BINDING_NAME_CLICK NPCScan_SearchMacroButton:LeftButton"] = "Targeting Macro"
 
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Constants.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 local LEFT_CLICK_TEXTURE = [[|TInterface\TUTORIALFRAME\UI-TUTORIAL-FRAME:19:11:-1:0:512:512:9:67:227:306|t]]
 local RIGHT_CLICK_TEXTURE = [[|TInterface\TUTORIALFRAME\UI-TUTORIAL-FRAME:20:12:0:-1:512:512:9:66:332:411|t]]
 
@@ -44,9 +42,9 @@ local TOOLTIP_ANCHORS = {
 	TOPRIGHT = "ANCHOR_LEFT",
 }
 
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Variables.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 local NUM_RAID_ICONS = 8
 local RaidIconIDs = {}
 
@@ -54,17 +52,17 @@ for index = 1, NUM_RAID_ICONS do
 	RaidIconIDs[#RaidIconIDs + 1] = index
 end
 
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Prototype.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 local TargetButton = _G.CreateFrame("Button")
 local TargetButtonMetatable = {
 	__index = TargetButton
 }
 
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Helpers.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 local function AnimationGroup_HideParent(self)
 	self:GetParent():Hide()
 end
@@ -77,9 +75,9 @@ local function AnimationGroup_DismissParent(self)
 	self:GetParent():DismissByAnimationGroup(self)
 end
 
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Scripts.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 local function TargetButton_OnClick(self, mouseButton)
 	if mouseButton == "RightButton" then
 		self.dismissAnimationGroup:Play()
@@ -103,9 +101,9 @@ local function TargetButton_OnLeave(self)
 	self.durationFadeAnimationGroup:Play()
 end
 
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Event and message handlers.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 function TargetButton:COMBAT_LOG_EVENT_UNFILTERED(eventName, _, subEvent, _, _, _, _, _, destGUID)
 	if subEvent == "UNIT_DIED" and destGUID and private.GUIDToCreatureID(destGUID) == self.npcID then
 		self.isDead = true
@@ -173,9 +171,9 @@ function TargetButton:UpdateData(eventName, data)
 	end
 end
 
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Methods.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 function TargetButton:Activate(data)
 	if self.SpecialText then
 		local npcData = private.NPCData[data.npcID]
@@ -345,9 +343,9 @@ function TargetButton:SetUnitData(data)
 	end
 end
 
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Initialization.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 local ClassificationDecorators
 
 do
@@ -437,9 +435,9 @@ local function CreateTargetButton(unitClassification)
 
 	AceEvent:Embed(_G.setmetatable(button, TargetButtonMetatable))
 
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
 	-- Textures.
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
 	local raidIcon = button:CreateTexture(nil, "ARTWORK")
 	raidIcon:Hide()
 	raidIcon:SetTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
@@ -491,9 +489,9 @@ local function CreateTargetButton(unitClassification)
 	killRightTexture:SetPoint("CENTER")
 	killedTextureFrame.right = killRightTexture
 
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
 	-- FontStrings.
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
 	local sourceText = button:CreateFontString(nil, "ARTWORK", 1)
 	sourceText:SetFontObject("GameFontNormalSmall")
 	button.SourceText = sourceText
@@ -509,9 +507,9 @@ local function CreateTargetButton(unitClassification)
 	classification:SetFontObject("GameFontNormalSmall")
 	button.Classification = classification
 
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
 	-- Animations.
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
 	local buttonAnimIn = button:CreateAnimationGroup()
 	buttonAnimIn:SetToFinalAlpha(true)
 	button.animIn = buttonAnimIn
@@ -607,9 +605,9 @@ local function CreateTargetButton(unitClassification)
 	local durationFadeAnim = private.CreateAlphaAnimation(durationFadeAnimationGroup, 1, 0, 1.5, private.db.profile.targetButtonGroup.durationSeconds)
 	durationFadeAnimationGroup.animOut = durationFadeAnim
 
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
 	-- Etcetera.
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
 	ClassificationDecorators[unitClassification](button)
 	button.__classification = unitClassification
 

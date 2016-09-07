@@ -1,18 +1,15 @@
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Upvalued Lua API.
------------------------------------------------------------------------
-local _G = getfenv(0)
-
+-- ----------------------------------------------------------------------------
 -- Functions
 local pairs = _G.pairs
-local tonumber = _G.tonumber
 
 -- Libraries
 local string = _G.string
 
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- AddOn namespace.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
 
 local LibStub = _G.LibStub
@@ -21,9 +18,9 @@ local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 
 local HereBeDragons = LibStub("HereBeDragons-1.0")
 
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Debugger.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 do
 	local TextDump = LibStub("LibTextDump-1.0")
 
@@ -52,15 +49,9 @@ do
 	end
 end
 
-local CriteriaType = {
-	NPCKill = 0,
-	Quest = 27,
-	Spell = 28,
-}
-
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- AddOn Methods.
------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 function NPCScan:OnInitialize()
 	local db = LibStub("AceDB-3.0"):New("NPCScanDB", private.DatabaseDefaults, "Default")
 	db.RegisterCallback(self, "OnProfileChanged", "RefreshPreferences")
@@ -73,9 +64,9 @@ function NPCScan:OnInitialize()
 	self:InitializeTargetButton()
 	self:RegisterChatCommand("npcscan", "ChatCommand")
 
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
 	-- Build lookup tables.
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
 	local QuestNPCs = {}
 	private.QuestNPCs = QuestNPCs
 
@@ -107,9 +98,15 @@ function NPCScan:OnInitialize()
 		end
 	end
 
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
 	-- Assign Achievement ID to appropriate NPCData entry.
-	-----------------------------------------------------------------------
+	-- ----------------------------------------------------------------------------
+	local CriteriaType = {
+		NPCKill = 0,
+		Quest = 27,
+		Spell = 28,
+	}
+
 	for achievementID, achievement in pairs(private.ACHIEVEMENTS) do
 		achievement.ID = achievementID
 
@@ -189,9 +186,9 @@ function NPCScan:OnInitialize()
 				if not npcData or (not npcData.questID and not npcData.achievementID) then
 					if not mapHeaderPrinted then
 						mapHeaderPrinted = true
-						private.Debug("-----------------------------------------------------------------------")
+						private.Debug("-- ----------------------------------------------------------------------------")
 						private.Debug("-- %s (%d)", HereBeDragons:GetLocalizedMap(mapID), mapID)
-						private.Debug("-----------------------------------------------------------------------")
+						private.Debug("-- ----------------------------------------------------------------------------")
 					end
 
 					private.Debug("NPC %d (%s) has no questID.", npcID, npcName)

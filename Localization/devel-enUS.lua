@@ -1,6 +1,4 @@
 local AddOnFolderName, private = ...
-
-local _G = getfenv(0)
 local L = _G.LibStub("AceLocale-3.0"):NewLocale(AddOnFolderName, "enUS", true)
 
 if not L then return end
@@ -8,7 +6,6 @@ if not L then return end
 L["Alerts"] = true
 L["Completed Achievement Criteria"] = true
 L["Completed Quest Objectives"] = true
-
 L["Drag to set the spawn point for targeting buttons."] = true
 L["Detection"] = true
 L["Duration"] = true
