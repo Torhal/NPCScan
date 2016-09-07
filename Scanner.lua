@@ -299,57 +299,52 @@ function NPCScan:UPDATE_MOUSEOVER_UNIT()
 	end
 end
 
-local function ProcessQuestDetection(questID, sourceText)
-	for npcID in pairs(private.QuestNPCs[questID]) do
-		ProcessDetection({
-			npcID = npcID,
-			sourceText = sourceText
-		})
+do
+	local function ProcessQuestDetection(questID, sourceText)
+		for npcID in pairs(private.QuestNPCs[questID]) do
+			ProcessDetection({
+				npcID = npcID,
+				sourceText = sourceText
+			})
+		end
 	end
-end
 
-function NPCScan:VIGNETTE_ADDED(eventName, instanceID)
-	local x, y, vignetteName, iconID = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceID)
-	local questID = private.QuestIDFromName[vignetteName]
+	local function ProcessVignette(vignetteName, sourceText)
+		local questID = private.QuestIDFromName[vignetteName]
+		if questID then
+			ProcessQuestDetection(questID, sourceText)
+			return true
+		end
 
-	if questID then
-		ProcessQuestDetection(questID, _G.MINIMAP_LABEL)
-	else
 		local npcID = private.NPCIDFromName[vignetteName]
-
 		if npcID then
 			ProcessDetection({
 				npcID = npcID,
-				sourceText = _G.MINIMAP_LABEL
+				sourceText = sourceText
 			})
-		else
+
+			return true
+		end
+
+		return false
+	end
+
+	function NPCScan:VIGNETTE_ADDED(eventName, instanceID)
+		local x, y, vignetteName, iconID = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceID)
+
+		if not ProcessVignette(vignetteName, _G.MINIMAP_LABEL) then
 			private.Debug("Unknown vignette: %s with iconID %s", vignetteName, tostring(iconID))
 		end
 	end
-end
 
-function NPCScan:WORLD_MAP_UPDATE()
-	for landmarkIndex = 1, _G.GetNumMapLandmarks() do
-		local landmarkType, landmarkName = _G.GetMapLandmarkInfo(landmarkIndex)
+	function NPCScan:WORLD_MAP_UPDATE()
+		for landmarkIndex = 1, _G.GetNumMapLandmarks() do
+			local landmarkType, landmarkName = _G.GetMapLandmarkInfo(landmarkIndex)
 
-		if landmarkType == _G.LE_MAP_LANDMARK_TYPE_VIGNETTE and landmarkName then
-			local questID = private.QuestIDFromName[landmarkName]
-
-			if questID then
-				ProcessQuestDetection(questID, _G.WORLD_MAP)
-			else
-				local npcID = private.NPCIDFromName[landmarkName]
-
-				if npcID then
-					ProcessDetection({
-						npcID = npcID,
-						sourceText = _G.WORLD_MAP
-					})
-				end
-			end
+			ProcessVignette(landmarkName, _G.WORLD_MAP)
 		end
 	end
-end
+end -- do-block
 
 -- ----------------------------------------------------------------------------
 -- Sensory cues.
