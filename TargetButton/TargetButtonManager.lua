@@ -124,7 +124,7 @@ end
 LibStub("HereBeDragons-1.0").RegisterCallback(TargetButtonManager, "PlayerZoneChanged", "DismissAll")
 
 function TargetButtonManager:ProcessQueue(eventName)
-	if #ActiveTargetButtons < _G.NUM_RAID_ICONS and not _G.InCombatLockdown() then
+	if #ActiveTargetButtons < private.NUM_RAID_ICONS and not _G.InCombatLockdown() then
 		local buttonData = table.remove(QueuedData, 1)
 
 		if buttonData then
@@ -197,7 +197,7 @@ function TargetButtonManager:Spawn(eventName, data)
 		return
 	end
 
-	if #ActiveTargetButtons >= _G.NUM_RAID_ICONS or _G.InCombatLockdown() then
+	if #ActiveTargetButtons >= private.NUM_RAID_ICONS or _G.InCombatLockdown() then
 		LibToast:Spawn("NPCScanAlertToast", ("%s %s"):format(data.npcName, _G.PARENS_TEMPLATE:format(data.sourceText)))
 
 		data.sourceText = ("%s %s"):format(data.sourceText, _G.PARENS_TEMPLATE:format(_G.QUEUED_STATUS_QUEUED))

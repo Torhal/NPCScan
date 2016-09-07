@@ -15,6 +15,9 @@ local AddOnFolderName, private = ...
 local DEFAULT_OS_SPAWN_POINT = _G.IsMacClient() and "TOPRIGHT" or "BOTTOMRIGHT"
 private.DEFAULT_OS_SPAWN_POINT = DEFAULT_OS_SPAWN_POINT
 
+local NUM_RAID_ICONS = 8
+private.NUM_RAID_ICONS = NUM_RAID_ICONS
+
 -- ----------------------------------------------------------------------------
 -- Database Defaults.
 -- ----------------------------------------------------------------------------

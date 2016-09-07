@@ -45,10 +45,9 @@ local TOOLTIP_ANCHORS = {
 -- ----------------------------------------------------------------------------
 -- Variables.
 -- ----------------------------------------------------------------------------
-local NUM_RAID_ICONS = 8
 local RaidIconIDs = {}
 
-for index = 1, NUM_RAID_ICONS do
+for index = 1, private.NUM_RAID_ICONS do
 	RaidIconIDs[#RaidIconIDs + 1] = index
 end
 
