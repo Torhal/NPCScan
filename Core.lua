@@ -149,7 +149,8 @@ function NPCScan:OnInitialize()
 					for npcID in pairs(QuestNPCs[assetID]) do
 						local npcData = private.NPCData[npcID]
 						npcData.achievementID = achievementID
-						npcData.isCriteriaCompleted = private.IsNPCQuestComplete(npcID)
+						npcData.achievementCriteriaID = criteriaID
+						npcData.isCriteriaCompleted = isCriteriaCompleted
 					end
 				else
 					private.Debug("***** AchievementID.%s: Quest %s with assetID %d", private.AchievementLabel[achievementID], assetName, assetID)
