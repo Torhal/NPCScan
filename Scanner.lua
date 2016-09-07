@@ -309,10 +309,24 @@ do
 		end
 	end
 
+	local function ProcessVignetteNameDetection(vignetteName, sourceText)
+		for npcID in pairs(private.VignetteNPCs[vignetteName]) do
+			ProcessDetection({
+				npcID = npcID,
+				sourceText = sourceText
+			})
+		end
+	end
+
 	local function ProcessVignette(vignetteName, sourceText)
 		local questID = private.QuestIDFromName[vignetteName]
 		if questID then
 			ProcessQuestDetection(questID, sourceText)
+			return true
+		end
+
+		if private.VignetteNPCs[vignetteName] then
+			ProcessVignetteNameDetection(vignetteName, sourceText)
 			return true
 		end
 

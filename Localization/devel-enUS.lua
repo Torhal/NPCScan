@@ -1,8 +1,6 @@
 local AddOnFolderName, private = ...
 local L = _G.LibStub("AceLocale-3.0"):NewLocale(AddOnFolderName, "enUS", true)
 
-if not L then return end
-
 L["Alerts"] = true
 L["Completed Achievement Criteria"] = true
 L["Completed Quest Objectives"] = true
@@ -34,3 +32,29 @@ L["RIGHT"] = "Right"
 L["TOP"] = "Top"
 L["TOPLEFT"] = "Top Left"
 L["TOPRIGHT"] = "Top Right"
+
+-- ----------------------------------------------------------------------------
+-- Vignettes
+-- ----------------------------------------------------------------------------
+local VL = _G.LibStub("AceLocale-3.0"):NewLocale(AddOnFolderName .. "Vignette", "enUS", true)
+
+VL["Abandoned Fishing Pole"] = true
+VL["Amateur Hunters"] = true
+VL["Beastmaster Pao'lek"] = true
+VL["Cache of Infernals"] = true
+VL["Forsaken Deathsquad"] = true
+VL["Helmouth Raiders"] = true
+VL["Hook & Sinker"] = true
+VL["Horn of the Siren"] = true
+VL["Invasion Point: Devastation"] = true
+VL["Lost Ettin"] = true
+VL["Perrexx the Corruptor"] = true
+VL["Sea Giant King"] = true
+VL["Seek & Destroy Squad"] = true
+VL["Shivering Ashmaw Cub"] = true
+VL["Stormdrake Matriarch"] = true
+VL["Thane's Mead Hall"] = true
+VL["The Beastly Boxer"] = true
+VL["Undgrell Attack"] = true
+VL["Worg Pack"] = true
+VL["Worgen Stalkers"] = true

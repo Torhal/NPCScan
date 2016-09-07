@@ -14,7 +14,7 @@ local AddOnFolderName, private = ...
 
 local LibStub = _G.LibStub
 local NPCScan = LibStub("AceAddon-3.0"):NewAddon(AddOnFolderName, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0", "AceBucket-3.0")
-local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
+local VL = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName .. "Vignette")
 
 local HereBeDragons = LibStub("HereBeDragons-1.0")
 
@@ -73,28 +73,35 @@ function NPCScan:OnInitialize()
 	local QuestIDFromName = {}
 	private.QuestIDFromName = QuestIDFromName
 
-	local function InitializeQuestData(questID, npcID)
-		local npcIDs = QuestNPCs[questID]
-		if not npcIDs then
-			npcIDs = {}
-			QuestNPCs[questID] = npcIDs
-		end
-
-		npcIDs[npcID] = true
-
-		local questName = NPCScan:GetQuestNameFromID(questID)
-		if questName and questName ~= _G.UNKNOWN then
-			QuestIDFromName[questName] = questID
-		end
-	end
+	local VignetteNPCs = {}
+	private.VignetteNPCs = VignetteNPCs
 
 	for npcID, data in pairs(private.NPCData) do
 		if data.questID then
-			InitializeQuestData(data.questID, npcID)
+			local npcIDs = QuestNPCs[data.questID]
+			if not npcIDs then
+				npcIDs = {}
+				QuestNPCs[data.questID] = npcIDs
+			end
+
+			npcIDs[npcID] = true
+
+			local questName = NPCScan:GetQuestNameFromID(data.questID)
+			if questName and questName ~= _G.UNKNOWN then
+				QuestIDFromName[questName] = data.questID
+			end
 		end
 
-		if data.vignetteQuestID then
-			InitializeQuestData(data.vignetteQuestID, npcID)
+		if data.vignetteName then
+			local vignetteName = VL[data.vignetteName]
+
+			local npcIDs = VignetteNPCs[vignetteName]
+			if not npcIDs then
+				npcIDs = {}
+				VignetteNPCs[vignetteName] = npcIDs
+			end
+
+			npcIDs[npcID] = true
 		end
 	end
 
@@ -305,8 +312,6 @@ do
 
 			if func then
 				func(arguments or "")
-			else
-				NPCScan:Print(L.CMD_HELP)
 			end
 		else
 			local optionsFrame = _G.InterfaceOptionsFrame
