@@ -778,8 +778,8 @@ local NPCData = {
 	[111651] = { questID = 43792, }, -- Degren
 	[111653] = { questID = 43793, }, -- Miasu
 	[112497] = { questID = 44072, isTameable = true, }, -- Maia the White
-	[112636] = { questID = 44081, }, -- Sinister Leyrunner
-	[112637] = { questID = 44081, }, -- Devious Sunrunner
+	[112636] = { questID = 44081, vignetteName = "Trecherous Stallions" }, -- Sinister Leyrunner
+	[112637] = { questID = 44081, vignetteName = "Trecherous Stallions" }, -- Devious Sunrunner
 	[112802] = { questID = 44124, isTameable = true, }, -- Mar'tura
 	[113368] = { questID = 44676, }, -- Llorian
 	[113694] = { isTameable = true, }, -- Pashya

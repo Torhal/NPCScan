@@ -55,6 +55,7 @@ VL["Shivering Ashmaw Cub"] = true
 VL["Stormdrake Matriarch"] = true
 VL["Thane's Mead Hall"] = true
 VL["The Beastly Boxer"] = true
+VL["Trecherous Stallions"] = true
 VL["Undgrell Attack"] = true
 VL["Worg Pack"] = true
 VL["Worgen Stalkers"] = true
