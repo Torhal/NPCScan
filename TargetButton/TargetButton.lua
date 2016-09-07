@@ -118,8 +118,7 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 			_G.PlaySoundFile(LibSharedMedia:Fetch("sound", "NPCScan Killed"), sound.channel)
 		end
 
-		-- Achievement criteria will be updated - show the new color.
-		self:SetSpecialText()
+		self:SetSpecialText(true)
 
 		self.shineTexture:Show()
 		self.shineTexture.animIn:Play()
@@ -317,11 +316,14 @@ function TargetButton:SetRaidTarget(unitToken)
 	return not self.needsRaidTarget
 end
 
-function TargetButton:SetSpecialText()
+function TargetButton:SetSpecialText(fakeCriteriaCompleted)
 	local npcData = private.NPCData[self.npcID]
+
 	if npcData and npcData.achievementID then
+		local isCriteriaCompleted = fakeCriteriaCompleted or npcData.isCriteriaCompleted
 		local _, achievementName = _G.GetAchievementInfo(npcData.achievementID)
-		self.SpecialText:SetFormattedText("%s%s|r", npcData.isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE, achievementName)
+
+		self.SpecialText:SetFormattedText("%s%s|r", isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE, achievementName)
 	end
 end
 
