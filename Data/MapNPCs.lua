@@ -1832,6 +1832,7 @@ local MapNPCs = {
 		[107487] = true, -- Starbuck
 		[107544] = true, -- Nithogg
 		[107926] = true, -- Hannval the Butcher
+		[108255] = true, -- Coura, Mistress of Arcana
 		[108790] = true, -- Den Mother Ylva
 		[108885] = true, -- Aegir Wavecrusher
 		[109994] = true, -- Stormtalon

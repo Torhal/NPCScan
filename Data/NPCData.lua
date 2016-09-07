@@ -748,6 +748,7 @@ local NPCData = {
 	[107657] = { questID = 42505, }, -- Arcanist Shal'iman
 	[107846] = { questID = 43968, isTameable = true, }, -- Pinchshank
 	[107926] = { questID = 42591, }, -- Hannval the Butcher
+	[108255] = { questID = 42699, vignetteName = "Coura, Master of Arcana" }, -- Coura, Mistress of Arcana
 	[108829] = { questID = 43192, }, -- Levantus
 	[109054] = { questID = 42831, }, -- Shal'an
 	[109163] = { questID = 42864, }, -- Captain Dargun

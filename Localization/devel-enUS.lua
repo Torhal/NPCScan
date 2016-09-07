@@ -42,6 +42,7 @@ VL["Abandoned Fishing Pole"] = true
 VL["Amateur Hunters"] = true
 VL["Beastmaster Pao'lek"] = true
 VL["Cache of Infernals"] = true
+VL["Coura, Master of Arcana"] = true
 VL["Forsaken Deathsquad"] = true
 VL["Helmouth Raiders"] = true
 VL["Hook & Sinker"] = true
