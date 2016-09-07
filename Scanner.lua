@@ -333,18 +333,18 @@ function NPCScan:WORLD_MAP_UPDATE()
 		local landmarkType, landmarkName = _G.GetMapLandmarkInfo(landmarkIndex)
 
 		if landmarkType == _G.LE_MAP_LANDMARK_TYPE_VIGNETTE and landmarkName then
-			local npcID = private.NPCIDFromName[landmarkName]
+			local questID = private.QuestIDFromName[landmarkName]
 
-			if npcID then
-				ProcessDetection({
-					npcID = npcID,
-					sourceText = _G.WORLD_MAP
-				})
+			if questID then
+				ProcessQuestDetection(questID, _G.WORLD_MAP)
 			else
-				local questID = private.QuestIDFromName[landmarkName]
+				local npcID = private.NPCIDFromName[landmarkName]
 
-				if questID then
-					ProcessQuestDetection(questID, _G.WORLD_MAP)
+				if npcID then
+					ProcessDetection({
+						npcID = npcID,
+						sourceText = _G.WORLD_MAP
+					})
 				end
 			end
 		end
