@@ -28,13 +28,18 @@ local function DecorateNormalTargetButton(button)
 	background:SetPoint("CENTER")
 
 	local sourceText = button.SourceText
-	sourceText:SetPoint("TOPRIGHT", -24, 0)
+	sourceText:SetPoint("TOPRIGHT", -12, 0)
 
 	local unitName = button.UnitName
 	unitName:SetPoint("TOPLEFT", portrait, "TOPRIGHT", 10, -10)
 
 	local classification = button.Classification
-	classification:SetPoint("BOTTOMRIGHT", -24, 0)
+	classification:SetPoint("BOTTOMRIGHT", -12, 0)
+
+	local specialText = button.SpecialText
+	specialText:SetFontObject("GameFontNormalSmallLeft")
+	specialText:SetSize(157, 10)
+	specialText:SetPoint("TOPLEFT", unitName, "TOPLEFT", 0, 3)
 
 	local glowTexture = button.glowTexture
 	glowTexture:SetSize(266, 109)

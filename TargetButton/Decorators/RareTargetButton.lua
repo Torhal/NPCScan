@@ -42,13 +42,12 @@ local function DecorateRareTargetButton(button)
 	local classification = button.Classification
 	classification:SetPoint("BOTTOMRIGHT", -18, 0)
 
-	local specialText = button:CreateFontString(nil, "ARTWORK", 1)
-	specialText:SetSize(150, 20)
-	specialText:SetPoint("TOPLEFT", portrait, "TOPRIGHT", 10, 5)
+	local specialText = button.SpecialText
+	specialText:SetSize(160, 20)
+	specialText:SetPoint("TOPLEFT", portrait, "TOPRIGHT", 8, 5)
 	specialText:SetFontObject("GameFontNormal")
 	specialText:SetJustifyH("LEFT")
 	specialText:SetJustifyV("MIDDLE")
-	button.SpecialText = specialText
 
 	local glowTexture = button.glowTexture
 	glowTexture:SetSize(286, 109)

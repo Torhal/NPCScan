@@ -62,13 +62,12 @@ local function DecorateEliteTargetButton(button)
 	local classification = button.Classification
 	classification:SetPoint("BOTTOMRIGHT", -18, 12)
 
-	local specialText = button:CreateFontString(nil, "ARTWORK", 1)
-	specialText:SetSize(150, 22)
+	local specialText = button.SpecialText
+	specialText:SetSize(160, 22)
 	specialText:SetPoint("TOPLEFT", 107, -31)
 	specialText:SetFontObject("GameFontNormal")
 	specialText:SetJustifyH("LEFT")
 	specialText:SetJustifyV("MIDDLE")
-	button.SpecialText = specialText
 
 	local ring1 = button:CreateTexture(nil, "BACKGROUND")
 	ring1:SetAlpha(0)

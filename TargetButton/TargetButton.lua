@@ -112,12 +112,14 @@ end
 
 function TargetButton:PLAYER_REGEN_ENABLED()
 	if self.isDead then
-
 		local sound = private.db.profile.alert.sound
 
 		if sound.isEnabled then
 			_G.PlaySoundFile(LibSharedMedia:Fetch("sound", "NPCScan Killed"), sound.channel)
 		end
+
+		-- Achievement criteria will be updated - show the new color.
+		self:SetSpecialText()
 
 		self.shineTexture:Show()
 		self.shineTexture.animIn:Play()
@@ -175,17 +177,10 @@ end
 -- Methods.
 -- ----------------------------------------------------------------------------
 function TargetButton:Activate(data)
-	if self.SpecialText then
-		local npcData = private.NPCData[data.npcID]
-		if npcData and npcData.achievementID then
-			local _, achievementName = _G.GetAchievementInfo(npcData.achievementID)
-			self.SpecialText:SetFormattedText("%s%s|r", npcData.isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE, achievementName)
-		end
-	end
-
 	self.npcID = data.npcID
 	self.npcName = data.npcName
 
+	self:SetSpecialText()
 	self.SourceText:SetText(data.sourceText)
 
 	if data.unitToken then
@@ -205,6 +200,7 @@ function TargetButton:Activate(data)
 
 	local macroText = ("/cleartarget\n/targetexact %s"):format(data.npcName)
 	_G.NPCScan_RecentTargetButton:SetAttribute("macrotext", macroText)
+
 	self:SetAttribute("macrotext", macroText)
 
 	self:Show()
@@ -267,9 +263,7 @@ function TargetButton:Deactivate()
 	self.RaidIcon:Hide()
 	self.PortraitModel:ClearModel()
 
-	if self.SpecialText then
-		self.SpecialText:SetText("")
-	end
+	self.SpecialText:SetText("")
 
 	self.npcID = nil
 	self.npcName = nil
@@ -321,6 +315,14 @@ function TargetButton:SetRaidTarget(unitToken)
 	end
 
 	return not self.needsRaidTarget
+end
+
+function TargetButton:SetSpecialText()
+	local npcData = private.NPCData[self.npcID]
+	if npcData and npcData.achievementID then
+		local _, achievementName = _G.GetAchievementInfo(npcData.achievementID)
+		self.SpecialText:SetFormattedText("%s%s|r", npcData.isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE, achievementName)
+	end
 end
 
 function TargetButton:SetUnitData(data)
@@ -506,6 +508,9 @@ local function CreateTargetButton(unitClassification)
 	local classification = button:CreateFontString(nil, "ARTWORK", 1)
 	classification:SetFontObject("GameFontNormalSmall")
 	button.Classification = classification
+
+	local specialText = button:CreateFontString(nil, "ARTWORK", 1)
+	button.SpecialText = specialText
 
 	-- ----------------------------------------------------------------------------
 	-- Animations.
