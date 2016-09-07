@@ -143,8 +143,6 @@ function NPCScan:OnInitialize()
 						private.Debug("[%s] = true, -- %s", assetID, assetName)
 						private.Debug("*****")
 					end
-					--				else
-					--					private.Debug("***** AchievementID.%s: NPCKill %s with assetID 0.", private.AchievementLabel[achievementID], assetName)
 				end
 			elseif criteriaType == CriteriaType.Quest then
 				if QuestNPCs[assetID] then

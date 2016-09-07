@@ -413,7 +413,6 @@ do
 		for cvar, value in pairs(StoredSoundCVars) do
 			_G.SetCVar(cvar, value)
 		end
-
 	end
 
 	function NPCScan:OverrideSoundCVars()
