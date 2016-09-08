@@ -252,6 +252,18 @@ local function UpdateScanListAchievementCriteria()
 
 	UntrackQueuedNPCs()
 end
+local function UpdateScanListQuestObjectives()
+	if private.db.profile.detection.ignoreCompletedQuestObjectives then
+		for npcID in pairs(npcScanList) do
+			if IsNPCQuestComplete(npcID) then
+				QueueNPCForUntracking(npcID)
+			end
+		end
+
+		UntrackQueuedNPCs()
+	end
+end
+private.UpdateScanListQuestObjectives = UpdateScanListQuestObjectives
 
 function NPCScan:ACHIEVEMENT_EARNED(_, achievementID)
 	if private.ACHIEVEMENTS[achievementID] then
@@ -270,17 +282,9 @@ function NPCScan:CRITERIA_UPDATE()
 	UpdateScanListAchievementCriteria()
 end
 
+-- Apparently some vignette NPC daily quests are only flagged as complete after looting...
 function NPCScan:LOOT_CLOSED()
-	-- Apparently some vignette NPC daily quests are only flagged as complete after looting...
-	if private.db.profile.detection.ignoreCompletedQuestObjectives then
-		for npcID in pairs(npcScanList) do
-			if IsNPCQuestComplete(npcID) then
-				QueueNPCForUntracking(npcID)
-			end
-		end
-
-		UntrackQueuedNPCs()
-	end
+	UpdateScanListQuestObjectives()
 end
 
 function NPCScan:NAME_PLATE_UNIT_ADDED(eventName, unitToken)
