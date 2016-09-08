@@ -210,7 +210,7 @@ function NPCScan:OnInitialize()
 end
 
 function NPCScan:OnEnable()
-	self:RegisterBucketEvent("CRITERIA_UPDATE", 0.5)
+	self:RegisterBucketEvent("CRITERIA_UPDATE", 5)
 	self:RegisterEvent("LOOT_CLOSED")
 	self:RegisterEvent("NAME_PLATE_UNIT_ADDED")
 	self:RegisterEvent("PLAYER_TARGET_CHANGED")
