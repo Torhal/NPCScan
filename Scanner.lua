@@ -252,6 +252,9 @@ local function UpdateScanListAchievementCriteria()
 
 	UntrackQueuedNPCs()
 end
+
+private.UpdateScanListAchievementCriteria = UpdateScanListAchievementCriteria
+
 local function UpdateScanListQuestObjectives()
 	if private.db.profile.detection.ignoreCompletedQuestObjectives then
 		for npcID in pairs(npcScanList) do
@@ -263,6 +266,7 @@ local function UpdateScanListQuestObjectives()
 		UntrackQueuedNPCs()
 	end
 end
+
 private.UpdateScanListQuestObjectives = UpdateScanListQuestObjectives
 
 function NPCScan:ACHIEVEMENT_EARNED(_, achievementID)

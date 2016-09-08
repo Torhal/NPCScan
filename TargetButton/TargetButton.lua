@@ -128,8 +128,6 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 		self.killedTextureFrame.left:Show()
 		self.killedTextureFrame.right:Show()
 		self.killedTextureFrame.animationGroup:Play()
-
-		self.isDead = nil
 	elseif self.pausedDismissal then
 		self.dismissAnimationGroup:Play()
 	end
@@ -174,6 +172,7 @@ end
 -- ----------------------------------------------------------------------------
 function TargetButton:Activate(data)
 	self.npcID = data.npcID
+	self.npcData = private.NPCData[self.npcID]
 	self.npcName = data.npcName
 
 	self:SetSpecialText()
@@ -255,11 +254,27 @@ function TargetButton:Deactivate()
 
 	self.SpecialText:SetText("")
 
+	if self.isDead then
+		local npcData = self.npcData
+
+		if npcData then
+			if npcData.achievementID and npcData.achievementCriteriaID then
+				private.UpdateScanListAchievementCriteria()
+			end
+
+			if npcData.questID then
+				private.UpdateScanListQuestObjectives()
+			end
+		end
+
+		self.isDead = nil
+	end
+
 	self.npcID = nil
+	self.npcData = nil
 	self.npcName = nil
 
 	self.needsUnitData = nil
-	self.isDead = nil
 end
 
 function TargetButton:RequestDeactivate()
@@ -306,7 +321,7 @@ function TargetButton:SetRaidTarget(unitToken)
 end
 
 function TargetButton:SetSpecialText(fakeCriteriaCompleted)
-	local npcData = private.NPCData[self.npcID]
+	local npcData = self.npcData
 
 	if npcData and npcData.achievementID then
 		local isCriteriaCompleted = fakeCriteriaCompleted or npcData.isCriteriaCompleted
