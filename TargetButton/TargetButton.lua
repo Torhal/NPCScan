@@ -110,9 +110,11 @@ function TargetButton:COMBAT_LOG_EVENT_UNFILTERED(eventName, _, subEvent, _, _, 
 end
 
 function TargetButton:PLAYER_REGEN_ENABLED()
+	local pausedDismissal = self.pausedDismissal
+	self.pausedDismissal = nil
+
 	if self.isDead then
 		local sound = private.db.profile.alert.sound
-
 		if sound.isEnabled then
 			_G.PlaySoundFile(LibSharedMedia:Fetch("sound", "NPCScan Killed"), sound.channel)
 		end
@@ -128,11 +130,9 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 		self.killedTextureFrame.left:Show()
 		self.killedTextureFrame.right:Show()
 		self.killedTextureFrame.animationGroup:Play()
-	elseif self.pausedDismissal then
+	elseif pausedDismissal then
 		self.dismissAnimationGroup:Play()
 	end
-
-	self.pausedDismissal = nil
 end
 
 function TargetButton:UpdateData(eventName, data)
