@@ -62,7 +62,7 @@ do
 	local npcRemoveList = {}
 
 	function QueueNPCForUntracking(npcID)
-		npcRemoveList[#npcRemoveList] = npcID
+		npcRemoveList[#npcRemoveList + 1] = npcID
 	end
 
 	function UntrackQueuedNPCs()
