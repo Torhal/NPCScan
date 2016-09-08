@@ -78,7 +78,7 @@ end
 -- Scripts.
 -- ----------------------------------------------------------------------------
 local function TargetButton_OnClick(self, mouseButton)
-	if mouseButton == "RightButton" then
+	if mouseButton == "RightButton" and not _G.InCombatLockdown() then
 		self.dismissAnimationGroup:Play()
 	end
 end
@@ -87,7 +87,11 @@ local function TargetButton_OnEnter(self)
 	local tooltip = _G.GameTooltip
 	tooltip:SetOwner(self, TOOLTIP_ANCHORS[self:GetEffectiveSpawnPoint()], 0, -50)
 	tooltip:AddLine(LEFT_CLICK_TEXTURE .. " " .. _G.TARGET, 0.5, 0.8, 1)
-	tooltip:AddLine(RIGHT_CLICK_TEXTURE .. " " .. _G.REMOVE, 0.5, 0.8, 1)
+
+	if not _G.InCombatLockdown() then
+		tooltip:AddLine(RIGHT_CLICK_TEXTURE .. " " .. _G.REMOVE, 0.5, 0.8, 1)
+	end
+
 	tooltip:Show()
 
 	self.durationFadeAnimationGroup:Stop()
