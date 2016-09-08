@@ -67,11 +67,11 @@ local function AnimationGroup_HideParent(self)
 end
 
 local function AnimationGroup_DismissGrandParent(self)
-	self:GetParent():GetParent():DismissByAnimationGroup(self)
+	self:GetParent():GetParent():RequestDeactivate()
 end
 
 local function AnimationGroup_DismissParent(self)
-	self:GetParent():DismissByAnimationGroup(self)
+	self:GetParent():RequestDeactivate()
 end
 
 -- ----------------------------------------------------------------------------
@@ -130,13 +130,11 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 		self.killedTextureFrame.animationGroup:Play()
 
 		self.isDead = nil
-	elseif self.pausedAnimations then
-		for index = 1, #self.pausedAnimations do
-			self.pausedAnimations[index]:Play()
-		end
+	elseif self.pausedDismissal then
+		self.dismissAnimationGroup:Play()
 	end
 
-	self.pausedAnimations = nil
+	self.pausedDismissal = nil
 end
 
 function TargetButton:UpdateData(eventName, data)
@@ -241,13 +239,7 @@ function TargetButton:Deactivate()
 
 	self.__isActive = nil
 
-	-- Make certain these are stopped, else they may finish soon after Activate is called again.
-	self.dismissAnimationGroup:Stop()
-	self.durationFadeAnimationGroup:Stop()
-	self.killedBackgroundTexture.animIn:Stop()
-	self.killedTextureFrame.animationGroup:Stop()
-
-	self.pausedAnimations = nil
+	self:StopAnimations()
 
 	self.killedBackgroundTexture:Hide()
 	self.killedTextureFrame.left:Hide()
@@ -270,17 +262,15 @@ function TargetButton:Deactivate()
 	self.isDead = nil
 end
 
-function TargetButton:DismissByAnimationGroup(animationGroup)
-	if self.__isActive then
+function TargetButton:RequestDeactivate()
+	if self.__isActive and not self.pausedDismissal then
 		if _G.InCombatLockdown() then
-			self.pausedAnimations = self.pausedAnimations or {}
-			table.insert(self.pausedAnimations, animationGroup)
-
-			animationGroup:Pause()
+			self.pausedDismissal = true
+			self:StopAnimations()
 			return
 		end
 
-		self:SendMessage("NPCScan_TargetButtonDismissed", self)
+		self:SendMessage("NPCScan_TargetButtonRequestDeactivate", self)
 	end
 end
 
@@ -344,6 +334,13 @@ function TargetButton:SetUnitData(data)
 		self.UnitName:SetText(data.npcName)
 		self.needsUnitData = true
 	end
+end
+
+function TargetButton:StopAnimations()
+	self.dismissAnimationGroup:Stop()
+	self.durationFadeAnimationGroup:Stop()
+	self.killedBackgroundTexture.animIn:Stop()
+	self.killedTextureFrame.animationGroup:Stop()
 end
 
 -- ----------------------------------------------------------------------------

@@ -163,7 +163,7 @@ function TargetButtonManager:Reclaim(eventName, button)
 	end
 end
 
-TargetButtonManager:RegisterMessage("NPCScan_TargetButtonDismissed", "Reclaim")
+TargetButtonManager:RegisterMessage("NPCScan_TargetButtonRequestDeactivate", "Reclaim")
 
 function TargetButtonManager:RespawnAsClassification(eventName, targetButton, data)
 	local targetButtonIndex
