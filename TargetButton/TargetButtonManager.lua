@@ -165,6 +165,18 @@ end
 
 TargetButtonManager:RegisterMessage("NPCScan_TargetButtonRequestDeactivate", "Reclaim")
 
+function TargetButtonManager:ReclaimByNPCID(eventName, npcID)
+	for index = 1, #ActiveTargetButtons do
+		local targetButton = ActiveTargetButtons[index]
+
+		if targetButton.npcID == npcID then
+			targetButton.dismissAnimationGroup:Play()
+		end
+	end
+end
+
+TargetButtonManager:RegisterMessage("NPCScan_UserDefinedNPCRemoved", "ReclaimByNPCID")
+
 function TargetButtonManager:RespawnAsClassification(eventName, targetButton, data)
 	local targetButtonIndex
 	for index = 1, #ActiveTargetButtons do
