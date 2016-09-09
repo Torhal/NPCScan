@@ -18,8 +18,10 @@ local AddOnFolderName, private = ...
 local LibStub = _G.LibStub
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
+
 local AceConfigDialog = LibStub("AceConfigDialog-3.0")
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
+local HereBeDragons = LibStub("HereBeDragons-1.0")
 local LibWindow = LibStub("LibWindow-1.1")
 local LibSharedMedia = LibStub("LibSharedMedia-3.0")
 
@@ -128,12 +130,11 @@ end
 -- ----------------------------------------------------------------------------
 -- Configuration.
 -- ----------------------------------------------------------------------------
-local TrackingOptions, UpdateUserDefinedNPCOptions
+local TrackingOptions, UpdateAchievementOptions, UpdateUserDefinedNPCOptions
 do
-	local UserDefinedNPCOptions = {}
 	local npcNames = {}
 
-	local function SortByNameThenByID(a, b)
+	local function SortByNPCNameThenByID(a, b)
 		local nameA = npcNames[a]
 		local nameB = npcNames[b]
 
@@ -144,22 +145,107 @@ do
 		return nameA < nameB
 	end
 
+	-- ----------------------------------------------------------------------------
+	-- Achievement options
+	-- ----------------------------------------------------------------------------
+	local AchievementOptions = {}
+	do
+		local function SortAchievementsByName(a, b)
+			return private.AchievementNameByID[a] < private.AchievementNameByID[b]
+		end
+
+		local function GetAchievementNPCOptionsName(npcID)
+			local npcData = private.NPCData[npcID]
+			local colorCode = npcData.isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
+			return ("%s%s|r"):format(colorCode, npcData.name)
+		end
+
+		function UpdateAchievementOptions()
+			table.wipe(AchievementOptions)
+			local achievementIDs = {}
+
+			for achievementID in pairs(private.ACHIEVEMENTS) do
+				achievementIDs[#achievementIDs + 1] = achievementID
+			end
+
+			table.sort(achievementIDs, SortAchievementsByName)
+
+			for index = 1, #achievementIDs do
+				local achievementID = achievementIDs[index]
+
+				local achievementOptionsTable = {
+					order = index,
+					name = private.AchievementNameByID[achievementID],
+					desc = private.AchievementDescriptionByID[achievementID],
+					type = "group",
+					args = {}
+				}
+
+				table.wipe(npcNames)
+
+				local npcIDs = {}
+				for npcID in pairs(private.ACHIEVEMENTS[achievementID].criteriaNPCs) do
+					local npcData = private.NPCData[npcID]
+
+					if npcData.unitFactionGroup ~= private.playerFactionGroup then
+						npcNames[npcID] = npcData.name
+						npcIDs[#npcIDs + 1] = npcID
+					end
+				end
+
+				table.sort(npcIDs, SortByNPCNameThenByID)
+
+				for index = 1, #npcIDs do
+					local npcID = npcIDs[index]
+
+					achievementOptionsTable.args["npc" .. index] = {
+						order = index,
+						name = GetAchievementNPCOptionsName(npcID),
+						desc = ("%s %s\n%s"):format(_G.ID, npcID, HereBeDragons:GetLocalizedMap(private.NPCData[npcID].mapID)),
+						type = "toggle",
+						width = "full",
+						get = function(info)
+							return not profile.blacklist.npcIDs[npcID]
+						end,
+						set = function(info, value)
+							profile.blacklist.npcIDs[npcID] = not profile.blacklist.npcIDs[npcID] and true or nil
+
+							UpdateAchievementOptions()
+
+							NPCScan:UpdateScanList()
+							NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+						end,
+					}
+				end
+
+				AchievementOptions["achievement" .. achievementID] = achievementOptionsTable
+			end
+
+			AceConfigRegistry:NotifyChange(AddOnFolderName)
+		end
+	end
+
+	-- ----------------------------------------------------------------------------
+	-- User defined options.
+	-- ----------------------------------------------------------------------------
+	local UserDefinedNPCOptions = {}
+
 	function UpdateUserDefinedNPCOptions()
 		table.wipe(UserDefinedNPCOptions)
 		table.wipe(npcNames)
 
-		local sortedIDs = {}
+		local npcIDs = {}
 
 		local savedNpcIDs = profile.userDefined.npcIDs
 		for npcID in pairs(savedNpcIDs) do
 			npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
-			sortedIDs[#sortedIDs + 1] = npcID
+			npcIDs[#npcIDs + 1] = npcID
 		end
 
-		table.sort(sortedIDs, SortByNameThenByID)
+		table.sort(npcIDs, SortByNPCNameThenByID)
 
-		for index = 1, #sortedIDs do
-			local npcID = sortedIDs[index]
+		for index = 1, #npcIDs do
+			local npcID = npcIDs[index]
 
 			UserDefinedNPCOptions["npc" .. index] = {
 				order = index,
@@ -176,7 +262,7 @@ do
 					UpdateUserDefinedNPCOptions()
 
 					NPCScan:UpdateScanList()
-					NPCScan:SendMessage("NPCScan_UserDefinedNPCRemoved", npcID)
+					NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
 				end,
 			}
 		end
@@ -190,9 +276,16 @@ do
 		type = "group",
 		childGroups = "tab",
 		args = {
+			achievements = {
+				name = _G.ACHIEVEMENTS,
+				order = 1,
+				type = "group",
+				childGroups = "tree",
+				args = AchievementOptions,
+			},
 			userDefined = {
 				name = _G.CUSTOM,
-				order = 1,
+				order = 2,
 				type = "group",
 				args = {
 					npcID = {
@@ -747,6 +840,7 @@ function NPCScan:SetupOptions()
 	AceConfigRegistry:RegisterOptionsTable(AddOnFolderName, options)
 	self.OptionsFrame = AceConfigDialog:AddToBlizOptions(AddOnFolderName)
 
+	UpdateAchievementOptions()
 	UpdateAlertNamesOptions()
 	UpdateUserDefinedNPCOptions()
 end

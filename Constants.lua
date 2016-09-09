@@ -164,6 +164,17 @@ local ACHIEVEMENTS = {
 
 private.ACHIEVEMENTS = ACHIEVEMENTS
 
-for id, data in pairs(ACHIEVEMENTS) do
+local AchievementNameByID = {}
+private.AchievementNameByID = AchievementNameByID
+
+local AchievementDescriptionByID = {}
+private.AchievementDescriptionByID = AchievementDescriptionByID
+
+for achievementID, data in pairs(ACHIEVEMENTS) do
 	data.criteriaNPCs = {}
+
+	local _, achievementName, _, _, _, _, _, achievementDescription = _G.GetAchievementInfo(achievementID)
+	AchievementNameByID[achievementID] = achievementName
+	AchievementDescriptionByID[achievementID] = achievementDescription
 end
+

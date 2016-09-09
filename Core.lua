@@ -178,6 +178,8 @@ function NPCScan:OnInitialize()
 						npcData.achievementID = achievementID
 						npcData.achievementCriteriaID = criteriaID
 						npcData.isCriteriaCompleted = isCriteriaCompleted
+
+						achievement.criteriaNPCs[npcID] = true
 					end
 				else
 					private.Debug("***** AchievementID.%s: Quest %s with assetID %d", private.AchievementLabel[achievementID], assetName, assetID)

@@ -26,6 +26,7 @@ local LibSharedMedia = LibStub("LibSharedMedia-3.0")
 local npcScanList = {}
 
 local playerFactionGroup = _G.UnitFactionGroup("player")
+private.playerFactionGroup = playerFactionGroup
 
 -- ----------------------------------------------------------------------------
 -- Variables.
