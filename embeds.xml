@@ -3,7 +3,6 @@
     <!--@no-lib-strip@-->
     <Script file="Libs\LibStub\LibStub.lua"/>
     <Include file="Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml"/>
-    <Include file="Libs\LibTextTable-1.1\Lib.xml"/>
     <Include file="Libs\LibSharedMedia-3.0\lib.xml"/>
     <Include file="Libs\AceGUI-3.0-SharedMediaWidgets\widget.xml"/>
     <Include file="Libs\LibTextDump-1.0\lib.xml"/>
