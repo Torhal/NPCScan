@@ -127,9 +127,116 @@ end
 -- ----------------------------------------------------------------------------
 -- Configuration.
 -- ----------------------------------------------------------------------------
+local TrackingOptions, UpdateUserDefinedNPCOptions
+do
+	local UserDefinedNPCOptions = {}
+	local npcNames = {}
+
+	local function SortByNameThenByID(a, b)
+		local nameA = npcNames[a]
+		local nameB = npcNames[b]
+
+		if nameA == nameB then
+			return a < b
+		end
+
+		return nameA < nameB
+	end
+
+	function UpdateUserDefinedNPCOptions()
+		table.wipe(UserDefinedNPCOptions)
+		table.wipe(npcNames)
+
+		local sortedIDs = {}
+
+		local savedNpcIDs = profile.userDefined.npcIDs
+		for npcID in pairs(savedNpcIDs) do
+			npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
+			sortedIDs[#sortedIDs + 1] = npcID
+		end
+
+		table.sort(sortedIDs, SortByNameThenByID)
+
+		for index = 1, #sortedIDs do
+			local npcID = sortedIDs[index]
+
+			UserDefinedNPCOptions["npc" .. index] = {
+				order = index,
+				name = ("%s: %d"):format(NPCScan:GetNPCNameFromID(npcID), npcID),
+				descStyle = "inline",
+				type = "toggle",
+				width = "full",
+				get = function()
+					return true
+				end,
+				set = function()
+					savedNpcIDs[npcID] = nil
+
+					UpdateUserDefinedNPCOptions()
+
+					NPCScan:UpdateScanList()
+					NPCScan:SendMessage("NPCScan_UserDefinedNPCRemoved", npcID)
+				end,
+			}
+		end
+
+		AceConfigRegistry:NotifyChange(AddOnFolderName)
+	end
+
+	TrackingOptions = {
+		name = _G.TRACKING,
+		order = 1,
+		type = "group",
+		childGroups = "tab",
+		args = {
+			userDefined = {
+				name = _G.CUSTOM,
+				order = 1,
+				type = "group",
+				args = {
+					npcID = {
+						order = 10,
+						name = ("%s %s"):format(_G.ADD, _G.PARENS_TEMPLATE:format(_G.ID)),
+						descStyle = "inline",
+						type = "input",
+						validate = function(info, value)
+							if value == "mouseover" or value == "target" then
+								value = private.UnitTokenToCreatureID(value)
+							end
+
+							if tonumber(value) then
+								return true
+							end
+						end,
+						get = function()
+							return ""
+						end,
+						set = function(info, value)
+							if value == "mouseover" or value == "target" then
+								value = private.UnitTokenToCreatureID(value)
+							end
+
+							profile.userDefined.npcIDs[tonumber(value)] = true
+							UpdateUserDefinedNPCOptions()
+							NPCScan:UpdateScanList()
+						end,
+					},
+					npcIDs = {
+						order = 20,
+						name = _G.ASSIGNED_COLON,
+						type = "group",
+						inline = true,
+						args = UserDefinedNPCOptions,
+					},
+				},
+			},
+		},
+	}
+end -- do-block
+
 local DetectionOptions = {
 	name = L["Detection"],
-	order = 1,
+	order = 2,
 	type = "group",
 	descStyle = "inline",
 	args = {
@@ -233,7 +340,7 @@ local DetectionOptions = {
 
 local TargetingOptions = {
 	name = _G.BINDING_HEADER_TARGETING,
-	order = 2,
+	order = 3,
 	type = "group",
 	descStyle = "inline",
 	args = {
@@ -388,7 +495,7 @@ do
 	end
 
 	AlertOptions = {
-		order = 3,
+		order = 4,
 		name = L["Alerts"],
 		descStyle = "inline",
 		type = "group",
@@ -574,29 +681,6 @@ do
 	}
 end -- do-block
 
-local TrackingOptions = {
-	name = _G.TRACKING,
-	order = 1,
-	type = "group",
-	childGroups = "tab",
-	args = {
-		foofroo = {
-			name = "NotYetAdded",
-			order = 1,
-			type = "input",
-			dialogControl = "MyNewWidgetName",
-		},
-	},
-}
-
-local UserDefinedOptions = {
-	name = _G.CUSTOM,
-	order = 2,
-	type = "group",
-	childGroups = "tree",
-	args = {},
-}
-
 local Options
 do
 	local options
@@ -608,6 +692,7 @@ do
 				type = "group",
 				childGroups = "tab",
 				args = {
+					trackingOptions = TrackingOptions,
 					detectionOptions = DetectionOptions,
 					alertOptions = AlertOptions,
 					targetingOptions = TargetingOptions,
@@ -643,4 +728,5 @@ function NPCScan:SetupOptions()
 	self.OptionsFrame = AceConfigDialog:AddToBlizOptions(AddOnFolderName)
 
 	UpdateAlertNamesOptions()
+	UpdateUserDefinedNPCOptions()
 end

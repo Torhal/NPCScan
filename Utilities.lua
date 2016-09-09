@@ -73,6 +73,19 @@ end
 
 private.GUIDToCreatureID = GUIDToCreatureID
 
+local function UnitTokenToCreatureID(unitToken)
+	if unitToken then
+		local GUID = _G.UnitGUID(unitToken)
+		if not GUID then
+			return
+		end
+
+		return GUIDToCreatureID(GUID)
+	end
+end
+
+private.UnitTokenToCreatureID = UnitTokenToCreatureID
+
 private.DUMP_COMMANDS = {
 	tables = function()
 		private.DumpTables()

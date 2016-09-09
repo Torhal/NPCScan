@@ -45,17 +45,6 @@ end
 
 private.IsNPCQuestComplete = IsNPCQuestComplete
 
-local function UnitTokenToCreatureID(unitToken)
-	if unitToken then
-		local GUID = _G.UnitGUID(unitToken)
-		if not GUID then
-			return
-		end
-
-		return private.GUIDToCreatureID(GUID)
-	end
-end
-
 -- These functions are used for situations where an npcID needs to be removed from the npcScanList while iterating it.
 local QueueNPCForUntracking, UntrackQueuedNPCs
 do
@@ -110,7 +99,7 @@ local function ProcessUnit(unitToken, sourceText)
 		return
 	end
 
-	local npcID = UnitTokenToCreatureID(unitToken)
+	local npcID = private.UnitTokenToCreatureID(unitToken)
 	if npcID then
 		local detectionData = {
 			npcID = npcID,
@@ -300,9 +289,9 @@ function NPCScan:PLAYER_TARGET_CHANGED(eventName)
 end
 
 function NPCScan:UPDATE_MOUSEOVER_UNIT()
-	local mouseoverID = UnitTokenToCreatureID("mouseover")
+	local mouseoverID = private.UnitTokenToCreatureID("mouseover")
 
-	if mouseoverID ~= UnitTokenToCreatureID("target") then
+	if mouseoverID ~= private.UnitTokenToCreatureID("target") then
 		ProcessUnit("mouseover", _G.MOUSE_LABEL)
 	end
 end
