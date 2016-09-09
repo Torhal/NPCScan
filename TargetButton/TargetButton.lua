@@ -202,6 +202,7 @@ function TargetButton:Activate(data)
 
 	self:SetAttribute("macrotext", macroText)
 
+	self:SetScale(private.db.profile.targetButtonGroup.scale)
 	self:Show()
 
 	if self.PreAnimateIn then

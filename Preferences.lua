@@ -2,6 +2,7 @@
 -- Localized Lua globals.
 -- ----------------------------------------------------------------------------
 -- Functions
+local pairs = _G.pairs
 local tonumber = _G.tonumber
 local tostring = _G.tostring
 
@@ -352,15 +353,32 @@ local TargetingOptions = {
 			width = "full",
 			min = 0.5,
 			max = 5,
-			get = function()
+			get = function(info)
 				return profile.targetButtonGroup.durationSeconds / 60
 			end,
 			set = function(info, value)
 				profile.targetButtonGroup.durationSeconds = value * 60
 			end,
 		},
-		targetButtons = {
+		scale = {
 			order = 2,
+			name = _G.UI_SCALE,
+			type = "range",
+			width = "full",
+			min = 0.5,
+			max = 2,
+			get = function(info)
+				return profile.targetButtonGroup.scale
+			end,
+			set = function(info, value)
+				profile.targetButtonGroup.scale = value
+				LibWindow.SetScale(anchorFrame, value)
+
+				NPCScan:SendMessage("NPCScan_TargetButtonScaleChanged")
+			end,
+		},
+		targetButtons = {
+			order = 3,
 			name = L["Screen Location"],
 			type = "group",
 			guiInline = true,
@@ -713,6 +731,8 @@ end
 function NPCScan:SetupOptions()
 	profile = private.db.profile
 	anchorFrame = CreateAnchorFrame()
+
+	private.TargetButtonAnchor = anchorFrame
 
 	CreateAnchorFrame = nil
 

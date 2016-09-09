@@ -74,24 +74,15 @@ local SIBLING_OFFSET_Y = {
 -- ----------------------------------------------------------------------------
 -- Helpers.
 -- ----------------------------------------------------------------------------
-local function GetAnchorData()
-	local anchorConfig = private.db.profile.targetButtonGroup
-	local spawnPoint = anchorConfig.point
-
-	return spawnPoint, anchorConfig.x or OFFSET_X[spawnPoint], anchorConfig.y or OFFSET_Y[spawnPoint]
-end
-
 local function ResetTargetButtonPoints()
-	local spawnPoint, offsetX, offsetY = GetAnchorData()
-
 	for index = 1, #ActiveTargetButtons do
 		local indexedButton = ActiveTargetButtons[index]
 		indexedButton:ClearAllPoints()
 
 		if index == 1 then
-			indexedButton:SetPoint(spawnPoint, _G.UIParent, spawnPoint, offsetX, offsetY)
+			indexedButton:SetPoint("CENTER", private.TargetButtonAnchor, "CENTER")
 		else
-			spawnPoint = POINT_TRANSLATION[ActiveTargetButtons[1]:GetEffectiveSpawnPoint()]
+			local spawnPoint = POINT_TRANSLATION[ActiveTargetButtons[1]:GetEffectiveSpawnPoint()]
 			indexedButton:SetPoint(spawnPoint, ActiveTargetButtons[index - 1], SIBLING_ANCHORS[spawnPoint], 0, SIBLING_OFFSET_Y[spawnPoint])
 		end
 	end
@@ -204,6 +195,14 @@ end
 
 TargetButtonManager:RegisterMessage("NPCScan_TargetButtonNeedsReclassified", "RespawnAsClassification")
 
+function TargetButtonManager:SetScale(eventName)
+	for index = 1, #ActiveTargetButtons do
+		ActiveTargetButtons[index]:SetScale(private.db.profile.targetButtonGroup.scale)
+	end
+end
+
+TargetButtonManager:RegisterMessage("NPCScan_TargetButtonScaleChanged", "SetScale")
+
 function TargetButtonManager:Spawn(eventName, data)
 	if ActiveTargetButtonByNPCID[data.npcID] then
 		return
@@ -219,13 +218,12 @@ function TargetButtonManager:Spawn(eventName, data)
 	end
 
 	local button = AcquireTargetButton(data.unitClassification)
-	local spawnPoint, offsetX, offsetY = GetAnchorData()
 
-	if #ActiveTargetButtons > 0 then
-		spawnPoint = POINT_TRANSLATION[ActiveTargetButtons[1]:GetEffectiveSpawnPoint()]
-		button:SetPoint(spawnPoint, ActiveTargetButtons[#ActiveTargetButtons], SIBLING_ANCHORS[spawnPoint], 0, SIBLING_OFFSET_Y[spawnPoint])
+	if #ActiveTargetButtons == 0 then
+		button:SetPoint("CENTER", private.TargetButtonAnchor, "CENTER")
 	else
-		button:SetPoint(spawnPoint, _G.UIParent, spawnPoint, offsetX, offsetY)
+		local spawnPoint = POINT_TRANSLATION[ActiveTargetButtons[1]:GetEffectiveSpawnPoint()]
+		button:SetPoint(spawnPoint, ActiveTargetButtons[#ActiveTargetButtons], SIBLING_ANCHORS[spawnPoint], 0, SIBLING_OFFSET_Y[spawnPoint])
 	end
 
 	ActiveTargetButtons[#ActiveTargetButtons + 1] = button
