@@ -103,6 +103,14 @@ private.ContinentID = ContinentID
 -- ----------------------------------------------------------------------------
 -- Achievements.
 -- ----------------------------------------------------------------------------
+local AchievementStatus = {
+	Enabled = 1,
+	UserDefined = 2,
+	Disabled = 3,
+}
+
+private.AchievementStatus = AchievementStatus
+
 local AchievementID = {
 	AdventurerOfAzsuna = 11261,
 	AdventurerOfHighmountain = 11264,
@@ -129,7 +137,7 @@ local AchievementID = {
 private.AchievementID = AchievementID
 
 for label, ID in pairs(AchievementID) do
-	DATABASE_DEFAULTS.profile.detection.achievements[ID] = true
+	DATABASE_DEFAULTS.profile.detection.achievements[ID] = AchievementStatus.Enabled
 end
 
 local AchievementLabel = {}

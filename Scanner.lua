@@ -149,7 +149,7 @@ local function CanAddToScanList(npcID)
 	local achievementID = npcData and npcData.achievementID
 
 	if achievementID then
-		if not detection.achievements[achievementID] then
+		if detection.achievements[achievementID] == private.AchievementStatus.Disabled then
 			private.Debug("Skipping %s (%d) - not tracking the achievement.", NPCScan:GetNPCNameFromID(npcID), npcID)
 			return false
 		end
@@ -265,7 +265,7 @@ function NPCScan:ACHIEVEMENT_EARNED(_, achievementID)
 
 		if private.db.profile.detection.ignoreCompletedAchievementCriteria then
 			-- Disable tracking for the achievement, since the above setting implies it.
-			private.db.profile.detection.achievements[achievementID] = false
+			private.db.profile.detection.achievements[achievementID] = private.AchievementStatus.Disabled
 		end
 
 		UpdateScanListAchievementCriteria()

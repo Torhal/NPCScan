@@ -150,6 +150,18 @@ do
 	-- ----------------------------------------------------------------------------
 	local AchievementOptions = {}
 	do
+		local AchievementStatusLabels = {
+			_G.ENABLE,
+			_G.CUSTOM,
+			_G.DISABLE,
+		}
+
+		local AchievementStatusColors = {
+			_G.GREEN_FONT_COLOR_CODE,
+			_G.NORMAL_FONT_COLOR_CODE,
+			_G.RED_FONT_COLOR_CODE,
+		}
+
 		local function SortAchievementsByName(a, b)
 			return private.AchievementNameByID[a] < private.AchievementNameByID[b]
 		end
@@ -172,13 +184,44 @@ do
 
 			for index = 1, #achievementIDs do
 				local achievementID = achievementIDs[index]
+				local achievementStatus = profile.detection.achievements[achievementID]
 
 				local achievementOptionsTable = {
 					order = index,
-					name = private.AchievementNameByID[achievementID],
+					name = ("%s%s|r"):format(AchievementStatusColors[achievementStatus], private.AchievementNameByID[achievementID]),
 					desc = private.AchievementDescriptionByID[achievementID],
 					type = "group",
-					args = {}
+					args = {
+						status = {
+							order = 1,
+							name = _G.STATUS,
+							type = "select",
+							values = AchievementStatusLabels,
+							get = function(info)
+								return profile.detection.achievements[achievementID]
+							end,
+							set = function(info, value)
+								profile.detection.achievements[achievementID] = value
+
+								if value ~= private.AchievementStatus.UserDefined then
+									for npcID in pairs(private.ACHIEVEMENTS[achievementID].criteriaNPCs) do
+										profile.blacklist.npcIDs[npcID] = nil
+									end
+								end
+
+								UpdateAchievementOptions()
+
+								NPCScan:UpdateScanList()
+							end,
+						},
+						npcs = {
+							order = 2,
+							name = " ",
+							type = "group",
+							guiInline = true,
+							args = {},
+						},
+					}
 				}
 
 				table.wipe(npcNames)
@@ -198,12 +241,16 @@ do
 				for index = 1, #npcIDs do
 					local npcID = npcIDs[index]
 
-					achievementOptionsTable.args["npc" .. index] = {
-						order = index,
+					achievementOptionsTable.args.npcs.args["npc" .. index] = {
+						order = index + 1,
 						name = GetAchievementNPCOptionsName(npcID),
-						desc = ("%s %s\n%s"):format(_G.ID, npcID, HereBeDragons:GetLocalizedMap(private.NPCData[npcID].mapID)),
+						desc = ("%s %s %s"):format(_G.ID, npcID, HereBeDragons:GetLocalizedMap(private.NPCData[npcID].mapID)),
 						type = "toggle",
+						disabled = function()
+							return profile.detection.achievements[achievementID] ~= private.AchievementStatus.UserDefined
+						end,
 						width = "full",
+						descStyle = "inline",
 						get = function(info)
 							return not profile.blacklist.npcIDs[npcID]
 						end,
