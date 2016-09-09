@@ -50,6 +50,21 @@ do
 end
 
 -- ----------------------------------------------------------------------------
+-- Variables.
+-- ----------------------------------------------------------------------------
+local NPCIDFromName = {}
+private.NPCIDFromName = NPCIDFromName
+
+local QuestNPCs = {}
+private.QuestNPCs = QuestNPCs
+
+local QuestIDFromName = {}
+private.QuestIDFromName = QuestIDFromName
+
+local VignetteNPCs = {}
+private.VignetteNPCs = VignetteNPCs
+
+-- ----------------------------------------------------------------------------
 -- AddOn Methods.
 -- ----------------------------------------------------------------------------
 function NPCScan:OnInitialize()
@@ -67,15 +82,6 @@ function NPCScan:OnInitialize()
 	-- ----------------------------------------------------------------------------
 	-- Build lookup tables.
 	-- ----------------------------------------------------------------------------
-	local QuestNPCs = {}
-	private.QuestNPCs = QuestNPCs
-
-	local QuestIDFromName = {}
-	private.QuestIDFromName = QuestIDFromName
-
-	local VignetteNPCs = {}
-	private.VignetteNPCs = VignetteNPCs
-
 	for npcID, data in pairs(private.NPCData) do
 		if data.questID then
 			local npcIDs = QuestNPCs[data.questID]
@@ -170,8 +176,6 @@ function NPCScan:OnInitialize()
 		end
 	end
 
-	private.NPCIDFromName = {}
-
 	for mapID, npcs in pairs(private.MapNPCs) do
 		local mapHeaderPrinted
 
@@ -184,7 +188,7 @@ function NPCScan:OnInitialize()
 				npcName = ("%s_%d"):format(_G.UNKNOWN, npcID)
 			end
 
-			private.NPCIDFromName[npcName] = npcID
+			NPCIDFromName[npcName] = npcID
 
 			if mapID >= 1015 then
 				local npcData = private.NPCData[npcID]
@@ -205,7 +209,7 @@ function NPCScan:OnInitialize()
 
 	-- Handle custom additions.
 	for npcID, npcName in pairs(db.locale.npcNames) do
-		private.NPCIDFromName[npcName] = npcID
+		NPCIDFromName[npcName] = npcID
 	end
 end
 
@@ -241,7 +245,7 @@ do
 
 			if npcName and npcName ~= "" then
 				private.db.locale.npcNames[npcID] = npcName
-				private.NPCIDFromName[npcName] = npcID
+				NPCIDFromName[npcName] = npcID
 			else
 				npcName = _G.UNKNOWN
 			end
