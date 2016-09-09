@@ -75,10 +75,6 @@ function NPCScan:OnInitialize()
 
 	private.db = db
 
-	self:SetupOptions()
-	self:InitializeTargetButton()
-	self:RegisterChatCommand("npcscan", "ChatCommand")
-
 	-- ----------------------------------------------------------------------------
 	-- Build lookup tables.
 	-- ----------------------------------------------------------------------------
@@ -219,6 +215,10 @@ function NPCScan:OnInitialize()
 	for npcID, npcName in pairs(db.locale.npcNames) do
 		NPCIDFromName[npcName] = npcID
 	end
+
+	self:SetupOptions()
+	self:InitializeTargetButton()
+	self:RegisterChatCommand("npcscan", "ChatCommand")
 end
 
 function NPCScan:OnEnable()
