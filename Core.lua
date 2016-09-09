@@ -82,6 +82,29 @@ function NPCScan:OnInitialize()
 	-- ----------------------------------------------------------------------------
 	-- Build lookup tables.
 	-- ----------------------------------------------------------------------------
+	for mapID, npcs in pairs(private.MapNPCs) do
+		for npcID in pairs(npcs) do
+			local npcData = private.NPCData[npcID]
+			if not npcData then
+				npcData = {}
+				private.NPCData[npcID] = npcData
+			end
+
+			npcData.mapID = mapID
+
+			local npcName = self:GetNPCNameFromID(npcID)
+			if not npcName then
+				private.Debug("NPC ID %d not found in localization table.", npcID)
+
+				npcName = ("%s_%d"):format(_G.UNKNOWN, npcID)
+			end
+
+			npcData.name = npcName
+
+			NPCIDFromName[npcName] = npcID
+		end
+	end
+
 	for npcID, data in pairs(private.NPCData) do
 		if data.questID then
 			local npcIDs = QuestNPCs[data.questID]
@@ -141,11 +164,6 @@ function NPCScan:OnInitialize()
 
 					if found then
 						local npcData = private.NPCData[assetID]
-						if not npcData then
-							npcData = {}
-							private.NPCData[assetID] = npcData
-						end
-
 						npcData.achievementID = achievementID
 						npcData.achievementCriteriaID = criteriaID
 						npcData.isCriteriaCompleted = isCriteriaCompleted
@@ -180,20 +198,10 @@ function NPCScan:OnInitialize()
 		local mapHeaderPrinted
 
 		for npcID in pairs(npcs) do
-			local npcName = self:GetNPCNameFromID(npcID)
-
-			if not npcName then
-				private.Debug("NPC ID %d not found in localization table.", npcID)
-
-				npcName = ("%s_%d"):format(_G.UNKNOWN, npcID)
-			end
-
-			NPCIDFromName[npcName] = npcID
-
 			if mapID >= 1015 then
 				local npcData = private.NPCData[npcID]
 
-				if not npcData or (not npcData.questID and not npcData.achievementID) then
+				if not npcData.questID and not npcData.achievementID then
 					if not mapHeaderPrinted then
 						mapHeaderPrinted = true
 						private.Debug("-- ----------------------------------------------------------------------------")
@@ -201,7 +209,7 @@ function NPCScan:OnInitialize()
 						private.Debug("-- ----------------------------------------------------------------------------")
 					end
 
-					private.Debug("NPC %d (%s) has no questID.", npcID, npcName)
+					private.Debug("NPC %d (%s) has no questID.", npcID, npcData.name)
 				end
 			end
 		end
