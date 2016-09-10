@@ -182,10 +182,20 @@ local function MergeUserDefinedWithScanList(npcList)
 end
 
 function NPCScan:UpdateScanList(eventName, mapID)
-	currentMapID = mapID or currentMapID
-	currentContinentID = mapID and HereBeDragons:GetCZFromMapID(mapID) or currentMapID
+	if mapID then
+		currentMapID = mapID
+		private.currentMapID = currentMapID
 
-	private.Debug("currentMapID: %d", currentMapID)
+		currentContinentID = HereBeDragons:GetCZFromMapID(mapID)
+		private.currentContinentID = currentContinentID
+	end
+
+	if not currentMapID and currentContinentID then
+		private.Debug("No mapID or no continentID.")
+		return
+	end
+
+	private.Debug("currentMapID: %d currentContinentID: %d", currentMapID, currentContinentID)
 
 	for npcID in pairs(npcScanList) do
 		private.Overlays.Remove(npcID)
@@ -200,6 +210,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 	MergeUserDefinedWithScanList(userDefined.npcIDs)
 
 	if profile.blacklist.continentIDs[currentContinentID] or profile.blacklist.mapIDs[currentMapID] then
+		private.Debug("continentID or mapID is blacklisted; terminating update.")
 		_G.NPCScan_SearchMacroButton:ResetMacroText()
 		return
 	end

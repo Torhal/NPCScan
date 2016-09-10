@@ -375,109 +375,165 @@ do
 	}
 end -- do-block
 
-local DetectionOptions = {
-	name = L["Detection"],
-	order = 2,
-	type = "group",
-	descStyle = "inline",
-	args = {
-		interval = {
-			order = 10,
-			name = L["Interval"],
-			desc = L["The number of minutes before an NPC will be detected again."],
-			type = "range",
-			width = "full",
-			min = 0.5,
-			max = 60,
-			get = function(info)
-				return profile.detection.intervalSeconds / 60
-			end,
-			set = function(info, value)
-				profile.detection.intervalSeconds = value * 60
-			end,
-		},
-		type = {
-			order = 20,
-			name = _G.TYPE,
-			type = "group",
-			guiInline = true,
-			args = {
-				rares = {
-					order = 10,
-					type = "toggle",
-					name = _G.BATTLE_PET_BREED_QUALITY4,
-					descStyle = "inline",
-					get = function(info)
-						return profile.detection.rares
-					end,
-					set = function(info, value)
-						profile.detection.rares = value
-					end,
-				},
-				tameables = {
-					order = 20,
-					type = "toggle",
-					name = ("%s %s"):format(_G.TAMEABLE, _G.PARENS_TEMPLATE:format(_G.BATTLE_PET_BREED_QUALITY4)),
-					descStyle = "inline",
-					get = function(info)
-						return profile.detection.tameables
-					end,
-					set = function(info, value)
-						profile.detection.tameables = value
-					end,
-				},
-				userDefined = {
-					order = 30,
-					type = "toggle",
-					name = _G.CUSTOM,
-					descStyle = "inline",
-					get = function(info)
-						return profile.detection.userDefined
-					end,
-					set = function(info, value)
-						profile.detection.userDefined = value
-					end,
+local DetectionOptions, UpdateIgnoredContinentOptions
+do
+	local IgnoredContinentOptions = {}
+
+	local function SortByContinentName(a, b)
+		return private.ContinentNameByID[a] < private.ContinentNameByID[b]
+	end
+
+	function UpdateIgnoredContinentOptions()
+		table.wipe(IgnoredContinentOptions)
+
+		local continentIDs = {}
+		for index = 1, #private.ContinentMapID do
+			continentIDs[#continentIDs + 1] = index
+		end
+
+		table.sort(continentIDs, SortByContinentName)
+
+		for index = 1, #continentIDs do
+			local continentID = continentIDs[index]
+
+			IgnoredContinentOptions["continentEntry" .. index] = {
+				order = index,
+				name = private.ContinentNameByID[continentID],
+				descStyle = "inline",
+				type = "toggle",
+				width = "full",
+				get = function(info)
+					return profile.blacklist.continentIDs[continentID]
+				end,
+				set = function(info, value)
+					profile.blacklist.continentIDs[continentID] = value or nil
+
+					if continentID == private.currentContinentID then
+						NPCScan:UpdateScanList()
+					end
+				end,
+			}
+		end
+
+		AceConfigRegistry:NotifyChange(AddOnFolderName)
+	end
+
+	DetectionOptions = {
+		name = L["Detection"],
+		order = 2,
+		type = "group",
+		descStyle = "inline",
+		args = {
+			interval = {
+				order = 10,
+				name = L["Interval"],
+				desc = L["The number of minutes before an NPC will be detected again."],
+				type = "range",
+				width = "full",
+				min = 0.5,
+				max = 60,
+				get = function(info)
+					return profile.detection.intervalSeconds / 60
+				end,
+				set = function(info, value)
+					profile.detection.intervalSeconds = value * 60
+				end,
+			},
+			type = {
+				order = 20,
+				name = _G.TYPE,
+				type = "group",
+				guiInline = true,
+				args = {
+					rares = {
+						order = 10,
+						type = "toggle",
+						name = _G.BATTLE_PET_BREED_QUALITY4,
+						descStyle = "inline",
+						get = function(info)
+							return profile.detection.rares
+						end,
+						set = function(info, value)
+							profile.detection.rares = value
+						end,
+					},
+					tameables = {
+						order = 20,
+						type = "toggle",
+						name = ("%s %s"):format(_G.TAMEABLE, _G.PARENS_TEMPLATE:format(_G.BATTLE_PET_BREED_QUALITY4)),
+						descStyle = "inline",
+						get = function(info)
+							return profile.detection.tameables
+						end,
+						set = function(info, value)
+							profile.detection.tameables = value
+						end,
+					},
+					userDefined = {
+						order = 30,
+						type = "toggle",
+						name = _G.CUSTOM,
+						descStyle = "inline",
+						get = function(info)
+							return profile.detection.userDefined
+						end,
+						set = function(info, value)
+							profile.detection.userDefined = value
+						end,
+					},
 				},
 			},
-		},
-		ignore = {
-			order = 30,
-			name = _G.IGNORE,
-			type = "group",
-			guiInline = true,
-			args = {
-				completedAchievementCriteria = {
-					order = 10,
-					type = "toggle",
-					name = L["Completed Achievement Criteria"],
-					descStyle = "inline",
-					width = "full",
-					get = function(info)
-						return profile.detection.ignoreCompletedAchievementCriteria
-					end,
-					set = function(info, value)
-						profile.detection.ignoreCompletedAchievementCriteria = value
-						NPCScan:UpdateScanList()
-					end,
-				},
-				completedQuestObjectives = {
-					order = 20,
-					type = "toggle",
-					name = L["Completed Quest Objectives"],
-					descStyle = "inline",
-					width = "full",
-					get = function(info)
-						return profile.detection.ignoreCompletedQuestObjectives
-					end,
-					set = function(info, value)
-						profile.detection.ignoreCompletedQuestObjectives = value
-						NPCScan:UpdateScanList()
-					end,
+			headerIgnore = {
+				order = 30,
+				name = _G.IGNORE,
+				type = "header"
+			},
+			ignoreGeneral = {
+				order = 40,
+				name = _G.GENERAL,
+				type = "group",
+				guiInline = true,
+				args = {
+					completedAchievementCriteria = {
+						order = 1,
+						type = "toggle",
+						name = L["Completed Achievement Criteria"],
+						descStyle = "inline",
+						width = "full",
+						get = function(info)
+							return profile.detection.ignoreCompletedAchievementCriteria
+						end,
+						set = function(info, value)
+							profile.detection.ignoreCompletedAchievementCriteria = value
+							NPCScan:UpdateScanList()
+						end,
+					},
+					completedQuestObjectives = {
+						order = 2,
+						type = "toggle",
+						name = L["Completed Quest Objectives"],
+						descStyle = "inline",
+						width = "full",
+						get = function(info)
+							return profile.detection.ignoreCompletedQuestObjectives
+						end,
+						set = function(info, value)
+							profile.detection.ignoreCompletedQuestObjectives = value
+							NPCScan:UpdateScanList()
+						end,
+					},
 				},
 			},
+			ignoreContinent = {
+				order = 50,
+				name = _G.CONTINENT,
+				type = "group",
+				guiInline = true,
+				args = IgnoredContinentOptions,
+			},
 		},
-	},
-}
+	}
+end -- do-block
 
 local TargetingOptions = {
 	name = _G.BINDING_HEADER_TARGETING,
@@ -890,4 +946,5 @@ function NPCScan:SetupOptions()
 	UpdateAchievementOptions()
 	UpdateAlertNamesOptions()
 	UpdateUserDefinedNPCOptions()
+	UpdateIgnoredContinentOptions()
 end

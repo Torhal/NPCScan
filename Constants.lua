@@ -9,6 +9,9 @@ local pairs = _G.pairs
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
 
+local LibStub = _G.LibStub
+local HereBeDragons = LibStub("HereBeDragons-1.0")
+
 -- ----------------------------------------------------------------------------
 -- General constants.
 -- ----------------------------------------------------------------------------
@@ -99,6 +102,26 @@ local ContinentID = {
 }
 
 private.ContinentID = ContinentID
+
+local ContinentMapID = {
+	[ContinentID.Kalimdor] = 13,
+	[ContinentID.EasternKingdoms] = 14,
+	[ContinentID.Outland] = 466,
+	[ContinentID.Northrend] = 485,
+	[ContinentID.TheMaelstrom] = 737,
+	[ContinentID.Pandaria] = 862,
+	[ContinentID.Draenor] = 962,
+	[ContinentID.BrokenIsles] = 1007,
+}
+
+private.ContinentMapID = ContinentMapID
+
+local ContinentNameByID = {}
+private.ContinentNameByID = ContinentNameByID
+
+for index = 1, #private.ContinentMapID do
+	ContinentNameByID[index] = HereBeDragons:GetLocalizedMap(private.ContinentMapID[index])
+end
 
 -- ----------------------------------------------------------------------------
 -- Achievements.
