@@ -88,14 +88,14 @@ private.DatabaseDefaults = DATABASE_DEFAULTS
 -- Continents.
 -- ----------------------------------------------------------------------------
 local ContinentID = {
-	KALIMDOR = 1,
-	EASTERN_KINGDOMS = 2,
-	OUTLAND = 3,
-	NORTHREND = 4,
-	THE_MAELSTROM = 5,
-	PANDARIA = 6,
-	DRAENOR = 7,
-	BROKEN_ISLES = 8,
+	Kalimdor = 1,
+	EasternKingdoms = 2,
+	Outland = 3,
+	Northrend = 4,
+	TheMaelstrom = 5,
+	Pandaria = 6,
+	Draenor = 7,
+	BrokenIsles = 8,
 }
 
 private.ContinentID = ContinentID
@@ -147,30 +147,30 @@ end
 
 private.AchievementLabel = AchievementLabel
 
-local ACHIEVEMENTS = {
-	[AchievementID.AdventurerOfAzsuna] = { continentID = ContinentID.BROKEN_ISLES },
-	[AchievementID.AdventurerOfHighmountain] = { continentID = ContinentID.BROKEN_ISLES },
-	[AchievementID.AdventurerOfStormheim] = { continentID = ContinentID.BROKEN_ISLES },
-	[AchievementID.AdventurerOfSuramar] = { continentID = ContinentID.BROKEN_ISLES },
-	[AchievementID.AdventurerOfValsharah] = { continentID = ContinentID.BROKEN_ISLES },
-	[AchievementID.AncientNoMore] = { continentID = ContinentID.DRAENOR },
-	[AchievementID.BloodyRare] = { continentID = ContinentID.OUTLAND },
-	[AchievementID.ChampionsOfLeiShen] = { continentID = ContinentID.PANDARIA },
-	[AchievementID.CutOffTheHead] = { continentID = ContinentID.DRAENOR },
-	[AchievementID.FightThePower] = { continentID = ContinentID.DRAENOR },
-	[AchievementID.Frostbitten] = { continentID = ContinentID.NORTHREND },
-	[AchievementID.Glorious] = { continentID = ContinentID.PANDARIA },
-	[AchievementID.GorgrondMonsterHunter] = { continentID = ContinentID.DRAENOR },
-	[AchievementID.Hellbane] = { continentID = ContinentID.DRAENOR },
-	[AchievementID.HeraldsOfTheLegion] = { continentID = ContinentID.DRAENOR },
-	[AchievementID.HighValueTargets] = { continentID = ContinentID.DRAENOR },
-	[AchievementID.JungleStalker] = { continentID = ContinentID.DRAENOR },
-	[AchievementID.OneManArmy] = { continentID = ContinentID.PANDARIA },
-	[AchievementID.TimelessChampion] = { continentID = ContinentID.PANDARIA },
-	[AchievementID.UnleashedMonstrosities] = { continentID = ContinentID.BROKEN_ISLES },
+local AchievementData = {
+	[AchievementID.AdventurerOfAzsuna] = { continentID = ContinentID.BrokenIsles },
+	[AchievementID.AdventurerOfHighmountain] = { continentID = ContinentID.BrokenIsles },
+	[AchievementID.AdventurerOfStormheim] = { continentID = ContinentID.BrokenIsles },
+	[AchievementID.AdventurerOfSuramar] = { continentID = ContinentID.BrokenIsles },
+	[AchievementID.AdventurerOfValsharah] = { continentID = ContinentID.BrokenIsles },
+	[AchievementID.AncientNoMore] = { continentID = ContinentID.Draenor },
+	[AchievementID.BloodyRare] = { continentID = ContinentID.Outland },
+	[AchievementID.ChampionsOfLeiShen] = { continentID = ContinentID.Pandaria },
+	[AchievementID.CutOffTheHead] = { continentID = ContinentID.Draenor },
+	[AchievementID.FightThePower] = { continentID = ContinentID.Draenor },
+	[AchievementID.Frostbitten] = { continentID = ContinentID.Northrend },
+	[AchievementID.Glorious] = { continentID = ContinentID.Pandaria },
+	[AchievementID.GorgrondMonsterHunter] = { continentID = ContinentID.Draenor },
+	[AchievementID.Hellbane] = { continentID = ContinentID.Draenor },
+	[AchievementID.HeraldsOfTheLegion] = { continentID = ContinentID.Draenor },
+	[AchievementID.HighValueTargets] = { continentID = ContinentID.Draenor },
+	[AchievementID.JungleStalker] = { continentID = ContinentID.Draenor },
+	[AchievementID.OneManArmy] = { continentID = ContinentID.Pandaria },
+	[AchievementID.TimelessChampion] = { continentID = ContinentID.Pandaria },
+	[AchievementID.UnleashedMonstrosities] = { continentID = ContinentID.BrokenIsles },
 }
 
-private.ACHIEVEMENTS = ACHIEVEMENTS
+private.AchievementData = AchievementData
 
 local AchievementNameByID = {}
 private.AchievementNameByID = AchievementNameByID
@@ -178,7 +178,7 @@ private.AchievementNameByID = AchievementNameByID
 local AchievementDescriptionByID = {}
 private.AchievementDescriptionByID = AchievementDescriptionByID
 
-for achievementID, data in pairs(ACHIEVEMENTS) do
+for achievementID, data in pairs(AchievementData) do
 	data.criteriaNPCs = {}
 
 	local _, achievementName, _, _, _, _, _, achievementDescription = _G.GetAchievementInfo(achievementID)

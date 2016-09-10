@@ -139,7 +139,7 @@ function NPCScan:OnInitialize()
 		Spell = 28,
 	}
 
-	for achievementID, achievement in pairs(private.ACHIEVEMENTS) do
+	for achievementID, achievement in pairs(private.AchievementData) do
 		achievement.ID = achievementID
 
 		for criteriaIndex = 1, _G.GetAchievementNumCriteria(achievementID) do

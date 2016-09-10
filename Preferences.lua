@@ -176,7 +176,7 @@ do
 			table.wipe(AchievementOptions)
 			local achievementIDs = {}
 
-			for achievementID in pairs(private.ACHIEVEMENTS) do
+			for achievementID in pairs(private.AchievementData) do
 				achievementIDs[#achievementIDs + 1] = achievementID
 			end
 
@@ -204,7 +204,7 @@ do
 								profile.detection.achievements[achievementID] = value
 
 								if value ~= private.AchievementStatus.UserDefined then
-									for npcID in pairs(private.ACHIEVEMENTS[achievementID].criteriaNPCs) do
+									for npcID in pairs(private.AchievementData[achievementID].criteriaNPCs) do
 										profile.blacklist.npcIDs[npcID] = nil
 									end
 								end
@@ -227,7 +227,7 @@ do
 				table.wipe(npcNames)
 
 				local npcIDs = {}
-				for npcID in pairs(private.ACHIEVEMENTS[achievementID].criteriaNPCs) do
+				for npcID in pairs(private.AchievementData[achievementID].criteriaNPCs) do
 					local npcData = private.NPCData[npcID]
 
 					if npcData.unitFactionGroup ~= private.playerFactionGroup then

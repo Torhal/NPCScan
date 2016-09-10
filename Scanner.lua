@@ -154,7 +154,7 @@ local function CanAddToScanList(npcID)
 			return false
 		end
 
-		if detection.ignoreCompletedAchievementCriteria and (private.ACHIEVEMENTS[achievementID].isCompleted or npcData.isCriteriaCompleted) then
+		if detection.ignoreCompletedAchievementCriteria and (private.AchievementData[achievementID].isCompleted or npcData.isCriteriaCompleted) then
 			private.Debug("Skipping %s (%d) - criteria already met or achievement completed.", NPCScan:GetNPCNameFromID(npcID), npcID)
 			return false
 		end
@@ -260,8 +260,8 @@ end
 private.UpdateScanListQuestObjectives = UpdateScanListQuestObjectives
 
 function NPCScan:ACHIEVEMENT_EARNED(_, achievementID)
-	if private.ACHIEVEMENTS[achievementID] then
-		private.ACHIEVEMENTS[achievementID].isCompleted = true
+	if private.AchievementData[achievementID] then
+		private.AchievementData[achievementID].isCompleted = true
 
 		if private.db.profile.detection.ignoreCompletedAchievementCriteria then
 			-- Disable tracking for the achievement, since the above setting implies it.
