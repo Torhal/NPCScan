@@ -169,14 +169,9 @@ local function CanAddToScanList(npcID)
 end
 
 local function MergeUserDefinedWithScanList(npcList)
-	if npcList then
-		local blacklist = private.db.profile.blacklist
-
+	if npcList and private.db.profile.detection.userDefined then
 		for npcID in pairs(npcList) do
-			if not blacklist.npcIDs[npcID] then
-				npcScanList[npcID] = true
-				private.Overlays.Add(npcID)
-			end
+			npcScanList[npcID] = true
 		end
 	end
 end
