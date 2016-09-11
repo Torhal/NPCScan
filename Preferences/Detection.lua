@@ -125,18 +125,6 @@ local function GetDetectionOptions()
 							profile.detection.tameables = value
 						end,
 					},
-					userDefined = {
-						order = 30,
-						type = "toggle",
-						name = _G.CUSTOM,
-						descStyle = "inline",
-						get = function(info)
-							return profile.detection.userDefined
-						end,
-						set = function(info, value)
-							profile.detection.userDefined = value
-						end,
-					},
 				},
 			},
 			headerIgnore = {

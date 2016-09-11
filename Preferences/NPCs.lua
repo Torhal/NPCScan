@@ -240,11 +240,28 @@ local function GetNPCOptions()
 				order = 2,
 				type = "group",
 				args = {
+					isEnabled = {
+						order = 1,
+						type = "toggle",
+						name = _G.ENABLE,
+						descStyle = "inline",
+						get = function(info)
+							return profile.detection.userDefined
+						end,
+						set = function(info, value)
+							profile.detection.userDefined = value
+
+							NPCScan:UpdateScanList()
+						end,
+					},
 					npcID = {
-						order = 10,
+						order = 2,
 						name = ("%s %s"):format(_G.ADD, _G.PARENS_TEMPLATE:format(_G.ID)),
 						descStyle = "inline",
 						type = "input",
+						disabled = function()
+							return not profile.detection.userDefined
+						end,
 						validate = function(info, value)
 							if value == "mouseover" or value == "target" then
 								value = private.UnitTokenToCreatureID(value)
@@ -269,10 +286,13 @@ local function GetNPCOptions()
 						end,
 					},
 					npcIDs = {
-						order = 20,
+						order = 3,
 						name = _G.ASSIGNED_COLON,
 						type = "group",
 						inline = true,
+						disabled = function()
+							return not profile.detection.userDefined
+						end,
 						args = UserDefinedNPCOptions,
 					},
 				},
