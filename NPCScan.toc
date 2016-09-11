@@ -14,42 +14,15 @@
 embeds.xml
 #@end-no-lib-strip@
 
-# See http://wow.wowace.com/addons/npcscan/localization/
-
-#@debug@
-Localization\devel-enUS.lua
-#@end-debug@
-
-#@non-debug@
-Localization\enUS.lua
-#@end-non-debug@
-Localization\deDE.lua
-Localization\esES.lua
-Localization\esMX.lua
-Localization\frFR.lua
-Localization\koKR.lua
-Localization\ptBR.lua
-Localization\ruRU.lua
-Localization\zhCN.lua
-Localization\zhTW.lua
+Localization\Manifest.xml
 
 Constants.lua
 Utilities.lua
 
-Data\MapNPCs.lua
-Data\NPCData.lua
-
 Core.lua
 Scanner.lua
-
-TargetButton\TargetButton.lua
-TargetButton\TargetButtonManager.lua
-
-TargetButton\Decorators\EliteTargetButton.lua
-TargetButton\Decorators\NormalTargetButton.lua
-TargetButton\Decorators\RareTargetButton.lua
-
 MapOverlays.lua
-Config.lua
-ConfigSearch.lua
-Preferences.lua
+
+Data\Manifest.xml
+Preferences\Manifest.xml
+TargetButton\Manifest.xml

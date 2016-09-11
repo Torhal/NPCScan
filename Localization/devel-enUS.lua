@@ -11,6 +11,7 @@ L["Hide Anchor"] = true
 L["Horizontal offset from the anchor point."] = true
 L["Ignore Mute"] = true
 L["Interval"] = true
+L["NPCs"] = true
 L["Play alert sounds when sound is muted."] = true
 L["Reset Position"] = true
 L["Screen Flash"] = true
