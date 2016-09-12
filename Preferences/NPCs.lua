@@ -18,11 +18,20 @@ local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
-local HereBeDragons = LibStub("HereBeDragons-1.0")
 
 -- ----------------------------------------------------------------------------
 -- Constants.
 -- ----------------------------------------------------------------------------
+local AchievementIDs = {}
+
+for achievementID in pairs(private.AchievementData) do
+	AchievementIDs[#AchievementIDs + 1] = achievementID
+end
+
+table.sort(AchievementIDs, function(a, b)
+	return private.AchievementNameByID[a] < private.AchievementNameByID[b]
+end)
+
 local AchievementStatusLabels = {
 	_G.ENABLE,
 	_G.CUSTOM,
@@ -40,6 +49,20 @@ local EmptyListOption = {
 	name = _G.EMPTY,
 	type = "header"
 }
+
+local MapIDs = {}
+
+for mapID in pairs(private.MapNPCs) do
+	MapIDs[#MapIDs + 1] = mapID
+end
+
+table.sort(MapIDs, function(a, b)
+	if private.MapNameByID[a] == private.MapNameByID[b] then
+		return a < b
+	end
+
+	return private.MapNameByID[a] < private.MapNameByID[b]
+end)
 
 -- ----------------------------------------------------------------------------
 -- Variables.
@@ -59,8 +82,15 @@ local function GetAchievementNPCOptionsName(npcID)
 	return ("%s%s|r"):format(colorCode, npcData.name)
 end
 
-local function SortByAchievementName(a, b)
-	return private.AchievementNameByID[a] < private.AchievementNameByID[b]
+local function GetRareNPCOptionsName(npcID)
+	local npcData = private.NPCData[npcID]
+
+	local colorCode = _G.NORMAL_FONT_COLOR_CODE
+	if npcData.questID then
+		colorCode = private.IsNPCQuestComplete(npcID) and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
+	end
+
+	return ("%s%s|r"):format(colorCode, npcData.name)
 end
 
 local function SortByNPCNameThenByID(a, b)
@@ -89,24 +119,17 @@ end
 -- ----------------------------------------------------------------------------
 -- Achievement options
 -- ----------------------------------------------------------------------------
-local AchievementOptions = {}
+local AchievementNPCOptions = {}
 
-local function UpdateAchievementOptions()
-	table.wipe(AchievementOptions)
-	local achievementIDs = {}
+local function UpdateAchievementNPCOptions()
+	table.wipe(AchievementNPCOptions)
 
-	for achievementID in pairs(private.AchievementData) do
-		achievementIDs[#achievementIDs + 1] = achievementID
-	end
-
-	table.sort(achievementIDs, SortByAchievementName)
-
-	for index = 1, #achievementIDs do
-		local achievementID = achievementIDs[index]
+	for achievementIDIndex = 1, #AchievementIDs do
+		local achievementID = AchievementIDs[achievementIDIndex]
 		local achievementStatus = profile.detection.achievements[achievementID]
 
 		local achievementOptionsTable = {
-			order = index,
+			order = achievementIDIndex,
 			name = ("%s%s|r"):format(AchievementStatusColors[achievementStatus], private.AchievementNameByID[achievementID]),
 			desc = private.AchievementDescriptionByID[achievementID],
 			type = "group",
@@ -128,7 +151,7 @@ local function UpdateAchievementOptions()
 							end
 						end
 
-						UpdateAchievementOptions()
+						UpdateAchievementNPCOptions()
 						UpdateBlacklistedNPCOptions()
 
 						NPCScan:UpdateScanList()
@@ -144,13 +167,13 @@ local function UpdateAchievementOptions()
 			}
 		}
 
+		table.wipe(npcIDs)
 		table.wipe(npcNames)
 
-		local npcIDs = {}
 		for npcID in pairs(private.AchievementData[achievementID].criteriaNPCs) do
 			local npcData = private.NPCData[npcID]
 
-			if npcData.unitFactionGroup ~= private.playerFactionGroup then
+			if npcData.factionGroup ~= private.PlayerFactionGroup then
 				npcNames[npcID] = npcData.name
 				npcIDs[#npcIDs + 1] = npcID
 			end
@@ -158,13 +181,13 @@ local function UpdateAchievementOptions()
 
 		table.sort(npcIDs, SortByNPCNameThenByID)
 
-		for index = 1, #npcIDs do
-			local npcID = npcIDs[index]
+		for npcIDIndex = 1, #npcIDs do
+			local npcID = npcIDs[npcIDIndex]
 
-			achievementOptionsTable.args.npcs.args["npc" .. index] = {
-				order = index + 1,
+			achievementOptionsTable.args.npcs.args["npc" .. npcID] = {
+				order = npcIDIndex,
 				name = GetAchievementNPCOptionsName(npcID),
-				desc = ("%s %s %s"):format(_G.ID, npcID, HereBeDragons:GetLocalizedMap(private.NPCData[npcID].mapID)),
+				desc = ("%s %s %s"):format(_G.ID, npcID, private.MapNameByID[private.NPCData[npcID].mapID]),
 				type = "toggle",
 				disabled = function()
 					return profile.detection.achievements[achievementID] ~= private.AchievementStatus.UserDefined
@@ -175,18 +198,22 @@ local function UpdateAchievementOptions()
 					return not profile.blacklist.npcIDs[npcID]
 				end,
 				set = function(info, value)
-					profile.blacklist.npcIDs[npcID] = not profile.blacklist.npcIDs[npcID] and true or nil
+					local isBlacklisted = not profile.blacklist.npcIDs[npcID] and true or nil
+					profile.blacklist.npcIDs[npcID] = isBlacklisted
 
-					UpdateAchievementOptions()
+					UpdateAchievementNPCOptions()
 					UpdateBlacklistedNPCOptions()
 
 					NPCScan:UpdateScanList()
-					NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+
+					if isBlacklisted then
+						NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+					end
 				end,
 			}
 		end
 
-		AchievementOptions["achievement" .. achievementID] = achievementOptionsTable
+		AchievementNPCOptions["achievement" .. achievementID] = achievementOptionsTable
 	end
 
 	AceConfigRegistry:NotifyChange(AddOnFolderName)
@@ -195,10 +222,168 @@ end
 -- ----------------------------------------------------------------------------
 -- Rare options.
 -- ----------------------------------------------------------------------------
+local RareNPCOptions = {}
+
+local function UpdateRareNPCOptions()
+	table.wipe(RareNPCOptions)
+
+	for mapIDIndex = 1, #MapIDs do
+		local mapID = MapIDs[mapIDIndex]
+
+		table.wipe(npcIDs)
+		table.wipe(npcNames)
+
+		for npcID in pairs(private.MapNPCs[mapID]) do
+			local npcData = private.NPCData[npcID]
+
+			if not npcData.isTameable and not npcData.achievementID and npcData.factionGroup ~= private.PlayerFactionGroup then
+				npcNames[npcID] = npcData.name
+				npcIDs[#npcIDs + 1] = npcID
+			end
+		end
+
+		if #npcIDs > 0 then
+			table.sort(npcIDs, SortByNPCNameThenByID)
+
+			local mapOptionsTable = {
+				order = mapIDIndex,
+				name = private.GetMapOptionName(mapID),
+				desc = ("%s %s"):format(_G.ID, mapID),
+				type = "group",
+				args = {
+					npcs = {
+						order = 1,
+						name = " ",
+						type = "group",
+						guiInline = true,
+						args = {},
+					},
+				},
+			}
+
+			for npcIDIndex = 1, #npcIDs do
+				local npcID = npcIDs[npcIDIndex]
+
+				if npcID then
+					mapOptionsTable.args.npcs.args["npc" .. npcID] = {
+						order = npcIDIndex,
+						name = GetRareNPCOptionsName(npcID),
+						desc = ("%s %s"):format(_G.ID, npcID),
+						descStyle = "inline",
+						type = "toggle",
+						width = "full",
+						disabled = function()
+							return not profile.detection.rares
+						end,
+						get = function(info)
+							return not profile.blacklist.npcIDs[npcID]
+						end,
+						set = function(info, value)
+							local isBlacklisted = not profile.blacklist.npcIDs[npcID] and true or nil
+							profile.blacklist.npcIDs[npcID] = isBlacklisted
+
+							UpdateRareNPCOptions()
+							UpdateBlacklistedNPCOptions()
+
+							NPCScan:UpdateScanList()
+
+							if isBlacklisted then
+								NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+							end
+						end,
+					}
+				end
+			end
+
+			RareNPCOptions["map" .. mapID] = mapOptionsTable
+		end
+	end
+
+	AceConfigRegistry:NotifyChange(AddOnFolderName)
+end
 
 -- ----------------------------------------------------------------------------
 -- Tameable rare options.
 -- ----------------------------------------------------------------------------
+local TameableRareNPCOptions = {}
+
+local function UpdateTameableRareNPCOptions()
+	table.wipe(TameableRareNPCOptions)
+
+	for mapIDIndex = 1, #MapIDs do
+		local mapID = MapIDs[mapIDIndex]
+
+		table.wipe(npcIDs)
+		table.wipe(npcNames)
+
+		for npcID in pairs(private.MapNPCs[mapID]) do
+			local npcData = private.NPCData[npcID]
+
+			if npcData.isTameable and not npcData.achievementID and npcData.factionGroup ~= private.PlayerFactionGroup then
+				npcNames[npcID] = npcData.name
+				npcIDs[#npcIDs + 1] = npcID
+			end
+		end
+
+		if #npcIDs > 0 then
+			table.sort(npcIDs, SortByNPCNameThenByID)
+
+			local mapOptionsTable = {
+				order = mapIDIndex,
+				name = private.GetMapOptionName(mapID),
+				desc = ("%s %s"):format(_G.ID, mapID),
+				type = "group",
+				args = {
+					npcs = {
+						order = 1,
+						name = " ",
+						type = "group",
+						guiInline = true,
+						args = {},
+					},
+				},
+			}
+
+			for npcIDIndex = 1, #npcIDs do
+				local npcID = npcIDs[npcIDIndex]
+
+				if npcID then
+					mapOptionsTable.args.npcs.args["npc" .. npcID] = {
+						order = npcIDIndex,
+						name = GetRareNPCOptionsName(npcID),
+						desc = ("%s %s"):format(_G.ID, npcID),
+						descStyle = "inline",
+						type = "toggle",
+						width = "full",
+						disabled = function()
+							return not profile.detection.tameables
+						end,
+						get = function(info)
+							return not profile.blacklist.npcIDs[npcID]
+						end,
+						set = function(info, value)
+							local isBlacklisted = not profile.blacklist.npcIDs[npcID] and true or nil
+							profile.blacklist.npcIDs[npcID] = isBlacklisted
+
+							UpdateTameableRareNPCOptions()
+							UpdateBlacklistedNPCOptions()
+
+							NPCScan:UpdateScanList()
+
+							if isBlacklisted then
+								NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+							end
+						end,
+					}
+				end
+			end
+
+			TameableRareNPCOptions["map" .. mapID] = mapOptionsTable
+		end
+	end
+
+	AceConfigRegistry:NotifyChange(AddOnFolderName)
+end
 
 -- ----------------------------------------------------------------------------
 -- User defined NPC options.
@@ -268,7 +453,7 @@ function UpdateBlacklistedNPCOptions()
 				set = function()
 					savedNPCIDs[npcID] = nil
 
-					UpdateAchievementOptions()
+					UpdateAchievementNPCOptions()
 					UpdateBlacklistedNPCOptions()
 
 					NPCScan:UpdateScanList()
@@ -297,15 +482,73 @@ local function GetNPCOptions()
 		childGroups = "tab",
 		args = {
 			achievements = {
-				name = _G.ACHIEVEMENTS,
 				order = 1,
+				name = _G.ACHIEVEMENTS,
 				type = "group",
 				childGroups = "tree",
-				args = AchievementOptions,
+				args = AchievementNPCOptions,
+			},
+			rare = {
+				order = 2,
+				name = _G.BATTLE_PET_BREED_QUALITY4,
+				type = "group",
+				childGroups = "tab",
+				args = {
+					isEnabled = {
+						order = 1,
+						type = "toggle",
+						name = _G.ENABLE,
+						descStyle = "inline",
+						get = function(info)
+							return profile.detection.rares
+						end,
+						set = function(info, value)
+							profile.detection.rares = value
+
+							NPCScan:UpdateScanList()
+						end,
+					},
+					npcOptions = {
+						order = 2,
+						name = _G.ZONE,
+						descStyle = "inline",
+						type = "group",
+						args = RareNPCOptions
+					},
+				},
+			},
+			tameableRare = {
+				order = 3,
+				name = _G.TAMEABLE,
+				type = "group",
+				childGroups = "tab",
+				args = {
+					isEnabled = {
+						order = 1,
+						type = "toggle",
+						name = _G.ENABLE,
+						descStyle = "inline",
+						get = function(info)
+							return profile.detection.tameables
+						end,
+						set = function(info, value)
+							profile.detection.tameables = value
+
+							NPCScan:UpdateScanList()
+						end,
+					},
+					npcOptions = {
+						order = 2,
+						name = _G.ZONE,
+						descStyle = "inline",
+						type = "group",
+						args = TameableRareNPCOptions
+					},
+				},
 			},
 			userDefined = {
-				name = _G.CUSTOM,
 				order = 4,
+				name = _G.CUSTOM,
 				type = "group",
 				args = {
 					isEnabled = {
@@ -382,7 +625,9 @@ local function GetNPCOptions()
 		},
 	}
 
-	UpdateAchievementOptions()
+	UpdateAchievementNPCOptions()
+	UpdateRareNPCOptions()
+	UpdateTameableRareNPCOptions()
 	UpdateUserDefinedNPCOptions()
 	UpdateBlacklistedNPCOptions()
 

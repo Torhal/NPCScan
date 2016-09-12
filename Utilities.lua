@@ -52,6 +52,15 @@ end
 
 private.CreateScaleAnimation = CreateScaleAnimation
 
+local function GetMapOptionName(mapID)
+	local profile = private.db.profile
+	local isBlacklisted = profile.blacklist.mapIDs[mapID] or profile.blacklist.continentIDs[private.ContinentIDByMapID[mapID]]
+	local colorCode = isBlacklisted and _G.RED_FONT_COLOR_CODE or _G.GREEN_FONT_COLOR_CODE
+	return ("%s%s|r"):format(colorCode, private.MapNameByID[mapID])
+end
+
+private.GetMapOptionName = GetMapOptionName
+
 local function GUIDToCreatureID(GUID)
 	local unitTypeName, _, _, _, _, unitID = ("-"):split(GUID)
 	if unitTypeName == "Creature" then

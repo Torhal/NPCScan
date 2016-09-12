@@ -1,3 +1,12 @@
+-- ----------------------------------------------------------------------------
+-- Localized Lua globals.
+-- ----------------------------------------------------------------------------
+-- Functions
+local pairs = _G.pairs
+
+local LibStub = _G.LibStub
+local HereBeDragons = LibStub("HereBeDragons-1.0")
+
 -- -- ---------------------------------------------------------------------------------
 -- AddOn namespace.
 -- -- ---------------------------------------------------------------------------------
@@ -1976,3 +1985,14 @@ local MapNPCs = {
 }
 
 private.MapNPCs = MapNPCs
+
+local ContinentIDByMapID = {}
+private.ContinentIDByMapID = ContinentIDByMapID
+
+local MapNameByID = {}
+private.MapNameByID = MapNameByID
+
+for mapID in pairs(MapNPCs) do
+	ContinentIDByMapID[mapID] = HereBeDragons:GetCZFromMapID(mapID)
+	MapNameByID[mapID] = HereBeDragons:GetLocalizedMap(mapID)
+end
