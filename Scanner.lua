@@ -47,8 +47,6 @@ local function IsNPCQuestComplete(npcID)
 	return false
 end
 
-private.IsNPCQuestComplete = IsNPCQuestComplete
-
 -- These functions are used for situations where an npcID needs to be removed from the npcScanList while iterating it.
 local QueueNPCForUntracking, UntrackQueuedNPCs
 do
