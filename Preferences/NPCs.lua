@@ -35,15 +35,24 @@ local AchievementStatusColors = {
 	_G.RED_FONT_COLOR_CODE,
 }
 
+local EmptyListOption = {
+	order = 1,
+	name = _G.EMPTY,
+	type = "header"
+}
+
 -- ----------------------------------------------------------------------------
 -- Variables.
 -- ----------------------------------------------------------------------------
+local npcIDs = {}
 local npcNames = {}
 local profile
 
 -- ----------------------------------------------------------------------------
 -- Helpers.
 -- ----------------------------------------------------------------------------
+local UpdateBlacklistedNPCOptions
+
 local function GetAchievementNPCOptionsName(npcID)
 	local npcData = private.NPCData[npcID]
 	local colorCode = npcData.isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
@@ -63,6 +72,18 @@ local function SortByNPCNameThenByID(a, b)
 	end
 
 	return nameA < nameB
+end
+
+local function SetNPCDataFromList(savedNPCIDs)
+	table.wipe(npcIDs)
+	table.wipe(npcNames)
+
+	for npcID in pairs(savedNPCIDs) do
+		npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
+		npcIDs[#npcIDs + 1] = npcID
+	end
+
+	table.sort(npcIDs, SortByNPCNameThenByID)
 end
 
 -- ----------------------------------------------------------------------------
@@ -108,6 +129,7 @@ local function UpdateAchievementOptions()
 						end
 
 						UpdateAchievementOptions()
+						UpdateBlacklistedNPCOptions()
 
 						NPCScan:UpdateScanList()
 					end,
@@ -156,6 +178,7 @@ local function UpdateAchievementOptions()
 					profile.blacklist.npcIDs[npcID] = not profile.blacklist.npcIDs[npcID] and true or nil
 
 					UpdateAchievementOptions()
+					UpdateBlacklistedNPCOptions()
 
 					NPCScan:UpdateScanList()
 					NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
@@ -170,45 +193,90 @@ local function UpdateAchievementOptions()
 end
 
 -- ----------------------------------------------------------------------------
--- User defined options.
+-- Rare options.
+-- ----------------------------------------------------------------------------
+
+-- ----------------------------------------------------------------------------
+-- Tameable rare options.
+-- ----------------------------------------------------------------------------
+
+-- ----------------------------------------------------------------------------
+-- User defined NPC options.
 -- ----------------------------------------------------------------------------
 local UserDefinedNPCOptions = {}
 
 local function UpdateUserDefinedNPCOptions()
 	table.wipe(UserDefinedNPCOptions)
-	table.wipe(npcNames)
 
-	local npcIDs = {}
+	local savedNPCIDs = profile.userDefined.npcIDs
+	SetNPCDataFromList(savedNPCIDs)
 
-	local savedNpcIDs = profile.userDefined.npcIDs
-	for npcID in pairs(savedNpcIDs) do
-		npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
-		npcIDs[#npcIDs + 1] = npcID
+	if #npcIDs > 0 then
+		for index = 1, #npcIDs do
+			local npcID = npcIDs[index]
+
+			UserDefinedNPCOptions["npc" .. index] = {
+				order = index,
+				name = ("%s: %d"):format(NPCScan:GetNPCNameFromID(npcID), npcID),
+				descStyle = "inline",
+				type = "toggle",
+				width = "full",
+				get = function()
+					return true
+				end,
+				set = function()
+					savedNPCIDs[npcID] = nil
+
+					UpdateUserDefinedNPCOptions()
+
+					NPCScan:UpdateScanList()
+					NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+				end,
+			}
+		end
+	else
+		UserDefinedNPCOptions["npc0"] = EmptyListOption
 	end
 
-	table.sort(npcIDs, SortByNPCNameThenByID)
+	AceConfigRegistry:NotifyChange(AddOnFolderName)
+end
 
-	for index = 1, #npcIDs do
-		local npcID = npcIDs[index]
+-- ----------------------------------------------------------------------------
+-- Blacklisted NPC options.
+-- ----------------------------------------------------------------------------
+local BlacklistedNPCOptions = {}
 
-		UserDefinedNPCOptions["npc" .. index] = {
-			order = index,
-			name = ("%s: %d"):format(NPCScan:GetNPCNameFromID(npcID), npcID),
-			descStyle = "inline",
-			type = "toggle",
-			width = "full",
-			get = function()
-				return true
-			end,
-			set = function()
-				savedNpcIDs[npcID] = nil
+function UpdateBlacklistedNPCOptions()
+	table.wipe(BlacklistedNPCOptions)
 
-				UpdateUserDefinedNPCOptions()
+	local savedNPCIDs = profile.blacklist.npcIDs
+	SetNPCDataFromList(savedNPCIDs)
 
-				NPCScan:UpdateScanList()
-				NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
-			end,
-		}
+	if #npcIDs > 0 then
+		for index = 1, #npcIDs do
+			local npcID = npcIDs[index]
+
+			BlacklistedNPCOptions["npc" .. index] = {
+				order = index,
+				name = ("%s: %d"):format(NPCScan:GetNPCNameFromID(npcID), npcID),
+				descStyle = "inline",
+				type = "toggle",
+				width = "full",
+				get = function()
+					return true
+				end,
+				set = function()
+					savedNPCIDs[npcID] = nil
+
+					UpdateAchievementOptions()
+					UpdateBlacklistedNPCOptions()
+
+					NPCScan:UpdateScanList()
+				end,
+			}
+		end
+	else
+		BlacklistedNPCOptions["npc0"] = EmptyListOption
 	end
 
 	AceConfigRegistry:NotifyChange(AddOnFolderName)
@@ -237,7 +305,7 @@ local function GetNPCOptions()
 			},
 			userDefined = {
 				name = _G.CUSTOM,
-				order = 2,
+				order = 4,
 				type = "group",
 				args = {
 					isEnabled = {
@@ -297,11 +365,26 @@ local function GetNPCOptions()
 					},
 				},
 			},
+			blacklisted = {
+				order = 5,
+				name = _G.IGNORED,
+				type = "group",
+				args = {
+					npcIDs = {
+						order = 1,
+						name = _G.ASSIGNED_COLON,
+						type = "group",
+						inline = true,
+						args = BlacklistedNPCOptions,
+					},
+				},
+			},
 		},
 	}
 
 	UpdateAchievementOptions()
 	UpdateUserDefinedNPCOptions()
+	UpdateBlacklistedNPCOptions()
 
 	return NPCOptions
 end
