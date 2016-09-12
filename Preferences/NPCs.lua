@@ -196,10 +196,12 @@ end
 -- ----------------------------------------------------------------------------
 -- Rare options.
 -- ----------------------------------------------------------------------------
-local RareNPCOptions = {}
+local DungeonRareNPCOptions = {}
+local ZoneRareNPCOptions = {}
 
 local function UpdateRareNPCOptions()
-	table.wipe(RareNPCOptions)
+	table.wipe(DungeonRareNPCOptions)
+	table.wipe(ZoneRareNPCOptions)
 
 	for mapIDIndex = 1, #private.AlphabeticalMapIDs do
 		local mapID = private.AlphabeticalMapIDs[mapIDIndex]
@@ -217,12 +219,14 @@ local function UpdateRareNPCOptions()
 		end
 
 		if #npcIDs > 0 then
+			local dungeonContinentID = private.ContinentIDByDungeonMapID[mapID]
+
 			table.sort(npcIDs, SortByNPCNameThenByID)
 
 			local mapOptionsTable = {
 				order = mapIDIndex,
 				name = private.GetMapOptionName(mapID),
-				desc = ("%s %s"):format(_G.ID, mapID),
+				desc = ("%s %s%s"):format(_G.ID, mapID, dungeonContinentID and (" %s"):format(private.ContinentNameByID[dungeonContinentID]) or ""),
 				type = "group",
 				args = {
 					npcs = {
@@ -269,7 +273,11 @@ local function UpdateRareNPCOptions()
 				end
 			end
 
-			RareNPCOptions["map" .. mapID] = mapOptionsTable
+			if dungeonContinentID then
+				DungeonRareNPCOptions["map" .. mapID] = mapOptionsTable
+			else
+				ZoneRareNPCOptions["map" .. mapID] = mapOptionsTable
+			end
 		end
 	end
 
@@ -281,10 +289,12 @@ private.UpdateRareNPCOptions = UpdateRareNPCOptions
 -- ----------------------------------------------------------------------------
 -- Tameable rare options.
 -- ----------------------------------------------------------------------------
-local TameableRareNPCOptions = {}
+local DungeonTameableRareNPCOptions = {}
+local ZoneTameableRareNPCOptions = {}
 
 local function UpdateTameableRareNPCOptions()
-	table.wipe(TameableRareNPCOptions)
+	table.wipe(DungeonTameableRareNPCOptions)
+	table.wipe(ZoneTameableRareNPCOptions)
 
 	for mapIDIndex = 1, #private.AlphabeticalMapIDs do
 		local mapID = private.AlphabeticalMapIDs[mapIDIndex]
@@ -302,12 +312,14 @@ local function UpdateTameableRareNPCOptions()
 		end
 
 		if #npcIDs > 0 then
+			local dungeonContinentID = private.ContinentIDByDungeonMapID[mapID]
+
 			table.sort(npcIDs, SortByNPCNameThenByID)
 
 			local mapOptionsTable = {
 				order = mapIDIndex,
 				name = private.GetMapOptionName(mapID),
-				desc = ("%s %s"):format(_G.ID, mapID),
+				desc = ("%s %s%s"):format(_G.ID, mapID, dungeonContinentID and (" %s"):format(private.ContinentNameByID[dungeonContinentID]) or ""),
 				type = "group",
 				args = {
 					npcs = {
@@ -354,7 +366,11 @@ local function UpdateTameableRareNPCOptions()
 				end
 			end
 
-			TameableRareNPCOptions["map" .. mapID] = mapOptionsTable
+			if dungeonContinentID then
+				DungeonTameableRareNPCOptions["map" .. mapID] = mapOptionsTable
+			else
+				ZoneTameableRareNPCOptions["map" .. mapID] = mapOptionsTable
+			end
 		end
 	end
 
@@ -486,12 +502,19 @@ local function GetNPCOptions()
 							NPCScan:UpdateScanList()
 						end,
 					},
-					npcOptions = {
+					zoneNPCOptions = {
 						order = 2,
 						name = _G.ZONE,
 						descStyle = "inline",
 						type = "group",
-						args = RareNPCOptions
+						args = ZoneRareNPCOptions
+					},
+					dungeonNPCOptions = {
+						order = 3,
+						name = _G.DUNGEONS,
+						descStyle = "inline",
+						type = "group",
+						args = DungeonRareNPCOptions
 					},
 				},
 			},
@@ -515,12 +538,19 @@ local function GetNPCOptions()
 							NPCScan:UpdateScanList()
 						end,
 					},
-					npcOptions = {
+					zoneNPCOptions = {
 						order = 2,
 						name = _G.ZONE,
 						descStyle = "inline",
 						type = "group",
-						args = TameableRareNPCOptions
+						args = ZoneTameableRareNPCOptions
+					},
+					dungeonNPCOptions = {
+						order = 3,
+						name = _G.DUNGEONS,
+						descStyle = "inline",
+						type = "group",
+						args = DungeonTameableRareNPCOptions
 					},
 				},
 			},

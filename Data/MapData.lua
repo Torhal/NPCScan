@@ -1989,6 +1989,27 @@ local MapNPCs = {
 
 private.MapNPCs = MapNPCs
 
+local ContinentIDByDungeonMapID = {
+	[686] = private.ContinentID.Kalimdor, -- Zul'Farrak
+	[687] = private.ContinentID.EasternKingdoms, -- The Temple of Atal'Hakkar
+	[688] = private.ContinentID.Kalimdor, -- Blackfathom Deeps
+	[691] = private.ContinentID.EasternKingdoms, -- Gnomeregan
+	[699] = private.ContinentID.Kalimdor, -- Dire Maul
+	[704] = private.ContinentID.EasternKingdoms, -- Blackrock Depths
+	[721] = private.ContinentID.EasternKingdoms, -- Blackrock Spire
+	[734] = private.ContinentID.Kalimdor, -- Old Hillsbrad Foothills
+	[749] = private.ContinentID.Kalimdor, -- Wailing Caverns
+	[750] = private.ContinentID.Kalimdor, -- Maraudon
+	[756] = private.ContinentID.EasternKingdoms, -- The Deadmines
+	[761] = private.ContinentID.Kalimdor, -- Razorfen Kraul
+	[764] = private.ContinentID.EasternKingdoms, -- Shadowfang Keep
+	[765] = private.ContinentID.EasternKingdoms, -- Stratholme
+	[799] = private.ContinentID.EasternKingdoms, -- Karazhan
+	[898] = private.ContinentID.EasternKingdoms, -- Scholomance
+}
+
+private.ContinentIDByDungeonMapID = ContinentIDByDungeonMapID
+
 local AlphabeticalMapIDs = {}
 private.AlphabeticalMapIDs = AlphabeticalMapIDs
 
