@@ -87,6 +87,7 @@ function NPCScan:OnInitialize()
 			end
 
 			npcData.mapID = mapID
+			npcData.npcID = npcID
 
 			local npcName = self:GetNPCNameFromID(npcID)
 			if not npcName then
