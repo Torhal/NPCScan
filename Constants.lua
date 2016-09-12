@@ -21,6 +21,9 @@ private.DEFAULT_OS_SPAWN_POINT = DEFAULT_OS_SPAWN_POINT
 local NUM_RAID_ICONS = 8
 private.NUM_RAID_ICONS = NUM_RAID_ICONS
 
+local PlayerFactionGroup = _G.UnitFactionGroup("player")
+private.PlayerFactionGroup = PlayerFactionGroup
+
 -- ----------------------------------------------------------------------------
 -- Database Defaults.
 -- ----------------------------------------------------------------------------

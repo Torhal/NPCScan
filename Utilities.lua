@@ -30,6 +30,7 @@ local function CreateAlphaAnimation(animationGroup, fromAlpha, toAlpha, duration
 
 	return animation
 end
+
 private.CreateAlphaAnimation = CreateAlphaAnimation
 
 local function CreateScaleAnimation(animationGroup, fromScaleX, fromScaleY, toScaleX, toScaleY, duration, startDelay, order)
@@ -48,7 +49,29 @@ local function CreateScaleAnimation(animationGroup, fromScaleX, fromScaleY, toSc
 
 	return animation
 end
+
 private.CreateScaleAnimation = CreateScaleAnimation
+
+local function GUIDToCreatureID(GUID)
+	local unitTypeName, _, _, _, _, unitID = ("-"):split(GUID)
+	if unitTypeName == "Creature" then
+		return tonumber(unitID)
+	end
+end
+
+private.GUIDToCreatureID = GUIDToCreatureID
+
+local function IsNPCQuestComplete(npcID)
+	local npcData = private.NPCData[npcID]
+	if npcData then
+		local questID = npcData.questID
+		return questID and _G.IsQuestFlaggedCompleted(questID) or false
+	end
+
+	return false
+end
+
+private.IsNPCQuestComplete = IsNPCQuestComplete
 
 local function NumericSortString(a, b)
 	local x, y = tonumber(a), tonumber(b)
@@ -63,15 +86,6 @@ end
 local function TableKeyFormat(input)
 	return input and input:upper():gsub(" ", "_"):gsub("'", ""):gsub(":", ""):gsub("-", "_"):gsub("%(", ""):gsub("%)", "") or ""
 end
-
-local function GUIDToCreatureID(GUID)
-	local unitTypeName, _, _, _, _, unitID = ("-"):split(GUID)
-	if unitTypeName == "Creature" then
-		return tonumber(unitID)
-	end
-end
-
-private.GUIDToCreatureID = GUIDToCreatureID
 
 local function UnitTokenToCreatureID(unitToken)
 	if unitToken then

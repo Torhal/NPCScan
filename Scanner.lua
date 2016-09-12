@@ -25,9 +25,6 @@ local LibSharedMedia = LibStub("LibSharedMedia-3.0")
 -- ----------------------------------------------------------------------------
 local npcScanList = {}
 
-local playerFactionGroup = _G.UnitFactionGroup("player")
-private.playerFactionGroup = playerFactionGroup
-
 -- ----------------------------------------------------------------------------
 -- Variables.
 -- ----------------------------------------------------------------------------
@@ -37,16 +34,6 @@ local currentMapID
 -- ----------------------------------------------------------------------------
 -- Helpers.
 -- ----------------------------------------------------------------------------
-local function IsNPCQuestComplete(npcID)
-	local npcData = private.NPCData[npcID]
-	if npcData then
-		local questID = npcData.questID
-		return questID and _G.IsQuestFlaggedCompleted(questID) or false
-	end
-
-	return false
-end
-
 -- These functions are used for situations where an npcID needs to be removed from the npcScanList while iterating it.
 local QueueNPCForUntracking, UntrackQueuedNPCs
 do
@@ -129,7 +116,7 @@ local function CanAddToScanList(npcID)
 
 	local npcData = private.NPCData[npcID]
 	if npcData then
-		if npcData.factionGroup == playerFactionGroup then
+		if npcData.factionGroup == private.PlayerFactionGroup then
 			private.Debug("Skipping %s (%d) - same faction group.", NPCScan:GetNPCNameFromID(npcID), npcID)
 			return false
 		end
@@ -161,7 +148,7 @@ local function CanAddToScanList(npcID)
 			end
 		end
 
-		if detection.ignoreCompletedQuestObjectives and IsNPCQuestComplete(npcID) then
+		if detection.ignoreCompletedQuestObjectives and private.IsNPCQuestComplete(npcID) then
 			private.Debug("Skipping %s (%d) - already killed.", NPCScan:GetNPCNameFromID(npcID), npcID)
 			return false
 		end
@@ -256,7 +243,7 @@ private.UpdateScanListAchievementCriteria = UpdateScanListAchievementCriteria
 local function UpdateScanListQuestObjectives()
 	if private.db.profile.detection.ignoreCompletedQuestObjectives then
 		for npcID in pairs(npcScanList) do
-			if IsNPCQuestComplete(npcID) then
+			if private.IsNPCQuestComplete(npcID) then
 				QueueNPCForUntracking(npcID)
 			end
 		end
