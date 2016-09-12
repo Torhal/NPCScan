@@ -75,6 +75,10 @@ function NPCScan:OnInitialize()
 
 	private.db = db
 
+	self:RegisterChatCommand("npcscan", "ChatCommand")
+end
+
+function NPCScan:OnEnable()
 	-- ----------------------------------------------------------------------------
 	-- Build lookup tables.
 	-- ----------------------------------------------------------------------------
@@ -215,16 +219,13 @@ function NPCScan:OnInitialize()
 	end
 
 	-- Handle custom additions.
-	for npcID, npcName in pairs(db.locale.npcNames) do
+	for npcID, npcName in pairs(private.db.locale.npcNames) do
 		NPCIDFromName[npcName] = npcID
 	end
 
 	self:SetupOptions()
 	self:InitializeTargetButton()
-	self:RegisterChatCommand("npcscan", "ChatCommand")
-end
 
-function NPCScan:OnEnable()
 	self:RegisterBucketEvent("CRITERIA_UPDATE", 5)
 	self:RegisterEvent("LOOT_CLOSED")
 	self:RegisterEvent("NAME_PLATE_UNIT_ADDED")
