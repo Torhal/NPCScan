@@ -299,10 +299,10 @@ local NPCData = {
 	[68322] = { factionGroup = "Horde", }, -- Muerta
 	[69998] = { isTameable = true, }, -- Goda
 	[71665] = { questID = 32918, }, -- Giant-Slayer Kul
-	[71721] = { questID = 32941, }, -- Canyon Icemother
+	[71721] = { questID = 32941, isTameable = true, vignettaName = "Oasis Icemother", }, -- Canyon Icemother
 	[72294] = { questID = 33014, }, -- Cindermaw
 	[72362] = { questID = 33039, }, -- Ku'targ the Voidseer
-	[72364] = { questID = 33512, }, -- Gorg'ak the Lava Guzzler
+	[72364] = { questID = 33512, vignetteName = "Lava-Gorged Goren", }, -- Gorg'ak the Lava Guzzler
 	[72537] = { questID = 33055, }, -- Leaf-Reader Kurri
 	[72606] = { questID = 34068, isTameable = true, }, -- Rockhoof
 	[72808] = { isTameable = true, }, -- Tsavo'ka
@@ -311,7 +311,7 @@ local NPCData = {
 	[73166] = { isTameable = true, }, -- Monstrous Spineclaw
 	[74206] = { questID = 33043, isTameable = true, }, -- Killmaw
 	[74613] = { questID = 33843, }, -- Broodmother Reeg'ak
-	[74971] = { questID = 33504, }, -- Firefury Giant
+	[74971] = { questID = 33504, vignettaName = "Shaman Fire Stone", }, -- Firefury Giant
 	[75071] = { questID = 33642, }, -- Mother Om'ra
 	[75434] = { questID = 33038, }, -- Windfang Matriarch
 	[75435] = { questID = 33389, }, -- Yggdrel
@@ -320,11 +320,11 @@ local NPCData = {
 	[76380] = { questID = 33664, }, -- Gorum
 	[76473] = { questID = 34726, isTameable = true, }, -- Mother Araneae
 	[76914] = { questID = 34131, isTameable = true, }, -- Coldtusk
-	[76918] = { questID = 33938, }, -- Primalist Mur'og
+	[76918] = { questID = 33938, vignetteName = "Ogre Primalist", }, -- Primalist Mur'og
 	[77085] = { questID = 33064, }, -- Dark Emanation
 	[77140] = { questID = 33061, isTameable = true, }, -- Amaukwa
 	[77310] = { questID = 35906, }, -- Mad "King" Sporeon
-	[77513] = { questID = 34129, isTameable = true, }, -- Coldstomp the Griever
+	[77513] = { questID = 34129, isTameable = true, vignettaName = "Coldstomp", }, -- Coldstomp the Griever
 	[77519] = { isTameable = true, }, -- Giantbane
 	[77526] = { questID = 34132, }, -- Scout Goreseeker
 	[77527] = { questID = 34133, }, -- The Beater
@@ -343,12 +343,12 @@ local NPCData = {
 	[77784] = { questID = 34208, }, -- Lo'marg Jawcrusher
 	[77795] = { questID = 34221, }, -- Echo of Murmur
 	[77828] = { questID = 34220, }, -- Echo of Murmur
-	[78151] = { questID = 34130, }, -- Huntmaster Kuang
+	[78151] = { questID = 34130, vignetteName = "Giantstalker Hunting Party", }, -- Huntmaster Kuang
 	[78161] = { questID = 34862, }, -- Hyperious
 	[78260] = { questID = 37412, }, -- King Slime
 	[78265] = { questID = 34361, }, -- The Bone Crawler
 	[78269] = { questID = 37413, }, -- Gnarljaw
-	[78606] = { questID = 34470, }, -- Pale Fishmonger
+	[78606] = { questID = 34470, vignetteName = "Pale Gone Fishin'", }, -- Pale Fishmonger
 	[78621] = { questID = 34477, }, -- Cyclonic Fury
 	[78710] = { questID = 35219, }, -- Kharazos the Triumphant
 	[78713] = { questID = 35219, }, -- Galzomar
@@ -400,7 +400,7 @@ local NPCData = {
 	[82536] = { questID = 37388, }, -- Gorivax
 	[82614] = { questID = 37387, }, -- Moltnoma
 	[82616] = { questID = 37386, isTameable = true, }, -- Jabberjaw
-	[82617] = { questID = 37385, isTameable = true, }, -- Slogtusk the Corpse-Eater
+	[82617] = { questID = 37385, isTameable = true, vignetteName = "Slogtusk the Corpse Eater", }, -- Slogtusk the Corpse-Eater
 	[82618] = { questID = 37384, }, -- Tor'goroth
 	[82620] = { questID = 37383, }, -- Son of Goramal
 	[82676] = { questID = 35688, }, -- Enavra
@@ -520,7 +520,7 @@ local NPCData = {
 	[87344] = { questID = 37472, }, -- Gortag Steelgrip
 	[87348] = { questID = 37382, }, -- Hoarfrost
 	[87351] = { questID = 37381, }, -- Mother of Goren
-	[87352] = { questID = 37380, }, -- Gibblette the Cowardly
+	[87352] = { questID = 37380, vignetteName = "Giblette the Cowardly", }, -- Gibblette the Cowardly
 	[87356] = { questID = 37379, }, -- Vrok the Ancient
 	[87357] = { questID = 37378, }, -- Valkor
 	[87362] = { isTameable = true, }, -- Gibby
@@ -547,7 +547,7 @@ local NPCData = {
 	[88951] = { isTameable = true, }, -- Vileclaw
 	[89016] = { questID = 37537, }, -- Ravyn-Drath
 	[89675] = { questID = 38749, }, -- Commander Org'mok
-	[89816] = { questID = 37820, vignetteName = "Horn of the Siren" }, -- Golza the Iron Fin
+	[89816] = { questID = 37820, vignetteName = "Horn of the Siren", }, -- Golza the Iron Fin
 	[89846] = { questID = 37821, }, -- Captain Volo'ren
 	[89850] = { questID = 37822, }, -- The Oracle
 	[89865] = { questID = 37823, }, -- Mrrgrl the Tide Reaver
@@ -555,27 +555,27 @@ local NPCData = {
 	[90024] = { questID = 37953, }, -- Sergeant Mor'grak
 	[90094] = { questID = 39046, }, -- Harbormaster Korak
 	[90057] = { questID = 37869, }, -- Daggerbeak
-	[90122] = { questID = 39045, }, -- Zoug the Heavy
+	[90122] = { questID = 39045, vignetteName = "Zoug", }, -- Zoug the Heavy
 	[90139] = { questID = 37908, }, -- Inquisitor Ernstenbok
-	[90164] = { questID = 37909, vignetteName = "Seek & Destroy Squad" }, -- Warbringer Mox'na
-	[90173] = { questID = 37909, vignetteName = "Seek & Destroy Squad" }, -- Arcana Stalker
+	[90164] = { questID = 37909, vignetteName = "Seek & Destroy Squad", }, -- Warbringer Mox'na
+	[90173] = { questID = 37909, vignetteName = "Seek & Destroy Squad", }, -- Arcana Stalker
 	[90244] = { questID = 37932, }, -- Arcavellus
 	[90429] = { questID = 38026, }, -- Imp-Master Valessa
 	[90434] = { questID = 38031, }, -- Ceraxas
-	[90437] = { questID = 38030, }, -- Jax'zor
+	[90437] = { questID = 38030, vignetteName = "Houndmaster Jax'zor", }, -- Jax'zor
 	[90438] = { questID = 38029, }, -- Lady Oran
 	[90442] = { questID = 38032, }, -- Mistress Thavra
-	[90505] = { questID = 37989, vignetteName = "Syphonus & Leodrath" }, -- Syphonus
-	[90519] = { questID = 37990, }, -- Cindral the Wildfire
+	[90505] = { questID = 37989, vignetteName = "Syphonus & Leodrath", }, -- Syphonus
+	[90519] = { questID = 37990, vignetteName = "Cindral", }, -- Cindral the Wildfire
 	[90777] = { questID = 38028, }, -- High Priest Ikzan
 	[90782] = { questID = 38034, }, -- Rasthe
-	[90803] = { questID = 38037, vignetteName = "Cache of Infernals" }, -- Infernal Lord
+	[90803] = { questID = 38037, vignetteName = "Cache of Infernals", }, -- Infernal Lord
 	[90884] = { questID = 38262, }, -- Bilkor the Thrower
-	[90885] = { questID = 38263, }, -- Rogond the Tracker
-	[90887] = { questID = 38265, }, -- Dorg the Bloody
+	[90885] = { questID = 38263, vignetteName = "Rogond", }, -- Rogond the Tracker
+	[90887] = { questID = 38265, vignetteName = "Dorg", }, -- Dorg the Bloody
 	[90888] = { questID = 38264, }, -- Drivnul
 	[90901] = { questID = 38061, }, -- Pridelord Meowl
-	[90936] = { questID = 38266, }, -- Bloodhunter Zulk
+	[90936] = { questID = 38266, vignetteName = "Zulk", }, -- Bloodhunter Zulk
 	[91100] = { questID = 38212, }, -- Brogozog
 	[91009] = { questID = 38457, }, -- Putre'thar
 	[91087] = { questID = 38207, }, -- Zeter'el
@@ -585,71 +585,72 @@ local NPCData = {
 	[91113] = { questID = 38217, }, -- Tide Behemoth
 	[91114] = { questID = 38217, }, -- Tide Behemoth
 	[91115] = { questID = 38217, }, -- Tide Behemoth
-	[91227] = { questID = 39159, }, -- Remnant of the Blood Moon
-	[91232] = { questID = 38746, }, -- Commander Krag'goth
-	[91243] = { questID = 38747, }, -- Tho'gar Gorefist
-	[91374] = { questID = 38282, }, -- Podlord Wakkawam
+	[91227] = { questID = 39159, vignetteName = "Blood Moon Boss", }, -- Remnant of the Blood Moon
+	[91232] = { questID = 38746, vignetteName = "Iron Front Captain 1", }, -- Commander Krag'goth
+	[91243] = { questID = 38747, vignetteName = "Iron Front Captain 2", }, -- Tho'gar Gorefist
+	[91374] = { questID = 38282, vignetteName = "Wakkawam", }, -- Podlord Wakkawam
 	[91529] = { questID = 38333, }, -- Glimar Ironfist
 	[91579] = { questID = 38352, }, -- Doomlord Kazrok
 	[91695] = { questID = 38400, }, -- Grand Warlock Nethekurse
 	[91727] = { questID = 38411, }, -- Executor Riloth
-	[91795] = { questID = 38423, vignetteName = "Stormdrake Matriarch" }, -- Stormwing Matriarch
+	[91795] = { questID = 38423, vignetteName = "Stormdrake Matriarch", }, -- Stormwing Matriarch
 	[91803] = { questID = 38425, }, -- Fathnyr
 	[91871] = { questID = 38430, }, -- Argosh the Destroyer
 	[91874] = { questID = 38431, }, -- Bladesquall
-	[91892] = { questID = 38424, vignetteName = "Thane's Mead Hall" }, -- Thane Irglov the Merciless
+	[91892] = { questID = 38424, vignetteName = "Thane's Mead Hall", }, -- Thane Irglov the Merciless
 	[92040] = { questID = 38461, }, -- Fenri
 	[92117] = { questID = 38468, isTameable = true, }, -- Gorebeak,
 	[92152] = { questID = 38472, }, -- Whitewater Typhoon
 	[92180] = { questID = 38479, }, -- Seersei
-	[92197] = { questID = 38496, }, -- Relgor
-	[92274] = { questID = 38557, vignetteName = "Invasion Point: Devastation" }, -- Painmistress Selora
+	[92197] = { questID = 38496, vignetteName = "BH Master Scout", }, -- Relgor
+	[92274] = { questID = 38557, vignetteName = "Invasion Point: Devastation", }, -- Painmistress Selora
 	[92408] = { questID = 38579, }, -- Xanzith the Everlasting
 	[92411] = { questID = 38580, }, -- Overlord Ma'gruth
-	[92429] = { questID = 38589, isTameable = true, }, -- Broodlord Ixkor
+	[92429] = { questID = 38589, isTameable = true, vignetteName = "Ravager Broodlord", }, -- Broodlord Ixkor
 	[92451] = { questID = 37937, }, -- Varyx the Damned
-	[92465] = { questID = 38597, }, -- The Blackfang
-	[92495] = { questID = 38600, }, -- Soulslicer
-	[92508] = { questID = 38604, }, -- Gloomtalon
-	[92517] = { questID = 38605, }, -- Krell the Serene
-	[92552] = { questID = 38609, }, -- Belgork
-	[92574] = { questID = 38620, }, -- Thromma the Gutslicer
-	[92590] = { questID = 38625, factionGroup = "Horde", vignetteName = "Hook & Sinker" }, -- Hook
-	[92591] = { questID = 38625, factionGroup = "Horde", vignetteName = "Hook & Sinker" }, -- Sinker
-	[92599] = { questID = 38626, isTameable = true, vignetteName = "Worg Pack" }, -- Bloodstalker Alpha
-	[92604] = { questID = 38627, factionGroup = "Alliance", vignetteName = "Worgen Stalkers" }, -- Champion Elodie
-	[92606] = { questID = 38628, }, -- Sylissa
-	[92609] = { questID = 38627, factionGroup = "Alliance", vignetteName = "Worgen Stalkers" }, -- Tracker Jack
+	[92465] = { questID = 38597, vignetteName = "Panther Saberon Boss", }, -- The Blackfang
+	[92495] = { questID = 38600, vignetteName = "Fel Saberon Shaman", }, -- Soulslicer
+	[92508] = { questID = 38604, vignetteName = "Saberon Shaman", }, -- Gloomtalon
+	[92517] = { questID = 38605, vignetteName = "Saberon Blademaster", }, -- Krell the Serene
+	[92552] = { questID = 38609, vignetteName = "Iron Tunnel Foreman", }, -- Belgork
+	[92574] = { questID = 38620, vignetteName = "Pale Assassin", }, -- Thromma the Gutslicer
+	[92590] = { questID = 38625, factionGroup = "Horde", vignetteName = "Hook & Sinker", }, -- Hook
+	[92591] = { questID = 38625, factionGroup = "Horde", vignetteName = "Hook & Sinker", }, -- Sinker
+	[92599] = { questID = 38626, isTameable = true, vignetteName = "Worg Pack", }, -- Bloodstalker Alpha
+	[92604] = { questID = 38627, factionGroup = "Alliance", vignetteName = "Worgen Stalkers", }, -- Champion Elodie
+	[92606] = { questID = 38628, vignetteName = "Giant Python", }, -- Sylissa
+	[92609] = { questID = 38627, factionGroup = "Alliance", vignetteName = "Worgen Stalkers", }, -- Tracker Jack
 	[92611] = { factionGroup = "Alliance", }, -- Ambusher Daggerfang
-	[92613] = { questID = 38627, factionGroup = "Alliance", vignetteName = "Worgen Stalkers" }, -- Priestess Liza
-	[92626] = { questID = 38630, factionGroup = "Horde", vignetteName = "Forsaken Deathsquad" }, -- Deathguard Adams
-	[92627] = { questID = 38631, isTameable = true, }, -- Rendrak
-	[92631] = { questID = 38630, factionGroup = "Horde", vignetteName = "Forsaken Deathsquad" }, -- Dark Ranger Jess
-	[92634] = { questID = 38630, factionGroup = "Horde", vignetteName = "Forsaken Deathsquad" }, -- Apothecary Perez
-	[92636] = { questID = 38632, }, -- The Night Haunter
+	[92613] = { questID = 38627, factionGroup = "Alliance", vignetteName = "Worgen Stalkers", }, -- Priestess Liza
+	[92626] = { questID = 38630, factionGroup = "Horde", vignetteName = "Forsaken Deathsquad", }, -- Deathguard Adams
+	[92627] = { questID = 38631, isTameable = true, vignetteName = "Alpha Bat", }, -- Rendrak
+	[92631] = { questID = 38630, factionGroup = "Horde", vignetteName = "Forsaken Deathsquad", }, -- Dark Ranger Jess
+	[92634] = { questID = 38630, factionGroup = "Horde", vignetteName = "Forsaken Deathsquad", }, -- Apothecary Perez
+	[92636] = { questID = 38632, vignetteName = "Night Haunter", }, -- The Night Haunter
 	[92645] = { questID = 38632, }, -- The Night Haunter
 	[92647] = { questID = 38634, }, -- Felsmith Damorka
 	[92657] = { questID = 38696, }, -- Bleeding Hollow Horror
-	[92682] = { questID = 38642, vignetteName = "Helmouth Raiders" }, -- Helmouth Raider
-	[92685] = { questID = 38642, vignetteName = "Helmouth Raiders" }, -- Captain Brvet
-	[92694] = { questID = 38654, isTameable = true, }, -- The Goreclaw
-	[92703] = { questID = 38642, vignetteName = "Helmouth Raiders" }, -- Helmouth Raider
+	[92682] = { questID = 38642, vignetteName = "Helmouth Raiders", }, -- Helmouth Raider
+	[92685] = { questID = 38642, vignetteName = "Helmouth Raiders", }, -- Captain Brvet
+	[92694] = { questID = 38654, isTameable = true, vignetteName = "Giant Raptor", }, -- The Goreclaw
+	[92703] = { questID = 38642, vignetteName = "Helmouth Raiders", }, -- Helmouth Raider
 	[92751] = { questID = 39031, }, -- Ivory Sentinel
 	[92763] = { questID = 38685, }, -- The Nameless King
 	[92887] = { questID = 38700, isTameable = true, }, -- Steelsnout
-	[92941] = { questID = 38709, }, -- Gorabosh
+	[92941] = { questID = 38709, vignetteName = "Cave Keeper", }, -- Gorabosh
 	[92951] = { questID = 38712, factionGroup = "Alliance", }, -- Houndmaster Ely
 	[92965] = { questID = 38767, }, -- Darkshade
-	[92977] = { questID = 38751, }, -- The Iron Houndmaster
-	[93001] = { questID = 38752, }, -- Szirek the Twisted
+	[92977] = { questID = 38751, vignetteName = "Iron Houndmaster", }, -- The Iron Houndmaster
+	[93001] = { questID = 38752, vignetteName = "Szirek", }, -- Szirek the Twisted
 	[93002] = { questID = 38726, isTameable = true, }, -- Magwia
 	[93030] = { questID = 40080, }, -- Ironbranch
-	[93028] = { questID = 38736, }, -- Driss Vile
-	[93057] = { questID = 38750, }, -- Grannok
-	[93076] = { questID = 38756, }, -- Captain Ironbeard
-	[93125] = { questID = 38764, }, -- Glub'glok
-	[93166] = { questID = 38774, vignetteName = "Lost Ettin" }, -- Tiptog the Lost
+	[93028] = { questID = 38736, vignetteName = "IH Elite Sniper", }, -- Driss Vile
+	[93057] = { questID = 38750, vignetteName = "Iron Front Captain 3", }, -- Grannok
+	[93076] = { questID = 38756, vignetteName = "Dead Orc Captain", }, -- Captain Ironbeard
+	[93125] = { questID = 38764, vignetteName = "Murktide Alpha", }, -- Glub'glok
+	[93166] = { questID = 38774, vignetteName = "Lost Ettin", }, -- Tiptog the Lost
 	[93168] = { questID = 38775, }, -- Felbore
+	[93205] = { questID = 38780, }, -- Thondrax
 	[93236] = { questID = 38812, isTameable = true, }, -- Shadowthrash
 	[93264] = { questID = 38820, }, -- Captain Grok'mar
 	[93279] = { questID = 38825, }, -- Kris'kar the Unredeemed
@@ -657,13 +658,13 @@ local NPCData = {
 	[93401] = { questID = 38847, }, -- Urgev the Flayer
 	[93654] = { questID = 38887, }, -- Skul'vrax
 	[93679] = { questID = 44070, }, -- Gathenak the Subjugator
-	[93686] = { questID = 38889, vignetteName = "Shivering Ashmaw Cub" }, -- Jinikki the Puncturer
+	[93686] = { questID = 38889, vignetteName = "Shivering Ashmaw Cub", }, -- Jinikki the Puncturer
 	[93758] = { questID = 38900, }, -- Antydas Nightcaller
 	[94313] = { factionGroup = "Alliance", }, -- Daniel "Boomer" Vorick
 	[94347] = { questID = 43343, }, -- Dread-Rider Cortis
 	[94413] = { questID = 39120, }, -- Isel the Hammer
 	[94414] = { questID = 39121, }, -- Kiranys Duskwhisper
-	[94485] = { questID = 39130, }, -- Pollous the Fetid
+	[94485] = { questID = 39130, vignetteName = "Purging the River", }, -- Pollous the Fetid
 	[94877] = { questID = 39235, }, -- Brogrul the Mighty
 	[95044] = { questID = 39288, }, -- Terrorfist
 	[95053] = { questID = 39287, }, -- Deathtalon
@@ -672,7 +673,7 @@ local NPCData = {
 	[95123] = { questID = 40126, }, -- Grelda the Hag
 	[95204] = { questID = 39435, }, -- Oubdob da Smasher
 	[95221] = { questID = 39357, }, -- Mad Henryk
-	[95318] = { questID = 39596, vignetteName = "Perrexx the Corruptor" }, -- Perrexx
+	[95318] = { questID = 39596, vignetteName = "Perrexx the Corruptor", }, -- Perrexx
 	[95872] = { questID = 39465, }, -- Skullhat
 	[96323] = { questID = 39617, }, -- Arachnis
 	[96410] = { questID = 39646, isTameable = true, }, -- Majestic Elderhorn
@@ -681,7 +682,7 @@ local NPCData = {
 	[97093] = { questID = 39762, }, -- Shara Felbreath
 	[97102] = { questID = 39766, }, -- Ram'Pag
 	[97203] = { questID = 39782, }, -- Tenpak Flametotem
-	[97220] = { questID = 39784, isTameable = true, vignetteName = "Beastmaster Pao'lek" }, -- Arru
+	[97220] = { questID = 39784, isTameable = true, vignetteName = "Beastmaster Pao'lek", }, -- Arru
 	[97326] = { questID = 39802, }, -- Hartli the Snatcher
 	[97345] = { questID = 39806, }, -- Crawshuk the Hungry
 	[97449] = { questID = 40405, isTameable = true, }, -- Bristlemaul
@@ -689,8 +690,8 @@ local NPCData = {
 	[97517] = { questID = 39858, }, -- Dreadbog
 	[97593] = { questID = 39866, }, -- Mynta Talonscreech
 	[97630] = { questID = 39870, }, -- Soulthirster
-	[97653] = { questID = 39872, vignetteName = "The Beastly Boxer" }, -- Taurson
-	[97793] = { questID = 39963, vignetteName = "Abandoned Fishing Pole" }, -- Flamescale
+	[97653] = { questID = 39872, vignetteName = "The Beastly Boxer", }, -- Taurson
+	[97793] = { questID = 39963, vignetteName = "Abandoned Fishing Pole", }, -- Flamescale
 	[97928] = { isTameable = true, }, -- Tamed Coralback
 	[97933] = { questID = 39994, }, -- Crab Rider Grmlrml
 	[98024] = { questID = 40406, }, -- Luggut the Eggeater
@@ -711,9 +712,9 @@ local NPCData = {
 	[98890] = { questID = 40175, isTameable = true, }, -- Slumber
 	[99610] = { questID = 40897, }, -- Garvrulg
 	[99792] = { questID = 41319, }, -- Elfbane
-	[100230] = { questID = 40413, vignetteName = "Amateur Hunters" }, -- "Sure-Shot" Arnie
-	[100231] = { questID = 40413, vignetteName = "Amateur Hunters" }, -- Dargok Thunderuin
-	[100232] = { questID = 40413, vignetteName = "Amateur Hunters" }, -- Ryael Dawndrifter
+	[100230] = { questID = 40413, vignetteName = "Amateur Hunters", }, -- "Sure-Shot" Arnie
+	[100231] = { questID = 40413, vignetteName = "Amateur Hunters", }, -- Dargok Thunderuin
+	[100232] = { questID = 40413, vignetteName = "Amateur Hunters", }, -- Ryael Dawndrifter
 	[100302] = { questID = 40423, }, -- Puck
 	[100303] = { questID = 40423, }, -- Zenobia
 	[100495] = { questID = 40414, }, -- Devouring Darkness
@@ -728,7 +729,7 @@ local NPCData = {
 	[103575] = { questID = 44003, }, -- Reef Lord Raj'his
 	[103785] = { isTameable = true, }, -- Well-Fed Bear
 	[103787] = { isTameable = true, }, -- Baconlisk
-	[103827] = { questID = 41786, vignetteName = "Sea Giant King" }, -- King Morgalash
+	[103827] = { questID = 41786, vignetteName = "Sea Giant King", }, -- King Morgalash
 	[103841] = { questID = 43996, isTameable = true, }, -- Shadowquill
 	[105547] = { questID = 43484, }, -- Rauren
 	[105938] = { questID = 42069, }, -- Felwing
@@ -748,7 +749,7 @@ local NPCData = {
 	[107657] = { questID = 42505, }, -- Arcanist Shal'iman
 	[107846] = { questID = 43968, isTameable = true, }, -- Pinchshank
 	[107926] = { questID = 42591, }, -- Hannval the Butcher
-	[108255] = { questID = 42699, vignetteName = "Coura, Master of Arcana" }, -- Coura, Mistress of Arcana
+	[108255] = { questID = 42699, vignetteName = "Coura, Master of Arcana", }, -- Coura, Mistress of Arcana
 	[108829] = { questID = 43192, }, -- Levantus
 	[109054] = { questID = 42831, }, -- Shal'an
 	[109163] = { questID = 42864, }, -- Captain Dargun
@@ -757,7 +758,7 @@ local NPCData = {
 	[109500] = { questID = 40423, }, -- Jak
 	[109501] = { questID = 40423, }, -- Darkful
 	[109504] = { questID = 44108, }, -- Ragemaw
-	[109708] = { questID = 43176, vignetteName = "Undgrell Attack" }, -- Undergrell Ringleader
+	[109708] = { questID = 43176, vignetteName = "Undgrell Attack", }, -- Undergrell Ringleader
 	[109954] = { questID = 43348, }, -- Magister Phaedris
 	[110024] = { questID = 43351, }, -- Mal'Dreth the Corruptor
 	[110340] = { questID = 43358, isTameable = true, }, -- Myonix
@@ -779,8 +780,8 @@ local NPCData = {
 	[111651] = { questID = 43792, }, -- Degren
 	[111653] = { questID = 43793, }, -- Miasu
 	[112497] = { questID = 44072, isTameable = true, }, -- Maia the White
-	[112636] = { questID = 44081, vignetteName = "Trecherous Stallions" }, -- Sinister Leyrunner
-	[112637] = { questID = 44081, vignetteName = "Trecherous Stallions" }, -- Devious Sunrunner
+	[112636] = { questID = 44081, vignetteName = "Trecherous Stallions", }, -- Sinister Leyrunner
+	[112637] = { questID = 44081, vignetteName = "Trecherous Stallions", }, -- Devious Sunrunner
 	[112802] = { questID = 44124, isTameable = true, }, -- Mar'tura
 	[113368] = { questID = 44676, }, -- Llorian
 	[113694] = { isTameable = true, }, -- Pashya
