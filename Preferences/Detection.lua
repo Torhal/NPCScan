@@ -1,6 +1,9 @@
 -- ----------------------------------------------------------------------------
 -- Localized Lua globals.
 -- ----------------------------------------------------------------------------
+-- Functions
+local pairs = _G.pairs
+
 -- Libraries
 local table = _G.table
 
@@ -16,6 +19,19 @@ local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 
 -- ----------------------------------------------------------------------------
+-- Constants.
+-- ----------------------------------------------------------------------------
+local ContinentIDs = {}
+
+for index = 1, #private.ContinentMapID do
+	ContinentIDs[#ContinentIDs + 1] = index
+end
+
+table.sort(ContinentIDs, function(a, b)
+	return private.ContinentNameByID[a] < private.ContinentNameByID[b]
+end)
+
+-- ----------------------------------------------------------------------------
 -- Variables.
 -- ----------------------------------------------------------------------------
 local profile
@@ -23,44 +39,95 @@ local profile
 -- ----------------------------------------------------------------------------
 -- Helpers.
 -- ----------------------------------------------------------------------------
-local function SortByContinentName(a, b)
-	return private.ContinentNameByID[a] < private.ContinentNameByID[b]
-end
-
 -- ----------------------------------------------------------------------------
 -- Ignored continent options.
 -- ----------------------------------------------------------------------------
-local IgnoredContinentOptions = {}
+local ContinentAndMapOptions = {}
 
-local function UpdateIgnoredContinentOptions()
-	table.wipe(IgnoredContinentOptions)
+local function UpdateContinentAndMapOptions()
+	table.wipe(ContinentAndMapOptions)
 
-	local continentIDs = {}
-	for index = 1, #private.ContinentMapID do
-		continentIDs[#continentIDs + 1] = index
-	end
+	for continentIndex = 1, #ContinentIDs do
+		local continentID = ContinentIDs[continentIndex]
+		local continentStatus = profile.detection.continentIDs[continentID]
 
-	table.sort(continentIDs, SortByContinentName)
-
-	for index = 1, #continentIDs do
-		local continentID = continentIDs[index]
-
-		IgnoredContinentOptions["continentEntry" .. index] = {
-			order = index,
-			name = private.ContinentNameByID[continentID],
+		local continentOptionsTable = {
+			order = continentIndex,
+			name = ("%s%s|r"):format(private.DetectionGroupStatusColors[continentStatus], private.ContinentNameByID[continentID]),
 			descStyle = "inline",
-			type = "toggle",
-			get = function(info)
-				return profile.blacklist.continentIDs[continentID]
-			end,
-			set = function(info, value)
-				profile.blacklist.continentIDs[continentID] = value or nil
+			type = "group",
+			args = {
+				status = {
+					order = 1,
+					name = _G.STATUS,
+					type = "select",
+					values = private.DetectionGroupStatusLabels,
+					get = function(info)
+						return profile.detection.continentIDs[continentID]
+					end,
+					set = function(info, value)
+						profile.detection.continentIDs[continentID] = value
 
-				if continentID == private.currentContinentID then
-					NPCScan:UpdateScanList()
-				end
-			end,
+						if value ~= private.DetectionGroupStatus.UserDefined then
+							for mapID in pairs(private.ContinentMaps[continentID]) do
+								profile.blacklist.mapIDs[mapID] = nil
+							end
+						end
+
+						UpdateContinentAndMapOptions()
+
+						private.UpdateRareNPCOptions()
+						private.UpdateTameableRareNPCOptions()
+
+						if continentID == private.currentContinentID then
+							NPCScan:UpdateScanList()
+						end
+					end,
+				},
+				mapIDs = {
+					order = 2,
+					name = " ",
+					type = "group",
+					guiInline = true,
+					args = {},
+				},
+			},
 		}
+
+		for mapIDIndex = 1, #private.AlphabeticalContinentMaps[continentID] do
+			local mapID = private.AlphabeticalContinentMaps[continentID][mapIDIndex]
+
+			continentOptionsTable.args.mapIDs.args["mapID" .. mapID] = {
+				order = mapIDIndex,
+				name = private.GetMapOptionName(mapID),
+				desc = ("%s %s"):format(_G.ID, mapID),
+				type = "toggle",
+				width = "full",
+				descStyle = "inline",
+				disabled = function()
+					return profile.detection.continentIDs[continentID] ~= private.DetectionGroupStatus.UserDefined
+				end,
+				get = function(info)
+					return not profile.blacklist.mapIDs[mapID]
+				end,
+				set = function(info, value)
+					profile.blacklist.mapIDs[mapID] = not profile.blacklist.mapIDs[mapID] and true or nil
+
+					UpdateContinentAndMapOptions()
+
+					private.UpdateRareNPCOptions()
+					private.UpdateTameableRareNPCOptions()
+
+					AceConfigRegistry:NotifyChange(AddOnFolderName)
+
+					if mapID == private.currentMapID then
+						NPCScan:UpdateScanList()
+					end
+				end,
+			}
+		end
+
+		ContinentAndMapOptions["continentID" .. continentID] = continentOptionsTable
 	end
 
 	AceConfigRegistry:NotifyChange(AddOnFolderName)
@@ -78,107 +145,77 @@ local function GetDetectionOptions()
 		name = L["Detection"],
 		order = 2,
 		type = "group",
-		descStyle = "inline",
+		childGroups = "tab",
 		args = {
-			interval = {
-				order = 10,
-				name = L["Interval"],
-				desc = L["The number of minutes before an NPC will be detected again."],
-				type = "range",
-				width = "full",
-				min = 0.5,
-				max = 60,
-				get = function(info)
-					return profile.detection.intervalSeconds / 60
-				end,
-				set = function(info, value)
-					profile.detection.intervalSeconds = value * 60
-				end,
-			},
-			type = {
-				order = 20,
-				name = _G.TYPE,
+			general = {
+				order = 1,
+				name = _G.GENERAL_LABEL,
 				type = "group",
-				guiInline = true,
 				args = {
-					rares = {
-						order = 10,
-						type = "toggle",
-						name = _G.BATTLE_PET_BREED_QUALITY4,
-						descStyle = "inline",
-						get = function(info)
-							return profile.detection.rares
-						end,
-						set = function(info, value)
-							profile.detection.rares = value
-						end,
-					},
-					tameables = {
-						order = 20,
-						type = "toggle",
-						name = ("%s %s"):format(_G.TAMEABLE, _G.PARENS_TEMPLATE:format(_G.BATTLE_PET_BREED_QUALITY4)),
-						descStyle = "inline",
-						get = function(info)
-							return profile.detection.tameables
-						end,
-						set = function(info, value)
-							profile.detection.tameables = value
-						end,
-					},
-				},
-			},
-			headerIgnore = {
-				order = 30,
-				name = _G.IGNORE,
-				type = "header"
-			},
-			ignoreGeneral = {
-				order = 40,
-				name = _G.GENERAL,
-				type = "group",
-				guiInline = true,
-				args = {
-					completedAchievementCriteria = {
+					interval = {
 						order = 1,
-						type = "toggle",
-						name = L["Completed Achievement Criteria"],
-						descStyle = "inline",
+						name = L["Interval"],
+						desc = L["The number of minutes before an NPC will be detected again."],
+						type = "range",
 						width = "full",
+						min = 0.5,
+						max = 60,
 						get = function(info)
-							return profile.detection.ignoreCompletedAchievementCriteria
+							return profile.detection.intervalSeconds / 60
 						end,
 						set = function(info, value)
-							profile.detection.ignoreCompletedAchievementCriteria = value
-							NPCScan:UpdateScanList()
+							profile.detection.intervalSeconds = value * 60
 						end,
 					},
-					completedQuestObjectives = {
+					ignore = {
 						order = 2,
-						type = "toggle",
-						name = L["Completed Quest Objectives"],
-						descStyle = "inline",
-						width = "full",
-						get = function(info)
-							return profile.detection.ignoreCompletedQuestObjectives
-						end,
-						set = function(info, value)
-							profile.detection.ignoreCompletedQuestObjectives = value
-							NPCScan:UpdateScanList()
-						end,
+						name = _G.IGNORE,
+						type = "group",
+						guiInline = true,
+						args = {
+							completedAchievementCriteria = {
+								order = 1,
+								type = "toggle",
+								name = L["Completed Achievement Criteria"],
+								descStyle = "inline",
+								width = "full",
+								get = function(info)
+									return profile.detection.ignoreCompletedAchievementCriteria
+								end,
+								set = function(info, value)
+									profile.detection.ignoreCompletedAchievementCriteria = value
+									NPCScan:UpdateScanList()
+								end,
+							},
+							completedQuestObjectives = {
+								order = 2,
+								type = "toggle",
+								name = L["Completed Quest Objectives"],
+								descStyle = "inline",
+								width = "full",
+								get = function(info)
+									return profile.detection.ignoreCompletedQuestObjectives
+								end,
+								set = function(info, value)
+									profile.detection.ignoreCompletedQuestObjectives = value
+									NPCScan:UpdateScanList()
+								end,
+							},
+						},
 					},
 				},
 			},
-			ignoreContinent = {
-				order = 50,
+			continentsAndMaps = {
+				order = 2,
 				name = _G.CONTINENT,
 				type = "group",
-				guiInline = true,
-				args = IgnoredContinentOptions,
+				childGroups = "tree",
+				args = ContinentAndMapOptions,
 			},
 		},
 	}
 
-	UpdateIgnoredContinentOptions()
+	UpdateContinentAndMapOptions()
 
 	return DetectionOptions
 end

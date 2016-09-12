@@ -137,7 +137,7 @@ local function CanAddToScanList(npcID)
 
 		local achievementID = npcData.achievementID
 		if achievementID then
-			if detection.achievements[achievementID] == private.AchievementStatus.Disabled then
+			if detection.achievementIDs[achievementID] == private.DetectionGroupStatus.Disabled then
 				private.Debug("Skipping %s (%d) - not tracking the achievement.", NPCScan:GetNPCNameFromID(npcID), npcID)
 				return false
 			end
@@ -193,7 +193,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 	-- No zone or continent specified, so always look for these.
 	MergeUserDefinedWithScanList(userDefined.npcIDs)
 
-	if profile.blacklist.continentIDs[currentContinentID] or profile.blacklist.mapIDs[currentMapID] then
+	if profile.blacklist.mapIDs[currentMapID] or profile.detection.continentIDs[currentContinentID] == private.DetectionGroupStatus.Disabled  then
 		private.Debug("continentID or mapID is blacklisted; terminating update.")
 		_G.NPCScan_SearchMacroButton:ResetMacroText()
 		return
@@ -260,7 +260,7 @@ function NPCScan:ACHIEVEMENT_EARNED(_, achievementID)
 
 		if private.db.profile.detection.ignoreCompletedAchievementCriteria then
 			-- Disable tracking for the achievement, since the above setting implies it.
-			private.db.profile.detection.achievements[achievementID] = private.AchievementStatus.Disabled
+			private.db.profile.detection.achievementIDs[achievementID] = private.DetectionGroupStatus.Disabled
 		end
 
 		UpdateScanListAchievementCriteria()

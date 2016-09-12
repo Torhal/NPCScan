@@ -4,13 +4,16 @@
 -- Functions
 local pairs = _G.pairs
 
-local LibStub = _G.LibStub
-local HereBeDragons = LibStub("HereBeDragons-1.0")
+-- Libraries
+local table = _G.table
 
 -- -- ---------------------------------------------------------------------------------
 -- AddOn namespace.
 -- -- ---------------------------------------------------------------------------------
 local AddOnFolderName, private = ...
+
+local LibStub = _G.LibStub
+local HereBeDragons = LibStub("HereBeDragons-1.0")
 
 local MapNPCs = {
 	-- ----------------------------------------------------------------------------
@@ -1986,6 +1989,15 @@ local MapNPCs = {
 
 private.MapNPCs = MapNPCs
 
+local AlphabeticalMapIDs = {}
+private.AlphabeticalMapIDs = AlphabeticalMapIDs
+
+local ContinentMaps = {}
+private.ContinentMaps = ContinentMaps
+
+local AlphabeticalContinentMaps = {}
+private.AlphabeticalContinentMaps = AlphabeticalContinentMaps
+
 local ContinentIDByMapID = {}
 private.ContinentIDByMapID = ContinentIDByMapID
 
@@ -1993,6 +2005,31 @@ local MapNameByID = {}
 private.MapNameByID = MapNameByID
 
 for mapID in pairs(MapNPCs) do
-	ContinentIDByMapID[mapID] = HereBeDragons:GetCZFromMapID(mapID)
+	AlphabeticalMapIDs[#AlphabeticalMapIDs + 1] = mapID
+
+	local continentID = HereBeDragons:GetCZFromMapID(mapID)
+
+	ContinentMaps[continentID] = ContinentMaps[continentID] or {}
+	ContinentMaps[continentID][mapID] = true
+
+	AlphabeticalContinentMaps[continentID] = AlphabeticalContinentMaps[continentID] or {}
+	AlphabeticalContinentMaps[continentID][#AlphabeticalContinentMaps[continentID] + 1] = mapID
+
+	ContinentIDByMapID[mapID] = continentID
 	MapNameByID[mapID] = HereBeDragons:GetLocalizedMap(mapID)
 end
+
+local function SortByMapNameThenByID(a, b)
+	if private.MapNameByID[a] == private.MapNameByID[b] then
+		return a < b
+	end
+
+	return private.MapNameByID[a] < private.MapNameByID[b]
+end
+
+for index = 1, #AlphabeticalContinentMaps do
+	table.sort(AlphabeticalContinentMaps[index], SortByMapNameThenByID)
+end
+
+table.sort(AlphabeticalMapIDs, SortByMapNameThenByID)
+

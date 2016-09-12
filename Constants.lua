@@ -27,7 +27,7 @@ private.PlayerFactionGroup = PlayerFactionGroup
 -- ----------------------------------------------------------------------------
 -- Database Defaults.
 -- ----------------------------------------------------------------------------
-local DATABASE_DEFAULTS = {
+local DatabaseDefaults = {
 	locale = {
 		npcNames = {},
 		questNames = {},
@@ -55,12 +55,12 @@ local DATABASE_DEFAULTS = {
 			}
 		},
 		blacklist = {
-			continentIDs = {},
 			mapIDs = {},
 			npcIDs = {},
 		},
 		detection = {
-			achievements = {},
+			achievementIDs = {},
+			continentIDs = {},
 			ignoreCompletedAchievementCriteria = true,
 			ignoreCompletedQuestObjectives = true,
 			intervalSeconds = 600,
@@ -88,7 +88,34 @@ local DATABASE_DEFAULTS = {
 	},
 }
 
-private.DatabaseDefaults = DATABASE_DEFAULTS
+private.DatabaseDefaults = DatabaseDefaults
+
+-- ----------------------------------------------------------------------------
+-- Preferences.
+-- ----------------------------------------------------------------------------
+local DetectionGroupStatus = {
+	Enabled = 1,
+	UserDefined = 2,
+	Disabled = 3,
+}
+
+private.DetectionGroupStatus = DetectionGroupStatus
+
+local DetectionGroupStatusLabels = {
+	_G.ENABLE,
+	_G.CUSTOM,
+	_G.DISABLE,
+}
+
+private.DetectionGroupStatusLabels = DetectionGroupStatusLabels
+
+local DetectionGroupStatusColors = {
+	_G.GREEN_FONT_COLOR_CODE,
+	_G.NORMAL_FONT_COLOR_CODE,
+	_G.RED_FONT_COLOR_CODE,
+}
+
+private.DetectionGroupStatusColors = DetectionGroupStatusColors
 
 -- ----------------------------------------------------------------------------
 -- Continents.
@@ -122,21 +149,14 @@ private.ContinentMapID = ContinentMapID
 local ContinentNameByID = {}
 private.ContinentNameByID = ContinentNameByID
 
-for index = 1, #private.ContinentMapID do
-	ContinentNameByID[index] = HereBeDragons:GetLocalizedMap(private.ContinentMapID[index])
+for continentID = 1, #private.ContinentMapID do
+	DatabaseDefaults.profile.detection.continentIDs[continentID] = DetectionGroupStatus.Enabled
+	ContinentNameByID[continentID] = HereBeDragons:GetLocalizedMap(private.ContinentMapID[continentID])
 end
 
 -- ----------------------------------------------------------------------------
 -- Achievements.
 -- ----------------------------------------------------------------------------
-local AchievementStatus = {
-	Enabled = 1,
-	UserDefined = 2,
-	Disabled = 3,
-}
-
-private.AchievementStatus = AchievementStatus
-
 local AchievementID = {
 	AdventurerOfAzsuna = 11261,
 	AdventurerOfHighmountain = 11264,
@@ -162,8 +182,8 @@ local AchievementID = {
 
 private.AchievementID = AchievementID
 
-for label, ID in pairs(AchievementID) do
-	DATABASE_DEFAULTS.profile.detection.achievements[ID] = AchievementStatus.Enabled
+for label, achievementID in pairs(AchievementID) do
+	DatabaseDefaults.profile.detection.achievementIDs[achievementID] = DetectionGroupStatus.Enabled
 end
 
 local AchievementLabel = {}

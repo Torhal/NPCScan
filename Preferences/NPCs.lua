@@ -32,37 +32,11 @@ table.sort(AchievementIDs, function(a, b)
 	return private.AchievementNameByID[a] < private.AchievementNameByID[b]
 end)
 
-local AchievementStatusLabels = {
-	_G.ENABLE,
-	_G.CUSTOM,
-	_G.DISABLE,
-}
-
-local AchievementStatusColors = {
-	_G.GREEN_FONT_COLOR_CODE,
-	_G.NORMAL_FONT_COLOR_CODE,
-	_G.RED_FONT_COLOR_CODE,
-}
-
 local EmptyListOption = {
 	order = 1,
 	name = _G.EMPTY,
 	type = "header"
 }
-
-local MapIDs = {}
-
-for mapID in pairs(private.MapNPCs) do
-	MapIDs[#MapIDs + 1] = mapID
-end
-
-table.sort(MapIDs, function(a, b)
-	if private.MapNameByID[a] == private.MapNameByID[b] then
-		return a < b
-	end
-
-	return private.MapNameByID[a] < private.MapNameByID[b]
-end)
 
 -- ----------------------------------------------------------------------------
 -- Variables.
@@ -126,11 +100,11 @@ local function UpdateAchievementNPCOptions()
 
 	for achievementIDIndex = 1, #AchievementIDs do
 		local achievementID = AchievementIDs[achievementIDIndex]
-		local achievementStatus = profile.detection.achievements[achievementID]
+		local achievementStatus = profile.detection.achievementIDs[achievementID]
 
 		local achievementOptionsTable = {
 			order = achievementIDIndex,
-			name = ("%s%s|r"):format(AchievementStatusColors[achievementStatus], private.AchievementNameByID[achievementID]),
+			name = ("%s%s|r"):format(private.DetectionGroupStatusColors[achievementStatus], private.AchievementNameByID[achievementID]),
 			desc = private.AchievementDescriptionByID[achievementID],
 			type = "group",
 			args = {
@@ -138,14 +112,14 @@ local function UpdateAchievementNPCOptions()
 					order = 1,
 					name = _G.STATUS,
 					type = "select",
-					values = AchievementStatusLabels,
+					values = private.DetectionGroupStatusLabels,
 					get = function(info)
-						return profile.detection.achievements[achievementID]
+						return profile.detection.achievementIDs[achievementID]
 					end,
 					set = function(info, value)
-						profile.detection.achievements[achievementID] = value
+						profile.detection.achievementIDs[achievementID] = value
 
-						if value ~= private.AchievementStatus.UserDefined then
+						if value ~= private.DetectionGroupStatus.UserDefined then
 							for npcID in pairs(private.AchievementData[achievementID].criteriaNPCs) do
 								profile.blacklist.npcIDs[npcID] = nil
 							end
@@ -184,16 +158,16 @@ local function UpdateAchievementNPCOptions()
 		for npcIDIndex = 1, #npcIDs do
 			local npcID = npcIDs[npcIDIndex]
 
-			achievementOptionsTable.args.npcs.args["npc" .. npcID] = {
+			achievementOptionsTable.args.npcs.args["npcID" .. npcID] = {
 				order = npcIDIndex,
 				name = GetAchievementNPCOptionsName(npcID),
 				desc = ("%s %s %s"):format(_G.ID, npcID, private.MapNameByID[private.NPCData[npcID].mapID]),
 				type = "toggle",
-				disabled = function()
-					return profile.detection.achievements[achievementID] ~= private.AchievementStatus.UserDefined
-				end,
 				width = "full",
 				descStyle = "inline",
+				disabled = function()
+					return profile.detection.achievementIDs[achievementID] ~= private.DetectionGroupStatus.UserDefined
+				end,
 				get = function(info)
 					return not profile.blacklist.npcIDs[npcID]
 				end,
@@ -213,7 +187,7 @@ local function UpdateAchievementNPCOptions()
 			}
 		end
 
-		AchievementNPCOptions["achievement" .. achievementID] = achievementOptionsTable
+		AchievementNPCOptions["achievementID" .. achievementID] = achievementOptionsTable
 	end
 
 	AceConfigRegistry:NotifyChange(AddOnFolderName)
@@ -227,8 +201,8 @@ local RareNPCOptions = {}
 local function UpdateRareNPCOptions()
 	table.wipe(RareNPCOptions)
 
-	for mapIDIndex = 1, #MapIDs do
-		local mapID = MapIDs[mapIDIndex]
+	for mapIDIndex = 1, #private.AlphabeticalMapIDs do
+		local mapID = private.AlphabeticalMapIDs[mapIDIndex]
 
 		table.wipe(npcIDs)
 		table.wipe(npcNames)
@@ -302,6 +276,8 @@ local function UpdateRareNPCOptions()
 	AceConfigRegistry:NotifyChange(AddOnFolderName)
 end
 
+private.UpdateRareNPCOptions = UpdateRareNPCOptions
+
 -- ----------------------------------------------------------------------------
 -- Tameable rare options.
 -- ----------------------------------------------------------------------------
@@ -310,8 +286,8 @@ local TameableRareNPCOptions = {}
 local function UpdateTameableRareNPCOptions()
 	table.wipe(TameableRareNPCOptions)
 
-	for mapIDIndex = 1, #MapIDs do
-		local mapID = MapIDs[mapIDIndex]
+	for mapIDIndex = 1, #private.AlphabeticalMapIDs do
+		local mapID = private.AlphabeticalMapIDs[mapIDIndex]
 
 		table.wipe(npcIDs)
 		table.wipe(npcNames)
@@ -384,6 +360,8 @@ local function UpdateTameableRareNPCOptions()
 
 	AceConfigRegistry:NotifyChange(AddOnFolderName)
 end
+
+private.UpdateTameableRareNPCOptions = UpdateTameableRareNPCOptions
 
 -- ----------------------------------------------------------------------------
 -- User defined NPC options.
