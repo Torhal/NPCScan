@@ -74,6 +74,7 @@ local MapNPCs = {
 		[2609] = true, -- Geomancer Flintdagger
 		[2779] = true, -- Prince Nazjak
 		[50337] = true, -- Cackle
+		[50770] = true, -- Zorn
 		[50804] = true, -- Ripwing
 		[50865] = true, -- Saurix
 		[50891] = true, -- Boros
@@ -173,6 +174,7 @@ local MapNPCs = {
 		[1847] = true, -- Foulmane
 		[1848] = true, -- Lord Maldazzar
 		[1849] = true, -- Dreadwhisper
+		[1850] = true, -- Putridius
 		[1851] = true, -- The Husk
 		[1885] = true, -- Scarlet Smith
 		[50345] = true, -- Alit
@@ -195,6 +197,7 @@ local MapNPCs = {
 		[10817] = true, -- Duggan Wildhammer
 		[10818] = true, -- Death Knight Soulbearer
 		[10819] = true, -- Baron Bloodbane
+		[10820] = true, -- Duke Ragereaver
 		[10821] = true, -- Hed'mush the Rotting
 		[10823] = true, -- Zul'Brin Warpbranch
 		[10824] = true, -- Death-Hunter Hawkspear
@@ -257,6 +260,7 @@ local MapNPCs = {
 		[8217] = true, -- Mith'rethis the Enchanter
 		[8218] = true, -- Witherheart the Stalker
 		[8219] = true, -- Zul'arek Hatefowler
+		[107617] = true, -- Ol' Muddle
 	},
 	-- ----------------------------------------------------------------------------
 	-- Dun Morogh
@@ -310,12 +314,14 @@ local MapNPCs = {
 		[50839] = true, -- Chromehound
 		[50842] = true, -- Magmagan
 		[50855] = true, -- Jaxx the Rabid
+		[51066] = true, -- Crystalfang
 	},
 	-- ----------------------------------------------------------------------------
 	-- Elwynn Forest
 	-- ----------------------------------------------------------------------------
 	[30] = {
 		[61] = true, -- Thuros Lightfingers
+		[62] = true, -- Gug Fatcandle
 		[79] = true, -- Narg the Taskmaster
 		[99] = true, -- Morgaine the Sly
 		[100] = true, -- Gruff Swiftbite
@@ -397,6 +403,7 @@ local MapNPCs = {
 		[1063] = true, -- Jade
 		[1106] = true, -- Lost One Cook
 		[5348] = true, -- Dreamwatcher Forktongue
+		[14445] = true, -- Captain Wyrmak
 		[14446] = true, -- Fingat
 		[14447] = true, -- Gilmorian
 		[14448] = true, -- Molt Thorn
@@ -419,6 +426,8 @@ local MapNPCs = {
 		[520] = true, -- Brack
 		[572] = true, -- Leprithus
 		[573] = true, -- Foe Reaper 4000
+		[596] = true, -- Brainwashed Noble
+		[599] = true, -- Marisa du'Paige
 		[1424] = true, -- Master Digger
 	},
 	-- ----------------------------------------------------------------------------
@@ -550,6 +559,7 @@ local MapNPCs = {
 		[11497] = true, -- The Razza
 		[11498] = true, -- Skarr the Broken
 		[43488] = true, -- Mordei the Earthrender
+		[54533] = true, -- Prince Lakma
 	},
 	-- ----------------------------------------------------------------------------
 	-- Dustwallow Marsh
@@ -610,6 +620,7 @@ local MapNPCs = {
 		[6651] = true, -- Gatekeeper Rageroar
 		[8660] = true, -- The Evalcharr
 		[13896] = true, -- Scalebeard
+		[107477] = true, -- N.U.T.Z.
 	},
 	-- ----------------------------------------------------------------------------
 	-- Felwood
@@ -633,6 +644,8 @@ local MapNPCs = {
 		[51017] = true, -- Gezan
 		[51025] = true, -- Dilennaa
 		[51046] = true, -- Fidonis
+		[107595] = true, -- Grimrot
+		[107596] = true, -- Grimrot
 	},
 	-- ----------------------------------------------------------------------------
 	-- Un'Goro Crater
@@ -708,6 +721,12 @@ local MapNPCs = {
 	-- ----------------------------------------------------------------------------
 	[463] = {
 		[22062] = true, -- Dr. Whitherlimb
+	},
+	-- ----------------------------------------------------------------------------
+	-- Azuremyst Isle
+	-- ----------------------------------------------------------------------------
+	[464] = {
+		[17591] = true, -- Blood Elf Bandit
 	},
 	-- ----------------------------------------------------------------------------
 	-- Hellfire Peninsula
@@ -844,6 +863,7 @@ local MapNPCs = {
 	-- ----------------------------------------------------------------------------
 	[606] = {
 		[50053] = true, -- Thartuk the Exile
+		[50056] = true, -- Garr
 		[50057] = true, -- Blazewing
 		[50058] = true, -- Terrorpene
 		[54318] = true, -- Ankha
@@ -856,6 +876,7 @@ local MapNPCs = {
 	[607] = {
 		[3253] = true, -- Silithid Harvester
 		[5829] = true, -- Snort the Heckler
+		[5832] = true, -- Thunderstomp
 		[5834] = true, -- Azzere the Skyblade
 		[5847] = true, -- Heggin Stonewhisker
 		[5848] = true, -- Malgin Barleybrew
@@ -881,6 +902,8 @@ local MapNPCs = {
 	-- Abyssal Depths
 	-- ----------------------------------------------------------------------------
 	[614] = {
+		[50005] = true, -- Poseidus
+		[50009] = true, -- Mobus
 		[50050] = true, -- Shok'sharak
 		[50051] = true, -- Ghostcrawler
 	},
@@ -942,6 +965,7 @@ local MapNPCs = {
 	-- ----------------------------------------------------------------------------
 	[699] = {
 		[11467] = true, -- Tsu'zee
+		[14506] = true, -- Lord Hel'nurath
 	},
 	-- ----------------------------------------------------------------------------
 	-- Twilight Highlands
@@ -949,6 +973,7 @@ local MapNPCs = {
 	[700] = {
 		[50085] = true, -- Overlord Sunderfury
 		[50086] = true, -- Tarvus the Vile
+		[50089] = true, -- Julak-Doom
 		[50138] = true, -- Karoma
 		[50159] = true, -- Sambas
 	},
@@ -962,6 +987,7 @@ local MapNPCs = {
 	-- Uldum
 	-- ----------------------------------------------------------------------------
 	[720] = {
+		[50063] = true, -- Akma'hat
 		[50064] = true, -- Cyrus the Black
 		[50065] = true, -- Armagedillo
 		[50154] = true, -- Madexx - Brown
@@ -1015,6 +1041,7 @@ local MapNPCs = {
 	[761] = {
 		[4425] = true, -- Blind Hunter
 		[4842] = true, -- Earthcaller Halmgar
+		[75590] = true, -- Enormous Bullfrog
 	},
 	-- ----------------------------------------------------------------------------
 	-- Shadowfang Keep
@@ -1073,6 +1100,7 @@ local MapNPCs = {
 		[69769] = true, -- Zandalari Warbringer
 		[69841] = true, -- Zandalari Warbringer
 		[69842] = true, -- Zandalari Warbringer
+		[70323] = true, -- Krakkanon
 	},
 	-- ----------------------------------------------------------------------------
 	-- Valley of the Four Winds
@@ -1173,6 +1201,7 @@ local MapNPCs = {
 		[68322] = true, -- Muerta
 		[69768] = true, -- Zandalari Warscout
 		[69769] = true, -- Zandalari Warbringer
+		[70323] = true, -- Krakkanon
 	},
 	-- ----------------------------------------------------------------------------
 	-- Dread Wastes
@@ -1220,7 +1249,9 @@ local MapNPCs = {
 	-- ----------------------------------------------------------------------------
 	[895] = {
 		[1132] = true, -- Timber
+		[1260] = true, -- Great Father Arctikus
 		[8503] = true, -- Gibblewilt
+		[107431] = true, -- Weaponized Rabbot
 	},
 	-- ----------------------------------------------------------------------------
 	-- Scholomance
@@ -1300,6 +1331,7 @@ local MapNPCs = {
 		[80235] = true, -- Gurun
 		[80242] = true, -- Chillfang
 		[80312] = true, -- Grutush the Pillager
+		[81001] = true, -- Nok-Karosh
 		[82536] = true, -- Gorivax
 		[82614] = true, -- Moltnoma
 		[82616] = true, -- Jabberjaw
@@ -1705,7 +1737,9 @@ local MapNPCs = {
 		[84875] = true, -- Ancient Inferno
 		[84893] = true, -- Goregore
 		[84904] = true, -- Oraggro
+		[84926] = true, -- Burning Power
 		[85763] = true, -- Cursed Ravager
+		[85765] = true, -- Cursed Kaliri
 		[85766] = true, -- Cursed Sharptalon
 		[85767] = true, -- Cursed Harbinger
 		[85771] = true, -- Elder Darkweaver Kath
@@ -1750,6 +1784,12 @@ local MapNPCs = {
 		[96323] = true, -- Arachnis
 	},
 	-- ----------------------------------------------------------------------------
+	-- Upper Blackrock Spire
+	-- ----------------------------------------------------------------------------
+	[995] = {
+		[77081] = true, -- The Lanticore
+	},
+	-- ----------------------------------------------------------------------------
 	-- Azsuna
 	-- ----------------------------------------------------------------------------
 	[1015] = {
@@ -1776,7 +1816,10 @@ local MapNPCs = {
 		[91289] = true, -- Cailyn Paledoom
 		[91579] = true, -- Doomlord Kazrok
 		[93622] = true, -- Mortiferous
+		[99846] = true, -- Raging Earth
+		[99886] = true, -- Pacified Earth
 		[102064] = true, -- Torrentius
+		[103975] = true, -- Jade Darkhaven
 		[105938] = true, -- Felwing
 		[106990] = true, -- Chief Bitterbrine
 		[107105] = true, -- Broodmother Lizax
@@ -1789,6 +1832,7 @@ local MapNPCs = {
 		[107327] = true, -- Bilebrain
 		[107657] = true, -- Arcanist Shal'iman
 		[108136] = true, -- The Muscle
+		[108174] = true, -- Bilgerat
 		[108678] = true, -- Shar'thos
 		[108829] = true, -- Levantus
 		[109331] = true, -- Calamir
@@ -1798,6 +1842,7 @@ local MapNPCs = {
 		[109641] = true, -- Arcanor Prime
 		[109702] = true, -- Deepclaw
 		[109943] = true, -- Ana-Mouz
+		[110824] = true, -- Tideclaw
 		[112636] = true, -- Sinister Leyrunner
 		[112637] = true, -- Devious Sunrunner
 	},
@@ -1822,6 +1867,7 @@ local MapNPCs = {
 		[92613] = true, -- Priestess Liza
 		[92626] = true, -- Deathguard Adams
 		[92631] = true, -- Dark Ranger Jess
+		[92633] = true, -- Assassin Huwe
 		[92634] = true, -- Apothecary Perez
 		[92682] = true, -- Helmouth Raider
 		[92685] = true, -- Captain Brvet
@@ -1839,7 +1885,9 @@ local MapNPCs = {
 		[98268] = true, -- Tarben
 		[98421] = true, -- Kottr Vondyr
 		[98503] = true, -- Grrvrgull the Conqueror
+		[99886] = true, -- Pacified Earth
 		[100223] = true, -- Vrykul Earthshaper Spirit
+		[100224] = true, -- Vrykul Earthmaiden Spirit
 		[107023] = true, -- Nithogg
 		[107487] = true, -- Starbuck
 		[107544] = true, -- Nithogg
@@ -1847,6 +1895,7 @@ local MapNPCs = {
 		[108255] = true, -- Coura, Mistress of Arcana
 		[108790] = true, -- Den Mother Ylva
 		[108885] = true, -- Aegir Wavecrusher
+		[109318] = true, -- Runeseer Sigvid
 		[109994] = true, -- Stormtalon
 		[110363] = true, -- Roteye
 		[111463] = true, -- Bulvinkel
@@ -1876,6 +1925,8 @@ local MapNPCs = {
 		[99846] = true, -- Raging Earth
 		[99886] = true, -- Pacified Earth
 		[103785] = true, -- Well-Fed Bear
+		[106042] = true, -- Kalazzius the Guileful
+		[107924] = true, -- Darkfiend Tormentor
 		[108879] = true, -- Humongris
 		[109281] = true, -- Malisandra
 		[109708] = true, -- Undergrell Ringleader
@@ -1917,6 +1968,8 @@ local MapNPCs = {
 		[98299] = true, -- Bodash the Hoarder
 		[98311] = true, -- Mrrklr
 		[98890] = true, -- Slumber
+		[99846] = true, -- Raging Earth
+		[99886] = true, -- Pacified Earth
 		[100230] = true, -- "Sure-Shot" Arnie
 		[100231] = true, -- Dargok Thunderuin
 		[100232] = true, -- Ryael Dawndrifter
@@ -1926,9 +1979,11 @@ local MapNPCs = {
 		[101077] = true, -- Sekhan
 		[101649] = true, -- Frostshard
 		[102863] = true, -- Bruiser
+		[104481] = true, -- Ala'washte
 		[104513] = true, -- Defilia
 		[104517] = true, -- Mawat'aki
 		[104524] = true, -- Ormagrogg
+		[107924] = true, -- Darkfiend Tormentor
 		[109498] = true, -- Xaander
 		[109500] = true, -- Jak
 		[109501] = true, -- Darkful
@@ -1952,9 +2007,12 @@ local MapNPCs = {
 		[104519] = true, -- Colerian
 		[104521] = true, -- Alteria
 		[104522] = true, -- Selenyi
+		[104698] = true, -- Colerian
 		[105547] = true, -- Rauren
+		[105632] = true, -- Broodmother Shu'malis
 		[105728] = true, -- Scythemaster Cil'raman
 		[105739] = true, -- Sanaar
+		[105899] = true, -- Oglok the Furious
 		[106351] = true, -- Artificer Lothaire
 		[106526] = true, -- Lady Rivantas
 		[106532] = true, -- Inquisitor Volitix
@@ -1980,10 +2038,23 @@ local MapNPCs = {
 		[111653] = true, -- Miasu
 		[112497] = true, -- Maia the White
 		[112756] = true, -- Sorallus
+		[112757] = true, -- Magistrix Vilessa
 		[112760] = true, -- Volshax, Breaker of Will
 		[112802] = true, -- Mar'tura
 		[113368] = true, -- Llorian
 		[113694] = true, -- Pashya
+	},
+	-- ----------------------------------------------------------------------------
+	-- Thunder Totem
+	-- ----------------------------------------------------------------------------
+	[1080] = {
+		[101077] = true, -- Sekhan
+	},
+	-- ----------------------------------------------------------------------------
+	-- Eye of Azshara
+	-- ----------------------------------------------------------------------------
+	[1096] = {
+		[111573] = true, -- Kosumoth the Hungering
 	},
 }
 
@@ -2006,6 +2077,7 @@ local ContinentIDByDungeonMapID = {
 	[765] = private.ContinentID.EasternKingdoms, -- Stratholme
 	[799] = private.ContinentID.EasternKingdoms, -- Karazhan
 	[898] = private.ContinentID.EasternKingdoms, -- Scholomance
+	[995] = private.ContinentID.EasternKingdoms, -- Upper Blackrock Spire
 }
 
 private.ContinentIDByDungeonMapID = ContinentIDByDungeonMapID

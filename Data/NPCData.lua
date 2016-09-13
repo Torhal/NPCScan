@@ -55,13 +55,22 @@ local NPCData = {
 	[2931] = { -- Zaricotl
 		isTameable = true,
 	},
+	[3058] = { -- Arra'chea
+		isTameable = true,
+	},
 	[3068] = { -- Mazzranache
 		isTameable = true,
 	},
 	[3253] = { -- Silithid Harvester
 		isTameable = true,
 	},
+	[3398] = { -- Gesharahan
+		isTameable = true,
+	},
 	[3581] = { -- Sewer Beast
+		isTameable = true,
+	},
+	[3652] = { -- Trigore the Lasher
 		isTameable = true,
 	},
 	[4132] = { -- Krkk'kx
@@ -97,6 +106,9 @@ local NPCData = {
 	[5829] = { -- Snort the Heckler
 		isTameable = true,
 	},
+	[5832] = { -- Thunderstomp
+		isTameable = true,
+	},
 	[5834] = { -- Azzere the Skyblade
 		isTameable = true,
 	},
@@ -106,6 +118,9 @@ local NPCData = {
 	[5865] = { -- Dishu
 		isTameable = true,
 	},
+	[5935] = { -- Ironeye the Invincible
+		isTameable = true,
+	},
 	[5937] = { -- Vile Sting
 		isTameable = true,
 	},
@@ -113,6 +128,9 @@ local NPCData = {
 		isTameable = true,
 	},
 	[6582] = { -- Clutchmother Zavas
+		isTameable = true,
+	},
+	[6583] = { -- Gruff
 		isTameable = true,
 	},
 	[6584] = { -- King Mosh
@@ -146,6 +164,9 @@ local NPCData = {
 		isTameable = true,
 	},
 	[8301] = { -- Clack the Reaver
+		isTameable = true,
+	},
+	[8302] = { -- Deatheye
 		isTameable = true,
 	},
 	[8303] = { -- Grunter
@@ -190,10 +211,16 @@ local NPCData = {
 	[12433] = { -- Krethis the Shadowspinner
 		isTameable = true,
 	},
+	[13896] = { -- Scalebeard
+		isTameable = true,
+	},
 	[14222] = { -- Araga
 		isTameable = true,
 	},
 	[14223] = { -- Cranky Benj
+		isTameable = true,
+	},
+	[14227] = { -- Hissperak
 		isTameable = true,
 	},
 	[14228] = { -- Giggler
@@ -256,6 +283,9 @@ local NPCData = {
 	[14491] = { -- Kurmokk
 		isTameable = true,
 	},
+	[16179] = { -- Hyakiss the Lurker
+		isTameable = true,
+	},
 	[16180] = { -- Shadikith the Glider
 		isTameable = true,
 	},
@@ -307,7 +337,13 @@ local NPCData = {
 	[39185] = { -- Slaverjaw
 		isTameable = true,
 	},
+	[39186] = { -- Hellgazer
+		isTameable = true,
+	},
 	[45380] = { -- Ashtail
+		isTameable = true,
+	},
+	[45399] = { -- Optimo
 		isTameable = true,
 	},
 	[45402] = { -- Nix
@@ -673,6 +709,9 @@ local NPCData = {
 	[50986] = { -- Goldenback
 		isTameable = true,
 	},
+	[50990] = { -- Nakk the Thunderer
+		isTameable = true,
+	},
 	[50993] = { -- Gal'dorak
 		isTameable = true,
 	},
@@ -853,10 +892,16 @@ local NPCData = {
 	[58474] = { -- Bloodtip
 		isTameable = true,
 	},
+	[58768] = { -- Cracklefang
+		isTameable = true,
+	},
 	[63509] = { -- Wulon
 		isTameable = true,
 	},
 	[63510] = { -- Wulon
+		isTameable = true,
+	},
+	[63978] = { -- Kri'chon
 		isTameable = true,
 	},
 	[68317] = { -- Mavis Harms
@@ -881,34 +926,39 @@ local NPCData = {
 		isTameable = true,
 	},
 	[71665] = { -- Giant-Slayer Kul
-		questID = 32918,
+		questID = 32918, -- Giant-Slayer Kul
 	},
 	[71721] = { -- Canyon Icemother
 		isTameable = true,
-		questID = 32941,
+		questID = 32941, -- Oasis Icemother
 		vignetteName = "Oasis Icemother",
 	},
 	[72294] = { -- Cindermaw
-		questID = 33014,
+		questID = 33014, -- Cindermaw
 	},
 	[72362] = { -- Ku'targ the Voidseer
-		questID = 33039,
+		questID = 33039, -- The Voidseer
+		vignetteName = "The Voidseer",
 	},
 	[72364] = { -- Gorg'ak the Lava Guzzler
-		questID = 33512,
+		questID = 33512, -- Lava-Gorged Goren
 		vignetteName = "Lava-Gorged Goren",
 	},
 	[72537] = { -- Leaf-Reader Kurri
-		questID = 33055,
+		questID = 33055, -- Foreling Worship Circle
+		vignetteName = "Foreling Worship Circle",
 	},
 	[72606] = { -- Rockhoof
 		isTameable = true,
-		questID = 34068,
+		questID = 34068, -- Rockhoof
 	},
 	[72808] = { -- Tsavo'ka
 		isTameable = true,
 	},
 	[73158] = { -- Emerald Gander
+		isTameable = true,
+	},
+	[73160] = { -- Ironfur Steelhorn
 		isTameable = true,
 	},
 	[73161] = { -- Great Turtle Furyshell
@@ -919,335 +969,358 @@ local NPCData = {
 	},
 	[74206] = { -- Killmaw
 		isTameable = true,
-		questID = 33043,
+		questID = 33043, -- Killmaw
 	},
 	[74613] = { -- Broodmother Reeg'ak
-		questID = 33843,
+		questID = 33843, -- Broodmother Reeg'ak
 	},
 	[74971] = { -- Firefury Giant
-		questID = 33504,
+		questID = 33504, -- Shaman Fire Stone
 		vignetteName = "Shaman Fire Stone",
 	},
 	[75071] = { -- Mother Om'ra
-		questID = 33642,
+		questID = 33642, -- Mother Om'ra
 	},
 	[75434] = { -- Windfang Matriarch
-		questID = 33038,
+		questID = 33038, -- Embaari Defense Crystal
+		vignetteName = "Embaari Defense Crystal",
 	},
 	[75435] = { -- Yggdrel
-		questID = 33389,
+		questID = 33389, -- Yggdrel the Corrupted
+		vignetteName = "Yggdrel the Corrupted",
 	},
 	[75482] = { -- Veloss
 		isTameable = true,
-		questID = 33640,
+		questID = 33640, -- Veloss
 	},
 	[75492] = { -- Venomshade
-		questID = 33643,
+		questID = 33643, -- Venomshade (Plant Hydra)
+		vignetteName = "Venomshade (Plant Hydra)",
 	},
 	[76380] = { -- Gorum
-		questID = 33664,
+		questID = 33664, -- Gorum
 	},
 	[76473] = { -- Mother Araneae
 		isTameable = true,
-		questID = 34726,
+		questID = 34726, -- Pale Spider Broodmother
+		vignetteName = "Pale Spider Broodmother",
 	},
 	[76914] = { -- Coldtusk
 		isTameable = true,
-		questID = 34131,
+		questID = 34131, -- Coldtusk
 	},
 	[76918] = { -- Primalist Mur'og
-		questID = 33938,
+		questID = 33938, -- Ogre Primalist
 		vignetteName = "Ogre Primalist",
 	},
 	[77085] = { -- Dark Emanation
-		questID = 33064,
+		questID = 33064, -- Shadowmoon Cultist Ritual
+		vignetteName = "Shadowmoon Cultist Ritual",
 	},
 	[77140] = { -- Amaukwa
 		isTameable = true,
-		questID = 33061,
+		questID = 33061, -- Amaukwa
 	},
 	[77310] = { -- Mad "King" Sporeon
-		questID = 35906,
+		questID = 35906, -- Mad "King" Sporeon
 	},
 	[77513] = { -- Coldstomp the Griever
 		isTameable = true,
-		questID = 34129,
+		questID = 34129, -- Coldstomp
 		vignetteName = "Coldstomp",
 	},
 	[77519] = { -- Giantbane
 		isTameable = true,
 	},
 	[77526] = { -- Scout Goreseeker
-		questID = 34132,
+		questID = 34132, -- Scout Goreseeker
 	},
 	[77527] = { -- The Beater
-		questID = 34133,
+		questID = 34133, -- The Beater
 	},
 	[77529] = { -- Yazheera the Incinerator
-		questID = 34135,
+		questID = 34135, -- Yazheera the Incinerator
 	},
 	[77561] = { -- Dr. Gloom
-		questID = 34142,
+		questID = 34142, -- Dr. Gloom
 	},
 	[77614] = { -- Frenzied Golem
-		questID = 34145,
+		questID = 34145, -- Frenzied Animus
+		vignetteName = "Frenzied Animus",
 	},
 	[77620] = { -- Cro Fleshrender
-		questID = 34165,
+		questID = 34165, -- Cro Fleshrender
 	},
 	[77626] = { -- Hen-Mother Hami
 		isTameable = true,
-		questID = 34167,
+		questID = 34167, -- Hen-Mother Hami
 	},
 	[77634] = { -- Taladorantula
 		isTameable = true,
-		questID = 34171,
+		questID = 34171, -- Taladorantula
 	},
 	[77664] = { -- Aarko
-		questID = 34182,
+		questID = 34182, -- Aarkos - Looted Treasure
+		vignetteName = "Aarkos - Looted Treasure",
 	},
 	[77715] = { -- Hammertooth
 		isTameable = true,
-		questID = 34185,
+		questID = 34185, -- Hammertooth
 	},
 	[77719] = { -- Glimmerwing
 		isTameable = true,
-		questID = 34189,
+		questID = 34189, -- Glimmerwing
 	},
 	[77741] = { -- Ra'kahn
 		isTameable = true,
-		questID = 34196,
+		questID = 34196, -- Ra'kahn
 	},
 	[77750] = { -- Kaavu the Crimson Claw
-		questID = 34199,
+		questID = 34199, -- Anchorite's Sojourn
+		vignetteName = "Anchorite's Sojourn",
 	},
 	[77776] = { -- Wandering Vindicator
-		questID = 34205,
+		questID = 34205, -- Wandering Vindicator - Looted Treasure
+		vignetteName = "Wandering Vindicator - Looted Treasure",
 	},
 	[77784] = { -- Lo'marg Jawcrusher
-		questID = 34208,
+		questID = 34208, -- Lo'marg Jawcrusher
 	},
 	[77795] = { -- Echo of Murmur
-		questID = 34221,
+		questID = 34221, -- Echo of Murmur
 	},
 	[77828] = { -- Echo of Murmur
-		questID = 34220,
+		questID = 34220, -- Echo of Murmur
 	},
 	[78151] = { -- Huntmaster Kuang
-		questID = 34130,
+		questID = 34130, -- Giantstalker Hunting Party
 		vignetteName = "Giantstalker Hunting Party",
 	},
 	[78161] = { -- Hyperious
-		questID = 34862,
+		questID = 34862, -- Light the Braziers
+		vignetteName = "Light the Braziers",
 	},
 	[78260] = { -- King Slime
-		questID = 37412,
+		questID = 37412, -- King Slime
 	},
 	[78265] = { -- The Bone Crawler
-		questID = 34361,
+		questID = 34361, -- The Bone Crawler
 	},
 	[78269] = { -- Gnarljaw
-		questID = 37413,
+		questID = 37413, -- Gnarljaw
 	},
 	[78606] = { -- Pale Fishmonger
-		questID = 34470,
+		questID = 34470, -- Pale Gone Fishin'
 		vignetteName = "Pale Gone Fishin'",
 	},
 	[78621] = { -- Cyclonic Fury
-		questID = 34477,
+		questID = 34477, -- Cyclonic Fury
 	},
 	[78710] = { -- Kharazos the Triumphant
-		questID = 35219,
+		questID = 35219, -- Burning Front
+		vignetteName = "Burning Front",
 	},
 	[78713] = { -- Galzomar
-		questID = 35219,
+		questID = 35219, -- Burning Front
+		vignetteName = "Burning Front",
 	},
 	[78715] = { -- Sikthiss, Maiden of Slaughter
-		questID = 35219,
+		questID = 35219, -- Burning Front
+		vignetteName = "Burning Front",
 	},
 	[78867] = { -- Breathless
-		questID = 34497,
+		questID = 34497, -- Breathless
 	},
 	[78872] = { -- Klikixx
 		isTameable = true,
-		questID = 34498,
+		questID = 34498, -- Klikixx
 	},
 	[79024] = { -- Warmaster Blugthol
-		questID = 34645,
+		questID = 34645, -- Warmaster Blugthol
 	},
 	[79104] = { -- Ug'lok the Frozen
-		questID = 34522,
+		questID = 34522, -- Ug'lok the Frozen
 	},
 	[79145] = { -- Yaga the Scarred
-		questID = 34559,
+		questID = 34559, -- Yaga the Scarred
 	},
 	[79334] = { -- No'losh
 		isTameable = true,
-		questID = 34859,
+		questID = 34859, -- No'losh
 	},
 	[79485] = { -- Talonpriest Zorkra
-		questID = 34668,
+		questID = 34668, -- Talonpriest Zorkra
 	},
 	[79524] = { -- Hypnocroak
-		questID = 35558,
+		questID = 35558, -- Hypnocroak
 	},
 	[79543] = { -- Shirzir
-		questID = 34671,
+		questID = 34671, -- Shirzir
 	},
 	[79629] = { -- Stomper Kreego
-		questID = 35910,
+		questID = 35910, -- Stomper Kreego
 	},
 	[79725] = { -- Captain Ironbeard
-		questID = 34727,
+		questID = 34727, -- Sea Lord Torglork
+		vignetteName = "Sea Lord Torglork",
 	},
 	[79938] = { -- Shadowbark
-		questID = 36478,
+		questID = 36478, -- Spires - Vignette 020 - Shadowbark
 	},
 	[80057] = { -- Soulfang
-		questID = 36128,
+		questID = 36128, -- Sabermaw - Saberon Vignette Boss
 	},
 	[80122] = { -- Gaz'orda
 		isTameable = true,
-		questID = 34725,
+		questID = 34725, -- Sea Hydra
+		vignetteName = "Sea Hydra",
 	},
 	[80190] = { -- Gruuk
-		questID = 34825,
+		questID = 34825, -- Gruuk
 	},
 	[80204] = { -- Felbark
-		questID = 35018,
+		questID = 35018, -- Felbark
 	},
 	[80235] = { -- Gurun
-		questID = 34839,
+		questID = 34839, -- Skog
+		vignetteName = "Skog",
 	},
 	[80242] = { -- Chillfang
 		isTameable = true,
-		questID = 34843,
+		questID = 34843, -- Chillfang
 	},
 	[80312] = { -- Grutush the Pillager
-		questID = 34865,
+		questID = 34865, -- Skog
 	},
 	[80370] = { -- Lernaea
 		isTameable = true,
-		questID = 37408,
+		questID = 37408, -- Lernaea
 	},
 	[80371] = { -- Typhon
-		questID = 37405,
+		questID = 37405, -- Typhon
 	},
 	[80372] = { -- Echidna
 		isTameable = true,
-		questID = 37406,
+		questID = 37406, -- Echidna
 	},
 	[80398] = { -- Keravnos
 		isTameable = true,
-		questID = 37407,
+		questID = 37407, -- Keravnos
 	},
 	[80471] = { -- Gennadian
 		isTameable = true,
-		questID = 34929,
+		questID = 34929, -- Gennadian
 	},
 	[80524] = { -- Underseer Bloodmane
-		questID = 34945,
+		questID = 34945, -- Tracking Flag - Underseer Bloodmane Vignette
 	},
 	[80614] = { -- Blade-Dancer Aeryx
-		questID = 35599,
+		questID = 35599, -- Blade-Dancer Aeryx
 	},
 	[80725] = { -- Sulfurious
-		questID = 36394,
+		questID = 36394, -- Sulfurious
 	},
 	[80868] = { -- Glut
-		questID = 36204,
+		questID = 36204, -- Gorger the Hungry
+		vignetteName = "Gorger the Hungry",
+	},
+	[81001] = { -- Nok-Karosh
+		isTameable = true,
 	},
 	[81038] = { -- Gelgor of the Blue Flame
-		questID = 36391,
+		questID = 36391, -- The Blue Flame
 	},
 	[81406] = { -- Bahameye
-		questID = 35281,
+		questID = 35281, -- Bahameye
 	},
 	[81639] = { -- Brambleking Fili
-		questID = 33383,
+		questID = 33383, -- Brambleking Fili
 	},
 	[82050] = { -- Varasha
 		isTameable = true,
+		questID = 35334, -- The Egg of Varasha
 	},
 	[82058] = { -- Depthroot
-		questID = 37370,
+		questID = 37370, -- Depthroot
 	},
 	[82085] = { -- Bashiok
-		questID = 35335,
+		questID = 35335, -- Bashiok
 	},
 	[82207] = { -- Faebright
-		questID = 35725,
+		questID = 35725, -- Faebright
 	},
 	[82247] = { -- Nas Dunberlin
-		questID = 36129,
+		questID = 36129, -- Nas Dunberlin
 	},
 	[82268] = { -- Darkmaster Go'vid
-		questID = 35448,
+		questID = 35448, -- Darkmaster Go'vid
 	},
 	[82311] = { -- Char the Burning
-		questID = 35503,
+		questID = 35503, -- Char the Burning
 	},
 	[82326] = { -- Ba'ruun
-		questID = 35731,
+		questID = 35731, -- Ba'ruun
 	},
 	[82362] = { -- Morva Soultwister
-		questID = 35523,
+		questID = 35523, -- Morva Soultwister
 	},
 	[82374] = { -- Rai'vosh
-		questID = 35553,
+		questID = 35553, -- Rai'vosh
 	},
 	[82411] = { -- Darktalon
-		questID = 35555,
+		questID = 35555, -- Darktalon
 	},
 	[82415] = { -- Shinri
-		questID = 35732,
+		questID = 35732, -- Shinri
 	},
 	[82486] = { -- Explorer Nozzand
-		questID = 35623,
+		questID = 35623, -- Nagrand - Vignette Boss - Explorer Rixak
 	},
 	[82536] = { -- Gorivax
-		questID = 37388,
+		questID = 37388, -- Gorivax
 	},
 	[82614] = { -- Moltnoma
-		questID = 37387,
+		questID = 37387, -- Moltnoma
 	},
 	[82616] = { -- Jabberjaw
 		isTameable = true,
-		questID = 37386,
+		questID = 37386, -- Jabberjaw
 	},
 	[82617] = { -- Slogtusk the Corpse-Eater
 		isTameable = true,
-		questID = 37385,
+		questID = 37385, -- Slogtusk the Corpse Eater
 		vignetteName = "Slogtusk the Corpse Eater",
 	},
 	[82618] = { -- Tor'goroth
-		questID = 37384,
+		questID = 37384, -- Tor'goroth
 	},
 	[82620] = { -- Son of Goramal
-		questID = 37383,
+		questID = 37383, -- Son of Goramal
 	},
 	[82676] = { -- Enavra
-		questID = 35688,
+		questID = 35688, -- Enavra Varandi
+		vignetteName = "Enavra Varandi",
 	},
 	[82742] = { -- Enavra
-		questID = 35688,
+		questID = 35688, -- Enavra Varandi
+		vignetteName = "Enavra Varandi",
 	},
 	[82755] = { -- Redclaw the Feral
-		questID = 35712,
+		questID = 35712, -- Nagrand - Vignette Boss 012 - Redclaw the Feral
 	},
 	[82758] = { -- Greatfeather
 		isTameable = true,
-		questID = 35714,
+		questID = 35714, -- Nagrand - Vignette Boss 001 - Greatfeather
 	},
 	[82764] = { -- Gar'lua
-		questID = 35715,
+		questID = 35715, -- Nagrand - Vignette Boss 002 - Gar'lua the Wolfmother
 	},
 	[82778] = { -- Gnarlhoof the Rabid
 		isTameable = true,
-		questID = 35717,
+		questID = 35717, -- Nagrand - Vignette Boss 015 - Gnarlhoof the Rabid
 	},
 	[82826] = { -- Berserk T-300 Series Mark II
-		questID = 35735,
+		questID = 35735, -- Nagrand - Vignette Boss 021 - Berserk Shredder
 	},
 	[82876] = { -- Grand Marshal Tremblade
 		factionGroup = "Alliance",
@@ -1268,281 +1341,302 @@ local NPCData = {
 		factionGroup = "Horde",
 	},
 	[82899] = { -- Ancient Blademaster
-		questID = 35778,
+		questID = 35778, -- Nagrand - Vignette Boss 020 - Ancient Blademaster - TSH
 	},
 	[82912] = { -- Grizzlemaw
 		isTameable = true,
-		questID = 35784,
+		questID = 35784, -- Vignette Boss
 	},
 	[82920] = { -- Lord Korinak
-		questID = 37345,
+		questID = 37345, -- Lord Korinak
 	},
 	[82922] = { -- Xothear, the Destroyer
-		questID = 37343,
+		questID = 37343, -- Xothear, The Destroyer
+		vignetteName = "Xothear, The Destroyer",
 	},
 	[82930] = { -- Shadowflame Terrorwalker
-		questID = 37347,
+		questID = 37347, -- Shadowflame Terror
+		vignetteName = "Shadowflame Terror",
 	},
 	[82942] = { -- Lady Demlash
-		questID = 37346,
+		questID = 37346, -- Lady Demlash
 	},
 	[82975] = { -- Fangler
-		questID = 35836,
+		questID = 35836, -- Nagrand - Vignette Boss 008 - The Lunker
 	},
 	[82988] = { -- Kurlosh Doomfang
-		questID = 37348,
+		questID = 37348, -- Kurlosh Doomfang
 	},
 	[82992] = { -- Felfire Consort
-		questID = 37341,
+		questID = 37341, -- Felfire Consort
 	},
 	[82998] = { -- Matron of Sin
-		questID = 37349,
+		questID = 37349, -- Matron of Sin
 	},
 	[83008] = { -- Haakun the All-Consuming
-		questID = 37312,
+		questID = 37312, -- Haakun, The All-Consuming
+		vignetteName = "Haakun, The All-Consuming",
 	},
 	[83019] = { -- Gug'tol
-		questID = 37340,
+		questID = 37340, -- Gug'tol
 	},
 	[83385] = { -- Voidseer Kalurg
-		questID = 35847,
+		questID = 35847, -- Voidseer Kalurg
 	},
 	[83401] = { -- Netherspawn
-		questID = 35865,
+		questID = 35865, -- Nagrand - Vignette Boss 018 - Void Ooze
 	},
 	[83409] = { -- Ophiis
-		questID = 35875,
+		questID = 35875, -- Nagrand - Vignette Boss 024 - Ophiis
 	},
 	[83428] = { -- Windcaller Korast
-		questID = 35877,
+		questID = 35877, -- Nagrand - Vignette Boss 005 - Windcaller Korast
 	},
 	[83483] = { -- Flinthide
 		isTameable = true,
-		questID = 35893,
+		questID = 35893, -- Nagrand - Vignette Boss 011 - Flinthide
 	},
 	[83509] = { -- Gorepetal
-		questID = 35898,
+		questID = 35898, -- Nagrand - Vignette Boss 005 - Gorepetal
 	},
 	[83522] = { -- Hive Queen Skrikka
 		isTameable = true,
-		questID = 35908,
+		questID = 35908, -- Stoneshard Broodmother
+		vignetteName = "Stoneshard Broodmother",
 	},
 	[83526] = { -- Ru'klaa
-		questID = 35900,
+		questID = 35900, -- Nagrand - Vignette Boss 013 - Ru'klaa
 	},
 	[83542] = { -- Sean Whitesea
-		questID = 35912,
+		questID = 35912, -- Nagrand - Vignette Boss 017 - Swindler Whitesea
 	},
 	[83553] = { -- Insha'tar
 		isTameable = true,
-		questID = 35909,
+		questID = 35909, -- Insha'tar
 	},
 	[83591] = { -- Tura'aka
 		isTameable = true,
-		questID = 35920,
+		questID = 35920, -- Nagrand - Vignette Boss 019 - Tura'aka
 	},
 	[83603] = { -- Hunter Blacktooth
-		questID = 35923,
+		questID = 35923, -- Nagrand - Vignette Boss 006 - Hunter Blacktooth
 	},
 	[83634] = { -- Scout Pokhar
-		questID = 35931,
+		questID = 35931, -- Nagrand - Vignette Boss 016 - Warsong Scout
 	},
 	[83643] = { -- Malroc Stonesunder
-		questID = 35932,
+		questID = 35932, -- Nagrand - Vignette Boss 026 - Warsong Tactician
 	},
 	[83680] = { -- Outrider Duretha
-		questID = 35943,
+		questID = 35943, -- Nagrand - Vignette Boss 026 - Duretha
 	},
 	[83990] = { -- Solar Magnifier
-		questID = 37394,
+		questID = 37394, -- Solar Magnifier
 	},
 	[84263] = { -- Graveltooth
-		questID = 36159,
+		questID = 36159, -- Nagrand - Vignette Boss 004 - Graveltooth
 	},
 	[84374] = { -- Kaga the Ironbender
-		questID = 37404,
+		questID = 37404, -- Kaga the Ironbender
 	},
 	[84376] = { -- Earthshaker Holar
-		questID = 37403,
+		questID = 37403, -- Earthshaker Holar
 	},
 	[84378] = { -- Ak'ox the Slaughterer
-		questID = 37525,
+		questID = 37525, -- Ak'ox the Slaughterer
 	},
 	[84392] = { -- Ragore Driftstalker
-		questID = 37401,
+		questID = 37401, -- Ragore Driftstalker
 	},
 	[84406] = { -- Mandrakor
-		questID = 36178,
+		questID = 36178, -- Mandrakor the Night Hunter
+		vignetteName = "Mandrakor the Night Hunter",
 	},
 	[84417] = { -- Mutafen
-		questID = 36396,
+		questID = 36396, -- Spires - Vignette Boss - Mutafen
 	},
 	[84431] = { -- Greldrok the Cunning
-		questID = 36186,
+		questID = 36186, -- Greldrok the Cunning
 	},
 	[84435] = { -- Mr. Pinchy Sr.
-		questID = 36229,
+		questID = 36229, -- Nagrand - Vignette Boss - Mr. Pinchy Sr.
 	},
 	[84775] = { -- Tesska the Broken
-		questID = 36254,
+		questID = 36254, -- Spires - Vignette Boss 002 - Tesska the Broken
 	},
 	[84805] = { -- Stonespite
 		isTameable = true,
-		questID = 36265,
+		questID = 36265, -- Spires - Vignette Boss 001 - Stonespite
 	},
 	[84807] = { -- Durkath Steelmaw
-		questID = 36267,
+		questID = 36267, -- Spires - Vignette 005 - Durkath Steelmaw
 	},
 	[84810] = { -- Kalos the Bloodbathed
-		questID = 36268,
+		questID = 36268, -- Spires - Vignette Boss 007 - Kalos the Bloodbathed
 	},
 	[84833] = { -- Sangrikass
-		questID = 36276,
+		questID = 36276, -- Spires - Vignette Boss 008 - Spawn of Sethe
 	},
 	[84836] = { -- Talonbreaker
-		questID = 36278,
+		questID = 36278, -- Spires - Vignette Boss 009 - Talonbreaker
 	},
 	[84838] = { -- Poisonmaster Bortusk
-		questID = 36279,
+		questID = 36279, -- Spires - Vignette 010 - Poisonmaster Bortusk
 	},
 	[84856] = { -- Blightglow
 		isTameable = true,
-		questID = 36283,
+		questID = 36283, -- Spires - Vignette Boss 011 - Blightglow
 	},
 	[84872] = { -- Oskiira the Vengeful
-		questID = 36288,
+		questID = 36288, -- Spires - Vignette Boss 012 - Oskiira
 	},
 	[84887] = { -- Betsi Boombasket
-		questID = 36291,
+		questID = 36291, -- Spires - Vignette Boss 014 -  Betsi Boombasket
 	},
 	[84890] = { -- Festerbloom
-		questID = 36297,
+		questID = 36297, -- Spires - Vignette Boss 016 - Festerbloom
 	},
 	[84893] = { -- Goregore
 		isTameable = true,
 	},
 	[84911] = { -- Demidos
-		questID = 37351,
+		questID = 37351, -- Demidos
 	},
 	[84912] = { -- Sunderthorn
 		isTameable = true,
-		questID = 36298,
+		questID = 36298, -- Spires - Vignette Boss 017 - Sunderthorn
 	},
 	[84925] = { -- Quartermaster Hershak
-		questID = 37352,
+		questID = 37352, -- Quartermaster Hershak
 	},
 	[84951] = { -- Gobblefin
-		questID = 36305,
+		questID = 36305, -- Spires - Vignette Boss 023 - Gobblefin
 	},
 	[84955] = { -- Jiasska the Sporegorger
 		isTameable = true,
-		questID = 36306,
+		questID = 36306, -- Spires - Vignette Boss 024 - Jiasska the Sporegorger
 	},
 	[85001] = { -- Master Sergeant Milgra
-		questID = 37353,
+		questID = 37353, -- Master Sergeant Milgra
 	},
 	[85026] = { -- Soul-Twister Torek
-		questID = 37358,
+		questID = 37358, -- Soul-Twister Torek
 	},
 	[85029] = { -- Shadowspeaker Niir
-		questID = 37354,
+		questID = 37354, -- Shadowspeaker Niir
 	},
 	[85036] = { -- Formless Nightmare
-		questID = 37360,
+		questID = 37360, -- Formless Nightmare
 	},
 	[85037] = { -- Kenos the Unraveler
-		questID = 37361,
+		questID = 37361, -- Kenos the Unraveller
+		vignetteName = "Kenos the Unraveller",
 	},
 	[85078] = { -- Voidreaver Urnae
-		questID = 37359,
+		questID = 37359, -- Voidreaver Urnae
 	},
 	[85121] = { -- Lady Temptessa
-		questID = 37355,
+		questID = 37355, -- Lady Temptessa
 	},
 	[85250] = { -- Fossilwood the Petrified
-		questID = 36387,
+		questID = 36387, -- Fossil the Petrified
 	},
 	[85264] = { -- Rolkor
-		questID = 36393,
+		questID = 36393, -- Rolkor the Ironbreaker
 	},
 	[85451] = { -- Malgosh Shadowkeeper
-		questID = 37357,
+		questID = 37357, -- Malgosh Shadowkeeper
 	},
 	[85504] = { -- Rotcap
-		questID = 36470,
+		questID = 36470, -- Spires - Vignette Boss 006 - Rotcap
 	},
 	[85520] = { -- Swarmleaf
-		questID = 36472,
+		questID = 36472, -- Spires - Vignette Boss 028 - Wasp Ancient
 	},
 	[85555] = { -- Nagidna
-		questID = 37409,
+		questID = 37409, -- Nagidna
 	},
 	[85568] = { -- Avalanche
-		questID = 37410,
+		questID = 37410, -- Avalanche
 	},
 	[85572] = { -- Grrbrrgle
-		questID = 36919,
+		questID = 36919, -- Talador - Shore Vignette - Murloc Boss
 	},
 	[85837] = { -- Slivermaw
-		questID = 37411,
+		questID = 37411, -- Slivermaw
 	},
 	[85907] = { -- Berthora
 		isTameable = true,
-		questID = 36597,
+		questID = 36597, -- Berthora
 	},
 	[85970] = { -- Riptar
 		isTameable = true,
-		questID = 36600,
+		questID = 36600, -- Riptar
 	},
 	[86137] = { -- Sunclaw
-		questID = 36656,
+		questID = 36656, -- Sunclaw
+	},
+	[86213] = { -- Aqualir
+		questID = 37356, -- Aqualir
 	},
 	[86257] = { -- Basten
-		questID = 37369,
+		questID = 37369, -- Protectors of the Grove
+		vignetteName = "Protectors of the Grove",
+	},
+	[86258] = { -- Nultra
+		questID = 37369, -- Protectors of the Grove
+		vignetteName = "Protectors of the Grove",
+	},
+	[86259] = { -- Valstil
+		questID = 37369, -- Protectors of the Grove
+		vignetteName = "Protectors of the Grove",
 	},
 	[86266] = { -- Venolasix
 		isTameable = true,
-		questID = 37372,
+		questID = 37372, -- Venolasix
 	},
 	[86268] = { -- Alkali
-		questID = 37371,
+		questID = 37371, -- Alkali
 	},
 	[86410] = { -- Sylldross
-		questID = 36794,
+		questID = 36794, -- Sylldross
 	},
 	[86520] = { -- Stompalupagus
 		isTameable = true,
-		questID = 36837,
+		questID = 36837, -- Stompalupagus
 	},
 	[86549] = { -- Steeltusk
-		questID = 36858,
+		questID = 36858, -- Steeltusk
 	},
 	[86562] = { -- Maniacal Madgard
-		questID = 37363,
+		questID = 37363, -- Maniacal Madgard
 	},
 	[86566] = { -- Defector Dazgo
-		questID = 37362,
+		questID = 37362, -- Defector Dazgo
 	},
 	[86571] = { -- Durp the Hated
-		questID = 37366,
+		questID = 37366, -- Durp the Hated
 	},
 	[86574] = { -- Inventor Blammo
-		questID = 37367,
+		questID = 37367, -- Inventor Blammo
 	},
 	[86577] = { -- Horgg
-		questID = 37365,
+		questID = 37365, -- Horgg
 	},
 	[86579] = { -- Blademaster Ro'gor
-		questID = 37368,
+		questID = 37368, -- Blademaster Ro'gor
 	},
 	[86582] = { -- Morgo Kain
-		questID = 37364,
+		questID = 37364, -- Morgo Kain
+	},
+	[86621] = { -- Morphed Sentient
+		questID = 37493, -- Morphed Sentient
 	},
 	[86689] = { -- Sneevel
-		questID = 36880,
+		questID = 36880, -- Sneevel
 	},
 	[86724] = { -- Hermit Palefur
-		questID = 36887,
+		questID = 36887, -- Spires - Vignette 029 - Hermit Palefur
 	},
 	[86729] = { -- Direhoof
 		isTameable = true,
@@ -1560,377 +1654,383 @@ local NPCData = {
 		isTameable = true,
 	},
 	[86959] = { -- Karosh Blackwind
-		questID = 37399,
+		questID = 37399, -- Karosh Blackwind
 	},
 	[86978] = { -- Gaze
-		questID = 36943,
+		questID = 36943, -- Spires - Vignette 030 - Gaze
 	},
 	[87019] = { -- Gluttonous Giant
-		questID = 37390,
+		questID = 37390, -- Gluttonous Giant
 	},
 	[87026] = { -- Mecha Plunderer
-		questID = 37391,
+		questID = 37391, -- Mecha Plunderer
 	},
 	[87027] = { -- Shadow Hulk
-		questID = 37392,
+		questID = 37392, -- Shadow Hulk
 	},
 	[87029] = { -- Giga Sentinel
-		questID = 37393,
+		questID = 37393, -- Giga Sentinel
 	},
 	[87234] = { -- Brutag Grimblade
-		questID = 37400,
+		questID = 37400, -- Brutag Grimblade
 	},
 	[87239] = { -- Krahl Deadeye
-		questID = 37473,
+		questID = 37473, -- Krahl Deathwind
+		vignetteName = "Krahl Deathwind",
 	},
 	[87344] = { -- Gortag Steelgrip
-		questID = 37472,
+		questID = 37472, -- Gortag Steelgrip
 	},
 	[87348] = { -- Hoarfrost
-		questID = 37382,
+		questID = 37382, -- Hoarfrost
 	},
 	[87351] = { -- Mother of Goren
-		questID = 37381,
+		questID = 37381, -- Mother of Goren
 	},
 	[87352] = { -- Gibblette the Cowardly
-		questID = 37380,
+		questID = 37380, -- Giblette the Cowardly
 		vignetteName = "Giblette the Cowardly",
 	},
 	[87356] = { -- Vrok the Ancient
-		questID = 37379,
+		questID = 37379, -- Vrok the Ancient
 	},
 	[87357] = { -- Valkor
-		questID = 37378,
+		questID = 37378, -- Valkor
 	},
 	[87362] = { -- Gibby
 		isTameable = true,
 	},
 	[87597] = { -- Bombardier Gu'gok
-		questID = 37339,
+		questID = 37339, -- Bombardier Gu'gok
 	},
 	[87600] = { -- Jaluk the Pacifist
-		questID = 37556,
+		questID = 37556, -- Jaluk the Pacifist
 	},
 	[87622] = { -- Ogom the Mangler
-		questID = 37402,
+		questID = 37402, -- Ogom the Mangler
 	},
 	[87666] = { -- Mu'gra
 		isTameable = true,
 	},
 	[87668] = { -- Orumo the Observer
-		questID = 37344,
+		questID = 37344, -- Orumo the Observer
 	},
 	[87788] = { -- Durg Spinecrusher
-		questID = 37395,
+		questID = 37395, -- Durg Spinecrusher
 	},
 	[87837] = { -- Bonebreaker
-		questID = 37396,
+		questID = 37396, -- Bonebreaker
 	},
 	[87846] = { -- Pit Slayer
-		questID = 37397,
+		questID = 37397, -- Pit-Slayer
+		vignetteName = "Pit-Slayer",
 	},
 	[88043] = { -- Avatar of Socrethar
-		questID = 37338,
+		questID = 37338, -- Avatar of Sothrecar
+		vignetteName = "Avatar of Sothrecar",
 	},
 	[88071] = { -- Strategist Ankor
-		questID = 37337,
+		questID = 37337, -- Strategist Ankor
 	},
 	[88208] = { -- Pit Beast
-		questID = 37637,
+		questID = 37637, -- Pit Beast
 	},
 	[88210] = { -- Krud the Eviscerator
-		questID = 37398,
+		questID = 37398, -- Krud the Eviscerator
 	},
 	[88436] = { -- Vigilant Paarthos
-		questID = 37350,
+		questID = 37350, -- Vigilant Paarthos
 	},
 	[88494] = { -- Legion Vanguard
-		questID = 37342,
+		questID = 37342, -- Legion Vanguard
 	},
 	[88580] = { -- Firestarter Grash
-		questID = 37373,
+		questID = 37373, -- Firestarter Grash
 	},
 	[88582] = { -- Swift Onyx Flayer
-		questID = 37374,
+		questID = 37374, -- Swift Onyx Flayer
 	},
 	[88583] = { -- Grove Warden Yal
-		questID = 37375,
+		questID = 37375, -- Grove Warden Yal
 	},
 	[88586] = { -- Mogamago
 		isTameable = true,
-		questID = 37376,
+		questID = 37376, -- Mogamago
 	},
 	[88672] = { -- Hunter Bal'ra
-		questID = 37377,
+		questID = 37377, -- Hunter Bal'ra
 	},
 	[88951] = { -- Vileclaw
 		isTameable = true,
 	},
 	[89016] = { -- Ravyn-Drath
-		questID = 37537,
+		questID = 37537, -- Ravyn-Drath
 	},
 	[89650] = { -- Valiyaka the Stormbringer
-		questID = 37726,
+		questID = 37726, -- Valiyaka the Stormbringer
 	},
 	[89675] = { -- Commander Org'mok
-		questID = 38749,
+		questID = 38749, -- Commander Org'mok
 	},
 	[89816] = { -- Golza the Iron Fin
-		questID = 37820,
+		questID = 37820, -- Hatecoil Reinforcements
 		vignetteName = "Horn of the Siren",
 	},
 	[89846] = { -- Captain Volo'ren
-		questID = 37821,
+		questID = 37821, -- Captain Volo'ren
 	},
 	[89850] = { -- The Oracle
-		questID = 37822,
+		questID = 37822, -- The Oracle
 	},
 	[89865] = { -- Mrrgrl the Tide Reaver
-		questID = 37823,
+		questID = 37823, -- Mrrgrl the Tide Reaver
 	},
 	[89884] = { -- Flog the Captain-Eater
-		questID = 37824,
+		questID = 37824, -- Flog the Captain-Eater
 	},
 	[90024] = { -- Sergeant Mor'grak
-		questID = 37953,
+		questID = 37953, -- Sergeant Mor'grak
 	},
 	[90057] = { -- Daggerbeak
-		questID = 37869,
+		questID = 37869, -- Daggerbeak
 	},
 	[90094] = { -- Harbormaster Korak
-		questID = 39046,
+		questID = 39046, -- Harbormaster Korak
 	},
 	[90122] = { -- Zoug the Heavy
-		questID = 39045,
+		questID = 39045, -- Zoug
 		vignetteName = "Zoug",
 	},
 	[90139] = { -- Inquisitor Ernstenbok
-		questID = 37908,
+		questID = 37908, -- Inquisitor Ernstenbok
 	},
 	[90164] = { -- Warbringer Mox'na
-		questID = 37909,
+		questID = 37909, -- Warbringer Mox'na
 		vignetteName = "Seek & Destroy Squad",
 	},
 	[90173] = { -- Arcana Stalker
-		questID = 37909,
+		questID = 37909, -- Warbringer Mox'na
 		vignetteName = "Seek & Destroy Squad",
 	},
 	[90244] = { -- Arcavellus
-		questID = 37932,
+		questID = 37932, -- Unbound Rift
 	},
 	[90429] = { -- Imp-Master Valessa
-		questID = 38026,
+		questID = 38026, -- Imp-Master Valessa
 	},
 	[90434] = { -- Ceraxas
-		questID = 38031,
+		questID = 38031, -- Ceraxas
 	},
 	[90437] = { -- Jax'zor
-		questID = 38030,
+		questID = 38030, -- Houndmaster Jax'zor
 		vignetteName = "Houndmaster Jax'zor",
 	},
 	[90438] = { -- Lady Oran
-		questID = 38029,
+		questID = 38029, -- Lady Oran
 	},
 	[90442] = { -- Mistress Thavra
-		questID = 38032,
+		questID = 38032, -- Mistress Thavra
 	},
 	[90505] = { -- Syphonus
-		questID = 37989,
+		questID = 37989, -- Syphonus
 		vignetteName = "Syphonus & Leodrath",
 	},
 	[90519] = { -- Cindral the Wildfire
-		questID = 37990,
+		questID = 37990, -- Cindral
 		vignetteName = "Cindral",
 	},
 	[90777] = { -- High Priest Ikzan
-		questID = 38028,
+		questID = 38028, -- High Priest Ikzan
 	},
 	[90782] = { -- Rasthe
-		questID = 38034,
+		questID = 38034, -- Rasthe
 	},
 	[90803] = { -- Infernal Lord
-		questID = 38037,
+		questID = 38037, -- Cache of Infernals
 		vignetteName = "Cache of Infernals",
 	},
 	[90884] = { -- Bilkor the Thrower
-		questID = 38262,
+		questID = 38262, -- Bilkor the Thrower
 	},
 	[90885] = { -- Rogond the Tracker
-		questID = 38263,
+		questID = 38263, -- Rogond
 		vignetteName = "Rogond",
 	},
 	[90887] = { -- Dorg the Bloody
-		questID = 38265,
+		questID = 38265, -- Dorg
 		vignetteName = "Dorg",
 	},
 	[90888] = { -- Drivnul
-		questID = 38264,
+		questID = 38264, -- Drivnul
 	},
 	[90901] = { -- Pridelord Meowl
-		questID = 38061,
+		questID = 38061, -- Pridelord Meowl
 	},
 	[90936] = { -- Bloodhunter Zulk
-		questID = 38266,
+		questID = 38266, -- Zulk
 		vignetteName = "Zulk",
 	},
 	[91009] = { -- Putre'thar
-		questID = 38457,
+		questID = 38457, -- Putre'thar
 	},
 	[91087] = { -- Zeter'el
-		questID = 38207,
+		questID = 38207, -- Zeter'el
 	},
 	[91093] = { -- Bramblefell
-		questID = 38209,
+		questID = 38209, -- Bramblefell
 	},
 	[91098] = { -- Felspark
-		questID = 38211,
+		questID = 38211, -- Felspark
 	},
 	[91100] = { -- Brogozog
-		questID = 38212,
+		questID = 38212, -- Brogozog
 	},
 	[91113] = { -- Tide Behemoth
-		questID = 38217,
+		questID = 38217, -- Tide Behemoth
 	},
 	[91114] = { -- Tide Behemoth
-		questID = 38217,
+		questID = 38217, -- Tide Behemoth
 	},
 	[91115] = { -- Tide Behemoth
-		questID = 38217,
+		questID = 38217, -- Tide Behemoth
 	},
 	[91187] = { -- Beacher
-		questID = 38238,
+		questID = 38238, -- Beacher
 	},
 	[91227] = { -- Remnant of the Blood Moon
-		questID = 39159,
+		questID = 39159, -- Blood Moon Boss
 		vignetteName = "Blood Moon Boss",
 	},
 	[91232] = { -- Commander Krag'goth
-		questID = 38746,
+		questID = 38746, -- Iron Front Captain 1
 		vignetteName = "Iron Front Captain 1",
 	},
 	[91243] = { -- Tho'gar Gorefist
-		questID = 38747,
+		questID = 38747, -- Iron Front Captain 2
 		vignetteName = "Iron Front Captain 2",
 	},
 	[91374] = { -- Podlord Wakkawam
-		questID = 38282,
+		questID = 38282, -- Wakkawam
 		vignetteName = "Wakkawam",
 	},
 	[91529] = { -- Glimar Ironfist
-		questID = 38333,
+		questID = 38333, -- Drake Wrestler
 	},
 	[91579] = { -- Doomlord Kazrok
-		questID = 38352,
+		questID = 38352, -- Kazrok
 	},
 	[91695] = { -- Grand Warlock Nethekurse
-		questID = 38400,
+		questID = 38400, -- Grand Warlock Nethekurse
 	},
 	[91727] = { -- Executor Riloth
-		questID = 38411,
+		questID = 38411, -- Executor Riloth
 	},
 	[91795] = { -- Stormwing Matriarch
-		questID = 38423,
+		questID = 38423, -- Stormdrake Matriarch
 		vignetteName = "Stormdrake Matriarch",
 	},
 	[91803] = { -- Fathnyr
-		questID = 38425,
+		questID = 38425, -- Fel Thorignir
 	},
 	[91871] = { -- Argosh the Destroyer
-		questID = 38430,
+		questID = 38430, -- Argosh the Destroyer
 	},
 	[91874] = { -- Bladesquall
-		questID = 38431,
+		questID = 38431, -- Bladesquall
 	},
 	[91892] = { -- Thane Irglov the Merciless
-		questID = 38424,
+		questID = 38424, -- Thane's Mead Hall
 		vignetteName = "Thane's Mead Hall",
 	},
 	[92040] = { -- Fenri
-		questID = 38461,
+		questID = 38461, -- Guarms Mate (Fenri)
 	},
 	[92117] = { -- Gorebeak
 		isTameable = true,
-		questID = 38468,
+		questID = 38468, -- Gorebeak
 	},
 	[92152] = { -- Whitewater Typhoon
-		questID = 38472,
+		questID = 38472, -- Whitewater Typhoon
 	},
 	[92180] = { -- Seersei
-		questID = 38479,
+		questID = 38479, -- Seersei
 	},
 	[92197] = { -- Relgor
-		questID = 38496,
+		questID = 38496, -- BH Master Scout
 		vignetteName = "BH Master Scout",
 	},
 	[92274] = { -- Painmistress Selora
-		questID = 38557,
+		questID = 38557, -- Invasion Point: Devastation
 		vignetteName = "Invasion Point: Devastation",
 	},
 	[92408] = { -- Xanzith the Everlasting
-		questID = 38579,
+		questID = 38579, -- Xanzith the Everlasting
 	},
 	[92411] = { -- Overlord Ma'gruth
-		questID = 38580,
+		questID = 38580, -- Overlord Ma'gruth
+	},
+	[92423] = { -- Theryssia
+		questID = 38772, -- Banshee Boss
 	},
 	[92429] = { -- Broodlord Ixkor
 		isTameable = true,
-		questID = 38589,
+		questID = 38589, -- Ravager Broodlord
 		vignetteName = "Ravager Broodlord",
 	},
 	[92451] = { -- Varyx the Damned
-		questID = 37937,
+		questID = 37937, -- Varyx the Damned
 	},
 	[92465] = { -- The Blackfang
-		questID = 38597,
+		questID = 38597, -- Panther Saberon Boss
 		vignetteName = "Panther Saberon Boss",
 	},
 	[92495] = { -- Soulslicer
-		questID = 38600,
+		questID = 38600, -- Fel Saberon Shaman
 		vignetteName = "Fel Saberon Shaman",
 	},
 	[92508] = { -- Gloomtalon
-		questID = 38604,
+		questID = 38604, -- Saberon Shaman
 		vignetteName = "Saberon Shaman",
 	},
 	[92517] = { -- Krell the Serene
-		questID = 38605,
+		questID = 38605, -- Saberon Blademaster
 		vignetteName = "Saberon Blademaster",
 	},
 	[92552] = { -- Belgork
-		questID = 38609,
+		questID = 38609, -- Iron Tunnel Foreman
 		vignetteName = "Iron Tunnel Foreman",
 	},
 	[92574] = { -- Thromma the Gutslicer
-		questID = 38620,
+		questID = 38620, -- Pale Assassin
 		vignetteName = "Pale Assassin",
 	},
 	[92590] = { -- Hook
 		factionGroup = "Horde",
-		questID = 38625,
+		questID = 38625, -- Hook & Sinker
 		vignetteName = "Hook & Sinker",
 	},
 	[92591] = { -- Sinker
 		factionGroup = "Horde",
-		questID = 38625,
+		questID = 38625, -- Hook & Sinker
 		vignetteName = "Hook & Sinker",
 	},
 	[92599] = { -- Bloodstalker Alpha
 		isTameable = true,
-		questID = 38626,
+		questID = 38626, -- Worg Pack
 		vignetteName = "Worg Pack",
 	},
 	[92604] = { -- Champion Elodie
 		factionGroup = "Alliance",
-		questID = 38627,
+		questID = 38627, -- Worgen Stalkers (Horde Only)
 		vignetteName = "Worgen Stalkers",
 	},
 	[92606] = { -- Sylissa
-		questID = 38628,
+		questID = 38628, -- Giant Python
 		vignetteName = "Giant Python",
 	},
 	[92609] = { -- Tracker Jack
 		factionGroup = "Alliance",
-		questID = 38627,
+		questID = 38627, -- Worgen Stalkers (Horde Only)
 		vignetteName = "Worgen Stalkers",
 	},
 	[92611] = { -- Ambusher Daggerfang
@@ -1938,363 +2038,366 @@ local NPCData = {
 	},
 	[92613] = { -- Priestess Liza
 		factionGroup = "Alliance",
-		questID = 38627,
+		questID = 38627, -- Worgen Stalkers (Horde Only)
 		vignetteName = "Worgen Stalkers",
 	},
 	[92626] = { -- Deathguard Adams
 		factionGroup = "Horde",
-		questID = 38630,
+		questID = 38630, -- Horde Kill Squad (Alliance Only)
 		vignetteName = "Forsaken Deathsquad",
 	},
 	[92627] = { -- Rendrak
 		isTameable = true,
-		questID = 38631,
+		questID = 38631, -- Alpha Bat
 		vignetteName = "Alpha Bat",
 	},
 	[92631] = { -- Dark Ranger Jess
 		factionGroup = "Horde",
-		questID = 38630,
+		questID = 38630, -- Horde Kill Squad (Alliance Only)
 		vignetteName = "Forsaken Deathsquad",
+	},
+	[92633] = { -- Assassin Huwe
+		factionGroup = "Horde",
 	},
 	[92634] = { -- Apothecary Perez
 		factionGroup = "Horde",
-		questID = 38630,
+		questID = 38630, -- Horde Kill Squad (Alliance Only)
 		vignetteName = "Forsaken Deathsquad",
 	},
 	[92636] = { -- The Night Haunter
-		questID = 38632,
+		questID = 38632, -- Night Haunter
 		vignetteName = "Night Haunter",
 	},
 	[92645] = { -- The Night Haunter
-		questID = 38632,
+		questID = 38632, -- Night Haunter
 	},
 	[92647] = { -- Felsmith Damorka
-		questID = 38634,
+		questID = 38634, -- Felsmith Damorka
 	},
 	[92657] = { -- Bleeding Hollow Horror
-		questID = 38696,
+		questID = 38696, -- Bleeding Hollow Horror
 	},
 	[92682] = { -- Helmouth Raider
-		questID = 38642,
+		questID = 38642, -- Vrykul Longboat
 		vignetteName = "Helmouth Raiders",
 	},
 	[92685] = { -- Captain Brvet
-		questID = 38642,
+		questID = 38642, -- Vrykul Longboat
 		vignetteName = "Helmouth Raiders",
 	},
 	[92694] = { -- The Goreclaw
 		isTameable = true,
-		questID = 38654,
+		questID = 38654, -- Giant Raptor
 		vignetteName = "Giant Raptor",
 	},
 	[92703] = { -- Helmouth Raider
-		questID = 38642,
+		questID = 38642, -- Vrykul Longboat
 		vignetteName = "Helmouth Raiders",
 	},
 	[92751] = { -- Ivory Sentinel
-		questID = 39031,
+		questID = 39031, -- Ivory Sentinel
 	},
 	[92763] = { -- The Nameless King
-		questID = 38685,
+		questID = 38685, -- The Nameless King
 	},
 	[92887] = { -- Steelsnout
 		isTameable = true,
-		questID = 38700,
+		questID = 38700, -- Steelsnout
 	},
 	[92941] = { -- Gorabosh
-		questID = 38709,
+		questID = 38709, -- Cave Keeper
 		vignetteName = "Cave Keeper",
 	},
 	[92951] = { -- Houndmaster Ely
 		factionGroup = "Alliance",
-		questID = 38712,
+		questID = 38712, -- Houndmaster Ely
 	},
 	[92965] = { -- Darkshade
-		questID = 38767,
+		questID = 38767, -- Nightmaul
 	},
 	[92977] = { -- The Iron Houndmaster
-		questID = 38751,
+		questID = 38751, -- Iron Houndmaster
 		vignetteName = "Iron Houndmaster",
 	},
 	[93001] = { -- Szirek the Twisted
-		questID = 38752,
+		questID = 38752, -- Szirek
 		vignetteName = "Szirek",
 	},
 	[93002] = { -- Magwia
 		isTameable = true,
-		questID = 38726,
+		questID = 38726, -- Magwia
 	},
 	[93028] = { -- Driss Vile
-		questID = 38736,
+		questID = 38736, -- IH Elite Sniper
 		vignetteName = "IH Elite Sniper",
 	},
 	[93030] = { -- Ironbranch
-		questID = 40080,
+		questID = 40080, -- Ironbrancch
 	},
 	[93057] = { -- Grannok
-		questID = 38750,
+		questID = 38750, -- Iron Front Captain 3
 		vignetteName = "Iron Front Captain 3",
 	},
 	[93076] = { -- Captain Ironbeard
-		questID = 38756,
+		questID = 38756, -- Dead Orc Captain
 		vignetteName = "Dead Orc Captain",
 	},
 	[93125] = { -- Glub'glok
-		questID = 38764,
+		questID = 38764, -- Murktide Alpha
 		vignetteName = "Murktide Alpha",
 	},
 	[93166] = { -- Tiptog the Lost
-		questID = 38774,
+		questID = 38774, -- Lost Ettin
 		vignetteName = "Lost Ettin",
 	},
 	[93168] = { -- Felbore
-		questID = 38775,
+		questID = 38775, -- Felbore
 	},
 	[93205] = { -- Thondrax
-		questID = 38780,
+		questID = 38780, -- 7.0 Val'sharah - River - Thondrax - TRACKING - twh
 	},
 	[93236] = { -- Shadowthrash
 		isTameable = true,
-		questID = 38812,
+		questID = 38812, -- Shadowthrash
 	},
 	[93264] = { -- Captain Grok'mar
-		questID = 38820,
+		questID = 38820, -- Captain Grok'mar
 	},
 	[93279] = { -- Kris'kar the Unredeemed
-		questID = 38825,
+		questID = 38825, -- Blazing Crusader
 	},
 	[93371] = { -- Mordvigbjorn
-		questID = 38837,
+		questID = 38837, -- Mordvigbjorn
 	},
 	[93401] = { -- Urgev the Flayer
-		questID = 38847,
+		questID = 38847, -- Berserker
 	},
 	[93654] = { -- Skul'vrax
-		questID = 38887,
+		questID = 38887, -- 7.0 Val'sharah - Bluffs - Swiftflight - TRACKING - twh
 	},
 	[93679] = { -- Gathenak the Subjugator
-		questID = 44070,
+		questID = 44070, -- Gathenak
 	},
 	[93686] = { -- Jinikki the Puncturer
-		questID = 38889,
+		questID = 38889, -- Adopting the Adorable
 		vignetteName = "Shivering Ashmaw Cub",
 	},
 	[93758] = { -- Antydas Nightcaller
-		questID = 38900,
+		questID = 38900, -- 7.0 Val'sharah - Bluffs - Nightcaller - TRACKING - twh
 	},
 	[94313] = { -- Daniel "Boomer" Vorick
 		factionGroup = "Alliance",
 	},
 	[94347] = { -- Dread-Rider Cortis
-		questID = 43343,
+		questID = 43343, -- Dread-Rider Cortis
 	},
 	[94413] = { -- Isel the Hammer
-		questID = 39120,
+		questID = 39120, -- Shield Forger
 	},
 	[94414] = { -- Kiranys Duskwhisper
-		questID = 39121,
+		questID = 39121, -- Haunted Manor
 	},
 	[94485] = { -- Pollous the Fetid
-		questID = 39130,
+		questID = 39130, -- 7.0 Val'sharah - River: Purging the River - TRACKING - twh
 		vignetteName = "Purging the River",
 	},
 	[94877] = { -- Brogrul the Mighty
-		questID = 39235,
+		questID = 39235, -- Buba
 	},
 	[95044] = { -- Terrorfist
-		questID = 39288,
+		questID = 39288, -- Terrorfist
 	},
 	[95053] = { -- Deathtalon
-		questID = 39287,
+		questID = 39287, -- Deathtalon
 	},
 	[95054] = { -- Vengeance
-		questID = 39290,
+		questID = 39290, -- Vengeance
 	},
 	[95056] = { -- Doomroller
-		questID = 39289,
+		questID = 39289, -- Doomroller
 	},
 	[95123] = { -- Grelda the Hag
-		questID = 40126,
+		questID = 40126, -- Grelda
 	},
 	[95204] = { -- Oubdob da Smasher
-		questID = 39435,
+		questID = 39435, -- Oubdob da Smasher
 	},
 	[95221] = { -- Mad Henryk
-		questID = 39357,
+		questID = 39357, -- 7.0 Val'sharah - Grove - Eileen - TRACKING - twh
 	},
 	[95318] = { -- Perrexx
-		questID = 39596,
+		questID = 39596, -- 7.0 Val'sharah - Vale - Perrexx - TRACKING - twh
 		vignetteName = "Perrexx the Corruptor",
 	},
 	[95872] = { -- Skullhat
-		questID = 39465,
+		questID = 39465, -- Skywhisker Taskmaster
 	},
 	[96323] = { -- Arachnis
-		questID = 39617,
+		questID = 39617, -- Vignette Tracking Quest
 	},
 	[96410] = { -- Majestic Elderhorn
 		isTameable = true,
-		questID = 39646,
+		questID = 39646, -- Albino Elderhorn
 	},
 	[96590] = { -- Gurbog da Basher
-		questID = 40347,
+		questID = 40347, -- Gurbog da Basher
 	},
 	[96621] = { -- Mellok, Son of Torok
-		questID = 40242,
+		questID = 40242, -- Mellok, Son of Torok
 	},
 	[97093] = { -- Shara Felbreath
-		questID = 39762,
+		questID = 39762, -- Feltotem Warlock
 	},
 	[97102] = { -- Ram'Pag
-		questID = 39766,
+		questID = 39766, -- Treasure Worm
 	},
 	[97203] = { -- Tenpak Flametotem
-		questID = 39782,
+		questID = 39782, -- The Exiled Shaman
 	},
 	[97220] = { -- Arru
 		isTameable = true,
-		questID = 39784,
+		questID = 39784, -- Beastmaster Pao'lek
 		vignetteName = "Beastmaster Pao'lek",
 	},
 	[97326] = { -- Hartli the Snatcher
-		questID = 39802,
+		questID = 39802, -- Hartli the Snatcher
 	},
 	[97345] = { -- Crawshuk the Hungry
-		questID = 39806,
+		questID = 39806, -- Crawshuk the Hungry
 	},
 	[97449] = { -- Bristlemaul
 		isTameable = true,
-		questID = 40405,
+		questID = 40405, -- Bristlemaul
 	},
 	[97504] = { -- Wraithtalon
-		questID = 39856,
+		questID = 39856, -- Wraithtalon
 	},
 	[97517] = { -- Dreadbog
-		questID = 39858,
+		questID = 39858, -- Dreadbog
 	},
 	[97593] = { -- Mynta Talonscreech
-		questID = 39866,
+		questID = 39866, -- Scout Harefoot
 	},
 	[97630] = { -- Soulthirster
-		questID = 39870,
+		questID = 39870, -- Soulthirster
 	},
 	[97653] = { -- Taurson
-		questID = 39872,
+		questID = 39872, -- The Beastly Boxer
 		vignetteName = "The Beastly Boxer",
 	},
 	[97793] = { -- Flamescale
-		questID = 39963,
+		questID = 39963, -- Abandoned Fishing Pole
 		vignetteName = "Abandoned Fishing Pole",
 	},
 	[97928] = { -- Tamed Coralback
 		isTameable = true,
 	},
 	[97933] = { -- Crab Rider Grmlrml
-		questID = 39994,
+		questID = 39994, -- Crab Rider Grmlrml
 	},
 	[98024] = { -- Luggut the Eggeater
-		questID = 40406,
+		questID = 40406, -- Luggut the Eggeater
 	},
 	[98188] = { -- Egyl the Enduring
-		questID = 40068,
+		questID = 40068, -- 7.0 Stormheim - Egyl the Enduring - twh
 	},
 	[98198] = { -- Rukdug
-		questID = 40075,
+		questID = 40075, -- Rukdug
 	},
 	[98199] = { -- Pugg
-		questID = 40073,
+		questID = 40073, -- Pugg
 	},
 	[98200] = { -- Guk
-		questID = 40074,
+		questID = 40074, -- Guk
 	},
 	[98241] = { -- Lyrath Moonfeather
-		questID = 40079,
+		questID = 40079, -- Lyrath Moonfeather
 	},
 	[98268] = { -- Tarben
-		questID = 40081,
+		questID = 40081, -- 7.0 Stormheim - Tarben - twh
 	},
 	[98283] = { -- Drakum
-		questID = 40105,
+		questID = 40105, -- Drakum
 	},
 	[98284] = { -- Gondar
-		questID = 40106,
+		questID = 40106, -- Gondar
 	},
 	[98285] = { -- Smashum Grabb
-		questID = 40104,
+		questID = 40104, -- Smashum Grabb
 	},
 	[98299] = { -- Bodash the Hoarder
-		questID = 40084,
+		questID = 40084, -- Zugdug the Hoarder
 	},
 	[98311] = { -- Mrrklr
-		questID = 40096,
+		questID = 40096, -- Mrrklr
 	},
 	[98408] = { -- Fel Overseer Mudlump
-		questID = 40107,
+		questID = 40107, -- Mudlump
 	},
 	[98421] = { -- Kottr Vondyr
-		questID = 40109,
+		questID = 40109, -- Vignette - Kottr Vondyr
 	},
 	[98503] = { -- Grrvrgull the Conqueror
-		questID = 40113,
+		questID = 40113, -- Grrvrgull the Conquerer
 	},
 	[98890] = { -- Slumber
 		isTameable = true,
-		questID = 40175,
+		questID = 40175, -- Sleeping Bear
 	},
 	[99610] = { -- Garvrulg
-		questID = 40897,
+		questID = 40897, -- Garvrulg
 	},
 	[99792] = { -- Elfbane
-		questID = 41319,
+		questID = 41319, -- Elfbane
 	},
 	[100230] = { -- "Sure-Shot" Arnie
-		questID = 40413,
+		questID = 40413, -- Amateur Hunters
 		vignetteName = "Amateur Hunters",
 	},
 	[100231] = { -- Dargok Thunderuin
-		questID = 40413,
+		questID = 40413, -- Amateur Hunters
 		vignetteName = "Amateur Hunters",
 	},
 	[100232] = { -- Ryael Dawndrifter
-		questID = 40413,
+		questID = 40413, -- Amateur Hunters
 		vignetteName = "Amateur Hunters",
 	},
 	[100302] = { -- Puck
-		questID = 40423,
+		questID = 40423, -- Unethical Adventurers
 	},
 	[100303] = { -- Zenobia
-		questID = 40423,
+		questID = 40423, -- Unethical Adventurers
 	},
 	[100495] = { -- Devouring Darkness
-		questID = 40414,
+		questID = 40414, -- Devouring Darkness
 	},
 	[100864] = { -- Cora'kar
-		questID = 41135,
+		questID = 41135, -- 7.0 Suramar - Cora'kar - twh
 	},
 	[101077] = { -- Sekhan
 		isTameable = true,
-		questID = 40681,
+		questID = 40681, -- Snarf
 	},
 	[101649] = { -- Frostshard
-		questID = 40773,
+		questID = 40773, -- Bloodshard
 	},
 	[102303] = { -- Lieutenant Strathmar
-		questID = 40905,
+		questID = 40905, -- Lieutenant Strathmar
 	},
 	[102863] = { -- Bruiser
 		isTameable = true,
 	},
 	[103183] = { -- Rok'nash
-		questID = 40680,
+		questID = 40680, -- 7.0 Suramar - Rok'nash - twh
 	},
 	[103214] = { -- Har'kess the Insatiable
-		questID = 41136,
+		questID = 41136, -- 7.0 Suramar - Har'kess - twh
 	},
 	[103223] = { -- Hertha Grimdottir
-		questID = 43993,
+		questID = 43993, -- Hertha Grimdottir
 	},
 	[103575] = { -- Reef Lord Raj'his
-		questID = 44003,
+		questID = 44003, -- Reef Lord Raj'his
 	},
 	[103785] = { -- Well-Fed Bear
 		isTameable = true,
@@ -2303,182 +2406,200 @@ local NPCData = {
 		isTameable = true,
 	},
 	[103827] = { -- King Morgalash
-		questID = 41786,
+		questID = 41786, -- 7.0 Suramar - Sea Giant King - twh
 		vignetteName = "Sea Giant King",
 	},
 	[103841] = { -- Shadowquill
 		isTameable = true,
-		questID = 43996,
+		questID = 43996, -- Shadowquill
+	},
+	[103975] = { -- Jade Darkhaven
+		questID = 43957, -- Jade Darkhaven
 	},
 	[105547] = { -- Rauren
-		questID = 43484,
+		questID = 43484, -- Rauren
 	},
 	[105938] = { -- Felwing
-		questID = 42069,
+		questID = 42069, -- Felbats
 	},
 	[106351] = { -- Artificer Lothaire
-		questID = 43717,
+		questID = 43717, -- Artificer Lothaire
 	},
 	[106526] = { -- Lady Rivantas
-		questID = 44675,
+		questID = 44675, -- Lady Rivantas
 	},
 	[106532] = { -- Inquisitor Volitix
-		questID = 44569,
+		questID = 44569, -- Inquisitor Volitix
 	},
 	[106990] = { -- Chief Bitterbrine
-		questID = 42221,
+		questID = 42221, -- Chief Bitterbrine
 	},
 	[107105] = { -- Broodmother Lizax
-		questID = 44670,
+		questID = 44670, -- Broodmother Lizax
 	},
 	[107113] = { -- Vorthax
-		questID = 42280,
+		questID = 42280, -- Vorthax
 	},
 	[107127] = { -- Brawlgoth
-		questID = 42450,
+		questID = 42450, -- Brawlgoth
 	},
 	[107136] = { -- Houndmaster Stroxis
-		questID = 42286,
+		questID = 42286, -- Houndmaster Stroxis
 	},
 	[107169] = { -- Horux
-		questID = 42286,
+		questID = 42286, -- Houndmaster Stroxis
 	},
 	[107170] = { -- Zorux
-		questID = 42286,
+		questID = 42286, -- Houndmaster Stroxis
 	},
 	[107269] = { -- Inquisitor Tivos
-		questID = 42376,
+		questID = 42376, -- Inquisitor Tivos
 	},
 	[107327] = { -- Bilebrain
-		questID = 42417,
+		questID = 42417, -- Bilebrain
+	},
+	[107431] = { -- Weaponized Rabbot
+		isTameable = true,
+	},
+	[107477] = { -- N.U.T.Z.
+		isTameable = true,
 	},
 	[107487] = { -- Starbuck
 		isTameable = true,
-		questID = 42437,
+		questID = 42437, -- Starbuck
+	},
+	[107595] = { -- Grimrot
+		isTameable = true,
+	},
+	[107596] = { -- Grimrot
+		isTameable = true,
+	},
+	[107617] = { -- Ol' Muddle
+		isTameable = true,
 	},
 	[107657] = { -- Arcanist Shal'iman
-		questID = 42505,
+		questID = 42505, -- Arcanist Shal'iman
 	},
 	[107846] = { -- Pinchshank
 		isTameable = true,
-		questID = 43968,
+		questID = 43968, -- Pinchshank
 	},
 	[107926] = { -- Hannval the Butcher
-		questID = 42591,
+		questID = 42591, -- Vignette - Hannval the Butcher
 	},
 	[108255] = { -- Coura, Mistress of Arcana
-		questID = 42699,
+		questID = 42699, -- Coura, Master of Arcana
 		vignetteName = "Coura, Master of Arcana",
 	},
 	[108829] = { -- Levantus
-		questID = 43192,
+		questID = 43192, -- Unknown
 	},
 	[109054] = { -- Shal'an
-		questID = 42831,
+		questID = 42831, -- Shal'an
 	},
 	[109163] = { -- Captain Dargun
-		questID = 42864,
+		questID = 42864, -- Unknown
 	},
 	[109331] = { -- Calamir
-		questID = 43193,
+		questID = 43193, -- Unknown
 	},
 	[109498] = { -- Xaander
-		questID = 40423,
+		questID = 40423, -- Unethical Adventurers
 	},
 	[109500] = { -- Jak
-		questID = 40423,
+		questID = 40423, -- Unethical Adventurers
 	},
 	[109501] = { -- Darkful
-		questID = 40423,
+		questID = 40423, -- Unethical Adventurers
 	},
 	[109504] = { -- Ragemaw
-		questID = 44108,
+		questID = 44108, -- Ragemaw
 	},
 	[109708] = { -- Undergrell Ringleader
-		questID = 43176,
+		questID = 43176, -- Grell Waves Tracking Flag
 		vignetteName = "Undgrell Attack",
 	},
 	[109954] = { -- Magister Phaedris
-		questID = 43348,
+		questID = 43348, -- Magister Phaedris
 	},
 	[110024] = { -- Mal'Dreth the Corruptor
-		questID = 43351,
+		questID = 43351, -- Mal'Dreth the Corrupter
 	},
 	[110340] = { -- Myonix
 		isTameable = true,
-		questID = 43358,
+		questID = 43358, -- Myonix
 	},
 	[110363] = { -- Roteye
-		questID = 43342,
+		questID = 43342, -- Vignette - Roteye
 	},
 	[110438] = { -- Siegemaster Aedrin
-		questID = 43369,
+		questID = 43369, -- Siegemaster Aedrin
 	},
 	[110562] = { -- Bahagar
 		isTameable = true,
-		questID = 43446,
+		questID = 43446, -- Bahagar
 	},
 	[110577] = { -- Oreth the Vile
-		questID = 43449,
+		questID = 43449, -- Oreth the Vile
 	},
 	[110656] = { -- Arcanist Lylandre
-		questID = 43481,
+		questID = 43481, -- Arcanist Lylandre
 	},
 	[110726] = { -- Cadraeus
-		questID = 43495,
+		questID = 43495, -- Cadraeus
 	},
 	[110824] = { -- Tideclaw
 		isTameable = true,
-		questID = 43542,
+		questID = 43542, -- Tideclaw
 	},
 	[110832] = { -- Gorgroth
-		questID = 43992,
+		questID = 43992, -- Gorgroth
 	},
 	[110870] = { -- Apothecary Faldren
-		questID = 43580,
+		questID = 43580, -- Apothecary Faldren
 	},
 	[110944] = { -- Guardian Thor'el
-		questID = 43597,
+		questID = 43597, -- Guardian Thor'el
 	},
 	[111007] = { -- Randril
-		questID = 43603,
+		questID = 43603, -- Randril
 	},
 	[111197] = { -- Anax
-		questID = 43954,
+		questID = 43954, -- Anax
 	},
 	[111329] = { -- Matron Hagatha
-		questID = 43718,
+		questID = 43718, -- Matron Hagatha
 	},
 	[111463] = { -- Bulvinkel
 		isTameable = true,
 	},
 	[111649] = { -- Ambassador D'vwinn
-		questID = 43794,
+		questID = 43794, -- Ambassador D'vwinn
 	},
 	[111651] = { -- Degren
-		questID = 43792,
+		questID = 43792, -- Degren
 	},
 	[111653] = { -- Miasu
-		questID = 43793,
+		questID = 43793, -- Miasu
 	},
 	[112497] = { -- Maia the White
 		isTameable = true,
-		questID = 44072,
+		questID = 44072, -- Maia the White
 	},
 	[112636] = { -- Sinister Leyrunner
-		questID = 44081,
+		questID = 44081, -- Treacherous Leyrunners
 		vignetteName = "Trecherous Stallions",
 	},
 	[112637] = { -- Devious Sunrunner
-		questID = 44081,
+		questID = 44081, -- Treacherous Leyrunners
 		vignetteName = "Trecherous Stallions",
 	},
 	[112802] = { -- Mar'tura
 		isTameable = true,
-		questID = 44124,
+		questID = 44124, -- Mar'tura
 	},
 	[113368] = { -- Llorian
-		questID = 44676,
+		questID = 44676, -- Llorian
 	},
 	[113694] = { -- Pashya
 		isTameable = true,

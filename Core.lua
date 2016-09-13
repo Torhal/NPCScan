@@ -90,7 +90,10 @@ function NPCScan:OnEnable()
 				private.NPCData[npcID] = npcData
 			end
 
+			-- This is technically incorrect, since NPCs can be in several locations, but it's primarily used for informational purposes where an
+			-- NPC _should_ ever only have a single location. For now.
 			npcData.mapID = mapID
+
 			npcData.npcID = npcID
 
 			local npcName = self:GetNPCNameFromID(npcID)

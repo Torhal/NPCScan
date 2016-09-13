@@ -158,7 +158,9 @@ do
 					end
 
 					local fieldInfoOutput = type(fieldInfo) == "string" and ("\"%s\""):format(fieldInfo) or tostring(fieldInfo)
-					output:AddLine(("        %s = %s,"):format(field, fieldInfoOutput))
+					local fieldInfoComment = field == "questID" and (" -- %s"):format(NPCScan:GetQuestNameFromID(fieldInfo)) or ""
+
+					output:AddLine(("        %s = %s,%s"):format(field, fieldInfoOutput, fieldInfoComment))
 				end
 			end
 
