@@ -449,7 +449,7 @@ do
 
 		if alert.sound.isEnabled and now > lastSoundTime + ALERT_SOUND_THROTTLE_INTERVAL_SECONDS then
 			if alert.sound.ignoreMute then
-				self:OverrideSoundCvars()
+				self:OverrideSoundCVars()
 			end
 
 			PlayAlertSounds()
@@ -457,6 +457,4 @@ do
 			lastSoundTime = now
 		end
 	end
-
-	NPCScan:RegisterMessage("NPCScan_TargetButtonActivated", "DispatchSensoryCues")
 end
