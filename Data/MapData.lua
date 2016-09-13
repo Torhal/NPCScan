@@ -2113,11 +2113,14 @@ for mapID in pairs(MapNPCs) do
 end
 
 local function SortByMapNameThenByID(a, b)
-	if private.MapNameByID[a] == private.MapNameByID[b] then
+	local mapNameA = MapNameByID[a]
+	local mapNameB = MapNameByID[b]
+
+	if mapNameA == mapNameB then
 		return a < b
 	end
 
-	return private.MapNameByID[a] < private.MapNameByID[b]
+	return mapNameA < mapNameB
 end
 
 for index = 1, #AlphabeticalContinentMaps do
