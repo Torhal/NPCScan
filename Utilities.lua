@@ -2,9 +2,13 @@
 -- Localized Lua globals.
 -- ----------------------------------------------------------------------------
 -- Functions
+local pairs = _G.pairs
 local tonumber = _G.tonumber
+local tostring = _G.tostring
+local type = _G.type
 
 -- Libraries
+local table = _G.table
 
 -----------------------------------------------------------------------
 -- AddOn namespace.
@@ -109,20 +113,67 @@ end
 
 private.UnitTokenToCreatureID = UnitTokenToCreatureID
 
-private.DUMP_COMMANDS = {
-	tables = function()
-		private.DumpTables()
-	end
-}
-
 do
-	-- TODO: Write this.
-	function private.DumpTables()
-		if not private.TextDump then
-			return
+	local OrderedDataFields = {
+		"factionGroup",
+		"isTameable",
+		"questID",
+		"vignetteName",
+	}
+
+	local SortedNPCIDs
+
+	function private.DumpNPCData()
+		local NPCScan = _G.LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+
+		if not SortedNPCIDs then
+			SortedNPCIDs = {}
+
+			for npcID, data in pairs(private.NPCData) do
+				SortedNPCIDs[#SortedNPCIDs + 1] = npcID
+			end
+
+			table.sort(SortedNPCIDs)
 		end
 
-		output:AddLine("Not yet implemented")
+		local npcData = private.NPCData
+		local output = private.TextDump
+
+		output:AddLine("local NPCData = {")
+
+		for index = 1, #SortedNPCIDs do
+			local npcID = SortedNPCIDs[index]
+			local data = private.NPCData[npcID]
+
+			local startedEntry = false
+
+			for index = 1, #OrderedDataFields do
+				local field = OrderedDataFields[index]
+				local fieldInfo = data[field]
+
+				if fieldInfo then
+					if not startedEntry then
+						startedEntry = true
+						output:AddLine(("    [%d] = { -- %s"):format(npcID, NPCScan:GetNPCNameFromID(npcID)))
+					end
+
+					local fieldInfoOutput = type(fieldInfo) == "string" and ("\"%s\""):format(fieldInfo) or tostring(fieldInfo)
+					output:AddLine(("        %s = %s,"):format(field, fieldInfoOutput))
+				end
+			end
+
+			if startedEntry then
+				output:AddLine("    },")
+			end
+		end
+
+		output:AddLine("}")
 		output:Display()
 	end
+
+	private.DUMP_COMMANDS = {
+		npcdata = function()
+			private.DumpNPCData()
+		end
+	}
 end -- do-block
