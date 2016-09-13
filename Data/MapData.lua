@@ -2075,9 +2075,12 @@ local ContinentIDByDungeonMapID = {
 	[761] = private.ContinentID.Kalimdor, -- Razorfen Kraul
 	[764] = private.ContinentID.EasternKingdoms, -- Shadowfang Keep
 	[765] = private.ContinentID.EasternKingdoms, -- Stratholme
+	[795] = private.ContinentID.Kalimdor,-- Molten Front
 	[799] = private.ContinentID.EasternKingdoms, -- Karazhan
 	[898] = private.ContinentID.EasternKingdoms, -- Scholomance
+	[930] = private.ContinentID.Pandaria, -- Throne of Thunder
 	[995] = private.ContinentID.EasternKingdoms, -- Upper Blackrock Spire
+	[1022] = private.ContinentID.BrokenIsles, -- Helheim
 }
 
 private.ContinentIDByDungeonMapID = ContinentIDByDungeonMapID
