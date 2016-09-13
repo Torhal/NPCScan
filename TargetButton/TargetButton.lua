@@ -372,7 +372,7 @@ do
 	local macroLines = {}
 
 	local function ResetMacroText(self)
-		self:SetAttribute("macrotext", ("/print \"%s\""):format(_G.ERR_GENERIC_NO_TARGET))
+		self:SetAttribute("macrotext", ("/cleartarget\n/print \"%s\""):format(_G.ERR_GENERIC_NO_TARGET))
 	end
 
 	function NPCScan:InitializeTargetButton()
@@ -413,7 +413,7 @@ do
 			table.wipe(macroLines)
 
 			for npcID in pairs(npcScanList) do
-				table.insert(macroLines, ("/targetexact %s"):format(NPCScan:GetNPCNameFromID(npcID)))
+				table.insert(macroLines, ("/cleartarget\n/targetexact %s"):format(NPCScan:GetNPCNameFromID(npcID)))
 				addedCount = addedCount + 1
 			end
 
