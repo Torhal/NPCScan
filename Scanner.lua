@@ -391,7 +391,6 @@ do
 	fadeAnimIn:SetEndDelay(0.25)
 
 	local ALERT_SOUND_THROTTLE_INTERVAL_SECONDS = 2
-	local SOUND_RESTORE_INTERVAL_SECONDS = 5
 	local lastSoundTime = time()
 
 	function NPCScan:PlayFlashAnimation(texturePath, color)
@@ -403,41 +402,52 @@ do
 		fadeAnimationGroup:Play()
 	end
 
-	local SoundCVars = {
-		Sound_EnableAllSound = 1,
-		Sound_EnableSFX = 1,
-		Sound_EnableSoundWhenGameIsInBG = 1,
-	}
+	local PlayAlertSounds
+	do
+		local SOUND_RESTORE_INTERVAL_SECONDS = 5
+		local soundsAreOverridden
 
-	local StoredSoundCVars = {}
+		local StoredSoundCVars = {}
+		local SoundChannelCVars = {
+			Ambience = "Sound_EnableAmbience",
+			Master = "Sound_EnableAllSound",
+			Music = "Sound_EnableMusic",
+			SFX = "Sound_EnableSFX",
+		}
 
-	local function ResetStoredSoundCVars()
-		for cvar, value in pairs(StoredSoundCVars) do
-			_G.SetCVar(cvar, value)
+		local function ResetStoredSoundCVars()
+			for cvar, value in pairs(StoredSoundCVars) do
+				_G.SetCVar(cvar, value)
+			end
+
+			soundsAreOverridden = nil
 		end
-	end
 
-	function NPCScan:OverrideSoundCVars()
-		for cvar, value in pairs(SoundCVars) do
-			StoredSoundCVars[cvar] = _G.GetCVar(cvar)
+		function PlayAlertSounds(overrideSoundCVars)
+			local soundPreferences = private.db.profile.alert.sound
 
-			_G.SetCVar(cvar, value)
-		end
+			if overrideSoundCVars and not soundsAreOverridden then
+				local channelCVar = SoundChannelCVars[soundPreferences.channel]
 
-		self:ScheduleTimer(ResetStoredSoundCVars, SOUND_RESTORE_INTERVAL_SECONDS)
-	end
+				StoredSoundCVars[channelCVar] = _G.GetCVar(channelCVar)
+				_G.SetCVar(channelCVar, 1)
 
-	local function PlayAlertSounds()
-		local soundPreferences = private.db.profile.alert.sound
+				StoredSoundCVars.Sound_EnableSoundWhenGameIsInBG = _G.GetCVar("Sound_EnableSoundWhenGameIsInBG")
+				_G.SetCVar("Sound_EnableSoundWhenGameIsInBG", 1)
 
-		for soundName in pairs(soundPreferences.sharedMediaNames) do
-			if soundPreferences.sharedMediaNames[soundName] ~= false then
-				_G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundName), soundPreferences.channel)
+				soundsAreOverridden = true
+				NPCScan:ScheduleTimer(ResetStoredSoundCVars, SOUND_RESTORE_INTERVAL_SECONDS)
+			end
+
+			for soundName in pairs(soundPreferences.sharedMediaNames) do
+				if soundPreferences.sharedMediaNames[soundName] ~= false then
+					_G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundName), soundPreferences.channel)
+				end
 			end
 		end
-	end
 
-	private.PlayAlertSounds = PlayAlertSounds
+		private.PlayAlertSounds = PlayAlertSounds
+	end
 
 	function NPCScan:DispatchSensoryCues(eventName)
 		local alert = private.db.profile.alert
@@ -448,11 +458,7 @@ do
 		end
 
 		if alert.sound.isEnabled and now > lastSoundTime + ALERT_SOUND_THROTTLE_INTERVAL_SECONDS then
-			if alert.sound.ignoreMute then
-				self:OverrideSoundCVars()
-			end
-
-			PlayAlertSounds()
+			PlayAlertSounds(alert.sound.ignoreMute)
 
 			lastSoundTime = now
 		end

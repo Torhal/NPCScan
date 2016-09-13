@@ -282,8 +282,7 @@ local function GetAlertOptions()
 						width = "normal",
 						disabled = IsSoundDisabled,
 						func = function()
-							NPCScan:OverrideSoundCVars()
-							private.PlayAlertSounds()
+							private.PlayAlertSounds(true)
 						end,
 					},
 				},
