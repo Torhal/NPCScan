@@ -193,7 +193,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 	-- No zone or continent specified, so always look for these.
 	MergeUserDefinedWithScanList(userDefined.npcIDs)
 
-	if profile.blacklist.mapIDs[currentMapID] or profile.detection.continentIDs[currentContinentID] == private.DetectionGroupStatus.Disabled  then
+	if profile.blacklist.mapIDs[currentMapID] or profile.detection.continentIDs[currentContinentID] == private.DetectionGroupStatus.Disabled then
 		private.Debug("continentID or mapID is blacklisted; terminating update.")
 		_G.NPCScan_SearchMacroButton:ResetMacroText()
 		return
@@ -427,6 +427,18 @@ do
 		self:ScheduleTimer(ResetStoredSoundCVars, SOUND_RESTORE_INTERVAL_SECONDS)
 	end
 
+	local function PlayAlertSounds()
+		local soundPreferences = private.db.profile.alert.sound
+
+		for soundName in pairs(soundPreferences.sharedMediaNames) do
+			if soundPreferences.sharedMediaNames[soundName] ~= false then
+				_G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundName), soundPreferences.channel)
+			end
+		end
+	end
+
+	private.PlayAlertSounds = PlayAlertSounds
+
 	function NPCScan:DispatchSensoryCues(eventName)
 		local alert = private.db.profile.alert
 		local now = time()
@@ -440,11 +452,7 @@ do
 				self:OverrideSoundCvars()
 			end
 
-			local soundNames = alert.sound.sharedMediaNames
-
-			for index = 1, #soundNames do
-				_G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundNames[index]), alert.sound.channel)
-			end
+			PlayAlertSounds()
 
 			lastSoundTime = now
 		end

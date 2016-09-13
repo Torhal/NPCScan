@@ -49,8 +49,8 @@ local DatabaseDefaults = {
 				ignoreMute = false,
 				isEnabled = true,
 				sharedMediaNames = {
-					"NPCScan Chimes",
-					"NPCScan Ogre War Drums",
+					["NPCScan Chimes"] = true,
+					["NPCScan Ogre War Drums"] = true,
 				},
 			}
 		},

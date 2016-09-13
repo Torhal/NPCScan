@@ -4,6 +4,9 @@
 -- Libraries
 local table = _G.table
 
+-- Functions
+local pairs = _G.pairs
+
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
@@ -49,13 +52,24 @@ local AlertNamesOptions = {}
 -- Helpers.
 -- ----------------------------------------------------------------------------
 local function UpdateAlertNamesOptions()
+	local sharedMediaNames = profile.alert.sound.sharedMediaNames
+	local sortedSoundNames = {}
+
+	for soundName in pairs(sharedMediaNames) do
+		if sharedMediaNames[soundName] ~= false then
+			sortedSoundNames[#sortedSoundNames + 1] = soundName
+		end
+	end
+
+	table.sort(sortedSoundNames)
 	table.wipe(AlertNamesOptions)
 
-	local soundNames = profile.alert.sound.sharedMediaNames
-	for index = 1, #soundNames do
-		AlertNamesOptions[soundNames[index] .. index] = {
+	for index = 1, #sortedSoundNames do
+		local soundName = sortedSoundNames[index]
+
+		AlertNamesOptions[soundName .. index] = {
 			order = index,
-			name = soundNames[index],
+			name = soundName,
 			descStyle = "inline",
 			type = "toggle",
 			width = "full",
@@ -63,7 +77,12 @@ local function UpdateAlertNamesOptions()
 				return true
 			end,
 			set = function()
-				table.remove(soundNames, index)
+				if private.DatabaseDefaults.profile.alert.sound.sharedMediaNames[soundName] then
+					sharedMediaNames[soundName] = false
+				else
+					sharedMediaNames[soundName] = nil
+				end
+
 				UpdateAlertNamesOptions()
 			end,
 		}
@@ -243,7 +262,7 @@ local function GetAlertOptions()
 							-- Intentionally empty, since there can be multiple sounds.
 						end,
 						set = function(info, value)
-							table.insert(profile.alert.sound.sharedMediaNames, value)
+							profile.alert.sound.sharedMediaNames[value] = true
 							UpdateAlertNamesOptions()
 						end,
 					},
@@ -263,14 +282,8 @@ local function GetAlertOptions()
 						width = "normal",
 						disabled = IsSoundDisabled,
 						func = function()
-							local alert = profile.alert
-							local soundNames = alert.sound.sharedMediaNames
-
 							NPCScan:OverrideSoundCVars()
-
-							for index = 1, #soundNames do
-								_G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundNames[index]), alert.sound.channel)
-							end
+							private.PlayAlertSounds()
 						end,
 					},
 				},
