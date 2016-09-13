@@ -226,7 +226,7 @@ local function UpdateRareNPCOptions()
 			local mapOptionsTable = {
 				order = mapIDIndex,
 				name = private.GetMapOptionName(mapID),
-				desc = ("%s %s%s"):format(_G.ID, mapID, dungeonContinentID and (" %s"):format(private.ContinentNameByID[dungeonContinentID]) or ""),
+				desc = private.GetMapOptionDescription(mapID),
 				type = "group",
 				args = {
 					npcs = {
@@ -319,7 +319,7 @@ local function UpdateTameableRareNPCOptions()
 			local mapOptionsTable = {
 				order = mapIDIndex,
 				name = private.GetMapOptionName(mapID),
-				desc = ("%s %s%s"):format(_G.ID, mapID, dungeonContinentID and (" %s"):format(private.ContinentNameByID[dungeonContinentID]) or ""),
+				desc = private.GetMapOptionDescription(mapID),
 				type = "group",
 				args = {
 					npcs = {
