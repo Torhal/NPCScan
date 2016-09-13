@@ -75,6 +75,19 @@ function NPCScan:OnInitialize()
 
 	private.db = db
 
+	-- ----------------------------------------------------------------------------
+	-- DB migrations
+	-- ----------------------------------------------------------------------------
+	local sharedMediaNames = db.profile.alert.sound.sharedMediaNames
+
+	for index = 1, 50 do
+		local actualName = sharedMediaNames[index]
+		if actualName then
+			sharedMediaNames[actualName] = true
+			sharedMediaNames[index] = nil
+		end
+	end
+
 	self:RegisterChatCommand("npcscan", "ChatCommand")
 end
 
