@@ -299,7 +299,7 @@ local NPCData = {
 	[68322] = { factionGroup = "Horde", }, -- Muerta
 	[69998] = { isTameable = true, }, -- Goda
 	[71665] = { questID = 32918, }, -- Giant-Slayer Kul
-	[71721] = { questID = 32941, isTameable = true, vignettaName = "Oasis Icemother", }, -- Canyon Icemother
+	[71721] = { questID = 32941, isTameable = true, vignetteName = "Oasis Icemother", }, -- Canyon Icemother
 	[72294] = { questID = 33014, }, -- Cindermaw
 	[72362] = { questID = 33039, }, -- Ku'targ the Voidseer
 	[72364] = { questID = 33512, vignetteName = "Lava-Gorged Goren", }, -- Gorg'ak the Lava Guzzler
@@ -311,7 +311,7 @@ local NPCData = {
 	[73166] = { isTameable = true, }, -- Monstrous Spineclaw
 	[74206] = { questID = 33043, isTameable = true, }, -- Killmaw
 	[74613] = { questID = 33843, }, -- Broodmother Reeg'ak
-	[74971] = { questID = 33504, vignettaName = "Shaman Fire Stone", }, -- Firefury Giant
+	[74971] = { questID = 33504, vignetteName = "Shaman Fire Stone", }, -- Firefury Giant
 	[75071] = { questID = 33642, }, -- Mother Om'ra
 	[75434] = { questID = 33038, }, -- Windfang Matriarch
 	[75435] = { questID = 33389, }, -- Yggdrel
@@ -324,7 +324,7 @@ local NPCData = {
 	[77085] = { questID = 33064, }, -- Dark Emanation
 	[77140] = { questID = 33061, isTameable = true, }, -- Amaukwa
 	[77310] = { questID = 35906, }, -- Mad "King" Sporeon
-	[77513] = { questID = 34129, isTameable = true, vignettaName = "Coldstomp", }, -- Coldstomp the Griever
+	[77513] = { questID = 34129, isTameable = true, vignetteName = "Coldstomp", }, -- Coldstomp the Griever
 	[77519] = { isTameable = true, }, -- Giantbane
 	[77526] = { questID = 34132, }, -- Scout Goreseeker
 	[77527] = { questID = 34133, }, -- The Beater
