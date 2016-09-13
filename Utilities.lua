@@ -60,7 +60,6 @@ local function GetMapOptionDescription(mapID)
 	local continentID = private.ContinentIDByDungeonMapID[mapID] or private.ContinentIDByMapID[mapID]
 
 	if continentID then
-		private.Debug("ContinentID is %s for mapID %s", tostring(continentID), tostring(mapID))
 		return ("%s %s %s"):format(_G.ID, mapID, _G.PARENS_TEMPLATE:format(private.ContinentNameByID[continentID]))
 	end
 

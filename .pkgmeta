@@ -7,40 +7,40 @@ externals:
         url: svn://svn.wowace.com/wow/libstub/mainline/trunk
     Libs/CallbackHandler-1.0:
         url: svn://svn.wowace.com/wow/callbackhandler/mainline/trunk/CallbackHandler-1.0
-    Libs/LibSharedMedia-3.0:
-        url: svn://svn.wowace.com/wow/libsharedmedia-3-0/mainline/trunk
-    Libs/AceGUI-3.0-SharedMediaWidgets:
-        url: svn://svn.wowace.com/wow/ace-gui-3-0-shared-media-widgets/mainline/trunk
-    Libs/LibTextDump-1.0:
-        url: git://git.wowace.com/wow/libtextdump-1-0/mainline.git
-        tag: latest
-    Libs/LibDialog-1.0:
-        url: http://hg.wowace.com/wow/libdialog-1-0/mainline
-        tag: latest
-    Libs/LibToast-1.0:
-        url: http://hg.curseforge.net/wow/libtoast-1-0/mainline
-        tag: latest
     Libs/AceAddon-3.0:
         url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceAddon-3.0
-    Libs/AceGUI-3.0:
-        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceGUI-3.0
-    Libs/AceConfig-3.0:
-        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConfig-3.0
-    Libs/AceEvent-3.0:
-        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0
     Libs/AceBucket-3.0:
         url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceBucket-3.0
+    Libs/AceConfig-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConfig-3.0
+    Libs/AceConsole-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConsole-3.0
     Libs/AceDB-3.0:
         url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDB-3.0
     Libs/AceDBOptions-3.0:
         url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDBOptions-3.0
-    Libs/AceTimer-3.0:
-        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceTimer-3.0
-    Libs/AceConsole-3.0:
-        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceTimer-3.0
+    Libs/AceEvent-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0
+    Libs/AceGUI-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceGUI-3.0
+    Libs/AceGUI-3.0-SharedMediaWidgets:
+        url: svn://svn.wowace.com/wow/ace-gui-3-0-shared-media-widgets/mainline/trunk
     Libs/AceLocale-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceLocale-3.0
+    Libs/AceTimer-3.0:
         url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceTimer-3.0
     Libs/HereBeDragons-1.0:
         url: git://git.wowace.com/wow/herebedragons/mainline.git
+    Libs/LibDialog-1.0:
+        url: http://hg.wowace.com/wow/libdialog-1-0/mainline
+        tag: latest
     Libs/LibWindow-1.1:
         url: svn://svn.wowace.com/wow/libwindow-1-1/mainline/trunk/LibWindow-1.1
+    Libs/LibSharedMedia-3.0:
+        url: svn://svn.wowace.com/wow/libsharedmedia-3-0/mainline/trunk
+    Libs/LibTextDump-1.0:
+        url: git://git.wowace.com/wow/libtextdump-1-0/mainline.git
+        tag: latest
+    Libs/LibToast-1.0:
+        url: http://hg.curseforge.net/wow/libtoast-1-0/mainline
+        tag: latest
