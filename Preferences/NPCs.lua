@@ -586,7 +586,8 @@ local function GetNPCOptions()
 								value = private.UnitTokenToCreatureID(value)
 							end
 
-							if tonumber(value) then
+							local numberValue = tonumber(value)
+							if numberValue and not private.NPCData[numberValue] then
 								return true
 							end
 						end,
