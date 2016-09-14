@@ -77,6 +77,27 @@ end
 -- ----------------------------------------------------------------------------
 -- Scripts.
 -- ----------------------------------------------------------------------------
+local function RaidIcon_OnEnter(self)
+	if self:IsEnabled() then
+		local tooltip = _G.GameTooltip
+		tooltip:SetOwner(self, TOOLTIP_ANCHORS[self:GetParent():GetEffectiveSpawnPoint()], 0, -50)
+		tooltip:AddLine(LEFT_CLICK_TEXTURE .. " " .. _G.REMOVE, 0.5, 0.8, 1)
+
+		tooltip:Show()
+	end
+end
+
+-- This is required to have the proper mouse interactivity or lack thereof; setting EnableMouse to false on creation didn't work as expected.
+local function RaidIcon_OnShow(self)
+	if _G.InCombatLockdown() then
+		self:EnableMouse(true)
+		self:Enable()
+	else
+		self:EnableMouse(false)
+		self:Disable()
+	end
+end
+
 local function TargetButton_OnClick(self, mouseButton)
 	if mouseButton == "RightButton" and not _G.InCombatLockdown() then
 		self.dismissAnimationGroup:Play()
@@ -113,11 +134,22 @@ function TargetButton:COMBAT_LOG_EVENT_UNFILTERED(eventName, _, subEvent, _, _, 
 	end
 end
 
+function TargetButton:PLAYER_REGEN_DISABLED()
+	self.RaidIcon:EnableMouse(true)
+	self.RaidIcon:Enable()
+end
+
 function TargetButton:PLAYER_REGEN_ENABLED()
 	local pausedDismissal = self.pausedDismissal
 	self.pausedDismissal = nil
 
-	if self.isDead then
+	self.RaidIcon:EnableMouse(false)
+	self.RaidIcon:Disable()
+
+	if not self:IsShown() then
+		-- Should only happen if the RaidIcon button was clicked.
+		self:RequestDeactivate()
+	elseif self.isDead then
 		local sound = private.db.profile.alert.sound
 		if sound.isEnabled then
 			_G.PlaySoundFile(LibSharedMedia:Fetch("sound", "NPCScan Killed"), sound.channel)
@@ -229,6 +261,7 @@ function TargetButton:Activate(data)
 
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
+	self:RegisterEvent("PLAYER_REGEN_DISABLED")
 	self:RegisterMessage("NPCScan_UnitInformationAvailable", "UpdateData")
 
 	if not data.isSilent then
@@ -308,7 +341,10 @@ end
 function TargetButton:SetRaidTarget(unitToken)
 	if unitToken and not self.raidIconID and #RaidIconIDs > 0 then
 		self.raidIconID = table.remove(RaidIconIDs)
-		_G.SetRaidTargetIconTexture(self.RaidIcon, self.raidIconID)
+
+		for textureIndex = 1, #self.RaidIcon.textures do
+			_G.SetRaidTargetIconTexture(self.RaidIcon.textures[textureIndex], self.raidIconID)
+		end
 
 		self.RaidIcon:Show()
 
@@ -455,15 +491,29 @@ local function CreateTargetButton(unitClassification)
 
 	AceEvent:Embed(_G.setmetatable(button, TargetButtonMetatable))
 
+	local raidIcon = _G.CreateFrame("Button", nil, button, "UIPanelCloseButton")
+	raidIcon:Hide()
+	raidIcon:SetDisabledTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
+	raidIcon:SetHighlightTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
+	raidIcon:SetNormalTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
+	raidIcon:SetPushedTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
+	raidIcon:SetSize(16, 16)
+	raidIcon.textures = {
+		raidIcon:GetDisabledTexture(),
+		raidIcon:GetHighlightTexture(),
+		raidIcon:GetNormalTexture(),
+		raidIcon:GetPushedTexture(),
+	}
+
+	raidIcon:SetScript("OnEnter", RaidIcon_OnEnter)
+	raidIcon:SetScript("OnLeave", _G.GameTooltip_Hide)
+	raidIcon:SetScript("OnShow", RaidIcon_OnShow)
+
+	button.RaidIcon = raidIcon
+
 	-- ----------------------------------------------------------------------------
 	-- Textures.
 	-- ----------------------------------------------------------------------------
-	local raidIcon = button:CreateTexture(nil, "ARTWORK")
-	raidIcon:Hide()
-	raidIcon:SetTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
-	raidIcon:SetSize(16, 16)
-	button.RaidIcon = raidIcon
-
 	local portrait = button:CreateTexture(nil, "BORDER")
 	portrait:SetTexture([[Interface\FrameGeneral\UI-Background-Marble]])
 	portrait:SetSize(52, 52)
