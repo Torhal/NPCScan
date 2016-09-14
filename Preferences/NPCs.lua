@@ -466,7 +466,7 @@ end
 -- ----------------------------------------------------------------------------
 local NPCOptions
 
-local function GetNPCOptions()
+local function GetOrUpdateNPCOptions()
 	profile = private.db.profile
 
 	NPCOptions = NPCOptions or {
@@ -643,4 +643,4 @@ local function GetNPCOptions()
 	return NPCOptions
 end
 
-private.GetNPCOptions = GetNPCOptions
+private.GetOrUpdateNPCOptions = GetOrUpdateNPCOptions

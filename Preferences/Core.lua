@@ -20,7 +20,7 @@ local function GetOptions()
 		type = "group",
 		childGroups = "tab",
 		args = {
-			npcOptions = private.GetNPCOptions(),
+			npcOptions = private.GetOrUpdateNPCOptions(),
 			detectionOptions = private.GetDetectionOptions(),
 			alertOptions = private.GetAlertOptions(),
 			targetingOptions = private.GetTargetingOptions(),

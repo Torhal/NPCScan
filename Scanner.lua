@@ -228,6 +228,8 @@ local function UpdateScanListAchievementCriteria()
 			if isCompleted then
 				npcData.isCriteriaCompleted = isCompleted
 
+				private.GetOrUpdateNPCOptions()
+
 				if private.db.profile.detection.ignoreCompletedAchievementCriteria then
 					QueueNPCForUntracking(npcID)
 				end
