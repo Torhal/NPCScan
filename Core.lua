@@ -13,7 +13,7 @@ local string = _G.string
 local AddOnFolderName, private = ...
 
 local LibStub = _G.LibStub
-local NPCScan = LibStub("AceAddon-3.0"):NewAddon(AddOnFolderName, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0", "AceBucket-3.0")
+local NPCScan = LibStub("AceAddon-3.0"):NewAddon(AddOnFolderName, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0", "AceBucket-3.0", "LibSink-2.0", "LibToast-1.0")
 local VL = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName .. "Vignette")
 
 local HereBeDragons = LibStub("HereBeDragons-1.0")
@@ -72,6 +72,9 @@ function NPCScan:OnInitialize()
 	db.RegisterCallback(self, "OnProfileChanged", "RefreshPreferences")
 	db.RegisterCallback(self, "OnProfileCopied", "RefreshPreferences")
 	db.RegisterCallback(self, "OnProfileReset", "RefreshPreferences")
+
+	self:DefineSinkToast(AddOnFolderName, [[Interface\LFGFRAME\BattlenetWorking0]])
+	self:SetSinkStorage(db.profile.alert.output)
 
 	private.db = db
 

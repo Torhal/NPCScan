@@ -95,6 +95,7 @@ end
 -- Initialization.
 -- ----------------------------------------------------------------------------
 local AlertOptions
+local firstRun = true
 
 local function GetAlertOptions()
 	profile = private.db.profile
@@ -116,12 +117,12 @@ local function GetAlertOptions()
 		name = L["Alerts"],
 		descStyle = "inline",
 		type = "group",
+		childGroups = "tree",
 		args = {
 			screenFlash = {
-				type = "group",
-				order = 1,
+				order = 2,
 				name = L["Screen Flash"],
-				inline = true,
+				type = "group",
 				args = {
 					isEnabled = {
 						order = 1,
@@ -204,11 +205,10 @@ local function GetAlertOptions()
 				},
 			},
 			sound = {
-				order = 2,
+				order = 3,
 				name = _G.SOUND,
 				descStyle = "inline",
 				type = "group",
-				guiInline = true,
 				args = {
 					isEnabled = {
 						order = 10,
@@ -291,6 +291,15 @@ local function GetAlertOptions()
 	}
 
 	UpdateAlertNamesOptions()
+
+	if firstRun then
+		firstRun = nil
+
+		local output = NPCScan:GetSinkAce3OptionsDataTable()
+		output.order = 1
+
+		AlertOptions.args.output = output
+	end
 
 	return AlertOptions
 end

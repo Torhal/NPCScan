@@ -34,6 +34,9 @@ local DatabaseDefaults = {
 	},
 	profile = {
 		alert = {
+			output = {
+				sink20OutputSink = "None",
+			},
 			screenFlash = {
 				color = {
 					r = 1,

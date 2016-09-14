@@ -34,13 +34,15 @@ externals:
     Libs/LibDialog-1.0:
         url: http://hg.wowace.com/wow/libdialog-1-0/mainline
         tag: latest
-    Libs/LibWindow-1.1:
-        url: svn://svn.wowace.com/wow/libwindow-1-1/mainline/trunk/LibWindow-1.1
     Libs/LibSharedMedia-3.0:
         url: svn://svn.wowace.com/wow/libsharedmedia-3-0/mainline/trunk
+    Libs/LibSink-2.0:
+        url: svn://svn.wowace.com/wow/libsink-2-0/mainline/trunk/LibSink-2.0
     Libs/LibTextDump-1.0:
         url: git://git.wowace.com/wow/libtextdump-1-0/mainline.git
         tag: latest
     Libs/LibToast-1.0:
         url: http://hg.curseforge.net/wow/libtoast-1-0/mainline
         tag: latest
+    Libs/LibWindow-1.1:
+        url: svn://svn.wowace.com/wow/libwindow-1-1/mainline/trunk/LibWindow-1.1
