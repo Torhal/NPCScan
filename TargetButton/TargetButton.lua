@@ -42,6 +42,15 @@ local TOOLTIP_ANCHORS = {
 	TOPRIGHT = "ANCHOR_LEFT",
 }
 
+local DEFAULT_CLOSE_BUTTON_TEXTURE_PATHS = {
+	"", -- Disabled
+	[[Interface\FriendsFrame\UI-Toast-CloseButton-Highlight]], -- Highlight
+	[[Interface\FriendsFrame\UI-Toast-CloseButton-Up]], -- Normal
+	[[Interface\FriendsFrame\UI-Toast-CloseButton-Down]], -- Pushed
+}
+
+local RAID_TARGETING_ICONS_TEXTURE = [[Interface\TargetingFrame\UI-RaidTargetingIcons]]
+
 -- ----------------------------------------------------------------------------
 -- Variables.
 -- ----------------------------------------------------------------------------
@@ -135,6 +144,18 @@ function TargetButton:COMBAT_LOG_EVENT_UNFILTERED(eventName, _, subEvent, _, _, 
 end
 
 function TargetButton:PLAYER_REGEN_DISABLED()
+
+	if self.needsRaidTarget then
+		-- Generated from a vignette that hasn't given a unitToken yet. Make a typical close button.
+		for pathIndex = 1, #DEFAULT_CLOSE_BUTTON_TEXTURE_PATHS do
+			local texture = self.RaidIcon.textures[pathIndex]
+			texture:SetTexture(DEFAULT_CLOSE_BUTTON_TEXTURE_PATHS[pathIndex])
+			texture:SetTexCoord(0, 1, 0, 1)
+		end
+
+		self.RaidIcon:Show()
+	end
+
 	self.RaidIcon:EnableMouse(true)
 	self.RaidIcon:Enable()
 end
@@ -343,7 +364,10 @@ function TargetButton:SetRaidTarget(unitToken)
 		self.raidIconID = table.remove(RaidIconIDs)
 
 		for textureIndex = 1, #self.RaidIcon.textures do
-			_G.SetRaidTargetIconTexture(self.RaidIcon.textures[textureIndex], self.raidIconID)
+			local texture = self.RaidIcon.textures[textureIndex]
+			texture:SetTexture(RAID_TARGETING_ICONS_TEXTURE)
+
+			_G.SetRaidTargetIconTexture(texture, self.raidIconID)
 		end
 
 		self.RaidIcon:Show()
@@ -493,10 +517,6 @@ local function CreateTargetButton(unitClassification)
 
 	local raidIcon = _G.CreateFrame("Button", nil, button, "UIPanelCloseButton")
 	raidIcon:Hide()
-	raidIcon:SetDisabledTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
-	raidIcon:SetHighlightTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
-	raidIcon:SetNormalTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
-	raidIcon:SetPushedTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
 	raidIcon:SetSize(16, 16)
 	raidIcon.textures = {
 		raidIcon:GetDisabledTexture(),
