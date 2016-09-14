@@ -77,14 +77,35 @@ end
 
 private.GetMapOptionName = GetMapOptionName
 
-local function GUIDToCreatureID(GUID)
-	local unitTypeName, _, _, _, _, unitID = ("-"):split(GUID)
-	if unitTypeName == "Creature" then
-		return tonumber(unitID)
-	end
-end
+do
+	local ValidUnitTypeNames = {
+		Creature = true,
+		Vehicle = true,
+		Pet = true,
+	}
 
-private.GUIDToCreatureID = GUIDToCreatureID
+	local function GUIDToCreatureID(GUID)
+		local unitTypeName, _, _, _, _, unitID = ("-"):split(GUID)
+		if ValidUnitTypeNames[unitTypeName] then
+			return tonumber(unitID)
+		end
+	end
+
+	private.GUIDToCreatureID = GUIDToCreatureID
+
+	local function UnitTokenToCreatureID(unitToken)
+		if unitToken then
+			local GUID = _G.UnitGUID(unitToken)
+			if not GUID then
+				return
+			end
+
+			return GUIDToCreatureID(GUID)
+		end
+	end
+
+	private.UnitTokenToCreatureID = UnitTokenToCreatureID
+end -- do-block
 
 local function IsNPCQuestComplete(npcID)
 	local npcData = private.NPCData[npcID]
@@ -111,19 +132,6 @@ end
 local function TableKeyFormat(input)
 	return input and input:upper():gsub(" ", "_"):gsub("'", ""):gsub(":", ""):gsub("-", "_"):gsub("%(", ""):gsub("%)", "") or ""
 end
-
-local function UnitTokenToCreatureID(unitToken)
-	if unitToken then
-		local GUID = _G.UnitGUID(unitToken)
-		if not GUID then
-			return
-		end
-
-		return GUIDToCreatureID(GUID)
-	end
-end
-
-private.UnitTokenToCreatureID = UnitTokenToCreatureID
 
 do
 	local OrderedDataFields = {
