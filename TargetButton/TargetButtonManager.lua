@@ -1,8 +1,6 @@
 -- ----------------------------------------------------------------------------
 -- Localized Lua globals.
 -- ----------------------------------------------------------------------------
--- Functions
-
 -- Libraries
 local table = _G.table
 
@@ -48,20 +46,6 @@ local SIBLING_ANCHORS = {
 	TOPLEFT = "BOTTOMLEFT",
 	BOTTOMRIGHT = "TOPRIGHT",
 	BOTTOMLEFT = "TOPLEFT",
-}
-
-local OFFSET_X = {
-	TOPRIGHT = -20,
-	TOPLEFT = 20,
-	BOTTOMRIGHT = -20,
-	BOTTOMLEFT = 20,
-}
-
-local OFFSET_Y = {
-	TOPRIGHT = -30,
-	TOPLEFT = -30,
-	BOTTOMRIGHT = 30,
-	BOTTOMLEFT = 30,
 }
 
 local SIBLING_OFFSET_Y = {
