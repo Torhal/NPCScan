@@ -2054,6 +2054,7 @@ local MapNPCs = {
 	-- Eye of Azshara
 	-- ----------------------------------------------------------------------------
 	[1096] = {
+		[108543] = true, -- Dread Captain Thedon
 		[111573] = true, -- Kosumoth the Hungering
 	},
 }
