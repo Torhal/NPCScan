@@ -56,6 +56,7 @@ local function UpdateContinentAndMapOptions()
 			name = ("%s%s|r"):format(private.DetectionGroupStatusColors[continentStatus], private.ContinentNameByID[continentID]),
 			descStyle = "inline",
 			type = "group",
+			childGroups = "tab",
 			args = {
 				status = {
 					order = 1,
@@ -84,11 +85,10 @@ local function UpdateContinentAndMapOptions()
 						end
 					end,
 				},
-				mapIDs = {
+				zoneMapIDs = {
 					order = 2,
-					name = " ",
+					name = _G.ZONE,
 					type = "group",
-					guiInline = true,
 					args = {},
 				},
 			},
@@ -96,8 +96,9 @@ local function UpdateContinentAndMapOptions()
 
 		for mapIDIndex = 1, #private.AlphabeticalContinentMaps[continentID] do
 			local mapID = private.AlphabeticalContinentMaps[continentID][mapIDIndex]
+			local dungeonContinentID = private.ContinentIDByDungeonMapID[mapID]
 
-			continentOptionsTable.args.mapIDs.args["mapID" .. mapID] = {
+			local mapOptions = {
 				order = mapIDIndex,
 				name = private.GetMapOptionName(mapID),
 				desc = ("%s %s"):format(_G.ID, mapID),
@@ -125,6 +126,25 @@ local function UpdateContinentAndMapOptions()
 					end
 				end,
 			}
+
+			if dungeonContinentID then
+				local dungeonOptionsTable = continentOptionsTable.args.dungeonMapIDs
+
+				if not dungeonOptionsTable then
+					dungeonOptionsTable = {
+						order = 3,
+						name = _G.DUNGEONS,
+						type = "group",
+						args = {},
+					}
+
+					continentOptionsTable.args.dungeonMapIDs = dungeonOptionsTable
+				end
+
+				dungeonOptionsTable.args["mapID" .. mapID] = mapOptions
+			else
+				continentOptionsTable.args.zoneMapIDs.args["mapID" .. mapID] = mapOptions
+			end
 		end
 
 		ContinentAndMapOptions["continentID" .. continentID] = continentOptionsTable
