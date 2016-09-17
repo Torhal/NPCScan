@@ -307,10 +307,12 @@ do
 
 	local function ProcessVignetteNameDetection(vignetteName, sourceText)
 		for npcID in pairs(private.VignetteNPCs[vignetteName]) do
-			ProcessDetection({
-				npcID = npcID,
-				sourceText = sourceText
-			})
+			if npcScanList[npcID] then
+				ProcessDetection({
+					npcID = npcID,
+					sourceText = sourceText
+				})
+			end
 		end
 	end
 
