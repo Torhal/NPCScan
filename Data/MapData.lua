@@ -1818,6 +1818,7 @@ local MapNPCs = {
 		[93622] = true, -- Mortiferous
 		[99846] = true, -- Raging Earth
 		[99886] = true, -- Pacified Earth
+		[101596] = true, -- Charfeather
 		[102064] = true, -- Torrentius
 		[103975] = true, -- Jade Darkhaven
 		[105938] = true, -- Felwing
@@ -1843,6 +1844,7 @@ local MapNPCs = {
 		[109702] = true, -- Deepclaw
 		[109943] = true, -- Ana-Mouz
 		[110824] = true, -- Tideclaw
+		[111434] = true, -- Sea King Tidross
 		[112636] = true, -- Sinister Leyrunner
 		[112637] = true, -- Devious Sunrunner
 	},
@@ -1990,14 +1992,33 @@ local MapNPCs = {
 		[110378] = true, -- Drugon the Frostblood
 	},
 	-- ----------------------------------------------------------------------------
+	-- Mardum, the Shattered Abyss
+	-- ----------------------------------------------------------------------------
+	[1028] = {
+		[97057] = true, -- Overseer Brutarg
+		[97058] = true, -- Count Nefarious
+		[97059] = true, -- King Voras
+		[97370] = true, -- General Volroth
+	},
+	-- ----------------------------------------------------------------------------
+	-- Vault of the Wardens
+	-- ----------------------------------------------------------------------------
+	[1032] = {
+		[96997] = true, -- Kethrazor
+		[97069] = true, -- Wrath-Lord Lekos
+	},
+	-- ----------------------------------------------------------------------------
 	-- Suramar
 	-- ----------------------------------------------------------------------------
 	[1033] = {
 		[99610] = true, -- Garvrulg
 		[99792] = true, -- Elfbane
+		[99899] = true, -- Vicious Whale Shark
+		[99929] = true, -- Flotsam
 		[100864] = true, -- Cora'kar
 		[102303] = true, -- Lieutenant Strathmar
 		[103183] = true, -- Rok'nash
+		[103203] = true, -- Jetsam
 		[103214] = true, -- Har'kess the Insatiable
 		[103223] = true, -- Hertha Grimdottir
 		[103575] = true, -- Reef Lord Raj'his
@@ -2051,6 +2072,12 @@ local MapNPCs = {
 		[101077] = true, -- Sekhan
 	},
 	-- ----------------------------------------------------------------------------
+	-- The Exodar
+	-- ----------------------------------------------------------------------------
+	[1091] = {
+		[110486] = true, -- Huk'roth the Huntmaster
+	},
+	-- ----------------------------------------------------------------------------
 	-- Eye of Azshara
 	-- ----------------------------------------------------------------------------
 	[1096] = {
@@ -2082,6 +2109,10 @@ local ContinentIDByDungeonMapID = {
 	[930] = private.ContinentID.Pandaria, -- Throne of Thunder
 	[995] = private.ContinentID.EasternKingdoms, -- Upper Blackrock Spire
 	[1022] = private.ContinentID.BrokenIsles, -- Helheim
+	[1028] = private.ContinentID.BrokenIsles, -- Mardum, the Shattered Abyss
+	[1032] = private.ContinentID.BrokenIsles, -- Vault of the Wardens
+	[1091] = private.ContinentID.Kalimdor, -- The Exodar (Scenario version)
+
 }
 
 private.ContinentIDByDungeonMapID = ContinentIDByDungeonMapID
