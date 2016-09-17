@@ -177,9 +177,14 @@ do
 						output:AddLine(("    [%d] = { -- %s"):format(npcID, NPCScan:GetNPCNameFromID(npcID)))
 					end
 
-					local fieldInfoOutput = type(fieldInfo) == "string" and ("\"%s\""):format(fieldInfo) or tostring(fieldInfo)
-					local fieldInfoComment = field == "questID" and (" -- %s"):format(NPCScan:GetQuestNameFromID(fieldInfo)) or ""
+					local fieldInfoOutput
+					if type(fieldInfo) == "string" then
+						fieldInfoOutput = ("\"%s\""):format(fieldInfo:gsub("\"", "\\\""))
+					else
+						fieldInfoOutput = tostring(fieldInfo)
+					end
 
+					local fieldInfoComment = field == "questID" and (" -- %s"):format(NPCScan:GetQuestNameFromID(fieldInfo)) or ""
 					output:AddLine(("        %s = %s,%s"):format(field, fieldInfoOutput, fieldInfoComment))
 				end
 			end
