@@ -2103,7 +2103,7 @@ local ContinentIDByDungeonMapID = {
 	[761] = private.ContinentID.Kalimdor, -- Razorfen Kraul
 	[764] = private.ContinentID.EasternKingdoms, -- Shadowfang Keep
 	[765] = private.ContinentID.EasternKingdoms, -- Stratholme
-	[795] = private.ContinentID.Kalimdor,-- Molten Front
+	[795] = private.ContinentID.Kalimdor, -- Molten Front
 	[799] = private.ContinentID.EasternKingdoms, -- Karazhan
 	[898] = private.ContinentID.EasternKingdoms, -- Scholomance
 	[930] = private.ContinentID.Pandaria, -- Throne of Thunder
@@ -2112,7 +2112,6 @@ local ContinentIDByDungeonMapID = {
 	[1028] = private.ContinentID.BrokenIsles, -- Mardum, the Shattered Abyss
 	[1032] = private.ContinentID.BrokenIsles, -- Vault of the Wardens
 	[1091] = private.ContinentID.Kalimdor, -- The Exodar (Scenario version)
-
 }
 
 private.ContinentIDByDungeonMapID = ContinentIDByDungeonMapID
@@ -2136,6 +2135,9 @@ for mapID in pairs(MapNPCs) do
 	AlphabeticalMapIDs[#AlphabeticalMapIDs + 1] = mapID
 
 	local continentID = HereBeDragons:GetCZFromMapID(mapID)
+	if continentID < 1 then
+		continentID = ContinentIDByDungeonMapID[mapID]
+	end
 
 	ContinentMaps[continentID] = ContinentMaps[continentID] or {}
 	ContinentMaps[continentID][mapID] = true
