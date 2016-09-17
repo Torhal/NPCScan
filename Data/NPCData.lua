@@ -978,11 +978,6 @@ local NPCData = {
 		questID = 33504, -- Shaman Fire Stone
 		vignetteName = "Shaman Fire Stone",
 	},
-	[91780] = {
-		questID = 38422,
-		vignetteName = "The Blightcaller",
-	}, -- Mother Clacker
-
 	[75071] = { -- Mother Om'ra
 		questID = 33642, -- Mother Om'ra
 		vignetteName = "Mother Om'ra",
@@ -1966,6 +1961,10 @@ local NPCData = {
 	[91727] = { -- Executor Riloth
 		questID = 38411, -- Executor Riloth
 	},
+	[91780] = { -- Mother Clacker
+		questID = 38422, -- Makrura Wave Event
+		vignetteName = "The Blightcaller",
+	},
 	[91795] = { -- Stormwing Matriarch
 		questID = 38423, -- Stormdrake Matriarch
 		vignetteName = "Stormwing Matriarch",
@@ -2246,6 +2245,8 @@ local NPCData = {
 	},
 	[94313] = { -- Daniel "Boomer" Vorick
 		factionGroup = "Alliance",
+		questID = 39048, -- Demolitionist
+		vignetteName = "Sapper Vorick",
 	},
 	[94347] = { -- Dread-Rider Cortis
 		questID = 43343, -- Dread-Rider Cortis
@@ -2255,11 +2256,6 @@ local NPCData = {
 		questID = 39120, -- Shield Forger
 		vignetteName = "Isel the Hammer",
 	},
-	[94313] = {
-		questID = 39048,
-		vignetteName = "Sapper Vorick",
-	}, -- Daniel "Boomer" Vorick
-
 	[94414] = { -- Kiranys Duskwhisper
 		questID = 39121, -- Haunted Manor
 		vignetteName = "Haunted Manor",
