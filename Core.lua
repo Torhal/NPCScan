@@ -272,7 +272,7 @@ do
 				private.db.locale.npcNames[npcID] = npcName
 				NPCIDFromName[npcName] = npcID
 			else
-				npcName = _G.UNKNOWN
+				npcName = _G.SEARCH_LOADING_TEXT
 			end
 		end
 
@@ -291,7 +291,7 @@ do
 				private.db.locale.questNames[questID] = questName
 				private.QuestIDFromName[questName] = questID
 			else
-				questName = _G.UNKNOWN
+				questName = _G.SEARCH_LOADING_TEXT
 			end
 		end
 
