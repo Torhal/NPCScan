@@ -399,14 +399,25 @@ local function UpdateNPCSearchOptions()
 	if #npcIDs > 0 then
 		for npcIDIndex = 1, #npcIDs do
 			local npcID = npcIDs[npcIDIndex]
+			local npcData = private.NPCData[npcID]
+
+			local achievementText = ""
+			if npcData.achievementID then
+				achievementText = _G.PARENS_TEMPLATE:format(private.AchievementNameByID[npcData.achievementID])
+			end
 
 			NPCSearchOptions["npc" .. npcID] = {
 				order = npcIDIndex,
 				name = GetNPCOptionsName(npcID),
-				desc = GetNPCOptionsDescription(npcID),
+				desc = ("%s %s"):format(GetNPCOptionsDescription(npcID), achievementText),
 				descStyle = "inline",
 				type = "toggle",
 				width = "full",
+				disabled = function()
+					if npcData.achievementID and profile.detection.achievementIDs[npcData.achievementID] ~= private.DetectionGroupStatus.UserDefined then
+						return true
+					end
+				end,
 				get = function(info)
 					return not profile.blacklist.npcIDs[npcID]
 				end,
