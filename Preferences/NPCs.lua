@@ -53,7 +53,7 @@ local UpdateBlacklistedNPCOptions
 local function GetAchievementNPCOptionsName(npcID)
 	local npcData = private.NPCData[npcID]
 	local colorCode = npcData.isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
-	return ("%s%s|r"):format(colorCode, npcData.name)
+	return ("%s%s|r"):format(colorCode, NPCScan:GetNPCNameFromID(npcID))
 end
 
 local function GetRareNPCOptionsName(npcID)
@@ -64,7 +64,7 @@ local function GetRareNPCOptionsName(npcID)
 		colorCode = private.IsNPCQuestComplete(npcID) and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
 	end
 
-	return ("%s%s|r"):format(colorCode, npcData.name)
+	return ("%s%s|r"):format(colorCode, NPCScan:GetNPCNameFromID(npcID))
 end
 
 local function SortByNPCNameThenByID(a, b)
@@ -148,7 +148,7 @@ local function UpdateAchievementNPCOptions()
 			local npcData = private.NPCData[npcID]
 
 			if npcData.factionGroup ~= private.PlayerFactionGroup then
-				npcNames[npcID] = npcData.name
+				npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
 				npcIDs[#npcIDs + 1] = npcID
 			end
 		end
@@ -213,7 +213,7 @@ local function UpdateRareNPCOptions()
 			local npcData = private.NPCData[npcID]
 
 			if not npcData.isTameable and npcData.factionGroup ~= private.PlayerFactionGroup then
-				npcNames[npcID] = npcData.name
+				npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
 				npcIDs[#npcIDs + 1] = npcID
 			end
 		end
@@ -306,7 +306,7 @@ local function UpdateTameableRareNPCOptions()
 			local npcData = private.NPCData[npcID]
 
 			if npcData.isTameable and npcData.factionGroup ~= private.PlayerFactionGroup then
-				npcNames[npcID] = npcData.name
+				npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
 				npcIDs[#npcIDs + 1] = npcID
 			end
 		end

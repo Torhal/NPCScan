@@ -112,16 +112,8 @@ function NPCScan:OnEnable()
 
 			npcData.npcID = npcID
 
-			local npcName = self:GetNPCNameFromID(npcID)
-			if not npcName then
-				private.Debug("NPC ID %d not found in localization table.", npcID)
-
-				npcName = ("%s_%d"):format(_G.UNKNOWN, npcID)
-			end
-
-			npcData.name = npcName
-
-			NPCIDFromName[npcName] = npcID
+			-- This sets values for NPCIDFromName, which is used for vignette detection.
+			self:GetNPCNameFromID(npcID)
 		end
 	end
 
@@ -231,7 +223,7 @@ function NPCScan:OnEnable()
 						private.Debug("-- ----------------------------------------------------------------------------")
 					end
 
-					private.Debug("NPC %d (%s) has no questID.", npcID, npcData.name)
+					private.Debug("NPC %d (%s) has no questID.", npcID, self:GetNPCNameFromID(npcID))
 				end
 			end
 		end
