@@ -2160,6 +2160,8 @@ local function SortByMapNameThenByID(a, b)
 	return mapNameA < mapNameB
 end
 
+private.SortByMapNameThenByID = SortByMapNameThenByID
+
 for index = 1, #AlphabeticalContinentMaps do
 	table.sort(AlphabeticalContinentMaps[index], SortByMapNameThenByID)
 end

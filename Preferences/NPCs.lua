@@ -50,17 +50,24 @@ local profile
 -- ----------------------------------------------------------------------------
 local UpdateBlacklistedNPCOptions
 
-local function GetAchievementNPCOptionsName(npcID)
+local function GetNPCOptionsDescription(npcID)
 	local npcData = private.NPCData[npcID]
-	local colorCode = npcData.isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
-	return ("%s%s|r"):format(colorCode, NPCScan:GetNPCNameFromID(npcID))
+	local mapNames = {}
+
+	for mapIDIndex = 1, #npcData.mapIDs do
+		mapNames[#mapNames + 1] = private.MapNameByID[npcData.mapIDs[mapIDIndex]]
+	end
+
+	return ("%s %s %s"):format(_G.ID, npcID, table.concat(mapNames, ", "))
 end
 
-local function GetRareNPCOptionsName(npcID)
+local function GetNPCOptionsName(npcID)
+	local colorCode = _G.NORMAL_FONT_COLOR_CODE
 	local npcData = private.NPCData[npcID]
 
-	local colorCode = _G.NORMAL_FONT_COLOR_CODE
-	if npcData.questID then
+	if npcData.achievementID then
+		colorCode = npcData.isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
+	elseif npcData.questID then
 		colorCode = private.IsNPCQuestComplete(npcID) and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
 	end
 
@@ -160,8 +167,8 @@ local function UpdateAchievementNPCOptions()
 
 			achievementOptionsTable.args.npcs.args["npcID" .. npcID] = {
 				order = npcIDIndex,
-				name = GetAchievementNPCOptionsName(npcID),
-				desc = ("%s %s %s"):format(_G.ID, npcID, private.MapNameByID[private.NPCData[npcID].mapID]),
+				name = GetNPCOptionsName(npcID),
+				desc = GetNPCOptionsDescription(npcID),
 				type = "toggle",
 				width = "full",
 				descStyle = "inline",
@@ -245,8 +252,8 @@ local function UpdateRareNPCOptions()
 				if npcID then
 					mapOptionsTable.args.npcs.args["npc" .. npcID] = {
 						order = npcIDIndex,
-						name = GetRareNPCOptionsName(npcID),
-						desc = ("%s %s"):format(_G.ID, npcID),
+						name = GetNPCOptionsName(npcID),
+						desc = GetNPCOptionsDescription(npcID),
 						descStyle = "inline",
 						type = "toggle",
 						width = "full",
@@ -338,8 +345,8 @@ local function UpdateTameableRareNPCOptions()
 				if npcID then
 					mapOptionsTable.args.npcs.args["npc" .. npcID] = {
 						order = npcIDIndex,
-						name = GetRareNPCOptionsName(npcID),
-						desc = ("%s %s"):format(_G.ID, npcID),
+						name = GetNPCOptionsName(npcID),
+						desc = GetNPCOptionsDescription(npcID),
 						descStyle = "inline",
 						type = "toggle",
 						width = "full",

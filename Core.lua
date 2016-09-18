@@ -6,6 +6,7 @@ local pairs = _G.pairs
 
 -- Libraries
 local string = _G.string
+local table = _G.table
 
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.
@@ -106,10 +107,8 @@ function NPCScan:OnEnable()
 				private.NPCData[npcID] = npcData
 			end
 
-			-- This is technically incorrect, since NPCs can be in several locations, but it's primarily used for informational purposes where an
-			-- NPC _should_ ever only have a single location. For now.
-			npcData.mapID = mapID
-
+			npcData.mapIDs = npcData.mapIDs or {}
+			npcData.mapIDs[#npcData.mapIDs + 1] = mapID
 			npcData.npcID = npcID
 
 			-- This sets values for NPCIDFromName, which is used for vignette detection.
@@ -118,6 +117,8 @@ function NPCScan:OnEnable()
 	end
 
 	for npcID, data in pairs(private.NPCData) do
+		table.sort(data.mapIDs, private.SortByMapNameThenByID)
+
 		if data.questID then
 			local npcIDs = QuestNPCs[data.questID]
 			if not npcIDs then
