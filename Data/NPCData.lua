@@ -73,6 +73,9 @@ local NPCData = {
 	[3652] = { -- Trigore the Lasher
 		isTameable = true,
 	},
+	[3868] = { -- Blood Seeker
+		isTameable = true,
+	},
 	[4132] = { -- Krkk'kx
 		isTameable = true,
 	},
