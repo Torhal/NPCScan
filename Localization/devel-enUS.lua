@@ -1,6 +1,7 @@
 local AddOnFolderName, private = ...
 local L = _G.LibStub("AceLocale-3.0"):NewLocale(AddOnFolderName, "enUS", true)
 
+L["Added %1$s (%2$d) to the user-defined NPC list."] = true
 L["Alerts"] = true
 L["Completed Achievement Criteria"] = true
 L["Completed Quest Objectives"] = true
@@ -13,11 +14,15 @@ L["Ignore Mute"] = true
 L["Interval"] = true
 L["NPCs"] = true
 L["Play alert sounds when sound is muted."] = true
+L["Predefined NPCs cannot be added to or removed from the user-defined NPC list."] = true
+L["Removed %1$s (%2$d) from the user-defined NPC list."] = true
 L["Reset Position"] = true
 L["Screen Flash"] = true
 L["Screen Location"] = true
 L["Show Anchor"] = true
 L["Spawn Point"] = true
+L["%1$s (%2$d) is already on the user-defined NPC list."] = true
+L["%1$s (%2$d) is not on the user-defined NPC list."] = true
 L["The number of minutes before an NPC will be detected again."] = true
 L["The number of minutes a targeting button will exist before fading out."] = true
 L["Type the name of a Continent, Dungeon, or Zone, or the partial name of an NPC. Accepts Lua patterns."] = true

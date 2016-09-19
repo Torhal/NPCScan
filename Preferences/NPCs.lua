@@ -4,6 +4,7 @@
 -- Functions
 local pairs = _G.pairs
 local tonumber = _G.tonumber
+local type = _G.type
 
 -- Libraries
 local table = _G.table
@@ -49,6 +50,72 @@ local profile
 -- Helpers.
 -- ----------------------------------------------------------------------------
 local UpdateBlacklistedNPCOptions
+
+local function ValidateUserDefinedNPCInput(input, operationType)
+	local value = type(input) == "string" and input:gsub("\"", "") or input
+
+	if value == "mouseover" or value == "target" then
+		value = private.UnitTokenToCreatureID(value)
+	end
+
+	local npcID = tonumber(value)
+
+	if npcID then
+		if private.NPCData[npcID] then
+			NPCScan:Print(L["Predefined NPCs cannot be added to or removed from the user-defined NPC list."])
+			return false
+		end
+
+		if profile.userDefined.npcIDs[npcID] then
+			if operationType == "add" then
+				NPCScan:Printf(L["%1$s (%2$d) is already on the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
+				return false
+			end
+		else
+			if operationType == "remove" then
+				NPCScan:Printf(L["%1$s (%2$d) is not on the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
+				return false
+			end
+		end
+
+		return true, npcID
+	end
+
+	NPCScan:Print(L["Valid values are a numeric NPC ID, the word \"mouseover\" while you have your mouse cursor over an NPC, or the word \"target\" while you have an NPC set as your target."])
+
+	return false
+end
+
+local function AddUserDefinedNPC(input)
+	local isValid, npcID = ValidateUserDefinedNPCInput(input, "add")
+
+	if isValid then
+		profile.userDefined.npcIDs[npcID] = true
+
+		private.UpdateUserDefinedNPCOptions()
+
+		NPCScan:UpdateScanList()
+		NPCScan:Printf(L["Added %1$s (%2$d) to the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
+	end
+end
+
+private.AddUserDefinedNPC = AddUserDefinedNPC
+
+local function RemoveUserDefinedNPC(input)
+	local isValid, npcID = ValidateUserDefinedNPCInput(input, "remove")
+
+	if isValid then
+		profile.userDefined.npcIDs[npcID] = nil
+
+		private.UpdateUserDefinedNPCOptions()
+
+		NPCScan:UpdateScanList()
+		NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+		NPCScan:Printf(L["Removed %1$s (%2$d) from the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
+	end
+end
+
+private.RemoveUserDefinedNPC = RemoveUserDefinedNPC
 
 local function GetNPCOptionsDescription(npcID)
 	local npcData = private.NPCData[npcID]
@@ -533,12 +600,7 @@ local function UpdateUserDefinedNPCOptions()
 					return true
 				end,
 				set = function()
-					savedNPCIDs[npcID] = nil
-
-					UpdateUserDefinedNPCOptions()
-
-					NPCScan:UpdateScanList()
-					NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+					RemoveUserDefinedNPC(npcID)
 				end,
 			}
 		end
@@ -548,6 +610,8 @@ local function UpdateUserDefinedNPCOptions()
 
 	AceConfigRegistry:NotifyChange(AddOnFolderName)
 end
+
+private.UpdateUserDefinedNPCOptions = UpdateUserDefinedNPCOptions
 
 -- ----------------------------------------------------------------------------
 -- Blacklisted NPC options.
@@ -741,32 +805,11 @@ local function GetOrUpdateNPCOptions()
 						disabled = function()
 							return not profile.detection.userDefined
 						end,
-						validate = function(info, value)
-							value = value:gsub("\"", "")
-
-							if value == "mouseover" or value == "target" then
-								value = private.UnitTokenToCreatureID(value)
-							end
-
-							local numberValue = tonumber(value)
-							if numberValue and not private.NPCData[numberValue] then
-								return true
-							end
-						end,
 						get = function()
 							return ""
 						end,
 						set = function(info, value)
-							value = value:gsub("\"", "")
-
-							if value == "mouseover" or value == "target" then
-								value = private.UnitTokenToCreatureID(value)
-							end
-
-							profile.userDefined.npcIDs[tonumber(value)] = true
-
-							UpdateUserDefinedNPCOptions()
-							NPCScan:UpdateScanList()
+							AddUserDefinedNPC(value)
 						end,
 					},
 					npcIDs = {

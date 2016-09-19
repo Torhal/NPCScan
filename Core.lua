@@ -301,40 +301,44 @@ do
 end
 
 do
-	local SUBCOMMAND_FUNCS = {
-		--@debug@
-		DEBUG = function()
-			local debugger = private.GetDebugger()
-
-			if debugger:Lines() == 0 then
-				debugger:AddLine("Nothing to report.")
-				debugger:Display()
-				debugger:Clear()
-				return
-			end
-
-			debugger:Display()
-		end,
-		DUMP = function(arguments)
-			local dumpType, arguments = NPCScan:GetArgs(arguments, 2)
-
-			local func = private.DUMP_COMMANDS[dumpType]
-
-			if func then
-				private.TextDump = private.TextDump or _G.LibStub("LibTextDump-1.0"):New(AddOnFolderName)
-				func(arguments)
-			else
-				NPCScan:Print("Unknown dump command. Valid commands:")
-
-				for command in pairs(private.DUMP_COMMANDS) do
-					NPCScan:Printf("     %s", command)
-				end
-			end
-		end,
-		--@end-debug@
-	}
+	local SUBCOMMAND_FUNCS
 
 	function NPCScan:ChatCommand(input)
+		SUBCOMMAND_FUNCS = SUBCOMMAND_FUNCS or {
+			ADD = private.AddUserDefinedNPC,
+			REMOVE = private.RemoveUserDefinedNPC,
+			--@debug@
+			DEBUG = function()
+				local debugger = private.GetDebugger()
+
+				if debugger:Lines() == 0 then
+					debugger:AddLine("Nothing to report.")
+					debugger:Display()
+					debugger:Clear()
+					return
+				end
+
+				debugger:Display()
+			end,
+			DUMP = function(arguments)
+				local dumpType, arguments = NPCScan:GetArgs(arguments, 2)
+
+				local func = private.DUMP_COMMANDS[dumpType]
+
+				if func then
+					private.TextDump = private.TextDump or _G.LibStub("LibTextDump-1.0"):New(AddOnFolderName)
+					func(arguments)
+				else
+					NPCScan:Print("Unknown dump command. Valid commands:")
+
+					for command in pairs(private.DUMP_COMMANDS) do
+						NPCScan:Printf("     %s", command)
+					end
+				end
+			end,
+			--@end-debug@
+		}
+
 		local subcommand, arguments = self:GetArgs(input, 2)
 
 		if subcommand then
