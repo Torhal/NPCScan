@@ -10,15 +10,7 @@ local table = _G.table
 local AddOnFolderName, private = ...
 
 local LibStub = _G.LibStub
-
 local TargetButtonManager = LibStub("AceEvent-3.0"):Embed({})
-
-local LibToast = LibStub("LibToast-1.0")
-LibToast:Register("NPCScanAlertToast", function(toast, ...)
-	toast:SetTitle(AddOnFolderName)
-	toast:SetFormattedText("%s%s|r", _G.GREEN_FONT_COLOR_CODE, ...)
-	toast:SetIconTexture([[Interface\LFGFRAME\BattlenetWorking0]])
-end)
 
 -- ----------------------------------------------------------------------------
 -- Constants.
@@ -193,8 +185,6 @@ function TargetButtonManager:Spawn(eventName, data)
 	end
 
 	if #ActiveTargetButtons >= private.NUM_RAID_ICONS or _G.InCombatLockdown() then
-		LibToast:Spawn("NPCScanAlertToast", ("%s %s"):format(data.npcName, _G.PARENS_TEMPLATE:format(data.sourceText)))
-
 		data.sourceText = ("%s %s"):format(data.sourceText, _G.PARENS_TEMPLATE:format(_G.QUEUED_STATUS_QUEUED))
 		table.insert(QueuedData, data)
 
