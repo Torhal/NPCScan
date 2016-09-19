@@ -735,13 +735,15 @@ local function GetOrUpdateNPCOptions()
 					},
 					npcID = {
 						order = 2,
-						name = ("%s %s"):format(_G.ADD, _G.PARENS_TEMPLATE:format(_G.ID)),
-						descStyle = "inline",
+						name = _G.ADD,
+						desc = L["Valid values are a numeric NPC ID, the word \"mouseover\" while you have your mouse cursor over an NPC, or the word \"target\" while you have an NPC set as your target."],
 						type = "input",
 						disabled = function()
 							return not profile.detection.userDefined
 						end,
 						validate = function(info, value)
+							value = value:gsub("\"", "")
+
 							if value == "mouseover" or value == "target" then
 								value = private.UnitTokenToCreatureID(value)
 							end
@@ -755,6 +757,8 @@ local function GetOrUpdateNPCOptions()
 							return ""
 						end,
 						set = function(info, value)
+							value = value:gsub("\"", "")
+
 							if value == "mouseover" or value == "target" then
 								value = private.UnitTokenToCreatureID(value)
 							end
