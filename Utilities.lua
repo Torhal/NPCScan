@@ -81,7 +81,6 @@ do
 	local ValidUnitTypeNames = {
 		Creature = true,
 		Vehicle = true,
-		Pet = true,
 	}
 
 	local function GUIDToCreatureID(GUID)
