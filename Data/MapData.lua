@@ -2085,7 +2085,7 @@ local MapNPCs = {
 	-- ----------------------------------------------------------------------------
 	-- Eye of Azshara
 	-- ----------------------------------------------------------------------------
-	[1096] = {
+	[1046] = {
 		[108543] = true, -- Dread Captain Thedon
 		[111573] = true, -- Kosumoth the Hungering
 	},
@@ -2116,6 +2116,7 @@ local ContinentIDByDungeonMapID = {
 	[1022] = private.ContinentID.BrokenIsles, -- Helheim
 	[1028] = private.ContinentID.BrokenIsles, -- Mardum, the Shattered Abyss
 	[1032] = private.ContinentID.BrokenIsles, -- Vault of the Wardens
+	[1046] = private.ContinentID.BrokenIsles, -- Eye of Azshara
 	[1091] = private.ContinentID.Kalimdor, -- The Exodar (Scenario version)
 }
 
