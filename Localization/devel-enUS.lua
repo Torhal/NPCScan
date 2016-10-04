@@ -125,6 +125,7 @@ VL["Giant Raptor"] = true
 VL["Giantstalker Hunting Party"] = true
 VL["Giblette the Cowardly"] = true
 VL["Glimar Ironfist"] = true
+VL["Gom Crabbar"] = true
 VL["Gorebeak"] = true
 VL["Gorger the Hungry"] = true
 VL["Gorgroth"] = true
