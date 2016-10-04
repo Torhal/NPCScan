@@ -2509,6 +2509,9 @@ local NPCData = {
 		questID = 40681, -- Snarf
 		vignetteName = "Sekhan",
 	},
+	[101411] = {, -- Gom Crabbar
+		vignetteName = "Gom Crabbar",
+	},
 	[101596] = { -- Charfeather
 		questID = 40766, -- Charfeather
 		vignetteName = "Charfeather",

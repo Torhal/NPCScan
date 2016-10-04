@@ -2087,6 +2087,7 @@ local MapNPCs = {
 	-- ----------------------------------------------------------------------------
 	[1046] = {
 		[108543] = true, -- Dread Captain Thedon
+		[101411] = true, -- Gom Crabbar
 		[111573] = true, -- Kosumoth the Hungering
 	},
 }
