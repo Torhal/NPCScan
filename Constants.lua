@@ -78,6 +78,7 @@ local DatabaseDefaults = {
 		},
 		targetButtonGroup = {
 			durationSeconds = 60,
+			hideDuringCombat = false,
 			point = "TOPRIGHT",
 			scale = 1,
 			x = -300,

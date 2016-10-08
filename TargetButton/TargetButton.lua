@@ -148,7 +148,6 @@ function TargetButton:COMBAT_LOG_EVENT_UNFILTERED(eventName, _, subEvent, _, _, 
 end
 
 function TargetButton:PLAYER_REGEN_DISABLED()
-
 	if self.needsRaidTarget then
 		-- Generated from a vignette that hasn't given a unitToken yet. Make a typical close button.
 		for pathIndex = 1, #DEFAULT_CLOSE_BUTTON_TEXTURE_PATHS do
@@ -162,6 +161,11 @@ function TargetButton:PLAYER_REGEN_DISABLED()
 
 	self.RaidIcon:EnableMouse(true)
 	self.RaidIcon:Enable()
+
+	if private.db.profile.targetButtonGroup.hideDuringCombat then
+		self.hiddenForCombat = true
+		self:Hide()
+	end
 end
 
 function TargetButton:PLAYER_REGEN_ENABLED()
@@ -171,7 +175,7 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 	self.RaidIcon:EnableMouse(false)
 	self.RaidIcon:Disable()
 
-	if not self:IsShown() then
+	if not self.hiddenForCombat and not self:IsShown() then
 		-- Should only happen if the RaidIcon button was clicked.
 		self:RequestDeactivate()
 	elseif self.isDead then
@@ -194,6 +198,12 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 	elseif pausedDismissal then
 		self.dismissAnimationGroup:Play()
 	end
+
+	if self.hiddenForCombat and self.__isActive then
+		self:Show()
+	end
+
+	self.hiddenForCombat = nil
 end
 
 function TargetButton:UpdateData(eventName, data)

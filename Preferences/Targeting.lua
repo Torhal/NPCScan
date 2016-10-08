@@ -181,7 +181,7 @@ local function GetTargetingOptions()
 				guiInline = true,
 				args = {
 					spawnPoint = {
-						order = 60,
+						order = 1,
 						type = "select",
 						name = L["Spawn Point"],
 						descStyle = "inline",
@@ -195,7 +195,7 @@ local function GetTargetingOptions()
 						values = LOCALIZED_SPAWN_POINTS,
 					},
 					x = {
-						order = 70,
+						order = 2,
 						type = "input",
 						name = L["X Offset"],
 						desc = L["Horizontal offset from the anchor point."],
@@ -209,7 +209,7 @@ local function GetTargetingOptions()
 						dialogControl = "EditBox",
 					},
 					y = {
-						order = 80,
+						order = 3,
 						type = "input",
 						name = L["Y Offset"],
 						desc = L["Vertical offset from the anchor point."],
@@ -222,14 +222,27 @@ local function GetTargetingOptions()
 						end,
 						dialogControl = "EditBox",
 					},
+					hideDuringCombat = {
+						order = 4,
+						type = "toggle",
+						name = L["Hide During Combat"],
+						descStyle = "inline",
+						width = "full",
+						get = function()
+							return profile.targetButtonGroup.hideDuringCombat
+						end,
+						set = function(info, value)
+							profile.targetButtonGroup.hideDuringCombat = value
+						end,
+					},
 					empty_4 = {
-						order = 81,
+						order = 5,
 						type = "description",
 						width = "full",
 						name = " ",
 					},
 					reset = {
-						order = 90,
+						order = 6,
 						type = "execute",
 						name = L["Reset Position"],
 						descStyle = "inline",
@@ -245,7 +258,7 @@ local function GetTargetingOptions()
 						end,
 					},
 					showAnchor = {
-						order = 100,
+						order = 7,
 						type = "execute",
 						descStyle = "inline",
 						name = function()
