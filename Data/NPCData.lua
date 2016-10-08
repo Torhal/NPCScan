@@ -2252,6 +2252,7 @@ local NPCData = {
 		vignetteName = "Sapper Vorick",
 	},
 	[94347] = { -- Dread-Rider Cortis
+		factionGroup = "Horde",
 		questID = 43343, -- Dread-Rider Cortis
 		vignetteName = "Dread-Rider Cortis",
 	},
