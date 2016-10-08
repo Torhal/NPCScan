@@ -134,6 +134,10 @@ local function TargetButton_OnLeave(self)
 	self.durationFadeAnimationGroup:Play()
 end
 
+local function TargetButton_OnShow(self)
+	self.PortraitModel:SetPortraitZoom(1)
+end
+
 -- ----------------------------------------------------------------------------
 -- Event and message handlers.
 -- ----------------------------------------------------------------------------
@@ -240,8 +244,6 @@ function TargetButton:Activate(data)
 	else
 		self.PortraitModel:SetCreature(data.npcID)
 	end
-
-	self.PortraitModel:SetPortraitZoom(1)
 
 	self:SetRaidTarget(data.unitToken)
 	self:SetUnitData(data)
@@ -510,6 +512,7 @@ local function CreateTargetButton(unitClassification)
 	button:HookScript("OnClick", TargetButton_OnClick)
 	button:SetScript("OnEnter", TargetButton_OnEnter)
 	button:SetScript("OnLeave", TargetButton_OnLeave)
+	button:HookScript("OnShow", TargetButton_OnShow)
 
 	button:Hide()
 
