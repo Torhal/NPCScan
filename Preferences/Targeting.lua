@@ -234,8 +234,13 @@ local function GetTargetingOptions()
 						name = L["Reset Position"],
 						descStyle = "inline",
 						func = function()
-							profile.targetButtonGroup = _G.copyTable(private.DatabaseDefaults.profile.targetButtonGroup)
-							LibWindow.RegisterConfig(anchorFrame, profile.targetButtonGroup)
+							local defaults = private.DatabaseDefaults.profile.targetButtonGroup
+							local preferences = profile.targetButtonGroup
+
+							preferences.point = defaults.point
+							preferences.x = defaults.x
+							preferences.y = defaults.y
+
 							LibWindow.RestorePosition(anchorFrame)
 						end,
 					},
