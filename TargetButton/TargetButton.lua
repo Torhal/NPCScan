@@ -262,7 +262,7 @@ function TargetButton:Activate(data)
 		self.needsRaidTarget = true
 	end
 
-	local macroText = ("/cleartarget\n/targetexact %s"):format(data.npcName)
+	local macroText = ("/targetexact %s"):format(data.npcName)
 	_G.NPCScan_RecentTargetButton:SetAttribute("macrotext", macroText)
 
 	self:SetAttribute("macrotext", macroText)
