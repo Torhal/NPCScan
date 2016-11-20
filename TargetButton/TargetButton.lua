@@ -502,7 +502,7 @@ do
 			minus = private.DecorateNormalTargetButton,
 			normal = private.DecorateNormalTargetButton,
 			rare = private.DecorateRareTargetButton,
-			rareelite = private.DecorateEliteTargetButton,
+			rareelite = private.DecorateRareEliteTargetButton,
 			worldboss = private.DecorateEliteTargetButton,
 		}
 	end

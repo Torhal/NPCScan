@@ -180,3 +180,10 @@ local function DecorateEliteTargetButton(button)
 end
 
 private.DecorateEliteTargetButton = DecorateEliteTargetButton
+
+local function DecorateRareEliteTargetButton(button)
+	DecorateEliteTargetButton(button)
+	button.Background:SetDesaturated(true)
+end
+
+private.DecorateRareEliteTargetButton = DecorateRareEliteTargetButton
