@@ -19,6 +19,7 @@ local function DecorateRareTargetButton(button)
 	portraitBorder:SetSize(60, 60)
 	portraitBorder:SetPoint("CENTER", portrait, "CENTER")
 	portraitBorder:SetAtlas("loottoast-itemborder-artifact")
+	portraitBorder:SetDesaturated(true)
 
 	local modelDimension = portrait:GetWidth() - 10
 
@@ -31,6 +32,7 @@ local function DecorateRareTargetButton(button)
 	local background = button.Background
 	background:SetSize(302, 97)
 	background:SetAtlas("LootToast-MoreAwesome", true)
+	background:SetDesaturated(true)
 	background:SetPoint("CENTER")
 
 	local sourceText = button.SourceText
