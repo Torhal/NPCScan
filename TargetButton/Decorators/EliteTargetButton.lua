@@ -35,11 +35,12 @@ local function DecorateEliteTargetButton(button)
 
 	button:SetSize(302, 119)
 
-	local raidIcon = button.RaidIcon
-	raidIcon:SetPoint("TOPRIGHT", -26, -26)
+	button.DismissButton:SetPoint("TOPRIGHT", -22, -47)
 
 	local portrait = button.Portrait
 	portrait:SetPoint("TOPLEFT", 48, -32)
+
+	button.RaidIcon:SetPoint("RIGHT", portrait, "LEFT", 4, 0)
 
 	local modelDimension = portrait:GetWidth() - 10
 

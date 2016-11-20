@@ -42,15 +42,6 @@ local TOOLTIP_ANCHORS = {
 	TOPRIGHT = "ANCHOR_LEFT",
 }
 
-local DEFAULT_CLOSE_BUTTON_TEXTURE_PATHS = {
-	"", -- Disabled
-	[[Interface\FriendsFrame\UI-Toast-CloseButton-Highlight]], -- Highlight
-	[[Interface\FriendsFrame\UI-Toast-CloseButton-Up]], -- Normal
-	[[Interface\FriendsFrame\UI-Toast-CloseButton-Down]], -- Pushed
-}
-
-local RAID_TARGETING_ICONS_TEXTURE = [[Interface\TargetingFrame\UI-RaidTargetingIcons]]
-
 -- ----------------------------------------------------------------------------
 -- Variables.
 -- ----------------------------------------------------------------------------
@@ -86,24 +77,13 @@ end
 -- ----------------------------------------------------------------------------
 -- Scripts.
 -- ----------------------------------------------------------------------------
-local function RaidIcon_OnEnter(self)
+local function DismissButton_OnEnter(self)
 	if self:IsEnabled() then
 		local tooltip = _G.GameTooltip
 		tooltip:SetOwner(self, TOOLTIP_ANCHORS[self:GetParent():GetEffectiveSpawnPoint()], 0, -50)
 		tooltip:AddLine(LEFT_CLICK_TEXTURE .. " " .. _G.REMOVE, 0.5, 0.8, 1)
 
 		tooltip:Show()
-	end
-end
-
--- This is required to have the proper mouse interactivity or lack thereof; setting EnableMouse to false on creation didn't work as expected.
-local function RaidIcon_OnShow(self)
-	if _G.InCombatLockdown() then
-		self:EnableMouse(true)
-		self:Enable()
-	else
-		self:EnableMouse(false)
-		self:Disable()
 	end
 end
 
@@ -148,20 +128,6 @@ function TargetButton:COMBAT_LOG_EVENT_UNFILTERED(eventName, _, subEvent, _, _, 
 end
 
 function TargetButton:PLAYER_REGEN_DISABLED()
-	if self.needsRaidTarget then
-		-- Generated from a vignette that hasn't given a unitToken yet. Make a typical close button.
-		for pathIndex = 1, #DEFAULT_CLOSE_BUTTON_TEXTURE_PATHS do
-			local texture = self.RaidIcon.textures[pathIndex]
-			texture:SetTexture(DEFAULT_CLOSE_BUTTON_TEXTURE_PATHS[pathIndex])
-			texture:SetTexCoord(0, 1, 0, 1)
-		end
-
-		self.RaidIcon:Show()
-	end
-
-	self.RaidIcon:EnableMouse(true)
-	self.RaidIcon:Enable()
-
 	if private.db.profile.targetButtonGroup.hideDuringCombat then
 		self.hiddenForCombat = true
 		self:Hide()
@@ -172,11 +138,8 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 	local pausedDismissal = self.pausedDismissal
 	self.pausedDismissal = nil
 
-	self.RaidIcon:EnableMouse(false)
-	self.RaidIcon:Disable()
-
 	if not self.hiddenForCombat and not self:IsShown() then
-		-- Should only happen if the RaidIcon button was clicked.
+		-- Should only happen if the dismiss button was clicked.
 		self:RequestDeactivate()
 	elseif self.isDead then
 		local sound = private.db.profile.alert.sound
@@ -374,15 +337,9 @@ end
 function TargetButton:SetRaidTarget(unitToken)
 	if unitToken and not self.raidIconID and #RaidIconIDs > 0 then
 		self.raidIconID = table.remove(RaidIconIDs)
-
-		for textureIndex = 1, #self.RaidIcon.textures do
-			local texture = self.RaidIcon.textures[textureIndex]
-			texture:SetTexture(RAID_TARGETING_ICONS_TEXTURE)
-
-			_G.SetRaidTargetIconTexture(texture, self.raidIconID)
-		end
-
 		self.RaidIcon:Show()
+
+		_G.SetRaidTargetIconTexture(self.RaidIcon, self.raidIconID)
 
 		local raidMarker = private.db.profile.detection.raidMarker
 		if raidMarker.add and (raidMarker.addInGroup or not _G.IsInGroup()) and _G.GetRaidTargetIndex(unitToken) ~= self.raidIconID then
@@ -528,25 +485,27 @@ local function CreateTargetButton(unitClassification)
 
 	AceEvent:Embed(_G.setmetatable(button, TargetButtonMetatable))
 
-	local raidIcon = _G.CreateFrame("Button", nil, button, "UIPanelCloseButton")
-	raidIcon:Hide()
-	raidIcon:SetSize(16, 16)
-	raidIcon.textures = {
-		raidIcon:GetDisabledTexture(),
-		raidIcon:GetHighlightTexture(),
-		raidIcon:GetNormalTexture(),
-		raidIcon:GetPushedTexture(),
-	}
+	local dismissButton = _G.CreateFrame("Button", nil, button, "UIPanelCloseButton")
+	dismissButton:SetSize(16, 16)
+	dismissButton:GetDisabledTexture():SetTexture("")
+	dismissButton:GetHighlightTexture():SetTexture([[Interface\FriendsFrame\UI-Toast-CloseButton-Highlight]])
+	dismissButton:GetNormalTexture():SetTexture([[Interface\FriendsFrame\UI-Toast-CloseButton-Up]])
+	dismissButton:GetPushedTexture():SetTexture([[Interface\FriendsFrame\UI-Toast-CloseButton-Down]])
 
-	raidIcon:SetScript("OnEnter", RaidIcon_OnEnter)
-	raidIcon:SetScript("OnLeave", _G.GameTooltip_Hide)
-	raidIcon:SetScript("OnShow", RaidIcon_OnShow)
+	dismissButton:SetScript("OnEnter", DismissButton_OnEnter)
+	dismissButton:SetScript("OnLeave", _G.GameTooltip_Hide)
 
-	button.RaidIcon = raidIcon
+	button.DismissButton = dismissButton
 
 	-- ----------------------------------------------------------------------------
 	-- Textures.
 	-- ----------------------------------------------------------------------------
+	local raidIcon = button:CreateTexture(nil, "OVERLAY")
+	raidIcon:Hide()
+	raidIcon:SetSize(16, 16)
+	raidIcon:SetTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
+	button.RaidIcon = raidIcon
+
 	local portrait = button:CreateTexture(nil, "BORDER")
 	portrait:SetTexture([[Interface\FrameGeneral\UI-Background-Marble]])
 	portrait:SetSize(52, 52)
@@ -694,6 +653,11 @@ local function CreateTargetButton(unitClassification)
 	local modelAnimIn = CreateAlphaAnimation(buttonAnimIn, 0, 1, 0.4, nil, 1)
 	modelAnimIn:SetTarget(button)
 	modelAnimIn:SetChildKey("PortraitModel")
+
+	-- Dismiss button
+	local dismissButtonAnimIn = CreateAlphaAnimation(buttonAnimIn, 0, 1, 0.4, nil, 1)
+	dismissButtonAnimIn:SetTarget(button)
+	dismissButtonAnimIn:SetChildKey("DismissButton")
 
 	-- Dismissed
 	local dismissAnimationGroup = button:CreateAnimationGroup()

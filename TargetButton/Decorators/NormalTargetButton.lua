@@ -9,11 +9,12 @@ local AddOnFolderName, private = ...
 local function DecorateNormalTargetButton(button)
 	button:SetSize(276, 80)
 
-	local raidIcon = button.RaidIcon
-	raidIcon:SetPoint("TOPRIGHT", -26, -22)
+	button.DismissButton:SetPoint("TOPRIGHT", -26, -22)
 
 	local portrait = button.Portrait
 	portrait:SetPoint("LEFT", 20, 0)
+
+	button.RaidIcon:SetPoint("RIGHT", portrait, "LEFT", 5, 0)
 
 	local modelDimension = portrait:GetWidth() - 10
 
