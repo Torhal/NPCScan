@@ -2573,6 +2573,9 @@ local NPCData = {
 		questID = 43957, -- Jade Darkhaven
 		vignetteName = "Jade Darkhaven",
 	},
+	[104523] = { -- Shalas'aman
+		questID = 45500, -- Shalas'aman
+	},
 	[105547] = { -- Rauren
 		questID = 43484, -- Rauren
 		vignetteName = "Rauren",
@@ -2618,6 +2621,9 @@ local NPCData = {
 	},
 	[107170] = { -- Zorux
 		questID = 42286, -- Houndmaster Stroxis
+	},
+	[107266] = { -- Commander Soraax
+		questID = 44673, -- Commander Soraax
 	},
 	[107269] = { -- Inquisitor Tivos
 		questID = 42376, -- Inquisitor Tivos
@@ -2668,9 +2674,18 @@ local NPCData = {
 		questID = 42699, -- Coura, Master of Arcana
 		vignetteName = "Coura, Master of Arcana",
 	},
+	[108827] = { -- Fjorlag, the Grave's Chill
+		questID = 45507, -- Fjorlag, the Grave's Chill
+	},
 	[109054] = { -- Shal'an
 		questID = 42831, -- Shal'an
 		vignetteName = "Shal'an",
+	},
+	[109113] = { -- Boulderfall, the Eroded
+		questID = 40067, -- 7.0 Stormheim - Boulderfall - twh
+	},
+	[109281] = { -- Malisandra
+		questID = 45501, -- Malisandra
 	},
 	[109498] = { -- Xaander
 		questID = 40423, -- Unethical Adventurers
@@ -2685,12 +2700,30 @@ local NPCData = {
 		questID = 44108, -- Ragemaw
 		vignetteName = "Ragemaw",
 	},
+	[109575] = { -- Valakar the Thirsty
+		questID = 45515, -- Valakar the Thirsty
+	},
+	[109594] = { -- Stormfeather
+		questID = 45497, -- Stormfeather
+	},
+	[109620] = { -- The Whisperer
+		questID = 45496, -- The Whisperer
+	},
+	[109648] = { -- Witchdoctor Grgl-Brgl
+		questID = 45493, -- Witchdoctor Grgl-Brgl
+	},
+	[109653] = { -- Marblub the Massive
+		questID = 45492, -- Marblub the Massive
+	},
 	[109708] = { -- Undergrell Ringleader
 		questID = 43176, -- Grell Waves Tracking Flag
 		vignetteName = "Undgrell Attack",
 	},
 	[109954] = { -- Magister Phaedris
 		questID = 43348, -- Magister Phaedris
+	},
+	[109990] = { -- Nylaathria the Forgotten
+		questID = 45488, -- Nylaathria the Forgotten
 	},
 	[110024] = { -- Mal'Dreth the Corruptor
 		questID = 43351, -- Mal'Dreth the Corrupter
@@ -2701,9 +2734,15 @@ local NPCData = {
 		questID = 43358, -- Myonix
 		vignetteName = "Myonix",
 	},
+	[110342] = { -- Rabxach
+		questID = 45487, -- Rabxach
+	},
 	[110363] = { -- Roteye
 		questID = 43342, -- Vignette - Roteye
 		vignetteName = "Roteye",
+	},
+	[110367] = { -- Ealdis
+		questID = 45483, -- Ealdis
 	},
 	[110438] = { -- Siegemaster Aedrin
 		questID = 43369, -- Siegemaster Aedrin
@@ -2766,6 +2805,9 @@ local NPCData = {
 	[111463] = { -- Bulvinkel
 		isTameable = true,
 	},
+	[111573] = { -- Kosumoth the Hungering
+		questID = 45479, -- Kosumoth the Hungering
+	},
 	[111649] = { -- Ambassador D'vwinn
 		questID = 43794, -- Ambassador D'vwinn
 		vignetteName = "Ambassador D'vwinn",
@@ -2777,6 +2819,9 @@ local NPCData = {
 	[111653] = { -- Miasu
 		questID = 43793, -- Miasu
 		vignetteName = "Miasu",
+	},
+	[111939] = { -- Lysanis Shadesoul
+		questID = 43956, -- Lysanis Shadesoul
 	},
 	[112497] = { -- Maia the White
 		isTameable = true,
@@ -2790,6 +2835,15 @@ local NPCData = {
 	[112637] = { -- Devious Sunrunner
 		questID = 44081, -- Treacherous Leyrunners
 		vignetteName = "Trecherous Stallions",
+	},
+	[112705] = { -- Achronos
+		questID = 45478, -- Achronos
+	},
+	[112758] = { -- Auditor Esiel
+		questID = 45475, -- Auditor Esiel
+	},
+	[112759] = { -- Az'jatar
+		questID = 45471, -- Az'jatar
 	},
 	[112802] = { -- Mar'tura
 		isTameable = true,

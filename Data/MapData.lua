@@ -187,6 +187,7 @@ local MapNPCs = {
 		[51029] = true, -- Parasitus
 		[51031] = true, -- Tracker
 		[51058] = true, -- Aphis
+		[111122] = true, -- Large Vile Slime
 	},
 	-- ----------------------------------------------------------------------------
 	-- Eastern Plaguelands
@@ -935,6 +936,7 @@ local MapNPCs = {
 		[14490] = true, -- Rippa
 		[14491] = true, -- Kurmokk
 		[14492] = true, -- Verifonix
+		[108715] = true, -- Ol' Eary
 	},
 	-- ----------------------------------------------------------------------------
 	-- Zul'Farrak
@@ -1831,6 +1833,7 @@ local MapNPCs = {
 		[107136] = true, -- Houndmaster Stroxis
 		[107169] = true, -- Horux
 		[107170] = true, -- Zorux
+		[107266] = true, -- Commander Soraax
 		[107269] = true, -- Inquisitor Tivos
 		[107327] = true, -- Bilebrain
 		[107657] = true, -- Arcanist Shal'iman
@@ -1840,14 +1843,19 @@ local MapNPCs = {
 		[108829] = true, -- Levantus
 		[109331] = true, -- Calamir
 		[109504] = true, -- Ragemaw
+		[109575] = true, -- Valakar the Thirsty
 		[109584] = true, -- Fjordun
+		[109594] = true, -- Stormfeather
+		[109620] = true, -- The Whisperer
 		[109630] = true, -- Immolian
 		[109641] = true, -- Arcanor Prime
+		[109653] = true, -- Marblub the Massive
 		[109677] = true, -- Chief Treasurer Jabrill
 		[109702] = true, -- Deepclaw
 		[109943] = true, -- Ana-Mouz
 		[110824] = true, -- Tideclaw
 		[111434] = true, -- Sea King Tidross
+		[111939] = true, -- Lysanis Shadesoul
 		[112636] = true, -- Sinister Leyrunner
 		[112637] = true, -- Devious Sunrunner
 	},
@@ -1899,8 +1907,14 @@ local MapNPCs = {
 		[107926] = true, -- Hannval the Butcher
 		[108255] = true, -- Coura, Mistress of Arcana
 		[108790] = true, -- Den Mother Ylva
+		[108822] = true, -- Huntress Estrid
+		[108823] = true, -- Halfdan
+		[108827] = true, -- Fjorlag, the Grave's Chill
 		[108885] = true, -- Aegir Wavecrusher
 		[109015] = true, -- Lagertha
+		[109113] = true, -- Boulderfall, the Eroded
+		[109195] = true, -- Soulbinder Halldora
+		[109317] = true, -- Rulf Bonesnapper
 		[109318] = true, -- Runeseer Sigvid
 		[109994] = true, -- Stormtalon
 		[110363] = true, -- Roteye
@@ -1931,13 +1945,19 @@ local MapNPCs = {
 		[99846] = true, -- Raging Earth
 		[99886] = true, -- Pacified Earth
 		[103785] = true, -- Well-Fed Bear
+		[104523] = true, -- Shalas'aman
 		[106042] = true, -- Kalazzius the Guileful
 		[107924] = true, -- Darkfiend Tormentor
 		[108879] = true, -- Humongris
+		[109125] = true, -- Kathaw the Savage
 		[109281] = true, -- Malisandra
+		[109648] = true, -- Witchdoctor Grgl-Brgl
 		[109692] = true, -- Lytheron
 		[109708] = true, -- Undergrell Ringleader
+		[109990] = true, -- Nylaathria the Forgotten
+		[110342] = true, -- Rabxach
 		[110361] = true, -- Harbinger of Screams
+		[110367] = true, -- Ealdis
 		[110562] = true, -- Bahagar
 	},
 	-- ----------------------------------------------------------------------------
@@ -2063,8 +2083,11 @@ local MapNPCs = {
 		[111651] = true, -- Degren
 		[111653] = true, -- Miasu
 		[112497] = true, -- Maia the White
+		[112705] = true, -- Achronos
 		[112756] = true, -- Sorallus
 		[112757] = true, -- Magistrix Vilessa
+		[112758] = true, -- Auditor Esiel
+		[112759] = true, -- Az'jatar
 		[112760] = true, -- Volshax, Breaker of Will
 		[112802] = true, -- Mar'tura
 		[113368] = true, -- Llorian
