@@ -138,7 +138,15 @@ local function GetNPCOptionsName(npcID)
 		colorCode = private.IsNPCQuestComplete(npcID) and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
 	end
 
-	return ("%s%s|r"):format(colorCode, NPCScan:GetNPCNameFromID(npcID))
+	local npcName = NPCScan:GetNPCNameFromID(npcID)
+	local vignetteName = npcData.vignetteName
+	local label = ""
+
+	if vignetteName and vignetteName ~= npcName then
+		label = (" %s"):format(_G.PARENS_TEMPLATE:format(vignetteName))
+	end
+
+	return ("%s%s%s|r"):format(colorCode, npcName, label)
 end
 
 local function SortByNPCNameThenByID(a, b)
