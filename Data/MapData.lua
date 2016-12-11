@@ -1824,6 +1824,7 @@ local MapNPCs = {
 		[99886] = true, -- Pacified Earth
 		[101596] = true, -- Charfeather
 		[102064] = true, -- Torrentius
+		[102075] = true, -- Withered J'im
 		[103975] = true, -- Jade Darkhaven
 		[105938] = true, -- Felwing
 		[106990] = true, -- Chief Bitterbrine
