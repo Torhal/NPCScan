@@ -2085,6 +2085,8 @@ local NPCData = {
 	},
 	[92611] = { -- Ambusher Daggerfang
 		factionGroup = "Alliance",
+		questID = 38627, -- Worgen Stalkers (Horde Only)
+		vignetteName = "Worgen Stalkers",
 	},
 	[92613] = { -- Priestess Liza
 		factionGroup = "Alliance",
@@ -2108,6 +2110,8 @@ local NPCData = {
 	},
 	[92633] = { -- Assassin Huwe
 		factionGroup = "Horde",
+		questID = 38630, -- Horde Kill Squad (Alliance Only)
+		vignetteName = "Forsaken Deathsquad",
 	},
 	[92634] = { -- Apothecary Perez
 		factionGroup = "Horde",
