@@ -73,6 +73,9 @@ local NPCData = {
 	[3652] = { -- Trigore the Lasher
 		isTameable = true,
 	},
+	[3735] = { -- Apothecary Falthis
+		factionGroup = "Horde",
+	},
 	[3736] = { -- Darkslayer Mordenthal
 		factionGroup = "Horde",
 	},
