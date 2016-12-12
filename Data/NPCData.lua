@@ -73,6 +73,9 @@ local NPCData = {
 	[3652] = { -- Trigore the Lasher
 		isTameable = true,
 	},
+	[3736] = { -- Darkslayer Mordenthal
+		factionGroup = "Horde",
+	},
 	[3868] = { -- Blood Seeker
 		isTameable = true,
 	},
