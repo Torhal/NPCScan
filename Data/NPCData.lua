@@ -106,6 +106,9 @@ local NPCData = {
 	[5807] = { -- The Rake
 		isTameable = true,
 	},
+	[5809] = { -- Sergeant Curtis
+		factionGroup = "Alliance",
+	},
 	[5823] = { -- Death Flayer
 		isTameable = true,
 	},
@@ -123,6 +126,18 @@ local NPCData = {
 	},
 	[5842] = { -- Takk the Leaper
 		isTameable = true,
+	},
+	[5847] = { -- Heggin Stonewhisker
+		factionGroup = "Alliance",
+	},
+	[5848] = { -- Malgin Barleybrew
+		factionGroup = "Alliance",
+	},
+	[5849] = { -- Digger Flameforge
+		factionGroup = "Alliance",
+	},
+	[5851] = { -- Captain Gerogg Hammertoe
+		factionGroup = "Alliance",
 	},
 	[5865] = { -- Dishu
 		isTameable = true,
@@ -162,6 +177,9 @@ local NPCData = {
 	},
 	[8213] = { -- Ironback
 		isTameable = true,
+	},
+	[8214] = { -- Jalinde Summerdrake
+		factionGroup = "Alliance",
 	},
 	[8277] = { -- Rekk'tilac
 		isTameable = true,
@@ -252,6 +270,9 @@ local NPCData = {
 	},
 	[14268] = { -- Lord Condar
 		isTameable = true,
+	},
+	[14275] = { -- Tamra Stormpike
+		factionGroup = "Alliance",
 	},
 	[14279] = { -- Creepthess
 		isTameable = true,
