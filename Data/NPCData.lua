@@ -2416,6 +2416,7 @@ local NPCData = {
 	},
 	[97928] = { -- Tamed Coralback
 		isTameable = true,
+		questID = 39994, -- Crab Rider Grmlrml
 	},
 	[97933] = { -- Crab Rider Grmlrml
 		questID = 39994, -- Crab Rider Grmlrml
