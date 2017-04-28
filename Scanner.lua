@@ -351,7 +351,7 @@ do
 
 	function NPCScan:WORLD_MAP_UPDATE()
 		for landmarkIndex = 1, _G.GetNumMapLandmarks() do
-			local landmarkType, landmarkName = _G.GetMapLandmarkInfo(landmarkIndex)
+			local landmarkType, landmarkName = C_WorldMap.GetMapLandmarkInfo(landmarkIndex)
 
 			ProcessVignette(landmarkName, _G.WORLD_MAP)
 		end
