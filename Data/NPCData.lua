@@ -2592,6 +2592,9 @@ local NPCData = {
 	[104481] = { -- Ala'washte
 		questID = 45514, -- Ala'washte
 	},
+	[104484] = { -- Olokk the Shipbreaker
+		questID = 45511, -- Olokk the Shipbreaker
+	},
 	[104513] = { -- Defilia
 		questID = 45513, -- Defilia
 	},

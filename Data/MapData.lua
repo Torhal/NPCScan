@@ -2008,6 +2008,7 @@ local MapNPCs = {
 		[101649] = true, -- Frostshard
 		[102863] = true, -- Bruiser
 		[104481] = true, -- Ala'washte
+		[104484] = true, -- Olokk the Shipbreaker
 		[104513] = true, -- Defilia
 		[104517] = true, -- Mawat'aki
 		[104524] = true, -- Ormagrogg
