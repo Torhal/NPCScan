@@ -2727,12 +2727,18 @@ local NPCData = {
 	[108827] = { -- Fjorlag, the Grave's Chill
 		questID = 45507, -- Fjorlag, the Grave's Chill
 	},
+	[108879] = { -- Humongris
+		questID = 42819, -- Pocket Wizard
+	},
 	[109054] = { -- Shal'an
 		questID = 42831, -- Shal'an
 		vignetteName = "Shal'an",
 	},
 	[109113] = { -- Boulderfall, the Eroded
 		questID = 40067, -- 7.0 Stormheim - Boulderfall - twh
+	},
+	[109125] = { -- Kathaw the Savage
+		questID = 42870, -- Unknown
 	},
 	[109281] = { -- Malisandra
 		questID = 45501, -- Malisandra
@@ -2786,6 +2792,9 @@ local NPCData = {
 	[109708] = { -- Undergrell Ringleader
 		questID = 43176, -- Grell Waves Tracking Flag
 		vignetteName = "Undgrell Attack",
+	},
+	[109943] = { -- Ana-Mouz
+		questID = 44501, -- Tracking Quest
 	},
 	[109954] = { -- Magister Phaedris
 		questID = 43348, -- Magister Phaedris
