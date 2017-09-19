@@ -163,8 +163,6 @@ function TargetButtonManager:RespawnAsClassification(eventName, targetButton, da
 
 	ResetTargetButtonPoints()
 
-	data.isSilent = true
-
 	newButton:Activate(data)
 	newButton.needsUnitData = nil
 end

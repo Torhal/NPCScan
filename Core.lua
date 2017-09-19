@@ -246,8 +246,6 @@ function NPCScan:OnEnable()
 	self:RegisterEvent("VIGNETTE_ADDED")
 	self:RegisterBucketEvent("WORLD_MAP_UPDATE", 0.5)
 
-	self:RegisterMessage("NPCScan_TargetButtonActivated", "DispatchSensoryCues")
-
 	HereBeDragons.RegisterCallback(NPCScan, "PlayerZoneChanged", "UpdateScanList")
 
 	self:UpdateScanList()

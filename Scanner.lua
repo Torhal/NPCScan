@@ -76,6 +76,7 @@ do
 		data.unitClassification = data.unitClassification or "rare"
 
 		NPCScan:Pour(_G.ERR_ZONE_EXPLORED:format(("%s %s"):format(data.npcName, _G.PARENS_TEMPLATE:format(data.sourceText))), 0, 1, 0)
+		NPCScan:DispatchSensoryCues()
 		NPCScan:SendMessage("NPCScan_DetectedNPC", data)
 
 		-- TODO: Make the Overlays object listen for the NPCScan_DetectedNPC message and run its own methods

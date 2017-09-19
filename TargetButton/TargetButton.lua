@@ -259,10 +259,6 @@ function TargetButton:Activate(data)
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED")
 	self:RegisterMessage("NPCScan_UnitInformationAvailable", "UpdateData")
-
-	if not data.isSilent then
-		self:SendMessage("NPCScan_TargetButtonActivated", self)
-	end
 end
 
 function TargetButton:Deactivate()
