@@ -126,6 +126,10 @@ local function CreateAnchorFrame()
 	return anchorFrame
 end
 
+local function IsTargetButtonGroupDisabled()
+	return not profile.targetButtonGroup.isEnabled
+end
+
 -- ----------------------------------------------------------------------------
 -- Initialization.
 -- ----------------------------------------------------------------------------
@@ -142,14 +146,28 @@ local function GetTargetingOptions()
 		type = "group",
 		descStyle = "inline",
 		args = {
-			duration = {
+			isEnabled = {
 				order = 1,
+				name = _G.ENABLE,
+				descStyle = "inline",
+				type = "toggle",
+				width = "full",
+				get = function(info)
+					return profile.targetButtonGroup.isEnabled
+				end,
+				set = function(info, value)
+					profile.targetButtonGroup.isEnabled = value
+				end,
+			},
+			duration = {
+				order = 2,
 				name = L["Duration"],
 				desc = L["The number of minutes a targeting button will exist before fading out."],
 				type = "range",
 				width = "full",
 				min = 0.5,
 				max = 5,
+				disabled = IsTargetButtonGroupDisabled,
 				get = function(info)
 					return profile.targetButtonGroup.durationSeconds / 60
 				end,
@@ -158,12 +176,13 @@ local function GetTargetingOptions()
 				end,
 			},
 			scale = {
-				order = 2,
+				order = 3,
 				name = _G.UI_SCALE,
 				type = "range",
 				width = "full",
 				min = 0.5,
 				max = 2,
+				disabled = IsTargetButtonGroupDisabled,
 				get = function(info)
 					return profile.targetButtonGroup.scale
 				end,
@@ -175,10 +194,11 @@ local function GetTargetingOptions()
 				end,
 			},
 			targetButtons = {
-				order = 3,
+				order = 4,
 				name = L["Screen Location"],
 				type = "group",
 				guiInline = true,
+				disabled = IsTargetButtonGroupDisabled,
 				args = {
 					spawnPoint = {
 						order = 1,
