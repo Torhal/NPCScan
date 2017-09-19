@@ -221,6 +221,20 @@ local function GetDetectionOptions()
 									NPCScan:UpdateScanList()
 								end,
 							},
+							deadNPCs = {
+								order = 3,
+								type = "toggle",
+								name = L["Dead NPCs"],
+								descStyle = "inline",
+								width = "full",
+								get = function(info)
+									return profile.detection.ignoreDeadNPCs
+								end,
+								set = function(info, value)
+									profile.detection.ignoreDeadNPCs = value
+									NPCScan:UpdateScanList()
+								end,
+							}
 						},
 					},
 				},

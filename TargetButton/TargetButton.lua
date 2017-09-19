@@ -245,6 +245,14 @@ function TargetButton:Activate(data)
 	self.shineTexture:Show()
 	self.shineTexture.animIn:Play()
 
+	if data.isDead then
+		self.killedBackgroundTexture:Show()
+
+		self.killedTextureFrame.left:Show()
+		self.killedTextureFrame.right:Show()
+		self.killedTextureFrame.animationGroup:Play()
+	end
+
 	if self:IsMouseOver() then
 		self.durationFadeAnimationGroup.animOut:SetStartDelay(1)
 	else

@@ -86,13 +86,21 @@ do
 end
 
 local function ProcessUnit(unitToken, sourceText)
-	if _G.UnitIsUnit("player", unitToken) or _G.UnitIsDeadOrGhost(unitToken) then
+	if _G.UnitIsUnit("player", unitToken) then
 		return
 	end
 
 	local npcID = private.UnitTokenToCreatureID(unitToken)
+
 	if npcID then
+		local unitIsDead = _G.UnitIsDead(unitToken)
+
+		if private.db.profile.detection.ignoreDeadNPCs and unitIsDead then
+			return
+		end
+
 		local detectionData = {
+			isDead = unitIsDead,
 			npcID = npcID,
 			npcName = _G.UnitName(unitToken),
 			sourceText = sourceText,

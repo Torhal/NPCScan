@@ -66,6 +66,7 @@ local DatabaseDefaults = {
 			continentIDs = {},
 			ignoreCompletedAchievementCriteria = true,
 			ignoreCompletedQuestObjectives = true,
+			ignoreDeadNPCs = true,
 			intervalSeconds = 600,
 			raidMarker = {
 				add = true,
