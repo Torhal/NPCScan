@@ -344,13 +344,7 @@ do
 				func(arguments or "")
 			end
 		else
-			local optionsFrame = _G.InterfaceOptionsFrame
-
-			if optionsFrame:IsVisible() then
-				optionsFrame:Hide()
-			else
-				_G.InterfaceOptionsFrame_OpenToCategory(self.OptionsFrame)
-			end
+			AceConfigDialog:Open(AddOnFolderName)
 		end
 	end
 end -- do-block
