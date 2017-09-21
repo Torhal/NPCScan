@@ -31,12 +31,6 @@ local function GetOptions()
 	return Options
 end
 
-local function SetupSuboptions(label, optionsTable)
-	local optionsName = AddOnFolderName .. ":" .. label
-	AceConfigRegistry:RegisterOptionsTable(optionsName, optionsTable)
-	return AceConfigDialog:AddToBlizOptions(optionsName, optionsTable.name or label, AddOnFolderName)
-end
-
 function NPCScan:SetupOptions()
 	AceConfigRegistry:RegisterOptionsTable(AddOnFolderName, GetOptions())
 	self.OptionsFrame = AceConfigDialog:AddToBlizOptions(AddOnFolderName)
