@@ -466,6 +466,13 @@ private.UpdateTameableRareNPCOptions = UpdateTameableRareNPCOptions
 -- ----------------------------------------------------------------------------
 local NPCSearchOptions = {}
 
+local function AddApplicableSearchID(npcID)
+	if private.NPCData[npcID].factionGroup ~= private.PlayerFactionGroup then
+		npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
+		npcIDs[#npcIDs + 1] = npcID
+	end
+end
+
 local function UpdateNPCSearchOptions()
 	table.wipe(NPCSearchOptions)
 
@@ -526,19 +533,10 @@ local function PerformNPCSearch(searchString)
 	table.wipe(npcNames)
 
 	for continentID = 1, #private.ContinentNameByID do
-		local continentName = private.ContinentNameByID[continentID]
-
-		if continentName:lower() == searchString then
-			local continentMaps = private.ContinentMaps[continentID]
-
-			for mapID in pairs(continentMaps) do
+		if private.ContinentNameByID[continentID]:lower() == searchString then
+			for mapID in pairs(private.ContinentMaps[continentID]) do
 				for npcID in pairs(private.MapNPCs[mapID]) do
-					local npcData = private.NPCData[npcID]
-
-					if npcData.factionGroup ~= private.PlayerFactionGroup then
-						npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
-						npcIDs[#npcIDs + 1] = npcID
-					end
+					AddApplicableSearchID(npcID)
 				end
 			end
 
@@ -549,16 +547,9 @@ local function PerformNPCSearch(searchString)
 	end
 
 	for mapID in pairs(private.MapNPCs) do
-		local mapName = private.MapNameByID[mapID]
-
-		if mapName:lower() == searchString then
+		if private.MapNameByID[mapID]:lower() == searchString then
 			for npcID in pairs(private.MapNPCs[mapID]) do
-				local npcData = private.NPCData[npcID]
-
-				if npcData.factionGroup ~= private.PlayerFactionGroup then
-					npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
-					npcIDs[#npcIDs + 1] = npcID
-				end
+				AddApplicableSearchID(npcID)
 			end
 
 			UpdateNPCSearchOptions()
@@ -568,15 +559,8 @@ local function PerformNPCSearch(searchString)
 	end
 
 	for npcID in pairs(private.NPCData) do
-		local npcName = NPCScan:GetNPCNameFromID(npcID)
-
-		if npcName:lower():find(searchString) then
-			local npcData = private.NPCData[npcID]
-
-			if npcData.factionGroup ~= private.PlayerFactionGroup then
-				npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
-				npcIDs[#npcIDs + 1] = npcID
-			end
+		if NPCScan:GetNPCNameFromID(npcID):lower():find(searchString) then
+			AddApplicableSearchID(npcID)
 		end
 	end
 
