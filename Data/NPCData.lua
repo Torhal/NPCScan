@@ -2759,7 +2759,7 @@ local NPCData = {
 		questID = 40067, -- 7.0 Stormheim - Boulderfall - twh
 	},
 	[109125] = { -- Kathaw the Savage
-		questID = 42870, -- Unknown
+		questID = 42870, -- DANGER: Kathaw the Savage
 	},
 	[109281] = { -- Malisandra
 		questID = 45501, -- Malisandra
