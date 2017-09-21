@@ -30,23 +30,21 @@ do
 
 	local debugger
 
-	function private.Debug(...)
-		if not debugger then
-			debugger = TextDump:New(("%s Debug Output"):format(AddOnFolderName), DEBUGGER_WIDTH, DEBUGGER_HEIGHT)
-		end
-
-		local message = string.format(...)
-		debugger:AddLine(message, "%X")
-
-		return message
-	end
-
-	function private.GetDebugger()
+	local function GetDebugger()
 		if not debugger then
 			debugger = TextDump:New(("%s Debug Output"):format(AddOnFolderName), DEBUGGER_WIDTH, DEBUGGER_HEIGHT)
 		end
 
 		return debugger
+	end
+
+	private.GetDebugger = GetDebugger
+
+	function private.Debug(...)
+		local message = string.format(...)
+		GetDebugger():AddLine(message, "%X")
+
+		return message
 	end
 end
 
