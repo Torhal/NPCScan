@@ -16,7 +16,7 @@ local AddOnFolderName, private = ...
 local LibStub = _G.LibStub
 local NPCScan = LibStub("AceAddon-3.0"):NewAddon(AddOnFolderName, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0", "AceBucket-3.0", "LibSink-2.0", "LibToast-1.0")
 local VL = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName .. "Vignette")
-
+local AceConfigDialog = LibStub("AceConfigDialog-3.0")
 local HereBeDragons = LibStub("HereBeDragons-1.0")
 
 -- ----------------------------------------------------------------------------
@@ -303,6 +303,11 @@ do
 		SUBCOMMAND_FUNCS = SUBCOMMAND_FUNCS or {
 			ADD = private.AddUserDefinedNPC,
 			REMOVE = private.RemoveUserDefinedNPC,
+			SEARCH = function(subject)
+				AceConfigDialog:Open(AddOnFolderName)
+				AceConfigDialog:SelectGroup(AddOnFolderName, "npcOptions", "search")
+				private.PerformNPCSearch(subject)
+			end,
 			--@debug@
 			DEBUG = function()
 				local debugger = private.GetDebugger()

@@ -567,6 +567,8 @@ local function PerformNPCSearch(searchString)
 	UpdateNPCSearchOptions()
 end
 
+private.PerformNPCSearch = PerformNPCSearch
+
 -- ----------------------------------------------------------------------------
 -- User defined NPC options.
 -- ----------------------------------------------------------------------------
