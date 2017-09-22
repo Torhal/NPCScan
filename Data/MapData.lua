@@ -1913,7 +1913,6 @@ local MapNPCs = {
 		[99886] = true, -- Pacified Earth
 		[100223] = true, -- Vrykul Earthshaper Spirit
 		[100224] = true, -- Vrykul Earthmaiden Spirit
-		[107023] = true, -- Nithogg
 		[107487] = true, -- Starbuck
 		[107544] = true, -- Nithogg
 		[107926] = true, -- Hannval the Butcher
