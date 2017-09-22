@@ -1905,6 +1905,9 @@ local NPCData = {
 		questID = 38037, -- Cache of Infernals
 		vignetteName = "Cache of Infernals",
 	},
+	[90816] = { -- Skystormer
+		isTameable = true,
+	},
 	[90884] = { -- Bilkor the Thrower
 		questID = 38262, -- Bilkor the Thrower
 	},

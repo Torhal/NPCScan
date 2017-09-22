@@ -283,6 +283,7 @@ local MapNPCs = {
 		[8281] = true, -- Scald
 		[8282] = true, -- Highlord Mastrogonde
 		[8283] = true, -- Slave Master Blackheart
+		[8924] = true, -- The Behemoth
 		[50846] = true, -- Slavermaw
 		[50876] = true, -- Avis
 		[50946] = true, -- Hogzilla
@@ -296,6 +297,7 @@ local MapNPCs = {
 	-- Burning Steppes
 	-- ----------------------------------------------------------------------------
 	[29] = {
+		[8924] = true, -- The Behemoth
 		[8976] = true, -- Hematos
 		[8978] = true, -- Thauris Balgarr
 		[8979] = true, -- Gruklash
@@ -515,6 +517,7 @@ local MapNPCs = {
 	-- Stonetalon Mountains
 	-- ----------------------------------------------------------------------------
 	[81] = {
+		[4015] = true, -- Pridewing Patriarch
 		[4066] = true, -- Nal'taszar
 		[5915] = true, -- Brother Ravenoak
 		[5928] = true, -- Sorrow Wing
@@ -561,6 +564,7 @@ local MapNPCs = {
 		[11498] = true, -- Skarr the Broken
 		[43488] = true, -- Mordei the Earthrender
 		[54533] = true, -- Prince Lakma
+		[90816] = true, -- Skystormer
 	},
 	-- ----------------------------------------------------------------------------
 	-- Dustwallow Marsh
