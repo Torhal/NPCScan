@@ -884,6 +884,7 @@ local MapNPCs = {
 		[5829] = true, -- Snort the Heckler
 		[5832] = true, -- Thunderstomp
 		[5834] = true, -- Azzere the Skyblade
+		[5837] = true, -- Stonearm
 		[5847] = true, -- Heggin Stonewhisker
 		[5848] = true, -- Malgin Barleybrew
 		[5849] = true, -- Digger Flameforge
