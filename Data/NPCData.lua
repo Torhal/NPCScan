@@ -2718,6 +2718,9 @@ local NPCData = {
 		questID = 42437, -- Starbuck
 		vignetteName = "Starbuck",
 	},
+	[107544] = { -- Nithogg
+		questID = 44508, -- Unknown
+	},
 	[107595] = { -- Grimrot
 		isTameable = true,
 	},
