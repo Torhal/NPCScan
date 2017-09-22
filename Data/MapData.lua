@@ -1971,6 +1971,56 @@ local MapNPCs = {
 		[110562] = true, -- Bahagar
 	},
 	-- ----------------------------------------------------------------------------
+	-- Broken Shore
+	-- ----------------------------------------------------------------------------
+	[1021] = {
+		[116166] = true, -- Eye of Gurgh
+		[116953] = true, -- Corrupted Bonebreaker
+		[117086] = true, -- Emberfire
+		[117089] = true, -- Inquisitor Chillbane
+		[117090] = true, -- Xorogun the Flamecarver
+		[117091] = true, -- Felmaw Emberfiend
+		[117093] = true, -- Felbringer Xar'thok
+		[117094] = true, -- Malorus the Soulkeeper
+		[117095] = true, -- Dreadblade Annihilator
+		[117096] = true, -- Potionmaster Gloop
+		[117103] = true, -- Felcaller Zelthae
+		[117136] = true, -- Doombringer Zar'thoz
+		[117140] = true, -- Salethan the Broodwalker
+		[117141] = true, -- Malgrazoth
+		[117239] = true, -- Brutallus
+		[117303] = true, -- Malificus
+		[117470] = true, -- Si'vash
+		[118993] = true, -- Dreadeye
+		[119629] = true, -- Lord Hel'Nurath
+		[119718] = true, -- Imp Mother Bruva
+		[120583] = true, -- Than'otalion
+		[120641] = true, -- Skulguloth
+		[120665] = true, -- Force-Commander Xillious
+		[120675] = true, -- An'thyna
+		[120681] = true, -- Fel Obliterator
+		[120686] = true, -- Illisthyndria
+		[120998] = true, -- Flllurlokkr
+		[121016] = true, -- Aqueux
+		[121029] = true, -- Brood Mother Nix
+		[121037] = true, -- Grossir
+		[121046] = true, -- Brother Badatin
+		[121049] = true, -- Baleful Knight-Captain
+		[121051] = true, -- Unstable Abyssal
+		[121056] = true, -- Malformed Terrorguard
+		[121068] = true, -- Volatile Imp
+		[121073] = true, -- Deranged Succubus
+		[121077] = true, -- Lambent Felhunter
+		[121088] = true, -- Warped Voidlord
+		[121090] = true, -- Demented Shivarra
+		[121092] = true, -- Anomalous Observer
+		[121107] = true, -- Lady Eldrathe
+		[121108] = true, -- Ruinous Overfiend
+		[121112] = true, -- Somber Dawn
+		[121124] = true, -- Apocron
+		[121134] = true, -- Duke Sithizi
+	},
+	-- ----------------------------------------------------------------------------
 	-- Helheim
 	-- ----------------------------------------------------------------------------
 	[1022] = {
