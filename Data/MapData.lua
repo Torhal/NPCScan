@@ -1867,6 +1867,8 @@ local MapNPCs = {
 		[109702] = true, -- Deepclaw
 		[110824] = true, -- Tideclaw
 		[111434] = true, -- Sea King Tidross
+		[111454] = true, -- Bestrix
+		[111674] = true, -- Cinderwing
 		[111939] = true, -- Lysanis Shadesoul
 		[112636] = true, -- Sinister Leyrunner
 		[112637] = true, -- Devious Sunrunner
@@ -1929,6 +1931,7 @@ local MapNPCs = {
 		[109994] = true, -- Stormtalon
 		[110363] = true, -- Roteye
 		[111463] = true, -- Bulvinkel
+		[117850] = true, -- Simone the Seductress
 	},
 	-- ----------------------------------------------------------------------------
 	-- Val'Sharah
@@ -1966,6 +1969,7 @@ local MapNPCs = {
 		[109708] = true, -- Undergrell Ringleader
 		[109990] = true, -- Nylaathria the Forgotten
 		[110342] = true, -- Rabxach
+		[110346] = true, -- Aodh Witherpetal
 		[110361] = true, -- Harbinger of Screams
 		[110367] = true, -- Ealdis
 		[110562] = true, -- Bahagar
@@ -2160,6 +2164,7 @@ local MapNPCs = {
 	-- ----------------------------------------------------------------------------
 	[1041] = {
 		[96647] = true, -- Earlnoc the Beastbreaker
+		[99802] = true, -- Arthfael
 	},
 	-- ----------------------------------------------------------------------------
 	-- Eye of Azshara
@@ -2168,7 +2173,16 @@ local MapNPCs = {
 		[91788] = true, -- Shellmaw
 		[108543] = true, -- Dread Captain Thedon
 		[101411] = true, -- Gom Crabbar
+		[101467] = true, -- Jaggen-Ra
+		[108541] = true, -- Dread Corsair
 		[111573] = true, -- Kosumoth the Hungering
+	},
+	-- ----------------------------------------------------------------------------
+	-- Darkheart Thicket
+	-- ----------------------------------------------------------------------------
+	[1067] = {
+		[99362] = true, -- Kudzilla
+		[101660] = true, -- Rage Rot
 	},
 	-- ----------------------------------------------------------------------------
 	-- Thunder Totem
@@ -2286,6 +2300,7 @@ local ContinentIDByDungeonMapID = {
 	[1032] = private.ContinentID.BrokenIsles, -- Vault of the Wardens
 	[1041] = private.ContinentID.BrokenIsles, -- Halls of Valor
 	[1046] = private.ContinentID.BrokenIsles, -- Eye of Azshara
+	[1067] = private.ContinentID.BrokenIsles, -- Darkheart Thicket
 	[1091] = private.ContinentID.Kalimdor, -- The Exodar (Scenario version)
 }
 
