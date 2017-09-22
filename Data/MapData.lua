@@ -2255,7 +2255,7 @@ for mapID in pairs(MapNPCs) do
 
 	local continentID = HereBeDragons:GetCZFromMapID(mapID)
 	if continentID < 1 then
-		continentID = ContinentIDByDungeonMapID[mapID]
+		continentID = ContinentIDByDungeonMapID[mapID] or continentID
 	end
 
 	ContinentMaps[continentID] = ContinentMaps[continentID] or {}
