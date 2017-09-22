@@ -154,8 +154,12 @@ function NPCScan:OnEnable()
 		Spell = 28,
 	}
 
+	local missingNPCs = {}
+
 	for achievementID, achievement in pairs(private.AchievementData) do
 		achievement.ID = achievementID
+
+		table.wipe(missingNPCs)
 
 		for criteriaIndex = 1, _G.GetAchievementNumCriteria(achievementID) do
 			local assetName, criteriaType, isCriteriaCompleted, _, _, _, _, assetID, _, criteriaID = _G.GetAchievementCriteriaInfo(achievementID, criteriaIndex)
@@ -181,9 +185,7 @@ function NPCScan:OnEnable()
 
 						achievement.criteriaNPCs[assetID] = true
 					else
-						private.Debug("***** AchievementID.%s: Missing MapNPCs entry.", private.AchievementLabel[achievementID])
-						private.Debug("[%s] = true, -- %s", assetID, assetName)
-						private.Debug("*****")
+						missingNPCs[#missingNPCs + 1] = ("\n [%s] = true, -- %s"):format(assetID, assetName)
 					end
 				end
 			elseif criteriaType == CriteriaType.Quest then
@@ -204,6 +206,16 @@ function NPCScan:OnEnable()
 			else
 				private.Debug("***** AchievementID.%s: Unknown criteria type %d, assetID %d", private.AchievementLabel[achievementID], criteriaType, assetID)
 			end
+		end
+
+		if #missingNPCs > 0 then
+			private.Debug("***** AchievementID.%s: Missing MapNPCs entry.", private.AchievementLabel[achievementID])
+
+			for index = 1, #missingNPCs do
+				private.Debug(missingNPCs[index])
+			end
+
+			private.Debug("*****")
 		end
 	end
 
