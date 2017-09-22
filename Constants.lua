@@ -135,6 +135,7 @@ local ContinentID = {
 	Pandaria = 6,
 	Draenor = 7,
 	BrokenIsles = 8,
+	Argus = 9,
 }
 
 private.ContinentID = ContinentID
@@ -148,6 +149,7 @@ local ContinentMapID = {
 	[ContinentID.Pandaria] = 862,
 	[ContinentID.Draenor] = 962,
 	[ContinentID.BrokenIsles] = 1007,
+	[ContinentID.Argus] = 1184,
 }
 
 private.ContinentMapID = ContinentMapID

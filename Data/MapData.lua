@@ -2231,9 +2231,6 @@ local ContinentIDByDungeonMapID = {
 	[1041] = private.ContinentID.BrokenIsles, -- Halls of Valor
 	[1046] = private.ContinentID.BrokenIsles, -- Eye of Azshara
 	[1091] = private.ContinentID.Kalimdor, -- The Exodar (Scenario version)
-	[1135] = private.ContinentID.BrokenIsles, -- Krokuun
-	[1170] = private.ContinentID.BrokenIsles, -- Mac'Aree
-	[1171] = private.ContinentID.BrokenIsles, -- Antoran Wastes
 }
 
 private.ContinentIDByDungeonMapID = ContinentIDByDungeonMapID
