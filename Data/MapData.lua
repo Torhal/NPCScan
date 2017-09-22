@@ -2100,6 +2100,21 @@ local MapNPCs = {
 		[113694] = true, -- Pashya
 	},
 	-- ----------------------------------------------------------------------------
+	-- Halls of Valor
+	-- ----------------------------------------------------------------------------
+	[1041] = {
+		[96647] = true, -- Earlnoc the Beastbreaker
+	},
+	-- ----------------------------------------------------------------------------
+	-- Eye of Azshara
+	-- ----------------------------------------------------------------------------
+	[1046] = {
+		[91788] = true, -- Shellmaw
+		[108543] = true, -- Dread Captain Thedon
+		[101411] = true, -- Gom Crabbar
+		[111573] = true, -- Kosumoth the Hungering
+	},
+	-- ----------------------------------------------------------------------------
 	-- Thunder Totem
 	-- ----------------------------------------------------------------------------
 	[1080] = {
@@ -2112,12 +2127,79 @@ local MapNPCs = {
 		[110486] = true, -- Huk'roth the Huntmaster
 	},
 	-- ----------------------------------------------------------------------------
-	-- Eye of Azshara
+	-- Krokuun
 	-- ----------------------------------------------------------------------------
-	[1046] = {
-		[108543] = true, -- Dread Captain Thedon
-		[101411] = true, -- Gom Crabbar
-		[111573] = true, -- Kosumoth the Hungering
+	[1135] = {
+		[120393] = true, -- Siegemaster Voraan
+		[122911] = true, -- Commander Vecaya
+		[122912] = true, -- Commander Sathrenael
+		[123464] = true, -- Sister Subversia
+		[123689] = true, -- Talestra the Vile
+		[124775] = true, -- Commander Endaxis
+		[124804] = true, -- Tereck the Selector
+		[125388] = true, -- Vagath the Betrayed
+		[125479] = true, -- Tar Spitter
+		[125820] = true, -- Imp Mother Laglath
+		[125824] = true, -- Khazaduum
+		[126419] = true, -- Naroua
+	},
+	-- ----------------------------------------------------------------------------
+	-- Mac'Aree
+	-- ----------------------------------------------------------------------------
+	[1170] = {
+		[122838] = true, -- Shadowcaster Voruun
+		[126815] = true, -- Soultwisted Monstrosity
+		[126852] = true, -- Wrangler Kravos
+		[126860] = true, -- Kaara the Pale
+		[126862] = true, -- Baruut the Bloodthirsty
+		[126864] = true, -- Feasel the Muffin Thief
+		[126865] = true, -- Vigilant Thanos
+		[126866] = true, -- Vigilant Kuro
+		[126867] = true, -- Venomtail Skyfin
+		[126868] = true, -- Turek the Lucid
+		[126869] = true, -- Captain Faruq
+		[126885] = true, -- Umbraliss
+		[126887] = true, -- Ataxon
+		[126889] = true, -- Sorolis the Ill-Fated
+		[126896] = true, -- Herald of Chaos
+		[126898] = true, -- Sabuul
+		[126899] = true, -- Jed'hin Champion Vorusk
+		[124440] = true, -- Overseer Y'Beda
+		[125497] = true, -- Overseer Y'Sorna
+		[125498] = true, -- Overseer Y'Morna
+		[126900] = true, -- Instructor Tarahna
+		[126908] = true, -- Zul'tan the Numerous
+		[126910] = true, -- Commander Xethgar
+		[126912] = true, -- Skreeg the Devourer
+		[126913] = true, -- Slithon the Last
+	},
+	-- ----------------------------------------------------------------------------
+	-- Antoran Wastes
+	-- ----------------------------------------------------------------------------
+	[1171] = {
+		[122947] = true, -- Mistress Il'thendra
+		[122958] = true, -- Blistermaw
+		[122999] = true, -- Gar'zoth
+		[126040] = true, -- Puscilla
+		[126115] = true, -- Ven'orn
+		[126199] = true, -- Vrax'thul
+		[126208] = true, -- Varga
+		[126254] = true, -- Lieutenant Xakaar
+		[126338] = true, -- Wrath-Lord Yarez
+		[126946] = true, -- Inquisitor Vethroz
+		[127084] = true, -- Commander Texlaz
+		[127090] = true, -- Admiral Rel'var
+		[127096] = true, -- All-Seer Xanarian
+		[127118] = true, -- Worldsplitter Skuul
+		[127288] = true, -- Houndmaster Kerrax
+		[127291] = true, -- Watcher Aival
+		[127300] = true, -- Void Warden Valsuran
+		[127376] = true, -- Chief Alchemist Munculus
+		[127581] = true, -- The Many-Faced Devourer
+		[127700] = true, -- Squadron Commander Vishax
+		[127703] = true, -- Doomcaster Suprax
+		[127705] = true, -- Mother Rosula
+		[127706] = true, -- Rezira the Seer
 	},
 }
 
@@ -2146,8 +2228,12 @@ local ContinentIDByDungeonMapID = {
 	[1022] = private.ContinentID.BrokenIsles, -- Helheim
 	[1028] = private.ContinentID.BrokenIsles, -- Mardum, the Shattered Abyss
 	[1032] = private.ContinentID.BrokenIsles, -- Vault of the Wardens
+	[1041] = private.ContinentID.BrokenIsles, -- Halls of Valor
 	[1046] = private.ContinentID.BrokenIsles, -- Eye of Azshara
 	[1091] = private.ContinentID.Kalimdor, -- The Exodar (Scenario version)
+	[1135] = private.ContinentID.BrokenIsles, -- Krokuun
+	[1170] = private.ContinentID.BrokenIsles, -- Mac'Aree
+	[1171] = private.ContinentID.BrokenIsles, -- Antoran Wastes
 }
 
 private.ContinentIDByDungeonMapID = ContinentIDByDungeonMapID
