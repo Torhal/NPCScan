@@ -2973,6 +2973,9 @@ local NPCData = {
 	[113694] = { -- Pashya
 		isTameable = true,
 	},
+	[118244] = { -- Lightning Paw
+		isTameable = true,
+	},
 }
 
 private.NPCData = NPCData

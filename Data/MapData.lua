@@ -351,6 +351,7 @@ local MapNPCs = {
 		[45785] = true, -- Carved One
 		[45801] = true, -- Eliza
 		[45811] = true, -- Marina DeSirrus
+		[118244] = true, -- Lightning Paw
 	},
 	-- ----------------------------------------------------------------------------
 	-- Loch Modan
