@@ -1159,6 +1159,7 @@ local MapNPCs = {
 		[69769] = true, -- Zandalari Warbringer
 		[69841] = true, -- Zandalari Warbringer
 		[69842] = true, -- Zandalari Warbringer
+		[70323] = true, -- Krakkanon
 	},
 	-- ----------------------------------------------------------------------------
 	-- Vale of Eternal Blossoms
@@ -1853,7 +1854,6 @@ local MapNPCs = {
 		[108136] = true, -- The Muscle
 		[108174] = true, -- Bilgerat
 		[108255] = true, -- Coura, Mistress of Arcana
-		[108678] = true, -- Shar'thos
 		[108829] = true, -- Levantus
 		[109331] = true, -- Calamir
 		[109504] = true, -- Ragemaw
@@ -1963,6 +1963,7 @@ local MapNPCs = {
 		[104523] = true, -- Shalas'aman
 		[106042] = true, -- Kalazzius the Guileful
 		[107924] = true, -- Darkfiend Tormentor
+		[108678] = true, -- Shar'thos
 		[108879] = true, -- Humongris
 		[109125] = true, -- Kathaw the Savage
 		[109281] = true, -- Malisandra
