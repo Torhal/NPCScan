@@ -326,14 +326,16 @@ do
 	end
 
 	local function ProcessVignette(vignetteName, sourceText)
-		if private.VignetteNPCs[vignetteName] then
-			ProcessVignetteNameDetection(vignetteName, sourceText)
-			return true
-		end
-
 		local questID = private.QuestIDFromName[vignetteName]
 		if questID then
 			ProcessQuestDetection(questID, sourceText)
+			return true
+		elseif sourceText == _G.WORLD_MAP then
+			return false
+		end
+
+		if private.VignetteNPCs[vignetteName] then
+			ProcessVignetteNameDetection(vignetteName, sourceText)
 			return true
 		end
 
