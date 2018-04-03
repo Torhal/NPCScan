@@ -363,7 +363,7 @@ function TargetButton:SetSpecialText(fakeCriteriaCompleted)
 
 	if npcData and npcData.achievementID then
 		local isCriteriaCompleted = fakeCriteriaCompleted or npcData.isCriteriaCompleted
-		local achievementName = private.AchievementNameByID[npcData.achievementID]
+		local achievementName = private.AchievementData[npcData.achievementID].name
 
 		self.SpecialText:SetFormattedText("%s%s|r", isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE, achievementName)
 	end
