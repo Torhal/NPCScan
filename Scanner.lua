@@ -352,7 +352,20 @@ do
 		return false
 	end
 
+	local VIGNETTE_SOURCE_TO_PREFERENCE = {
+		[_G.MINIMAP_LABEL] = "ignoreMiniMap",
+		[_G.WORLD_MAP] = "ignoreWorldMap",
+	}
+
+	local function IsIgnoringSource(sourceText)
+		return private.db.profile.detection[VIGNETTE_SOURCE_TO_PREFERENCE[sourceText]]
+	end
+
 	function NPCScan:VIGNETTE_ADDED(eventName, instanceID)
+		if IsIgnoringSource(_G.MINIMAP_LABEL) then
+			return
+		end
+
 		local x, y, vignetteName, iconID = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceID)
 
 		if not ProcessVignette(vignetteName, _G.MINIMAP_LABEL) then
@@ -361,6 +374,10 @@ do
 	end
 
 	function NPCScan:WORLD_MAP_UPDATE()
+		if IsIgnoringSource(_G.WORLD_MAP) then
+			return
+		end
+
 		for landmarkIndex = 1, _G.GetNumMapLandmarks() do
 			local landmarkType, landmarkName = C_WorldMap.GetMapLandmarkInfo(landmarkIndex)
 
