@@ -23,16 +23,6 @@ local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 -- ----------------------------------------------------------------------------
 -- Constants.
 -- ----------------------------------------------------------------------------
-local AchievementIDs = {}
-
-for achievementID in pairs(private.AchievementData) do
-	AchievementIDs[#AchievementIDs + 1] = achievementID
-end
-
-table.sort(AchievementIDs, function(a, b)
-	return private.AchievementNameByID[a] < private.AchievementNameByID[b]
-end)
-
 local EmptyListOption = {
 	order = 1,
 	name = _G.EMPTY,
@@ -175,10 +165,23 @@ end
 -- ----------------------------------------------------------------------------
 -- Achievement options
 -- ----------------------------------------------------------------------------
+local AchievementIDs -- Populated below.
 local AchievementNPCOptions = {}
 
 local function UpdateAchievementNPCOptions()
 	table.wipe(AchievementNPCOptions)
+
+	if not AchievementIDs then
+		AchievementIDs = {}
+
+		for achievementID in pairs(private.AchievementData) do
+			AchievementIDs[#AchievementIDs + 1] = achievementID
+		end
+
+		table.sort(AchievementIDs, function(a, b)
+			return private.AchievementData[a].name < private.AchievementData[b].name
+		end)
+	end
 
 	for achievementIDIndex = 1, #AchievementIDs do
 		local achievementID = AchievementIDs[achievementIDIndex]
@@ -186,8 +189,8 @@ local function UpdateAchievementNPCOptions()
 
 		local achievementOptionsTable = {
 			order = achievementIDIndex,
-			name = ("%s%s|r"):format(private.DetectionGroupStatusColors[achievementStatus], private.AchievementNameByID[achievementID]),
-			desc = private.AchievementDescriptionByID[achievementID],
+			name = ("%s%s|r"):format(private.DetectionGroupStatusColors[achievementStatus], private.AchievementData[achievementID].name),
+			desc = private.AchievementData[achievementID].description,
 			type = "group",
 			args = {
 				status = {
@@ -485,7 +488,7 @@ local function UpdateNPCSearchOptions()
 
 			local achievementText = ""
 			if npcData.achievementID then
-				achievementText = _G.PARENS_TEMPLATE:format(private.AchievementNameByID[npcData.achievementID])
+				achievementText = _G.PARENS_TEMPLATE:format(private.AchievementData[npcData.achievementID].name)
 			end
 
 			NPCSearchOptions["npc" .. npcID] = {
