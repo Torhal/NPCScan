@@ -186,7 +186,9 @@ local AchievementID = {
 	HeraldsOfTheLegion = 9638,
 	HighValueTargets = 9216,
 	JungleStalker = 10070,
+	NaxtVictim = 11841,
 	OneManArmy = 7317,
+	TerrorsOfTheShore = 11786,
 	TimelessChampion = 8714,
 	UnleashedMonstrosities = 11160,
 }
@@ -223,7 +225,9 @@ local AchievementData = {
 	[AchievementID.HeraldsOfTheLegion] = { continentID = ContinentID.Draenor },
 	[AchievementID.HighValueTargets] = { continentID = ContinentID.Draenor },
 	[AchievementID.JungleStalker] = { continentID = ContinentID.Draenor },
+	[AchievementID.NaxtVictim] = { continentID = ContinentID.BrokenIsles},
 	[AchievementID.OneManArmy] = { continentID = ContinentID.Pandaria },
+	[AchievementID.TerrorsOfTheShore] = { continentID = ContinentID.BrokenIsles },
 	[AchievementID.TimelessChampion] = { continentID = ContinentID.Pandaria },
 	[AchievementID.UnleashedMonstrosities] = { continentID = ContinentID.BrokenIsles },
 }
