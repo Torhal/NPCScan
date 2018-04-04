@@ -1940,6 +1940,7 @@ local MapNPCs = {
 	-- Val'Sharah
 	-- ----------------------------------------------------------------------------
 	[1018] = {
+		[92104] = true, -- Thistleleaf Rascal
 		[92117] = true, -- Gorebeak,
 		[92180] = true, -- Seersei
 		[92423] = true, -- Theryssia

@@ -2021,6 +2021,10 @@ local NPCData = {
 		questID = 38461, -- Guarms Mate (Fenri)
 		vignetteName = "Fenri",
 	},
+	[92104] = { -- Thistleleaf Rascal
+		questID = 38466, -- Grellkin Treasure
+		vignetteName = "Unguarded Thistleleaf Treasure",
+	},
 	[92117] = { -- Gorebeak
 		isTameable = true,
 		questID = 38468, -- Gorebeak
@@ -3030,7 +3034,7 @@ local NPCData = {
 		questID = 46090, -- Unknown
 	},
 	[117470] = { -- Si'vash
-		questID = 46945, -- Unknown
+		questID = 46945, -- Si'vash
 	},
 	[118244] = { -- Lightning Paw
 		isTameable = true,
@@ -3069,7 +3073,7 @@ local NPCData = {
 		questID = 47028, -- Unknown
 	},
 	[121124] = { -- Apocron
-		questID = 47061, -- Unknown
+		questID = 47061, -- Apocron
 	},
 	[121134] = { -- Duke Sithizi
 		questID = 47036, -- Unknown

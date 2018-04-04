@@ -298,6 +298,7 @@ VL["Trecherous Stallions"] = true
 
 VL["Unbound Rift"] = true
 VL["Undgrell Attack"] = true
+VL["Unguarded Thistleleaf Treasure"] = true
 VL["Urgev the Flayer"] = true
 
 VL["Valiyaka the Stormbringer"] = true
