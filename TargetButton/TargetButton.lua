@@ -3,10 +3,8 @@
 -- ----------------------------------------------------------------------------
 -- Functions
 local pairs = _G.pairs
-local type = _G.type
 
 -- Libraries
-local math = _G.math
 local table = _G.table
 
 -- ----------------------------------------------------------------------------
@@ -121,7 +119,7 @@ end
 -- ----------------------------------------------------------------------------
 -- Event and message handlers.
 -- ----------------------------------------------------------------------------
-function TargetButton:COMBAT_LOG_EVENT_UNFILTERED(eventName, _, subEvent, _, _, _, _, _, destGUID)
+function TargetButton:COMBAT_LOG_EVENT_UNFILTERED(_, _, subEvent, _, _, _, _, _, destGUID)
 	if subEvent == "UNIT_DIED" and destGUID and private.GUIDToCreatureID(destGUID) == self.npcID then
 		self.isDead = true
 	end
@@ -169,7 +167,7 @@ function TargetButton:PLAYER_REGEN_ENABLED()
 	self.hiddenForCombat = nil
 end
 
-function TargetButton:UpdateData(eventName, data)
+function TargetButton:UpdateData(_, data)
 	if data.npcID == self.npcID then
 		if data.unitClassification and self.__classification ~= data.unitClassification and not _G.InCombatLockdown() then
 			self:SendMessage("NPCScan_TargetButtonNeedsReclassified", self, data)
@@ -585,37 +583,37 @@ local function CreateTargetButton(unitClassification)
 
 	-- Glow
 	local glowAnimationGroup = glowTexture:CreateAnimationGroup()
-	glowTexture.animIn = glowAnimationGroup
-
 	glowAnimationGroup:SetScript("OnFinished", AnimationGroup_HideParent)
 
-	local glowAnimInShow = CreateAlphaAnimation(glowAnimationGroup, 0, 1, 0.2, nil, 1)
-	local glowAnimInHide = CreateAlphaAnimation(glowAnimationGroup, 1, 0, 0.5, nil, 2)
+	glowTexture.animIn = glowAnimationGroup
+
+	CreateAlphaAnimation(glowAnimationGroup, 0, 1, 0.2, nil, 1) -- Show
+	CreateAlphaAnimation(glowAnimationGroup, 1, 0, 0.5, nil, 2) -- Hide
 
 	-- Shine
 	local shineAnimationGroup = shineTexture:CreateAnimationGroup()
-	shineTexture.animIn = shineAnimationGroup
-
 	shineAnimationGroup:SetScript("OnFinished", AnimationGroup_HideParent)
 
-	local shineAnimateIn = CreateAlphaAnimation(shineAnimationGroup, 0, 1, 0.1, nil, 1)
+	shineTexture.animIn = shineAnimationGroup
+
+	CreateAlphaAnimation(shineAnimationGroup, 0, 1, 0.1, nil, 1) -- Animate in.
 
 	local shineOffset = shineAnimationGroup:CreateAnimation("Translation")
 	shineOffset:SetOffset(165, 0)
 	shineOffset:SetDuration(0.425)
 	shineOffset:SetOrder(2)
 
-	local shineAnimateOut = CreateAlphaAnimation(shineAnimationGroup, 1, 0, 0.25, 0.175, 2)
+	CreateAlphaAnimation(shineAnimationGroup, 1, 0, 0.25, 0.175, 2) -- Animate out.
 
 	-- Killed Background
 	local killedBackgroundAnimationGroup = killedBackgroundTexture:CreateAnimationGroup()
-	killedBackgroundTexture.animIn = killedBackgroundAnimationGroup
-
 	killedBackgroundAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissGrandParent)
 	killedBackgroundAnimationGroup.name = "killedBackgroundAnimationGroup"
 
-	local killedBackgroundAnimInShow = CreateAlphaAnimation(killedBackgroundAnimationGroup, 0, 1, 0.5, nil, 1)
-	local killedBackgroundAnimInHide = CreateAlphaAnimation(killedBackgroundAnimationGroup, 1, 0, 0.8, nil, 2)
+	killedBackgroundTexture.animIn = killedBackgroundAnimationGroup
+
+	CreateAlphaAnimation(killedBackgroundAnimationGroup, 0, 1, 0.5, nil, 1) -- Show.
+	CreateAlphaAnimation(killedBackgroundAnimationGroup, 1, 0, 0.8, nil, 2) -- Hide.
 
 	-- Killed
 	local killedAnimationGroup = killedTextureFrame:CreateAnimationGroup()
@@ -665,16 +663,19 @@ local function CreateTargetButton(unitClassification)
 
 	-- Dismissed
 	local dismissAnimationGroup = button:CreateAnimationGroup()
-	local dismissAnim = private.CreateAlphaAnimation(dismissAnimationGroup, 1, 0, 0.5, 0.5)
 	dismissAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissParent)
-	button.dismissAnimationGroup = dismissAnimationGroup
 	dismissAnimationGroup.name = "dismissAnimationGroup"
+
+	private.CreateAlphaAnimation(dismissAnimationGroup, 1, 0, 0.5, 0.5)
+
+	button.dismissAnimationGroup = dismissAnimationGroup
 
 	-- Duration
 	local durationFadeAnimationGroup = button:CreateAnimationGroup()
 	durationFadeAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissParent)
-	button.durationFadeAnimationGroup = durationFadeAnimationGroup
 	durationFadeAnimationGroup.name = "durationFadeAnimationGroup"
+
+	button.durationFadeAnimationGroup = durationFadeAnimationGroup
 
 	local durationFadeAnim = private.CreateAlphaAnimation(durationFadeAnimationGroup, 1, 0, 1.5, private.db.profile.targetButtonGroup.durationSeconds)
 	durationFadeAnimationGroup.animOut = durationFadeAnim

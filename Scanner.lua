@@ -144,7 +144,6 @@ local function CanAddToScanList(npcID)
 			return false
 		end
 
-
 		local achievementID = npcData.achievementID
 		if achievementID then
 			if detection.achievementIDs[achievementID] == private.DetectionGroupStatus.Disabled then
@@ -288,11 +287,11 @@ function NPCScan:LOOT_CLOSED()
 	UpdateScanListQuestObjectives()
 end
 
-function NPCScan:NAME_PLATE_UNIT_ADDED(eventName, unitToken)
+function NPCScan:NAME_PLATE_UNIT_ADDED(_, unitToken)
 	ProcessUnit(unitToken, _G.UNIT_NAMEPLATES)
 end
 
-function NPCScan:PLAYER_TARGET_CHANGED(eventName)
+function NPCScan:PLAYER_TARGET_CHANGED()
 	ProcessUnit("target", _G.TARGET)
 end
 
@@ -361,12 +360,12 @@ do
 		return private.db.profile.detection[VIGNETTE_SOURCE_TO_PREFERENCE[sourceText]]
 	end
 
-	function NPCScan:VIGNETTE_ADDED(eventName, instanceID)
+	function NPCScan:VIGNETTE_ADDED(_, instanceID)
 		if IsIgnoringSource(_G.MINIMAP_LABEL) then
 			return
 		end
 
-		local x, y, vignetteName, iconID = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceID)
+		local _, _, vignetteName, iconID = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceID)
 
 		if not ProcessVignette(vignetteName, _G.MINIMAP_LABEL) then
 			private.Debug("Unknown vignette: %s with iconID %s", vignetteName or _G.UNKNOWN, tostring(iconID))
@@ -379,7 +378,7 @@ do
 		end
 
 		for landmarkIndex = 1, _G.GetNumMapLandmarks() do
-			local landmarkType, landmarkName = C_WorldMap.GetMapLandmarkInfo(landmarkIndex)
+			local _, landmarkName = _G.C_WorldMap.GetMapLandmarkInfo(landmarkIndex)
 
 			ProcessVignette(landmarkName, _G.WORLD_MAP)
 		end
@@ -482,7 +481,7 @@ do
 		private.PlayAlertSounds = PlayAlertSounds
 	end
 
-	function NPCScan:DispatchSensoryCues(eventName)
+	function NPCScan:DispatchSensoryCues()
 		local alert = private.db.profile.alert
 		local now = time()
 

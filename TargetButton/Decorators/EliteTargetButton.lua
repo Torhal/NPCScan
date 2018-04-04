@@ -19,8 +19,8 @@ local function CreateAnimatedBackground(parentFrame)
 	animationGroup:SetToFinalAlpha(true)
 	background.animIn = animationGroup
 
-	local alphaIn = CreateAlphaAnimation(animationGroup, 0, 1, 0.5, 0.6)
-	local alphaOut = CreateAlphaAnimation(animationGroup, 1, 0, 0.5, 1.1)
+	CreateAlphaAnimation(animationGroup, 0, 1, 0.5, 0.6)
+	CreateAlphaAnimation(animationGroup, 1, 0, 0.5, 1.1)
 
 	return background
 end
