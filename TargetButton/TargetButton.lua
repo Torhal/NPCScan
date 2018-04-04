@@ -423,18 +423,15 @@ do
 
 		function macroButton:PLAYER_REGEN_ENABLED()
 			if self.needsUpdate then
-				self:UpdateMacroText(self.npcScanList)
-
 				self.needsUpdate = nil
-				self.npcScanList = nil
+				self:UpdateMacroText()
 			end
 		end
 
 		macroButton:RegisterEvent("PLAYER_REGEN_ENABLED")
 
-		function macroButton:UpdateMacroText(npcScanList)
+		function macroButton:UpdateMacroText()
 			if _G.InCombatLockdown() then
-				self.npcScanList = npcScanList
 				self.needsUpdate = true
 				return
 			end
@@ -443,7 +440,7 @@ do
 
 			table.wipe(macroLines)
 
-			for npcID in pairs(npcScanList) do
+			for npcID in pairs(private.scannerData.NPCs) do
 				table.insert(macroLines, ("/cleartarget\n/targetexact %s"):format(NPCScan:GetNPCNameFromID(npcID)))
 				addedCount = addedCount + 1
 			end

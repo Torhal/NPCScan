@@ -80,7 +80,7 @@ local function UpdateContinentAndMapOptions()
 						private.UpdateRareNPCOptions()
 						private.UpdateTameableRareNPCOptions()
 
-						if continentID == private.currentContinentID then
+						if continentID == private.scannerData.continentID then
 							NPCScan:UpdateScanList()
 						end
 					end,
@@ -121,7 +121,7 @@ local function UpdateContinentAndMapOptions()
 
 					AceConfigRegistry:NotifyChange(AddOnFolderName)
 
-					if mapID == private.currentMapID then
+					if mapID == private.scannerData.mapID then
 						NPCScan:UpdateScanList()
 					end
 				end,
