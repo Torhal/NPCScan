@@ -250,6 +250,7 @@ VL["Seek & Destroy Squad"] = true
 VL["Seersei"] = true
 VL["Sekhan"] = true
 VL["Selia, Master of Balefire"] = true       -- The NPC isn't in the game (yet?). Quest ID 42698
+VL["Seemingly Unguarded Treasure"] = true
 VL["Shadowflame Terror"] = true
 VL["Shadowmoon Cultist Ritual"] = true
 VL["Shadowquill"] = true

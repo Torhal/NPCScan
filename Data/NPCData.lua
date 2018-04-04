@@ -2534,9 +2534,11 @@ local NPCData = {
 	},
 	[100302] = { -- Puck
 		questID = 40423, -- Unethical Adventurers
+		vignetteName = "Seemingly Unguarded Treasure",
 	},
 	[100303] = { -- Zenobia
 		questID = 40423, -- Unethical Adventurers
+		vignetteName = "Seemingly Unguarded Treasure",
 	},
 	[100495] = { -- Devouring Darkness
 		questID = 40414, -- Devouring Darkness
@@ -2775,12 +2777,15 @@ local NPCData = {
 	},
 	[109498] = { -- Xaander
 		questID = 40423, -- Unethical Adventurers
+		vignetteName = "Seemingly Unguarded Treasure",
 	},
 	[109500] = { -- Jak
 		questID = 40423, -- Unethical Adventurers
+		vignetteName = "Seemingly Unguarded Treasure",
 	},
 	[109501] = { -- Darkful
 		questID = 40423, -- Unethical Adventurers
+		vignetteName = "Seemingly Unguarded Treasure",
 	},
 	[109504] = { -- Ragemaw
 		questID = 44108, -- Ragemaw
@@ -2854,6 +2859,9 @@ local NPCData = {
 	[110367] = { -- Ealdis
 		questID = 45483, -- Ealdis
 	},
+	[110378] = { -- Drugon the Frostblood
+		questID = 44503, -- Unknown
+	},
 	[110438] = { -- Siegemaster Aedrin
 		questID = 43369, -- Siegemaster Aedrin
 		vignetteName = "Siegemaster Aedrin",
@@ -2911,6 +2919,9 @@ local NPCData = {
 	[111434] = { -- Sea King Tidross
 		questID = 44039, -- Sea King Tidross
 		vignetteName = "Sea King Tidross",
+	},
+	[111454] = { -- Bestrix
+		questID = 43961, -- Unknown
 	},
 	[111463] = { -- Bulvinkel
 		isTameable = true,
@@ -2976,8 +2987,269 @@ local NPCData = {
 	[113694] = { -- Pashya
 		isTameable = true,
 	},
+	[116166] = { -- Eye of Gurgh
+		questID = 47068, -- Unknown
+	},
+	[116953] = { -- Corrupted Bonebreaker
+		questID = 46101, -- Unknown
+	},
+	[117086] = { -- Emberfire
+		questID = 46093, -- Unknown
+	},
+	[117089] = { -- Inquisitor Chillbane
+		questID = 46096, -- Unknown
+	},
+	[117090] = { -- Xorogun the Flamecarver
+		questID = 46100, -- Unknown
+	},
+	[117091] = { -- Felmaw Emberfiend
+		questID = 46095, -- Unknown
+	},
+	[117093] = { -- Felbringer Xar'thok
+		questID = 46099, -- Unknown
+	},
+	[117094] = { -- Malorus the Soulkeeper
+		questID = 46092, -- Unknown
+	},
+	[117095] = { -- Dreadblade Annihilator
+		questID = 46098, -- Unknown
+	},
+	[117096] = { -- Potionmaster Gloop
+		questID = 46094, -- Unknown
+	},
+	[117103] = { -- Felcaller Zelthae
+		questID = 46102, -- Unknown
+	},
+	[117136] = { -- Doombringer Zar'thoz
+		questID = 46097, -- Unknown
+	},
+	[117140] = { -- Salethan the Broodwalker
+		questID = 46091, -- Unknown
+	},
+	[117141] = { -- Malgrazoth
+		questID = 46090, -- Unknown
+	},
+	[117470] = { -- Si'vash
+		questID = 46945, -- Unknown
+	},
 	[118244] = { -- Lightning Paw
 		isTameable = true,
+	},
+	[118993] = { -- Dreadeye
+		questID = 46202, -- Unknown
+	},
+	[119629] = { -- Lord Hel'Nurath
+		questID = 46304, -- Unknown
+	},
+	[119718] = { -- Imp Mother Bruva
+		questID = 46313, -- Unknown
+	},
+	[120393] = { -- Siegemaster Voraan
+		questID = 48627, -- Unknown
+	},
+	[120998] = { -- Flllurlokkr
+		questID = 46951, -- Unknown
+	},
+	[121016] = { -- Aqueux
+		questID = 46953, -- Unknown
+	},
+	[121029] = { -- Brood Mother Nix
+		questID = 46965, -- Unknown
+	},
+	[121037] = { -- Grossir
+		questID = 46995, -- Unknown
+	},
+	[121046] = { -- Brother Badatin
+		questID = 47001, -- Unknown
+	},
+	[121107] = { -- Lady Eldrathe
+		questID = 47026, -- Unknown
+	},
+	[121112] = { -- Somber Dawn
+		questID = 47028, -- Unknown
+	},
+	[121124] = { -- Apocron
+		questID = 47061, -- Unknown
+	},
+	[121134] = { -- Duke Sithizi
+		questID = 47036, -- Unknown
+	},
+	[122838] = { -- Shadowcaster Voruun
+		questID = 48692, -- Unknown
+	},
+	[122899] = { -- Death Metal Knight
+		questID = 47767, -- Unknown
+	},
+	[122911] = { -- Commander Vecaya
+		questID = 48563, -- Unknown
+	},
+	[122912] = { -- Commander Sathrenael
+		questID = 48562, -- Unknown
+	},
+	[122947] = { -- Mistress Il'thendra
+		questID = 49240, -- Unknown
+	},
+	[122958] = { -- Blistermaw
+		questID = 49183, -- Unknown
+	},
+	[122999] = { -- Gar'zoth
+		questID = 49241, -- Unknown
+	},
+	[123464] = { -- Sister Subversia
+		questID = 48565, -- Unknown
+	},
+	[123689] = { -- Talestra the Vile
+		questID = 48628, -- Unknown
+	},
+	[124440] = { -- Overseer Y'Beda
+		questID = 48714, -- Unknown
+	},
+	[124775] = { -- Commander Endaxis
+		questID = 48564, -- Unknown
+	},
+	[124804] = { -- Tereck the Selector
+		questID = 48664, -- Unknown
+	},
+	[125388] = { -- Vagath the Betrayed
+		questID = 48629, -- Unknown
+	},
+	[125479] = { -- Tar Spitter
+		questID = 48665, -- Unknown
+	},
+	[125497] = { -- Overseer Y'Sorna
+		questID = 48716, -- Unknown
+	},
+	[125498] = { -- Overseer Y'Morna
+		questID = 48717, -- Unknown
+	},
+	[125820] = { -- Imp Mother Laglath
+		questID = 48666, -- Unknown
+	},
+	[125824] = { -- Khazaduum
+		questID = 48561, -- Unknown
+	},
+	[125951] = { -- Obsidian Deathwarder
+		questID = 48381, -- Unknown
+	},
+	[126040] = { -- Puscilla
+		questID = 48809, -- Unknown
+	},
+	[126115] = { -- Ven'orn
+		questID = 48811, -- Unknown
+	},
+	[126199] = { -- Vrax'thul
+		questID = 48810, -- Unknown
+	},
+	[126208] = { -- Varga
+		questID = 48812, -- Unknown
+	},
+	[126254] = { -- Lieutenant Xakaar
+		questID = 48813, -- Unknown
+	},
+	[126338] = { -- Wrath-Lord Yarez
+		questID = 48814, -- Unknown
+	},
+	[126419] = { -- Naroua
+		questID = 48667, -- Unknown
+	},
+	[126815] = { -- Soultwisted Monstrosity
+		questID = 48693, -- Unknown
+	},
+	[126852] = { -- Wrangler Kravos
+		questID = 48695, -- Unknown
+	},
+	[126860] = { -- Kaara the Pale
+		questID = 48697, -- Unknown
+	},
+	[126862] = { -- Baruut the Bloodthirsty
+		questID = 48700, -- Unknown
+	},
+	[126864] = { -- Feasel the Muffin Thief
+		questID = 48702, -- Unknown
+	},
+	[126865] = { -- Vigilant Thanos
+		questID = 48703, -- Unknown
+	},
+	[126866] = { -- Vigilant Kuro
+		questID = 48704, -- Unknown
+	},
+	[126867] = { -- Venomtail Skyfin
+		questID = 48705, -- Unknown
+	},
+	[126868] = { -- Turek the Lucid
+		questID = 48706, -- Unknown
+	},
+	[126869] = { -- Captain Faruq
+		questID = 48707, -- Unknown
+	},
+	[126885] = { -- Umbraliss
+		questID = 48708, -- Unknown
+	},
+	[126889] = { -- Sorolis the Ill-Fated
+		questID = 48710, -- Unknown
+	},
+	[126896] = { -- Herald of Chaos
+		questID = 48711, -- Unknown
+	},
+	[126898] = { -- Sabuul
+		questID = 48712, -- Unknown
+	},
+	[126899] = { -- Jed'hin Champion Vorusk
+		questID = 48713, -- Unknown
+	},
+	[126900] = { -- Instructor Tarahna
+		questID = 48718, -- Unknown
+	},
+	[126908] = { -- Zul'tan the Numerous
+		questID = 48719, -- Unknown
+	},
+	[126910] = { -- Commander Xethgar
+		questID = 48720, -- Unknown
+	},
+	[126912] = { -- Skreeg the Devourer
+		questID = 48721, -- Unknown
+	},
+	[126913] = { -- Slithon the Last
+		questID = 48935, -- Unknown
+	},
+	[126946] = { -- Inquisitor Vethroz
+		questID = 48815, -- Unknown
+	},
+	[127084] = { -- Commander Texlaz
+		questID = 48816, -- Unknown
+	},
+	[127090] = { -- Admiral Rel'var
+		questID = 48817, -- Unknown
+	},
+	[127096] = { -- All-Seer Xanarian
+		questID = 48818, -- Unknown
+	},
+	[127118] = { -- Worldsplitter Skuul
+		questID = 48820, -- Unknown
+	},
+	[127288] = { -- Houndmaster Kerrax
+		questID = 48821, -- Unknown
+	},
+	[127291] = { -- Watcher Aival
+		questID = 48822, -- Unknown
+	},
+	[127300] = { -- Void Warden Valsuran
+		questID = 48824, -- Unknown
+	},
+	[127376] = { -- Chief Alchemist Munculus
+		questID = 48865, -- Unknown
+	},
+	[127581] = { -- The Many-Faced Devourer
+		questID = 48966, -- Unknown
+	},
+	[127703] = { -- Doomcaster Suprax
+		questID = 48968, -- Unknown
+	},
+	[127705] = { -- Mother Rosula
+		questID = 48970, -- Unknown
+	},
+	[132591] = { -- Ogmot the Mad
+		questID = 50334, -- Unknown
 	},
 }
 
