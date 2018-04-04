@@ -237,8 +237,9 @@ private.AchievementData = AchievementData
 for achievementID, data in pairs(AchievementData) do
 	data.criteriaNPCs = {}
 
-	local _, achievementName, _, _, _, _, _, achievementDescription = _G.GetAchievementInfo(achievementID)
+	local _, achievementName, _, _, _, _, _, achievementDescription, _, iconTexturePath = _G.GetAchievementInfo(achievementID)
 	data.name = achievementName
 	data.description = achievementDescription
+	data.iconTexturePath = iconTexturePath
 end
 
