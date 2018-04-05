@@ -100,7 +100,7 @@ local function RemoveUserDefinedNPC(input)
 		private.UpdateUserDefinedNPCOptions()
 
 		NPCScan:UpdateScanList()
-		NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+		NPCScan:SendMessage("NPCSCan_DismissTargetButtonByID", npcID)
 		NPCScan:Printf(L["Removed %1$s (%2$d) from the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
 	end
 end
@@ -266,7 +266,7 @@ local function UpdateAchievementNPCOptions()
 					NPCScan:UpdateScanList()
 
 					if isBlacklisted then
-						NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+						NPCScan:SendMessage("NPCSCan_DismissTargetButtonByID", npcID)
 					end
 				end,
 			}
@@ -277,6 +277,8 @@ local function UpdateAchievementNPCOptions()
 
 	AceConfigRegistry:NotifyChange(AddOnFolderName)
 end
+
+private.UpdateAchievementNPCOptions = UpdateAchievementNPCOptions
 
 -- ----------------------------------------------------------------------------
 -- Rare options.
@@ -351,7 +353,7 @@ local function UpdateRareNPCOptions()
 							NPCScan:UpdateScanList()
 
 							if isBlacklisted then
-								NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+								NPCScan:SendMessage("NPCSCan_DismissTargetButtonByID", npcID)
 							end
 						end,
 					}
@@ -444,7 +446,7 @@ local function UpdateTameableRareNPCOptions()
 							NPCScan:UpdateScanList()
 
 							if isBlacklisted then
-								NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+								NPCScan:SendMessage("NPCSCan_DismissTargetButtonByID", npcID)
 							end
 						end,
 					}
@@ -517,7 +519,7 @@ local function UpdateNPCSearchOptions()
 					NPCScan:UpdateScanList()
 
 					if isBlacklisted then
-						NPCScan:SendMessage("NPCScan_RemoveNPCFromScanList", npcID)
+						NPCScan:SendMessage("NPCSCan_DismissTargetButtonByID", npcID)
 					end
 				end,
 			}
@@ -650,6 +652,8 @@ function UpdateBlacklistedNPCOptions()
 
 	AceConfigRegistry:NotifyChange(AddOnFolderName)
 end
+
+private.UpdateBlacklistedNPCOptions = UpdateBlacklistedNPCOptions
 
 -- ----------------------------------------------------------------------------
 -- Initialization.

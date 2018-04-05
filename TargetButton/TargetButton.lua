@@ -75,11 +75,37 @@ end
 -- ----------------------------------------------------------------------------
 -- Scripts.
 -- ----------------------------------------------------------------------------
+local function DismissButton_OnClick(self, mouseButton)
+	local parent = self:GetParent()
+
+	if mouseButton == "RightButton" then
+		-- TODO: Make this a general utility function - this is based on code from Preferences/NPCs
+		local profile = private.db.profile
+
+		local isBlacklisted = not profile.blacklist.npcIDs[parent.npcID] and true or nil
+		profile.blacklist.npcIDs[parent.npcID] = isBlacklisted
+
+		private.UpdateAchievementNPCOptions()
+		private.UpdateBlacklistedNPCOptions()
+
+		NPCScan:UpdateScanList()
+
+		if isBlacklisted then
+			NPCScan:SendMessage("NPCSCan_DismissTargetButtonByID", parent.npcID)
+			NPCScan:Printf(_G.ERR_IGNORE_ADDED_S, NPCScan:GetNPCNameFromID(parent.npcID))
+		end
+
+	end
+
+	parent:RequestDeactivate()
+end
+
 local function DismissButton_OnEnter(self)
 	if self:IsEnabled() then
 		local tooltip = _G.GameTooltip
 		tooltip:SetOwner(self, TOOLTIP_ANCHORS[self:GetParent():GetEffectiveSpawnPoint()], 0, -50)
 		tooltip:AddLine(LEFT_CLICK_TEXTURE .. " " .. _G.REMOVE, 0.5, 0.8, 1)
+		tooltip:AddLine(RIGHT_CLICK_TEXTURE .. " " .. _G.IGNORE, 0.5, 0.8, 1)
 
 		tooltip:Show()
 	end
@@ -484,13 +510,15 @@ local function CreateTargetButton(unitClassification)
 
 	AceEvent:Embed(_G.setmetatable(button, TargetButtonMetatable))
 
-	local dismissButton = _G.CreateFrame("Button", nil, button, "UIPanelCloseButton")
+	local dismissButton = _G.CreateFrame("Button", nil, button, "UIPanelCloseButtonNoScripts")
 	dismissButton:SetSize(16, 16)
 	dismissButton:GetDisabledTexture():SetTexture("")
 	dismissButton:GetHighlightTexture():SetTexture([[Interface\FriendsFrame\UI-Toast-CloseButton-Highlight]])
 	dismissButton:GetNormalTexture():SetTexture([[Interface\FriendsFrame\UI-Toast-CloseButton-Up]])
 	dismissButton:GetPushedTexture():SetTexture([[Interface\FriendsFrame\UI-Toast-CloseButton-Down]])
 
+	dismissButton:RegisterForClicks("AnyUp")
+	dismissButton:SetScript("OnClick", DismissButton_OnClick)
 	dismissButton:SetScript("OnEnter", DismissButton_OnEnter)
 	dismissButton:SetScript("OnLeave", _G.GameTooltip_Hide)
 

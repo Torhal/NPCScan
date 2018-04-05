@@ -142,7 +142,7 @@ function TargetButtonManager:ReclaimByNPCID(eventName, npcID)
 	end
 end
 
-TargetButtonManager:RegisterMessage("NPCScan_RemoveNPCFromScanList", "ReclaimByNPCID")
+TargetButtonManager:RegisterMessage("NPCSCan_DismissTargetButtonByID", "ReclaimByNPCID")
 
 function TargetButtonManager:RespawnAsClassification(eventName, targetButton, data)
 	local targetButtonIndex
