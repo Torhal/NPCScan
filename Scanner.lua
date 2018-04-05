@@ -154,8 +154,9 @@ local function MergeUserDefinedWithScanList(npcList)
 	end
 end
 
-
 function NPCScan:UpdateScanList(eventName, mapID)
+	mapID = mapID or HereBeDragons:GetPlayerZone()
+
 	if mapID then
 		scannerData.mapID = mapID
 		scannerData.continentID = HereBeDragons:GetCZFromMapID(mapID)
