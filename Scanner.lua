@@ -35,34 +35,6 @@ private.scannerData = scannerData
 -- ----------------------------------------------------------------------------
 -- Helpers.
 -- ----------------------------------------------------------------------------
--- These functions are used for situations where an npcID needs to be removed from scannerData.NPCs while iterating it.
-local QueueNPCForUntracking, UntrackQueuedNPCs
-do
-	local npcRemoveList = {}
-
-	function QueueNPCForUntracking(npcID)
-		npcRemoveList[#npcRemoveList + 1] = npcID
-	end
-
-	function UntrackQueuedNPCs()
-		if #npcRemoveList == 0 then
-			return
-		end
-
-		for index = 1, #npcRemoveList do
-			local npcID = npcRemoveList[index]
-
-			scannerData.NPCs[npcID] = nil
-			scannerData.NPCCount = scannerData.NPCCount - 1
-			private.Overlays.Remove(npcID)
-		end
-
-		table.wipe(npcRemoveList)
-
-		_G.NPCScan_SearchMacroButton:UpdateMacroText()
-	end
-end
-
 local ProcessDetection
 do
 	local throttledNPCs = {}
@@ -241,6 +213,8 @@ end
 -- Events.
 -- ----------------------------------------------------------------------------
 local function UpdateScanListAchievementCriteria()
+	local needsUpdate = false
+
 	for npcID in pairs(scannerData.NPCs) do
 		local npcData = private.NPCData[npcID]
 
@@ -253,26 +227,32 @@ local function UpdateScanListAchievementCriteria()
 				private.GetOrUpdateNPCOptions()
 
 				if private.db.profile.detection.ignoreCompletedAchievementCriteria then
-					QueueNPCForUntracking(npcID)
+					needsUpdate = true
 				end
 			end
 		end
 	end
 
-	UntrackQueuedNPCs()
+	if needsUpdate then
+		NPCScan:UpdateScanList()
+	end
 end
 
 private.UpdateScanListAchievementCriteria = UpdateScanListAchievementCriteria
 
 local function UpdateScanListQuestObjectives()
+	local needsUpdate = false
+
 	if private.db.profile.detection.ignoreCompletedQuestObjectives then
 		for npcID in pairs(scannerData.NPCs) do
 			if private.IsNPCQuestComplete(npcID) then
-				QueueNPCForUntracking(npcID)
+				needsUpdate = true
 			end
 		end
 
-		UntrackQueuedNPCs()
+		if needsUpdate then
+			NPCScan:UpdateScanList()
+		end
 	end
 end
 
