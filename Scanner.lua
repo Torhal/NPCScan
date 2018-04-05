@@ -174,6 +174,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 	end
 
 	table.wipe(scannerData.NPCs)
+	scannerData.NPCCount = 0
 
 	local profile = private.db.profile
 	local userDefined = profile.userDefined
@@ -183,8 +184,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 
 	if profile.blacklist.mapIDs[scannerData.mapID] or profile.detection.continentIDs[scannerData.continentID] == private.DetectionGroupStatus.Disabled then
 		private.Debug("continentID or mapID is blacklisted; terminating update.")
-
-		_G.NPCScan_SearchMacroButton:ResetMacroText()
+		self:SendMessage("NPCScan_ScannerDataUpdated", scannerData)
 
 		return
 	end
@@ -207,7 +207,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 	MergeUserDefinedWithScanList(userDefined.continentNPCs[scannerData.continentID])
 	MergeUserDefinedWithScanList(userDefined.mapNPCs[scannerData.mapID])
 
-	_G.NPCScan_SearchMacroButton:UpdateMacroText()
+	self:SendMessage("NPCScan_ScannerDataUpdated", scannerData)
 end
 
 -- ----------------------------------------------------------------------------
