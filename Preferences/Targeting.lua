@@ -14,11 +14,13 @@ local math = _G.math
 local AddOnFolderName, private = ...
 
 local LibStub = _G.LibStub
-local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
-local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
+local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 local LibWindow = LibStub("LibWindow-1.1")
+local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+
+local EventMessage = private.EventMessage
 
 -- ----------------------------------------------------------------------------
 -- Constants.
@@ -190,7 +192,7 @@ local function GetTargetingOptions()
 					profile.targetButtonGroup.scale = value
 					LibWindow.SetScale(anchorFrame, value)
 
-					NPCScan:SendMessage("NPCScan_TargetButtonScaleChanged")
+					NPCScan:SendMessage(EventMessage.TargetButtonScaleChanged)
 				end,
 			},
 			targetButtons = {

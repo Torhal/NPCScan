@@ -12,6 +12,8 @@ local AddOnFolderName, private = ...
 local LibStub = _G.LibStub
 local TargetButtonManager = LibStub("AceEvent-3.0"):Embed({})
 
+local EventMessage = private.EventMessage
+
 -- ----------------------------------------------------------------------------
 -- Constants.
 -- ----------------------------------------------------------------------------
@@ -130,7 +132,7 @@ function TargetButtonManager:Reclaim(eventName, targetButton)
 	end
 end
 
-TargetButtonManager:RegisterMessage("NPCScan_TargetButtonRequestDeactivate", "Reclaim")
+TargetButtonManager:RegisterMessage(EventMessage.TargetButtonRequestDeactivate, "Reclaim")
 
 function TargetButtonManager:ReclaimByNPCID(eventName, npcID)
 	for index = 1, #ActiveTargetButtons do
@@ -142,7 +144,7 @@ function TargetButtonManager:ReclaimByNPCID(eventName, npcID)
 	end
 end
 
-TargetButtonManager:RegisterMessage("NPCSCan_DismissTargetButtonByID", "ReclaimByNPCID")
+TargetButtonManager:RegisterMessage(EventMessage.DismissTargetButtonByID, "ReclaimByNPCID")
 
 function TargetButtonManager:RespawnAsClassification(eventName, targetButton, data)
 	local targetButtonIndex
@@ -167,15 +169,15 @@ function TargetButtonManager:RespawnAsClassification(eventName, targetButton, da
 	newButton.needsUnitData = nil
 end
 
-TargetButtonManager:RegisterMessage("NPCScan_TargetButtonNeedsReclassified", "RespawnAsClassification")
+TargetButtonManager:RegisterMessage(EventMessage.TargetButtonNeedsReclassified, "RespawnAsClassification")
 
-function TargetButtonManager:SetScale(eventName)
+function TargetButtonManager:SetScale()
 	for index = 1, #ActiveTargetButtons do
 		ActiveTargetButtons[index]:SetScale(private.db.profile.targetButtonGroup.scale)
 	end
 end
 
-TargetButtonManager:RegisterMessage("NPCScan_TargetButtonScaleChanged", "SetScale")
+TargetButtonManager:RegisterMessage(EventMessage.TargetButtonScaleChanged, "SetScale")
 
 function TargetButtonManager:Spawn(eventName, data)
 	if (not private.db.profile.targetButtonGroup.isEnabled) or ActiveTargetButtonByNPCID[data.npcID] then
@@ -205,4 +207,4 @@ function TargetButtonManager:Spawn(eventName, data)
 	targetButton:Activate(data)
 end
 
-TargetButtonManager:RegisterMessage("NPCScan_DetectedNPC", "Spawn")
+TargetButtonManager:RegisterMessage(EventMessage.DetectedNPC, "Spawn")

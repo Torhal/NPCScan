@@ -15,10 +15,12 @@ local table = _G.table
 local AddOnFolderName, private = ...
 
 local LibStub = _G.LibStub
-local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 
 local HereBeDragons = LibStub("HereBeDragons-1.0")
 local LibSharedMedia = LibStub("LibSharedMedia-3.0")
+local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+
+local EventMessage = private.EventMessage
 
 -- ----------------------------------------------------------------------------
 -- Constants.
@@ -57,7 +59,7 @@ do
 
 		NPCScan:Pour(_G.ERR_ZONE_EXPLORED:format(("%s %s"):format(data.npcName, _G.PARENS_TEMPLATE:format(data.sourceText))), 0, 1, 0)
 		NPCScan:DispatchSensoryCues()
-		NPCScan:SendMessage("NPCScan_DetectedNPC", data)
+		NPCScan:SendMessage(EventMessage.DetectedNPC, data)
 
 		-- TODO: Make the Overlays object listen for the NPCScan_DetectedNPC message and run its own methods
 		private.Overlays.Found(npcID)
@@ -92,7 +94,7 @@ local function ProcessUnit(unitToken, sourceText)
 
 		ProcessDetection(detectionData)
 
-		NPCScan:SendMessage("NPCScan_UnitInformationAvailable", detectionData)
+		NPCScan:SendMessage(EventMessage.UnitInformationAvailable, detectionData)
 	end
 end
 
@@ -184,7 +186,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 
 	if profile.blacklist.mapIDs[scannerData.mapID] or profile.detection.continentIDs[scannerData.continentID] == private.DetectionGroupStatus.Disabled then
 		private.Debug("continentID or mapID is blacklisted; terminating update.")
-		self:SendMessage("NPCScan_ScannerDataUpdated", scannerData)
+		self:SendMessage(EventMessage.ScannerDataUpdated, scannerData)
 
 		return
 	end
@@ -207,7 +209,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 	MergeUserDefinedWithScanList(userDefined.continentNPCs[scannerData.continentID])
 	MergeUserDefinedWithScanList(userDefined.mapNPCs[scannerData.mapID])
 
-	self:SendMessage("NPCScan_ScannerDataUpdated", scannerData)
+	self:SendMessage(EventMessage.ScannerDataUpdated, scannerData)
 end
 
 -- ----------------------------------------------------------------------------

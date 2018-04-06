@@ -15,10 +15,12 @@ local table = _G.table
 local AddOnFolderName, private = ...
 
 local LibStub = _G.LibStub
-local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
-local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
+local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
+local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+
+local EventMessage = private.EventMessage
 
 -- ----------------------------------------------------------------------------
 -- Constants.
@@ -100,7 +102,7 @@ local function RemoveUserDefinedNPC(input)
 		private.UpdateUserDefinedNPCOptions()
 
 		NPCScan:UpdateScanList()
-		NPCScan:SendMessage("NPCSCan_DismissTargetButtonByID", npcID)
+		NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 		NPCScan:Printf(L["Removed %1$s (%2$d) from the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
 	end
 end
@@ -266,7 +268,7 @@ local function UpdateAchievementNPCOptions()
 					NPCScan:UpdateScanList()
 
 					if isBlacklisted then
-						NPCScan:SendMessage("NPCSCan_DismissTargetButtonByID", npcID)
+						NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 					end
 				end,
 			}
@@ -353,7 +355,7 @@ local function UpdateRareNPCOptions()
 							NPCScan:UpdateScanList()
 
 							if isBlacklisted then
-								NPCScan:SendMessage("NPCSCan_DismissTargetButtonByID", npcID)
+								NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 							end
 						end,
 					}
@@ -446,7 +448,7 @@ local function UpdateTameableRareNPCOptions()
 							NPCScan:UpdateScanList()
 
 							if isBlacklisted then
-								NPCScan:SendMessage("NPCSCan_DismissTargetButtonByID", npcID)
+								NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 							end
 						end,
 					}
@@ -519,7 +521,7 @@ local function UpdateNPCSearchOptions()
 					NPCScan:UpdateScanList()
 
 					if isBlacklisted then
-						NPCScan:SendMessage("NPCSCan_DismissTargetButtonByID", npcID)
+						NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 					end
 				end,
 			}
