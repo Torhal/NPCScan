@@ -269,6 +269,7 @@ VL["Slumbering Bear"] = true
 VL["Soulfang"] = true
 VL["Soulthirster"] = true
 VL["Starbuck"] = true
+VL["Stingtail Nest"] = true
 VL["Stomper Kreego"] = true
 VL["Stoneshard Broodmother"] = true
 VL["Stormwing Matriarch"] = true

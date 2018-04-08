@@ -1547,6 +1547,7 @@ local NPCData = {
 	[84912] = { -- Sunderthorn
 		isTameable = true,
 		questID = 36298, -- Spires - Vignette Boss 017 - Sunderthorn
+		vignetteName = "Stingtail Nest",
 	},
 	[84925] = { -- Quartermaster Hershak
 		questID = 37352, -- Quartermaster Hershak
