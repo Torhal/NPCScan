@@ -13,26 +13,15 @@ local table = _G.table
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
+local Data = private.Data
+local Enum = private.Enum
+local EventMessage = private.EventMessage
+
 
 local LibStub = _G.LibStub
-
 local HereBeDragons = LibStub("HereBeDragons-1.0")
 local LibSharedMedia = LibStub("LibSharedMedia-3.0")
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
-
-local EventMessage = private.EventMessage
-
--- ----------------------------------------------------------------------------
--- Constants.
--- ----------------------------------------------------------------------------
-local scannerData = {
-	continentID = -1,
-	mapID = -1,
-	NPCCount = 0,
-	NPCs = {},
-}
-
-private.scannerData = scannerData
 
 -- ----------------------------------------------------------------------------
 -- Helpers.
@@ -41,25 +30,25 @@ local ProcessDetection
 do
 	local throttledNPCs = {}
 
-	function ProcessDetection(data)
-		local npcID = data.npcID
+	function ProcessDetection(detectionData)
+		local npcID = detectionData.npcID
 		local profile = private.db.profile
 		local detection = profile.detection
 		local throttleTime = throttledNPCs[npcID]
 		local now = time()
 
-		if not scannerData.NPCs[npcID] or (throttleTime and now < throttleTime + detection.intervalSeconds) or (not detection.whileOnTaxi and _G.UnitOnTaxi("player")) then
+		if not Data.Scanner.NPCs[npcID] or (throttleTime and now < throttleTime + detection.intervalSeconds) or (not detection.whileOnTaxi and _G.UnitOnTaxi("player")) then
 			return
 		end
 
 		throttledNPCs[npcID] = now
 
-		data.npcName = data.npcName or NPCScan:GetNPCNameFromID(npcID)
-		data.unitClassification = data.unitClassification or "rare"
+		detectionData.npcName = detectionData.npcName or NPCScan:GetNPCNameFromID(npcID)
+		detectionData.unitClassification = detectionData.unitClassification or "rare"
 
-		NPCScan:Pour(_G.ERR_ZONE_EXPLORED:format(("%s %s"):format(data.npcName, _G.PARENS_TEMPLATE:format(data.sourceText))), 0, 1, 0)
+		NPCScan:Pour(_G.ERR_ZONE_EXPLORED:format(("%s %s"):format(detectionData.npcName, _G.PARENS_TEMPLATE:format(detectionData.sourceText))), 0, 1, 0)
 		NPCScan:DispatchSensoryCues()
-		NPCScan:SendMessage(EventMessage.DetectedNPC, data)
+		NPCScan:SendMessage(EventMessage.DetectedNPC, detectionData)
 
 		-- TODO: Make the Overlays object listen for the NPCScan_DetectedNPC message and run its own methods
 		private.Overlays.Found(npcID)
@@ -106,14 +95,15 @@ local function CanAddToScanList(npcID)
 		return false
 	end
 
-	local npcData = private.NPCData[npcID]
-	if npcData then
-		if npcData.factionGroup == private.PlayerFactionGroup then
+	local npc = Data.NPCs[npcID]
+
+	if npc then
+		if npc.factionGroup == _G.UnitFactionGroup("player") then
 			private.Debug("Skipping %s (%d) - same faction group.", NPCScan:GetNPCNameFromID(npcID), npcID)
 			return false
 		end
 
-		local isTameable = npcData.isTameable
+		local isTameable = npc.isTameable
 		local detection = profile.detection
 
 		if isTameable and not detection.tameables then
@@ -126,14 +116,14 @@ local function CanAddToScanList(npcID)
 			return false
 		end
 
-		local achievementID = npcData.achievementID
+		local achievementID = npc.achievementID
 		if achievementID then
-			if detection.achievementIDs[achievementID] == private.DetectionGroupStatus.Disabled then
+			if detection.achievementIDs[achievementID] == Enum.DetectionGroupStatus.Disabled then
 				private.Debug("Skipping %s (%d) - not tracking the achievement.", NPCScan:GetNPCNameFromID(npcID), npcID)
 				return false
 			end
 
-			if detection.ignoreCompletedAchievementCriteria and (private.AchievementData[achievementID].isCompleted or npcData.isCriteriaCompleted) then
+			if detection.ignoreCompletedAchievementCriteria and (Data.Achievements[achievementID].isCompleted or npc.isCriteriaCompleted) then
 				private.Debug("Skipping %s (%d) - criteria already met or achievement completed.", NPCScan:GetNPCNameFromID(npcID), npcID)
 				return false
 			end
@@ -151,15 +141,16 @@ end
 local function MergeUserDefinedWithScanList(npcList)
 	if npcList and private.db.profile.detection.userDefined then
 		for npcID in pairs(npcList) do
-			scannerData.NPCs[npcID] = true
+			Data.Scanner.NPCs[npcID] = Data.NPCs[npcID]
 		end
 	end
 end
 
 function NPCScan:UpdateScanList(eventName, mapID)
+	local scannerData = Data.Scanner
 	mapID = mapID or HereBeDragons:GetPlayerZone()
 
-	if mapID then
+	if mapID and mapID >= 0 then
 		scannerData.mapID = mapID
 		scannerData.continentID = HereBeDragons:GetCZFromMapID(mapID)
 	end
@@ -169,7 +160,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 		return
 	end
 
-	private.Debug("eventName: %s scannerData.mapID: %d scannerData.continentID: %d", eventName or _G.NONE, scannerData.mapID, scannerData.continentID)
+	private.Debug("eventName: %s Data.Scanner.mapID: %d Data.Scanner.continentID: %d", eventName or _G.NONE, scannerData.mapID, scannerData.continentID)
 
 	for npcID in pairs(scannerData.NPCs) do
 		private.Overlays.Remove(npcID)
@@ -184,7 +175,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 	-- No zone or continent specified, so always look for these.
 	MergeUserDefinedWithScanList(userDefined.npcIDs)
 
-	if profile.blacklist.mapIDs[scannerData.mapID] or profile.detection.continentIDs[scannerData.continentID] == private.DetectionGroupStatus.Disabled then
+	if profile.blacklist.mapIDs[scannerData.mapID] or profile.detection.continentIDs[scannerData.continentID] == Enum.DetectionGroupStatus.Disabled then
 		private.Debug("continentID or mapID is blacklisted; terminating update.")
 		self:SendMessage(EventMessage.ScannerDataUpdated, scannerData)
 
@@ -192,13 +183,14 @@ function NPCScan:UpdateScanList(eventName, mapID)
 	end
 
 	local zoneNPCCount = 0
-	local npcList = private.MapNPCs[scannerData.mapID]
+	local npcList = Data.Maps[scannerData.mapID].NPCs
 
 	if npcList then
 		for npcID in pairs(npcList) do
 			if CanAddToScanList(npcID) then
-				scannerData.NPCs[npcID] = true
 				zoneNPCCount = zoneNPCCount + 1;
+				scannerData.NPCs[npcID] = Data.NPCs[npcID]
+
 				private.Overlays.Add(npcID)
 			end
 		end
@@ -218,14 +210,12 @@ end
 local function UpdateScanListAchievementCriteria()
 	local needsUpdate = false
 
-	for npcID in pairs(scannerData.NPCs) do
-		local npcData = private.NPCData[npcID]
-
-		if npcData and npcData.achievementID and npcData.achievementCriteriaID and not npcData.isCriteriaCompleted then
-			local _, _, isCompleted = _G.GetAchievementCriteriaInfoByID(npcData.achievementID, npcData.achievementCriteriaID)
+	for _, npc in pairs(Data.Scanner.NPCs) do
+		if npc.achievementID and npc.achievementCriteriaID and not npc.isCriteriaCompleted then
+			local _, _, isCompleted = _G.GetAchievementCriteriaInfoByID(npc.achievementID, npc.achievementCriteriaID)
 
 			if isCompleted then
-				npcData.isCriteriaCompleted = isCompleted
+				npc.isCriteriaCompleted = isCompleted
 
 				private.GetOrUpdateNPCOptions()
 
@@ -247,7 +237,7 @@ local function UpdateScanListQuestObjectives()
 	local needsUpdate = false
 
 	if private.db.profile.detection.ignoreCompletedQuestObjectives then
-		for npcID in pairs(scannerData.NPCs) do
+		for npcID in pairs(Data.Scanner.NPCs) do
 			if private.IsNPCQuestComplete(npcID) then
 				needsUpdate = true
 			end
@@ -262,12 +252,12 @@ end
 private.UpdateScanListQuestObjectives = UpdateScanListQuestObjectives
 
 function NPCScan:ACHIEVEMENT_EARNED(_, achievementID)
-	if private.AchievementData[achievementID] then
-		private.AchievementData[achievementID].isCompleted = true
+	if Data.Achievements[achievementID] then
+		Data.Achievements[achievementID].isCompleted = true
 
 		if private.db.profile.detection.ignoreCompletedAchievementCriteria then
 			-- Disable tracking for the achievement, since the above setting implies it.
-			private.db.profile.detection.achievementIDs[achievementID] = private.DetectionGroupStatus.Disabled
+			private.db.profile.detection.achievementIDs[achievementID] = Enum.DetectionGroupStatus.Disabled
 		end
 
 		UpdateScanListAchievementCriteria()
@@ -311,7 +301,7 @@ do
 
 	local function ProcessVignetteNameDetection(vignetteName, sourceText)
 		for npcID in pairs(private.VignetteNPCs[vignetteName]) do
-			if scannerData.NPCs[npcID] then
+			if Data.Scanner.NPCs[npcID] then
 				ProcessDetection({
 					npcID = npcID,
 					sourceText = sourceText

@@ -11,14 +11,14 @@ local table = _G.table
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
+local Data = private.Data
+local EventMessage = private.EventMessage
 
 local LibStub = _G.LibStub
-
 local AceEvent = LibStub("AceEvent-3.0")
 local LibSharedMedia = LibStub("LibSharedMedia-3.0")
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 
-local EventMessage = private.EventMessage
 
 _G.BINDING_HEADER_NPCSCAN = AddOnFolderName
 _G["BINDING_NAME_CLICK NPCScan_RecentTargetButton:LeftButton"] = "Target latest NPC"
@@ -232,7 +232,7 @@ end
 -- ----------------------------------------------------------------------------
 function TargetButton:Activate(data)
 	self.npcID = data.npcID
-	self.npcData = private.NPCData[self.npcID]
+	self.npcData = Data.NPCs[self.npcID]
 	self.npcName = data.npcName
 
 	self:SetSpecialText()
@@ -389,7 +389,7 @@ function TargetButton:SetSpecialText(fakeCriteriaCompleted)
 
 	if npcData and npcData.achievementID then
 		local isCriteriaCompleted = fakeCriteriaCompleted or npcData.isCriteriaCompleted
-		local achievementName = private.AchievementData[npcData.achievementID].name
+		local achievementName = Data.Achievements[npcData.achievementID].name
 
 		self.SpecialText:SetFormattedText("%s%s|r", isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE, achievementName)
 	end

@@ -269,7 +269,7 @@ local function GetTargetingOptions()
 						name = L["Reset Position"],
 						descStyle = "inline",
 						func = function()
-							local defaults = private.DatabaseDefaults.profile.targetButtonGroup
+							local defaults = private.DefaultPreferences.profile.targetButtonGroup
 							local preferences = profile.targetButtonGroup
 
 							preferences.point = defaults.point

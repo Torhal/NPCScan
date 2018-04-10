@@ -1,6 +1,12 @@
+-- ----------------------------------------------------------------------------
+-- AddOn namespace.
+-- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
 
-local DatabaseDefaults = {
+-- ----------------------------------------------------------------------------
+-- Constants
+-- ----------------------------------------------------------------------------
+local DefaultPreferences = {
 	locale = {
 		npcNames = {},
 		questNames = {},
@@ -69,4 +75,4 @@ local DatabaseDefaults = {
 	},
 }
 
-private.DatabaseDefaults = DatabaseDefaults
+private.DefaultPreferences = DefaultPreferences
