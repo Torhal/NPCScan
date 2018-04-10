@@ -690,6 +690,14 @@ NPCs[88071] = { -- Strategist Ankor
 	questID = 37337, -- Strategist Ankor
 }
 
+NPCs[88072] = { -- Archmagus Tekar
+	questID = 37337, -- Strategist Ankor
+}
+
+NPCs[88083] = { -- Soulbinder Naylana
+	questID = 37337, -- Strategist Ankor
+}
+
 NPCs[88436] = { -- Vigilant Paarthos
 	questID = 37350, -- Vigilant Paarthos
 }
