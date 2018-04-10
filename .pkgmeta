@@ -46,3 +46,5 @@ externals:
         tag: latest
     Libs/LibWindow-1.1:
         url: svn://svn.wowace.com/wow/libwindow-1-1/mainline/trunk/LibWindow-1.1
+    Libs/LibQTip-1.0:
+        url: svn://svn.wowace.com/wow/libqtip-1-0/mainline/trunk
