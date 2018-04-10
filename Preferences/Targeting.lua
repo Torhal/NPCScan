@@ -154,10 +154,10 @@ local function GetTargetingOptions()
 				descStyle = "inline",
 				type = "toggle",
 				width = "full",
-				get = function(info)
+				get = function()
 					return profile.targetButtonGroup.isEnabled
 				end,
-				set = function(info, value)
+				set = function(_, value)
 					profile.targetButtonGroup.isEnabled = value
 				end,
 			},
@@ -170,10 +170,10 @@ local function GetTargetingOptions()
 				min = 0.5,
 				max = 5,
 				disabled = IsTargetButtonGroupDisabled,
-				get = function(info)
+				get = function()
 					return profile.targetButtonGroup.durationSeconds / 60
 				end,
-				set = function(info, value)
+				set = function(_, value)
 					profile.targetButtonGroup.durationSeconds = value * 60
 				end,
 			},
@@ -185,10 +185,10 @@ local function GetTargetingOptions()
 				min = 0.5,
 				max = 2,
 				disabled = IsTargetButtonGroupDisabled,
-				get = function(info)
+				get = function()
 					return profile.targetButtonGroup.scale
 				end,
-				set = function(info, value)
+				set = function(_, value)
 					profile.targetButtonGroup.scale = value
 					LibWindow.SetScale(anchorFrame, value)
 
@@ -210,7 +210,7 @@ local function GetTargetingOptions()
 						get = function()
 							return SPAWN_INDICES[profile.targetButtonGroup.point]
 						end,
-						set = function(info, value)
+						set = function(_, value)
 							profile.targetButtonGroup.point = SPAWN_POINTS[value]
 							LibWindow.RestorePosition(anchorFrame)
 						end,
@@ -224,7 +224,7 @@ local function GetTargetingOptions()
 						get = function()
 							return tostring(round(profile.targetButtonGroup.x))
 						end,
-						set = function(info, value)
+						set = function(_, value)
 							profile.targetButtonGroup.x = tonumber(value)
 							LibWindow.RestorePosition(anchorFrame)
 						end,
@@ -238,7 +238,7 @@ local function GetTargetingOptions()
 						get = function()
 							return tostring(round(profile.targetButtonGroup.y))
 						end,
-						set = function(info, value)
+						set = function(_, value)
 							profile.targetButtonGroup.y = tonumber(value)
 							LibWindow.RestorePosition(anchorFrame)
 						end,
@@ -253,7 +253,7 @@ local function GetTargetingOptions()
 						get = function()
 							return profile.targetButtonGroup.hideDuringCombat
 						end,
-						set = function(info, value)
+						set = function(_   , value)
 							profile.targetButtonGroup.hideDuringCombat = value
 						end,
 					},

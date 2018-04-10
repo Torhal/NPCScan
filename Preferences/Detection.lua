@@ -63,10 +63,10 @@ local function UpdateContinentAndMapOptions()
 					name = _G.STATUS,
 					type = "select",
 					values = private.DetectionGroupStatusLabels,
-					get = function(info)
+					get = function()
 						return profile.detection.continentIDs[continentID]
 					end,
-					set = function(info, value)
+					set = function(_, value)
 						profile.detection.continentIDs[continentID] = value
 
 						if value ~= private.DetectionGroupStatus.UserDefined then
@@ -108,10 +108,10 @@ local function UpdateContinentAndMapOptions()
 				disabled = function()
 					return profile.detection.continentIDs[continentID] ~= private.DetectionGroupStatus.UserDefined
 				end,
-				get = function(info)
+				get = function()
 					return not profile.blacklist.mapIDs[mapID]
 				end,
-				set = function(info, value)
+				set = function()
 					profile.blacklist.mapIDs[mapID] = not profile.blacklist.mapIDs[mapID] and true or nil
 
 					UpdateContinentAndMapOptions()

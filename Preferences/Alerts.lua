@@ -130,10 +130,10 @@ local function GetAlertOptions()
 						descStyle = "inline",
 						type = "toggle",
 						width = "full",
-						get = function(info)
+						get = function()
 							return profile.alert.screenFlash.isEnabled
 						end,
-						set = function(info, value)
+						set = function(_, value)
 							profile.alert.screenFlash.isEnabled = value
 						end,
 					},
@@ -147,10 +147,10 @@ local function GetAlertOptions()
 						disabled = function()
 							return not profile.alert.screenFlash.isEnabled
 						end,
-						get = function(info)
+						get = function()
 							return profile.alert.screenFlash.texture
 						end,
-						set = function(info, value)
+						set = function(_, value)
 							profile.alert.screenFlash.texture = value
 						end,
 					},
@@ -163,14 +163,14 @@ local function GetAlertOptions()
 						disabled = function()
 							return not profile.alert.screenFlash.isEnabled
 						end,
-						get = function(info)
+						get = function()
 							local color = profile.alert.screenFlash.color
 
 							if color then
 								return color.r, color.g, color.b, color.a else return 0, 0, 0, 1
 							end
 						end,
-						set = function(info, r, g, b, a)
+						set = function(_, r, g, b, a)
 							local color = profile.alert.screenFlash.color
 
 							if not color then
@@ -215,10 +215,10 @@ local function GetAlertOptions()
 						name = _G.ENABLE,
 						descStyle = "inline",
 						type = "toggle",
-						get = function(info)
+						get = function()
 							return profile.alert.sound.isEnabled
 						end,
-						set = function(info, value)
+						set = function(_, value)
 							profile.alert.sound.isEnabled = value
 						end,
 					},
@@ -229,10 +229,10 @@ local function GetAlertOptions()
 						type = "toggle",
 						width = "double",
 						disabled = IsSoundDisabled,
-						get = function(info)
+						get = function()
 							return profile.alert.sound.ignoreMute
 						end,
-						set = function(info, value)
+						set = function(_, value)
 							profile.alert.sound.ignoreMute = value
 						end,
 					},
@@ -243,10 +243,10 @@ local function GetAlertOptions()
 						type = "select",
 						values = LOCALIZED_SOUND_CHANNELS,
 						disabled = IsSoundDisabled,
-						get = function(info)
+						get = function()
 							return SOUND_CHANNEL_INDICES[profile.alert.sound.channel]
 						end,
-						set = function(info, value)
+						set = function(_, value)
 							profile.alert.sound.channel = SOUND_CHANNELS[value]
 						end,
 					},
@@ -258,10 +258,10 @@ local function GetAlertOptions()
 						dialogControl = "LSM30_Sound",
 						values = _G.AceGUIWidgetLSMlists.sound,
 						disabled = IsSoundDisabled,
-						get = function(info)
+						get = function()
 							-- Intentionally empty, since there can be multiple sounds.
 						end,
-						set = function(info, value)
+						set = function(_, value)
 							profile.alert.sound.sharedMediaNames[value] = true
 							UpdateAlertNamesOptions()
 						end,

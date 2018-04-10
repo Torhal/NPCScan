@@ -200,10 +200,10 @@ local function UpdateAchievementNPCOptions()
 					name = _G.STATUS,
 					type = "select",
 					values = private.DetectionGroupStatusLabels,
-					get = function(info)
+					get = function()
 						return profile.detection.achievementIDs[achievementID]
 					end,
-					set = function(info, value)
+					set = function(_, value)
 						profile.detection.achievementIDs[achievementID] = value
 
 						if value ~= private.DetectionGroupStatus.UserDefined then
@@ -216,15 +216,15 @@ local function UpdateAchievementNPCOptions()
 						UpdateBlacklistedNPCOptions()
 
 						NPCScan:UpdateScanList()
-					end,
+					end
 				},
 				npcs = {
 					order = 2,
 					name = " ",
 					type = "group",
 					guiInline = true,
-					args = {},
-				},
+					args = {}
+				}
 			}
 		}
 
@@ -255,10 +255,10 @@ local function UpdateAchievementNPCOptions()
 				disabled = function()
 					return profile.detection.achievementIDs[achievementID] ~= private.DetectionGroupStatus.UserDefined
 				end,
-				get = function(info)
+				get = function()
 					return not profile.blacklist.npcIDs[npcID]
 				end,
-				set = function(info, value)
+				set = function()
 					local isBlacklisted = not profile.blacklist.npcIDs[npcID] and true or nil
 					profile.blacklist.npcIDs[npcID] = isBlacklisted
 
@@ -270,7 +270,7 @@ local function UpdateAchievementNPCOptions()
 					if isBlacklisted then
 						NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 					end
-				end,
+				end
 			}
 		end
 
@@ -323,9 +323,9 @@ local function UpdateRareNPCOptions()
 						name = " ",
 						type = "group",
 						guiInline = true,
-						args = {},
-					},
-				},
+						args = {}
+					}
+				}
 			}
 
 			for npcIDIndex = 1, #npcIDs do
@@ -342,10 +342,10 @@ local function UpdateRareNPCOptions()
 						disabled = function()
 							return not profile.detection.rares
 						end,
-						get = function(info)
+						get = function()
 							return not profile.blacklist.npcIDs[npcID]
 						end,
-						set = function(info, value)
+						set = function()
 							local isBlacklisted = not profile.blacklist.npcIDs[npcID] and true or nil
 							profile.blacklist.npcIDs[npcID] = isBlacklisted
 
@@ -357,7 +357,7 @@ local function UpdateRareNPCOptions()
 							if isBlacklisted then
 								NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 							end
-						end,
+						end
 					}
 				end
 			end
@@ -416,9 +416,9 @@ local function UpdateTameableRareNPCOptions()
 						name = " ",
 						type = "group",
 						guiInline = true,
-						args = {},
-					},
-				},
+						args = {}
+					}
+				}
 			}
 
 			for npcIDIndex = 1, #npcIDs do
@@ -435,10 +435,10 @@ local function UpdateTameableRareNPCOptions()
 						disabled = function()
 							return not profile.detection.tameables
 						end,
-						get = function(info)
+						get = function()
 							return not profile.blacklist.npcIDs[npcID]
 						end,
-						set = function(info, value)
+						set = function()
 							local isBlacklisted = not profile.blacklist.npcIDs[npcID] and true or nil
 							profile.blacklist.npcIDs[npcID] = isBlacklisted
 
@@ -450,7 +450,7 @@ local function UpdateTameableRareNPCOptions()
 							if isBlacklisted then
 								NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 							end
-						end,
+						end
 					}
 				end
 			end
@@ -507,10 +507,10 @@ local function UpdateNPCSearchOptions()
 						return true
 					end
 				end,
-				get = function(info)
+				get = function()
 					return not profile.blacklist.npcIDs[npcID]
 				end,
-				set = function(info, value)
+				set = function()
 					local isBlacklisted = not profile.blacklist.npcIDs[npcID] and true or nil
 					profile.blacklist.npcIDs[npcID] = isBlacklisted
 
@@ -523,7 +523,7 @@ local function UpdateNPCSearchOptions()
 					if isBlacklisted then
 						NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 					end
-				end,
+				end
 			}
 		end
 	else
@@ -602,7 +602,7 @@ local function UpdateUserDefinedNPCOptions()
 				end,
 				set = function()
 					RemoveUserDefinedNPC(npcID)
-				end,
+				end
 			}
 		end
 	else
@@ -645,7 +645,7 @@ function UpdateBlacklistedNPCOptions()
 					UpdateBlacklistedNPCOptions()
 
 					NPCScan:UpdateScanList()
-				end,
+				end
 			}
 		end
 	else
