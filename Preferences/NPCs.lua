@@ -77,6 +77,7 @@ do
 		return mapIDs
 	end
 end -- do-block
+
 local function ValidateUserDefinedNPCInput(input, operationType)
 	local value = type(input) == "string" and input:gsub('"', "") or input
 

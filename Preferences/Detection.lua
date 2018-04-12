@@ -32,13 +32,14 @@ local profile
 -- ----------------------------------------------------------------------------
 -- Ignored continent options.
 -- ----------------------------------------------------------------------------
+local AlphabeticalContinentMaps = {}
 local ContinentAndMapOptions = {}
 local ContinentIDs = {}
 
 local function UpdateContinentAndMapOptions()
 	table.wipe(ContinentAndMapOptions)
 
-	if not ContinentIDs then
+	if #ContinentIDs == 0 then
 		for index = 1, #Enum.ContinentMapID do
 			ContinentIDs[#ContinentIDs + 1] = index
 		end
@@ -49,6 +50,19 @@ local function UpdateContinentAndMapOptions()
 				return Data.Continents[a].name < Data.Continents[b].name
 			end
 		)
+	end
+
+	if #AlphabeticalContinentMaps == 0 then
+		for mapID, mapData in pairs(Data.Maps) do
+			local continentID = mapData.continentID
+
+			AlphabeticalContinentMaps[continentID] = AlphabeticalContinentMaps[continentID] or {}
+			AlphabeticalContinentMaps[continentID][#AlphabeticalContinentMaps[continentID] + 1] = mapID
+		end
+
+		for index = 1, #AlphabeticalContinentMaps do
+			table.sort(AlphabeticalContinentMaps[index], private.SortByMapNameThenByID)
+		end
 	end
 
 	for continentIndex = 1, #ContinentIDs do
@@ -99,8 +113,8 @@ local function UpdateContinentAndMapOptions()
 			}
 		}
 
-		for mapIDIndex = 1, #private.AlphabeticalContinentMaps[continentID] do
-			local mapID = private.AlphabeticalContinentMaps[continentID][mapIDIndex]
+		for mapIDIndex = 1, #AlphabeticalContinentMaps[continentID] do
+			local mapID = AlphabeticalContinentMaps[continentID][mapIDIndex]
 
 			local mapOptions = {
 				order = mapIDIndex,
