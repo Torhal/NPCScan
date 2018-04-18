@@ -23,4 +23,6 @@
     <Script file="Libs\LibWindow-1.1\LibWindow-1.1.lua"/>
     <Script file="Libs\HereBeDragons-1.0\HereBeDragons-1.0.lua"/>
     <!--@end-no-lib-strip@-->
+
+	<Script file="Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>
 </Ui>
