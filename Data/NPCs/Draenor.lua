@@ -117,6 +117,7 @@ NPCs[81001] = { -- Nok-Karosh
 
 NPCs[82536] = { -- Gorivax
 	questID = 37388, -- Gorivax
+	vignetteName = "Soulgrinder Portal",
 }
 
 NPCs[82614] = { -- Moltnoma

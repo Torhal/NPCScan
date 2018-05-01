@@ -267,6 +267,7 @@ VL["Skywhisker Taskmaster"] = true
 VL["Slogtusk"] = true
 VL["Slumbering Bear"] = true
 VL["Soulfang"] = true
+VL["Soulgrinder Portal"] = true
 VL["Soulthirster"] = true
 VL["Starbuck"] = true
 VL["Stingtail Nest"] = true
