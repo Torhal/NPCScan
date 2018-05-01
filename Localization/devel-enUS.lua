@@ -64,6 +64,7 @@ VL["Avatar of Sothrecar"] = true
 
 VL["Ba'ruun"] = true
 VL["Bahagar"] = true
+VL["Battle of the Barnacle"] = true
 VL["Beacher"] = true
 VL["Beastmaster Pao'lek"] = true
 VL["BH Master Scout"] = true
