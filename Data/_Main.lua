@@ -85,7 +85,10 @@ private.Data = {
         },
         [AchievementID.TerrorsOfTheShore] = {
             continentID = ContinentID.BrokenIsles
-        },
+		},
+		[AchievementID.TheSongOfSilence] = {
+			continentID = ContinentID.Draenor
+		},
         [AchievementID.TimelessChampion] = {
             continentID = ContinentID.Pandaria
         },

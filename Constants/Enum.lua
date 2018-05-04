@@ -41,7 +41,8 @@ private.Enum = {
         JungleStalker = 10070,
         NaxtVictim = 11841,
         OneManArmy = 7317,
-        TerrorsOfTheShore = 11786,
+		TerrorsOfTheShore = 11786,
+		TheSongOfSilence = 9541,
         TimelessChampion = 8714,
         UnleashedMonstrosities = 11160
     },
