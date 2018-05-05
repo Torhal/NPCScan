@@ -44,6 +44,9 @@ private.Data = {
         [AchievementID.BloodyRare] = {
             continentID = ContinentID.Outland
         },
+        [AchievementID.BrokeBackPrecipice] = {
+            continentID = ContinentID.Draenor
+        },
         [AchievementID.ChampionsOfLeiShen] = {
             continentID = ContinentID.Pandaria
         },
@@ -75,6 +78,12 @@ private.Data = {
             continentID = ContinentID.Draenor
         },
         [AchievementID.JungleStalker] = {
+            continentID = ContinentID.Draenor
+        },
+        [AchievementID.KingOfTheMonsters] = {
+            continentID = ContinentID.Draenor
+        },
+        [AchievementID.MakingTheCut] = {
             continentID = ContinentID.Draenor
         },
         [AchievementID.NaxtVictim] = {
