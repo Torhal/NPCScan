@@ -600,6 +600,7 @@ NPCs[98241] = { -- Lyrath Moonfeather
 
 NPCs[103785] = { -- Well-Fed Bear
 	isTameable = true,
+	questID = 41553, -- Slab of Bacon
 }
 
 NPCs[104523] = { -- Shalas'aman
