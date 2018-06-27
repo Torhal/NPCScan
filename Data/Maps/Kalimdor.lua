@@ -297,7 +297,10 @@ Maps[261].NPCs = {
     [50897] = true, -- Ffexk the Dunestalker
     [51004] = true, -- Toxx
     [54533] = true, -- Prince Lakma
-    [132591] = true -- Ogmot the Mad
+	[132578] = true, -- Qroshekx
+	[132584] = true, -- Xaarshej
+	[132580] = true, -- Ssinkrix
+	[132591] = true, -- Ogmot the Mad
 }
 
 -- ----------------------------------------------------------------------------

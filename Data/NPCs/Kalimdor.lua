@@ -496,6 +496,18 @@ NPCs[54533] = { -- Prince Lakma
 	isTameable = true,
 }
 
+NPCs[132578] = { -- Qroshekx
+	questID = 50255, -- Unknown
+}
+
+NPCs[132584] = { -- Xaarshej
+	questID = 50224, -- Unknown
+}
+
+NPCs[132580] = { -- Ssinkrix
+	questID = 50223, -- Unknown
+}
+
 NPCs[132591] = { -- Ogmot the Mad
 	questID = 50334, -- Unknown
 }
