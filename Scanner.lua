@@ -107,31 +107,28 @@ local function CanAddToScanList(npcID)
 		local detection = profile.detection
 
 		if isTameable and not detection.tameables then
-			private.Debug("Skipping %s (%d) - not tracking tameables.", NPCScan:GetNPCNameFromID(npcID), npcID)
 			return false
 		end
 
 		if not isTameable and not detection.rares then
-			private.Debug("Skipping %s (%d) - not tracking rares.", NPCScan:GetNPCNameFromID(npcID), npcID)
 			return false
 		end
 
-		local achievementID = npc.achievementID
-		if achievementID then
-			if detection.achievementIDs[achievementID] == Enum.DetectionGroupStatus.Disabled then
-				private.Debug("Skipping %s (%d) - not tracking the achievement.", NPCScan:GetNPCNameFromID(npcID), npcID)
+		if private.IsNPCQuestComplete(npcID) then
+			if detection.ignoreCompletedQuestObjectives then
 				return false
 			end
 
-			if detection.ignoreCompletedAchievementCriteria and (Data.Achievements[achievementID].isCompleted or npc.isCriteriaCompleted) then
-				private.Debug("Skipping %s (%d) - criteria already met or achievement completed.", NPCScan:GetNPCNameFromID(npcID), npcID)
-				return false
-			end
-		end
+			local achievementID = npc.achievementID
+			if achievementID then
+				if detection.achievementIDs[achievementID] == Enum.DetectionGroupStatus.Disabled then
+					return false
+				end
 
-		if detection.ignoreCompletedQuestObjectives and private.IsNPCQuestComplete(npcID) then
-			private.Debug("Skipping %s (%d) - already killed.", NPCScan:GetNPCNameFromID(npcID), npcID)
-			return false
+				if detection.ignoreCompletedAchievementCriteria and (Data.Achievements[achievementID].isCompleted or npc.isCriteriaCompleted) then
+					return false
+				end
+			end
 		end
 	end
 
