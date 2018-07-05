@@ -572,6 +572,8 @@ local function UpdateNPCSearchOptions()
 end
 
 local function PerformNPCSearch(searchString)
+	local Data = private.Data
+
 	searchString = searchString:lower():trim()
 
 	table.wipe(npcIDs)
