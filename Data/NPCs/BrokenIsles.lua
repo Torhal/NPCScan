@@ -713,6 +713,10 @@ NPCs[117141] = { -- Malgrazoth
 	questID = 46090, -- Unknown
 }
 
+NPCs[117303] = { -- Malificus
+	questID = 46948,
+}
+
 NPCs[117470] = { -- Si'vash
 	questID = 46945, -- Si'vash
 }
