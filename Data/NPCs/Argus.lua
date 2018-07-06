@@ -53,6 +53,7 @@ NPCs[125824] = { -- Khazaduum
 
 NPCs[126419] = { -- Naroua
 	questID = 48667, -- Unknown
+	vignetteName = "Naroua, King of the Forest",
 }
 
 -- ----------------------------------------------------------------------------

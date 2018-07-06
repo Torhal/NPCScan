@@ -203,6 +203,7 @@ VL["Mrrgrl the Tide Reaver"] = true
 VL["Murktide Alpha"] = true
 VL["Myonix"] = true
 
+VL["Naroua, King of the Forest"] = true
 VL["Nas Dunberlin"] = true
 VL["Night Haunter"] = true
 VL["No'losh"] = true
