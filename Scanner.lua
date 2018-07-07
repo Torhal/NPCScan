@@ -114,12 +114,11 @@ local function CanAddToScanList(npcID)
 			return false
 		end
 
-		if private.IsNPCQuestComplete(npcID) then
-			if detection.ignoreCompletedQuestObjectives then
-				return false
-			end
+		local isquestCompleted = private.IsNPCQuestComplete(npcID)
 
+		if not npc.questID or isquestCompleted then
 			local achievementID = npc.achievementID
+
 			if achievementID then
 				if detection.achievementIDs[achievementID] == Enum.DetectionGroupStatus.Disabled then
 					return false
@@ -130,7 +129,11 @@ local function CanAddToScanList(npcID)
 				end
 			end
 		end
-	end
+
+		if isquestCompleted and detection.ignoreCompletedQuestObjectives then
+			return false
+		end
+end
 
 	return true
 end
