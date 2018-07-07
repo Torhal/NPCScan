@@ -234,6 +234,7 @@ VL["Randril"] = true
 VL["Rauren"] = true
 VL["Ravager Broodlord"] = true
 VL["Ravyn-Drath"] = true
+VL["Really Skunky Beer"] = true
 VL["Reef Lord Raj'his"] = true
 VL["Remnant of the Blood Moon"] = true
 VL["Rogond"] = true
