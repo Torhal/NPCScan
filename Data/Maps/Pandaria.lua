@@ -223,14 +223,13 @@ Maps[951].NPCs = {
     [73171] = true, -- Champion of the Black Flame
     [73172] = true, -- Flintlord Gairan
     [73173] = true, -- Urdur the Cauterizer
-    [73174] = true, -- Archiereus of Flame
+    [73174] = true, -- Archiereus of Flame (Ordon Sanctuary)
     [73175] = true, -- Cinderfall
     [73277] = true, -- Leafmender
     [73279] = true, -- Evermaw
     [73281] = true, -- Dread Ship Vazuvius
     [73282] = true, -- Garnia
     [73293] = true, -- Whizzig
-    [73666] = true, -- Archiereus of Flame
+    [73666] = true, -- Archiereus of Flame (Three-Breeze Terrace)
     [73704] = true, -- Stinkbraid
-    [73854] = true -- Cranegnasher
 }
