@@ -8,51 +8,51 @@ local NPCs = private.Data.NPCs
 -- Krokuun (1135)
 -- ----------------------------------------------------------------------------
 NPCs[120393] = { -- Siegemaster Voraan
-	questID = 48627, -- Unknown
+	questID = 48627, -- Tracking Quest
 }
 
 NPCs[122911] = { -- Commander Vecaya
-	questID = 48563, -- Unknown
+	questID = 48563, -- Tracking Quest
 }
 
 NPCs[122912] = { -- Commander Sathrenael
-	questID = 48562, -- Unknown
+	questID = 48562, -- Tracking Quest
 }
 
 NPCs[123464] = { -- Sister Subversia
-	questID = 48565, -- Unknown
+	questID = 48565, -- Tracking Quest
 }
 
 NPCs[123689] = { -- Talestra the Vile
-	questID = 48628, -- Unknown
+	questID = 48628, -- Tracking Quest
 }
 
 NPCs[124775] = { -- Commander Endaxis
-	questID = 48564, -- Unknown
+	questID = 48564, -- Tracking Quest
 }
 
 NPCs[124804] = { -- Tereck the Selector
-	questID = 48664, -- Unknown
+	questID = 48664, -- Tracking Quest
 }
 
 NPCs[125388] = { -- Vagath the Betrayed
-	questID = 48629, -- Unknown
+	questID = 48629, -- Tracking Quest
 }
 
 NPCs[125479] = { -- Tar Spitter
-	questID = 48665, -- Unknown
+	questID = 48665, -- Tracking Quest
 }
 
 NPCs[125820] = { -- Imp Mother Laglath
-	questID = 48666, -- Unknown
+	questID = 48666, -- Tracking Quest
 }
 
 NPCs[125824] = { -- Khazaduum
-	questID = 48561, -- Unknown
+	questID = 48561, -- Tracking Quest
 }
 
 NPCs[126419] = { -- Naroua
-	questID = 48667, -- Unknown
+	questID = 48667, -- Tracking Quest
 	vignetteName = "Naroua, King of the Forest",
 }
 
@@ -60,19 +60,19 @@ NPCs[126419] = { -- Naroua
 -- Mac'Aree (1170)
 -- ----------------------------------------------------------------------------
 NPCs[122838] = { -- Shadowcaster Voruun
-	questID = 48692, -- Unknown
+	questID = 48692, -- Tracking Quest
 }
 
 NPCs[124440] = { -- Overseer Y'Beda
-	questID = 48714, -- Unknown
+	questID = 48714, -- Tracking Quest
 }
 
 NPCs[125497] = { -- Overseer Y'Sorna
-	questID = 48716, -- Unknown
+	questID = 48716, -- Tracking Quest
 }
 
 NPCs[125498] = { -- Overseer Y'Morna
-	questID = 48717, -- Unknown
+	questID = 48717, -- Tracking Quest
 }
 
 NPCs[126815] = { -- Soultwisted Monstrosity

@@ -70,7 +70,7 @@ NPCs[69998] = { -- Goda
 -- ----------------------------------------------------------------------------
 NPCs[71919] = { -- Zhu-Gon the Sour
 	questID = 32959, -- Tracking Quest - Daily - Zhu-Gon the Sour/Skunky Beer
-	vignetteName = "Really Skunky Beer"
+	vignetteName = "Really Skunky Beer",
 }
 
 NPCs[72045] = { -- Chelon

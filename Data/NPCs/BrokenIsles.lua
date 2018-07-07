@@ -254,7 +254,7 @@ NPCs[111434] = { -- Sea King Tidross
 }
 
 NPCs[111454] = { -- Bestrix
-	questID = 43961, -- Unknown
+	questID = 43961, -- Bestrix
 }
 
 NPCs[111939] = { -- Lysanis Shadesoul
@@ -464,7 +464,7 @@ NPCs[98503] = { -- Grrvrgull the Conqueror
 }
 
 NPCs[107023] = { -- Nithogg
-	questID = 44508, -- Unknown
+	questID = 44508, -- Tracking Quest
 }
 
 NPCs[107487] = { -- Starbuck
@@ -474,7 +474,7 @@ NPCs[107487] = { -- Starbuck
 }
 
 NPCs[107544] = { -- Nithogg
-	questID = 44508, -- Unknown
+	questID = 44508, -- Tracking Quest
 }
 
 NPCs[107926] = { -- Hannval the Butcher
@@ -503,7 +503,7 @@ NPCs[111463] = { -- Bulvinkel
 -- Val'sharah (1018)
 -- ----------------------------------------------------------------------------
 NPCs[92104] = { -- Thistleleaf Rascal
-	questID = 38466, -- Unknown
+	questID = 38466, -- Grellkin Treasure
 	vignetteName = "Unguarded Thistleleaf Treasure",
 }
 
@@ -658,63 +658,63 @@ NPCs[110562] = { -- Bahagar
 -- Broken Shore (1021)
 -- ----------------------------------------------------------------------------
 NPCs[116166] = { -- Eye of Gurgh
-	questID = 47068, -- Unknown
+	questID = 47068, -- Rare Elite 25
 }
 
 NPCs[116953] = { -- Corrupted Bonebreaker
-	questID = 46101, -- Unknown
+	questID = 46101, -- Rare Elite 12
 }
 
 NPCs[117086] = { -- Emberfire
-	questID = 46093, -- Unknown
+	questID = 46093, -- Rare Elite 04
 }
 
 NPCs[117089] = { -- Inquisitor Chillbane
-	questID = 46096, -- Unknown
+	questID = 46096, -- Rare Elite 07
 }
 
 NPCs[117090] = { -- Xorogun the Flamecarver
-	questID = 46100, -- Unknown
+	questID = 46100, -- Rare Elite 11
 }
 
 NPCs[117091] = { -- Felmaw Emberfiend
-	questID = 46095, -- Unknown
+	questID = 46095, -- Rare Elite 06
 }
 
 NPCs[117093] = { -- Felbringer Xar'thok
-	questID = 46099, -- Unknown
+	questID = 46099, -- Rare Elite 10
 }
 
 NPCs[117094] = { -- Malorus the Soulkeeper
-	questID = 46092, -- Unknown
+	questID = 46092, -- Rare Elite 03
 }
 
 NPCs[117095] = { -- Dreadblade Annihilator
-	questID = 46098, -- Unknown
+	questID = 46098, -- Rare Elite 09
 }
 
 NPCs[117096] = { -- Potionmaster Gloop
-	questID = 46094, -- Unknown
+	questID = 46094, -- Rare Elite 05
 }
 
 NPCs[117103] = { -- Felcaller Zelthae
-	questID = 46102, -- Unknown
+	questID = 46102, -- Rare Elite 13
 }
 
 NPCs[117136] = { -- Doombringer Zar'thoz
-	questID = 46097, -- Unknown
+	questID = 46097, -- Rare Elite 08
 }
 
 NPCs[117140] = { -- Salethan the Broodwalker
-	questID = 46091, -- Unknown
+	questID = 46091, -- Rare Elite 02
 }
 
 NPCs[117141] = { -- Malgrazoth
-	questID = 46090, -- Unknown
+	questID = 46090, -- Rare Elite 01
 }
 
 NPCs[117303] = { -- Malificus
-	questID = 46948,
+	questID = 46948, -- Malificus
 }
 
 NPCs[117470] = { -- Si'vash
@@ -722,43 +722,43 @@ NPCs[117470] = { -- Si'vash
 }
 
 NPCs[118993] = { -- Dreadeye
-	questID = 46202, -- Unknown
+	questID = 46202, -- Rare Elite 14
 }
 
 NPCs[119629] = { -- Lord Hel'Nurath
-	questID = 46304, -- Unknown
+	questID = 46304, -- Rare Elite 15
 }
 
 NPCs[119718] = { -- Imp Mother Bruva
-	questID = 46313, -- Unknown
+	questID = 46313, -- Rare Elite 16
 }
 
 NPCs[120998] = { -- Flllurlokkr
-	questID = 46951, -- Unknown
+	questID = 46951, -- Rare Elite 17
 }
 
 NPCs[121016] = { -- Aqueux
-	questID = 46953, -- Unknown
+	questID = 46953, -- Rare Elite 18
 }
 
 NPCs[121029] = { -- Brood Mother Nix
-	questID = 46965, -- Unknown
+	questID = 46965, -- Rare Elite 19
 }
 
 NPCs[121037] = { -- Grossir
-	questID = 46995, -- Unknown
+	questID = 46995, -- Rare Elite 20
 }
 
 NPCs[121046] = { -- Brother Badatin
-	questID = 47001, -- Unknown
+	questID = 47001, -- Rare Elite 21
 }
 
 NPCs[121107] = { -- Lady Eldrathe
-	questID = 47026, -- Unknown
+	questID = 47026, -- Rare Elite 22
 }
 
 NPCs[121112] = { -- Somber Dawn
-	questID = 47028, -- Unknown
+	questID = 47028, -- Rare Elite 23
 }
 
 NPCs[121124] = { -- Apocron
@@ -766,7 +766,7 @@ NPCs[121124] = { -- Apocron
 }
 
 NPCs[121134] = { -- Duke Sithizi
-	questID = 47036, -- Unknown
+	questID = 47036, -- Rare Elite 24
 }
 
 -- ----------------------------------------------------------------------------
@@ -991,7 +991,7 @@ NPCs[109501] = { -- Darkful
 }
 
 NPCs[110378] = { -- Drugon the Frostblood
-	questID = 44503, -- Unknown
+	questID = 44503, -- Tracking Quest
 }
 
 NPCs[125951] = { -- Obsidian Deathwarder
