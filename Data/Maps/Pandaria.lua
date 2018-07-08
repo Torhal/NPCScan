@@ -231,5 +231,6 @@ Maps[951].NPCs = {
     [73282] = true, -- Garnia
     [73293] = true, -- Whizzig
     [73666] = true, -- Archiereus of Flame (Three-Breeze Terrace)
-    [73704] = true, -- Stinkbraid
+	[73704] = true, -- Stinkbraid
+	[73854] = true, -- Cranegnasher
 }
