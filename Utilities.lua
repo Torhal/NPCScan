@@ -115,22 +115,20 @@ do
 	private.UnitTokenToCreatureID = UnitTokenToCreatureID
 end -- do-block
 
-local function IsNPCQuestComplete(npcID)
-	local npc = Data.NPCs[npcID]
-
-	if npc then
-		local questID = npc.questID
-		return questID and _G.IsQuestFlaggedCompleted(questID) or false
 local function IsNPCAchievementCriteriaComplete(npc)
 	if not npc.achievementID then
 		return true
 	end
 
-	return false
 	return Data.Achievements[npc.achievementID].isCompleted or npc.isCriteriaCompleted
 end
 
 private.IsNPCAchievementCriteriaComplete = IsNPCAchievementCriteriaComplete
+
+local function IsNPCQuestComplete(npc)
+	local questID = npc.questID
+
+	return questID and _G.IsQuestFlaggedCompleted(questID) or false
 end
 
 private.IsNPCQuestComplete = IsNPCQuestComplete

@@ -114,7 +114,7 @@ local function CanAddToScanList(npcID)
 			return false
 		end
 
-		local isquestCompleted = private.IsNPCQuestComplete(npcID)
+		local isquestCompleted = private.IsNPCQuestComplete(npc)
 
 		if not npc.questID or isquestCompleted then
 			local achievementID = npc.achievementID
@@ -237,8 +237,10 @@ local function UpdateScanListQuestObjectives()
 	local needsUpdate = false
 
 	if private.db.profile.detection.ignoreCompletedQuestObjectives then
-		for npcID in pairs(Data.Scanner.NPCs) do
-			if private.IsNPCQuestComplete(npcID) then
+		local NPCs = Data.Scanner.NPCs
+
+		for npcID in pairs(NPCs) do
+			if private.IsNPCQuestComplete(NPCs[npcID]) then
 				needsUpdate = true
 			end
 		end

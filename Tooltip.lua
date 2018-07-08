@@ -265,7 +265,7 @@ local function DrawTooltip(anchorFrame)
 		Tooltip:SetCell(line, 1, npcDisplayNames[npcID])
 
 		if npc.questID then
-			Tooltip:SetCell(line, QUEST_COLUMN, private.IsNPCQuestComplete(npcID) and ICON_QUEST_COMPLETE or ICON_QUEST_ACTIVE)
+			Tooltip:SetCell(line, QUEST_COLUMN, private.IsNPCQuestComplete(npc) and ICON_QUEST_COMPLETE or ICON_QUEST_ACTIVE)
 		end
 
 		if npc.isTameable then
