@@ -214,10 +214,13 @@ local function DrawTooltip(anchorFrame)
 	for npcID in pairs(DataObject.scannerData.NPCs) do
 		local npc = Data.NPCs[npcID]
 
-		npcAchievementNames[npcID] = npc.achievementID and Data.Achievements[npc.achievementID].name or "ZZZZZ"
-		npcDisplayNames[npcID] = private.GetNPCOptionsName(npcID)
-		npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
-		npcIDs[#npcIDs + 1] = npcID
+		-- The npcID may belong to a custom NPC, which will not have further information.
+		if npc then
+			npcAchievementNames[npcID] = npc.achievementID and Data.Achievements[npc.achievementID].name or "ZZZZZ"
+			npcDisplayNames[npcID] = private.GetNPCOptionsName(npcID)
+			npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
+			npcIDs[#npcIDs + 1] = npcID
+		end
 	end
 
 	table.sort(npcIDs, SortByNPCAchievementNameThenByNameThenByID)

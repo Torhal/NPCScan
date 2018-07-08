@@ -141,7 +141,7 @@ end
 local function MergeUserDefinedWithScanList(npcList)
 	if npcList and private.db.profile.detection.userDefined then
 		for npcID in pairs(npcList) do
-			Data.Scanner.NPCs[npcID] = Data.NPCs[npcID]
+			Data.Scanner.NPCs[npcID] = {}
 		end
 	end
 end
