@@ -121,9 +121,16 @@ local function IsNPCQuestComplete(npcID)
 	if npc then
 		local questID = npc.questID
 		return questID and _G.IsQuestFlaggedCompleted(questID) or false
+local function IsNPCAchievementCriteriaComplete(npc)
+	if not npc.achievementID then
+		return true
 	end
 
 	return false
+	return Data.Achievements[npc.achievementID].isCompleted or npc.isCriteriaCompleted
+end
+
+private.IsNPCAchievementCriteriaComplete = IsNPCAchievementCriteriaComplete
 end
 
 private.IsNPCQuestComplete = IsNPCQuestComplete

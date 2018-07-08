@@ -160,7 +160,7 @@ local function GetNPCOptionsName(npcID)
 	local npc = Data.NPCs[npcID]
 
 	if npc.achievementID then
-		colorCode = npc.isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
+		colorCode = private.IsNPCAchievementCriteriaComplete(npc) and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
 	elseif npc.questID then
 		colorCode = private.IsNPCQuestComplete(npcID) and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
 	end

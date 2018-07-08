@@ -210,15 +210,15 @@ function NPCScan:OnEnable()
 	end
 
 	for achievementID, achievement in pairs(Data.Achievements) do
+		local _, _, _, isAchievementCompleted = _G.GetAchievementInfo(achievementID)
+
 		achievement.ID = achievementID
+		achievement.isCompleted = isAchievementCompleted
 
 		table.wipe(missingNPCs)
 
 		for criteriaIndex = 1, _G.GetAchievementNumCriteria(achievementID) do
 			local assetName, criteriaType, isCriteriaCompleted, _, _, _, _, assetID, _, criteriaID = _G.GetAchievementCriteriaInfo(achievementID, criteriaIndex)
-			local _, _, _, isAchievementCompleted = _G.GetAchievementInfo(achievementID)
-
-			achievement.isCompleted = isAchievementCompleted
 
 			if criteriaType == CriteriaType.NPCKill then
 				if assetID > 0 then
