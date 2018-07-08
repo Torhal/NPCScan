@@ -62,6 +62,7 @@ NPCs[68322] = { -- Muerta
 -- Isle of Thunder (928)
 -- ----------------------------------------------------------------------------
 NPCs[69099] = { -- Nalak
+	achievementID = 8028, -- Praise the Sun!
 	questID = 32518, -- Short-Supply Reward
 }
 

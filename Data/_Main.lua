@@ -91,7 +91,13 @@ private.Data = {
         },
         [AchievementID.OneManArmy] = {
             continentID = ContinentID.Pandaria
-        },
+		},
+		[AchievementID.PraiseTheSun] = {
+			continentID = ContinentID.Pandaria,
+			criteriaNPCs = {
+				[69099] = true, -- Nalak
+			},
+		},
         [AchievementID.TerrorsOfTheShore] = {
             continentID = ContinentID.BrokenIsles
 		},
