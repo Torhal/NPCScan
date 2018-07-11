@@ -98,7 +98,7 @@ private.Data = {
 		[AchievementID.PraiseTheSun] = {
 			continentID = ContinentID.Pandaria,
 			criteriaNPCs = {
-				[69099] = true, -- Nalak
+				[69099] = true, -- Nalak¸
 			},
 		},
         [AchievementID.TerrorsOfTheShore] = {
@@ -112,7 +112,16 @@ private.Data = {
         },
         [AchievementID.UnleashedMonstrosities] = {
             continentID = ContinentID.BrokenIsles
-        }
+		},
+		[AchievementID.ZulAgain] = {
+			continentID = ContinentID.Pandaria,
+			criteriaNPCs = {
+				[69768] = true, -- Zandalari Warscout
+				[69769] = true, -- Zandalari Warbringer
+				[69841] = true, -- Zandalari Warbringer
+				[69842] = true, -- Zandalari Warbringer
+			},
+		},
     },
     Continents = {},
 	Maps = setmetatable({}, addTableMeta),

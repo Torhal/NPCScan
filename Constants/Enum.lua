@@ -49,7 +49,8 @@ private.Enum = {
 		TerrorsOfTheShore = 11786,
 		TheSongOfSilence = 9541,
         TimelessChampion = 8714,
-        UnleashedMonstrosities = 11160
+		UnleashedMonstrosities = 11160,
+		ZulAgain = 8078
     },
     ContinentID = ContinentID,
     ContinentMapID = {

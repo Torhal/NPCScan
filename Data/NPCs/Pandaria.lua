@@ -5,6 +5,25 @@ local AddOnFolderName, private = ...
 local NPCs = private.Data.NPCs
 
 -- ----------------------------------------------------------------------------
+-- Multiple zones
+-- ----------------------------------------------------------------------------
+NPCs[69768] = { -- Zandalari Warscout
+	achievementID = 8078, -- Zul'Again
+}
+
+NPCs[69769] = { -- Zandalari Warbringer
+	achievementID = 8078, -- Zul'Again
+}
+
+NPCs[69841] = { -- Zandalari Warbringer
+	achievementID = 8078, -- Zul'Again
+}
+
+NPCs[69842] = { -- Zandalari Warbringer
+	achievementID = 8078, -- Zul'Again
+}
+
+-- ----------------------------------------------------------------------------
 -- Vale of Eternal Blossoms (811)
 -- ----------------------------------------------------------------------------
 NPCs[50843] = { -- Portent
