@@ -497,12 +497,40 @@ NPCs[107926] = { -- Hannval the Butcher
 	vignetteName = "Hannval the Butcher",
 }
 
+NPCs[108790] = { -- Den Mother Ylva
+	questID = 42785, -- DANGER: Den Mother Ylva
+}
+
+NPCs[108822] = { -- Huntress Estrid
+	questID = 42798, -- DANGER: Huntress Estrid
+}
+
 NPCs[108827] = { -- Fjorlag, the Grave's Chill
 	questID = 45507, -- Fjorlag, the Grave's Chill
 }
 
+NPCs[108885] = { -- Aegir Wavecrusher
+	questID = 42820, -- DANGER: Aegir Wavecrusher
+}
+
+NPCs[109015] = { -- Lagertha
+	questID = 42964, -- DANGER: Lagertha
+}
+
 NPCs[109113] = { -- Boulderfall, the Eroded
 	questID = 40067, -- 7.0 Stormheim - Boulderfall - twh
+}
+
+NPCs[109195] = { -- Soulbinder Halldora
+	questID = 42953, -- DANGER: Soulbinder Halldora
+}
+
+NPCs[109317] = { -- Rulf Bonesnapper
+	questID = 42963, -- DANGER: Rulf Bonesnapper
+}
+
+NPCs[109318] = { -- Runeseer Sigvid
+	questID = 42991, -- DANGER: Runeseer Sigvid
 }
 
 NPCs[110363] = { -- Roteye
@@ -653,6 +681,10 @@ NPCs[109990] = { -- Nylaathria the Forgotten
 
 NPCs[110342] = { -- Rabxach
 	questID = 45487, -- Rabxach
+}
+
+NPCs[110346] = { -- Aodh Witherpetal
+	questID = 43344, -- DANGER: Aodh Witherpetal
 }
 
 NPCs[110361] = { -- Harbinger of Screams
