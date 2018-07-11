@@ -76,7 +76,10 @@ private.Data = {
         },
         [AchievementID.HighValueTargets] = {
             continentID = ContinentID.Draenor
-        },
+		},
+		[AchievementID.ImInYourBaseKillingYourDudes] = {
+			continentID = ContinentID.Pandaria
+		},
         [AchievementID.JungleStalker] = {
             continentID = ContinentID.Draenor
         },

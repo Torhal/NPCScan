@@ -35,26 +35,32 @@ NPCs[63978] = { -- Kri'chon
 -- Krasarang Wilds (857)
 -- ----------------------------------------------------------------------------
 NPCs[68317] = { -- Mavis Harms
+	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
 	factionGroup = "Alliance",
 }
 
 NPCs[68318] = { -- Dalan Nightbreaker
+	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
 	factionGroup = "Alliance",
 }
 
 NPCs[68319] = { -- Disha Fearwarden
+	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
 	factionGroup = "Alliance",
 }
 
 NPCs[68320] = { -- Ubunti the Shade
+	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
 	factionGroup = "Horde",
 }
 
 NPCs[68321] = { -- Kar Warmaker
+	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
 	factionGroup = "Horde",
 }
 
 NPCs[68322] = { -- Muerta
+	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
 	factionGroup = "Horde",
 }
 
