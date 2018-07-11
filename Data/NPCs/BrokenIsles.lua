@@ -463,6 +463,21 @@ NPCs[98503] = { -- Grrvrgull the Conqueror
 	vignetteName = "Grrvrgull the Conquerer",
 }
 
+NPCs[106981] = { -- Captain Hring
+	achievementID = 11160, -- Unleashed Monstrosities
+	questID = 42269, -- The Soultakers
+}
+
+NPCs[106982] = { -- Reaver Jdorn
+	achievementID = 11160, -- Unleashed Monstrosities
+	questID = 42269, -- The Soultakers
+}
+
+NPCs[106984] = { -- Soultrapper Mevra
+	achievementID = 11160, -- Unleashed Monstrosities
+	questID = 42269, -- The Soultakers
+}
+
 NPCs[107023] = { -- Nithogg
 	questID = 44508, -- Tracking Quest
 }
