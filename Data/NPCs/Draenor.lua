@@ -1229,6 +1229,10 @@ NPCs[76473] = { -- Mother Araneae
 	vignetteName = "Pale Spider Broodmother",
 }
 
+NPCs[77093] = { -- Roardan the Sky Terror
+	isTameable = true,
+}
+
 NPCs[78260] = { -- King Slime
 	questID = 37412, -- King Slime
 }
@@ -1263,6 +1267,14 @@ NPCs[80868] = { -- Glut
 
 NPCs[81038] = { -- Gelgor of the Blue Flame
 	questID = 36391, -- The Blue Flame
+}
+
+NPCs[81537] = { -- Khargax the Devourer
+	isTameable = true,
+}
+
+NPCs[81548] = { -- Charl Doomwing
+	isTameable = true,
 }
 
 NPCs[82058] = { -- Depthroot
