@@ -1126,11 +1126,13 @@ NPCs[86257] = { -- Basten
 }
 
 NPCs[86258] = { -- Nultra
+	achievementID = 9678, -- Ancient No More
 	questID = 37369, -- Protectors of the Grove
 	vignetteName = "Protectors of the Grove",
 }
 
 NPCs[86259] = { -- Valstil
+	achievementID = 9678, -- Ancient No More
 	questID = 37369, -- Protectors of the Grove
 	vignetteName = "Protectors of the Grove",
 }
