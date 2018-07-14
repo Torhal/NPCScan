@@ -297,6 +297,7 @@ NPCs[69998] = { -- Goda
 -- Isle of Giants (929)
 -- ----------------------------------------------------------------------------
 NPCs[69161] = { -- Oondasta
+	achievementID = 8123, -- Millions of Years of Evolution vs. My Fist
 	mounts = {
 		{
 			itemID = 94228, -- Reins of the Cobalt Primordial Direhorn

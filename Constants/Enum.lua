@@ -43,6 +43,7 @@ private.Enum = {
 		JungleStalker = 10070,
 		KingOfTheMonsters = 9601,
 		MakingTheCut = 9617,
+		MillionsOfYearsOfEvolutionVsMyFist = 8123,
         NaxtVictim = 11841,
 		OneManArmy = 7317,
 		PraiseTheSun = 8028,

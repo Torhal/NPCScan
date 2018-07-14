@@ -89,6 +89,12 @@ private.Data = {
         [AchievementID.MakingTheCut] = {
             continentID = ContinentID.Draenor
         },
+        [AchievementID.MillionsOfYearsOfEvolutionVsMyFist] = {
+			continentID = ContinentID.Pandaria,
+			criteriaNPCs = {
+				[69161] = true, -- Oondasta
+			}
+        },
         [AchievementID.NaxtVictim] = {
             continentID = ContinentID.BrokenIsles
         },
