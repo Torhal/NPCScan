@@ -155,14 +155,21 @@ local function GetNPCOptionsDescription(npcID)
 	return ("%s %s %s"):format(_G.ID, npcID, table.concat(mapNames, ", "))
 end
 
+local ICON_QUEST_ACTIVE = private.FormatAtlasTexture("QuestDaily")
+local ICON_QUEST_COMPLETE = private.FormatAtlasTexture("QuestRepeatableTurnin")
+
 local function GetNPCOptionsName(npcID)
 	local colorCode = _G.NORMAL_FONT_COLOR_CODE
 	local npc = Data.NPCs[npcID]
 
 	if npc.achievementID then
 		colorCode = private.IsNPCAchievementCriteriaComplete(npc) and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
-	elseif npc.questID then
-		colorCode = private.IsNPCQuestComplete(npc) and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
+	end
+
+	local prefix = ""
+
+	if npc.questID then
+		prefix = private.IsNPCQuestComplete(npc) and ICON_QUEST_COMPLETE or ICON_QUEST_ACTIVE
 	end
 
 	local npcName = NPCScan:GetNPCNameFromID(npcID)
@@ -173,7 +180,7 @@ local function GetNPCOptionsName(npcID)
 		label = (" %s"):format(_G.PARENS_TEMPLATE:format(vignetteName))
 	end
 
-	return ("%s%s%s|r"):format(colorCode, npcName, label)
+	return ("%s%s%s%s|r"):format(prefix, colorCode, npcName, label)
 end
 
 private.GetNPCOptionsName = GetNPCOptionsName
