@@ -489,6 +489,10 @@ NPCs[95056] = { -- Doomroller
 	questID = 39289, -- Doomroller
 }
 
+NPCs[96235] = { -- Xemirkol
+	achievementID = 10334, -- Predator
+}
+
 NPCs[98283] = { -- Drakum
 	questID = 40105, -- Drakum
 }

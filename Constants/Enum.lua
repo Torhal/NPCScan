@@ -46,6 +46,7 @@ private.Enum = {
         NaxtVictim = 11841,
 		OneManArmy = 7317,
 		PraiseTheSun = 8028,
+		Predator = 10334,
 		TerrorsOfTheShore = 11786,
 		TheSongOfSilence = 9541,
         TimelessChampion = 8714,

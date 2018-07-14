@@ -101,6 +101,12 @@ private.Data = {
 				[69099] = true, -- Nalak¸
 			},
 		},
+		[AchievementID.Predator] = {
+			continentID = ContinentID.Draenor,
+			criteriaNPCs = {
+				[96235] = true, -- Xemirkol
+			}
+		},
         [AchievementID.TerrorsOfTheShore] = {
             continentID = ContinentID.BrokenIsles
 		},
