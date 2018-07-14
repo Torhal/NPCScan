@@ -34,7 +34,8 @@ Maps[807].NPCs = {
     [50783] = true, -- Salyin Warscout
     [50811] = true, -- Nasra Spothide
     [50828] = true, -- Bonobos
-    [51059] = true -- Blackhoof
+	[51059] = true, -- Blackhoof
+	[62346] = true, -- Galleon
 }
 
 -- ----------------------------------------------------------------------------
@@ -49,7 +50,8 @@ Maps[809].NPCs = {
     [50789] = true, -- Nessos the Oracle
     [50817] = true, -- Ahone the Wanderer
     [50831] = true, -- Scritch
-    [69768] = true, -- Zandalari Warscout
+	[60491] = true, -- Sha of Anger
+	[69768] = true, -- Zandalari Warscout
     [69769] = true, -- Zandalari Warbringer
     [69841] = true, -- Zandalari Warbringer
     [69842] = true, -- Zandalari Warbringer

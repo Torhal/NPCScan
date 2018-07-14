@@ -68,6 +68,14 @@ NPCs[51059] = { -- Blackhoof
 	},
 }
 
+NPCs[62346] = { -- Galleon
+	mounts = {
+		itemID = 89783, -- Son of Galleon's Saddle
+		spellID = 130965, -- Son of Galleon
+	},
+	questID = 32098, -- Short-Supply Reward
+}
+
 -- ----------------------------------------------------------------------------
 -- Kun-Lai Summit (809)
 -- ----------------------------------------------------------------------------
@@ -101,6 +109,14 @@ NPCs[50817] = { -- Ahone the Wanderer
 	},
 }
 
+NPCs[60491] = { -- Sha of Anger
+	mounts = {
+		{
+			itemID = 87771, -- Reins of the Heavenly Onyx Cloud Serpent
+			spellID = 127158, -- Heavenly Onyx Cloud Serpent
+		},
+	},
+	questID = 32099, -- Short-Supply Reward
 }
 
 -- ----------------------------------------------------------------------------
@@ -275,6 +291,40 @@ NPCs[69099] = { -- Nalak
 
 NPCs[69998] = { -- Goda
 	isTameable = true,
+}
+
+-- ----------------------------------------------------------------------------
+-- Isle of Giants (929)
+-- ----------------------------------------------------------------------------
+NPCs[69161] = { -- Oondasta
+	mounts = {
+		{
+			itemID = 94228, -- Reins of the Cobalt Primordial Direhorn
+			spellID = 138423, -- Cobalt Primordial Direhorn
+		},
+	},
+	questID = 32519, -- Short-Supply Reward
+}
+
+NPCs[70096] = { -- War-God Dokah
+	pets = {
+		{
+			itemID = 94126, -- Zandalari Kneebiter
+			npcID = 69796, -- Zandalari Kneebiter
+		},
+		{
+			itemID = 95422, -- Zandalari Anklerender
+			npcID = 70451, -- Zandalari Anklerender
+		},
+		{
+			itemID = 95423, -- Zandalari Footslasher
+			npcID = 70452, -- Zandalari Footslasher
+		},
+		{
+			itemID = 95424, -- Zandalari Toenibbler
+			npcID = 70453, -- Zandalari Toenibbler
+		},
+	},
 }
 
 -- ----------------------------------------------------------------------------
