@@ -290,6 +290,12 @@ NPCs[91780] = { -- Mother Clacker
 }
 
 NPCs[91795] = { -- Stormwing Matriarch
+	pets = {
+		{
+			itemID = 129208, -- Stormborne Whelpling
+			npcID = 97205, -- Stormborne Whelpling
+		},
+	},
 	questID = 38423, -- Stormdrake Matriarch
 	vignetteName = "Stormwing Matriarch",
 }
@@ -306,6 +312,9 @@ NPCs[91874] = { -- Bladesquall
 
 NPCs[91892] = { -- Thane Irglov the Merciless
 	questID = 38424, -- Thane's Mead Hall
+	toys = {
+		{ itemID = 129113 }, -- Faintly Glowing Flagon of Mead
+	},
 	vignetteName = "Thane's Mead Hall",
 }
 
@@ -547,17 +556,29 @@ NPCs[111463] = { -- Bulvinkel
 -- ----------------------------------------------------------------------------
 NPCs[92104] = { -- Thistleleaf Rascal
 	questID = 38466, -- Grellkin Treasure
+	toys = {
+		{ itemID = 130147 }, -- Thistleleaf Branch
+	},
 	vignetteName = "Unguarded Thistleleaf Treasure",
 }
 
 NPCs[92117] = { -- Gorebeak
 	isTameable = true,
+	pets = {
+		{
+			itemID = 130154, -- Pygmy Owl
+			npcID = 108568, -- Pygmy Owl
+		},
+	},
 	questID = 38468, -- Gorebeak
 	vignetteName = "Gorebeak",
 }
 
 NPCs[92180] = { -- Seersei
 	questID = 38479, -- Seersei
+	toys = {
+		{ itemID = 130171 }, -- Cursed Orb
+	},
 	vignetteName = "Seersei",
 }
 
@@ -567,6 +588,12 @@ NPCs[92423] = { -- Theryssia
 }
 
 NPCs[92965] = { -- Darkshade
+	pets = {
+		{
+			itemID = 130166, -- Risen Saber Kitten
+			npcID = 99403, -- Risen Saber Kitten
+		},
+	},
 	questID = 38767, -- Nightmaul
 	vignetteName = "Darkshade, Saber Matriarch",
 }
@@ -607,6 +634,12 @@ NPCs[94414] = { -- Kiranys Duskwhisper
 }
 
 NPCs[94485] = { -- Pollous the Fetid
+	pets = {
+		{
+			itemID = 130168, -- Fetid Waveling
+			npcID = 99394, -- Fetid Waveling
+		},
+	},
 	questID = 39130, -- 7.0 Val'sharah - River: Purging the River - TRACKING - twh
 	vignetteName = "Purging the River",
 }
@@ -618,6 +651,9 @@ NPCs[95123] = { -- Grelda the Hag
 
 NPCs[95221] = { -- Mad Henryk
 	questID = 39357, -- 7.0 Val'sharah - Grove - Eileen - TRACKING - twh
+	toys = {
+		{ itemID = 130214 }, -- Worn Doll
+	},
 	vignetteName = "Old Bear Trap",
 }
 
@@ -660,6 +696,9 @@ NPCs[109125] = { -- Kathaw the Savage
 
 NPCs[109281] = { -- Malisandra
 	questID = 45501, -- Malisandra
+	toys = {
+		{ itemID = 130171 }, -- Cursed Orb
+	},
 }
 
 NPCs[109648] = { -- Witchdoctor Grgl-Brgl
@@ -854,6 +893,9 @@ NPCs[96072] = { -- Durguth
 NPCs[96410] = { -- Majestic Elderhorn
 	isTameable = true,
 	questID = 39646, -- Albino Elderhorn
+	toys = {
+		{ itemID = 131900 }, -- Majestic Elderhorn Hoof
+	},
 	vignetteName = "Majestic Elderhorn",
 }
 
@@ -869,6 +911,9 @@ NPCs[96621] = { -- Mellok, Son of Torok
 
 NPCs[97093] = { -- Shara Felbreath
 	questID = 39762, -- Feltotem Warlock
+	toys = {
+		{ itemID = 131900 }, -- Majestic Elderhorn Hoof
+	},
 	vignetteName = "Shara Felbreath",
 }
 
@@ -878,6 +923,12 @@ NPCs[97102] = { -- Ram'Pag
 }
 
 NPCs[97203] = { -- Tenpak Flametotem
+	pets = {
+		{
+			itemID = 129175, -- Crispin
+			npcID = 98077, -- Crispin
+		},
+	},
 	questID = 39782, -- The Exiled Shaman
 	vignetteName = "The Exiled Shaman",
 }
@@ -1189,6 +1240,12 @@ NPCs[106526] = { -- Lady Rivantas
 }
 
 NPCs[106532] = { -- Inquisitor Volitix
+	pets = {
+		{
+			itemID = 136901, -- Eye of Inquisition
+			npcID = 97179, -- Eye of Inquisition
+		}
+	},
 	questID = 44569, -- Inquisitor Volitix
 	vignetteName = "Inquisitor Volitix",
 }
@@ -1196,6 +1253,9 @@ NPCs[106532] = { -- Inquisitor Volitix
 NPCs[107846] = { -- Pinchshank
 	isTameable = true,
 	questID = 43968, -- Pinchshank
+	toys = {
+		{ itemID = 140314 }, -- Crab Shank
+	},
 	vignetteName = "Pinchshank",
 }
 
@@ -1270,6 +1330,12 @@ NPCs[111007] = { -- Randril
 }
 
 NPCs[111197] = { -- Anax
+	pets = {
+		{
+			itemID = 140934, -- Benax
+			npcID = 113136, -- Benax
+		},
+	},
 	questID = 43954, -- Anax
 	vignetteName = "Anax",
 }
