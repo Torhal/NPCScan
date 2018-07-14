@@ -26,8 +26,9 @@ local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 -- ----------------------------------------------------------------------------
 local DataObjectProperties = {
 	icon = [[Interface\LFGFRAME\BattlenetWorking0]],
-	text = " ",
-	type = "data source"
+	label = _G.OBJECTIVES_LABEL,
+    text = _G.NONE,
+    type = "data source"
 }
 
 local DataObject = LibStub("LibDataBroker-1.1"):NewDataObject(AddOnFolderName, DataObjectProperties)
@@ -264,28 +265,28 @@ end
 -- DataObject methods.
 -- ----------------------------------------------------------------------------
 function DataObject:OnClick()
-	LibStub("AceConfigDialog-3.0"):Open(AddOnFolderName)
+    LibStub("AceConfigDialog-3.0"):Open(AddOnFolderName)
 end
 
 function DataObject:OnEnter()
-	if not Tooltip or not Tooltip:IsShown() then
-		DrawTooltip(self)
-		Tooltip:UpdateScrolling()
-		Tooltip:Show()
-	end
+    if not Tooltip or not Tooltip:IsShown() then
+        DrawTooltip(self)
+        Tooltip:UpdateScrolling()
+        Tooltip:Show()
+    end
 end
 
 function DataObject:OnLeave()
-	-- Null operation: Some LDB displays get cranky if this method is missing.
+    -- Null operation: Some LDB displays get cranky if this method is missing.
 end
 
 function DataObject:Update(_, scannerData)
-	self.text = ("%s %s"):format(_G.ZONE_COLON, scannerData.NPCCount)
-	self.scannerData = scannerData
+    self.text = scannerData.NPCCount > 0 and scannerData.NPCCount or _G.NONE
+    self.scannerData = scannerData
 
-	if Tooltip and Tooltip:IsShown() then
-		DrawTooltip(self)
-	end
+    if Tooltip and Tooltip:IsShown() then
+        DrawTooltip(self)
+    end
 end
 
 LibStub("AceEvent-3.0"):Embed(DataObject)
