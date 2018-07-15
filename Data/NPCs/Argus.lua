@@ -177,7 +177,8 @@ NPCs[126887] = { -- Ataxon
 			itemID = 153056, -- Grasping Manifestation
 			npcID = 128159, -- Grasping Manifestation
 		},
-	}
+	},
+	questID = 48709, -- Tracking Quest
 }
 
 NPCs[126889] = { -- Sorolis the Ill-Fated
