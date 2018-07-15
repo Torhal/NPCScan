@@ -70,8 +70,10 @@ NPCs[51059] = { -- Blackhoof
 
 NPCs[62346] = { -- Galleon
 	mounts = {
-		itemID = 89783, -- Son of Galleon's Saddle
-		spellID = 130965, -- Son of Galleon
+		{
+			itemID = 89783, -- Son of Galleon's Saddle
+			spellID = 130965, -- Son of Galleon
+		},
 	},
 	questID = 32098, -- Short-Supply Reward
 }
