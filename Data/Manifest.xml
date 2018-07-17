@@ -2,6 +2,7 @@
 ..\FrameXML\UI.xsd">
     <Script file="_Main.lua"/>
 
-	<Include file="NPCs\Manifest.xml"/>
 	<Include file="Maps\Manifest.xml"/>
+	<Script file="Achievements.lua"/>
+	<Include file="NPCs\Manifest.xml"/>
 </Ui>
