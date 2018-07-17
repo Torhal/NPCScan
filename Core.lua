@@ -307,7 +307,7 @@ function NPCScan:OnEnable()
 	self:RegisterEvent("PLAYER_TARGET_CHANGED")
 	self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 	self:RegisterEvent("VIGNETTE_MINIMAP_UPDATED")
-	-- self:RegisterBucketEvent("WORLD_MAP_UPDATE", 0.5)
+	self:RegisterBucketEvent("VIGNETTES_UPDATED", 0.5)
 
 	HereBeDragons.RegisterCallback(NPCScan, "PlayerZoneChanged", "UpdateScanList")
 

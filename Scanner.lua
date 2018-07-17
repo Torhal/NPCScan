@@ -372,24 +372,25 @@ do
 
 		local vignetteInfo = _G.C_VignetteInfo.GetVignetteInfo(vignetteGUID)
 
-		if not vignetteInfo then
-			return
-		end
-
-		if not ProcessVignette(vignetteInfo, _G.MINIMAP_LABEL) then
-			private.Debug("Unknown vignette: %s with vignetteID %s", vignetteInfo.name or _G.UNKNOWN, tostring(vignetteInfo.vignetteID))
+		if vignetteInfo then
+			if not ProcessVignette(vignetteInfo, _G.MINIMAP_LABEL) then
+				private.Debug("Unknown vignette: %s with vignetteID %s", vignetteInfo.name or _G.UNKNOWN, tostring(vignetteInfo.vignetteID))
+			end
 		end
 	end
 
-	function NPCScan:WORLD_MAP_UPDATE()
-		if IsIgnoringSource(_G.WORLD_MAP) then
-			return
-		end
+	function NPCScan:VIGNETTES_UPDATED()
+		local vignetteGUIDs = _G.C_VignetteInfo.GetVignettes()
 
-		for landmarkIndex = 1, _G.GetNumMapLandmarks() do
-			local _, landmarkName = _G.C_WorldMap.GetMapLandmarkInfo(landmarkIndex)
+		for index = 1, #vignetteGUIDs do
+			local vignetteGUID = vignetteGUIDs[index]
+			local vignetteInfo = _G.C_VignetteInfo.GetVignetteInfo(vignetteGUID);
 
-			ProcessVignette(landmarkName, _G.WORLD_MAP)
+			if vignetteInfo and vignetteInfo.onWorldMap then
+				if not ProcessVignette(vignetteInfo, _G.WORLD_MAP) then
+					private.Debug("Unknown world map vignette: %s with vignetteID %s", vignetteInfo.name or _G.UNKNOWN, tostring(vignetteInfo.vignetteID))
+				end
+			end
 		end
 	end
 end -- do-block
