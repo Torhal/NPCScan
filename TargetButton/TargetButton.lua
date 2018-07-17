@@ -147,7 +147,9 @@ end
 -- ----------------------------------------------------------------------------
 -- Event and message handlers.
 -- ----------------------------------------------------------------------------
-function TargetButton:COMBAT_LOG_EVENT_UNFILTERED(_, _, subEvent, _, _, _, _, _, destGUID)
+function TargetButton:COMBAT_LOG_EVENT_UNFILTERED()
+	local _, subEvent, _, _, _, _, _, destGUID = _G.CombatLogGetCurrentEventInfo()
+
 	if subEvent == "UNIT_DIED" and destGUID and private.GUIDToCreatureID(destGUID) == self.npcID then
 		self.isDead = true
 	end
