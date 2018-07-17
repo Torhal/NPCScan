@@ -312,10 +312,25 @@ do
 		end
 	end
 
-	local function ProcessVignette(vignetteName, sourceText)
+	local function ProcessVignette(vignetteInfo, sourceText)
+		local npcID = private.GUIDToCreatureID(vignetteInfo.objectGUID)
+
+		-- The objectGUID can be but isn't always an NPC ID, since some NPCs must be summoned from the vignette object.
+		if npcID and Data.Scanner.NPCs[npcID] then
+			ProcessDetection({
+				npcID = npcID,
+				sourceText = sourceText
+			})
+
+			return true
+		end
+
+		local vignetteName = vignetteInfo.name
 		local questID = private.QuestIDFromName[vignetteName]
+
 		if questID then
 			ProcessQuestDetection(questID, sourceText)
+
 			return true
 		elseif sourceText == _G.WORLD_MAP then
 			return false
@@ -323,10 +338,12 @@ do
 
 		if private.VignetteNPCs[vignetteName] then
 			ProcessVignetteNameDetection(vignetteName, sourceText)
+
 			return true
 		end
 
-		local npcID = private.NPCIDFromName[vignetteName]
+		npcID = private.NPCIDFromName[vignetteName]
+
 		if npcID then
 			ProcessDetection({
 				npcID = npcID,
@@ -348,15 +365,19 @@ do
 		return private.db.profile.detection[VIGNETTE_SOURCE_TO_PREFERENCE[sourceText]]
 	end
 
-	function NPCScan:VIGNETTE_ADDED(_, instanceID)
-		if IsIgnoringSource(_G.MINIMAP_LABEL) then
+	function NPCScan:VIGNETTE_MINIMAP_UPDATED(_, vignetteGUID)
+		if not vignetteGUID or IsIgnoringSource(_G.MINIMAP_LABEL) then
 			return
 		end
 
-		local _, _, vignetteName, iconID = _G.C_Vignettes.GetVignetteInfoFromInstanceID(instanceID)
+		local vignetteInfo = _G.C_VignetteInfo.GetVignetteInfo(vignetteGUID)
 
-		if not ProcessVignette(vignetteName, _G.MINIMAP_LABEL) then
-			private.Debug("Unknown vignette: %s with iconID %s", vignetteName or _G.UNKNOWN, tostring(iconID))
+		if not vignetteInfo then
+			return
+		end
+
+		if not ProcessVignette(vignetteInfo, _G.MINIMAP_LABEL) then
+			private.Debug("Unknown vignette: %s with vignetteID %s", vignetteInfo.name or _G.UNKNOWN, tostring(vignetteInfo.vignetteID))
 		end
 	end
 
