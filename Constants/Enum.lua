@@ -6,19 +6,6 @@ local AddOnFolderName, private = ...
 -- ----------------------------------------------------------------------------
 -- Constants
 -- ----------------------------------------------------------------------------
-local ContinentID = {
-	Cosmic = -1,
-    Kalimdor = 1,
-    EasternKingdoms = 2,
-    Outland = 3,
-    Northrend = 4,
-    TheMaelstrom = 5,
-    Pandaria = 6,
-    Draenor = 7,
-    BrokenIsles = 8,
-    Argus = 9
-}
-
 private.Enum = {
     AchievementID = {
         AdventurerOfAzsuna = 11261,
@@ -53,18 +40,6 @@ private.Enum = {
         TimelessChampion = 8714,
 		UnleashedMonstrosities = 11160,
 		ZulAgain = 8078
-    },
-    ContinentID = ContinentID,
-    ContinentMapID = {
-        [ContinentID.Kalimdor] = 13,
-        [ContinentID.EasternKingdoms] = 14,
-        [ContinentID.Outland] = 466,
-        [ContinentID.Northrend] = 485,
-        [ContinentID.TheMaelstrom] = 737,
-        [ContinentID.Pandaria] = 862,
-        [ContinentID.Draenor] = 962,
-        [ContinentID.BrokenIsles] = 1007,
-        [ContinentID.Argus] = 1184
     },
     DetectionGroupStatus = {
         Enabled = 1,

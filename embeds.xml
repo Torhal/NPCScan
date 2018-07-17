@@ -21,7 +21,7 @@
     <Include file="Libs\LibSink-2.0\lib.xml"/>
     <Include file="Libs\LibQTip-1.0\lib.xml"/>
     <Script file="Libs\LibWindow-1.1\LibWindow-1.1.lua"/>
-    <Script file="Libs\HereBeDragons-1.0\HereBeDragons-1.0.lua"/>
+    <Script file="Libs\HereBeDragons\HereBeDragons-2.0.lua"/>
     <!--@end-no-lib-strip@-->
 
 	<Script file="Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>

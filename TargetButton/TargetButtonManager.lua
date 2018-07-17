@@ -90,7 +90,7 @@ function TargetButtonManager:DismissAll()
 	end
 end
 
-LibStub("HereBeDragons-1.0").RegisterCallback(TargetButtonManager, "PlayerZoneChanged", "DismissAll")
+LibStub("HereBeDragons-2.0").RegisterCallback(TargetButtonManager, "PlayerZoneChanged", "DismissAll")
 
 function TargetButtonManager:ProcessQueue(eventName)
 	if #ActiveTargetButtons < private.NUM_RAID_ICONS and not _G.InCombatLockdown() then

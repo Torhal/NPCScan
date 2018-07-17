@@ -3,11 +3,12 @@
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
 local Maps = private.Data.Maps
+local MapID = private.Enum.MapID
 
 -- ----------------------------------------------------------------------------
 -- Deepholm
 -- ----------------------------------------------------------------------------
-Maps[640].NPCs = {
+Maps[MapID.Deepholm].NPCs = {
     [3868] = true, -- Blood Seeker
     [49822] = true, -- Jadefang
     [50059] = true, -- Golgarok

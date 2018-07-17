@@ -5,7 +5,7 @@ local AddOnFolderName, private = ...
 local NPCs = private.Data.NPCs
 
 -- ----------------------------------------------------------------------------
--- Deepholm (640)
+-- Deepholm
 -- ----------------------------------------------------------------------------
 NPCs[3868] = { -- Blood Seeker
 	isTameable = true,

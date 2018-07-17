@@ -3,11 +3,12 @@
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
 local Maps = private.Data.Maps
+local MapID = private.Enum.MapID
 
 -- ----------------------------------------------------------------------------
 -- Krokuun
 -- ----------------------------------------------------------------------------
-Maps[1135].NPCs = {
+Maps[MapID.Krokuun].NPCs = {
     [120393] = true, -- Siegemaster Voraan
     [122911] = true, -- Commander Vecaya
     [122912] = true, -- Commander Sathrenael
@@ -25,7 +26,7 @@ Maps[1135].NPCs = {
 -- ----------------------------------------------------------------------------
 -- Mac'Aree
 -- ----------------------------------------------------------------------------
-Maps[1170].NPCs = {
+Maps[MapID.MacAree].NPCs = {
     [122838] = true, -- Shadowcaster Voruun
     [126815] = true, -- Soultwisted Monstrosity
     [126852] = true, -- Wrangler Kravos
@@ -56,7 +57,7 @@ Maps[1170].NPCs = {
 -- ----------------------------------------------------------------------------
 -- Antoran Wastes
 -- ----------------------------------------------------------------------------
-Maps[1171].NPCs = {
+Maps[MapID.AntoranWastes].NPCs = {
     [122947] = true, -- Mistress Il'thendra
     [122958] = true, -- Blistermaw
     [122999] = true, -- Gar'zoth

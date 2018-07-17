@@ -3,11 +3,12 @@
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
 local Maps = private.Data.Maps
+local MapID = private.Enum.MapID
 
 -- ----------------------------------------------------------------------------
 -- Frostfire Ridge
 -- ----------------------------------------------------------------------------
-Maps[941].NPCs = {
+Maps[MapID.FrostfireRidge].NPCs = {
     [50992] = true, -- Gorok
     [71665] = true, -- Giant-Slayer Kul
     [71721] = true, -- Canyon Icemother
@@ -61,7 +62,7 @@ Maps[941].NPCs = {
 -- ----------------------------------------------------------------------------
 -- Tanaan Jungle
 -- ----------------------------------------------------------------------------
-Maps[945].NPCs = {
+Maps[MapID.TanaanJungle].NPCs = {
     [80398] = true, -- Keravnos
     [89675] = true, -- Commander Org'mok
     [90024] = true, -- Sergeant Mor'grak
@@ -140,7 +141,7 @@ Maps[945].NPCs = {
 -- ----------------------------------------------------------------------------
 -- Talador
 -- ----------------------------------------------------------------------------
-Maps[946].NPCs = {
+Maps[MapID.Talador].NPCs = {
     [51015] = true, -- Silthide
     [77529] = true, -- Yazheera the Incinerator
     [77561] = true, -- Dr. Gloom
@@ -191,7 +192,7 @@ Maps[946].NPCs = {
 -- ----------------------------------------------------------------------------
 -- Shadowmoon Valley (Draenor)
 -- ----------------------------------------------------------------------------
-Maps[947].NPCs = {
+Maps[MapID.ShadowmoonValleyDraenor].NPCs = {
     [50883] = true, -- Pathrunner
     [72362] = true, -- Ku'targ the Voidseer
     [72537] = true, -- Leaf-Reader Kurri
@@ -239,7 +240,7 @@ Maps[947].NPCs = {
 -- ----------------------------------------------------------------------------
 -- Spires of Arak
 -- ----------------------------------------------------------------------------
-Maps[948].NPCs = {
+Maps[MapID.SpiresOfArak].NPCs = {
     [79938] = true, -- Shadowbark
     [80372] = true, -- Echidna
     [80614] = true, -- Blade-Dancer Aeryx
@@ -279,7 +280,7 @@ Maps[948].NPCs = {
 -- ----------------------------------------------------------------------------
 -- Gorgrond
 -- ----------------------------------------------------------------------------
-Maps[949].NPCs = {
+Maps[MapID.Gorgrond].NPCs = {
     [50985] = true, -- Poundfist
     [75207] = true, -- Biolante
     [76473] = true, -- Mother Araneae
@@ -332,7 +333,7 @@ Maps[949].NPCs = {
 -- ----------------------------------------------------------------------------
 -- Nagrand (Draenor)
 -- ----------------------------------------------------------------------------
-Maps[950].NPCs = {
+Maps[MapID.NagrandDraenor].NPCs = {
     [50981] = true, -- Luk'hok
     [50990] = true, -- Nakk the Thunderer
     [78161] = true, -- Hyperious
@@ -390,7 +391,7 @@ Maps[950].NPCs = {
 -- ----------------------------------------------------------------------------
 -- Ashran
 -- ----------------------------------------------------------------------------
-Maps[978].NPCs = {
+Maps[MapID.Ashran].NPCs = {
     [82876] = true, -- Grand Marshal Tremblade
     [82877] = true, -- High Warlord Volrath
     [82878] = true, -- Marshal Gabriel
@@ -421,47 +422,23 @@ Maps[978].NPCs = {
 }
 
 -- ----------------------------------------------------------------------------
--- Lunarfall
+-- Alliance Garrison
 -- ----------------------------------------------------------------------------
-Maps[971].NPCs = {
+Maps[MapID.LunarfallExcavation].NPCs = {
     [96323] = true -- Arachnis
 }
 
-Maps[973].NPCs = {
-    [96323] = true -- Arachnis
-}
-
-Maps[974].NPCs = {
-    [96323] = true -- Arachnis
-}
-
-Maps[975].NPCs = {
-    [96323] = true -- Arachnis
-}
-
-Maps[991].NPCs = {
+Maps[MapID.Lunarfall].NPCs = {
     [96323] = true -- Arachnis
 }
 
 -- ----------------------------------------------------------------------------
--- Frostwall
+-- Horde Garrison
 -- ----------------------------------------------------------------------------
-Maps[976].NPCs = {
+Maps[MapID.FrostwallMine].NPCs = {
     [96323] = true -- Arachnis
 }
 
-Maps[980].NPCs = {
-    [96323] = true -- Arachnis
-}
-
-Maps[981].NPCs = {
-    [96323] = true -- Arachnis
-}
-
-Maps[982].NPCs = {
-    [96323] = true -- Arachnis
-}
-
-Maps[990].NPCs = {
+Maps[MapID.Frostwall].NPCs = {
     [96323] = true -- Arachnis
 }

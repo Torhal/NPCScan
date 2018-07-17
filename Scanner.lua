@@ -19,7 +19,7 @@ local EventMessage = private.EventMessage
 
 
 local LibStub = _G.LibStub
-local HereBeDragons = LibStub("HereBeDragons-1.0")
+local HereBeDragons = LibStub("HereBeDragons-2.0")
 local LibSharedMedia = LibStub("LibSharedMedia-3.0")
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 
@@ -152,7 +152,7 @@ function NPCScan:UpdateScanList(eventName, mapID)
 
 	if mapID and mapID >= 0 then
 		scannerData.mapID = mapID
-		scannerData.continentID = HereBeDragons:GetCZFromMapID(mapID)
+		scannerData.continentID = Data.Maps[mapID].continentID
 	end
 
 	if not scannerData.mapID or not scannerData.continentID then
