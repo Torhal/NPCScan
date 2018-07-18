@@ -13,4 +13,10 @@ NPCs[3868] = { -- Blood Seeker
 
 NPCs[49822] = { -- Jadefang
 	isTameable = true,
+	pets = {
+		{
+			itemID = 64494, -- Tiny Shale Spider
+			npcID = 48982, -- Tiny Shale Spider
+		},
+	},
 }
