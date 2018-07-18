@@ -31,6 +31,10 @@ local FormatAtlasTexture = private.FormatAtlasTexture
 local DataObjectProperties = {
 	icon = [[Interface\LFGFRAME\BattlenetWorking0]],
 	label = _G.OBJECTIVES_LABEL,
+	scannerData = {
+		NPCCount = 0,
+		NPCs = {},
+	},
     text = _G.NONE,
     type = "data source"
 }
