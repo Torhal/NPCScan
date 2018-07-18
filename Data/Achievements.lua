@@ -64,7 +64,11 @@ Data.Achievements = {
 		continentID = ContinentID.BrokenIsles
 	},
 	[AchievementID.AncientNoMore] = {
-		continentID = ContinentID.Draenor
+		continentID = ContinentID.Draenor,
+		criteriaNPCs = {
+			[86258] = true, -- Nultra
+			[86259] = true, -- Valstil
+		},
 	},
 	[AchievementID.BloodyRare] = {
 		continentID = ContinentID.Outland
@@ -103,7 +107,15 @@ Data.Achievements = {
 		continentID = ContinentID.Draenor
 	},
 	[AchievementID.ImInYourBaseKillingYourDudes] = {
-		continentID = ContinentID.Pandaria
+		continentID = ContinentID.Pandaria,
+		criteriaNPCs = {
+			[68317] = true, -- Mavis Harms
+			[68318] = true, -- Dalan Nightbreaker
+			[68319] = true, -- Disha Fearwarden
+			[68320] = true, -- Ubunti the Shade
+			[68321] = true, -- Kar Warmaker
+			[68322] = true, -- Muerta
+		},
 	},
 	[AchievementID.JungleStalker] = {
 		continentID = ContinentID.Draenor
@@ -148,7 +160,12 @@ Data.Achievements = {
 		continentID = ContinentID.Pandaria
 	},
 	[AchievementID.UnleashedMonstrosities] = {
-		continentID = ContinentID.BrokenIsles
+		continentID = ContinentID.BrokenIsles,
+		criteriaNPCs = {
+			[106981] = true, -- Captain Hring
+			[106982] = true, -- Reaver Jdorn
+			[106984] = true, -- Soultrapper Mevra
+		},
 	},
 	[AchievementID.ZulAgain] = {
 		continentID = ContinentID.Pandaria,
@@ -166,7 +183,7 @@ Data.Achievements = {
 -- ----------------------------------------------------------------------------
 for achievementID, achievement in pairs(private.Data.Achievements) do
     local _, name, _, _, _, _, _, description, _, iconTexturePath = _G.GetAchievementInfo(achievementID)
-    achievement.criteriaNPCs = {}
+    achievement.criteriaNPCs = achievement.criteriaNPCs or {}
     achievement.description = description
     achievement.iconTexturePath = iconTexturePath
     achievement.name = name

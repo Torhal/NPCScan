@@ -2,13 +2,14 @@
 -- AddOn namespace
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
+local AchievementID = private.Enum.AchievementID
 local NPCs = private.Data.NPCs
 
 -- ----------------------------------------------------------------------------
 -- Multiple zones
 -- ----------------------------------------------------------------------------
 NPCs[69768] = { -- Zandalari Warscout
-	achievementID = 8078, -- Zul'Again
+	achievementID = AchievementID.ZulAgain,
 	mounts = {
 		{
 			itemID = 94230, -- Reins of the Amber Primordial Direhorn
@@ -18,7 +19,7 @@ NPCs[69768] = { -- Zandalari Warscout
 }
 
 NPCs[69769] = { -- Zandalari Warbringer
-	achievementID = 8078, -- Zul'Again
+	achievementID = AchievementID.ZulAgain,
 	mounts = {
 		{
 			itemID = 94229, -- Reins of the Slate Primordial Direhorn
@@ -28,7 +29,7 @@ NPCs[69769] = { -- Zandalari Warbringer
 }
 
 NPCs[69841] = { -- Zandalari Warbringer
-	achievementID = 8078, -- Zul'Again
+	achievementID = AchievementID.ZulAgain,
 	mounts = {
 		{
 			itemID = 94230, -- Reins of the Amber Primordial Direhorn
@@ -38,7 +39,7 @@ NPCs[69841] = { -- Zandalari Warbringer
 }
 
 NPCs[69842] = { -- Zandalari Warbringer
-	achievementID = 8078, -- Zul'Again
+	achievementID = AchievementID.ZulAgain,
 	mounts = {
 		{
 			itemID = 94231, -- Reins of the Jade Primordial Direhorn
@@ -200,32 +201,32 @@ NPCs[63978] = { -- Kri'chon
 -- Krasarang Wilds
 -- ----------------------------------------------------------------------------
 NPCs[68317] = { -- Mavis Harms
-	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
+	achievementID = AchievementID.ImInYourBaseKillingYourDudes,
 	factionGroup = "Alliance",
 }
 
 NPCs[68318] = { -- Dalan Nightbreaker
-	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
+	achievementID = AchievementID.ImInYourBaseKillingYourDudes,
 	factionGroup = "Alliance",
 }
 
 NPCs[68319] = { -- Disha Fearwarden
-	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
+	achievementID = AchievementID.ImInYourBaseKillingYourDudes,
 	factionGroup = "Alliance",
 }
 
 NPCs[68320] = { -- Ubunti the Shade
-	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
+	achievementID = AchievementID.ImInYourBaseKillingYourDudes,
 	factionGroup = "Horde",
 }
 
 NPCs[68321] = { -- Kar Warmaker
-	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
+	achievementID = AchievementID.ImInYourBaseKillingYourDudes,
 	factionGroup = "Horde",
 }
 
 NPCs[68322] = { -- Muerta
-	achievementID = 7932, -- I'm In Your Base, Killing Your Dudes
+	achievementID = AchievementID.ImInYourBaseKillingYourDudes,
 	factionGroup = "Horde",
 }
 
@@ -281,7 +282,7 @@ NPCs[50358] = { -- Haywire Sunreaver Construct
 }
 
 NPCs[69099] = { -- Nalak
-	achievementID = 8028, -- Praise the Sun!
+	achievementID = AchievementID.PraiseTheSun,
 	mounts = {
 		{
 			itemID = 95057, -- Reins of the Thundering Cobalt Cloud Serpent
@@ -299,7 +300,7 @@ NPCs[69998] = { -- Goda
 -- Isle of Giants
 -- ----------------------------------------------------------------------------
 NPCs[69161] = { -- Oondasta
-	achievementID = 8123, -- Millions of Years of Evolution vs. My Fist
+	achievementID = AchievementID.MillionsOfYearsOfEvolutionVsMyFist,
 	mounts = {
 		{
 			itemID = 94228, -- Reins of the Cobalt Primordial Direhorn

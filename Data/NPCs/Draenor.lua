@@ -2,6 +2,7 @@
 -- AddOn namespace
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
+local AchievementID = private.Enum.AchievementID
 local NPCs = private.Data.NPCs
 
 -- ----------------------------------------------------------------------------
@@ -588,7 +589,7 @@ NPCs[95056] = { -- Doomroller
 }
 
 NPCs[96235] = { -- Xemirkol
-	achievementID = 10334, -- Predator
+	achievementID = AchievementID.Predator,
 }
 
 NPCs[98283] = { -- Drakum
@@ -1347,13 +1348,13 @@ NPCs[86257] = { -- Basten
 }
 
 NPCs[86258] = { -- Nultra
-	achievementID = 9678, -- Ancient No More
+	achievementID = AchievementID.AncientNoMore,
 	questID = 37369, -- Protectors of the Grove
 	vignetteName = "Protectors of the Grove",
 }
 
 NPCs[86259] = { -- Valstil
-	achievementID = 9678, -- Ancient No More
+	achievementID = AchievementID.AncientNoMore,
 	questID = 37369, -- Protectors of the Grove
 	vignetteName = "Protectors of the Grove",
 }

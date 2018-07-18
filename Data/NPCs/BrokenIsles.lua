@@ -2,6 +2,7 @@
 -- AddOn namespace
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
+local AchievementID = private.Enum.AchievementID
 local NPCs = private.Data.NPCs
 
 -- ----------------------------------------------------------------------------
@@ -473,17 +474,17 @@ NPCs[98503] = { -- Grrvrgull the Conqueror
 }
 
 NPCs[106981] = { -- Captain Hring
-	achievementID = 11160, -- Unleashed Monstrosities
+	achievementID = AchievementID.UnleashedMonstrosities,
 	questID = 42269, -- The Soultakers
 }
 
 NPCs[106982] = { -- Reaver Jdorn
-	achievementID = 11160, -- Unleashed Monstrosities
+	achievementID = AchievementID.UnleashedMonstrosities,
 	questID = 42269, -- The Soultakers
 }
 
 NPCs[106984] = { -- Soultrapper Mevra
-	achievementID = 11160, -- Unleashed Monstrosities
+	achievementID = AchievementID.UnleashedMonstrosities,
 	questID = 42269, -- The Soultakers
 }
 
