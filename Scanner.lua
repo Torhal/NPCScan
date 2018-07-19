@@ -145,21 +145,16 @@ local function MergeUserDefinedWithScanList(npcList)
 	end
 end
 
-function NPCScan:UpdateScanList(eventName, mapID)
+function NPCScan:UpdateScanList(_, mapID)
 	local scannerData = Data.Scanner
 	mapID = mapID or HereBeDragons:GetPlayerZone()
 
-	if mapID and mapID >= 0 then
-		scannerData.mapID = mapID
-		scannerData.continentID = Data.Maps[mapID].continentID
-	end
-
-	if not scannerData.mapID or not scannerData.continentID then
-		private.Debug("No mapID or no continentID.")
+	if not mapID or mapID < 0 then
 		return
 	end
 
-	private.Debug("eventName: %s Data.Scanner.mapID: %d Data.Scanner.continentID: %d", eventName or _G.NONE, scannerData.mapID, scannerData.continentID)
+	scannerData.mapID = mapID
+	scannerData.continentID = Data.Maps[mapID].continentID
 
 	for npcID in pairs(scannerData.NPCs) do
 		private.Overlays.Remove(npcID)
@@ -276,6 +271,10 @@ end
 
 function NPCScan:NAME_PLATE_UNIT_ADDED(_, unitToken)
 	ProcessUnit(unitToken, _G.UNIT_NAMEPLATES)
+end
+
+function NPCScan:PLAYER_ENTERING_WORLD()
+	self:UpdateScanList("PLAYER_ENTERING_WORLD", _G.C_Map.GetBestMapForUnit("player"))
 end
 
 function NPCScan:PLAYER_TARGET_CHANGED()
