@@ -1,6 +1,6 @@
 package-as: NPCScan
 
-enable-nolib-creation: yes
+enable-nolib-creation: no
 
 externals:
     Libs/LibStub:

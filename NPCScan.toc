@@ -10,9 +10,7 @@
 ## X-Category: Achievements
 ## X-Email: jcallahan@curse.com
 
-#@no-lib-strip@
 embeds.xml
-#@end-no-lib-strip@
 
 Localization\Manifest.xml
 Constants\Manifest.xml
