@@ -216,7 +216,6 @@ function NPCScan:OnEnable()
 		Spell = 28
 	}
 
-	local missingNPCs = {}
 	local achievementLabel = {}
 
 	for label, ID in pairs(Enum.AchievementID) do
@@ -228,8 +227,6 @@ function NPCScan:OnEnable()
 
 		achievement.ID = achievementID
 		achievement.isCompleted = isAchievementCompleted
-
-		table.wipe(missingNPCs)
 
 		for criteriaIndex = 1, _G.GetAchievementNumCriteria(achievementID) do
 			local assetName, criteriaType, isCriteriaCompleted, _, _, _, _, assetID, _, criteriaID = _G.GetAchievementCriteriaInfo(achievementID, criteriaIndex)
@@ -253,7 +250,7 @@ function NPCScan:OnEnable()
 
 						achievement.criteriaNPCs[assetID] = true
 					else
-						missingNPCs[#missingNPCs + 1] = ("\n [%s] = true, -- %s"):format(assetID, assetName)
+						private.Debug("***** AchievementID.%s: NPC %s with assetID %d", achievementLabel[achievementID], assetName, assetID)
 					end
 				end
 			elseif criteriaType == CriteriaType.Quest then
@@ -267,21 +264,11 @@ function NPCScan:OnEnable()
 						achievement.criteriaNPCs[npcID] = true
 					end
 				else
-					private.Debug("***** AchievementID.%s: Quest %s with assetID %d", achievementLabel[achievementID], assetName, assetID)
+					private.Debug("***** AchievementID.%s: (criteriaID %d) questID = %d, -- %s", achievementLabel[achievementID], criteriaID, assetID, assetName)
 				end
 			else
 				private.Debug("***** AchievementID.%s: Unknown criteria type %d, assetID %d", achievementLabel[achievementID], criteriaType, assetID)
 			end
-		end
-
-		if #missingNPCs > 0 then
-			private.Debug("***** AchievementID.%s: Missing NPC entry.", achievementLabel[achievementID])
-
-			for index = 1, #missingNPCs do
-				private.Debug(missingNPCs[index])
-			end
-
-			private.Debug("*****")
 		end
 	end
 
@@ -289,7 +276,7 @@ function NPCScan:OnEnable()
 		local mapHeaderPrinted
 
 		for npcID in pairs(map.NPCs) do
-			if mapID >= 1015 then
+			if mapID >= Enum.MapID.Zuldazar then
 				local npc = map.NPCs[npcID]
 
 				if not npc.questID and not npc.achievementID then
