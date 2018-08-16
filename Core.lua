@@ -54,6 +54,12 @@ end
 -- ----------------------------------------------------------------------------
 -- Variables.
 -- ----------------------------------------------------------------------------
+local AchievementLabel = {}
+
+for label, ID in pairs(Enum.AchievementID) do
+	AchievementLabel[ID] = label
+end
+
 local NPCIDFromName = {}
 private.NPCIDFromName = NPCIDFromName
 
@@ -68,6 +74,34 @@ private.VignetteNPCs = VignetteNPCs
 
 local VignetteIDToNPCMapping = {}
 private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
+
+-- ----------------------------------------------------------------------------
+-- Helpers.
+-- ----------------------------------------------------------------------------
+local function TryAssignNPCToAchievement(npcDataField, achievement, achievementAssetID, achievementCriteriaID, isCriteriaCompleted)
+	local foundMatch = false
+
+	for npcID in pairs(Data.NPCs) do
+		local npc = Data.NPCs[npcID]
+
+		if npc[npcDataField] == achievementAssetID then
+			foundMatch = true
+
+			npc.achievementID = achievement.ID
+			npc.achievementCriteriaID = achievementCriteriaID
+			npc.isCriteriaCompleted = isCriteriaCompleted
+
+			achievement.criteriaNPCs[npcID] = true
+
+			break;
+		end
+
+	end
+
+	if not foundMatch then
+		private.Debug("***** AchievementID.%s - not assigned to an NPC: %s = %d,", AchievementLabel[achievement.ID], npcDataField, achievementAssetID)
+	end
+end
 
 -- ----------------------------------------------------------------------------
 -- AddOn Methods.
@@ -213,14 +247,9 @@ function NPCScan:OnEnable()
 	local CriteriaType = {
 		NPCKill = 0,
 		Quest = 27,
-		Spell = 28
+		Spell = 28,
+		Item = 36,
 	}
-
-	local achievementLabel = {}
-
-	for label, ID in pairs(Enum.AchievementID) do
-		achievementLabel[ID] = label
-	end
 
 	for achievementID, achievement in pairs(Data.Achievements) do
 		local _, _, _, isAchievementCompleted = _G.GetAchievementInfo(achievementID)
@@ -250,7 +279,7 @@ function NPCScan:OnEnable()
 
 						achievement.criteriaNPCs[assetID] = true
 					else
-						private.Debug("***** AchievementID.%s: NPC %s with assetID %d", achievementLabel[achievementID], assetName, assetID)
+						private.Debug("***** AchievementID.%s: NPC %s with assetID %d", AchievementLabel[achievementID], assetName, assetID)
 					end
 				end
 			elseif criteriaType == CriteriaType.Quest then
@@ -264,10 +293,14 @@ function NPCScan:OnEnable()
 						achievement.criteriaNPCs[npcID] = true
 					end
 				else
-					private.Debug("***** AchievementID.%s: (criteriaID %d) questID = %d, -- %s", achievementLabel[achievementID], criteriaID, assetID, assetName)
+					private.Debug("***** AchievementID.%s: (criteriaID %d) questID = %d, -- %s", AchievementLabel[achievementID], criteriaID, assetID, assetName)
 				end
+			elseif criteriaType == CriteriaType.Item then
+				TryAssignNPCToAchievement("achievementItemID", achievement, assetID, criteriaID, isCriteriaCompleted)
+			elseif criteriaType == CriteriaType.Spell then
+				TryAssignNPCToAchievement("achievementSpellID", achievement, assetID, criteriaID, isCriteriaCompleted)
 			else
-				private.Debug("***** AchievementID.%s: Unknown criteria type %d, assetID %d", achievementLabel[achievementID], criteriaType, assetID)
+				private.Debug("***** AchievementID.%s: Unknown criteria type %d, assetID %d", AchievementLabel[achievementID], criteriaType, assetID)
 			end
 		end
 	end
