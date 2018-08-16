@@ -66,6 +66,9 @@ private.QuestIDFromName = QuestIDFromName
 local VignetteNPCs = {}
 private.VignetteNPCs = VignetteNPCs
 
+local VignetteIDToNPCMapping = {}
+private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
+
 -- ----------------------------------------------------------------------------
 -- AddOn Methods.
 -- ----------------------------------------------------------------------------
@@ -191,6 +194,16 @@ function NPCScan:OnEnable()
 			end
 
 			npcIDs[npcID] = true
+		end
+
+		if npc.vignetteID then
+			VignetteIDToNPCMapping[npc.vignetteID] = npc
+		end
+
+		if npc.vignetteIDs then
+			for index = 1, #npc.vignetteIDs do
+				VignetteIDToNPCMapping[npc.vignetteIDs[index]] = npc
+			end
 		end
 	end
 
