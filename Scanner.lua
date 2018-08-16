@@ -98,7 +98,6 @@ local function CanAddToScanList(npcID)
 
 	if npc then
 		if npc.factionGroup == _G.UnitFactionGroup("player") then
-			private.Debug("Skipping %s (%d) - same faction group.", NPCScan:GetNPCNameFromID(npcID), npcID)
 			return false
 		end
 
