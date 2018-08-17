@@ -579,8 +579,6 @@ local function UpdateNPCSearchOptions()
 end
 
 local function PerformNPCSearch(searchString)
-	local Data = private.Data
-
 	searchString = searchString:lower():trim()
 
 	table.wipe(npcIDs)
@@ -602,8 +600,12 @@ local function PerformNPCSearch(searchString)
 		end
 	end
 
-	for _, map in pairs(Data.Maps) do
-		if map.name:lower() == searchString then
+	for mapID, map in pairs(Data.Maps) do
+		if not map.name then
+			private.Debug("MapID %d: No map name", mapID)
+		end
+
+		if map.name and map.name:lower() == searchString then
 			for _, npc in pairs(map.NPCs) do
 				AddApplicableSearchID(npc)
 			end
