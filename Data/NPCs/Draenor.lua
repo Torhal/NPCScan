@@ -588,10 +588,6 @@ NPCs[95056] = { -- Doomroller
 	questID = 39289, -- Doomroller
 }
 
-NPCs[96235] = { -- Xemirkol
-	achievementID = AchievementID.Predator,
-}
-
 NPCs[98283] = { -- Drakum
 	questID = 40105, -- Drakum
 	toys = {
@@ -1348,13 +1344,11 @@ NPCs[86257] = { -- Basten
 }
 
 NPCs[86258] = { -- Nultra
-	achievementID = AchievementID.AncientNoMore,
 	questID = 37369, -- Protectors of the Grove
 	vignetteName = "Protectors of the Grove",
 }
 
 NPCs[86259] = { -- Valstil
-	achievementID = AchievementID.AncientNoMore,
 	questID = 37369, -- Protectors of the Grove
 	vignetteName = "Protectors of the Grove",
 }

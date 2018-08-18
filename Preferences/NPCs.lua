@@ -168,16 +168,21 @@ local function GetNPCOptionsName(npcID)
 
 	local prefix = ""
 
-	if npc.questID then
+	if npc.questID or npc.achievementQuestID then
 		prefix = private.IsNPCQuestComplete(npc) and ICON_QUEST_COMPLETE or ICON_QUEST_ACTIVE
 	end
 
 	local npcName = NPCScan:GetNPCNameFromID(npcID)
+	local assetName = npc.achievementAssetName
 	local vignetteName = npc.vignetteName
 	local label = ""
 
 	if vignetteName and vignetteName ~= npcName then
 		label = (" %s"):format(_G.PARENS_TEMPLATE:format(vignetteName))
+	end
+
+	if assetName and assetName ~= npcName then
+		label = (" %s"):format(_G.PARENS_TEMPLATE:format(assetName))
 	end
 
 	return ("%s%s%s%s|r"):format(prefix, colorCode, npcName, label)
@@ -278,9 +283,7 @@ local function UpdateAchievementNPCOptions()
 		table.wipe(npcIDs)
 		table.wipe(npcNames)
 
-		for npcID in pairs(Data.Achievements[achievementID].criteriaNPCs) do
-			local npc = Data.NPCs[npcID]
-
+		for npcID, npc in pairs(Data.Achievements[achievementID].criteriaNPCs) do
 			if npc.factionGroup ~= _G.UnitFactionGroup("player") then
 				npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
 				npcIDs[#npcIDs + 1] = npcID

@@ -2,15 +2,14 @@
 -- AddOn namespace
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
-local AchievementID = private.Enum.AchievementID
 local NPCs = private.Data.NPCs
 
 -- ----------------------------------------------------------------------------
 -- Azsuna
 -- ----------------------------------------------------------------------------
 NPCs[89016] = { -- Ravyn-Drath
-	questID = 37537, -- Ravyn-Drath
 	vignetteName = "Ravyn-Drath",
+	achievementQuestID = 37537, -- Ravyn-Drath
 }
 
 NPCs[89650] = { -- Valiyaka the Stormbringer
@@ -64,18 +63,18 @@ NPCs[90217] = { -- Normantis the Deposed
 }
 
 NPCs[90244] = { -- Arcavellus
-	questID = 37932, -- Unbound Rift
 	vignetteName = "Unbound Rift",
+	achievementQuestID = 37932, -- Unbound Rift
 }
 
 NPCs[90505] = { -- Syphonus
-	questID = 37989, -- Syphonus
 	vignetteName = "Syphonus & Leodrath",
+	achievementQuestID = 37989, -- Syphonus
 }
 
 NPCs[90803] = { -- Infernal Lord
-	questID = 38037, -- Cache of Infernals
 	vignetteName = "Cache of Infernals",
+	achievementQuestID = 38037, -- Cache of Infernals
 }
 
 NPCs[90901] = { -- Pridelord Meowl
@@ -84,8 +83,8 @@ NPCs[90901] = { -- Pridelord Meowl
 }
 
 NPCs[91100] = { -- Brogozog
-	questID = 38212, -- Brogozog
 	vignetteName = "Marius & Tehd",
+	achievementQuestID = 38212, -- Brogozog
 }
 
 NPCs[91113] = { -- Tide Behemoth
@@ -97,8 +96,8 @@ NPCs[91114] = { -- Tide Behemoth
 }
 
 NPCs[91115] = { -- Tide Behemoth
-	questID = 38217, -- Tide Behemoth
 	vignetteName = "Tide Behemoth",
+	achievementQuestID = 38217, -- Tide Behemoth
 }
 
 NPCs[91187] = { -- Beacher
@@ -112,8 +111,8 @@ NPCs[91289] = { -- Cailyn Paledoom
 }
 
 NPCs[91579] = { -- Doomlord Kazrok
-	questID = 38352, -- Kazrok
 	vignetteName = "Marius & Tehd",
+	achievementQuestID = 38352, -- Kazrok
 }
 
 NPCs[93622] = { -- Mortiferous
@@ -136,8 +135,8 @@ NPCs[103975] = { -- Jade Darkhaven
 }
 
 NPCs[105938] = { -- Felwing
-	questID = 42069, -- Felbats
 	vignetteName = "Marius & Tehd",
+	achievementQuestID = 42069, -- Felbats
 }
 
 NPCs[106990] = { -- Chief Bitterbrine
@@ -151,8 +150,8 @@ NPCs[107105] = { -- Broodmother Lizax
 }
 
 NPCs[107113] = { -- Vorthax
-	questID = 42280, -- Vorthax
 	vignetteName = "Vorthax",
+	achievementQuestID = 42280, -- Vorthax
 }
 
 NPCs[107127] = { -- Brawlgoth
@@ -178,8 +177,8 @@ NPCs[107266] = { -- Commander Soraax
 }
 
 NPCs[107269] = { -- Inquisitor Tivos
-	questID = 42376, -- Inquisitor Tivos
 	vignetteName = "Inquisitor Tivos",
+	achievementQuestID = 42376, -- Inquisitor Tivos
 }
 
 NPCs[107327] = { -- Bilebrain
@@ -188,8 +187,8 @@ NPCs[107327] = { -- Bilebrain
 }
 
 NPCs[107657] = { -- Arcanist Shal'iman
-	questID = 42505, -- Arcanist Shal'iman
 	vignetteName = "Arcanist Shal'iman",
+	achievementQuestID = 42505, -- Arcanist Shal'iman
 }
 
 NPCs[108136] = { -- The Muscle
@@ -257,25 +256,25 @@ NPCs[111939] = { -- Lysanis Shadesoul
 }
 
 NPCs[112636] = { -- Sinister Leyrunner
-	questID = 44081, -- Treacherous Leyrunners
 	vignetteName = "Trecherous Stallions",
+	achievementQuestID = 44081, -- Treacherous Leyrunners
 }
 
 NPCs[112637] = { -- Devious Sunrunner
-	questID = 44081, -- Treacherous Leyrunners
 	vignetteName = "Trecherous Stallions",
+	achievementQuestID = 44081, -- Treacherous Leyrunners
 }
 
 -- ----------------------------------------------------------------------------
 -- Stormheim
 -- ----------------------------------------------------------------------------
 NPCs[90139] = { -- Inquisitor Ernstenbok
-	questID = 37908, -- Inquisitor Ernstenbok
+	achievementQuestID = 37908, -- Inquisitor Ernstenbok
 	vignetteName = "Inquisitor Ernstenbok",
 }
 
 NPCs[91529] = { -- Glimar Ironfist
-	questID = 38333, -- Drake Wrestler
+	achievementQuestID = 38333, -- Drake Wrestler
 	vignetteName = "Glimar Ironfist",
 }
 
@@ -291,22 +290,22 @@ NPCs[91795] = { -- Stormwing Matriarch
 			npcID = 97205, -- Stormborne Whelpling
 		},
 	},
-	questID = 38423, -- Stormdrake Matriarch
+	achievementQuestID = 38423, -- Stormdrake Matriarch
 	vignetteName = "Stormwing Matriarch",
 }
 
 NPCs[91803] = { -- Fathnyr
-	questID = 38425, -- Fel Thorignir
+	achievementQuestID = 38425, -- Fel Thorignir
 	vignetteName = "Fathnyr",
 }
 
 NPCs[91874] = { -- Bladesquall
-	questID = 38431, -- Bladesquall
+	achievementQuestID = 38431, -- Bladesquall
 	vignetteName = "Bladesquall",
 }
 
 NPCs[91892] = { -- Thane Irglov the Merciless
-	questID = 38424, -- Thane's Mead Hall
+	achievementQuestID = 38424, -- Thane's Mead Hall
 	toys = {
 		{ itemID = 129113 }, -- Faintly Glowing Flagon of Mead
 	},
@@ -314,7 +313,7 @@ NPCs[91892] = { -- Thane Irglov the Merciless
 }
 
 NPCs[92152] = { -- Whitewater Typhoon
-	questID = 38472, -- Whitewater Typhoon
+	achievementQuestID = 38472, -- Whitewater Typhoon
 	vignetteName = "Whitewater Typhoon",
 }
 
@@ -331,8 +330,8 @@ NPCs[92591] = { -- Sinker
 }
 
 NPCs[92599] = { -- Bloodstalker Alpha
+	achievementQuestID = 38626, -- Worg Pack
 	isTameable = true,
-	questID = 38626, -- Worg Pack
 	vignetteName = "Worg Pack",
 }
 
@@ -385,27 +384,27 @@ NPCs[92634] = { -- Apothecary Perez
 }
 
 NPCs[92682] = { -- Helmouth Raider
-	questID = 38642, -- Vrykul Longboat
+	achievementQuestID = 38642, -- Vrykul Longboat
 	vignetteName = "Helmouth Raiders",
 }
 
 NPCs[92685] = { -- Captain Brvet
-	questID = 38642, -- Vrykul Longboat
+	achievementQuestID = 38642, -- Vrykul Longboat
 	vignetteName = "Helmouth Raiders",
 }
 
 NPCs[92703] = { -- Helmouth Raider
-	questID = 38642, -- Vrykul Longboat
+	achievementQuestID = 38642, -- Vrykul Longboat
 	vignetteName = "Helmouth Raiders",
 }
 
 NPCs[92751] = { -- Ivory Sentinel
-	questID = 39031, -- Ivory Sentinel
+	achievementQuestID = 39031, -- Ivory Sentinel
 	vignetteName = "Ivory Sentinel",
 }
 
 NPCs[92763] = { -- The Nameless King
-	questID = 38685, -- The Nameless King
+	achievementQuestID = 38685, -- The Nameless King
 	vignetteName = "The Nameless King",
 }
 
@@ -416,17 +415,17 @@ NPCs[92951] = { -- Houndmaster Ely
 }
 
 NPCs[93166] = { -- Tiptog the Lost
-	questID = 38774, -- Lost Ettin
+	achievementQuestID = 38774, -- Lost Ettin
 	vignetteName = "Lost Ettin",
 }
 
 NPCs[93371] = { -- Mordvigbjorn
-	questID = 38837, -- Mordvigbjorn
+	achievementQuestID = 38837, -- Mordvigbjorn
 	vignetteName = "Mordvigbjorn",
 }
 
 NPCs[93401] = { -- Urgev the Flayer
-	questID = 38847, -- Berserker
+	achievementQuestID = 38847, -- Berserker
 	vignetteName = "Urgev the Flayer",
 }
 
@@ -443,42 +442,39 @@ NPCs[94347] = { -- Dread-Rider Cortis
 }
 
 NPCs[94413] = { -- Isel the Hammer
-	questID = 39120, -- Shield Forger
+	achievementQuestID = 39120, -- Shield Forger
 	vignetteName = "Isel the Hammer",
 }
 
 NPCs[98188] = { -- Egyl the Enduring
-	questID = 40068, -- 7.0 Stormheim - Egyl the Enduring - twh
+	achievementQuestID = 40068, -- 7.0 Stormheim - Egyl the Enduring - twh
 	vignetteName = "Egyl the Enduring",
 }
 
 NPCs[98268] = { -- Tarben
-	questID = 40081, -- 7.0 Stormheim - Tarben - twh
+	achievementQuestID = 40081, -- 7.0 Stormheim - Tarben - twh
 	vignetteName = "Tarben",
 }
 
 NPCs[98421] = { -- Kottr Vondyr
-	questID = 40109, -- Vignette - Kottr Vondyr
+	achievementQuestID = 40109, -- Vignette - Kottr Vondyr
 	vignetteName = "Kottr Vondyr",
 }
 
 NPCs[98503] = { -- Grrvrgull the Conqueror
-	questID = 40113, -- Grrvrgull the Conquerer
+	achievementQuestID = 40113, -- Grrvrgull the Conquerer
 	vignetteName = "Grrvrgull the Conquerer",
 }
 
 NPCs[106981] = { -- Captain Hring
-	achievementID = AchievementID.UnleashedMonstrosities,
 	questID = 42269, -- The Soultakers
 }
 
 NPCs[106982] = { -- Reaver Jdorn
-	achievementID = AchievementID.UnleashedMonstrosities,
 	questID = 42269, -- The Soultakers
 }
 
 NPCs[106984] = { -- Soultrapper Mevra
-	achievementID = AchievementID.UnleashedMonstrosities,
 	questID = 42269, -- The Soultakers
 }
 
@@ -497,8 +493,8 @@ NPCs[107544] = { -- Nithogg
 }
 
 NPCs[107926] = { -- Hannval the Butcher
-	questID = 42591, -- Vignette - Hannval the Butcher
 	vignetteName = "Hannval the Butcher",
+	achievementQuestID = 42591, -- Vignette - Hannval the Butcher
 }
 
 NPCs[108790] = { -- Den Mother Ylva
@@ -538,8 +534,8 @@ NPCs[109318] = { -- Runeseer Sigvid
 }
 
 NPCs[110363] = { -- Roteye
-	questID = 43342, -- Vignette - Roteye
 	vignetteName = "Roteye",
+	achievementQuestID = 43342, -- Vignette - Roteye
 }
 
 NPCs[111463] = { -- Bulvinkel
@@ -550,7 +546,7 @@ NPCs[111463] = { -- Bulvinkel
 -- Val'sharah
 -- ----------------------------------------------------------------------------
 NPCs[92104] = { -- Thistleleaf Rascal
-	questID = 38466, -- Grellkin Treasure
+	achievementQuestID = 38466, -- Grellkin Treasure
 	toys = {
 		{ itemID = 130147 }, -- Thistleleaf Branch
 	},
@@ -604,13 +600,13 @@ NPCs[93205] = { -- Thondrax
 }
 
 NPCs[93654] = { -- Skul'vrax
-	questID = 38887, -- 7.0 Val'sharah - Bluffs - Swiftflight - TRACKING - twh
 	vignetteName = "Elindya Featherlight",
+	achievementQuestID = 38887, -- 7.0 Val'sharah - Bluffs - Swiftflight - TRACKING - twh
 }
 
 NPCs[93679] = { -- Gathenak the Subjugator
-	questID = 44070, -- Gathenak
 	vignetteName = "Marius & Tehd",
+	achievementQuestID = 44070, -- Gathenak
 }
 
 NPCs[93686] = { -- Jinikki the Puncturer
@@ -619,33 +615,33 @@ NPCs[93686] = { -- Jinikki the Puncturer
 }
 
 NPCs[93758] = { -- Antydas Nightcaller
-	questID = 38900, -- 7.0 Val'sharah - Bluffs - Nightcaller - TRACKING - twh
 	vignetteName = "Antydas Nightcaller's Hideaway",
+	achievementQuestID = 38900, -- 7.0 Val'sharah - Bluffs - Nightcaller - TRACKING - twh
 }
 
 NPCs[94414] = { -- Kiranys Duskwhisper
-	questID = 39121, -- Haunted Manor
 	vignetteName = "Haunted Manor",
+	achievementQuestID = 39121, -- Haunted Manor
 }
 
 NPCs[94485] = { -- Pollous the Fetid
+	achievementQuestID = 39130, -- 7.0 Val'sharah - River: Purging the River - TRACKING - twh
 	pets = {
 		{
 			itemID = 130168, -- Fetid Waveling
 			npcID = 99394, -- Fetid Waveling
 		},
 	},
-	questID = 39130, -- 7.0 Val'sharah - River: Purging the River - TRACKING - twh
 	vignetteName = "Purging the River",
 }
 
 NPCs[95123] = { -- Grelda the Hag
-	questID = 40126, -- Grelda
 	vignetteName = "Grelda the Hag",
+	achievementQuestID = 40126, -- Grelda
 }
 
 NPCs[95221] = { -- Mad Henryk
-	questID = 39357, -- 7.0 Val'sharah - Grove - Eileen - TRACKING - twh
+	achievementQuestID = 39357, -- 7.0 Val'sharah - Grove - Eileen - TRACKING - twh
 	toys = {
 		{ itemID = 130214 }, -- Worn Doll
 	},
@@ -653,23 +649,23 @@ NPCs[95221] = { -- Mad Henryk
 }
 
 NPCs[95318] = { -- Perrexx
-	questID = 39596, -- 7.0 Val'sharah - Vale - Perrexx - TRACKING - twh
 	vignetteName = "Perrexx the Corruptor",
+	achievementQuestID = 39596, -- 7.0 Val'sharah - Vale - Perrexx - TRACKING - twh
 }
 
 NPCs[97504] = { -- Wraithtalon
-	questID = 39856, -- Wraithtalon
 	vignetteName = "Wraithtalon",
+	achievementQuestID = 39856, -- Wraithtalon
 }
 
 NPCs[97517] = { -- Dreadbog
-	questID = 39858, -- Dreadbog
 	vignetteName = "Dreadbog",
+	achievementQuestID = 39858, -- Dreadbog
 }
 
 NPCs[98241] = { -- Lyrath Moonfeather
-	questID = 40079, -- Lyrath Moonfeather
 	vignetteName = "Lyrath Moonfeather",
+	achievementQuestID = 40079, -- Lyrath Moonfeather
 }
 
 NPCs[103785] = { -- Well-Fed Bear
@@ -705,8 +701,8 @@ NPCs[109692] = { -- Lytheron
 }
 
 NPCs[109708] = { -- Undergrell Ringleader
-	questID = 43176, -- Grell Waves Tracking Flag
 	vignetteName = "Undgrell Attack",
+	achievementQuestID = 43176, -- Grell Waves Tracking Flag
 }
 
 NPCs[109990] = { -- Nylaathria the Forgotten
@@ -730,8 +726,8 @@ NPCs[110367] = { -- Ealdis
 }
 
 NPCs[110562] = { -- Bahagar
+	achievementQuestID = 43446, -- Bahagar
 	isTameable = true,
-	questID = 43446, -- Bahagar
 	vignetteName = "Bahagar",
 }
 
@@ -854,13 +850,13 @@ NPCs[121134] = { -- Duke Sithizi
 -- Helheim
 -- ----------------------------------------------------------------------------
 NPCs[92040] = { -- Fenri
-	questID = 38461, -- Guarms Mate (Fenri)
 	vignetteName = "Fenri",
+	achievementQuestID = 38461, -- Guarms Mate (Fenri)
 }
 
 NPCs[97630] = { -- Soulthirster
-	questID = 39870, -- Soulthirster
 	vignetteName = "Soulthirster",
+	achievementQuestID = 39870, -- Soulthirster
 }
 
 -- ----------------------------------------------------------------------------
@@ -877,8 +873,8 @@ NPCs[95204] = { -- Oubdob da Smasher
 }
 
 NPCs[95872] = { -- Skullhat
-	questID = 39465, -- Skywhisker Taskmaster
 	vignetteName = "Skywhisker Taskmaster",
+	achievementQuestID = 39465, -- Skywhisker Taskmaster
 }
 
 NPCs[96072] = { -- Durguth
@@ -886,8 +882,8 @@ NPCs[96072] = { -- Durguth
 }
 
 NPCs[96410] = { -- Majestic Elderhorn
+	achievementQuestID = 39646, -- Albino Elderhorn
 	isTameable = true,
-	questID = 39646, -- Albino Elderhorn
 	toys = {
 		{ itemID = 131900 }, -- Majestic Elderhorn Hoof
 	},
@@ -895,17 +891,17 @@ NPCs[96410] = { -- Majestic Elderhorn
 }
 
 NPCs[96590] = { -- Gurbog da Basher
-	questID = 40347, -- Gurbog da Basher
 	vignetteName = "Gurbog da Basher",
+	achievementQuestID = 40347, -- Gurbog da Basher
 }
 
 NPCs[96621] = { -- Mellok, Son of Torok
-	questID = 40242, -- Mellok, Son of Torok
 	vignetteName = "Mellok, Son of Torok",
+	achievementQuestID = 40242, -- Mellok, Son of Torok
 }
 
 NPCs[97093] = { -- Shara Felbreath
-	questID = 39762, -- Feltotem Warlock
+	achievementQuestID = 39762, -- Feltotem Warlock
 	toys = {
 		{ itemID = 131900 }, -- Majestic Elderhorn Hoof
 	},
@@ -913,8 +909,8 @@ NPCs[97093] = { -- Shara Felbreath
 }
 
 NPCs[97102] = { -- Ram'Pag
-	questID = 39766, -- Treasure Worm
 	vignetteName = "Totally Safe Treasure Chest",
+	achievementQuestID = 39766, -- Treasure Worm
 }
 
 NPCs[97203] = { -- Tenpak Flametotem
@@ -924,40 +920,40 @@ NPCs[97203] = { -- Tenpak Flametotem
 			npcID = 98077, -- Crispin
 		},
 	},
-	questID = 39782, -- The Exiled Shaman
 	vignetteName = "The Exiled Shaman",
+	achievementQuestID = 39782, -- The Exiled Shaman
 }
 
 NPCs[97220] = { -- Arru
+	achievementQuestID = 39784, -- Beastmaster Pao'lek
 	isTameable = true,
-	questID = 39784, -- Beastmaster Pao'lek
 	vignetteName = "Beastmaster Pao'lek",
 }
 
 NPCs[97326] = { -- Hartli the Snatcher
-	questID = 39802, -- Hartli the Snatcher
 	vignetteName = "Hartli the Snatcher",
+	achievementQuestID = 39802, -- Hartli the Snatcher
 }
 
 NPCs[97345] = { -- Crawshuk the Hungry
-	questID = 39806, -- Crawshuk the Hungry
 	vignetteName = "Crawshuk the Hungry",
+	achievementQuestID = 39806, -- Crawshuk the Hungry
 }
 
 NPCs[97449] = { -- Bristlemaul
+	achievementQuestID = 40405, -- Bristlemaul
 	isTameable = true,
-	questID = 40405, -- Bristlemaul
 	vignetteName = "Bristlemaul",
 }
 
 NPCs[97593] = { -- Mynta Talonscreech
-	questID = 39866, -- Scout Harefoot
 	vignetteName = "Scout Harefoot",
+	achievementQuestID = 39866, -- Scout Harefoot
 }
 
 NPCs[97653] = { -- Taurson
-	questID = 39872, -- The Beastly Boxer
 	vignetteName = "The Beastly Boxer",
+	achievementQuestID = 39872, -- The Beastly Boxer
 }
 
 NPCs[97793] = { -- Flamescale
@@ -966,33 +962,33 @@ NPCs[97793] = { -- Flamescale
 }
 
 NPCs[97928] = { -- Tamed Coralback
+	achievementQuestID = 39994, -- Crab Rider Grmlrml
 	isTameable = true,
-	questID = 39994, -- Crab Rider Grmlrml
 }
 
 NPCs[97933] = { -- Crab Rider Grmlrml
-	questID = 39994, -- Crab Rider Grmlrml
 	vignetteName = "Crab Rider Grmlrml",
+	achievementQuestID = 39994, -- Crab Rider Grmlrml
 }
 
 NPCs[98024] = { -- Luggut the Eggeater
-	questID = 40406, -- Luggut the Eggeater
 	vignetteName = "Luggut the Eggeater",
+	achievementQuestID = 40406, -- Luggut the Eggeater
 }
 
 NPCs[98299] = { -- Bodash the Hoarder
-	questID = 40084, -- Zugdug the Hoarder
 	vignetteName = "Bodash the Hoarder",
+	achievementQuestID = 40084, -- Zugdug the Hoarder
 }
 
 NPCs[98311] = { -- Mrrklr
-	questID = 40096, -- Mrrklr
 	vignetteName = "Captured Survivor",
+	achievementQuestID = 40096, -- Mrrklr
 }
 
 NPCs[98890] = { -- Slumber
+	achievementQuestID = 40175, -- Sleeping Bear
 	isTameable = true,
-	questID = 40175, -- Sleeping Bear
 	vignetteName = "Slumbering Bear",
 }
 
@@ -1002,38 +998,38 @@ NPCs[99929] = { -- Flotsam
 }
 
 NPCs[100230] = { -- "Sure-Shot" Arnie
-	questID = 40413, -- Amateur Hunters
 	vignetteName = "Amateur Hunters",
+	achievementQuestID = 40413, -- Amateur Hunters
 }
 
 NPCs[100231] = { -- Dargok Thunderuin
-	questID = 40413, -- Amateur Hunters
 	vignetteName = "Amateur Hunters",
+	achievementQuestID = 40413, -- Amateur Hunters
 }
 
 NPCs[100232] = { -- Ryael Dawndrifter
-	questID = 40413, -- Amateur Hunters
 	vignetteName = "Amateur Hunters",
+	achievementQuestID = 40413, -- Amateur Hunters
 }
 
 NPCs[100302] = { -- Puck
-	questID = 40423, -- Unethical Adventurers
 	vignetteName = "Seemingly Unguarded Treasure",
+	achievementQuestID = 40423, -- Unethical Adventurers
 }
 
 NPCs[100303] = { -- Zenobia
-	questID = 40423, -- Unethical Adventurers
 	vignetteName = "Seemingly Unguarded Treasure",
+	achievementQuestID = 40423, -- Unethical Adventurers
 }
 
 NPCs[100495] = { -- Devouring Darkness
-	questID = 40414, -- Devouring Darkness
 	vignetteName = "Devouring Darkness",
+	achievementQuestID = 40414, -- Devouring Darkness
 }
 
 NPCs[101077] = { -- Sekhan
+	achievementQuestID = 40681, -- Snarf
 	isTameable = true,
-	questID = 40681, -- Snarf
 	vignetteName = "Sekhan",
 }
 
@@ -1069,18 +1065,18 @@ NPCs[104524] = { -- Ormagrogg
 }
 
 NPCs[109498] = { -- Xaander
-	questID = 40423, -- Unethical Adventurers
 	vignetteName = "Seemingly Unguarded Treasure",
+	achievementQuestID = 40423, -- Unethical Adventurers
 }
 
 NPCs[109500] = { -- Jak
-	questID = 40423, -- Unethical Adventurers
 	vignetteName = "Seemingly Unguarded Treasure",
+	achievementQuestID = 40423, -- Unethical Adventurers
 }
 
 NPCs[109501] = { -- Darkful
-	questID = 40423, -- Unethical Adventurers
 	vignetteName = "Seemingly Unguarded Treasure",
+	achievementQuestID = 40423, -- Unethical Adventurers
 }
 
 NPCs[110378] = { -- Drugon the Frostblood
@@ -1131,13 +1127,13 @@ NPCs[97069] = { -- Wrath-Lord Lekos
 -- Suramar
 -- ----------------------------------------------------------------------------
 NPCs[99610] = { -- Garvrulg
-	questID = 40897, -- Garvrulg
 	vignetteName = "Garvrulg",
+	achievementQuestID = 40897, -- Garvrulg
 }
 
 NPCs[99792] = { -- Elfbane
-	questID = 41319, -- Elfbane
 	vignetteName = "Elfbane",
+	achievementQuestID = 41319, -- Elfbane
 }
 
 NPCs[99899] = { -- Vicious Whale Shark
@@ -1146,18 +1142,18 @@ NPCs[99899] = { -- Vicious Whale Shark
 }
 
 NPCs[100864] = { -- Cora'kar
-	questID = 41135, -- 7.0 Suramar - Cora'kar - twh
 	vignetteName = "Cora'kar",
+	achievementQuestID = 41135, -- 7.0 Suramar - Cora'kar - twh
 }
 
 NPCs[102303] = { -- Lieutenant Strathmar
-	questID = 40905, -- Lieutenant Strathmar
 	vignetteName = "Lieutenant Strathmar",
+	achievementQuestID = 40905, -- Lieutenant Strathmar
 }
 
 NPCs[103183] = { -- Rok'nash
-	questID = 40680, -- 7.0 Suramar - Rok'nash - twh
 	vignetteName = "Rok'nash",
+	achievementQuestID = 40680, -- 7.0 Suramar - Rok'nash - twh
 }
 
 NPCs[103203] = { -- Jetsam
@@ -1166,18 +1162,18 @@ NPCs[103203] = { -- Jetsam
 }
 
 NPCs[103214] = { -- Har'kess the Insatiable
-	questID = 41136, -- 7.0 Suramar - Har'kess - twh
 	vignetteName = "Har'kess the Insatiable",
+	achievementQuestID = 41136, -- 7.0 Suramar - Har'kess - twh
 }
 
 NPCs[103223] = { -- Hertha Grimdottir
-	questID = 43993, -- Hertha Grimdottir
 	vignetteName = "Hertha Grimdottir",
+	achievementQuestID = 43993, -- Hertha Grimdottir
 }
 
 NPCs[103575] = { -- Reef Lord Raj'his
-	questID = 44003, -- Reef Lord Raj'his
 	vignetteName = "Reef Lord Raj'his",
+	achievementQuestID = 44003, -- Reef Lord Raj'his
 }
 
 NPCs[103787] = { -- Baconlisk
@@ -1190,8 +1186,8 @@ NPCs[103827] = { -- King Morgalash
 }
 
 NPCs[103841] = { -- Shadowquill
+	achievementQuestID = 43996, -- Shadowquill
 	isTameable = true,
-	questID = 43996, -- Shadowquill
 	vignetteName = "Shadowquill",
 }
 
@@ -1212,8 +1208,8 @@ NPCs[104698] = { -- Colerian
 }
 
 NPCs[105547] = { -- Rauren
-	questID = 43484, -- Rauren
 	vignetteName = "Rauren",
+	achievementQuestID = 43484, -- Rauren
 }
 
 NPCs[105728] = { -- Scythemaster Cil'raman
@@ -1225,8 +1221,8 @@ NPCs[105899] = { -- Oglok the Furious
 }
 
 NPCs[106351] = { -- Artificer Lothaire
-	questID = 43717, -- Artificer Lothaire
 	vignetteName = "Artificer Lothaire",
+	achievementQuestID = 43717, -- Artificer Lothaire
 }
 
 NPCs[106526] = { -- Lady Rivantas
@@ -1246,8 +1242,8 @@ NPCs[106532] = { -- Inquisitor Volitix
 }
 
 NPCs[107846] = { -- Pinchshank
+	achievementQuestID = 43968, -- Pinchshank
 	isTameable = true,
-	questID = 43968, -- Pinchshank
 	toys = {
 		{ itemID = 140314 }, -- Crab Shank
 	},
@@ -1255,8 +1251,8 @@ NPCs[107846] = { -- Pinchshank
 }
 
 NPCs[109054] = { -- Shal'an
-	questID = 42831, -- Shal'an
 	vignetteName = "Shal'an",
+	achievementQuestID = 42831, -- Shal'an
 }
 
 NPCs[109943] = { -- Ana-Mouz
@@ -1264,100 +1260,104 @@ NPCs[109943] = { -- Ana-Mouz
 }
 
 NPCs[109954] = { -- Magister Phaedris
-	questID = 43348, -- Magister Phaedris
+	achievementQuestID = 43348, -- Magister Phaedris
 }
 
 NPCs[110024] = { -- Mal'Dreth the Corruptor
-	questID = 43351, -- Mal'Dreth the Corrupter
-	vignetteName = "Magister Phaedris",
+	achievementQuestID = 43351, -- Mal'Dreth the Corrupter
+	vignetteID = 1498,
+}
+
+NPCs[110321] = { -- Na'zak the Fiend
+	questID = 43513 -- Na'zak the Fiend
 }
 
 NPCs[110340] = { -- Myonix
+	achievementQuestID = 43358, -- Myonix
 	isTameable = true,
-	questID = 43358, -- Myonix
-	vignetteName = "Myonix",
+	vignetteID = 1499,
 }
 
 NPCs[110438] = { -- Siegemaster Aedrin
-	questID = 43369, -- Siegemaster Aedrin
-	vignetteName = "Siegemaster Aedrin",
+	achievementQuestID = 43369, -- Siegemaster Aedrin
+	vignetteID = 1500,
 }
 
 NPCs[110577] = { -- Oreth the Vile
-	questID = 43449, -- Oreth the Vile
-	vignetteName = "Oreth the Vile",
+	achievementQuestID = 43449, -- Oreth the Vile
+	vignetteID = 1505,
 }
 
 NPCs[110656] = { -- Arcanist Lylandre
-	questID = 43481, -- Arcanist Lylandre
-	vignetteName = "Arcanist Lylandre",
+	achievementQuestID = 43481, -- Arcanist Lylandre
+	vignetteID = 1507,
 }
 
 NPCs[110726] = { -- Cadraeus
-	questID = 43495, -- Cadraeus
-	vignetteName = "Cadraeus",
+	achievementQuestID = 43495, -- Cadraeus
+	vignetteID = 1509,
 }
 
 NPCs[110824] = { -- Tideclaw
+	achievementQuestID = 43542, -- Tideclaw
 	isTameable = true,
-	questID = 43542, -- Tideclaw
-	vignetteName = "Tideclaw",
+	vignetteID = 1510,
 }
 
 NPCs[110832] = { -- Gorgroth
-	questID = 43992, -- Gorgroth
-	vignetteName = "Gorgroth",
+	achievementQuestID = 43992, -- Gorgroth
+	vignetteID = 1609,
 }
 
 NPCs[110870] = { -- Apothecary Faldren
-	questID = 43580, -- Apothecary Faldren
-	vignetteName = "Apothecary Faldren",
+	achievementQuestID = 43580, -- Apothecary Faldren
+	vignetteID = 1511,
 }
 
 NPCs[110944] = { -- Guardian Thor'el
-	questID = 43597, -- Guardian Thor'el
 	vignetteName = "Guardian Thor'el",
+	achievementQuestID = 43597, -- Guardian Thor'el
 }
 
 NPCs[111007] = { -- Randril
-	questID = 43603, -- Randril
-	vignetteName = "Randril",
+	achievementQuestID = 43603, -- Randril
+	vignetteID = 1518,
 }
 
 NPCs[111197] = { -- Anax
+	achievementQuestID = 43954, -- Anax
 	pets = {
 		{
 			itemID = 140934, -- Benax
 			npcID = 113136, -- Benax
 		},
 	},
-	questID = 43954, -- Anax
 	vignetteName = "Anax",
 }
 
 NPCs[111329] = { -- Matron Hagatha
-	questID = 43718, -- Matron Hagatha
 	vignetteName = "Matron Hagatha",
+	achievementQuestID = 43718, -- Matron Hagatha
 }
 
 NPCs[111649] = { -- Ambassador D'vwinn
-	questID = 43794, -- Ambassador D'vwinn
 	vignetteName = "Ambassador D'vwinn",
+	achievementQuestID = 43794, -- Ambassador D'vwinn
 }
 
 NPCs[111651] = { -- Degren
-	questID = 43792, -- Degren
 	vignetteName = "Noble Blademaster",
+	achievementQuestID = 43792, -- Degren
 }
 
 NPCs[111653] = { -- Miasu
-	questID = 43793, -- Miasu
 	vignetteName = "Miasu",
+	achievementQuestID = 43793, -- Miasu
 }
 
 NPCs[112497] = { -- Maia the White
+	achievementQuestID = 44072, -- Maia the White
 	isTameable = true,
-	questID = 44072, -- Maia the White
 	vignetteName = "Maia the White",
 }
 
@@ -1386,8 +1386,8 @@ NPCs[112760] = { -- Volshax, Breaker of Will
 }
 
 NPCs[112802] = { -- Mar'tura
+	achievementQuestID = 44124, -- Mar'tura
 	isTameable = true,
-	questID = 44124, -- Mar'tura
 	vignetteName = "Mar'tura",
 }
 
@@ -1409,13 +1409,4 @@ NPCs[101411] = { -- Gom Crabbar
 
 NPCs[111573] = { -- Kosumoth the Hungering
 	questID = 45479, -- Kosumoth the Hungering
-}
-
--- ----------------------------------------------------------------------------
--- Thunder Totem
--- ----------------------------------------------------------------------------
-NPCs[101077] = { -- Sekhan
-	isTameable = true,
-	questID = 40681, -- Snarf
-	vignetteName = "Sekhan",
 }

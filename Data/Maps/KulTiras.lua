@@ -8,105 +8,106 @@ local NPCs = private.Data.NPCs
 -- Drustvar
 -- ----------------------------------------------------------------------------
 NPCs[124548] = { -- Betsy
-	questID = 47884, -- Betsy
+	achievementQuestID = 47884, -- Betsy
 }
 
 NPCs[125453] = { -- Quillrat Matriarch
+	achievementQuestID = 48178, -- Quillrat Matriarch
 	isTameable = true,
-	questID = 48178, -- Quillrat Matriarch
 }
 
 NPCs[126621] = { -- Bonesquall
-	questID = 48978, -- Bonesquall
+	achievementQuestID = 48978, -- Bonesquall
 }
 
 NPCs[127129] = { -- Grozgore
-	questID = 49388, -- Grozgore
+	achievementQuestID = 49388, -- Grozgore
 }
 
 NPCs[127333] = { -- Barbthorn Queen
+	achievementQuestID = 48842, -- Barbthorn Queen
 	isTameable = true,
-	questID = 48842, -- Barbthorn Queen
 }
 
 NPCs[127651] = { -- Vicemaul
+	achievementQuestID = 48928, -- Vicemaul
 	isTameable = true,
-	questID = 48928, -- Vicemaul
 }
 
 NPCs[127844] = { -- Gluttonous Yeti
-	questID = 48979, -- Gluttonous Yeti
+	achievementQuestID = 48979, -- Gluttonous Yeti
 }
 
 NPCs[127877] = { -- Longfang
+	achievementQuestID = 48981, -- Longfang
 	factionGroup = "Alliance",
-	questID = 48981, -- Longfang
 }
 
 NPCs[127901] = { -- Henry Breakwater
+	achievementQuestID = 48981, -- Longfang
 	factionGroup = "Alliance",
 }
 
 NPCs[128707] = { -- Rimestone
-	questID = 49269, -- Rimestone
+	achievementQuestID = 49269, -- Rimestone
 }
 
 NPCs[128973] = { -- Whargarble the Ill-Tempered
-	questID = 49311, -- Whargarble the Ill-Tempered
+	achievementQuestID = 49311, -- Whargarble the Ill-Tempered
 }
 
 NPCs[129805] = { -- Beshol
-	questID = 49481, -- Beshol,
 	-- vignetteID = -- Obviously Safe Chest
+	achievementQuestID = 49481, -- Beshol,
 }
 
 NPCs[129835] = { -- Gorehorn
-	questID = 49480, -- Gorehorn
+	achievementQuestID = 49480, -- Gorehorn
 }
 
 NPCs[129950] = { -- Talon
+	achievementQuestID = 49528, -- Talon
 	isTameable = true,
-	questID = 49528, -- Talon
 }
 
 NPCs[129995] = { -- Emily Mayville
+	achievementQuestID = 49530, -- Emily Mayville
 	factionGroup = "Alliance",
-	questID = 49530, -- Emily Mayville
 }
 
 NPCs[130138] = { -- Nevermore
+	achievementQuestID = 49601, -- Nevermore
 	isTameable = true,
-	questID = 49601, -- Nevermore
 }
 
 NPCs[130143] = { -- Balethorn
-	questID = 49602, -- Balethorn
+	achievementQuestID = 49602, -- Balethorn
 }
 
 NPCs[132319] = { -- Bilefang Mother
+	achievementQuestID = 50163, -- Bilefang Mother
 	isTameable = true,
-	questID = 50163, -- Bilefang Mother
 }
 
 NPCs[134213] = { -- Executioner Blackwell
-	questID = 50546, -- Executioner Blackwell
+	achievementQuestID = 50546, -- Executioner Blackwell
 }
 
 NPCs[134706] = { -- Deathcap
-	questID = 50669, -- Deathcap
+	achievementQuestID = 50669, -- Deathcap
 }
 
 NPCs[134754] = { -- Hyo'gi
+	achievementQuestID = 50688, -- Hyo'gi
 	isTameable = true,
-	questID = 50688, -- Hyo'gi
 }
 
 NPCs[135796] = { -- Captain Leadfist
-	questID = 50939, -- Captain Leadfist
+	achievementQuestID = 50939, -- Captain Leadfist
 }
 
 NPCs[137529] = { -- Arvon the Betrayed
-	questID = 51383, -- Arvon the Betrayed
+	achievementQuestID = 51383, -- Arvon the Betrayed
 }
 
 NPCs[137665] = { -- Soul Goliath
@@ -122,17 +123,17 @@ NPCs[137708] = { -- Stone Golem
 }
 
 NPCs[137824] = { -- Arclight
+	achievementQuestID = 51470, -- Arclight
 	isTameable = true,
-	questID = 51470, -- Arclight
 }
 
 NPCs[137825] = { -- Avalanche
+	achievementQuestID = 51471, -- Avalanche
 	isTameable = true,
-	questID = 51471, -- Avalanche
 }
 
 NPCs[138618] = { -- Haywire Golem
-	questID = 51698, -- Haywire Golem
+	achievementQuestID = 51698, -- Haywire Golem
 }
 
 NPCs[138667] = { -- Blighted Monstrosity
@@ -140,31 +141,32 @@ NPCs[138667] = { -- Blighted Monstrosity
 }
 
 NPCs[138675] = { -- Gorged Boar
+	achievementQuestID = 51700, -- Gorged Boar
 	isTameable = true,
-	questID = 51700, -- Gorged Boar
 }
 
 NPCs[138863] = { -- Sister Martha
-	questID = 51748, -- Sister Martha
+	achievementQuestID = 51748, -- Sister Martha
 }
 
 NPCs[138866] = { -- Mack
-	questID = 51749, -- Fungi Trio
+	achievementQuestID = 51749, -- Fungi Trio
 }
 
 NPCs[138870] = { -- Mick
-	questID = 51749, -- Fungi Trio
+	achievementQuestID = 51749, -- Fungi Trio
 }
 
 NPCs[138871] = { -- Ernie
-	questID = 51749, -- Fungi Trio
+	achievementQuestID = 51749, -- Fungi Trio
 }
 
 NPCs[139321] = { -- Braedan Whitewall
-	questID = 51922, -- Braedan Whitewall
+	achievementQuestID = 51922, -- Braedan Whitewall
 }
 
 NPCs[139322] = { -- Whitney "Steelclaw" Ramsay
+	achievementQuestID = 51923, -- Hexed Hunter
 	questID = 51988, -- Whitney "Steelclaw" Ramsay
 }
 

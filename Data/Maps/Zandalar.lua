@@ -131,7 +131,6 @@ Maps[MapID.Zuldazar].NPCs = {
 	[134738] = true, -- Hakbi the Risen
 	[134760] = true, -- Darkspeaker Jo'la
 	[134782] = true, -- Murderbeak
-	-- [136410] = true, -- Tehd Shoemaker
 	[136413] = true, -- Syrawon the Dominus
 	[136428] = true, -- Dark Chronicler
 	[143314] = true, -- Bane of the Woods
