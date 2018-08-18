@@ -137,7 +137,7 @@ local function TryAssignNPCToAchievement(npcDataField, achievement, achievementL
 	end
 
 	if not foundMatch then
-		private.Debug("** AchievementID.%s - (criteriaID %s): %s = %d -- %s,", achievementLabel, achievementCriteriaID, npcDataField, achievementAssetID, achievementAssetName)
+		private.Debug("** AchievementID.%s - (criteriaID %s): %s = %d, -- %s", achievementLabel, achievementCriteriaID, npcDataField, achievementAssetID, achievementAssetName)
 	end
 end
 
