@@ -35,6 +35,7 @@ Maps[MapID.Nazmir].NPCs = {
 	[127820] = true, -- Scout Skrasniss
 	[127873] = true, -- Scrounger Patriarch
 	[128426] = true, -- Gutrip
+	[128578] = true, -- Zujothgul
 	[128930] = true, -- Rohnkor
 	[128935] = true, -- Mala'kili
 	[128965] = true, -- Uroku the Bound

@@ -92,6 +92,10 @@ NPCs[128426] = { -- Gutrip
 	questID = 49231, -- Gutrip the Hungry
 }
 
+NPCs[128578] = { -- Zujothgul
+	questID = 50461, -- Zujothgul
+}
+
 NPCs[128930] = { -- Rohnkor
 questID = 50040, -- Mala'kili and Rohnkor
 }
