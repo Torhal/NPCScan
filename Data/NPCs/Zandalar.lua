@@ -208,10 +208,19 @@ NPCs[124722] = { -- Commodore Calhoun
 
 NPCs[127776] = { -- Scaleclaw Broodmother
 	isTameable = true,
+	questID = 51107, -- Scaleclaw Broodmother
+}
+
+NPCs[128497] = { -- Bajiani the Slick
+	questID = 51117, -- Bajiani the Slick
 }
 
 NPCs[128553] = { -- Azer'tor
 	questID = 51096,
+}
+
+NPCs[128674] = { -- Gut-Gut the Glutton
+	questID = 51099, -- Gut-Gut the Glutton
 }
 
 NPCs[130439] = { -- Ashmane
@@ -224,8 +233,17 @@ NPCs[133843] = { -- First Mate Swainbeak
 	vignetteID = 2889, -- "Stef ""Marrow"" Quin"
 }
 
+NPCs[135852] = { -- Ak'tar
+	questID = 51105, -- Ak'tar
+}
+
 NPCs[136323] = { -- Fangcaller Xorreth
 	questID = 51156, -- Fangcaller Xorreth
+}
+
+NPCs[136335] = { -- Enraged Krolusk
+	isTameable = true,
+	questID = 51121, -- Enraged Krolusk
 }
 
 NPCs[136346] = { -- Captain Stef "Marrow" Quin

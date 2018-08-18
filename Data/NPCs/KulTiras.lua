@@ -210,6 +210,7 @@ NPCs[139322] = { -- Whitney "Steelclaw" Ramsay
 
 NPCs[139358] = { -- The Caterer
 	questID = 51970, -- The Caterer
+	vignetteID = 3027, -- Ruined Wedding Cake
 }
 
 NPCs[140252] = { -- Hailstone Construct
@@ -434,12 +435,29 @@ NPCs[127289] = { -- Saurolisk Tamer Mugg
 }
 
 NPCs[127290] = { -- Mugg
+	isTameable = true,
 	questID = 51656, -- Saurolisk Tamer Mugg
 }
 
 NPCs[129181] = { -- Barman Bill
 	achievementItemID = 163717, -- Forbidden Sea Shanty of Josephus
 	questID = 51652, -- Barman Bill
+}
+
+NPCs[130508] = { -- Broodmother Razora
+	isTameable = true,
+	questID = 51665, -- Broodmother Razora
+}
+
+NPCs[131252] = { -- Merianae
+	isTameable = true,
+	questID = 51659, -- Merianae
+}
+
+NPCs[132086] = { -- Black-Eyed Bart
+	achievementItemID = 163718, -- Forbidden Sea Shanty of the Black Sphere
+	questID = 51669, -- Black-Eyed Bart
+
 }
 
 NPCs[136385] = { -- Azurethos
