@@ -174,12 +174,7 @@ local function GetNPCOptionsName(npcID)
 
 	local npcName = NPCScan:GetNPCNameFromID(npcID)
 	local assetName = npc.achievementAssetName
-	local vignetteName = npc.vignetteName
 	local label = ""
-
-	if vignetteName and vignetteName ~= npcName then
-		label = (" %s"):format(_G.PARENS_TEMPLATE:format(vignetteName))
-	end
 
 	if assetName and assetName ~= npcName then
 		label = (" %s"):format(_G.PARENS_TEMPLATE:format(assetName))

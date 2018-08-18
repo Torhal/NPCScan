@@ -337,7 +337,7 @@ NPCs[71919] = { -- Zhu-Gon the Sour
 		},
 	},
 	questID = 32959, -- Tracking Quest - Daily - Zhu-Gon the Sour/Skunky Beer
-	vignetteName = "Really Skunky Beer",
+	vignetteID = 49, -- Really Skunky Beer
 }
 
 NPCs[72045] = { -- Chelon
@@ -348,7 +348,7 @@ NPCs[72045] = { -- Chelon
 }
 
 NPCs[72048] = { -- Rattleskew
-	vignetteName = "Battle of the Barnacle",
+	vignetteID = 61, -- Battle of the Barnacle
 }
 
 NPCs[72049] = { -- Cranegnasher

@@ -20,7 +20,6 @@ local LibStub = _G.LibStub
 local AceConfigDialog = LibStub("AceConfigDialog-3.0")
 local HereBeDragons = LibStub("HereBeDragons-2.0")
 local NPCScan = LibStub("AceAddon-3.0"):NewAddon(AddOnFolderName, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0", "AceBucket-3.0", "LibSink-2.0", "LibToast-1.0")
-local VL = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName .. "Vignette")
 
 -- ----------------------------------------------------------------------------
 -- Debugger.
@@ -62,9 +61,6 @@ private.QuestNPCs = QuestNPCs
 
 local QuestIDFromName = {}
 private.QuestIDFromName = QuestIDFromName
-
-local VignetteNPCs = {}
-private.VignetteNPCs = VignetteNPCs
 
 local VignetteIDToNPCMapping = {}
 private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
@@ -182,18 +178,6 @@ function NPCScan:OnEnable()
 			if questName and questName ~= _G.UNKNOWN then
 				QuestIDFromName[questName] = npc.questID
 			end
-		end
-
-		if npc.vignetteName then
-			local vignetteName = VL[npc.vignetteName]
-
-			local npcIDs = VignetteNPCs[vignetteName]
-			if not npcIDs then
-				npcIDs = {}
-				VignetteNPCs[vignetteName] = npcIDs
-			end
-
-			npcIDs[npcID] = true
 		end
 
 		if npc.vignetteID then
