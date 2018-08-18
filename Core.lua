@@ -199,12 +199,6 @@ function NPCScan:OnEnable()
 		if npc.vignetteID then
 			VignetteIDToNPCMapping[npc.vignetteID] = npc
 		end
-
-		if npc.vignetteIDs then
-			for index = 1, #npc.vignetteIDs do
-				VignetteIDToNPCMapping[npc.vignetteIDs[index]] = npc
-			end
-		end
 	end
 
 	private.InitializeAchievements()
