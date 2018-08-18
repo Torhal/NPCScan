@@ -243,12 +243,6 @@ NPCs[109702] = { -- Deepclaw
 	questID = 45489, -- Deepclaw
 }
 
-NPCs[110824] = { -- Tideclaw
-	isTameable = true,
-	questID = 43542, -- Tideclaw
-	vignetteName = "Tideclaw",
-}
-
 NPCs[111434] = { -- Sea King Tidross
 	questID = 44039, -- Sea King Tidross
 	vignetteName = "Sea King Tidross",
