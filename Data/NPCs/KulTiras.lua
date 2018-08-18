@@ -221,14 +221,17 @@ NPCs[140252] = { -- Hailstone Construct
 -- ----------------------------------------------------------------------------
 NPCs[129803] = { -- Whiplash
 	achievementQuestID = 52296, -- Whiplash
+	questID = 52299, -- Whiplash
 }
 
 NPCs[130079] = { -- Wagga Snarltusk
 	achievementQuestID = 50819, -- Wagga Snarltusk
+	questID = 52300, -- Wagga Snarltusk
 }
 
 NPCs[130897] = { -- Captain Razorspine
 	achievementQuestID = 50170, -- Captain Razorspine
+	questID = 51782, -- Captain Razorspine
 }
 
 NPCs[131404] = { -- Foreman Scripps
@@ -239,22 +242,188 @@ NPCs[131404] = { -- Foreman Scripps
 			spellID = 260175 -- Goldenmane
 		}
 	},
+	questID = 51781, -- Foreman Scripps
 }
 
 NPCs[132007] = { -- Galestorm
 	achievementQuestID = 50075, -- Galestorm
+	questID = 51776, -- Galestorm
+}
+
+NPCs[132047] = { -- Reinforced Hullbreaker
+	questID = 51905, -- Reinforced Hullbreaker
+}
+
+NPCs[134147] = { -- Beehemoth
+	isTameable = true,
+	questID = 52330, -- Beehemoth
 }
 
 NPCs[134884] = { -- Ragna
 	achievementQuestID = 50725, -- Ragna
+	questID = 51774, -- Ragna
+}
+
+NPCs[134897] = { -- Dagrus the Scorned
+	achievementQuestID = 50731, -- Dagrus the Scorned
+	questID = 51777, -- Dagrus the Scorned
+}
+
+NPCs[135939] = { -- Vinespeaker Ratha
+	achievementQuestID = 50037, -- Vinespeaker Ratha
+	questID = 52301, -- Vinespeaker Ratha
+}
+
+NPCs[136183] = { -- Crushtacean
+	achievementQuestID = 50731, -- Crushtacean
+	questID = 51901, -- Crushtacean
+}
+
+NPCs[136189] = { -- The Lichen King
+	achievementQuestID = 50974, -- The Lichen King
+	questID = 52476, -- The Lichen King
+}
+
+NPCs[137025] = { -- Broodmother
+	achievementQuestID = 51298, -- Broodmother
+	isTameable = true,
+}
+
+NPCs[137649] = { -- Pest Remover Mk. II
+	questID = 51806,  -- Pest Remover Mk. II
+}
+
+NPCs[138938] = { -- Seabreaker Skoloth
+	achievementQuestID = 51757, -- Seabreaker Skoloth
+	questID = 51759, -- Seabreaker Skoloth
+}
+
+NPCs[138963] = { -- Nestmother Acada
+	achievementQuestID = 51762, -- Nestmother Acada
+	vignetteID = 2981, -- Nestmother Acada
+}
+
+NPCs[139298] = { -- Pinku'shon
+	achievementQuestID = 51959, -- Pinku'shon
+	isTameable = true,
+	questID = 51886, -- Pinku'shon
+}
+
+NPCs[139319] = { -- Slickspill
+	achievementQuestID = 51958, -- Slickspill
+	questID = 51921, -- Slickspill
+}
+
+NPCs[139328] = { -- Sabertron (Red Sabertron)
+	isTameable = true,
+}
+
+NPCs[139335] = { -- Sabertron (Yellow Sabertron)
+	isTameable = true,
+}
+
+NPCs[139336] = { -- Sabertron (Green Sabertron)
+	isTameable = true,
+}
+
+NPCs[139356] = { -- Sabertron (Orange Sabertron)
+	isTameable = true,
+}
+
+NPCs[139359] = { -- Sabertron (Copper Sabertron)
+	isTameable = true,
+}
+
+NPCs[139385] = { -- Deepfang
+	achievementQuestID = 50692, -- Deepfang
+	isTameable = true,
+	questID = 51778, -- Deepfang
+}
+
+NPCs[139968] = { -- Corrupted Tideskipper
+	questID = 52310, -- Corrupted Tideskipper
+}
+
+NPCs[139980] = { -- Taja the Tidehowler
+	achievementQuestID = 52123, -- Taja the Tidehowler
+	questID = 52322, -- Taja the Tidehowler
+}
+
+NPCs[139988] = { -- Sandfang
+	achievementQuestID = 52125, -- Sandfang
+	isTameable = true,
+	questID = 52309, -- Sandfang
 }
 
 NPCs[140163] = { -- Warbringer Yenajz
 	questID = 52166, -- The Faceless Herald
 }
 
+NPCs[140398] = { -- Zeritarj
+	questID = 52352, -- Zeritarj
+}
+
+NPCs[140938] = { -- Croaker
+	achievementQuestID = 52303, -- Croaker
+	isTameable = true,
+	questID = 52306, -- Croaker
+}
+
+NPCs[140997] = { -- Severus the Outcast
+	achievementQuestID = 50938, -- Severus the Outcast
+	questID = 52315, -- Severus the Outcast
+}
+
+NPCs[141029] = { -- Kickers
+	achievementQuestID = 52318, -- Kickers
+	isTameable = true,
+	questID = 52321, -- Kickers
+}
+
+NPCs[141039] = { -- Ice Sickle
+	achievementQuestID = 52327, -- Ice Sickle
+	questID = 52328, -- Ice Sickle
+}
+
+NPCs[141059] = { -- Grimscowl the Harebrained
+	achievementQuestID = 52329, -- Grimscowl the Harebrained
+	questID = 51779, -- Rage Paw
+}
+
+NPCs[141088] = { -- Squall
+	achievementQuestID = 52433, -- Squall
+	questID = 52432, -- Unrelenting Squall
+}
+
+NPCs[141143] = { -- Sister Absinthe
+	achievementQuestID = 52441, -- Sister Absinthe
+	questID = 52446, -- Tidesage Absinthe
+}
+
 NPCs[141175] = { -- Song Mistress Dadalea
 	achievementQuestID = 52448, -- Song Mistress Dadalea
+	questID = 52452, -- Song Mistress Dadalea
+}
+
+NPCs[141226] = { -- Haegol the Hammer
+	achievementQuestID = 52460, -- Haegol the Hammer
+	questID = 52463, -- Haegol the Hammer
+}
+
+NPCs[141239] = { -- Osca the Bloodied
+	achievementQuestID = 52461, -- Osca the Bloodied
+	isTameable = true,
+	questID = 52464, -- Osca the Bloodied
+}
+
+NPCs[141286] = { -- Poacher Zane
+	achievementQuestID = 52469, -- Poacher Zane
+}
+
+NPCs[142088] = { -- Whirlwing
+	achievementQuestID = 52457, -- Whirlwing
+	isTameable = true,
+	questID = 52459, -- Whirlwing
 }
 
 -- ----------------------------------------------------------------------------
