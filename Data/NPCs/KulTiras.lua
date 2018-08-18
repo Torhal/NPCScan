@@ -56,7 +56,50 @@ Maps[MapID.Drustvar].NPCs = {
 -- Stormsong Valley
 -- ----------------------------------------------------------------------------
 Maps[MapID.StormsongValley].NPCs = {
+	[129803] = true, -- Whiplash
+	[129836] = true, -- Spelltwister Moephus
+	[130079] = true, -- Wagga Snarltusk
+	[130897] = true, -- Captain Razorspine
+	[131404] = true, -- Foreman Scripps
+	[132007] = true, -- Galestorm
+	[132047] = true, -- Reinforced Hullbreaker
+	[134147] = true, -- Beehemoth
+	[134884] = true, -- Ragna
+	[134897] = true, -- Dagrus the Scorned
+	[135939] = true, -- Vinespeaker Ratha
+	[136183] = true, -- Crushtacean
+	[136189] = true, -- The Lichen King
+	[137025] = true, -- Broodmother
+	[137649] = true, -- Pest Remover Mk. II
+	[138938] = true, -- Seabreaker Skoloth
+	[138963] = true, -- Nestmother Acada
+	[139298] = true, -- Pinku'shon
+	[139319] = true, -- Slickspill
+	[139328] = true, -- Sabertron (Red Sabertron)
+	[139335] = true, -- Sabertron (Yellow Sabertron)
+	[139336] = true, -- Sabertron (Green Sabertron)
+	[139356] = true, -- Sabertron (Orange Sabertron)
+	[139359] = true, -- Sabertron (Copper Sabertron)
+	[139385] = true, -- Deepfang
+	[139968] = true, -- Corrupted Tideskipper
+	[139980] = true, -- Taja the Tidehowler
+	[139988] = true, -- Sandfang
 	[140163] = true, -- Warbringer Yenajz
+	[140398] = true, -- Zeritarj
+	[140925] = true, -- Doc Marrtens
+	[140938] = true, -- Croaker
+	[140997] = true, -- Severus the Outcast
+	[141029] = true, -- Kickers
+	[141039] = true, -- Ice Sickle
+	[141043] = true, -- Jakala the Cruel
+	[141059] = true, -- Grimscowl the Harebrained
+	[141088] = true, -- Squall
+	[141143] = true, -- Sister Absinthe
+	[141175] = true, -- Song Mistress Dadalea
+	[141226] = true, -- Haegol the Hammer
+	[141239] = true, -- Osca the Bloodied
+	[141286] = true, -- Poacher Zane
+	[142088] = true, -- Whirlwing
 }
 
 -- ----------------------------------------------------------------------------
