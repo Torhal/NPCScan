@@ -159,29 +159,27 @@ function NPCScan:OnEnable()
 
 			-- This sets values for NPCIDFromName, which is used for vignette detection.
 			self:GetNPCNameFromID(npcID)
-		end
-	end
 
-	for npcID, npc in pairs(Data.NPCs) do
-		table.sort(npc.mapIDs, private.SortByMapNameThenByID)
+			table.sort(npc.mapIDs, private.SortByMapNameThenByID)
 
-		if npc.questID then
-			local npcIDs = QuestNPCs[npc.questID]
-			if not npcIDs then
-				npcIDs = {}
-				QuestNPCs[npc.questID] = npcIDs
+			if npc.questID then
+				local npcIDs = QuestNPCs[npc.questID]
+				if not npcIDs then
+					npcIDs = {}
+					QuestNPCs[npc.questID] = npcIDs
+				end
+
+				npcIDs[npcID] = true
+
+				local questName = NPCScan:GetQuestNameFromID(npc.questID)
+				if questName and questName ~= _G.UNKNOWN then
+					QuestIDFromName[questName] = npc.questID
+				end
 			end
 
-			npcIDs[npcID] = true
-
-			local questName = NPCScan:GetQuestNameFromID(npc.questID)
-			if questName and questName ~= _G.UNKNOWN then
-				QuestIDFromName[questName] = npc.questID
+			if npc.vignetteID then
+				VignetteIDToNPCMapping[npc.vignetteID] = npc
 			end
-		end
-
-		if npc.vignetteID then
-			VignetteIDToNPCMapping[npc.vignetteID] = npc
 		end
 	end
 
