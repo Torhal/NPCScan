@@ -285,6 +285,10 @@ NPCs[135939] = { -- Vinespeaker Ratha
 	questID = 52301, -- Vinespeaker Ratha
 }
 
+NPCs[135947] = { -- Strange Mushroom Ring
+	achievementQuestID = 50024, -- Strange Mushroom Ring
+}
+
 NPCs[136183] = { -- Crushtacean
 	achievementQuestID = 50731, -- Crushtacean
 	questID = 51901, -- Crushtacean
@@ -374,6 +378,10 @@ NPCs[140398] = { -- Zeritarj
 	questID = 52352, -- Zeritarj
 }
 
+NPCs[140925] = { -- Doc Marrtens
+	questID = 52323,
+}
+
 NPCs[140938] = { -- Croaker
 	achievementQuestID = 52303, -- Croaker
 	isTameable = true,
@@ -394,6 +402,10 @@ NPCs[141029] = { -- Kickers
 NPCs[141039] = { -- Ice Sickle
 	achievementQuestID = 52327, -- Ice Sickle
 	questID = 52328, -- Ice Sickle
+}
+
+NPCs[141043] = { -- Jakala the Cruel
+	questID = 52324,
 }
 
 NPCs[141059] = { -- Grimscowl the Harebrained
