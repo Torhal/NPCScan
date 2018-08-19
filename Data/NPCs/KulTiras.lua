@@ -415,6 +415,7 @@ NPCs[127290] = { -- Mugg
 
 NPCs[129181] = { -- Barman Bill
 	questID = 50233, -- Barman Bill
+	vignetteID = 2572, -- Barman Bill,
 }
 
 NPCs[130508] = { -- Broodmother Razora
@@ -425,13 +426,156 @@ NPCs[130508] = { -- Broodmother Razora
 NPCs[131252] = { -- Merianae
 	isTameable = true,
 	questID = 49921,
+	vignetteID = 2491, -- Merianae
+}
+
+NPCs[131262] = { -- Pack Leader Asenya
+	questID = 49923,
+	vignetteID = 2492, -- Pack Leader Asenya
+}
+
+NPCs[131389] = { -- Teres
+	questID = 49942,
+	vignetteID = 2501, --Teres
+}
+
+NPCs[131520] = { -- Kulett the Ornery
+	isTameable = true,
+	questID = 49984,
+	vignetteID = 2518, -- Kulett the Ornery
+}
+
+NPCs[131984] = { -- Twin-hearted Construct
+	questID = 50073,
+	vignetteID = 2535, -- Twin-hearted Construct
+}
+
+NPCs[132068] = { -- Bashmu
+	questID = 50094,
+	vignetteID = 2539, -- Bashmu
+}
+
+NPCs[132076] = { -- Totes
+	questID = 50095,
+	vignetteID = 2540, -- Totes
 }
 
 NPCs[132086] = { -- Black-Eyed Bart
 	questID = 50096,
+	vignetteID = 2541, -- Black-Eyed Bart
+}
 
+NPCs[132127] = { -- Foxhollow Skyterror
+	isTameable = true,
+	questID = 50137,
+	vignetteID = 2544, -- Foxhollow Skyterror
+}
+
+NPCs[132179] = { -- Raging Swell
+	questID = 50148,
+	vignetteID = 2545, -- Raging Swell
+}
+
+NPCs[132182] = { -- Auditor Dolp
+	questID = 50156,
+	vignetteID = 2547, -- Auditor Dolp
+}
+
+NPCs[132211] = { -- Fowlmouth
+	isTameable = true,
+	questID = 50155,
+	vignetteID = 2546, -- Fowlmouth
+}
+
+NPCs[132280] = { -- Squacks
+	questID = 50160,
+	vignetteID = 2549, -- Squacks
+}
+
+NPCs[134106] = { -- Lumbergrasp Sentinel
+	questID = 50525,
+	vignetteID = 2653, -- Lumbergrasp Sentinel
 }
 
 NPCs[136385] = { -- Azurethos
 	questID = 52163, -- The Winged Typhoon
+}
+
+NPCs[137183] = { -- Honey-Coated Slitherer
+	questID = 51321,
+	vignetteID = 2942, -- Imperiled Merchants
+}
+
+NPCs[137983] = { -- Rear Admiral Hainsworth
+	factionGroup = "Alliance",
+}
+
+NPCs[138039] = { -- Dark Ranger Clea
+	factionGroup = "Horde",
+}
+
+NPCs[139135] = { -- Squirgle of the Depths
+	questID = 51807,
+	vignetteID = 2982, -- Squirgle of the Depths
+}
+
+NPCs[139145] = { -- Blackthorne
+	isTameable = true,
+	questID = 51808,
+	vignetteID = 2983, -- Blackthorne
+}
+
+NPCs[139152] = { -- Carla Smirk
+	questID = 51809,
+	vignetteID = 2984, -- Edina Teach
+}
+
+NPCs[139205] = { -- P4-N73R4
+	questID = 51833,
+	vignetteID = 2985, -- P4-N73R4
+}
+
+NPCs[139233] = { -- Gulliver
+	isTameable = true,
+	questID = 53373,
+	vignetteID = 2986, -- Gulliver
+}
+
+NPCs[139235] = { -- Tort Jaw
+	questID = 51835,
+	vignetteID = 2987, -- Tort Jaw
+}
+
+NPCs[139278] = { -- Ranja
+	isTameable = true,
+	questID = 51872,
+	vignetteID = 2989, -- Ranja
+}
+
+NPCs[139280] = { -- Sythian the Swift
+	isTameable = true,
+	questID = 51873,
+	vignetteID = 2990, -- Synthian the Swift
+}
+
+NPCs[139285] = { -- Shiverscale the Toxic
+	isTameable = true,
+	questID = 51876,
+	vignetteID = 2992, -- Shiverscale the Toxic
+}
+
+NPCs[139287] = { -- Sawtooth
+	questID = 51877,
+	vignetteID = 2993,-- Sawtooth
+}
+
+NPCs[139289] = { -- Tentulos the Drifter
+	questID = 51879,
+	vignetteID = 2995, -- Tentulos the Drifter
+}
+
+NPCs[139290] = { -- Maison the Portable
+	isTameable = true,
+	questID = 51880,
+	vignetteID = 2996, -- Maison the Portable
 }
