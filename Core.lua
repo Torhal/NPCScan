@@ -188,10 +188,10 @@ function NPCScan:OnEnable()
 	private.InitializeAchievements()
 
 	for mapID, map in pairs(Data.Maps) do
-		local mapHeaderPrinted
+		if mapID >= Enum.MapID.Zuldazar then
+			local mapHeaderPrinted
 
-		for npcID in pairs(map.NPCs) do
-			if mapID >= Enum.MapID.Zuldazar then
+			for npcID in pairs(map.NPCs) do
 				local npc = map.NPCs[npcID]
 
 				if not npc.questID and not npc.achievementID then
