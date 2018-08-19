@@ -182,8 +182,8 @@ local function InitializeAchievements()
 				if assetID > 0 then
 					local found
 
-					for _, mapData in pairs(Data.Maps) do
-						if mapData.NPCs[assetID] then
+					for _, map in pairs(Data.Maps) do
+						if map.NPCs[assetID] then
 							found = true
 							break
 						end
