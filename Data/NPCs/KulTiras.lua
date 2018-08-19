@@ -56,6 +56,11 @@ NPCs[127901] = { -- Henry Breakwater
 	vignetteID = 2311, -- Longfang & Breakwater
 }
 
+NPCs[128181] = { -- Vengeful Dead
+	achievementQuestID = 49137, -- Ancient Sarcophagus
+	vignetteID = 2321, -- Ancient Sarcophagus
+}
+
 NPCs[128707] = { -- Rimestone
 	achievementQuestID = 49269, -- Rimestone
 	questID = 51897, -- Rimestone
@@ -64,6 +69,11 @@ NPCs[128707] = { -- Rimestone
 NPCs[128973] = { -- Whargarble the Ill-Tempered
 	achievementQuestID = 49311, -- Whargarble the Ill-Tempered
 	questID = 51457, -- Whargarble the Ill-Tempered
+}
+
+NPCs[129031] = { -- Manifested Hate
+	achievementQuestID = 49341, -- Seething Cache
+	vignetteID = 2384, -- Seething Cache
 }
 
 NPCs[129805] = { -- Beshol
