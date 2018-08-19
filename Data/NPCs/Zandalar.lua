@@ -203,9 +203,48 @@ NPCs[128674] = { -- Gut-Gut the Glutton
 	questID = 49270, -- Gut-Gut the Glutton
 }
 
+NPCs[128686] = { -- Kamid the Trapper
+	questID = 50528,
+}
+
+NPCs[128951] = { -- Nez'ara
+	questID = 50898,
+}
+
+NPCs[129027] = { -- Golanar
+	questID = 50362,
+}
+
+NPCs[129180] = { -- Warbringer Hozzik
+	questID = 49373,
+}
+
+NPCs[129283] = { -- Jumbo Sandsnapper
+	isTameable = true,
+	questID = 49392,
+}
+
+NPCs[129411] = { -- Zunashi the Exile
+	questID = 48319,
+}
+
+NPCs[129476] = { -- Bloated Krolusk
+	questID = 47562,
+	vignetteID = 2411, -- Bloated Ruincrawler
+}
+
+NPCs[130401] = { -- Vathikur
+	questID = 49674
+}
+
 NPCs[130439] = { -- Ashmane
 	isTameable = true,
 	questID = 47532, -- Ashmane
+}
+
+NPCs[130443] = { -- Hivemother Kraxi
+	isTameable = true,
+	questID = 47533,
 }
 
 NPCs[133843] = { -- First Mate Swainbeak
@@ -213,8 +252,32 @@ NPCs[133843] = { -- First Mate Swainbeak
 	vignetteID = 2889, -- "Stef ""Marrow"" Quin"
 }
 
+NPCs[134571] = { -- Skycaller Teskris
+	questID = 50637,
+}
+
+NPCs[134625] = { -- Warmother Captive
+	questID = 50658,
+}
+
+NPCs[134638] = { -- Warlord Zothix
+	questID = 50662,
+}
+
+NPCs[134643] = { -- Brgl-Lrgl the Basher
+	questID = 50663,
+}
+
+NPCs[134745] = { -- Skycarver Krakit
+	questID = 50686,
+}
+
 NPCs[135852] = { -- Ak'tar
 	questID = 51058, -- Ak'tar
+}
+
+NPCs[136304] = { -- Songstress Nahjeen
+	questID = 51063,
 }
 
 NPCs[136323] = { -- Fangcaller Xorreth
@@ -224,6 +287,24 @@ NPCs[136323] = { -- Fangcaller Xorreth
 NPCs[136335] = { -- Enraged Krolusk
 	isTameable = true,
 	questID = 51077, -- Enraged Krolusk
+}
+
+NPCs[136336] = { -- Scorpox
+	isTameable = true,
+	questID = 51076,
+}
+
+NPCs[136338] = { -- Sirokar
+	questID = 51075,
+}
+
+NPCs[136340] = { -- Relic Hunter Hazaak
+	questID = 51126,
+}
+
+NPCs[136341] = { -- Jungleweb Hunter
+	isTameable = true,
+	questID = 51074,
 }
 
 NPCs[136346] = { -- Captain Stef "Marrow" Quin
@@ -236,6 +317,11 @@ NPCs[136393] = { -- Bloodwing Bonepicker
 	questID = 51079, -- Bloodwing Bonepicker
 }
 
+NPCs[137681] = { -- King Clickyclack
+	isTameable = true,
+	questID = 51424,
+}
+
 NPCs[138794] = { -- Dunegorger Kraulok
 	questID = 52196, -- Sandswept Bones
 }
@@ -245,6 +331,10 @@ NPCs[138794] = { -- Dunegorger Kraulok
 -- ----------------------------------------------------------------------------
 NPCs[120899] = { -- Kul'krazahn
 	achievementQuestID = 48333, -- Kul'krazahn
+}
+
+NPCs[122004] = { -- Umbra'jin
+	questID = 47567
 }
 
 NPCs[122639] = { -- Old R'gal
