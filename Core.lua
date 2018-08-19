@@ -192,7 +192,7 @@ function NPCScan:OnEnable()
 			for npcID in pairs(map.NPCs) do
 				local npc = map.NPCs[npcID]
 
-				if not npc.questID and not npc.achievementID then
+				if not npc.questID and not npc.achievementQuestID then
 					if not mapHeaderPrinted then
 						mapHeaderPrinted = true
 						private.Debug("-- ----------------------------------------------------------------------------")
