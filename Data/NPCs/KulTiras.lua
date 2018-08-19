@@ -414,7 +414,6 @@ NPCs[127290] = { -- Mugg
 }
 
 NPCs[129181] = { -- Barman Bill
-	achievementItemID = 163717, -- Forbidden Sea Shanty of Josephus
 	questID = 50233, -- Barman Bill
 }
 
@@ -429,7 +428,6 @@ NPCs[131252] = { -- Merianae
 }
 
 NPCs[132086] = { -- Black-Eyed Bart
-	achievementItemID = 163718, -- Forbidden Sea Shanty of the Black Sphere
 	questID = 50096,
 
 }

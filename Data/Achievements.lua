@@ -47,7 +47,6 @@ local AchievementID = {
 	PraiseTheSun = 8028,
 	Predator = 10334,
 	SabertronAssemble = 13054,
-	ShantyRaid = 13057,
 	TerrorsOfTheShore = 11786,
 	TheSongOfSilence = 9541,
 	TimelessChampion = 8714,
