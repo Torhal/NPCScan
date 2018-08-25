@@ -49,7 +49,7 @@ do
 		NPCScan:DispatchSensoryCues()
 		NPCScan:SendMessage(EventMessage.DetectedNPC, detectionData)
 
-		-- TODO: Make the Overlays object listen for the NPCScan_DetectedNPC message and run its own methods
+		-- TODO: Make the Overlays object listen for the DetectedNPC message and run its own methods
 		private.Overlays.Found(npcID)
 		private.Overlays.Remove(npcID)
 	end
@@ -344,9 +344,9 @@ do
 		local questID = private.QuestIDFromName[vignetteName]
 
 		if questID then
-			for ID in pairs(private.QuestNPCs[questID]) do
+			for questNPCID in pairs(private.QuestNPCs[questID]) do
 				ProcessDetection({
-					npcID = ID,
+					npcID = questNPCID,
 					sourceText = sourceText
 				})
 			end
