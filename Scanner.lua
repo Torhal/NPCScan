@@ -328,19 +328,20 @@ do
 		end
 
 		local vignetteNPC = private.VignetteIDToNPCMapping[vignetteInfo.vignetteID]
+		local vignetteName = vignetteInfo.name
 
 		if vignetteNPC then
 			if Data.Scanner.NPCs[vignetteNPC.npcID] then
 				ProcessDetection({
 					npcID = vignetteNPC.npcID,
-					sourceText = sourceText
+					sourceText = sourceText,
+					vignetteName = vignetteName,
 				})
 			end
 		else
 			private.Debug("Unknown vignette: %s - vignetteID %d (NPC ID %d) in mapID %d", vignetteInfo.name, vignetteInfo.vignetteID, npcID or -1, _G.C_Map.GetBestMapForUnit("player"))
 		end
 
-		local vignetteName = vignetteInfo.name
 		local questID = private.QuestIDFromName[vignetteName]
 
 		if questID then
