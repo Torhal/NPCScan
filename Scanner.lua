@@ -305,7 +305,7 @@ do
 
 		local vignetteInfo = _G.C_VignetteInfo.GetVignetteInfo(vignetteGUID);
 
-		if not vignetteInfo then
+		if not vignetteInfo or vignetteInfo.atlasName == "VignetteLoot" then
 			return
 		end
 
