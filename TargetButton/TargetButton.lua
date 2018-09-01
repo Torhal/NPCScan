@@ -239,7 +239,7 @@ function TargetButton:Activate(data)
 
 	self:SetSpecialText()
 
-	if data.vignetteName then
+	if data.vignetteName and data.vignetteName ~= data.npcName then
 		self.SourceText:SetText(("%s %s"):format(data.sourceText, _G.PARENS_TEMPLATE:format(data.vignetteName)))
 	else
 		self.SourceText:SetText(data.sourceText)
