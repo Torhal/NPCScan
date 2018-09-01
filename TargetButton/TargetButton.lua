@@ -211,7 +211,9 @@ function TargetButton:UpdateData(_, data)
 		end
 
 		if self.needsUnitData then
-			if data.sourceText then
+			local sourceText = self.SourceText:GetText()
+
+			if data.sourceText and (not sourceText or sourceText == "") then
 				self.SourceText:SetText(data.sourceText)
 			end
 
