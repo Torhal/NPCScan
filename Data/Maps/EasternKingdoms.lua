@@ -138,7 +138,7 @@ Maps[MapID.WesternPlaguelands].NPCs = {
     [51029] = true, -- Parasitus
     [51031] = true, -- Tracker
     [51058] = true, -- Aphis
-    [111122] = true -- Large Vile Slime
+	[111122] = true, -- Large Vile Slime
 }
 
 -- ----------------------------------------------------------------------------
@@ -593,7 +593,6 @@ Maps[MapID.NewTinkertown].NPCs = {
 -- Scholomance
 -- ----------------------------------------------------------------------------
 Maps[MapID.Scholomance].NPCs = {
-    [1850] = true, -- Putridius
     [59369] = true -- Doctor Theolen Krastinov
 }
 
