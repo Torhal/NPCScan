@@ -187,6 +187,8 @@ function NPCScan:OnEnable()
 
 	private.InitializeAchievements()
 
+	local hasChecked = {}
+
 	local questMapIDs = {
 		[Enum.MapID.Argus] = true,
 		[Enum.MapID.BrokenIsles] = true,
@@ -212,15 +214,19 @@ function NPCScan:OnEnable()
 		for npcID in pairs(map.NPCs) do
 			local npc = map.NPCs[npcID]
 
-			if not npc.questID and not npc.achievementQuestID and (not continent or questMapIDs[continent.mapID]) then
-				missingData[npcID] = "questID"
-			end
+			if not hasChecked[npcID] then
+				hasChecked[npcID] = true
 
-			if not npc.vignetteID and (not continent or vignetteMapIDs[continent.mapID]) then
-				if missingData[npcID] then
-					missingData[npcID] = ("%s, vignetteID"):format(missingData[npcID])
-				else
-					missingData[npcID] = "vignetteID"
+				if not npc.questID and not npc.achievementQuestID and (not continent or questMapIDs[continent.mapID]) then
+					missingData[npcID] = "questID"
+				end
+
+				if not npc.vignetteID and (not continent or vignetteMapIDs[continent.mapID]) then
+					if missingData[npcID] then
+						missingData[npcID] = ("%s, vignetteID"):format(missingData[npcID])
+					else
+						missingData[npcID] = "vignetteID"
+					end
 				end
 			end
 		end
