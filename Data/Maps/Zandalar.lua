@@ -44,6 +44,7 @@ Maps[MapID.Nazmir].NPCs = {
 	[129657] = true, -- Za'amar the Queen's Blade
 	[132701] = true, -- T'zane
 	[133373] = true, -- Jax'teb the Reanimated
+	[133505] = true, -- Aiji the Accursed
 	[133527] = true, -- Juba the Scarred
 	[133531] = true, -- Xu'ba
 	[133539] = true, -- Lo'kuno

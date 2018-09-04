@@ -131,6 +131,11 @@ NPCs[133373] = { -- Jax'teb the Reanimated
 	achievementQuestID = 50307, -- Jax'teb the Reanimated
 }
 
+NPCs[133505] = { -- Aiji the Accursed
+	questID = 50339,
+	vignetteID = 2796,
+}
+
 NPCs[133527] = { -- Juba the Scarred
 	achievementQuestID = 50342, -- Juba the Scarred
 }
