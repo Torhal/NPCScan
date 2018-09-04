@@ -82,6 +82,7 @@ Maps[MapID.Voldun].NPCs = {
 	[134625] = true, -- Warmother Captive
 	[134638] = true, -- Warlord Zothix
 	[134643] = true, -- Brgl-Lrgl the Basher
+	[134694] = true, -- Mor'fani the Exile
 	[134745] = true, -- Skycarver Krakit
 	[135852] = true, -- Ak'tar
 	[136304] = true, -- Songstress Nahjeen

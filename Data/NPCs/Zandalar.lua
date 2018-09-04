@@ -269,6 +269,11 @@ NPCs[134643] = { -- Brgl-Lrgl the Basher
 	questID = 50663,
 }
 
+NPCs[134694] = { -- Mor'fani the Exile
+	questID = 50666,
+	vignetteID = 2677,
+}
+
 NPCs[134745] = { -- Skycarver Krakit
 	questID = 50686,
 }
