@@ -8,6 +8,7 @@ local NPCs = private.Data.NPCs
 -- Multiple zones
 -- ----------------------------------------------------------------------------
 NPCs[107924] = { -- Darkfiend Tormentor
+	questID = -1,
 	vignetteID = -1,
 }
 
@@ -130,10 +131,12 @@ NPCs[93622] = { -- Mortiferous
 }
 
 NPCs[99846] = { -- Raging Earth
+	questID = -1,
 	vignetteID = -1,
 }
 
 NPCs[99886] = { -- Pacified Earth
+	questID = -1,
 	vignetteID = -1,
 }
 
@@ -283,6 +286,7 @@ NPCs[111454] = { -- Bestrix
 }
 
 NPCs[111674] = { -- Cinderwing
+	questID = 43960,
 	vignetteID = 1606,
 }
 
@@ -316,10 +320,12 @@ NPCs[101660] = { -- Rage Rot
 -- Halls of Valor
 -- ----------------------------------------------------------------------------
 NPCs[96647] = { -- Earlnoc the Beastbreaker
+	questID = 42240, -- Halls of Valor: Ponderous Poaching
 	vignetteID = 1064
 }
 
 NPCs[99802] = { -- Arthfael
+	questID = 42239, -- Halls of Valor: The Bear King
 	vignetteID = 1247,
 }
 
@@ -787,7 +793,7 @@ NPCs[110342] = { -- Rabxach
 }
 
 NPCs[110346] = { -- Aodh Witherpetal
-	questID = 43344, -- DANGER: Aodh Witherpetal
+	questID = 45485,
 	vignetteID = 1811,
 }
 
@@ -1328,6 +1334,7 @@ NPCs[103575] = { -- Reef Lord Raj'his
 
 NPCs[103787] = { -- Baconlisk
 	isTameable = true,
+	questID = -1,
 	vignetteID = -1,
 }
 
@@ -1363,6 +1370,7 @@ NPCs[104698] = { -- Colerian
 }
 
 NPCs[105632] = { -- Broodmother Shu'malis
+	questID = -1,
 	vignetteID = -1,
 }
 
@@ -1377,6 +1385,7 @@ NPCs[105728] = { -- Scythemaster Cil'raman
 }
 
 NPCs[105739] = { -- Sanaar
+	questID = -1,
 	vignetteID = -1,
 }
 
@@ -1572,6 +1581,7 @@ NPCs[113368] = { -- Llorian
 
 NPCs[113694] = { -- Pashya
 	isTameable = true,
+	questID = -1,
 	vignetteID = -1
 }
 
@@ -1579,10 +1589,12 @@ NPCs[113694] = { -- Pashya
 -- Eye of Azshara
 -- ----------------------------------------------------------------------------
 NPCs[91788] = { -- Shellmaw
+	questID = -1,
 	vignetteID = 1229,
 }
 
 NPCs[108543] = { -- Dread Captain Thedon
+	questID = -1,
 	vignetteID = 1527,
 }
 
@@ -1592,10 +1604,12 @@ NPCs[101411] = { -- Gom Crabbar
 }
 
 NPCs[101467] = { -- Jaggen-Ra
+	questID = -1,
 	vignetteID = 1230,
 }
 
 NPCs[108541] = { -- Dread Corsair
+	questID = -1,
 	vignetteID = -1,
 }
 

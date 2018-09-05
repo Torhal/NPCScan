@@ -86,18 +86,22 @@ NPCs[77527] = { -- The Beater
 }
 
 NPCs[78128] = { -- Gronnstalker Dawarn
+	questID = 34130, -- Giantstalker Hunting Party
 	vignetteID = 226, -- Giantslayer Hunting Party
 }
 
 NPCs[78134] = { -- Pathfinder Jalog
+	questID = 34130, -- Giantstalker Hunting Party
 	vignetteID = 226, -- Giantslayer Hunting Party
 }
 
 NPCs[78144] = { -- Giantslayer Kimla
+	questID = 34130, -- Giantstalker Hunting Party
 	vignetteID = 226, -- Giantslayer Hunting Party
 }
 
 NPCs[78150] = { -- Beastcarver Saramor
+	questID = 34130, -- Giantstalker Hunting Party
 	vignetteID = 226, -- Giantslayer Hunting Party
 }
 
@@ -107,6 +111,7 @@ NPCs[78151] = { -- Huntmaster Kuang
 }
 
 NPCs[78169] = { -- Cloudspeaker Daber
+	questID = 34130, -- Giantstalker Hunting Party
 	vignetteID = 226, -- Giantslayer Hunting Party
 }
 

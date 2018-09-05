@@ -584,6 +584,10 @@ NPCs[138039] = { -- Dark Ranger Clea
 	factionGroup = "Horde",
 }
 
+NPCs[138279] = { -- Adhara White
+	questID = 51610, -- Adhara White
+}
+
 NPCs[139135] = { -- Squirgle of the Depths
 	questID = 51807,
 	vignetteID = 2982, -- Squirgle of the Depths
