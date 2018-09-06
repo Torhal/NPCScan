@@ -11,6 +11,7 @@ local MapID = private.Enum.MapID
 Maps[MapID.Dazaralor].NPCs = {
 	[120899] = true, -- Kul'krazahn
 	[122639] = true, -- Old R'gal
+	[125816] = true, -- Sky Queen
 }
 
 -- ----------------------------------------------------------------------------
