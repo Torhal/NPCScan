@@ -321,6 +321,8 @@ do
 		local vignetteName = vignetteInfo.name
 		local vignetteNPCs = private.VignetteIDToNPCMapping[vignetteInfo.vignetteID]
 
+		local npcID = private.GUIDToCreatureID(vignetteInfo.objectGUID)
+
 		if vignetteNPCs then
 			for index = 1, #vignetteNPCs do
 				local vignetteNPC = vignetteNPCs[index]
@@ -339,7 +341,6 @@ do
 			private.Debug("Unknown vignette: %s - vignetteID %d (NPC ID %d) in mapID %d", vignetteInfo.name, vignetteInfo.vignetteID, npcID or -1, _G.C_Map.GetBestMapForUnit("player"))
 		end
 
-		local npcID = private.GUIDToCreatureID(vignetteInfo.objectGUID)
 
 		-- The objectGUID can be but isn't always an NPC ID, since some NPCs must be summoned from the vignette object.
 		if npcID and Data.Scanner.NPCs[npcID] then
