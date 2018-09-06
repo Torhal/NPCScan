@@ -13,6 +13,12 @@ NPCs[120899] = { -- Kul'krazahn
 	vignetteID = 2038,
 }
 
+NPCs[122639] = { -- Old R'gal
+	factionGroup = "Horde",
+	questID = 50856, -- Old R'gal
+	vignetteID = 2784,
+}
+
 -- ----------------------------------------------------------------------------
 -- Nazmir
 -- ----------------------------------------------------------------------------
@@ -407,10 +413,6 @@ NPCs[122004] = { -- Umbra'jin
 	vignetteID = 1998,
 }
 
-NPCs[122639] = { -- Old R'gal
-	factionGroup = "Horde",
-	questID = 50856, -- Old R'gal
-	vignetteID = 2784,
 }
 
 NPCs[124185] = { -- Golrakahn

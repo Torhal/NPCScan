@@ -10,6 +10,7 @@ local MapID = private.Enum.MapID
 -- ----------------------------------------------------------------------------
 Maps[MapID.Dazaralor].NPCs = {
 	[120899] = true, -- Kul'krazahn
+	[122639] = true, -- Old R'gal
 }
 
 -- ----------------------------------------------------------------------------
@@ -113,7 +114,6 @@ Maps[MapID.UnchartedIsland].NPCs = {
 -- ----------------------------------------------------------------------------
 Maps[MapID.Zuldazar].NPCs = {
 	[122004] = true, -- Umbra'jin
-	[122639] = true, -- Old R'gal
 	[124185] = true, -- Golrakahn
 	[126637] = true, -- Kandak
 	[127939] = true, -- Torraske the Eternal
