@@ -59,6 +59,7 @@ Maps[MapID.Nazmir].NPCs = {
 	[134298] = true, -- Azerite-Infused Elemental
 	[143311] = true, -- Toadcruel
 	[143316] = true, -- Skullcap
+	[143898] = true, -- Makatau
 }
 
 -- ----------------------------------------------------------------------------
@@ -115,14 +116,17 @@ Maps[MapID.UnchartedIsland].NPCs = {
 -- ----------------------------------------------------------------------------
 Maps[MapID.Zuldazar].NPCs = {
 	[122004] = true, -- Umbra'jin
+	[123502] = true, -- King K'tal
 	[124185] = true, -- Golrakahn
 	[126637] = true, -- Kandak
 	[127939] = true, -- Torraske the Eternal
 	[128699] = true, -- Bloodbulge
+	[129323] = true, -- Sabertusk Empress
 	[129343] = true, -- Avatar of Xolotal
 	[129954] = true, -- Gahz'ralka
 	[129961] = true, -- Atal'zul Gotaka
 	[130643] = true, -- Twisted Child of Rezan
+	[130741] = true, -- Nol'ixwan
 	[131233] = true, -- Lei-zhi
 	[131476] = true, -- Zayoos
 	[131687] = true, -- Tambano
@@ -140,8 +144,12 @@ Maps[MapID.Zuldazar].NPCs = {
 	[134738] = true, -- Hakbi the Risen
 	[134760] = true, -- Darkspeaker Jo'la
 	[134782] = true, -- Murderbeak
+	[135510] = true, -- Azuresail the Ancient
+	[139365] = true, -- Queenfeather
+	[135512] = true, -- Thunderfoot
 	[136413] = true, -- Syrawon the Dominus
 	[136428] = true, -- Dark Chronicler
 	[143314] = true, -- Bane of the Woods
 	[143536] = true, -- High Warlord Volrath
+	[143910] = true, -- Sludgecrusher
 }

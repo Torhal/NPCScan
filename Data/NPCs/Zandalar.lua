@@ -230,6 +230,10 @@ NPCs[134298] = { -- Azerite-Infused Elemental
 	vignetteID = 2661, -- Azerite Infused Elemental
 }
 
+NPCs[143898] = { -- Makatau
+	classification = "elite",
+}
+
 -- ----------------------------------------------------------------------------
 -- Vol'dun
 -- ----------------------------------------------------------------------------
@@ -419,6 +423,8 @@ NPCs[122004] = { -- Umbra'jin
 	vignetteID = 1998,
 }
 
+NPCs[123502] = { -- King K'tal
+	classification = "elite",
 }
 
 NPCs[124185] = { -- Golrakahn
@@ -442,6 +448,10 @@ NPCs[128699] = { -- Bloodbulge
 	vignetteID = 2359,
 }
 
+NPCs[129323] = { -- Sabertusk Empress
+	classification = "elite",
+}
+
 NPCs[129343] = { -- Avatar of Xolotal
 	achievementQuestID = 49410, -- Avatar of Xolotal
 	vignetteID = 2407,
@@ -460,6 +470,10 @@ NPCs[129961] = { -- Atal'zul Gotaka
 NPCs[130643] = { -- Twisted Child of Rezan
 	questID = 50333, -- Twisted Child of Rezan
 	vignetteID = 2597,
+}
+
+NPCs[130741] = { -- Nol'ixwan
+	classification = "elite",
 }
 
 NPCs[131233] = { -- Lei-zhi
@@ -549,6 +563,20 @@ NPCs[134782] = { -- Murderbeak
 	vignetteID = 2651, -- Chum Bucket
 }
 
+NPCs[135510] = { -- Azuresail the Ancient
+	classification = "elite",
+	isTameable = true,
+}
+
+NPCs[139365] = { -- Queenfeather
+	classification = "elite",
+	isTameable = true,
+}
+
+NPCs[135512] = { -- Thunderfoot
+	classification = "elite",
+}
+
 NPCs[136413] = { -- Syrawon the Dominus
 	achievementQuestID = 51080, -- Syrawon the Dominus
 	vignetteID = 2895, -- Tehd & Marius
@@ -562,4 +590,8 @@ NPCs[136428] = { -- Dark Chronicler
 NPCs[143536] = { -- High Warlord Volrath
 	factionGroup = "Horde",
 	vignetteID = 612,
+}
+
+NPCs[143910] = { -- Sludgecrusher
+	classification = "elite",
 }
