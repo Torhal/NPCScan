@@ -292,7 +292,7 @@ NPCs[135947] = { -- Strange Mushroom Ring
 }
 
 NPCs[136183] = { -- Crushtacean
-	achievementQuestID = 50731, -- Crushtacean
+	achievementQuestID = 52466, -- Crushtacean
 	isTameable = true,
 	vignetteID = 3010,
 }
