@@ -22,6 +22,14 @@ NPCs[139287] = { -- Sawtooth
 	vignetteID = 2993,-- Sawtooth
 }
 
+NPCs[143559] = { -- Grand Marshal Tremblade
+	factionGroup = "Alliance",
+}
+
+NPCs[143560] = { -- Marshal Gabriel
+	factionGroup = "Alliance",
+}
+
 -- ----------------------------------------------------------------------------
 -- Drustvar
 -- ----------------------------------------------------------------------------

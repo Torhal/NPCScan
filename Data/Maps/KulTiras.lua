@@ -12,6 +12,8 @@ Maps[MapID.Boralus].NPCs = {
 	[137983] = true, -- Rear Admiral Hainsworth
 	[138039] = true, -- Dark Ranger Clea
 	[139287] = true, -- Sawtooth
+	[143559] = true, -- Grand Marshal Tremblade
+    [143560] = true, -- Marshal Gabriel
 }
 
 -- ----------------------------------------------------------------------------
