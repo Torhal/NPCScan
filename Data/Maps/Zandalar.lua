@@ -112,7 +112,6 @@ Maps[MapID.UnchartedIsland].NPCs = {
 -- Zuldazar
 -- ----------------------------------------------------------------------------
 Maps[MapID.Zuldazar].NPCs = {
-	[120899] = true, -- Kul'krazahn
 	[122004] = true, -- Umbra'jin
 	[122639] = true, -- Old R'gal
 	[124185] = true, -- Golrakahn
