@@ -562,6 +562,11 @@ NPCs[132280] = { -- Squacks
 	vignetteID = 2549, -- Squacks
 }
 
+NPCs[133356] = { -- Tempestria
+	questID = 50301,
+	vignetteID = 2591, -- Suspicious Pile of Meat
+}
+
 NPCs[134106] = { -- Lumbergrasp Sentinel
 	questID = 50525,
 	vignetteID = 2653, -- Lumbergrasp Sentinel
