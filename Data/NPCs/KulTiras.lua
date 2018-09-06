@@ -5,6 +5,24 @@ local AddOnFolderName, private = ...
 local NPCs = private.Data.NPCs
 
 -- ----------------------------------------------------------------------------
+-- Boralus
+-- ----------------------------------------------------------------------------
+NPCs[137983] = { -- Rear Admiral Hainsworth
+	factionGroup = "Alliance",
+	questID = 51580,
+}
+
+NPCs[138039] = { -- Dark Ranger Clea
+	factionGroup = "Horde",
+	questID = 51579,
+}
+
+NPCs[139287] = { -- Sawtooth
+	questID = 51877,
+	vignetteID = 2993,-- Sawtooth
+}
+
+-- ----------------------------------------------------------------------------
 -- Drustvar
 -- ----------------------------------------------------------------------------
 NPCs[124548] = { -- Betsy
@@ -581,14 +599,6 @@ NPCs[137183] = { -- Honey-Coated Slitherer
 	vignetteID = 2942, -- Imperiled Merchants
 }
 
-NPCs[137983] = { -- Rear Admiral Hainsworth
-	factionGroup = "Alliance",
-}
-
-NPCs[138039] = { -- Dark Ranger Clea
-	factionGroup = "Horde",
-}
-
 NPCs[138279] = { -- Adhara White
 	questID = 51610, -- Adhara White
 }
@@ -641,11 +651,6 @@ NPCs[139285] = { -- Shiverscale the Toxic
 	isTameable = true,
 	questID = 51876,
 	vignetteID = 2992, -- Shiverscale the Toxic
-}
-
-NPCs[139287] = { -- Sawtooth
-	questID = 51877,
-	vignetteID = 2993,-- Sawtooth
 }
 
 NPCs[139289] = { -- Tentulos the Drifter
