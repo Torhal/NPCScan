@@ -132,9 +132,20 @@ NPCs[128426] = { -- Gutrip
 	vignetteID = 2337, -- Gutrip the Hungry
 }
 
+NPCs[128584] = { -- Vugthuth
+	classification = "rareelite",
+	questID = 50366,
+	vignetteID = 2605,
+}
+
 NPCs[128578] = { -- Zujothgul
 	questID = 50460, -- Zujothgul
 	vignetteID = 2640,
+}
+
+NPCs[128610] = { -- Maw of Shul-Nagruth
+	questID = 50467,
+	vignetteID = 2642,
 }
 
 NPCs[128930] = { -- Rohnkor
