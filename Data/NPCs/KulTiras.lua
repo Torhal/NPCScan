@@ -424,6 +424,7 @@ NPCs[140398] = { -- Zeritarj
 }
 
 NPCs[140925] = { -- Doc Marrtens
+	factionGroup = "Alliance",
 	questID = 52323,
 	vignetteID = 3055,
 }
@@ -451,6 +452,7 @@ NPCs[141039] = { -- Ice Sickle
 }
 
 NPCs[141043] = { -- Jakala the Cruel
+	factionGroup = "Horde",
 	questID = 52324,
 	vignetteID = 3056,
 }
