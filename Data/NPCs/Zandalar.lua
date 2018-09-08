@@ -420,6 +420,8 @@ NPCs[136393] = { -- Bloodwing Bonepicker
 
 NPCs[137553] = { -- General Krathax
 	classification = "rareelite",
+	questID = -1,
+	vignetteID = -1,
 }
 
 NPCs[137681] = { -- King Clickyclack

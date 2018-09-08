@@ -78,6 +78,7 @@ NPCs[127877] = { -- Longfang
 
 NPCs[127901] = { -- Henry Breakwater
 	achievementQuestID = 48981, -- Longfang
+	questID = 48979,
 	vignetteID = 2311, -- Longfang & Breakwater
 }
 
