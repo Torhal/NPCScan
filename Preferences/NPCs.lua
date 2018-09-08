@@ -163,13 +163,13 @@ local function GetNPCOptionsName(npcID)
 	local npc = Data.NPCs[npcID]
 
 	if npc.achievementID then
-		colorCode = private.IsNPCAchievementCriteriaComplete(npc) and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
+		colorCode = npc:IsAchievementCriteriaComplete() and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
 	end
 
 	local prefix = ""
 
 	if npc.questID or npc.achievementQuestID then
-		prefix = private.IsNPCQuestComplete(npc) and ICON_QUEST_COMPLETE or ICON_QUEST_ACTIVE
+		prefix = npc:IsQuestComplete() and ICON_QUEST_COMPLETE or ICON_QUEST_ACTIVE
 	end
 
 	local npcName = NPCScan:GetNPCNameFromID(npcID)
