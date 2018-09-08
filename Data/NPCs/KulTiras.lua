@@ -83,6 +83,7 @@ NPCs[127901] = { -- Henry Breakwater
 
 NPCs[128181] = { -- Vengeful Dead
 	achievementQuestID = 49137, -- Ancient Sarcophagus
+	classification = "normal",
 	vignetteID = 2321, -- Ancient Sarcophagus
 }
 

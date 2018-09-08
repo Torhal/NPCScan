@@ -139,6 +139,7 @@ NPCs[128584] = { -- Vugthuth
 }
 
 NPCs[128578] = { -- Zujothgul
+	classification = "rareelite",
 	questID = 50460, -- Zujothgul
 	vignetteID = 2640,
 }
@@ -186,6 +187,7 @@ NPCs[133373] = { -- Jax'teb the Reanimated
 }
 
 NPCs[133505] = { -- Aiji the Accursed
+	classification = "elite",
 	questID = 50339,
 	vignetteID = 2796,
 }
@@ -414,6 +416,10 @@ NPCs[136393] = { -- Bloodwing Bonepicker
 	isTameable = true,
 	questID = 51079, -- Bloodwing Bonepicker
 	vignetteID = 2894,
+}
+
+NPCs[137553] = { -- General Krathax
+	classification = "rareelite",
 }
 
 NPCs[137681] = { -- King Clickyclack
