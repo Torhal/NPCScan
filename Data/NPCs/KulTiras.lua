@@ -315,6 +315,7 @@ NPCs[135939] = { -- Vinespeaker Ratha
 }
 
 NPCs[135947] = { -- Strange Mushroom Ring
+	classification = "normal",
 	achievementQuestID = 50024, -- Strange Mushroom Ring
 	vignetteID = 2838,
 }
