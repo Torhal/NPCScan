@@ -292,13 +292,18 @@ function NPCScan:UPDATE_MOUSEOVER_UNIT()
 end
 
 do
-	local VIGNETTE_SOURCE_TO_PREFERENCE = {
+	local VignetteSourceToPreference = {
 		[_G.MINIMAP_LABEL] = "ignoreMiniMap",
 		[_G.WORLD_MAP] = "ignoreWorldMap",
 	}
 
+	local IgnoredVignetteAtlasName = {
+		VignetteLoot = true,
+		VignetteLootElite = true,
+	}
+
 	local function IsIgnoringSource(sourceText)
-		return private.db.profile.detection[VIGNETTE_SOURCE_TO_PREFERENCE[sourceText]]
+		return private.db.profile.detection[VignetteSourceToPreference[sourceText]]
 	end
 
 	local function ProcessVignetteGUID(vignetteGUID)
@@ -308,7 +313,7 @@ do
 
 		local vignetteInfo = _G.C_VignetteInfo.GetVignetteInfo(vignetteGUID);
 
-		if not vignetteInfo or vignetteInfo.atlasName == "VignetteLoot" then
+		if not vignetteInfo or IgnoredVignetteAtlasName[vignetteInfo.atlasName] then
 			return
 		end
 
