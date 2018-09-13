@@ -145,6 +145,7 @@ NPCs[128578] = { -- Zujothgul
 }
 
 NPCs[128610] = { -- Maw of Shul-Nagruth
+	classification = "rareelite",
 	questID = 50467,
 	vignetteID = 2642,
 }
@@ -219,6 +220,7 @@ NPCs[133812] = { -- Zanxib
 }
 
 NPCs[134002] = { -- Underlord Xerxiz
+	classification = "rareelite",
 	questID = 50480, -- Underlord Xerxiz
 	vignetteID = 2648,
 }
@@ -431,6 +433,7 @@ NPCs[137681] = { -- King Clickyclack
 }
 
 NPCs[138794] = { -- Dunegorger Kraulok
+	classification = "elite",
 	questID = 52196, -- Sandswept Bones
 }
 
@@ -563,6 +566,7 @@ NPCs[134637] = { -- Headhunter Lee'za
 }
 
 NPCs[134717] = { -- Umbra'rix
+	classification = "rareelite",
 	questID = 50673, -- Umbra'rix
 	vignetteID = 2680,
 }
