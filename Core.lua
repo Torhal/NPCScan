@@ -179,9 +179,9 @@ function NPCScan:OnEnable()
 			local npc = map.NPCs[npcID]
 
 			if not hasChecked[npcID] then
-				hasChecked[npcID] = true
+				local questID = npc.questID or npc.achievementQuestID
 
-				if not npc:HasQuest() and (not continent or questMapIDs[continent.mapID]) then
+				if not questID and (not continent or questMapIDs[continent.mapID]) then
 					missingData[npcID] = "questID"
 				end
 
@@ -192,6 +192,8 @@ function NPCScan:OnEnable()
 						missingData[npcID] = "vignetteID"
 					end
 				end
+
+				hasChecked[npcID] = true
 			end
 		end
 

@@ -32,7 +32,9 @@ private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
 -- ----------------------------------------------------------------------------
 local NPCPrototype = {
 	HasQuest = function(self)
-		return (self.questID or self.achievementQuestID) and true or false
+		local questID = self.questID or self.achievementQuestID
+
+		return questID and questID >= 0
 	end,
 	IsAchievementCriteriaComplete = function(self)
 		if not self.achievementID then
@@ -44,7 +46,7 @@ local NPCPrototype = {
 	IsQuestComplete = function(self)
 		local questID = self.questID or self.achievementQuestID
 
-		return (questID and questID >= 0) and _G.IsQuestFlaggedCompleted(questID) or false
+		return questID and questID >= 0 and _G.IsQuestFlaggedCompleted(questID)
 	end,
 }
 
