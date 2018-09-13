@@ -168,7 +168,7 @@ local function GetNPCOptionsName(npcID)
 
 	local prefix = ""
 
-	if npc.questID or npc.achievementQuestID then
+	if npc:HasQuest() then
 		prefix = npc:IsQuestComplete() and ICON_QUEST_COMPLETE or ICON_QUEST_ACTIVE
 	end
 
@@ -333,6 +333,11 @@ private.UpdateAchievementNPCOptions = UpdateAchievementNPCOptions
 local DungeonRareNPCOptions = {}
 local ZoneRareNPCOptions = {}
 
+local RareClassifications = {
+	rare = true,
+	rareelite = true,
+}
+
 local function UpdateRareNPCOptions()
 	table.wipe(DungeonRareNPCOptions)
 	table.wipe(ZoneRareNPCOptions)
@@ -346,7 +351,7 @@ local function UpdateRareNPCOptions()
 		table.wipe(npcNames)
 
 		for npcID, npc in pairs(Data.Maps[mapID].NPCs) do
-			if not npc.isTameable and npc.factionGroup ~= _G.UnitFactionGroup("player") then
+			if (not npc.classification or RareClassifications[npc.classification]) and npc.factionGroup ~= _G.UnitFactionGroup("player") then
 				npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
 				npcIDs[#npcIDs + 1] = npcID
 			end
