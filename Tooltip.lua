@@ -495,6 +495,8 @@ local function DrawTooltip(anchorFrame)
 
         if tameableColumn and npc.isTameable then
             Tooltip:SetCell(line, tameableColumn, ICON_TAMEABLE)
+			Tooltip:SetCellScript(line, tameableColumn, "OnEnter", DisplayText, _G.TAMEABLE)
+            Tooltip:SetCellScript(line, tameableColumn, "OnLeave", CleanupDataTooltip)
         end
 
         if mountsColumn and npc.mounts then
