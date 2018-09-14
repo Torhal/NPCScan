@@ -358,7 +358,7 @@ local function GetTooltipData()
 				hasToys = true
 			end
 
-			if not hasWorldQuest and npc.worldQuestID and _G.C_TaskQuest.IsActive(npc.worldQuestID) then
+			if not hasWorldQuest and npc:HasActiveWorldQuest() then
 				hasWorldQuest = true
 			end
         end
@@ -487,7 +487,7 @@ local function DrawTooltip(anchorFrame)
 
         Tooltip:SetCell(line, 1, npcDisplayNames[npcID])
 
-        if worldQuestColumn and npc.worldQuestID then
+        if worldQuestColumn and npc:HasActiveWorldQuest() then
 			Tooltip:SetCell(line, worldQuestColumn, ICON_WORLDQUEST)
 			Tooltip:SetCellScript(line, worldQuestColumn, "OnEnter", DisplayText, _G.TRACKER_HEADER_WORLD_QUESTS)
             Tooltip:SetCellScript(line, worldQuestColumn, "OnLeave", CleanupDataTooltip)

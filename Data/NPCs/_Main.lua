@@ -36,6 +36,15 @@ local NPCPrototype = {
 
 		return questID and questID >= 0
 	end,
+	HasActiveWorldQuest = function(self)
+		local questID = self.worldQuestID
+
+		if not questID then
+			return false
+		end
+
+		return _G.C_TaskQuest.IsActive(questID)
+	end,
 	IsAchievementCriteriaComplete = function(self)
 		if not self.achievementID then
 			return true
