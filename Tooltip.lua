@@ -222,6 +222,12 @@ local function InitializeDataTooltip(tooltipCell)
     return DataTooltip
 end
 
+local function DisplayText(tooltipCell, text)
+    InitializeDataTooltip(tooltipCell)
+	DataTooltip:AddLine(text)
+    DataTooltip:Show()
+end
+
 local function DisplayMountInfo(tooltipCell, mountList)
     AddEntryDataIDs(mountList, "spellID")
     InitializeDataTooltip(tooltipCell)
@@ -305,6 +311,7 @@ local mountsColumn
 local petsColumn
 local tameableColumn
 local toysColumn
+local worldQuestColumn
 
 local function GetTooltipData()
     numTooltipColumns = 1
@@ -323,6 +330,7 @@ local function GetTooltipData()
 	local hasPets = false
 	local hasToys = false
 	local hasTameable = false
+	local hasWorldQuest = false
 
 	for npcID in pairs(DataObject.scannerData.NPCs) do
         local npc = Data.NPCs[npcID]
@@ -348,7 +356,11 @@ local function GetTooltipData()
 
 			if not hasToys and npc.toys then
 				hasToys = true
-            end
+			end
+
+			if not hasWorldQuest and npc.worldQuestID and _G.C_TaskQuest.IsActive(npc.worldQuestID) then
+				hasWorldQuest = true
+			end
         end
     end
 
@@ -372,6 +384,11 @@ local function GetTooltipData()
 		tameableColumn = numTooltipColumns
 	end
 
+	if hasWorldQuest then
+		numTooltipColumns = numTooltipColumns + 1
+		worldQuestColumn = numTooltipColumns
+	end
+
 	table.sort(npcIDs, SortByNPCAchievementNameThenByNameThenByID)
 end
 
@@ -391,6 +408,7 @@ do
 end
 
 local ICON_TOY = [[|TInterface\Worldmap\TreasureChest_64:0:0|t]]
+local ICON_WORLDQUEST = FormatAtlasTexture("worldquest-icon-boss")
 
 local function DrawTooltip(anchorFrame)
     if not anchorFrame then
@@ -468,6 +486,12 @@ local function DrawTooltip(anchorFrame)
         end
 
         Tooltip:SetCell(line, 1, npcDisplayNames[npcID])
+
+        if worldQuestColumn and npc.worldQuestID then
+			Tooltip:SetCell(line, worldQuestColumn, ICON_WORLDQUEST)
+			Tooltip:SetCellScript(line, worldQuestColumn, "OnEnter", DisplayText, _G.TRACKER_HEADER_WORLD_QUESTS)
+            Tooltip:SetCellScript(line, worldQuestColumn, "OnLeave", CleanupDataTooltip)
+        end
 
         if tameableColumn and npc.isTameable then
             Tooltip:SetCell(line, tameableColumn, ICON_TAMEABLE)

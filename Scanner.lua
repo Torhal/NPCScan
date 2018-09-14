@@ -116,6 +116,10 @@ local function CanAddToScanList(npcID)
 		return false
 	end
 
+	if npc.worldQuestID and _G.C_TaskQuest.IsActive(npc.worldQuestID) then
+		return true
+	end
+
 	if npc:HasQuest() then
 		if not npc:IsQuestComplete() then
 			return true
