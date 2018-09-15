@@ -412,7 +412,7 @@ do
 end
 
 local ICON_TOY = [[|TInterface\Worldmap\TreasureChest_64:0:0|t]]
-local ICON_WORLDQUEST = FormatAtlasTexture("worldquest-icon-boss")
+local ICON_WORLDQUEST = FormatAtlasTexture("worldquest-tracker-questmarker")
 
 local function DrawTooltip(anchorFrame)
     if not anchorFrame then
