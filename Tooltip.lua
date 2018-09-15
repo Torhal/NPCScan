@@ -305,32 +305,27 @@ end
 -- ----------------------------------------------------------------------------
 -- DataBroker Tooltip helpers.
 -- ----------------------------------------------------------------------------
-local numTooltipColumns
-
-local mountsColumn
-local petsColumn
-local tameableColumn
-local toysColumn
-local worldQuestColumn
 
 local function GetTooltipData()
-    numTooltipColumns = 1
-
-    mountsColumn = nil
-    petsColumn = nil
-    tameableColumn = nil
-    toysColumn = nil
-
-    table.wipe(npcAchievementNames)
-    table.wipe(npcDisplayNames)
-    table.wipe(npcIDs)
-    table.wipe(npcNames)
-
 	local hasMounts = false
 	local hasPets = false
 	local hasToys = false
 	local hasTameable = false
 	local hasWorldQuest = false
+
+	local mountsColumn
+	local petsColumn
+	local tameableColumn
+	local toysColumn
+	local worldQuestColumn
+
+	local numTooltipColumns = 1
+
+	table.wipe(npcAchievementNames)
+    table.wipe(npcDisplayNames)
+    table.wipe(npcIDs)
+    table.wipe(npcNames)
+
 
 	for npcID in pairs(DataObject.scannerData.NPCs) do
         local npc = Data.NPCs[npcID]
@@ -390,6 +385,15 @@ local function GetTooltipData()
 	end
 
 	table.sort(npcIDs, SortByNPCAchievementNameThenByNameThenByID)
+
+	return {
+		mountsColumn = mountsColumn,
+		petsColumn = petsColumn,
+		tameableColumn = tameableColumn,
+		toysColumn = toysColumn,
+		worldQuestColumn = worldQuestColumn,
+		numTooltipColumns = numTooltipColumns
+	}
 end
 
 -- ----------------------------------------------------------------------------
@@ -415,7 +419,7 @@ local function DrawTooltip(anchorFrame)
         return
     end
 
-    GetTooltipData()
+    local data = GetTooltipData()
 
     if not Tooltip then
         Tooltip = LibQTip:Acquire(AddOnFolderName, numTooltipColumns)
@@ -487,34 +491,34 @@ local function DrawTooltip(anchorFrame)
 
         Tooltip:SetCell(line, 1, npcDisplayNames[npcID])
 
-        if worldQuestColumn and npc:HasActiveWorldQuest() then
-			Tooltip:SetCell(line, worldQuestColumn, ICON_WORLDQUEST)
-			Tooltip:SetCellScript(line, worldQuestColumn, "OnEnter", DisplayText, _G.TRACKER_HEADER_WORLD_QUESTS)
-            Tooltip:SetCellScript(line, worldQuestColumn, "OnLeave", CleanupDataTooltip)
+        if data.worldQuestColumn and npc:HasActiveWorldQuest() then
+			Tooltip:SetCell(line, data.worldQuestColumn, ICON_WORLDQUEST)
+			Tooltip:SetCellScript(line, data.worldQuestColumn, "OnEnter", DisplayText, _G.TRACKER_HEADER_WORLD_QUESTS)
+            Tooltip:SetCellScript(line, data.worldQuestColumn, "OnLeave", CleanupDataTooltip)
         end
 
-        if tameableColumn and npc.isTameable then
-            Tooltip:SetCell(line, tameableColumn, ICON_TAMEABLE)
-			Tooltip:SetCellScript(line, tameableColumn, "OnEnter", DisplayText, _G.TAMEABLE)
-            Tooltip:SetCellScript(line, tameableColumn, "OnLeave", CleanupDataTooltip)
+        if data.tameableColumn and npc.isTameable then
+            Tooltip:SetCell(line, data.tameableColumn, ICON_TAMEABLE)
+			Tooltip:SetCellScript(line, data.tameableColumn, "OnEnter", DisplayText, _G.TAMEABLE)
+            Tooltip:SetCellScript(line, data.tameableColumn, "OnLeave", CleanupDataTooltip)
         end
 
-        if mountsColumn and npc.mounts then
-            Tooltip:SetCell(line, mountsColumn, ICON_MOUNT)
-            Tooltip:SetCellScript(line, mountsColumn, "OnEnter", DisplayMountInfo, npc.mounts)
-            Tooltip:SetCellScript(line, mountsColumn, "OnLeave", CleanupDataTooltip)
+        if data.mountsColumn and npc.mounts then
+            Tooltip:SetCell(line, data.mountsColumn, ICON_MOUNT)
+            Tooltip:SetCellScript(line, data.mountsColumn, "OnEnter", DisplayMountInfo, npc.mounts)
+            Tooltip:SetCellScript(line, data.mountsColumn, "OnLeave", CleanupDataTooltip)
         end
 
-        if petsColumn and npc.pets then
-            Tooltip:SetCell(line, petsColumn, ICON_PET)
-            Tooltip:SetCellScript(line, petsColumn, "OnEnter", DisplayPetInfo, npc.pets)
-            Tooltip:SetCellScript(line, petsColumn, "OnLeave", CleanupDataTooltip)
+        if data.petsColumn and npc.pets then
+            Tooltip:SetCell(line, data.petsColumn, ICON_PET)
+            Tooltip:SetCellScript(line, data.petsColumn, "OnEnter", DisplayPetInfo, npc.pets)
+            Tooltip:SetCellScript(line, data.petsColumn, "OnLeave", CleanupDataTooltip)
         end
 
-        if toysColumn and npc.toys then
-            Tooltip:SetCell(line, toysColumn, ICON_TOY)
-            Tooltip:SetCellScript(line, toysColumn, "OnEnter", DisplayToyInfo, npc.toys)
-            Tooltip:SetCellScript(line, toysColumn, "OnLeave", CleanupDataTooltip)
+        if data.toysColumn and npc.toys then
+            Tooltip:SetCell(line, data.toysColumn, ICON_TOY)
+            Tooltip:SetCellScript(line, data.toysColumn, "OnEnter", DisplayToyInfo, npc.toys)
+            Tooltip:SetCellScript(line, data.toysColumn, "OnLeave", CleanupDataTooltip)
         end
     end
 end
