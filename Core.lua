@@ -181,7 +181,7 @@ function NPCScan:OnEnable()
 			if not hasChecked[npcID] then
 				local questID = npc.questID or npc.achievementQuestID
 
-				if not questID and (not continent or questMapIDs[continent.mapID]) then
+				if not questID and not npc.worldQuestID and (not continent or questMapIDs[continent.mapID]) then
 					missingData[npcID] = "questID"
 				end
 
