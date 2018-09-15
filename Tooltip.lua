@@ -421,16 +421,18 @@ local function DrawTooltip(anchorFrame)
 
     local data = GetTooltipData()
 
-    if not Tooltip then
-        Tooltip = LibQTip:Acquire(AddOnFolderName, numTooltipColumns)
-        Tooltip:SetAutoHideDelay(0.25, anchorFrame)
-        Tooltip:SmartAnchorTo(anchorFrame)
-        Tooltip:SetBackdropColor(0.05, 0.05, 0.05, 1)
-        Tooltip:SetCellMarginH(0)
-        Tooltip:SetCellMarginV(1)
+	if LibQTip:IsAcquired(AddOnFolderName) then
+		LibQTip:Release(AddOnFolderName)
+	end
 
-        Tooltip.OnRelease = Tooltip_OnRelease
-    end
+	Tooltip = LibQTip:Acquire(AddOnFolderName, data.numTooltipColumns)
+	Tooltip:SetAutoHideDelay(0.25, anchorFrame)
+	Tooltip:SmartAnchorTo(anchorFrame)
+	Tooltip:SetBackdropColor(0.05, 0.05, 0.05, 1)
+	Tooltip:SetCellMarginH(0)
+	Tooltip:SetCellMarginV(1)
+
+	Tooltip.OnRelease = Tooltip_OnRelease
 
     Tooltip:Clear()
 
