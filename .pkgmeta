@@ -47,7 +47,7 @@ externals:
     Libs/LibWindow-1.1:
         url: https://repos.wowace.com/wow/libwindow-1-1/trunk/LibWindow-1.1
     Libs/LibQTip-1.0:
-        url: https://repos.wowace.com/wow/libqtip-1-0/trunk
+        url: https://repos.wowace.com/wow/libqtip-1-0
 	Libs/LibDataBroker-1.1:
 		url: https://repos.wowace.com/wow/libdatabroker-1-1
 		tag: v1.1.4
