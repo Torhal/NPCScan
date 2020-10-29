@@ -226,6 +226,18 @@ NPCs[108255] = { -- Coura, Mistress of Arcana
 	vignetteID = 1410, -- Coura, Master of Arcana
 }
 
+NPCs[108829] = { -- Levantus
+	classification = NPCClassification.Elite,
+	vignetteID = -1,
+	worldQuestID = 43192, -- Terror of the Deep
+}
+
+NPCs[109331] = { -- Calamir
+	classification = NPCClassification.Elite,
+	vignetteID = -1,
+	worldQuestID = 43193, -- Calamitous Intent
+}
+
 NPCs[109504] = { -- Ragemaw
 	questID = 44108, -- Ragemaw
 	vignetteID = 1636, -- Ragemaw
@@ -750,8 +762,10 @@ NPCs[98241] = { -- Lyrath Moonfeather
 }
 
 NPCs[103785] = { -- Well-Fed Bear
+	classification = NPCClassification.Rare,
 	isTameable = true,
-	questID = 41553, -- Slab of Bacon
+	vignetteID = -1,
+	worldQuestID = 41553, -- Slab of Bacon
 }
 
 NPCs[104523] = { -- Shalas'aman
@@ -759,12 +773,27 @@ NPCs[104523] = { -- Shalas'aman
 	vignetteID = 1824,
 }
 
+NPCs[106042] = { -- Kalazzius the Guileful
+	questID = -1,
+	vignetteID = -1,
+}
+
+NPCs[108678] = { -- Shar'thos
+	classification = NPCClassification.RareElite,
+	vignetteID = -1,
+	worldQuestID = 42779, -- The Sleeping Corruption
+}
+
 NPCs[108879] = { -- Humongris
-	questID = 42819, -- Pocket Wizard
+	classification = NPCClassification.RareElite,
+	vignetteID = -1,
+	worldQuestID = 42819, -- Pocket Wizard
 }
 
 NPCs[109125] = { -- Kathaw the Savage
-	questID = 42870, -- DANGER: Kathaw the Savage
+	classification = NPCClassification.RareElite,
+	vignetteID = -1,
+	worldQuestID = 42870, -- DANGER: Kathaw the Savage
 }
 
 NPCs[109281] = { -- Malisandra
@@ -1012,6 +1041,12 @@ NPCs[92040] = { -- Fenri
 NPCs[97630] = { -- Soulthirster
 	achievementQuestID = 39870, -- Soulthirster
 	vignetteID = 1041,
+}
+
+NPCs[109163] = { -- Captain Dargun
+	classification = NPCClassification.RareElite,
+	vignetteID = -1,
+	worldQuestID = 42864, -- DANGER: Captain Dargun
 }
 
 -- ----------------------------------------------------------------------------

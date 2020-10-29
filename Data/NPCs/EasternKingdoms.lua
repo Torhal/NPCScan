@@ -3,6 +3,7 @@
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
 local NPCs = private.Data.NPCs
+local NPCClassification = private.Enum.NPCClassification
 
 -- ----------------------------------------------------------------------------
 -- Arathi Highlands
@@ -44,17 +45,23 @@ NPCs[51067] = { -- Glint
 }
 
 NPCs[137374] = { -- The Lion's Roar
+	classification = NPCClassification.Elite,
 	factionGroup = "Alliance",
 	toys = {
 		{ itemID = 163829, }, -- Toy War Machine
 	},
+	vignetteID = -1,
+	worldQuestID = 52848, -- The Lion's Roar
 }
 
 NPCs[138122] = { -- Doom's Howl
+	classification = NPCClassification.Elite,
 	factionGroup = "Horde",
 	toys = {
 		{ itemID = 163828, }, -- Toy Siege Tower
 	},
+	vignetteID = -1,
+	worldQuestID = 52847, -- Doom's Howl
 }
 
 NPCs[141615] = { -- Burning Goliath
@@ -134,6 +141,7 @@ NPCs[142437] = { -- Skullripper
 }
 
 NPCs[142438] = { -- Venomarus
+	classification = NPCClassification.RareElite,
 	pets = {
 		{
 			itemID = 163648, -- Fuzzy Creepling
@@ -186,6 +194,7 @@ NPCs[141668] = { -- Echo of Myzrael
 }
 
 NPCs[141942] = { -- Molok the Crusher
+	classification = NPCClassification.RareElite,
 	questID = 53516,
 	toys = {
 		{ itemID = 163775, }, -- Molok Morion
@@ -202,6 +211,7 @@ NPCs[142112] = { -- Kor'gresh Coldrage
 }
 
 NPCs[142682] = { -- Zalas Witherbark
+	classification = NPCClassification.Rare,
 	questID = 53530,
 	toys = {
 		{ itemID = 163745, }, -- Witherbark Gong
@@ -234,6 +244,7 @@ NPCs[142686] = { -- Foulbelly
 }
 
 NPCs[142688] = { -- Darbel Montrose
+	classification = NPCClassification.RareElite,
 	pets = {
 		{
 			itemID = 163652, -- Tiny Grimoire
@@ -245,6 +256,7 @@ NPCs[142688] = { -- Darbel Montrose
 }
 
 NPCs[142690] = { -- Singer
+	classification = NPCClassification.RareElite,
 	questID = 53525,
 	toys = {
 		{ itemID = 163738, } -- Syndicate Mask
@@ -253,6 +265,7 @@ NPCs[142690] = { -- Singer
 }
 
 NPCs[142692] = { -- Nimar the Slayer
+	classification = NPCClassification.RareElite,
 	mounts = {
 		{
 			itemID = 163706, -- Witherbark Direwing
@@ -264,6 +277,7 @@ NPCs[142692] = { -- Nimar the Slayer
 }
 
 NPCs[142709] = { -- Beastrider Kama
+	classification = NPCClassification.RareElite,
 	mounts = {
 		{
 			itemID = 163644, -- Swift Albino Raptor
@@ -294,6 +308,7 @@ NPCs[142725] = { -- Horrific Apparition
 }
 
 NPCs[142739] = { -- Knight-Captain Aldrin
+	classification = NPCClassification.RareElite,
 	factionGroup = "Alliance",
 	mounts = {
 		{
@@ -301,6 +316,7 @@ NPCs[142739] = { -- Knight-Captain Aldrin
 			spellID = 279457, -- Broken Highland Mustang
 		},
 	},
+	questID = 53088,
 	vignetteID = 3212,
 }
 
