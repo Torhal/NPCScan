@@ -293,7 +293,7 @@ local function GetDetectionOptions()
 				},
 				continentsAndMaps = {
 					order = 2,
-					name = _G.CONTINENT,
+					name = _G.WORLD_MAP, -- Actually says "Map" - at least, in English.
 					type = "group",
 					childGroups = "tree",
 					args = ContinentAndMapOptions
