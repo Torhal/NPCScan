@@ -3,6 +3,7 @@
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
 local NPCs = private.Data.NPCs
+local NPCClassification = private.Enum.NPCClassification
 
 -- ----------------------------------------------------------------------------
 -- Multiple zones
@@ -604,6 +605,13 @@ NPCs[109317] = { -- Rulf Bonesnapper
 NPCs[109318] = { -- Runeseer Sigvid
 	questID = 42991, -- DANGER: Runeseer Sigvid
 	vignetteID = 1533,
+}
+
+NPCs[109994] = { -- Stormtalon
+	achievementSpellID = 218964, -- Mount Stormtalon in Storm's Reach
+	classification = NPCClassification.RareElite,
+	vignetteID = -1,
+	worldQuestID = 42025, -- Bareback Brawl
 }
 
 NPCs[110363] = { -- Roteye

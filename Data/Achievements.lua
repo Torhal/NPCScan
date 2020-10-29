@@ -53,6 +53,7 @@ local AchievementID = {
 	TimelessChampion = 8714,
 	UnboundMonstrosities = 12587,
 	UnleashedMonstrosities = 11160,
+	WakeTheDragon = 11178,
 	ZulAgain = 8078
 }
 
