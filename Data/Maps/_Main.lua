@@ -17,6 +17,7 @@ local MapID = {
 	Argus = 905,
 	Ashenvale = 63,
 	Ashran = 588,
+	Azeroth = 947,
 	Azshara = 76,
 	Azsuna = 630,
 	AzuremystIsle = 97,
@@ -169,23 +170,25 @@ Enum.MapID = MapID
 
 local ContinentID = {
 	Cosmic = 1,
-	Kalimdor = 2,
-	EasternKingdoms = 3,
-	Outland = 4,
-	Northrend = 5,
-	TheMaelstrom = 6,
-	Pandaria = 7,
-	Draenor = 8,
-	BrokenIsles = 9,
-	Argus = 10,
-	Zandalar = 11,
-	KulTiras = 12,
+	Azeroth = 2,
+	Kalimdor = 3,
+	EasternKingdoms = 4,
+	Outland = 5,
+	Northrend = 6,
+	TheMaelstrom = 7,
+	Pandaria = 8,
+	Draenor = 9,
+	BrokenIsles = 10,
+	Argus = 11,
+	Zandalar = 12,
+	KulTiras = 13,
 }
 
 Enum.ContinentID = ContinentID
 
 local ContinentMapID = {
 	[ContinentID.Cosmic] = MapID.Cosmic,
+	[ContinentID.Azeroth] = MapID.Azeroth,
 	[ContinentID.Kalimdor] = MapID.Kalimdor,
 	[ContinentID.EasternKingdoms] = MapID.EasternKingdoms,
 	[ContinentID.Outland] = MapID.Outland,
