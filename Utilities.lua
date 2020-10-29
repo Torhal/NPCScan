@@ -59,20 +59,25 @@ end
 private.CreateScaleAnimation = CreateScaleAnimation
 
 local function FormatAtlasTexture(atlasName)
-    local filename, width, height, txLeft, txRight, txTop, txBottom = _G.GetAtlasInfo(atlasName)
+	local atlasInfo = _G.C_Texture.GetAtlasInfo(atlasName)
 
-    if not filename then
+    if not atlasInfo.file then
         return
     end
 
-    local atlasWidth = width / (txRight - txLeft)
-    local atlasHeight = height / (txBottom - txTop)
-    local pxLeft = atlasWidth * txLeft
-    local pxRight = atlasWidth * txRight
-    local pxTop = atlasHeight * txTop
-    local pxBottom = atlasHeight * txBottom
+	local bottomTexCoord = atlasInfo.bottomTexCoord
+	local leftTexCoord = atlasInfo.leftTexCoord
+	local rightTexCoord = atlasInfo.rightTexCoord
+	local topTexCoord = atlasInfo.topTexCoord
 
-    return ("|T%s:%d:%d:0:0:%d:%d:%d:%d:%d:%d|t"):format(filename, 0, 0, atlasWidth, atlasHeight, pxLeft, pxRight, pxTop, pxBottom)
+	local atlasWidth = atlasInfo.width / (rightTexCoord - leftTexCoord)
+    local atlasHeight = atlasInfo.height / (bottomTexCoord - topTexCoord)
+    local pxLeft = atlasWidth * leftTexCoord
+    local pxRight = atlasWidth * rightTexCoord
+    local pxTop = atlasHeight * topTexCoord
+    local pxBottom = atlasHeight * bottomTexCoord
+
+    return ("|T%s:%d:%d:0:0:%d:%d:%d:%d:%d:%d|t"):format(atlasInfo.file, 0, 0, atlasWidth, atlasHeight, pxLeft, pxRight, pxTop, pxBottom)
 end
 
 private.FormatAtlasTexture = FormatAtlasTexture

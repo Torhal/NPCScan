@@ -62,7 +62,7 @@ end
 -- TargetButton anchor frame.
 -- ----------------------------------------------------------------------------
 local function CreateAnchorFrame()
-	local anchorFrame = _G.CreateFrame("Frame", nil, _G.UIParent)
+	local anchorFrame = _G.CreateFrame("Frame", nil, _G.UIParent, "BackdropTemplate")
 	anchorFrame:SetSize(302, 119)
 	anchorFrame:SetFrameStrata("DIALOG")
 	anchorFrame:SetBackdrop({

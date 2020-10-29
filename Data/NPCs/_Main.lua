@@ -55,7 +55,7 @@ local NPCPrototype = {
 	IsQuestComplete = function(self)
 		local questID = self.questID or self.achievementQuestID
 
-		return questID and questID >= 0 and _G.IsQuestFlaggedCompleted(questID)
+		return questID and questID >= 0 and _G.C_QuestLog.IsQuestFlaggedCompleted(questID)
 	end,
 }
 
