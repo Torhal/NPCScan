@@ -51,7 +51,6 @@ Maps[MapID.Drustvar].NPCs = {
 	[137708] = true, -- Stone Golem
 	[137824] = true, -- Arclight
 	[137825] = true, -- Avalanche
-	[138244] = true, -- Briarwood Bulwark
 	[138618] = true, -- Haywire Golem
 	[138667] = true, -- Blighted Monstrosity
 	[138675] = true, -- Gorged Boar
