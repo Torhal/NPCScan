@@ -91,8 +91,11 @@ function NPCScan:OnInitialize()
 	end
 
 	for mapID, map in pairs(Data.Maps) do
-		local continentInfo = _G.MapUtil.GetMapParentInfo(mapID, UIMapType.Continent)
-		local continentID = continentInfo and Enum.MapContinentID[continentInfo.mapID] or Enum.ContinentID.Cosmic
+		local parentMapInfo = _G.MapUtil.GetMapParentInfo(mapID, UIMapType.Continent)
+			or _G.MapUtil.GetMapParentInfo(mapID, UIMapType.World)
+			or _G.MapUtil.GetMapParentInfo(mapID, UIMapType.Cosmic)
+
+		local continentID = parentMapInfo and Enum.MapContinentID[parentMapInfo.mapID] or Enum.ContinentID.Cosmic
 		local mapInfo = _G.C_Map.GetMapInfo(mapID)
 
 		if mapInfo.mapType == UIMapType.Dungeon or mapInfo.mapType == UIMapType.Orphan then
