@@ -105,11 +105,11 @@ local function GetAlertOptions()
 	end
 
 	if not AlertOptions then
-		LibSharedMedia:Register("sound", "NPCScan Killed", [[Sound\Interface\RaidBossWarning.ogg]])
-		LibSharedMedia:Register("sound", "NPCScan Chimes", [[Sound\Interface\UI_Legendary_Item_Toast.ogg]])
-		LibSharedMedia:Register("sound", "NPCScan Gruntling Horn", [[Sound\Events\gruntling_horn_bb.ogg]])
-		LibSharedMedia:Register("sound", "NPCScan Ogre War Drums", [[Sound\Event Sounds\Event_wardrum_ogre.ogg]])
-		LibSharedMedia:Register("sound", "NPCScan Scourge Horn", [[Sound\Events\scourge_horn.ogg]])
+		LibSharedMedia:Register("sound", "NPCScan Killed", 567394)
+		LibSharedMedia:Register("sound", "NPCScan Chimes", 1489461)
+		LibSharedMedia:Register("sound", "NPCScan Gruntling Horn", 598196)
+		LibSharedMedia:Register("sound", "NPCScan Ogre War Drums", 567275)
+		LibSharedMedia:Register("sound", "NPCScan Scourge Horn", 567386)
 	end
 
 	AlertOptions = AlertOptions or {
