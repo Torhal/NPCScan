@@ -33,7 +33,7 @@ end
 
 function NPCScan:SetupOptions()
 	AceConfigRegistry:RegisterOptionsTable(AddOnFolderName, GetOptions())
-	AceConfigDialog:SetDefaultSize(AddOnFolderName, 1000, 1000)
+	AceConfigDialog:SetDefaultSize(AddOnFolderName, 1000, 720)
 
 	self.OptionsFrame = AceConfigDialog:AddToBlizOptions(AddOnFolderName)
 end
