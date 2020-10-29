@@ -9,6 +9,7 @@ local Enum = private.Enum
 -- Constants
 -- ----------------------------------------------------------------------------
 local MapID = {
+	Cosmic = 946,
 	AbyssalDepths = 204,
 	AhnQirajTheFallenKingdom = 327,
 	AntoranWastes = 885,
@@ -166,23 +167,24 @@ local MapID = {
 Enum.MapID = MapID
 
 local ContinentID = {
-	Cosmic = -1,
-	Kalimdor = 1,
-	EasternKingdoms = 2,
-	Outland = 3,
-	Northrend = 4,
-	TheMaelstrom = 5,
-	Pandaria = 6,
-	Draenor = 7,
-	BrokenIsles = 8,
-	Argus = 9,
-	Zandalar = 10,
-	KulTiras = 11,
+	Cosmic = 1,
+	Kalimdor = 2,
+	EasternKingdoms = 3,
+	Outland = 4,
+	Northrend = 5,
+	TheMaelstrom = 6,
+	Pandaria = 7,
+	Draenor = 8,
+	BrokenIsles = 9,
+	Argus = 10,
+	Zandalar = 11,
+	KulTiras = 12,
 }
 
 Enum.ContinentID = ContinentID
 
 local ContinentMapID = {
+	[ContinentID.Cosmic] = MapID.Cosmic,
 	[ContinentID.Kalimdor] = MapID.Kalimdor,
 	[ContinentID.EasternKingdoms] = MapID.EasternKingdoms,
 	[ContinentID.Outland] = MapID.Outland,
