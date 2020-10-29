@@ -414,27 +414,31 @@ end
 local ICON_TOY = [[|TInterface\Worldmap\TreasureChest_64:0:0|t]]
 local ICON_WORLDQUEST = FormatAtlasTexture("worldquest-tracker-questmarker")
 
-local function DrawTooltip(anchorFrame)
-    if not anchorFrame then
+local DataObjectDisplay -- Used for updates.
+
+local function DrawTooltip(displayFrame)
+    if not displayFrame then
         return
     end
 
-    local data = GetTooltipData()
+    DataObjectDisplay = displayFrame
 
 	if LibQTip:IsAcquired(AddOnFolderName) then
 		LibQTip:Release(AddOnFolderName)
 	end
+    
+    local data = GetTooltipData()
 
-	Tooltip = LibQTip:Acquire(AddOnFolderName, data.numTooltipColumns)
-	Tooltip:SetAutoHideDelay(0.25, anchorFrame)
-	Tooltip:SmartAnchorTo(anchorFrame)
+    Tooltip = LibQTip:Acquire(AddOnFolderName, data.numTooltipColumns)
+	Tooltip:SmartAnchorTo(displayFrame)
+	Tooltip:SetAutoHideDelay(0.25, displayFrame)
+    Tooltip:Clear()
 	Tooltip:SetBackdropColor(0.05, 0.05, 0.05, 1)
 	Tooltip:SetCellMarginH(0)
 	Tooltip:SetCellMarginV(1)
 
 	Tooltip.OnRelease = Tooltip_OnRelease
 
-    Tooltip:Clear()
 
     Tooltip:SetCell(Tooltip:AddLine(), 1, AddOnFolderName, TitleFont, "CENTER", 0)
     Tooltip:AddSeparator(1, 0, 0, 0)
@@ -548,8 +552,8 @@ function DataObject:Update(_, scannerData)
     self.text = scannerData.NPCCount > 0 and scannerData.NPCCount or _G.NONE
     self.scannerData = scannerData
 
-    if Tooltip and Tooltip:IsShown() then
-        DrawTooltip(self)
+    if DataObjectDisplay and Tooltip and Tooltip:IsShown() then
+        DrawTooltip(DataObjectDisplay)
     end
 end
 
