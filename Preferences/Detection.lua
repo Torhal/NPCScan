@@ -27,9 +27,6 @@ local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 local profile
 
 -- ----------------------------------------------------------------------------
--- Helpers.
--- ----------------------------------------------------------------------------
--- ----------------------------------------------------------------------------
 -- Ignored continent options.
 -- ----------------------------------------------------------------------------
 local AlphabeticalContinentMaps = {}
@@ -104,12 +101,6 @@ local function UpdateContinentAndMapOptions()
 						end
 					end
 				},
-				zoneMapIDs = {
-					order = 2,
-					name = _G.ZONE,
-					type = "group",
-					args = {}
-				}
 			}
 		}
 
@@ -161,6 +152,19 @@ local function UpdateContinentAndMapOptions()
 
 				dungeonOptionsTable.args["mapID" .. mapID] = mapOptions
 			else
+				local zoneOptionsTable = continentOptionsTable.args.zoneMapIDs
+
+				if not zoneOptionsTable then
+					zoneOptionsTable = {
+						order = 2,
+						name = _G.ZONE,
+						type = "group",
+						args = {}
+					}
+
+					continentOptionsTable.args.zoneMapIDs = zoneOptionsTable
+				end
+	
 				continentOptionsTable.args.zoneMapIDs.args["mapID" .. mapID] = mapOptions
 			end
 		end
