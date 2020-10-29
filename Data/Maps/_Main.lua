@@ -90,6 +90,7 @@ local MapID = {
 	Mulgore = 7,
 	NagrandDraenor = 550,
 	NagrandOutland = 107,
+	Nazjatar = 1355,
 	Nazmir = 863,
 	Netherstorm = 109,
 	NewTinkertown = 469,
