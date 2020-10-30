@@ -597,7 +597,14 @@ NPCs[137681] = { -- King Clickyclack
 }
 
 NPCs[138794] = { -- Dunegorger Kraulok
-	classification = NPCClassification.Elite,
+	classification = NPCClassification.RareElite,
+	isTameable = true,
+	mounts = {
+		{
+			itemID = 174842, -- Slightly Damp Pile of Fur
+			spellID = 298367, -- Mollie
+		},
+	},
 	questID = -1,
 	vignetteID = -1,
 	worldQuestID = 52196, -- Sandswept Bones
