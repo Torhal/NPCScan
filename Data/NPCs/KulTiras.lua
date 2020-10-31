@@ -648,6 +648,7 @@ NPCs[141286] = { -- Poacher Zane
 
 NPCs[142088] = { -- Whirlwing
 	achievementQuestID = 52457, -- Whirlwing
+	classification = NPCClassification.Rare,
 	isTameable = true,
 	vignetteID = 3064,
 }
