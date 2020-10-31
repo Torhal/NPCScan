@@ -303,10 +303,10 @@ local function DisplayToyInfo(tooltipCell, toyList)
     DataTooltip:UpdateScrolling()
     DataTooltip:Show()
 end
+
 -- ----------------------------------------------------------------------------
 -- DataBroker Tooltip helpers.
 -- ----------------------------------------------------------------------------
-
 local function GetTooltipData()
 	local hasMounts = false
 	local hasPets = false
@@ -427,7 +427,7 @@ local function DrawTooltip(displayFrame)
 	if LibQTip:IsAcquired(AddOnFolderName) then
 		LibQTip:Release(AddOnFolderName)
 	end
-    
+
     local tooltipData = GetTooltipData()
 
     Tooltip = LibQTip:Acquire(AddOnFolderName, tooltipData.numTooltipColumns)
