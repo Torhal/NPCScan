@@ -155,7 +155,7 @@ NPCs[80190] = { -- Gruuk
 
 NPCs[80235] = { -- Gurun
 	questID = 34839, -- Skog
-	vignetteID = -1,
+	vignetteID = 328,
 }
 
 NPCs[80242] = { -- Chillfang
