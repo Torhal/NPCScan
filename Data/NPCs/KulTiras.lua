@@ -749,6 +749,7 @@ NPCs[132086] = { -- Black-Eyed Bart
 
 NPCs[132088] = { -- Captain Wintersail
 	classification = NPCClassification.Rare,
+	vignetteID = 2542, -- Smuggler's Cache
 	worldQuestID = 51848,
 }
 
@@ -808,7 +809,7 @@ NPCs[137183] = { -- Honey-Coated Slitherer
 NPCs[138279] = { -- Adhara White
 	classification = NPCClassification.RareElite,
 	questID = -1,
-	vignetteID = -1,
+	vignetteID = 3528, -- Adhara White
 	worldQuestID = 51610, -- Adhara White
 }
 
