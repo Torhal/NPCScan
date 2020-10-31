@@ -156,4 +156,6 @@ Maps[MapID.TiragardeSound].NPCs = {
 	[139285] = true, -- Shiverscale the Toxic
 	[139289] = true, -- Tentulos the Drifter
 	[139290] = true, -- Maison the Portable
+	[145392] = true, -- Ambassador Gaines
+	[145395] = true, -- Katrianna
 }

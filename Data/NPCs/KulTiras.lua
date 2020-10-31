@@ -653,6 +653,20 @@ NPCs[142088] = { -- Whirlwing
 	vignetteID = 3064,
 }
 
+NPCs[145392] = { -- Ambassador Gaines
+	classification = NPCClassification.RareElite,
+	factionGroup = "Alliance",
+	vignetteID = 3410, -- Ambassador Gaines
+	worldQuestID = 54251, -- The Ambassador
+}
+
+NPCs[145395] = { -- Katrianna
+	classification = NPCClassification.RareElite,
+	factionGroup = "Alliance",
+	vignetteID = 3411, -- Katrianna
+	worldQuestID = 54251, -- The Ambassador
+}
+
 -- ----------------------------------------------------------------------------
 -- Tiragarde Sound
 -- ----------------------------------------------------------------------------
