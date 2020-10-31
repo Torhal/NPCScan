@@ -88,8 +88,8 @@ local function ValidateUserDefinedNPCInput(input, operationType)
 	local npcID = tonumber(value)
 
 	if npcID then
-		if Data.NPCs[npcID] then
-			NPCScan:Print(L["Predefined NPCs cannot be added to or removed from the user-defined NPC list."])
+		if operationType == "add" and Data.NPCs[npcID] then
+			NPCScan:Print(L["Predefined NPCs cannot be added to the user-defined NPC list."])
 			return false
 		end
 
