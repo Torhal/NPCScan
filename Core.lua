@@ -265,9 +265,7 @@ do
 		local questName = private.db.locale.questNames[questID]
 
 		if not questName then
-			DatamineTooltip:SetHyperlink(("quest:%d"):format(questID))
-
-			questName = _G["NPCScanDatamineTooltipTextLeft1"]:GetText()
+			questName = _G.C_QuestLog.GetTitleForQuestID(questID)
 
 			if questName and questName ~= "" then
 				private.db.locale.questNames[questID] = questName
