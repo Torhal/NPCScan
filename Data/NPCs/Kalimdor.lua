@@ -1,18 +1,19 @@
 -- ----------------------------------------------------------------------------
--- AddOn namespace
+-- AddOn Namespace
 -- ----------------------------------------------------------------------------
 local AddOnFolderName, private = ...
 local NPCs = private.Data.NPCs
+local NPCClassification = private.Enum.NPCClassification
 
 -- ----------------------------------------------------------------------------
--- Ahn'Qiraj: The Fallen Kingdom
+-- Ahn'Qiraj: The Fallen Kingdom (327)
 -- ----------------------------------------------------------------------------
 NPCs[50747] = { -- Tix
 	isTameable = true,
 }
 
 -- ----------------------------------------------------------------------------
--- Ashenvale
+-- Ashenvale (63)
 -- ----------------------------------------------------------------------------
 NPCs[3735] = { -- Apothecary Falthis
 	factionGroup = "Horde",
@@ -31,7 +32,7 @@ NPCs[12037] = { -- Ursol'lok
 }
 
 -- ----------------------------------------------------------------------------
--- Azshara
+-- Azshara (76)
 -- ----------------------------------------------------------------------------
 NPCs[8660] = { -- The Evalcharr
 	isTameable = true,
@@ -46,7 +47,7 @@ NPCs[107477] = { -- N.U.T.Z.
 }
 
 -- ----------------------------------------------------------------------------
--- Darkshore
+-- Darkshore (62)
 -- ----------------------------------------------------------------------------
 NPCs[2172] = { -- Strider Clutchmother
 	isTameable = true,
@@ -56,8 +57,96 @@ NPCs[2175] = { -- Shadowclaw
 	isTameable = true,
 }
 
+NPCs[144946] = { -- Ivus the Forest Lord
+	questID = 54896, -- Ivus the Forest Lord
+}
+
+NPCs[147435] = { -- Thelar Moonstrike
+	questID = 54252, -- Unknown
+}
+
+NPCs[147664] = { -- Zim'kaga
+	questID = 54274, -- Unknown
+}
+
+NPCs[147701] = { -- Moxo the Beheader
+	questID = 54277, -- Unknown
+}
+
+NPCs[147758] = { -- Onu
+	questID = 54291, -- Unknown
+}
+
+NPCs[147845] = { -- Commander Drald
+	questID = 54309, -- Unknown
+}
+
+NPCs[148037] = { -- Athil Dewfire
+	questID = 54431, -- Unknown
+}
+
+NPCs[148103] = { -- Sapper Odette
+	questID = 54452, -- Unknown
+}
+
+NPCs[148295] = { -- Ivus the Decayed
+	questID = 54895, -- Ivus the Decayed
+}
+
+NPCs[149141] = { -- Burninator Mark V
+	questID = 54768, -- Unknown
+}
+
+NPCs[149517] = { -- Agathe Wyrmwood
+	questID = 54883, -- Unknown
+}
+
+NPCs[149651] = { -- Blackpaw
+	questID = 54890, -- Unknown
+}
+
+NPCs[149652] = { -- Agathe Wyrmwood
+	questID = 54883, -- Unknown
+}
+
+NPCs[149655] = { -- Croz Bloodrage
+	questID = 54886, -- Unknown
+}
+
+NPCs[149656] = { -- Grimhorn
+	questID = 54891, -- Unknown
+}
+
+NPCs[149658] = { -- Shadowclaw
+	questID = 54892, -- Unknown
+}
+
+NPCs[149659] = { -- Orwell Stevenson
+	questID = 54889, -- Unknown
+}
+
+NPCs[149660] = { -- Blackpaw
+	questID = 54890, -- Unknown
+}
+
+NPCs[149661] = { -- Croz Bloodrage
+	questID = 54886, -- Unknown
+}
+
+NPCs[149662] = { -- Grimhorn
+	questID = 54891, -- Unknown
+}
+
+NPCs[149663] = { -- Shadowclaw
+	questID = 54892, -- Unknown
+}
+
+NPCs[149664] = { -- Orwell Stevenson
+	questID = 54889, -- Unknown
+}
+
 -- ----------------------------------------------------------------------------
--- Desolace
+-- Desolace (66)
 -- ----------------------------------------------------------------------------
 NPCs[14227] = { -- Hissperak
 	isTameable = true,
@@ -72,7 +161,7 @@ NPCs[18241] = { -- Crusty
 }
 
 -- ----------------------------------------------------------------------------
--- Durotar
+-- Durotar (1)
 -- ----------------------------------------------------------------------------
 NPCs[5809] = { -- Sergeant Curtis
 	factionGroup = "Alliance",
@@ -83,7 +172,7 @@ NPCs[5823] = { -- Death Flayer
 }
 
 -- ----------------------------------------------------------------------------
--- Dustwallow Marsh
+-- Dustwallow Marsh (70)
 -- ----------------------------------------------------------------------------
 NPCs[4380] = { -- Darkmist Widow
 	isTameable = true,
@@ -146,7 +235,7 @@ NPCs[51069] = { -- Scintillex
 }
 
 -- ----------------------------------------------------------------------------
--- Felwood
+-- Felwood (77)
 -- ----------------------------------------------------------------------------
 NPCs[14339] = { -- Death Howl
 	isTameable = true,
@@ -209,7 +298,7 @@ NPCs[107596] = { -- Grimrot
 }
 
 -- ----------------------------------------------------------------------------
--- Feralas
+-- Feralas (69)
 -- ----------------------------------------------------------------------------
 NPCs[5349] = { -- Arash-ethis
 	isTameable = true,
@@ -232,6 +321,7 @@ NPCs[11497] = { -- The Razza
 }
 
 NPCs[39384] = { -- Noxious Whelp
+	classification = NPCClassification.Normal,
 	pets = {
 		itemID = 8498, -- Emerald Whelpling
 		npcID = 7545, -- Emerald Whelpling
@@ -247,7 +337,7 @@ NPCs[90816] = { -- Skystormer
 }
 
 -- ----------------------------------------------------------------------------
--- Molten Front
+-- Molten Front (338)
 -- ----------------------------------------------------------------------------
 NPCs[50815] = { -- Skarr
 	isTameable = true,
@@ -278,7 +368,7 @@ NPCs[54338] = { -- Anthriss
 }
 
 -- ----------------------------------------------------------------------------
--- Mount Hyjal
+-- Mount Hyjal (198)
 -- ----------------------------------------------------------------------------
 NPCs[50058] = { -- Terrorpene
 	isTameable = true,
@@ -297,7 +387,7 @@ NPCs[54320] = { -- Ban'thalos
 }
 
 -- ----------------------------------------------------------------------------
--- Mulgore
+-- Mulgore (7)
 -- ----------------------------------------------------------------------------
 NPCs[3058] = { -- Arra'chea
 	isTameable = true,
@@ -312,7 +402,7 @@ NPCs[5807] = { -- The Rake
 }
 
 -- ----------------------------------------------------------------------------
--- Northern Barrens
+-- Northern Barrens (10)
 -- ----------------------------------------------------------------------------
 NPCs[3398] = { -- Gesharahan
 	isTameable = true,
@@ -335,14 +425,14 @@ NPCs[5865] = { -- Dishu
 }
 
 -- ----------------------------------------------------------------------------
--- Razorfen Kraul
+-- Razorfen Kraul (301)
 -- ----------------------------------------------------------------------------
 NPCs[4425] = { -- Blind Hunter
 	isTameable = true,
 }
 
 -- ----------------------------------------------------------------------------
--- Silithus
+-- Silithus (81)
 -- ----------------------------------------------------------------------------
 NPCs[14472] = { -- Gretheer
 	isTameable = true,
@@ -425,7 +515,7 @@ NPCs[132591] = { -- Ogmot the Mad
 }
 
 -- ----------------------------------------------------------------------------
--- Southern Barrens
+-- Southern Barrens (199)
 -- ----------------------------------------------------------------------------
 NPCs[3253] = { -- Silithid Harvester
 	isTameable = true,
@@ -460,7 +550,7 @@ NPCs[5851] = { -- Captain Gerogg Hammertoe
 }
 
 -- ----------------------------------------------------------------------------
--- Stonetalon Mountains
+-- Stonetalon Mountains (65)
 -- ----------------------------------------------------------------------------
 NPCs[50343] = { -- Quall
 	isTameable = true,
@@ -503,7 +593,7 @@ NPCs[51062] = { -- Khep-Re
 }
 
 -- ----------------------------------------------------------------------------
--- Tanaris
+-- Tanaris (71)
 -- ----------------------------------------------------------------------------
 NPCs[8204] = { -- Soriid the Devourer
 	isTameable = true,
@@ -538,22 +628,22 @@ NPCs[47387] = { -- Harakiss the Infestor
 }
 
 -- ----------------------------------------------------------------------------
--- Teldrassil
+-- Teldrassil (57)
 -- ----------------------------------------------------------------------------
 NPCs[14430] = { -- Duskstalker
 	isTameable = true,
 }
 
 -- ----------------------------------------------------------------------------
--- The Exodar
+-- The Exodar (775)
 -- ----------------------------------------------------------------------------
 NPCs[110486] = { -- Huk'roth the Huntmaster
 	questID = 43480, -- Huk'roth the Houndmaster
-	vignetteID = 1506, -- Huk'roth the Houndmaster
+	vignetteID = 1506,
 }
 
 -- ----------------------------------------------------------------------------
--- Thousand Needles
+-- Thousand Needles (64)
 -- ----------------------------------------------------------------------------
 NPCs[4132] = { -- Krkk'kx
 	isTameable = true,
@@ -604,7 +694,7 @@ NPCs[51008] = { -- The Barbed Horror
 }
 
 -- ----------------------------------------------------------------------------
--- Uldum
+-- Uldum (249)
 -- ----------------------------------------------------------------------------
 NPCs[50154] = { -- Madexx
 	isTameable = true,
@@ -627,7 +717,278 @@ NPCs[51404] = { -- Madexx
 }
 
 -- ----------------------------------------------------------------------------
--- Un'Goro Crater
+-- Uldum (1527)
+-- ----------------------------------------------------------------------------
+NPCs[151609] = { -- Sun Prophet Epaphos
+	questID = 55353, -- Unknown
+}
+
+NPCs[151852] = { -- Watcher Rehu
+	questID = 55461, -- Unknown
+}
+
+NPCs[151878] = { -- Sun King Nahkotep
+	questID = 58613, -- Unknown
+}
+
+NPCs[151883] = { -- Anaua
+	questID = 55468, -- Unknown
+}
+
+NPCs[151897] = { -- Sun Priestess Nubitt
+	questID = 55479, -- Unknown
+}
+
+NPCs[151948] = { -- Senbu the Pridefather
+	questID = 55496, -- Unknown
+}
+
+NPCs[151995] = { -- Hik-ten the Taskmaster
+	questID = 55502, -- Unknown
+}
+
+NPCs[152040] = { -- Scoutmaster Moswen
+	questID = 55518, -- Unknown
+}
+
+NPCs[152431] = { -- Kaneb-ti
+	questID = 55629, -- Unknown
+}
+
+NPCs[152657] = { -- Tat the Bonechewer
+	questID = 55682, -- Unknown
+}
+
+NPCs[152677] = { -- Nebet the Ascended
+	questID = 55684, -- Unknown
+}
+
+NPCs[152757] = { -- Atekhramun
+	questID = 55710, -- Unknown
+}
+
+NPCs[152788] = { -- Uat-ka the Sun's Wrath
+	questID = 55716, -- Unknown
+}
+
+NPCs[154576] = { -- Aqir Titanus
+	questID = 58614, -- Unknown
+}
+
+NPCs[154578] = { -- Aqir Flayer
+	questID = 58612, -- Unknown
+}
+
+NPCs[154604] = { -- Lord Aj'qirai
+	questID = 56340, -- Unknown
+}
+
+NPCs[155531] = { -- Infested Wastewander Captain
+	questID = 56823, -- Unknown
+}
+
+NPCs[155703] = { -- Anq'uri the Titanic
+	questID = 56834, -- Unknown
+}
+
+NPCs[156078] = { -- Magus Rehleth
+	questID = 56952, -- Unknown
+}
+
+NPCs[156299] = { -- R'khuzj the Unfathomable
+	questID = 57430, -- Unknown
+}
+
+NPCs[156654] = { -- Shol'thoss the Doomspeaker
+	questID = 57432, -- Unknown
+}
+
+NPCs[156655] = { -- Korzaran the Slaughterer
+	questID = 57433, -- Unknown
+}
+
+NPCs[157120] = { -- Fangtaker Orsa
+	questID = 57258, -- Unknown
+}
+
+NPCs[157134] = { -- Ishak of the Four Winds
+	questID = 57259, -- Unknown
+}
+
+NPCs[157146] = { -- Rotfeaster
+	questID = 57273, -- Unknown
+}
+
+NPCs[157157] = { -- Muminah the Incandescent
+	questID = 57277, -- Unknown
+}
+
+NPCs[157164] = { -- Zealot Tekem
+	questID = 57279, -- Unknown
+}
+
+NPCs[157167] = { -- Champion Sen-mat
+	questID = 57280, -- Unknown
+}
+
+NPCs[157170] = { -- Acolyte Taspu
+	questID = 57281, -- Unknown
+}
+
+NPCs[157188] = { -- The Tomb Widow
+	questID = 57285, -- Unknown
+}
+
+NPCs[157390] = { -- R'oyolok the Reality Eater
+	questID = 57434, -- Unknown
+}
+
+NPCs[157469] = { -- Zoth'rum the Intellect Pillager
+	questID = 57435, -- Unknown
+}
+
+NPCs[157470] = { -- R'aas the Anima Devourer
+	questID = 57436, -- Unknown
+}
+
+NPCs[157472] = { -- Aphrom the Guise of Madness
+	questID = 57437, -- Unknown
+}
+
+NPCs[157473] = { -- Yiphrim the Will Ravager
+	questID = 57438, -- Unknown
+}
+
+NPCs[157476] = { -- Shugshul the Flesh Gorger
+	questID = 57439, -- Unknown
+}
+
+NPCs[157593] = { -- Amalgamation of Flesh
+	questID = 58330, -- Unknown
+}
+
+NPCs[158491] = { -- Falconer Amenophis
+	questID = 57662, -- Unknown
+}
+
+NPCs[158528] = { -- High Guard Reshef
+	questID = 57664, -- Unknown
+}
+
+NPCs[158531] = { -- Corrupted Neferset Guard
+	questID = 57665, -- Unknown
+}
+
+NPCs[158557] = { -- Actiss the Deceiver
+	questID = 57669, -- Unknown
+}
+
+NPCs[158594] = { -- Doomsayer Vathiris
+	questID = 57672, -- Unknown
+}
+
+NPCs[158595] = { -- Thoughtstealer Vos
+	questID = 57673, -- Unknown
+}
+
+NPCs[158597] = { -- High Executor Yothrim
+	questID = 57675, -- Unknown
+}
+
+NPCs[158632] = { -- Corrupted Fleshbeast
+	questID = 58691, -- Unknown
+}
+
+NPCs[158633] = { -- Gaze of N'Zoth
+	questID = 57680, -- Unknown
+}
+
+NPCs[158636] = { -- The Grand Executor
+	questID = 57688, -- Unknown
+}
+
+NPCs[159087] = { -- Corrupted Bonestripper
+	questID = 57834, -- Unknown
+}
+
+NPCs[160532] = { -- Shoth the Darkened
+	questID = 58169, -- Unknown
+}
+
+NPCs[160623] = { -- Hungering Miasma
+	questID = 58206, -- Unknown
+}
+
+NPCs[160631] = { -- Hungering Miasma
+	questID = 58206, -- Unknown
+}
+
+NPCs[161033] = { -- Shadowmaw
+	questID = 58333, -- Unknown
+}
+
+NPCs[162140] = { -- Skikx'traz
+	questID = 58697, -- Unknown
+}
+
+NPCs[162141] = { -- Zuythiz
+	questID = 58695, -- Unknown
+}
+
+NPCs[162142] = { -- Qho
+	questID = 58693, -- Unknown
+}
+
+NPCs[162147] = { -- Corpse Eater
+	questID = 58696, -- Unknown
+}
+
+NPCs[162163] = { -- High Priest Ytaessis
+	questID = 58701, -- Unknown
+}
+
+NPCs[162170] = { -- Warcaster Xeshro
+	questID = 58702, -- Unknown
+}
+
+NPCs[162171] = { -- Captain Dunewalker
+	questID = 58699, -- Unknown
+}
+
+NPCs[162172] = { -- Aqir Warcaster
+	questID = 58694, -- Unknown
+}
+
+NPCs[162173] = { -- R'krox the Runt
+	questID = 58864, -- Unknown
+}
+
+NPCs[162196] = { -- Obsidian Annihilator
+	questID = 58681, -- Unknown
+}
+
+NPCs[162254] = { -- Corrupted Observer
+	questID = 58691, -- Unknown
+}
+
+NPCs[162352] = { -- Spirit of Dark Ritualist Zakahn
+	questID = 58716, -- Unknown
+}
+
+NPCs[162370] = { -- Armagedillo
+	questID = 58718, -- Unknown
+}
+
+NPCs[162372] = { -- Spirit of Cyrus the Black
+	questID = 58715, -- Unknown
+}
+
+NPCs[162765] = { -- Friendly Alpaca
+	questID = 58879, -- Alpaca It Up
+}
+
+-- ----------------------------------------------------------------------------
+-- Un'Goro Crater (78)
 -- ----------------------------------------------------------------------------
 NPCs[6581] = { -- Ravasaur Matriarch
 	isTameable = true,
@@ -650,7 +1011,7 @@ NPCs[6585] = { -- Uhk'loc
 }
 
 -- ----------------------------------------------------------------------------
--- Winterspring
+-- Winterspring (83)
 -- ----------------------------------------------------------------------------
 NPCs[10200] = { -- Rak'shiri
 	isTameable = true,
