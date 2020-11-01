@@ -719,186 +719,184 @@ local NPCOptions
 local function GetOrUpdateNPCOptions()
 	profile = private.db.profile
 
-	NPCOptions =
-		NPCOptions or
-		{
-			name = L["NPCs"],
-			order = 1,
-			type = "group",
-			childGroups = "tab",
-			args = {
-				achievements = {
-					order = 1,
-					name = _G.ACHIEVEMENTS,
-					type = "group",
-					childGroups = "tree",
-					args = AchievementNPCOptions
-				},
-				rare = {
-					order = 2,
-					name = _G.BATTLE_PET_BREED_QUALITY4,
-					type = "group",
-					childGroups = "tab",
-					args = {
-						isEnabled = {
-							order = 1,
-							type = "toggle",
-							name = _G.ENABLE,
-							descStyle = "inline",
-							get = function()
-								return profile.detection.rares
-							end,
-							set = function(_, value)
-								profile.detection.rares = value
+	NPCOptions = NPCOptions or {
+		name = L["NPCs"],
+		order = 1,
+		type = "group",
+		childGroups = "tab",
+		args = {
+			achievements = {
+				order = 1,
+				name = _G.ACHIEVEMENTS,
+				type = "group",
+				childGroups = "tree",
+				args = AchievementNPCOptions
+			},
+			rare = {
+				order = 2,
+				name = _G.BATTLE_PET_BREED_QUALITY4,
+				type = "group",
+				childGroups = "tab",
+				args = {
+					isEnabled = {
+						order = 1,
+						type = "toggle",
+						name = _G.ENABLE,
+						descStyle = "inline",
+						get = function()
+							return profile.detection.rares
+						end,
+						set = function(_, value)
+							profile.detection.rares = value
 
-								NPCScan:UpdateScanList()
-							end
-						},
-						zoneNPCOptions = {
-							order = 2,
-							name = _G.ZONE,
-							descStyle = "inline",
-							type = "group",
-							args = ZoneRareNPCOptions
-						},
-						dungeonNPCOptions = {
-							order = 3,
-							name = _G.DUNGEONS,
-							descStyle = "inline",
-							type = "group",
-							args = DungeonRareNPCOptions
-						}
+							NPCScan:UpdateScanList()
+						end
+					},
+					zoneNPCOptions = {
+						order = 2,
+						name = _G.ZONE,
+						descStyle = "inline",
+						type = "group",
+						args = ZoneRareNPCOptions
+					},
+					dungeonNPCOptions = {
+						order = 3,
+						name = _G.DUNGEONS,
+						descStyle = "inline",
+						type = "group",
+						args = DungeonRareNPCOptions
 					}
-				},
-				tameableRare = {
-					order = 3,
-					name = _G.TAMEABLE,
-					type = "group",
-					childGroups = "tab",
-					args = {
-						isEnabled = {
-							order = 1,
-							type = "toggle",
-							name = _G.ENABLE,
-							descStyle = "inline",
-							get = function()
-								return profile.detection.tameables
-							end,
-							set = function(_, value)
-								profile.detection.tameables = value
+				}
+			},
+			tameableRare = {
+				order = 3,
+				name = _G.TAMEABLE,
+				type = "group",
+				childGroups = "tab",
+				args = {
+					isEnabled = {
+						order = 1,
+						type = "toggle",
+						name = _G.ENABLE,
+						descStyle = "inline",
+						get = function()
+							return profile.detection.tameables
+						end,
+						set = function(_, value)
+							profile.detection.tameables = value
 
-								NPCScan:UpdateScanList()
-							end
-						},
-						zoneNPCOptions = {
-							order = 2,
-							name = _G.ZONE,
-							descStyle = "inline",
-							type = "group",
-							args = ZoneTameableRareNPCOptions
-						},
-						dungeonNPCOptions = {
-							order = 3,
-							name = _G.DUNGEONS,
-							descStyle = "inline",
-							type = "group",
-							args = DungeonTameableRareNPCOptions
-						}
+							NPCScan:UpdateScanList()
+						end
+					},
+					zoneNPCOptions = {
+						order = 2,
+						name = _G.ZONE,
+						descStyle = "inline",
+						type = "group",
+						args = ZoneTameableRareNPCOptions
+					},
+					dungeonNPCOptions = {
+						order = 3,
+						name = _G.DUNGEONS,
+						descStyle = "inline",
+						type = "group",
+						args = DungeonTameableRareNPCOptions
 					}
-				},
-				search = {
-					order = 4,
-					name = _G.SEARCH,
-					type = "group",
-					args = {
-						description = {
-							order = 1,
-							type = "description",
-							name = L["Type the name of a Continent, Dungeon, or Zone, or the partial name of an NPC. Accepts Lua patterns."]
-						},
-						entryBox = {
-							order = 2,
-							name = " ",
-							descStyle = "inline",
-							type = "input",
-							get = function()
-								return ""
-							end,
-							set = function(_, value)
-								PerformNPCSearch(value)
-							end
-						},
-						results = {
-							order = 3,
-							name = _G.KBASE_SEARCH_RESULTS,
-							type = "group",
-							inline = true,
-							args = NPCSearchOptions
-						}
+				}
+			},
+			search = {
+				order = 4,
+				name = _G.SEARCH,
+				type = "group",
+				args = {
+					description = {
+						order = 1,
+						type = "description",
+						name = L["Type the name of a Continent, Dungeon, or Zone, or the partial name of an NPC. Accepts Lua patterns."]
+					},
+					entryBox = {
+						order = 2,
+						name = " ",
+						descStyle = "inline",
+						type = "input",
+						get = function()
+							return ""
+						end,
+						set = function(_, value)
+							PerformNPCSearch(value)
+						end
+					},
+					results = {
+						order = 3,
+						name = _G.KBASE_SEARCH_RESULTS,
+						type = "group",
+						inline = true,
+						args = NPCSearchOptions
 					}
-				},
-				userDefined = {
-					order = 5,
-					name = _G.CUSTOM,
-					type = "group",
-					args = {
-						isEnabled = {
-							order = 1,
-							type = "toggle",
-							name = _G.ENABLE,
-							descStyle = "inline",
-							get = function()
-								return profile.detection.userDefined
-							end,
-							set = function(_, value)
-								profile.detection.userDefined = value
+				}
+			},
+			userDefined = {
+				order = 5,
+				name = _G.CUSTOM,
+				type = "group",
+				args = {
+					isEnabled = {
+						order = 1,
+						type = "toggle",
+						name = _G.ENABLE,
+						descStyle = "inline",
+						get = function()
+							return profile.detection.userDefined
+						end,
+						set = function(_, value)
+							profile.detection.userDefined = value
 
-								NPCScan:UpdateScanList()
-							end
-						},
-						npcID = {
-							order = 2,
-							name = _G.ADD,
-							desc = L['Valid values are a numeric NPC ID, the word "mouseover" while you have your mouse cursor over an NPC, or the word "target" while you have an NPC set as your target.'],
-							type = "input",
-							disabled = function()
-								return not profile.detection.userDefined
-							end,
-							get = function()
-								return ""
-							end,
-							set = function(_, value)
-								AddUserDefinedNPC(value)
-							end
-						},
-						npcIDs = {
-							order = 3,
-							name = _G.ASSIGNED_COLON,
-							type = "group",
-							inline = true,
-							disabled = function()
-								return not profile.detection.userDefined
-							end,
-							args = UserDefinedNPCOptions
-						}
+							NPCScan:UpdateScanList()
+						end
+					},
+					npcID = {
+						order = 2,
+						name = _G.ADD,
+						desc = L['Valid values are a numeric NPC ID, the word "mouseover" while you have your mouse cursor over an NPC, or the word "target" while you have an NPC set as your target.'],
+						type = "input",
+						disabled = function()
+							return not profile.detection.userDefined
+						end,
+						get = function()
+							return ""
+						end,
+						set = function(_, value)
+							AddUserDefinedNPC(value)
+						end
+					},
+					npcIDs = {
+						order = 3,
+						name = _G.ASSIGNED_COLON,
+						type = "group",
+						inline = true,
+						disabled = function()
+							return not profile.detection.userDefined
+						end,
+						args = UserDefinedNPCOptions
 					}
-				},
-				blacklisted = {
-					order = 6,
-					name = _G.IGNORED,
-					type = "group",
-					args = {
-						npcIDs = {
-							order = 1,
-							name = _G.ASSIGNED_COLON,
-							type = "group",
-							inline = true,
-							args = BlacklistedNPCOptions
-						}
+				}
+			},
+			blacklisted = {
+				order = 6,
+				name = _G.IGNORED,
+				type = "group",
+				args = {
+					npcIDs = {
+						order = 1,
+						name = _G.ASSIGNED_COLON,
+						type = "group",
+						inline = true,
+						args = BlacklistedNPCOptions
 					}
 				}
 			}
 		}
+	}
 
 	UpdateAchievementNPCOptions()
 	UpdateRareNPCOptions()
