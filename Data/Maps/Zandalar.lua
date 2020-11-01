@@ -62,6 +62,19 @@ Maps[MapID.Nazmir].NPCs = {
 	[143311] = true, -- Toadcruel
 	[143316] = true, -- Skullcap
 	[143898] = true, -- Makatau
+	[148637] = true, -- Shadow Hunter Vol'tris
+	[148642] = true, -- Caravan Leader
+	[148651] = true, -- Overgrown Ancient
+	[148674] = true, -- Plague Master Herbert
+	[148679] = true, -- Arcanist Quintril
+	[148744] = true, -- Brewmaster Lin
+	[148753] = true, -- Ptin'go
+	[148759] = true, -- Stormcaller Morka
+	[148779] = true, -- Lightforged Warframe
+	[148792] = true, -- Skycaptain Thermospark
+	[148813] = true, -- Thomas Vandergrief
+	[148842] = true, -- Siegeotron
+	[149383] = true, -- Xizz Gutshank
 }
 
 -- ----------------------------------------------------------------------------
@@ -104,6 +117,19 @@ Maps[MapID.Voldun].NPCs = {
 	[137681] = true, -- King Clickyclack
 	[138794] = true, -- Dunegorger Kraulok
 	[143313] = true, -- Portakillo
+	[146942] = true, -- Grand Marshal Fury
+	[146979] = true, -- Ormin Rocketbop
+	[148446] = true, -- Wolfleader Skraug
+	[148451] = true, -- Siege O' Matic 9000
+	[148456] = true, -- Jin'tago
+	[148477] = true, -- Beastlord Drakara
+	[148494] = true, -- Sandbinder Sodir
+	[148510] = true, -- Drox'ar Morgar
+	[148534] = true, -- Evezon the Eternal
+	[148550] = true, -- Caravan Leader
+	[148558] = true, -- Rockfury
+	[148597] = true, -- Iron Shaman Grimbeard
+	[162681] = true, -- Elusive Quickhoof
 }
 
 -- ----------------------------------------------------------------------------
@@ -151,7 +177,25 @@ Maps[MapID.Zuldazar].NPCs = {
 	[135512] = true, -- Thunderfoot
 	[136413] = true, -- Syrawon the Dominus
 	[136428] = true, -- Dark Chronicler
+	[142434] = true, -- Loo'ay
+	[142475] = true, -- Ka'za the Mezmerizing
 	[143314] = true, -- Bane of the Woods
 	[143536] = true, -- High Warlord Volrath
 	[143910] = true, -- Sludgecrusher
+	[145391] = true, -- Caravan Leader
+	[148198] = true, -- Scout Captain Grizzleknob
+	[148231] = true, -- Siegebreaker Vol'gar
+	[148253] = true, -- Death Captain Detheca
+	[148257] = true, -- Death Captain Danielle
+	[148259] = true, -- Death Captain Delilah
+	[148264] = true, -- Dinomancer Dajingo
+	[148276] = true, -- Tidebinder Maka
+	[148308] = true, -- Eric Quietfist
+	[148322] = true, -- Blinky Gizmospark
+	[148343] = true, -- Dinohunter Wildbeard
+	[148390] = true, -- Jessibelle Moonshield
+	[148393] = true, -- Ancient Defender
+	[148403] = true, -- Portal Keeper Romiir
+	[148428] = true, -- Bilestomper
+	[149147] = true, -- N'chala the Egg Thief
 }

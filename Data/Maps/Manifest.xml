@@ -3,6 +3,7 @@
     <Script file="_Main.lua"/>
 
     <Script file="Argus.lua"/>
+    <Script file="Azeroth.lua"/>
     <Script file="BrokenIsles.lua"/>
     <Script file="Cosmic.lua"/>
     <Script file="Draenor.lua"/>

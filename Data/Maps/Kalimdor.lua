@@ -83,7 +83,48 @@ Maps[MapID.Darkshore].NPCs = {
     [2192] = true, -- Firecaller Radison
     [7015] = true, -- Flagglemurk the Cruel
     [7016] = true, -- Lady Vespira
-    [7017] = true -- Lord Sinslayer
+    [7017] = true, -- Lord Sinslayer
+    [144946] = true, -- Ivus the Forest Lord
+    [147240] = true, -- Hydrath
+    [147241] = true, -- Cyclarus
+    [147260] = true, -- Conflagros
+    [147261] = true, -- Granokk
+    [147332] = true, -- Stonebinder Ssra'vess
+    [147435] = true, -- Thelar Moonstrike
+    [147664] = true, -- Zim'kaga
+    [147701] = true, -- Moxo the Beheader
+    [147708] = true, -- Athrikus Narassin
+    [147744] = true, -- Amberclaw
+    [147751] = true, -- Shattershard
+    [147758] = true, -- Onu
+    [147845] = true, -- Commander Drald
+    [147897] = true, -- Soggoth the Slitherer
+    [147942] = true, -- Twilight Prophet Graeme
+    [147966] = true, -- Aman
+    [147970] = true, -- Mrggr'marr
+    [148025] = true, -- Commander Ral'esh
+    [148031] = true, -- Gren Tornfur
+    [148037] = true, -- Athil Dewfire
+    [148103] = true, -- Sapper Odette
+    [148295] = true, -- Ivus the Decayed
+    [148787] = true, -- Alash'anir
+    [148790] = true, -- Frightened Kodo
+    [149141] = true, -- Burninator Mark V
+    [149517] = true, -- Agathe Wyrmwood
+    [149651] = true, -- Blackpaw
+    [149652] = true, -- Agathe Wyrmwood
+    [149654] = true, -- Glimmerspine
+    [149655] = true, -- Croz Bloodrage
+    [149656] = true, -- Grimhorn
+    [149657] = true, -- Madfeather
+    [149658] = true, -- Shadowclaw
+    [149659] = true, -- Orwell Stevenson
+    [149660] = true, -- Blackpaw
+    [149661] = true, -- Croz Bloodrage
+    [149662] = true, -- Grimhorn
+    [149663] = true, -- Shadowclaw
+    [149664] = true, -- Orwell Stevenson
+    [149665] = true, -- Scalefiend   
 }
 
 -- ----------------------------------------------------------------------------
@@ -398,7 +439,7 @@ Maps[MapID.DireMaul].NPCs = {
 }
 
 -- ----------------------------------------------------------------------------
--- Uldum
+-- Uldum (249)
 -- ----------------------------------------------------------------------------
 Maps[MapID.Uldum].NPCs = {
     [50063] = true, -- Akma'hat
@@ -409,6 +450,79 @@ Maps[MapID.Uldum].NPCs = {
     [51402] = true, -- Madexx - Green
     [51403] = true, -- Madexx - Black
     [51404] = true -- Madexx - Blue
+}
+
+-- ----------------------------------------------------------------------------
+-- Uldum (1527)
+-- ----------------------------------------------------------------------------
+Maps[MapID.UldumBFA].NPCs = {
+    [151609] = true, -- Sun Prophet Epaphos
+    [151852] = true, -- Watcher Rehu
+    [151878] = true, -- Sun King Nahkotep
+    [151883] = true, -- Anaua
+    [151897] = true, -- Sun Priestess Nubitt
+    [151948] = true, -- Senbu the Pridefather
+    [151995] = true, -- Hik-ten the Taskmaster
+    [152040] = true, -- Scoutmaster Moswen
+    [152431] = true, -- Kaneb-ti
+    [152657] = true, -- Tat the Bonechewer
+    [152677] = true, -- Nebet the Ascended
+    [152757] = true, -- Atekhramun
+    [152788] = true, -- Uat-ka the Sun's Wrath
+    [154576] = true, -- Aqir Titanus
+    [154578] = true, -- Aqir Flayer
+    [154604] = true, -- Lord Aj'qirai
+    [155531] = true, -- Infested Wastewander Captain
+    [155703] = true, -- Anq'uri the Titanic
+    [156078] = true, -- Magus Rehleth
+    [156299] = true, -- R'khuzj the Unfathomable
+    [156654] = true, -- Shol'thoss the Doomspeaker
+    [156655] = true, -- Korzaran the Slaughterer
+    [157120] = true, -- Fangtaker Orsa
+    [157134] = true, -- Ishak of the Four Winds
+    [157146] = true, -- Rotfeaster
+    [157157] = true, -- Muminah the Incandescent
+    [157164] = true, -- Zealot Tekem
+    [157167] = true, -- Champion Sen-mat
+    [157170] = true, -- Acolyte Taspu
+    [157188] = true, -- The Tomb Widow
+    [157390] = true, -- R'oyolok the Reality Eater
+    [157469] = true, -- Zoth'rum the Intellect Pillager
+    [157470] = true, -- R'aas the Anima Devourer
+    [157472] = true, -- Aphrom the Guise of Madness
+    [157473] = true, -- Yiphrim the Will Ravager
+    [157476] = true, -- Shugshul the Flesh Gorger
+    [157593] = true, -- Amalgamation of Flesh
+    [158491] = true, -- Falconer Amenophis
+    [158528] = true, -- High Guard Reshef
+    [158531] = true, -- Corrupted Neferset Guard
+    [158557] = true, -- Actiss the Deceiver
+    [158594] = true, -- Doomsayer Vathiris
+    [158595] = true, -- Thoughtstealer Vos
+    [158597] = true, -- High Executor Yothrim
+    [158632] = true, -- Corrupted Fleshbeast
+    [158633] = true, -- Gaze of N'Zoth
+    [158636] = true, -- The Grand Executor
+    [159087] = true, -- Corrupted Bonestripper
+    [160532] = true, -- Shoth the Darkened
+    [160623] = true, -- Hungering Miasma
+    [160631] = true, -- Hungering Miasma
+    [161033] = true, -- Shadowmaw
+    [162140] = true, -- Skikx'traz
+    [162141] = true, -- Zuythiz
+    [162142] = true, -- Qho
+    [162147] = true, -- Corpse Eater
+    [162163] = true, -- High Priest Ytaessis
+    [162170] = true, -- Warcaster Xeshro
+    [162171] = true, -- Captain Dunewalker
+    [162172] = true, -- Aqir Warcaster
+    [162173] = true, -- R'krox the Runt
+    [162196] = true, -- Obsidian Annihilator
+    [162254] = true, -- Corrupted Observer
+    [162352] = true, -- Spirit of Dark Ritualist Zakahn
+    [162370] = true, -- Armagedillo
+    [162372] = true, -- Spirit of Cyrus the Black
+    [162765] = true, -- Friendly Alpaca
 }
 
 -- ----------------------------------------------------------------------------

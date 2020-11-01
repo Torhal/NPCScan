@@ -79,7 +79,7 @@ Maps[MapID.TownlongSteppes].NPCs = {
 }
 
 -- ----------------------------------------------------------------------------
--- Vale of Eternal Blossoms
+-- Vale of Eternal Blossoms (390)
 -- ----------------------------------------------------------------------------
 Maps[MapID.ValeOfEternalBlossoms].NPCs = {
     [50336] = true, -- Yorik Sharpeye
@@ -108,6 +108,55 @@ Maps[MapID.ValeOfEternalBlossoms].NPCs = {
     [63695] = true, -- Baolai the Immolator
     [63977] = true, -- Vyraxxis
     [63978] = true -- Kri'chon
+}
+
+-- ----------------------------------------------------------------------------
+-- Vale of Eternal Blossoms (1530)
+-- ----------------------------------------------------------------------------
+Maps[MapID.ValeOfEternalBlossomsBFA].NPCs = {
+    [154087] = true, -- Zror'um the Infinite
+    [154106] = true, -- Quid
+    [154332] = true, -- Voidtender Malketh
+    [154394] = true, -- Veskan the Fallen
+    [154447] = true, -- Brother Meller
+    [154467] = true, -- Chief Mek-mek
+    [154490] = true, -- Rijz'x the Devourer
+    [154495] = true, -- Will of N'Zoth
+    [154559] = true, -- Deeplord Zrihj
+    [154600] = true, -- Teng the Awakened
+    [155958] = true, -- Tashara
+    [156083] = true, -- Sanguifang
+    [157153] = true, -- Ha-Li
+    [157160] = true, -- Houndlord Ren
+    [157162] = true, -- Rei Lun
+    [157171] = true, -- Heixi the Stonelord
+    [157176] = true, -- The Forgotten
+    [157183] = true, -- Coagulated Anima
+    [157266] = true, -- Kilxl the Gaping Maw
+    [157267] = true, -- Escaped Mutation
+    [157279] = true, -- Stormhowl
+    [157287] = true, -- Dokani Obliterator
+    [157290] = true, -- Jade Watcher
+    [157291] = true, -- Spymaster Hul'ach
+    [157443] = true, -- Xiln the Mountain
+    [157466] = true, -- Anh-De the Loyal
+    [157468] = true, -- Tisiphon
+    [160810] = true, -- Harbinger Il'koxik
+    [160825] = true, -- Amber-Shaper Esh'ri
+    [160826] = true, -- Hive-Guard Naz'ruzek
+    [160867] = true, -- Kzit'kovok
+    [160868] = true, -- Harrier Nir'verash
+    [160872] = true, -- Destroyer Krox'tazar
+    [160874] = true, -- Drone Keeper Ak'thet
+    [160876] = true, -- Enraged Amber Elemental
+    [160878] = true, -- Buh'gzaki the Blasphemous
+    [160893] = true, -- Captain Vor'lek
+    [160906] = true, -- Skiver
+    [160920] = true, -- Kal'tik the Blight
+    [160922] = true, -- Needler Zhesalla
+    [160930] = true, -- Infused Amber Ooze
+    [160968] = true, -- Jade Colossus
+    [163042] = true, -- Ivory Cloud Serpent
 }
 
 -- ----------------------------------------------------------------------------
