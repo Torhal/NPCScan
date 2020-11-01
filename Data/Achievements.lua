@@ -20,10 +20,14 @@ local Data = private.Data
 Data.Achievements = {}
 
 local AchievementID = {
+	AdventurerOfArdenweald = 14309,
 	AdventurerOfAzsuna = 11261,
+	AdventurerOfBastion = 14307,
 	AdventurerOfDrustvar = 12941,
 	AdventurerOfHighmountain = 11264,
+	AdventurerOfMaldraxxus = 14308,
 	AdventurerOfNazmir = 12942,
+	AdventurerOfRevendreth = 14310,
 	AdventurerOfStormheim = 11263,
 	AdventurerOfStormsongValley = 12940,
 	AdventurerOfSuramar = 11265,
