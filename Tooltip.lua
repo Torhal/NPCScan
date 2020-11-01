@@ -52,6 +52,7 @@ TitleFont:SetTextColor(1, 0.82, 0)
 TitleFont:SetFontObject("QuestTitleFont")
 
 local Tooltip
+local DataObjectDisplay -- Used for updates.
 
 -- ----------------------------------------------------------------------------
 -- Helpers
@@ -167,6 +168,7 @@ local entryFromID = {}
 
 local function Tooltip_OnRelease()
     Tooltip = nil
+    DataObjectDisplay = nil
 end
 
 local DataTooltip
@@ -414,8 +416,6 @@ end
 
 local ICON_TOY = [[|TInterface\Worldmap\TreasureChest_64:0:0|t]]
 local ICON_WORLDQUEST = FormatAtlasTexture("worldquest-tracker-questmarker")
-
-local DataObjectDisplay -- Used for updates.
 
 local function DrawTooltip(displayFrame)
     if not displayFrame then
