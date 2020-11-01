@@ -2,6 +2,14 @@
 -- Lua globals
 -- ----------------------------------------------------------------------------
 local pairs = _G.pairs
+local type = _G.type
+
+-- ----------------------------------------------------------------------------
+-- WoW API
+-- ----------------------------------------------------------------------------
+local GetAchievementCriteriaInfo = _G.GetAchievementCriteriaInfo
+local GetAchievementInfo = _G.GetAchievementInfo
+local GetAchievementNumCriteria = _G.GetAchievementNumCriteria
 
 -- ----------------------------------------------------------------------------
 -- AddOn namespace
@@ -37,6 +45,7 @@ local AchievementID = {
 	HeraldsOfTheLegion = 9638,
 	HighValueTargets = 9216,
 	ImInYourBaseKillingYourDudes = 7932,
+	IThoughtYouSaidTheydBeRare = 13691,
 	JungleStalker = 10070,
 	KingOfTheMonsters = 9601,
 	LifeFindsAWayToDie = 13048,
@@ -146,7 +155,7 @@ end
 
 local function InitializeAchievements()
 	for achievementLabel, achievementID in pairs(AchievementID) do
-		local _, name, _, isCompleted, _, _, _, description, _, iconTexturePath = _G.GetAchievementInfo(achievementID)
+		local _, name, _, isCompleted, _, _, _, description, _, iconTexturePath = GetAchievementInfo(achievementID)
 
 		local achievement = {
 			ID = achievementID,
@@ -164,8 +173,8 @@ local function InitializeAchievements()
 			for npcID, criteriaID in pairs(defaultNPCs) do
 				local npc = Data.NPCs[npcID]
 
-				if _G.type(criteriaID) == "number" then
-					local assetName, _, isCriteriaCompleted = _G.GetAchievementCriteriaInfo(achievementID, criteriaID)
+				if type(criteriaID) == "number" then
+					local assetName, _, isCriteriaCompleted = GetAchievementCriteriaInfo(achievementID, criteriaID)
 
 					AssignAchievementDataToNPC(npc, assetName, achievementID, criteriaID, isCriteriaCompleted)
 				else
@@ -176,8 +185,8 @@ local function InitializeAchievements()
 			end
 		end
 
-		for criteriaIndex = 1, _G.GetAchievementNumCriteria(achievementID) do
-			local assetName, criteriaType, isCriteriaCompleted, _, _, _, _, assetID, _, criteriaID = _G.GetAchievementCriteriaInfo(achievementID, criteriaIndex)
+		for criteriaIndex = 1, GetAchievementNumCriteria(achievementID) do
+			local assetName, criteriaType, isCriteriaCompleted, _, _, _, _, assetID, _, criteriaID = GetAchievementCriteriaInfo(achievementID, criteriaIndex)
 
 			if criteriaType == CriteriaType.NPCKill then
 				if assetID > 0 then
