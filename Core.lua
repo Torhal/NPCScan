@@ -161,6 +161,7 @@ function NPCScan:OnEnable()
 		[Enum.MapID.BrokenIsles] = true,
 		[Enum.MapID.KulTiras] = true,
 		[Enum.MapID.Zandalar] = true,
+		[Enum.MapID.TheShadowlands] = true,
 	}
 
 	local vignetteMapIDs = {
@@ -170,6 +171,7 @@ function NPCScan:OnEnable()
 		[Enum.MapID.KulTiras] = true,
 		[Enum.MapID.Pandaria] = true,
 		[Enum.MapID.Zandalar] = true,
+		[Enum.MapID.TheShadowlands] = true,
 	}
 
 	for mapID, map in pairs(Data.Maps) do

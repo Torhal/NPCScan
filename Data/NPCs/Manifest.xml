@@ -3,6 +3,7 @@
     <Script file="_Main.lua"/>
 
     <Script file="Argus.lua"/>
+    <Script file="Azeroth.lua"/>
     <Script file="BrokenIsles.lua"/>
     <Script file="Cosmic.lua"/>
     <Script file="Draenor.lua"/>
@@ -13,5 +14,6 @@
     <Script file="Outland.lua"/>
     <Script file="Pandaria.lua"/>
     <Script file="TheMaelstrom.lua"/>
+    <Script file="TheShadowlands.lua"/>
     <Script file="Zandalar.lua"/>
 </Ui>
