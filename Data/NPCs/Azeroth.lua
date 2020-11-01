@@ -8,10 +8,25 @@ local NPCClassification = private.Enum.NPCClassification
 -- ----------------------------------------------------------------------------
 -- Darkmoon Island (407)
 -- ----------------------------------------------------------------------------
+NPCs[71992] = { -- Moonfang
+    classification = NPCClassification.Elite,
+    pets = {
+        {
+            itemID = 101570, -- Moon Moon
+            npcID = 72160, -- Moon Moon
+        },
+    },
+    toys = {
+        { itemID = 101571, }, -- Moonfang Shroud
+        { itemID = 105898, }, -- Moonfang's Paw
+    },
+	vignetteID = 63, -- Moonfang
+}
+
 NPCs[122899] = { -- Death Metal Knight
     classification = NPCClassification.RareElite,
 	questID = 47767, -- Death Metal Knight
-	vignetteID = 2003,
+	vignetteID = 2003, -- Death Metal Knight
 }
 
 -- ----------------------------------------------------------------------------
