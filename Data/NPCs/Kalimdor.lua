@@ -5,69 +5,9 @@ local AddOnFolderName, private = ...
 local NPCs = private.Data.NPCs
 
 -- ----------------------------------------------------------------------------
--- Durotar
+-- Ahn'Qiraj: The Fallen Kingdom
 -- ----------------------------------------------------------------------------
-NPCs[5809] = { -- Sergeant Curtis
-	factionGroup = "Alliance",
-}
-
-NPCs[5823] = { -- Death Flayer
-	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
--- Mulgore
--- ----------------------------------------------------------------------------
-NPCs[3058] = { -- Arra'chea
-	isTameable = true,
-}
-
-NPCs[3068] = { -- Mazzranache
-	isTameable = true,
-}
-
-NPCs[5807] = { -- The Rake
-	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
--- Northern Barrens
--- ----------------------------------------------------------------------------
-NPCs[3398] = { -- Gesharahan
-	isTameable = true,
-}
-
-NPCs[3652] = { -- Trigore the Lasher
-	isTameable = true,
-}
-
-NPCs[5828] = { -- Humar the Pridelord
-	isTameable = true,
-}
-
-NPCs[5842] = { -- Takk the Leaper
-	isTameable = true,
-}
-
-NPCs[5865] = { -- Dishu
-	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
--- Teldrassil
--- ----------------------------------------------------------------------------
-NPCs[14430] = { -- Duskstalker
-	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
--- Darkshore
--- ----------------------------------------------------------------------------
-NPCs[2172] = { -- Strider Clutchmother
-	isTameable = true,
-}
-
-NPCs[2175] = { -- Shadowclaw
+NPCs[50747] = { -- Tix
 	isTameable = true,
 }
 
@@ -91,96 +31,28 @@ NPCs[12037] = { -- Ursol'lok
 }
 
 -- ----------------------------------------------------------------------------
--- Thousand Needles
+-- Azshara
 -- ----------------------------------------------------------------------------
-NPCs[4132] = { -- Krkk'kx
+NPCs[8660] = { -- The Evalcharr
 	isTameable = true,
 }
 
-NPCs[5935] = { -- Ironeye the Invincible
+NPCs[13896] = { -- Scalebeard
 	isTameable = true,
 }
 
-NPCs[5937] = { -- Vile Sting
-	isTameable = true,
-}
-
-NPCs[50329] = { -- Rrakk
-	isTameable = true,
-}
-
-NPCs[50727] = { -- Strix the Barbed
-	isTameable = true,
-}
-
-NPCs[50741] = { -- Kaxx
-	isTameable = true,
-}
-
-NPCs[50748] = { -- Nyaj
-	isTameable = true,
-}
-
-NPCs[50785] = { -- Skyshadow
-	isTameable = true,
-}
-
-NPCs[50892] = { -- Cyn
-	isTameable = true,
-}
-
-NPCs[50952] = { -- Barnacle Jim
-	isTameable = true,
-}
-
-NPCs[51001] = { -- Venomclaw
-	isTameable = true,
-}
-
-NPCs[51008] = { -- The Barbed Horror
+NPCs[107477] = { -- N.U.T.Z.
 	isTameable = true,
 }
 
 -- ----------------------------------------------------------------------------
--- Stonetalon Mountains
+-- Darkshore
 -- ----------------------------------------------------------------------------
-NPCs[50343] = { -- Quall
+NPCs[2172] = { -- Strider Clutchmother
 	isTameable = true,
 }
 
-NPCs[50759] = { -- Iriss the Widow
-	isTameable = true,
-}
-
-NPCs[50786] = { -- Sparkwing
-	isTameable = true,
-}
-
-NPCs[50812] = { -- Arae
-	isTameable = true,
-}
-
-NPCs[50825] = { -- Feras
-	isTameable = true,
-}
-
-NPCs[50874] = { -- Tenok
-	isTameable = true,
-}
-
-NPCs[50884] = { -- Dustflight the Cowardly
-	isTameable = true,
-}
-
-NPCs[50895] = { -- Volux
-	isTameable = true,
-}
-
-NPCs[50986] = { -- Goldenback
-	isTameable = true,
-}
-
-NPCs[51062] = { -- Khep-Re
+NPCs[2175] = { -- Shadowclaw
 	isTameable = true,
 }
 
@@ -200,41 +72,13 @@ NPCs[18241] = { -- Crusty
 }
 
 -- ----------------------------------------------------------------------------
--- Feralas
+-- Durotar
 -- ----------------------------------------------------------------------------
-NPCs[5349] = { -- Arash-ethis
-	isTameable = true,
+NPCs[5809] = { -- Sergeant Curtis
+	factionGroup = "Alliance",
 }
 
-NPCs[5350] = { -- Qirot
-	isTameable = true,
-}
-
-NPCs[5352] = { -- Old Grizzlegut
-	isTameable = true,
-}
-
-NPCs[5356] = { -- Snarler
-	isTameable = true,
-}
-
-NPCs[11497] = { -- The Razza
-	isTameable = true,
-}
-
-NPCs[39384] = { -- Noxious Whelp
-	isRare = false,
-	pets = {
-		itemID = 8498, -- Emerald Whelpling
-		npcID = 7545, -- Emerald Whelpling
-	},
-}
-
-NPCs[54533] = { -- Prince Lakma
-	isTameable = true,
-}
-
-NPCs[90816] = { -- Skystormer
+NPCs[5823] = { -- Death Flayer
 	isTameable = true,
 }
 
@@ -302,56 +146,6 @@ NPCs[51069] = { -- Scintillex
 }
 
 -- ----------------------------------------------------------------------------
--- Tanaris
--- ----------------------------------------------------------------------------
-NPCs[8204] = { -- Soriid the Devourer
-	isTameable = true,
-}
-
-NPCs[8205] = { -- Haarka the Ravenous
-	isTameable = true,
-}
-
-NPCs[8207] = { -- Emberwing
-	isTameable = true,
-}
-
-NPCs[39183] = { -- Scorpitar
-	isTameable = true,
-}
-
-NPCs[39185] = { -- Slaverjaw
-	isTameable = true,
-}
-
-NPCs[39186] = { -- Hellgazer
-	isTameable = true,
-}
-
-NPCs[47386] = { -- Ainamiss the Hive Queen
-	isTameable = true,
-}
-
-NPCs[47387] = { -- Harakiss the Infestor
-	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
--- Azshara
--- ----------------------------------------------------------------------------
-NPCs[8660] = { -- The Evalcharr
-	isTameable = true,
-}
-
-NPCs[13896] = { -- Scalebeard
-	isTameable = true,
-}
-
-NPCs[107477] = { -- N.U.T.Z.
-	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
 -- Felwood
 -- ----------------------------------------------------------------------------
 NPCs[14339] = { -- Death Howl
@@ -415,25 +209,135 @@ NPCs[107596] = { -- Grimrot
 }
 
 -- ----------------------------------------------------------------------------
--- Un'Goro Crater
+-- Feralas
 -- ----------------------------------------------------------------------------
-NPCs[6581] = { -- Ravasaur Matriarch
+NPCs[5349] = { -- Arash-ethis
 	isTameable = true,
 }
 
-NPCs[6582] = { -- Clutchmother Zavas
+NPCs[5350] = { -- Qirot
 	isTameable = true,
 }
 
-NPCs[6583] = { -- Gruff
+NPCs[5352] = { -- Old Grizzlegut
 	isTameable = true,
 }
 
-NPCs[6584] = { -- King Mosh
+NPCs[5356] = { -- Snarler
 	isTameable = true,
 }
 
-NPCs[6585] = { -- Uhk'loc
+NPCs[11497] = { -- The Razza
+	isTameable = true,
+}
+
+NPCs[39384] = { -- Noxious Whelp
+	pets = {
+		itemID = 8498, -- Emerald Whelpling
+		npcID = 7545, -- Emerald Whelpling
+	},
+}
+
+NPCs[54533] = { -- Prince Lakma
+	isTameable = true,
+}
+
+NPCs[90816] = { -- Skystormer
+	isTameable = true,
+}
+
+-- ----------------------------------------------------------------------------
+-- Molten Front
+-- ----------------------------------------------------------------------------
+NPCs[50815] = { -- Skarr
+	isTameable = true,
+}
+
+NPCs[50959] = { -- Karkin
+	isTameable = true,
+}
+
+NPCs[54321] = { -- Solix
+	isTameable = true,
+}
+
+NPCs[54322] = { -- Deth'tilac
+	isTameable = true,
+}
+
+NPCs[54323] = { -- Kirix
+	isTameable = true,
+}
+
+NPCs[54324] = { -- Skitterflame
+	isTameable = true,
+}
+
+NPCs[54338] = { -- Anthriss
+	isTameable = true,
+}
+
+-- ----------------------------------------------------------------------------
+-- Mount Hyjal
+-- ----------------------------------------------------------------------------
+NPCs[50058] = { -- Terrorpene
+	isTameable = true,
+}
+
+NPCs[54318] = { -- Ankha
+	isTameable = true,
+}
+
+NPCs[54319] = { -- Magria
+	isTameable = true,
+}
+
+NPCs[54320] = { -- Ban'thalos
+	isTameable = true,
+}
+
+-- ----------------------------------------------------------------------------
+-- Mulgore
+-- ----------------------------------------------------------------------------
+NPCs[3058] = { -- Arra'chea
+	isTameable = true,
+}
+
+NPCs[3068] = { -- Mazzranache
+	isTameable = true,
+}
+
+NPCs[5807] = { -- The Rake
+	isTameable = true,
+}
+
+-- ----------------------------------------------------------------------------
+-- Northern Barrens
+-- ----------------------------------------------------------------------------
+NPCs[3398] = { -- Gesharahan
+	isTameable = true,
+}
+
+NPCs[3652] = { -- Trigore the Lasher
+	isTameable = true,
+}
+
+NPCs[5828] = { -- Humar the Pridelord
+	isTameable = true,
+}
+
+NPCs[5842] = { -- Takk the Leaper
+	isTameable = true,
+}
+
+NPCs[5865] = { -- Dishu
+	isTameable = true,
+}
+
+-- ----------------------------------------------------------------------------
+-- Razorfen Kraul
+-- ----------------------------------------------------------------------------
+NPCs[4425] = { -- Blind Hunter
 	isTameable = true,
 }
 
@@ -508,16 +412,241 @@ NPCs[132578] = { -- Qroshekx
 	questID = 50255, -- Unknown
 }
 
-NPCs[132584] = { -- Xaarshej
-	questID = 50224, -- Unknown
-}
-
 NPCs[132580] = { -- Ssinkrix
 	questID = 50223, -- Unknown
 }
 
+NPCs[132584] = { -- Xaarshej
+	questID = 50224, -- Unknown
+}
+
 NPCs[132591] = { -- Ogmot the Mad
 	questID = 50334, -- Unknown
+}
+
+-- ----------------------------------------------------------------------------
+-- Southern Barrens
+-- ----------------------------------------------------------------------------
+NPCs[3253] = { -- Silithid Harvester
+	isTameable = true,
+}
+
+NPCs[5829] = { -- Snort the Heckler
+	isTameable = true,
+}
+
+NPCs[5832] = { -- Thunderstomp
+	isTameable = true,
+}
+
+NPCs[5834] = { -- Azzere the Skyblade
+	isTameable = true,
+}
+
+NPCs[5847] = { -- Heggin Stonewhisker
+	factionGroup = "Alliance",
+}
+
+NPCs[5848] = { -- Malgin Barleybrew
+	factionGroup = "Alliance",
+}
+
+NPCs[5849] = { -- Digger Flameforge
+	factionGroup = "Alliance",
+}
+
+NPCs[5851] = { -- Captain Gerogg Hammertoe
+	factionGroup = "Alliance",
+}
+
+-- ----------------------------------------------------------------------------
+-- Stonetalon Mountains
+-- ----------------------------------------------------------------------------
+NPCs[50343] = { -- Quall
+	isTameable = true,
+}
+
+NPCs[50759] = { -- Iriss the Widow
+	isTameable = true,
+}
+
+NPCs[50786] = { -- Sparkwing
+	isTameable = true,
+}
+
+NPCs[50812] = { -- Arae
+	isTameable = true,
+}
+
+NPCs[50825] = { -- Feras
+	isTameable = true,
+}
+
+NPCs[50874] = { -- Tenok
+	isTameable = true,
+}
+
+NPCs[50884] = { -- Dustflight the Cowardly
+	isTameable = true,
+}
+
+NPCs[50895] = { -- Volux
+	isTameable = true,
+}
+
+NPCs[50986] = { -- Goldenback
+	isTameable = true,
+}
+
+NPCs[51062] = { -- Khep-Re
+	isTameable = true,
+}
+
+-- ----------------------------------------------------------------------------
+-- Tanaris
+-- ----------------------------------------------------------------------------
+NPCs[8204] = { -- Soriid the Devourer
+	isTameable = true,
+}
+
+NPCs[8205] = { -- Haarka the Ravenous
+	isTameable = true,
+}
+
+NPCs[8207] = { -- Emberwing
+	isTameable = true,
+}
+
+NPCs[39183] = { -- Scorpitar
+	isTameable = true,
+}
+
+NPCs[39185] = { -- Slaverjaw
+	isTameable = true,
+}
+
+NPCs[39186] = { -- Hellgazer
+	isTameable = true,
+}
+
+NPCs[47386] = { -- Ainamiss the Hive Queen
+	isTameable = true,
+}
+
+NPCs[47387] = { -- Harakiss the Infestor
+	isTameable = true,
+}
+
+-- ----------------------------------------------------------------------------
+-- Teldrassil
+-- ----------------------------------------------------------------------------
+NPCs[14430] = { -- Duskstalker
+	isTameable = true,
+}
+
+-- ----------------------------------------------------------------------------
+-- The Exodar
+-- ----------------------------------------------------------------------------
+NPCs[110486] = { -- Huk'roth the Huntmaster
+	questID = 43480, -- Huk'roth the Houndmaster
+	vignetteID = 1506, -- Huk'roth the Houndmaster
+}
+
+-- ----------------------------------------------------------------------------
+-- Thousand Needles
+-- ----------------------------------------------------------------------------
+NPCs[4132] = { -- Krkk'kx
+	isTameable = true,
+}
+
+NPCs[5935] = { -- Ironeye the Invincible
+	isTameable = true,
+}
+
+NPCs[5937] = { -- Vile Sting
+	isTameable = true,
+}
+
+NPCs[50329] = { -- Rrakk
+	isTameable = true,
+}
+
+NPCs[50727] = { -- Strix the Barbed
+	isTameable = true,
+}
+
+NPCs[50741] = { -- Kaxx
+	isTameable = true,
+}
+
+NPCs[50748] = { -- Nyaj
+	isTameable = true,
+}
+
+NPCs[50785] = { -- Skyshadow
+	isTameable = true,
+}
+
+NPCs[50892] = { -- Cyn
+	isTameable = true,
+}
+
+NPCs[50952] = { -- Barnacle Jim
+	isTameable = true,
+}
+
+NPCs[51001] = { -- Venomclaw
+	isTameable = true,
+}
+
+NPCs[51008] = { -- The Barbed Horror
+	isTameable = true,
+}
+
+-- ----------------------------------------------------------------------------
+-- Uldum
+-- ----------------------------------------------------------------------------
+NPCs[50154] = { -- Madexx
+	isTameable = true,
+}
+
+NPCs[51401] = { -- Madexx
+	isTameable = true,
+}
+
+NPCs[51402] = { -- Madexx
+	isTameable = true,
+}
+
+NPCs[51403] = { -- Madexx
+	isTameable = true,
+}
+
+NPCs[51404] = { -- Madexx
+	isTameable = true,
+}
+
+-- ----------------------------------------------------------------------------
+-- Un'Goro Crater
+-- ----------------------------------------------------------------------------
+NPCs[6581] = { -- Ravasaur Matriarch
+	isTameable = true,
+}
+
+NPCs[6582] = { -- Clutchmother Zavas
+	isTameable = true,
+}
+
+NPCs[6583] = { -- Gruff
+	isTameable = true,
+}
+
+NPCs[6584] = { -- King Mosh
+	isTameable = true,
+}
+
+NPCs[6585] = { -- Uhk'loc
+	isTameable = true,
 }
 
 -- ----------------------------------------------------------------------------
@@ -569,134 +698,4 @@ NPCs[51028] = { -- The Deep Tunneler
 
 NPCs[51045] = { -- Arcanus
 	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
--- Mount Hyjal
--- ----------------------------------------------------------------------------
-NPCs[50058] = { -- Terrorpene
-	isTameable = true,
-}
-
-NPCs[54318] = { -- Ankha
-	isTameable = true,
-}
-
-NPCs[54319] = { -- Magria
-	isTameable = true,
-}
-
-NPCs[54320] = { -- Ban'thalos
-	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
--- Southern Barrens
--- ----------------------------------------------------------------------------
-NPCs[3253] = { -- Silithid Harvester
-	isTameable = true,
-}
-
-NPCs[5829] = { -- Snort the Heckler
-	isTameable = true,
-}
-
-NPCs[5832] = { -- Thunderstomp
-	isTameable = true,
-}
-
-NPCs[5834] = { -- Azzere the Skyblade
-	isTameable = true,
-}
-
-NPCs[5847] = { -- Heggin Stonewhisker
-	factionGroup = "Alliance",
-}
-
-NPCs[5848] = { -- Malgin Barleybrew
-	factionGroup = "Alliance",
-}
-
-NPCs[5849] = { -- Digger Flameforge
-	factionGroup = "Alliance",
-}
-
-NPCs[5851] = { -- Captain Gerogg Hammertoe
-	factionGroup = "Alliance",
-}
-
--- ----------------------------------------------------------------------------
--- Uldum
--- ----------------------------------------------------------------------------
-NPCs[50154] = { -- Madexx
-	isTameable = true,
-}
-
-NPCs[51401] = { -- Madexx
-	isTameable = true,
-}
-
-NPCs[51402] = { -- Madexx
-	isTameable = true,
-}
-
-NPCs[51403] = { -- Madexx
-	isTameable = true,
-}
-
-NPCs[51404] = { -- Madexx
-	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
--- Razorfen Kraul
--- ----------------------------------------------------------------------------
-NPCs[4425] = { -- Blind Hunter
-	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
--- Ahn'Qiraj: The Fallen Kingdom
--- ----------------------------------------------------------------------------
-NPCs[50747] = { -- Tix
-	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
--- Molten Front
--- ----------------------------------------------------------------------------
-NPCs[50815] = { -- Skarr
-	isTameable = true,
-}
-
-NPCs[50959] = { -- Karkin
-	isTameable = true,
-}
-
-NPCs[54321] = { -- Solix
-	isTameable = true,
-}
-
-NPCs[54322] = { -- Deth'tilac
-	isTameable = true,
-}
-
-NPCs[54323] = { -- Kirix
-	isTameable = true,
-}
-
-NPCs[54324] = { -- Skitterflame
-	isTameable = true,
-}
-
-NPCs[54338] = { -- Anthriss
-	isTameable = true,
-}
-
--- ----------------------------------------------------------------------------
--- The Exodar
--- ----------------------------------------------------------------------------
-NPCs[110486] = { -- Huk'roth the Huntmaster
-	questID = 43480, -- Huk'roth the Houndmaster
-	vignetteID = 1506, -- Huk'roth the Houndmaster
 }
