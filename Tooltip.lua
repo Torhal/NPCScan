@@ -1,6 +1,6 @@
--- ----------------------------------------------------------------------------
--- Localized globals.
--- ----------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+---- Localized globals.
+---------------------------------------------------------------------------------
 -- Lua Functions
 local pairs = _G.pairs
 
@@ -12,35 +12,34 @@ local C_PetJournal = _G.C_PetJournal
 local C_ToyBox = _G.C_ToyBox
 local GameTooltip = _G.GameTooltip
 
--- ----------------------------------------------------------------------------
--- AddOn namespace.
--- ----------------------------------------------------------------------------
-local AddOnFolderName, private = ...
+----------------------------------------------------------------------------------
+---- AddOn Namespace
+---------------------------------------------------------------------------------
+local AddOnFolderName = ... ---@type string
+local private = select(2, ...) ---@class PrivateNamespace
+
 local Data = private.Data
 local EventMessage = private.EventMessage
 
 local LibStub = _G.LibStub
 local LibQTip = LibStub("LibQTip-1.0")
-local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) --[[@as NPCScan]]
 
 local FormatAtlasTexture = private.FormatAtlasTexture
 
--- ----------------------------------------------------------------------------
--- Constants
--- ----------------------------------------------------------------------------
-local DataObject = LibStub("LibDataBroker-1.1"):NewDataObject(
-    AddOnFolderName,
-    {
-        icon = [[Interface\LFGFRAME\BattlenetWorking0]],
-        label = _G.OBJECTIVES_LABEL,
-        scannerData = {
-            NPCCount = 0,
-            NPCs = {},
-        },
-        text = _G.NONE,
-        type = "data source"
-    }
-)
+--------------------------------------------------------------------------------
+---- Constants
+--------------------------------------------------------------------------------
+local DataObject = LibStub("LibDataBroker-1.1"):NewDataObject(AddOnFolderName, {
+    icon = [[Interface\LFGFRAME\BattlenetWorking0]],
+    label = _G.OBJECTIVES_LABEL,
+    scannerData = {
+        NPCCount = 0,
+        NPCs = {},
+    },
+    text = _G.NONE,
+    type = "data source",
+})
 
 local npcAchievementNames = {}
 local npcDisplayNames = {}
@@ -54,9 +53,9 @@ TitleFont:SetFontObject("QuestTitleFont")
 local Tooltip
 local DataObjectDisplay -- Used for updates.
 
--- ----------------------------------------------------------------------------
--- Helpers
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Helper Functions
+--------------------------------------------------------------------------------
 local function SortByNPCNameThenByID(a, b)
     local nameA = npcNames[a]
     local nameB = npcNames[b]
@@ -87,9 +86,9 @@ local function SortByNPCAchievementNameThenByNameThenByID(a, b)
     return achievementNameA < achievementNameB
 end
 
--- ----------------------------------------------------------------------------
--- Tooltip achievement headers.
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Tooltip Achievement Headers
+--------------------------------------------------------------------------------
 local achievementProvider, achievementPrototype, baseCellPrototype = LibQTip:CreateCellProvider(LibQTip.LabelProvider)
 
 function achievementPrototype:getContentHeight()
@@ -161,9 +160,9 @@ local function HideAchievementTooltip()
     GameTooltip:Hide()
 end
 
--- ----------------------------------------------------------------------------
--- NPC tidbit helpers
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- NPC tidbit helpers
+--------------------------------------------------------------------------------
 local entryFromID = {}
 
 local function Tooltip_OnRelease()
@@ -227,7 +226,7 @@ end
 
 local function DisplayText(tooltipCell, text)
     InitializeDataTooltip(tooltipCell)
-	DataTooltip:AddLine(text)
+    DataTooltip:AddLine(text)
     DataTooltip:Show()
 end
 
@@ -238,7 +237,8 @@ local function DisplayMountInfo(tooltipCell, mountList)
     local mountIDs = _G.C_MountJournal.GetMountIDs()
 
     for index = 1, #mountIDs do
-        local creatureName, spellID, iconPath, _, _, _, _, _, _, hideOnChar, isCollected = _G.C_MountJournal.GetMountInfoByID(mountIDs[index])
+        local creatureName, spellID, iconPath, _, _, _, _, _, _, hideOnChar, isCollected =
+            _G.C_MountJournal.GetMountInfoByID(mountIDs[index])
 
         if creatureName and not hideOnChar and entryFromID[spellID] then
             AddEntryToDataTooltip(iconPath, creatureName, isCollected)
@@ -251,7 +251,7 @@ end
 
 local function DisplayPetInfo(tooltipCell, petList)
     AddEntryDataIDs(petList, "npcID")
-	InitializeDataTooltip(tooltipCell)
+    InitializeDataTooltip(tooltipCell)
 
     C_PetJournal.SetFilterChecked(_G.LE_PET_JOURNAL_FILTER_COLLECTED, true)
     C_PetJournal.SetFilterChecked(_G.LE_PET_JOURNAL_FILTER_FAVORITES, false)
@@ -260,9 +260,9 @@ local function DisplayPetInfo(tooltipCell, petList)
     C_PetJournal.SetAllPetSourcesChecked(true)
     C_PetJournal.ClearSearchFilter()
 
-	if _G.PetJournalSearchBox then
-		_G.PetJournalSearchBox:SetText("");
-	end
+    if _G.PetJournalSearchBox then
+        _G.PetJournalSearchBox:SetText("")
+    end
 
     local numPets = C_PetJournal.GetNumPets()
 
@@ -270,8 +270,8 @@ local function DisplayPetInfo(tooltipCell, petList)
         local _, _, isCollected, _, _, _, _, petName, iconPath, _, npcID = C_PetJournal.GetPetInfoByIndex(index)
 
         if petName and entryFromID[npcID] then
-			AddEntryToDataTooltip(iconPath, petName, isCollected)
-			entryFromID[npcID] = nil -- Prevent multiples if already collected.
+            AddEntryToDataTooltip(iconPath, petName, isCollected)
+            entryFromID[npcID] = nil -- Prevent multiples if already collected.
         end
     end
 
@@ -283,21 +283,21 @@ local function DisplayToyInfo(tooltipCell, toyList)
     AddEntryDataIDs(toyList, "itemID")
     InitializeDataTooltip(tooltipCell)
 
-	C_ToyBox.SetAllSourceTypeFilters(true)
-	C_ToyBox.SetCollectedShown(true)
-	C_ToyBox.SetFilterString("")
+    C_ToyBox.SetAllSourceTypeFilters(true)
+    C_ToyBox.SetCollectedShown(true)
+    C_ToyBox.SetFilterString("")
 
-	if _G.ToyBox then
-		_G.ToyBox.searchBox:SetText("");
-	end
+    if _G.ToyBox then
+        _G.ToyBox.searchBox:SetText("")
+    end
 
-	local numToys = C_ToyBox.GetNumToys()
+    local numToys = C_ToyBox.GetNumToys()
 
     for index = 1, numToys do
         local toyID = C_ToyBox.GetToyFromIndex(index)
         local itemID, toyName, iconPath = C_ToyBox.GetToyInfo(toyID)
 
-		if toyName and entryFromID[itemID] then
+        if toyName and entryFromID[itemID] then
             AddEntryToDataTooltip(iconPath, toyName, _G.PlayerHasToy(itemID))
         end
     end
@@ -306,31 +306,30 @@ local function DisplayToyInfo(tooltipCell, toyList)
     DataTooltip:Show()
 end
 
--- ----------------------------------------------------------------------------
--- DataBroker Tooltip helpers.
--- ----------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+---- DataBroker Tooltip helpers.
+---------------------------------------------------------------------------------
 local function GetTooltipData()
-	local hasMounts = false
-	local hasPets = false
-	local hasToys = false
-	local hasTameable = false
-	local hasWorldQuest = false
+    local hasMounts = false
+    local hasPets = false
+    local hasToys = false
+    local hasTameable = false
+    local hasWorldQuest = false
 
-	local mountsColumn
-	local petsColumn
-	local tameableColumn
-	local toysColumn
-	local worldQuestColumn
+    local mountsColumn
+    local petsColumn
+    local tameableColumn
+    local toysColumn
+    local worldQuestColumn
 
-	local numTooltipColumns = 1
+    local numTooltipColumns = 1
 
-	table.wipe(npcAchievementNames)
+    table.wipe(npcAchievementNames)
     table.wipe(npcDisplayNames)
     table.wipe(npcIDs)
     table.wipe(npcNames)
 
-
-	for npcID in pairs(DataObject.scannerData.NPCs) do
+    for npcID in pairs(DataObject.scannerData.NPCs) do
         local npc = Data.NPCs[npcID]
 
         -- The npcID may belong to a custom NPC, which will not have further information.
@@ -340,68 +339,68 @@ local function GetTooltipData()
             npcIDs[#npcIDs + 1] = npcID
             npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
 
-			if not hasTameable and npc.isTameable then
-				hasTameable = true
+            if not hasTameable and npc.isTameable then
+                hasTameable = true
             end
 
-			if not hasMounts and npc.mounts then
-				hasMounts = true
+            if not hasMounts and npc.mounts then
+                hasMounts = true
             end
 
-			if not hasPets and npc.pets then
-				hasPets = true
+            if not hasPets and npc.pets then
+                hasPets = true
             end
 
-			if not hasToys and npc.toys then
-				hasToys = true
-			end
+            if not hasToys and npc.toys then
+                hasToys = true
+            end
 
-			if not hasWorldQuest and npc:HasActiveWorldQuest() then
-				hasWorldQuest = true
-			end
+            if not hasWorldQuest and npc:HasActiveWorldQuest() then
+                hasWorldQuest = true
+            end
         end
     end
 
-	if hasMounts then
-		numTooltipColumns = numTooltipColumns + 1
-		mountsColumn = numTooltipColumns
-	end
+    if hasMounts then
+        numTooltipColumns = numTooltipColumns + 1
+        mountsColumn = numTooltipColumns
+    end
 
-	if hasPets then
-		numTooltipColumns = numTooltipColumns + 1
-		petsColumn = numTooltipColumns
-	end
+    if hasPets then
+        numTooltipColumns = numTooltipColumns + 1
+        petsColumn = numTooltipColumns
+    end
 
-	if hasToys then
-		numTooltipColumns = numTooltipColumns + 1
-		toysColumn = numTooltipColumns
-	end
+    if hasToys then
+        numTooltipColumns = numTooltipColumns + 1
+        toysColumn = numTooltipColumns
+    end
 
-	if hasTameable then
-		numTooltipColumns = numTooltipColumns + 1
-		tameableColumn = numTooltipColumns
-	end
+    if hasTameable then
+        numTooltipColumns = numTooltipColumns + 1
+        tameableColumn = numTooltipColumns
+    end
 
-	if hasWorldQuest then
-		numTooltipColumns = numTooltipColumns + 1
-		worldQuestColumn = numTooltipColumns
-	end
+    if hasWorldQuest then
+        numTooltipColumns = numTooltipColumns + 1
+        worldQuestColumn = numTooltipColumns
+    end
 
-	table.sort(npcIDs, SortByNPCAchievementNameThenByNameThenByID)
+    table.sort(npcIDs, SortByNPCAchievementNameThenByNameThenByID)
 
-	return {
-		mountsColumn = mountsColumn,
-		petsColumn = petsColumn,
-		tameableColumn = tameableColumn,
-		toysColumn = toysColumn,
-		worldQuestColumn = worldQuestColumn,
-		numTooltipColumns = numTooltipColumns
-	}
+    return {
+        mountsColumn = mountsColumn,
+        petsColumn = petsColumn,
+        tameableColumn = tameableColumn,
+        toysColumn = toysColumn,
+        worldQuestColumn = worldQuestColumn,
+        numTooltipColumns = numTooltipColumns,
+    }
 end
 
--- ----------------------------------------------------------------------------
--- DataBroker Tooltip.
--- ----------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+---- DataBroker Tooltip
+---------------------------------------------------------------------------------
 local ICON_MOUNT = FormatAtlasTexture("StableMaster")
 local ICON_PET = FormatAtlasTexture("WildBattlePetCapturable")
 
@@ -411,7 +410,8 @@ do
     local textureSize = 256
     local left, right, top, bottom = _G.unpack(_G.CLASS_ICON_TCOORDS["HUNTER"])
 
-    ICON_TAMEABLE = textureFormat:format(left * textureSize, right * textureSize, top * textureSize, bottom * textureSize)
+    ICON_TAMEABLE =
+        textureFormat:format(left * textureSize, right * textureSize, top * textureSize, bottom * textureSize)
 end
 
 local ICON_TOY = [[|TInterface\Worldmap\TreasureChest_64:0:0|t]]
@@ -424,22 +424,21 @@ local function DrawTooltip(displayFrame)
 
     DataObjectDisplay = displayFrame
 
-	if LibQTip:IsAcquired(AddOnFolderName) then
-		LibQTip:Release(AddOnFolderName)
-	end
+    if LibQTip:IsAcquired(AddOnFolderName) then
+        LibQTip:Release(AddOnFolderName)
+    end
 
     local tooltipData = GetTooltipData()
 
     Tooltip = LibQTip:Acquire(AddOnFolderName, tooltipData.numTooltipColumns)
-	Tooltip:SmartAnchorTo(displayFrame)
-	Tooltip:SetAutoHideDelay(0.25, displayFrame)
+    Tooltip:SmartAnchorTo(displayFrame)
+    Tooltip:SetAutoHideDelay(0.25, displayFrame)
     Tooltip:Clear()
-	Tooltip:SetBackdropColor(0.05, 0.05, 0.05, 1)
-	Tooltip:SetCellMarginH(0)
-	Tooltip:SetCellMarginV(1)
+    Tooltip:SetBackdropColor(0.05, 0.05, 0.05, 1)
+    Tooltip:SetCellMarginH(0)
+    Tooltip:SetCellMarginV(1)
 
-	Tooltip.OnRelease = Tooltip_OnRelease
-
+    Tooltip.OnRelease = Tooltip_OnRelease
 
     Tooltip:SetCell(Tooltip:AddLine(), 1, AddOnFolderName, TitleFont, "CENTER", 0)
     Tooltip:AddSeparator(1, 0, 0, 0)
@@ -474,7 +473,14 @@ local function DrawTooltip(displayFrame)
                 local achievementData = Data.Achievements[npc.achievementID]
                 local achievementLine = Tooltip:AddLine()
 
-                Tooltip:SetCell(achievementLine, 1, ("|T%s:0|t %s"):format(achievementData.iconTexturePath, achievementData.name), "CENTER", 0, achievementProvider)
+                Tooltip:SetCell(
+                    achievementLine,
+                    1,
+                    ("|T%s:0|t %s"):format(achievementData.iconTexturePath, achievementData.name),
+                    "CENTER",
+                    0,
+                    achievementProvider
+                )
                 Tooltip:SetLineScript(achievementLine, "OnMouseUp", OpenToAchievement, npc.achievementID)
                 Tooltip:SetLineScript(achievementLine, "OnEnter", ShowAchievementTooltip, npc.achievementID)
                 Tooltip:SetLineScript(achievementLine, "OnLeave", HideAchievementTooltip)
@@ -505,14 +511,14 @@ local function DrawTooltip(displayFrame)
         Tooltip:SetCell(line, 1, npcDisplayNames[npcID])
 
         if worldQuestColumn and npc:HasActiveWorldQuest() then
-			Tooltip:SetCell(line, worldQuestColumn, ICON_WORLDQUEST)
-			Tooltip:SetCellScript(line, worldQuestColumn, "OnEnter", DisplayText, _G.TRACKER_HEADER_WORLD_QUESTS)
+            Tooltip:SetCell(line, worldQuestColumn, ICON_WORLDQUEST)
+            Tooltip:SetCellScript(line, worldQuestColumn, "OnEnter", DisplayText, _G.TRACKER_HEADER_WORLD_QUESTS)
             Tooltip:SetCellScript(line, worldQuestColumn, "OnLeave", CleanupDataTooltip)
         end
 
         if tameableColumn and npc.isTameable then
             Tooltip:SetCell(line, tameableColumn, ICON_TAMEABLE)
-			Tooltip:SetCellScript(line, tameableColumn, "OnEnter", DisplayText, _G.TAMEABLE)
+            Tooltip:SetCellScript(line, tameableColumn, "OnEnter", DisplayText, _G.TAMEABLE)
             Tooltip:SetCellScript(line, tameableColumn, "OnLeave", CleanupDataTooltip)
         end
 
@@ -536,9 +542,9 @@ local function DrawTooltip(displayFrame)
     end
 end
 
--- ----------------------------------------------------------------------------
--- DataObject methods.
--- ----------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+---- DataObject methods.
+---------------------------------------------------------------------------------
 function DataObject:OnClick()
     LibStub("AceConfigDialog-3.0"):Open(AddOnFolderName)
 end

@@ -1,38 +1,39 @@
--- ----------------------------------------------------------------------------
--- Lua globals
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Lua globals
+--------------------------------------------------------------------------------
 local rawset = _G.rawset
 local setmetatable = _G.setmetatable
 
--- ----------------------------------------------------------------------------
--- AddOn namespace
--- ----------------------------------------------------------------------------
-local AddOnFolderName, private = ...
+--------------------------------------------------------------------------------
+---- AddOn Namespace
+--------------------------------------------------------------------------------
+local AddOnFolderName = ... ---@type string
+local private = select(2, ...) ---@class PrivateNamespace
 
--- ----------------------------------------------------------------------------
--- Constants
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Constants
+--------------------------------------------------------------------------------
 local addTableMeta = {
-	__index = function(t, mapID)
-		if mapID < 0 then
-			return
-		end
+    __index = function(t, mapID)
+        if mapID < 0 then
+            return
+        end
 
-		local new = {}
+        local new = {}
         rawset(t, mapID, new)
 
         return new
-    end
+    end,
 }
 
 private.Data = {
     Continents = {},
-	Maps = setmetatable({}, addTableMeta),
-	NPCs = {},
-	Scanner = {
-		continentID = nil,
-		mapID = nil,
-		NPCCount = 0,
-		NPCs = {},
-	}
+    Maps = setmetatable({}, addTableMeta),
+    NPCs = {},
+    Scanner = {
+        continentID = nil,
+        mapID = nil,
+        NPCCount = 0,
+        NPCs = {},
+    },
 }

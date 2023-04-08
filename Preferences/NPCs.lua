@@ -1,18 +1,8 @@
--- ----------------------------------------------------------------------------
--- Localized Lua globals.
--- ----------------------------------------------------------------------------
--- Functions
-local pairs = _G.pairs
-local tonumber = _G.tonumber
-local type = _G.type
-
--- Libraries
-local table = _G.table
-
--- ----------------------------------------------------------------------------
--- AddOn namespace.
--- ----------------------------------------------------------------------------
-local AddOnFolderName, private = ...
+--------------------------------------------------------------------------------
+---- AddOn Namespace
+--------------------------------------------------------------------------------
+local AddOnFolderName = ... ---@type string
+local private = select(2, ...) ---@class PrivateNamespace
 
 local Data = private.Data
 local Enum = private.Enum
@@ -24,25 +14,25 @@ local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 
--- ----------------------------------------------------------------------------
--- Constants.
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Constants
+--------------------------------------------------------------------------------
 local EmptyListOption = {
 	order = 1,
 	name = _G.EMPTY,
-	type = "header"
+	type = "header",
 }
 
--- ----------------------------------------------------------------------------
--- Variables.
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Variables
+--------------------------------------------------------------------------------
 local npcIDs = {}
 local npcNames = {}
 local profile
 
--- ----------------------------------------------------------------------------
--- Helpers.
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Helpers
+--------------------------------------------------------------------------------
 local UpdateBlacklistedNPCOptions
 
 local GetMapIDsAlphabetizedByName
@@ -60,19 +50,16 @@ do
 			mapIDs[#mapIDs + 1] = mapID
 		end
 
-		table.sort(
-			mapIDs,
-			function(a, b)
-				local mapNameA = Data.Maps[a].name
-				local mapNameB = Data.Maps[b].name
+		table.sort(mapIDs, function(a, b)
+			local mapNameA = Data.Maps[a].name
+			local mapNameB = Data.Maps[b].name
 
-				if mapNameA == mapNameB then
-					return a < b
-				end
-
-				return mapNameA < mapNameB
+			if mapNameA == mapNameB then
+				return a < b
 			end
-		)
+
+			return mapNameA < mapNameB
+		end)
 
 		return mapIDs
 	end
@@ -95,12 +82,20 @@ local function ValidateUserDefinedNPCInput(input, operationType)
 
 		if profile.userDefined.npcIDs[npcID] then
 			if operationType == "add" then
-				NPCScan:Printf(L["%1$s (%2$d) is already on the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
+				NPCScan:Printf(
+					L["%1$s (%2$d) is already on the user-defined NPC list."],
+					NPCScan:GetNPCNameFromID(npcID),
+					npcID
+				)
 				return false
 			end
 		else
 			if operationType == "remove" then
-				NPCScan:Printf(L["%1$s (%2$d) is not on the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
+				NPCScan:Printf(
+					L["%1$s (%2$d) is not on the user-defined NPC list."],
+					NPCScan:GetNPCNameFromID(npcID),
+					npcID
+				)
 				return false
 			end
 		end
@@ -108,7 +103,9 @@ local function ValidateUserDefinedNPCInput(input, operationType)
 		return true, npcID
 	end
 
-	NPCScan:Print(L['Valid values are a numeric NPC ID, the word "mouseover" while you have your mouse cursor over an NPC, or the word "target" while you have an NPC set as your target.'])
+	NPCScan:Print(
+		L['Valid values are a numeric NPC ID, the word "mouseover" while you have your mouse cursor over an NPC, or the word "target" while you have an NPC set as your target.']
+	)
 
 	return false
 end
@@ -208,10 +205,10 @@ local function SetNPCDataFromList(savedNPCIDs)
 	table.sort(npcIDs, SortByNPCNameThenByID)
 end
 
--- ----------------------------------------------------------------------------
--- Achievement options
--- ----------------------------------------------------------------------------
-local AchievementIDs  -- Populated below.
+--------------------------------------------------------------------------------
+---- Achievement Options
+--------------------------------------------------------------------------------
+local AchievementIDs -- Populated below.
 local AchievementNPCOptions = {}
 
 local function UpdateAchievementNPCOptions()
@@ -224,12 +221,9 @@ local function UpdateAchievementNPCOptions()
 			AchievementIDs[#AchievementIDs + 1] = achievementID
 		end
 
-		table.sort(
-			AchievementIDs,
-			function(a, b)
-				return Data.Achievements[a].name < Data.Achievements[b].name
-			end
-		)
+		table.sort(AchievementIDs, function(a, b)
+			return Data.Achievements[a].name < Data.Achievements[b].name
+		end)
 	end
 
 	for achievementIDIndex = 1, #AchievementIDs do
@@ -238,7 +232,10 @@ local function UpdateAchievementNPCOptions()
 
 		local achievementOptionsTable = {
 			order = achievementIDIndex,
-			name = ("%s%s|r"):format(private.DetectionGroupStatusColors[achievementStatus], Data.Achievements[achievementID].name),
+			name = ("%s%s|r"):format(
+				private.DetectionGroupStatusColors[achievementStatus],
+				Data.Achievements[achievementID].name
+			),
 			desc = Data.Achievements[achievementID].description,
 			type = "group",
 			args = {
@@ -263,16 +260,16 @@ local function UpdateAchievementNPCOptions()
 						UpdateBlacklistedNPCOptions()
 
 						NPCScan:UpdateScanList()
-					end
+					end,
 				},
 				npcs = {
 					order = 2,
 					name = " ",
 					type = "group",
 					guiInline = true,
-					args = {}
-				}
-			}
+					args = {},
+				},
+			},
 		}
 
 		table.wipe(npcIDs)
@@ -315,7 +312,7 @@ local function UpdateAchievementNPCOptions()
 					if isBlacklisted then
 						NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 					end
-				end
+				end,
 			}
 		end
 
@@ -327,9 +324,9 @@ end
 
 private.UpdateAchievementNPCOptions = UpdateAchievementNPCOptions
 
--- ----------------------------------------------------------------------------
--- Rare options.
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Rare Options
+--------------------------------------------------------------------------------
 local DungeonRareNPCOptions = {}
 local ZoneRareNPCOptions = {}
 
@@ -351,7 +348,10 @@ local function UpdateRareNPCOptions()
 		table.wipe(npcNames)
 
 		for npcID, npc in pairs(Data.Maps[mapID].NPCs) do
-			if (not npc.classification or RareClassifications[npc.classification]) and npc.factionGroup ~= _G.UnitFactionGroup("player") then
+			if
+				(not npc.classification or RareClassifications[npc.classification])
+				and npc.factionGroup ~= _G.UnitFactionGroup("player")
+			then
 				npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
 				npcIDs[#npcIDs + 1] = npcID
 			end
@@ -371,9 +371,9 @@ local function UpdateRareNPCOptions()
 						name = " ",
 						type = "group",
 						guiInline = true,
-						args = {}
-					}
-				}
+						args = {},
+					},
+				},
 			}
 
 			for npcIDIndex = 1, #npcIDs do
@@ -405,7 +405,7 @@ local function UpdateRareNPCOptions()
 							if isBlacklisted then
 								NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 							end
-						end
+						end,
 					}
 				end
 			end
@@ -423,9 +423,9 @@ end
 
 private.UpdateRareNPCOptions = UpdateRareNPCOptions
 
--- ----------------------------------------------------------------------------
--- Tameable rare options.
--- ----------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+---- Tameable Rare Options
+---------------------------------------------------------------------------------
 local DungeonTameableRareNPCOptions = {}
 local ZoneTameableRareNPCOptions = {}
 
@@ -462,9 +462,9 @@ local function UpdateTameableRareNPCOptions()
 						name = " ",
 						type = "group",
 						guiInline = true,
-						args = {}
-					}
-				}
+						args = {},
+					},
+				},
 			}
 
 			for npcIDIndex = 1, #npcIDs do
@@ -496,7 +496,7 @@ local function UpdateTameableRareNPCOptions()
 							if isBlacklisted then
 								NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 							end
-						end
+						end,
 					}
 				end
 			end
@@ -514,9 +514,9 @@ end
 
 private.UpdateTameableRareNPCOptions = UpdateTameableRareNPCOptions
 
--- ----------------------------------------------------------------------------
--- Search options.
--- ----------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+---- Search Options
+---------------------------------------------------------------------------------
 local NPCSearchOptions = {}
 
 local function AddApplicableSearchID(npc)
@@ -551,7 +551,11 @@ local function UpdateNPCSearchOptions()
 				type = "toggle",
 				width = "full",
 				disabled = function()
-					if npc.achievementID and profile.detection.achievementIDs[npc.achievementID] ~= Enum.DetectionGroupStatus.UserDefined then
+					if
+						npc.achievementID
+						and profile.detection.achievementIDs[npc.achievementID]
+							~= Enum.DetectionGroupStatus.UserDefined
+					then
 						return true
 					end
 				end,
@@ -571,7 +575,7 @@ local function UpdateNPCSearchOptions()
 					if isBlacklisted then
 						NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
 					end
-				end
+				end,
 			}
 		end
 	else
@@ -630,9 +634,9 @@ end
 
 private.PerformNPCSearch = PerformNPCSearch
 
--- ----------------------------------------------------------------------------
--- User defined NPC options.
--- ----------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+---- User-Defined NPC Options
+---------------------------------------------------------------------------------
 local UserDefinedNPCOptions = {}
 
 local function UpdateUserDefinedNPCOptions()
@@ -656,7 +660,7 @@ local function UpdateUserDefinedNPCOptions()
 				end,
 				set = function()
 					RemoveUserDefinedNPC(npcID)
-				end
+				end,
 			}
 		end
 	else
@@ -668,9 +672,9 @@ end
 
 private.UpdateUserDefinedNPCOptions = UpdateUserDefinedNPCOptions
 
--- ----------------------------------------------------------------------------
--- Blacklisted NPC options.
--- ----------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+---- Blacklisted NPC Options
+---------------------------------------------------------------------------------
 local BlacklistedNPCOptions = {}
 
 function UpdateBlacklistedNPCOptions()
@@ -699,7 +703,7 @@ function UpdateBlacklistedNPCOptions()
 					UpdateBlacklistedNPCOptions()
 
 					NPCScan:UpdateScanList()
-				end
+				end,
 			}
 		end
 	else
@@ -711,192 +715,193 @@ end
 
 private.UpdateBlacklistedNPCOptions = UpdateBlacklistedNPCOptions
 
--- ----------------------------------------------------------------------------
--- Initialization.
--- ----------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+---- Initialization
+---------------------------------------------------------------------------------
 local NPCOptions
 
 local function GetOrUpdateNPCOptions()
 	profile = private.db.profile
 
-	NPCOptions = NPCOptions or {
-		name = L["NPCs"],
-		order = 1,
-		type = "group",
-		childGroups = "tab",
-		args = {
-			achievements = {
-				order = 1,
-				name = _G.ACHIEVEMENTS,
-				type = "group",
-				childGroups = "tree",
-				args = AchievementNPCOptions
-			},
-			rare = {
-				order = 2,
-				name = _G.BATTLE_PET_BREED_QUALITY4,
-				type = "group",
-				childGroups = "tab",
-				args = {
-					isEnabled = {
-						order = 1,
-						type = "toggle",
-						name = _G.ENABLE,
-						descStyle = "inline",
-						get = function()
-							return profile.detection.rares
-						end,
-						set = function(_, value)
-							profile.detection.rares = value
+	NPCOptions = NPCOptions
+		or {
+			name = L["NPCs"],
+			order = 1,
+			type = "group",
+			childGroups = "tab",
+			args = {
+				achievements = {
+					order = 1,
+					name = _G.ACHIEVEMENTS,
+					type = "group",
+					childGroups = "tree",
+					args = AchievementNPCOptions,
+				},
+				rare = {
+					order = 2,
+					name = _G.BATTLE_PET_BREED_QUALITY4,
+					type = "group",
+					childGroups = "tab",
+					args = {
+						isEnabled = {
+							order = 1,
+							type = "toggle",
+							name = _G.ENABLE,
+							descStyle = "inline",
+							get = function()
+								return profile.detection.rares
+							end,
+							set = function(_, value)
+								profile.detection.rares = value
 
-							NPCScan:UpdateScanList()
-						end
+								NPCScan:UpdateScanList()
+							end,
+						},
+						zoneNPCOptions = {
+							order = 2,
+							name = _G.ZONE,
+							descStyle = "inline",
+							type = "group",
+							args = ZoneRareNPCOptions,
+						},
+						dungeonNPCOptions = {
+							order = 3,
+							name = _G.DUNGEONS,
+							descStyle = "inline",
+							type = "group",
+							args = DungeonRareNPCOptions,
+						},
 					},
-					zoneNPCOptions = {
-						order = 2,
-						name = _G.ZONE,
-						descStyle = "inline",
-						type = "group",
-						args = ZoneRareNPCOptions
-					},
-					dungeonNPCOptions = {
-						order = 3,
-						name = _G.DUNGEONS,
-						descStyle = "inline",
-						type = "group",
-						args = DungeonRareNPCOptions
-					}
-				}
-			},
-			tameableRare = {
-				order = 3,
-				name = _G.TAMEABLE,
-				type = "group",
-				childGroups = "tab",
-				args = {
-					isEnabled = {
-						order = 1,
-						type = "toggle",
-						name = _G.ENABLE,
-						descStyle = "inline",
-						get = function()
-							return profile.detection.tameables
-						end,
-						set = function(_, value)
-							profile.detection.tameables = value
+				},
+				tameableRare = {
+					order = 3,
+					name = _G.TAMEABLE,
+					type = "group",
+					childGroups = "tab",
+					args = {
+						isEnabled = {
+							order = 1,
+							type = "toggle",
+							name = _G.ENABLE,
+							descStyle = "inline",
+							get = function()
+								return profile.detection.tameables
+							end,
+							set = function(_, value)
+								profile.detection.tameables = value
 
-							NPCScan:UpdateScanList()
-						end
+								NPCScan:UpdateScanList()
+							end,
+						},
+						zoneNPCOptions = {
+							order = 2,
+							name = _G.ZONE,
+							descStyle = "inline",
+							type = "group",
+							args = ZoneTameableRareNPCOptions,
+						},
+						dungeonNPCOptions = {
+							order = 3,
+							name = _G.DUNGEONS,
+							descStyle = "inline",
+							type = "group",
+							args = DungeonTameableRareNPCOptions,
+						},
 					},
-					zoneNPCOptions = {
-						order = 2,
-						name = _G.ZONE,
-						descStyle = "inline",
-						type = "group",
-						args = ZoneTameableRareNPCOptions
+				},
+				search = {
+					order = 4,
+					name = _G.SEARCH,
+					type = "group",
+					args = {
+						description = {
+							order = 1,
+							type = "description",
+							name = L["Type the name of a Continent, Dungeon, or Zone, or the partial name of an NPC. Accepts Lua patterns."],
+						},
+						entryBox = {
+							order = 2,
+							name = " ",
+							descStyle = "inline",
+							type = "input",
+							get = function()
+								return ""
+							end,
+							set = function(_, value)
+								PerformNPCSearch(value)
+							end,
+						},
+						results = {
+							order = 3,
+							name = _G.KBASE_SEARCH_RESULTS,
+							type = "group",
+							inline = true,
+							args = NPCSearchOptions,
+						},
 					},
-					dungeonNPCOptions = {
-						order = 3,
-						name = _G.DUNGEONS,
-						descStyle = "inline",
-						type = "group",
-						args = DungeonTameableRareNPCOptions
-					}
-				}
-			},
-			search = {
-				order = 4,
-				name = _G.SEARCH,
-				type = "group",
-				args = {
-					description = {
-						order = 1,
-						type = "description",
-						name = L["Type the name of a Continent, Dungeon, or Zone, or the partial name of an NPC. Accepts Lua patterns."]
-					},
-					entryBox = {
-						order = 2,
-						name = " ",
-						descStyle = "inline",
-						type = "input",
-						get = function()
-							return ""
-						end,
-						set = function(_, value)
-							PerformNPCSearch(value)
-						end
-					},
-					results = {
-						order = 3,
-						name = _G.KBASE_SEARCH_RESULTS,
-						type = "group",
-						inline = true,
-						args = NPCSearchOptions
-					}
-				}
-			},
-			userDefined = {
-				order = 5,
-				name = _G.CUSTOM,
-				type = "group",
-				args = {
-					isEnabled = {
-						order = 1,
-						type = "toggle",
-						name = _G.ENABLE,
-						descStyle = "inline",
-						get = function()
-							return profile.detection.userDefined
-						end,
-						set = function(_, value)
-							profile.detection.userDefined = value
+				},
+				userDefined = {
+					order = 5,
+					name = _G.CUSTOM,
+					type = "group",
+					args = {
+						isEnabled = {
+							order = 1,
+							type = "toggle",
+							name = _G.ENABLE,
+							descStyle = "inline",
+							get = function()
+								return profile.detection.userDefined
+							end,
+							set = function(_, value)
+								profile.detection.userDefined = value
 
-							NPCScan:UpdateScanList()
-						end
+								NPCScan:UpdateScanList()
+							end,
+						},
+						npcID = {
+							order = 2,
+							name = _G.ADD,
+							desc = L['Valid values are a numeric NPC ID, the word "mouseover" while you have your mouse cursor over an NPC, or the word "target" while you have an NPC set as your target.'],
+							type = "input",
+							disabled = function()
+								return not profile.detection.userDefined
+							end,
+							get = function()
+								return ""
+							end,
+							set = function(_, value)
+								AddUserDefinedNPC(value)
+							end,
+						},
+						npcIDs = {
+							order = 3,
+							name = _G.ASSIGNED_COLON,
+							type = "group",
+							inline = true,
+							disabled = function()
+								return not profile.detection.userDefined
+							end,
+							args = UserDefinedNPCOptions,
+						},
 					},
-					npcID = {
-						order = 2,
-						name = _G.ADD,
-						desc = L['Valid values are a numeric NPC ID, the word "mouseover" while you have your mouse cursor over an NPC, or the word "target" while you have an NPC set as your target.'],
-						type = "input",
-						disabled = function()
-							return not profile.detection.userDefined
-						end,
-						get = function()
-							return ""
-						end,
-						set = function(_, value)
-							AddUserDefinedNPC(value)
-						end
+				},
+				blacklisted = {
+					order = 6,
+					name = _G.IGNORED,
+					type = "group",
+					args = {
+						npcIDs = {
+							order = 1,
+							name = _G.ASSIGNED_COLON,
+							type = "group",
+							inline = true,
+							args = BlacklistedNPCOptions,
+						},
 					},
-					npcIDs = {
-						order = 3,
-						name = _G.ASSIGNED_COLON,
-						type = "group",
-						inline = true,
-						disabled = function()
-							return not profile.detection.userDefined
-						end,
-						args = UserDefinedNPCOptions
-					}
-				}
+				},
 			},
-			blacklisted = {
-				order = 6,
-				name = _G.IGNORED,
-				type = "group",
-				args = {
-					npcIDs = {
-						order = 1,
-						name = _G.ASSIGNED_COLON,
-						type = "group",
-						inline = true,
-						args = BlacklistedNPCOptions
-					}
-				}
-			}
 		}
-	}
 
 	UpdateAchievementNPCOptions()
 	UpdateRareNPCOptions()

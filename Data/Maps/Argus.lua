@@ -1,13 +1,15 @@
--- ----------------------------------------------------------------------------
--- AddOn namespace
--- ----------------------------------------------------------------------------
-local AddOnFolderName, private = ...
+--------------------------------------------------------------------------------
+---- AddOn Namespace
+--------------------------------------------------------------------------------
+local AddOnFolderName = ... ---@type string
+local private = select(2, ...) ---@class PrivateNamespace
+
 local Maps = private.Data.Maps
 local MapID = private.Enum.MapID
 
--- ----------------------------------------------------------------------------
--- Krokuun
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Krokuun
+--------------------------------------------------------------------------------
 Maps[MapID.Krokuun].NPCs = {
     [120393] = true, -- Siegemaster Voraan
     [122911] = true, -- Commander Vecaya
@@ -20,12 +22,12 @@ Maps[MapID.Krokuun].NPCs = {
     [125479] = true, -- Tar Spitter
     [125820] = true, -- Imp Mother Laglath
     [125824] = true, -- Khazaduum
-    [126419] = true -- Naroua
+    [126419] = true, -- Naroua
 }
 
--- ----------------------------------------------------------------------------
--- Mac'Aree
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Mac'Aree
+--------------------------------------------------------------------------------
 Maps[MapID.MacAree].NPCs = {
     [122838] = true, -- Shadowcaster Voruun
     [126815] = true, -- Soultwisted Monstrosity
@@ -51,12 +53,12 @@ Maps[MapID.MacAree].NPCs = {
     [126908] = true, -- Zul'tan the Numerous
     [126910] = true, -- Commander Xethgar
     [126912] = true, -- Skreeg the Devourer
-    [126913] = true -- Slithon the Last
+    [126913] = true, -- Slithon the Last
 }
 
--- ----------------------------------------------------------------------------
--- Antoran Wastes
--- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Antoran Wastes
+--------------------------------------------------------------------------------
 Maps[MapID.AntoranWastes].NPCs = {
     [122947] = true, -- Mistress Il'thendra
     [122958] = true, -- Blistermaw
@@ -80,5 +82,5 @@ Maps[MapID.AntoranWastes].NPCs = {
     [127700] = true, -- Squadron Commander Vishax
     [127703] = true, -- Doomcaster Suprax
     [127705] = true, -- Mother Rosula
-    [127706] = true -- Rezira the Seer
+    [127706] = true, -- Rezira the Seer
 }

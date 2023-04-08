@@ -1,4 +1,6 @@
-local AddOnFolderName, private = ...
+local AddOnFolderName = ... ---@type string
+local private = select(2, ...) ---@class PrivateNamespace
+
 local L = _G.LibStub("AceLocale-3.0"):NewLocale(AddOnFolderName, "enUS", true)
 
 L["Added %1$s (%2$d) to the user-defined NPC list."] = true
@@ -28,7 +30,8 @@ L["%1$s (%2$d) is not on the user-defined NPC list."] = true
 L["The number of minutes before an NPC will be detected again."] = true
 L["The number of minutes a targeting button will exist before fading out."] = true
 L["Type the name of a Continent, Dungeon, or Zone, or the partial name of an NPC. Accepts Lua patterns."] = true
-L["Valid values are a numeric NPC ID, the word \"mouseover\" while you have your mouse cursor over an NPC, or the word \"target\" while you have an NPC set as your target."] = true
+L['Valid values are a numeric NPC ID, the word "mouseover" while you have your mouse cursor over an NPC, or the word "target" while you have an NPC set as your target.'] =
+    true
 L["Vertical offset from the anchor point."] = true
 L["X Offset"] = true
 L["Y Offset"] = true
