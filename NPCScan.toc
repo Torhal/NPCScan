@@ -1,4 +1,4 @@
-## Interface: 90001
+## Interface: 100007
 ## Title: NPCScan
 ## Notes: Uses various methods to scan your surroundings for rare or specified NPCs.
 ## Author: Torhal
@@ -8,7 +8,6 @@
 
 ## X-Date: @file-date-iso@
 ## X-Category: Achievements
-## X-Email: jcallahan@curse.com
 
 embeds.xml
 
