@@ -1,4 +1,4 @@
-## Interface: 100007
+## Interface: 120000
 ## Title: NPCScan
 ## Notes: Uses various methods to scan your surroundings for rare or specified NPCs.
 ## Author: Torhal
