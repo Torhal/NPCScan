@@ -3,51 +3,51 @@ package-as: NPCScan
 enable-nolib-creation: no
 
 externals:
-    Libs/LibStub:
+    Libraries/LibStub:
         url: https://repos.wowace.com/wow/libstub/trunk
-    Libs/CallbackHandler-1.0:
+    Libraries/CallbackHandler-1.0:
         url: https://repos.wowace.com/wow/callbackhandler/trunk/CallbackHandler-1.0
-    Libs/AceAddon-3.0:
+    Libraries/AceAddon-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceAddon-3.0
-    Libs/AceBucket-3.0:
+    Libraries/AceBucket-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceBucket-3.0
-    Libs/AceConfig-3.0:
+    Libraries/AceConfig-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceConfig-3.0
-    Libs/AceConsole-3.0:
+    Libraries/AceConsole-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceConsole-3.0
-    Libs/AceDB-3.0:
+    Libraries/AceDB-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceDB-3.0
-    Libs/AceDBOptions-3.0:
+    Libraries/AceDBOptions-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceDBOptions-3.0
-    Libs/AceEvent-3.0:
+    Libraries/AceEvent-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceEvent-3.0
-    Libs/AceGUI-3.0:
+    Libraries/AceGUI-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceGUI-3.0
-    Libs/AceLocale-3.0:
+    Libraries/AceLocale-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceLocale-3.0
-    Libs/AceTimer-3.0:
+    Libraries/AceTimer-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceTimer-3.0
-    Libs/AceGUI-3.0-SharedMediaWidgets:
+    Libraries/AceGUI-3.0-SharedMediaWidgets:
         url: https://repos.wowace.com/wow/ace-gui-3-0-shared-media-widgets/trunk
-    Libs/HereBeDragons:
+    Libraries/HereBeDragons:
         url: https://repos.wowace.com/wow/herebedragons
-    Libs/LibDialog-1.0:
+    Libraries/LibDialog-1.0:
         url: https://repos.wowace.com/wow/libdialog-1-0
         tag: latest
-    Libs/LibSharedMedia-3.0:
+    Libraries/LibSharedMedia-3.0:
         url: https://repos.wowace.com/wow/libsharedmedia-3-0/trunk
-    Libs/LibSink-2.0:
+    Libraries/LibSink-2.0:
         url: https://repos.wowace.com/wow/libsink-2-0/trunk/LibSink-2.0
-    Libs/LibTextDump-1.0:
+    Libraries/LibTextDump-1.0:
         url: https://repos.wowace.com/wow/libtextdump-1-0
         tag: latest
-    Libs/LibToast-1.0:
+    Libraries/LibToast-1.0:
         url: https://repos.wowace.com/wow/libtoast-1-0
         tag: latest
-    Libs/LibWindow-1.1:
+    Libraries/LibWindow-1.1:
         url: https://repos.wowace.com/wow/libwindow-1-1/trunk/LibWindow-1.1
-    Libs/LibQTip-1.0:
+    Libraries/LibQTip-1.0:
         url: https://repos.wowace.com/wow/libqtip-1-0
-	Libs/LibDataBroker-1.1:
-		url: https://repos.wowace.com/wow/libdatabroker-1-1
-		tag: v1.1.4
+    Libraries/LibDataBroker-1.1:
+        url: https://repos.wowace.com/wow/libdatabroker-1-1
+        tag: v1.1.4
