@@ -101,6 +101,10 @@ local firstRun = true
 local function GetAlertOptions()
     profile = private.db.profile
 
+    if not profile then
+        return {}
+    end
+
     local function IsSoundDisabled()
         return not profile.alert.sound.isEnabled
     end
