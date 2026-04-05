@@ -30,16 +30,17 @@ local FormatAtlasTexture = private.FormatAtlasTexture
 --------------------------------------------------------------------------------
 ---- Constants
 --------------------------------------------------------------------------------
-local DataObject = LibStub("LibDataBroker-1.1"):NewDataObject(AddOnFolderName, {
-    icon = [[Interface\LFGFRAME\BattlenetWorking0]],
-    label = _G.OBJECTIVES_LABEL,
-    scannerData = {
-        NPCCount = 0,
-        NPCs = {},
-    },
-    text = _G.NONE,
-    type = "data source",
-})
+local DataObject =
+    LibStub("AceEvent-3.0"):Embed(LibStub("LibDataBroker-1.1"):NewDataObject(AddOnFolderName, {
+        icon = [[Interface\LFGFRAME\BattlenetWorking0]],
+        label = OBJECTIVES_LABEL,
+        scannerData = {
+            NPCCount = 0,
+            NPCs = {},
+        },
+        text = NONE,
+        type = "data source",
+    }))
 
 local npcAchievementNames = {}
 local npcDisplayNames = {}
@@ -570,5 +571,4 @@ function DataObject:Update(_, scannerData)
     end
 end
 
-LibStub("AceEvent-3.0"):Embed(DataObject)
 DataObject:RegisterMessage(EventMessage.ScannerDataUpdated, "Update")
