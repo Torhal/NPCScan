@@ -312,7 +312,7 @@ do
                     local func = private.DUMP_COMMANDS[dumpType]
 
                     if func then
-                        private.TextDump = private.TextDump or _G.LibStub("LibTextDump-1.0"):New(AddOnFolderName)
+                        private.TextDump = private.TextDump or _G.LibStub("LibTextDump-1.0"):New(AddOnFolderName, 750, 600)
                         func(parameters)
                     else
                         NPCScan:Print("Unknown dump command. Valid commands:")
