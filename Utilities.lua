@@ -74,8 +74,8 @@ local function CreateScaleAnimation(
     order
 )
     local animation = animationGroup:CreateAnimation("Scale")
-    animation:SetFromScale(fromScaleX, fromScaleY)
-    animation:SetToScale(toScaleX, toScaleY)
+    animation:SetScaleFrom(fromScaleX, fromScaleY)
+    animation:SetScaleTo(toScaleX, toScaleY)
     animation:SetDuration(duration)
 
     if startDelay then
