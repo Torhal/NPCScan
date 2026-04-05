@@ -55,9 +55,10 @@ end
 --------------------------------------------------------------------------------
 ---- Prototype.
 --------------------------------------------------------------------------------
-local TargetButton = _G.CreateFrame("Button")
+local TargetButtonPrototype = CreateFrame("Button")
+
 local TargetButtonMetatable = {
-    __index = TargetButton,
+    __index = TargetButtonPrototype,
 }
 
 --------------------------------------------------------------------------------
@@ -147,7 +148,7 @@ end
 --------------------------------------------------------------------------------
 ---- Event and message handlers.
 --------------------------------------------------------------------------------
-function TargetButton:COMBAT_LOG_EVENT_UNFILTERED()
+function TargetButtonPrototype:COMBAT_LOG_EVENT_UNFILTERED()
     local _, subEvent, _, _, _, _, _, destGUID = _G.CombatLogGetCurrentEventInfo()
 
     if subEvent == "UNIT_DIED" and destGUID and private.GUIDToCreatureID(destGUID) == self.npcID then
@@ -155,14 +156,14 @@ function TargetButton:COMBAT_LOG_EVENT_UNFILTERED()
     end
 end
 
-function TargetButton:PLAYER_REGEN_DISABLED()
+function TargetButtonPrototype:PLAYER_REGEN_DISABLED()
     if private.db.profile.targetButtonGroup.hideDuringCombat then
         self.hiddenForCombat = true
         self:Hide()
     end
 end
 
-function TargetButton:PLAYER_REGEN_ENABLED()
+function TargetButtonPrototype:PLAYER_REGEN_ENABLED()
     local pausedDismissal = self.pausedDismissal
     self.pausedDismissal = nil
 
@@ -197,7 +198,7 @@ function TargetButton:PLAYER_REGEN_ENABLED()
     self.hiddenForCombat = nil
 end
 
-function TargetButton:UpdateData(_, data)
+function TargetButtonPrototype:UpdateData(_, data)
     if data.npcID == self.npcID then
         if
             data.unitClassification
@@ -237,7 +238,7 @@ end
 --------------------------------------------------------------------------------
 ---- Methods.
 --------------------------------------------------------------------------------
-function TargetButton:Activate(data)
+function TargetButtonPrototype:Activate(data)
     self.npcID = data.npcID
     self.npcData = Data.NPCs[self.npcID]
     self.npcName = data.npcName
@@ -307,7 +308,7 @@ function TargetButton:Activate(data)
     self:RegisterMessage(EventMessage.UnitInformationAvailable, "UpdateData")
 end
 
-function TargetButton:Deactivate()
+function TargetButtonPrototype:Deactivate()
     self:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
     self:UnregisterEvent("PLAYER_REGEN_ENABLED")
     self:UnregisterMessage("NPCScan_UnitInformationAvailable")
@@ -353,7 +354,7 @@ function TargetButton:Deactivate()
     self.needsUnitData = nil
 end
 
-function TargetButton:RequestDeactivate()
+function TargetButtonPrototype:RequestDeactivate()
     if self.__isActive and not self.pausedDismissal then
         if _G.InCombatLockdown() then
             self.pausedDismissal = true
@@ -365,7 +366,7 @@ function TargetButton:RequestDeactivate()
     end
 end
 
-function TargetButton:GetEffectiveSpawnPoint()
+function TargetButtonPrototype:GetEffectiveSpawnPoint()
     local x, y = self:GetCenter()
     if not x or not y then
         return private.DEFAULT_OS_SPAWN_POINT
@@ -378,7 +379,7 @@ function TargetButton:GetEffectiveSpawnPoint()
     return verticalName .. horizontalName
 end
 
-function TargetButton:SetRaidTarget(unitToken)
+function TargetButtonPrototype:SetRaidTarget(unitToken)
     if unitToken and not self.raidIconID and #RaidIconIDs > 0 then
         self.raidIconID = table.remove(RaidIconIDs)
         self.RaidIcon:Show()
@@ -402,7 +403,7 @@ function TargetButton:SetRaidTarget(unitToken)
     return not self.needsRaidTarget
 end
 
-function TargetButton:SetSpecialText(fakeCriteriaCompleted)
+function TargetButtonPrototype:SetSpecialText(fakeCriteriaCompleted)
     local npcData = self.npcData
 
     if npcData and npcData.achievementID then
@@ -417,7 +418,7 @@ function TargetButton:SetSpecialText(fakeCriteriaCompleted)
     end
 end
 
-function TargetButton:SetUnitData(data)
+function TargetButtonPrototype:SetUnitData(data)
     if data.unitCreatureType then
         if data.unitLevel then
             local template = (self.__classification == "elite" or self.__classification == "rareelite")
@@ -445,7 +446,7 @@ function TargetButton:SetUnitData(data)
     end
 end
 
-function TargetButton:StopAnimations()
+function TargetButtonPrototype:StopAnimations()
     self.dismissAnimationGroup:Stop()
     self.durationFadeAnimationGroup:Stop()
     self.killedBackgroundTexture.animIn:Stop()
