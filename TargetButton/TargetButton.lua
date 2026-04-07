@@ -621,26 +621,26 @@ local function CreateTargetButton(unitClassification)
     --------------------------------------------------------------------------------
     ---- FontStrings
     --------------------------------------------------------------------------------
-    local sourceText = button:CreateFontString(nil, "ARTWORK", 1)
+    local sourceText = button:CreateFontString(nil, "ARTWORK", nil)
     sourceText:SetFontObject("GameFontNormalSmall")
     button.SourceText = sourceText
 
-    local unitName = button:CreateFontString(nil, "ARTWORK", 1)
+    local unitName = button:CreateFontString(nil, "ARTWORK", nil)
     unitName:SetSize(165, 33)
     unitName:SetFontObject("GameFontNormalMed3")
     unitName:SetJustifyH("LEFT")
     unitName:SetJustifyV("MIDDLE")
     button.UnitName = unitName
 
-    local classification = button:CreateFontString(nil, "ARTWORK", 1)
+    local classification = button:CreateFontString(nil, "ARTWORK", nil)
     classification:SetFontObject("GameFontNormalSmall")
     button.Classification = classification
 
-    local specialText = button:CreateFontString(nil, "ARTWORK", 1)
+    local specialText = button:CreateFontString(nil, "ARTWORK", nil)
     button.SpecialText = specialText
 
     --------------------------------------------------------------------------------
-    ---- Animations.
+    ---- Animations
     --------------------------------------------------------------------------------
     local buttonAnimIn = button:CreateAnimationGroup()
     buttonAnimIn:SetToFinalAlpha(true)
