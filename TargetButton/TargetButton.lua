@@ -524,12 +524,19 @@ do
     end
 end -- do-block
 
+---@param unitClassification string
+---@return TargetButton
 local function CreateTargetButton(unitClassification)
     local CreateAlphaAnimation = private.CreateAlphaAnimation
     local CreateScaleAnimation = private.CreateScaleAnimation
 
-    local button =
-        _G.CreateFrame("Button", nil, _G.UIParent, "SecureActionButtonTemplate, SecureHandlerShowHideTemplate")
+    local button = AceEvent:Embed(
+        setmetatable(
+            CreateFrame("Button", nil, UIParent, "SecureActionButtonTemplate, SecureHandlerShowHideTemplate"),
+            TargetButtonMetatable
+        )
+    ) --[[@as TargetButton]]
+
     button:SetFrameStrata("DIALOG")
     button:SetAttribute("type1", "macro")
     button:SetAttribute("_onshow", "self:Enable()")
@@ -543,9 +550,7 @@ local function CreateTargetButton(unitClassification)
 
     button:Hide()
 
-    AceEvent:Embed(_G.setmetatable(button, TargetButtonMetatable))
-
-    local dismissButton = _G.CreateFrame("Button", nil, button, "UIPanelCloseButtonNoScripts")
+    local dismissButton = CreateFrame("Button", nil, button, "UIPanelCloseButtonNoScripts")
     dismissButton:SetSize(16, 16)
     dismissButton:GetDisabledTexture():SetTexture("")
     dismissButton:GetHighlightTexture():SetTexture([[Interface\FriendsFrame\UI-Toast-CloseButton-Highlight]])
