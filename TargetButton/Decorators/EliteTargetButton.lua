@@ -31,6 +31,7 @@ local function EliteTargetButton_AnimateIn(self)
     self.Background3.animIn:Play()
 end
 
+---@param button TargetButton
 local function DecorateEliteTargetButton(button)
     local CreateAlphaAnimation = private.CreateAlphaAnimation
 

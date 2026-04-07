@@ -7,6 +7,8 @@ local private = select(2, ...) ---@class PrivateNamespace
 ----------------------------------------------------------------------------------
 ---- Helpers
 ---------------------------------------------------------------------------------
+
+---@param button TargetButton
 local function DecorateNormalTargetButton(button)
     button:SetSize(276, 80)
 
