@@ -111,23 +111,25 @@ private.NPCMetatable = NPCMetatable
 ---@param npc NPCData
 ---@param questFieldName "achievementQuestID" | "questID"
 local function AssignNPCToQuest(npc, questFieldName)
-    if not npc[questFieldName] then
+    local questID = npc[questFieldName]
+
+    if not questID then
         return
     end
 
-    local questNPCs = QuestNPCs[npc[questFieldName]]
+    local questNPCs = QuestNPCs[questID]
 
     if not questNPCs then
         questNPCs = {}
-        QuestNPCs[npc[questFieldName]] = questNPCs
+        QuestNPCs[questID] = questNPCs
     end
 
     questNPCs[npc.npcID] = npc
 
-    local questName = NPCScan:GetQuestNameFromID(npc[questFieldName])
+    local questName = NPCScan:GetQuestNameFromID(questID)
 
     if questName and questName ~= UNKNOWN then
-        private.QuestIDFromName[questName] = npc[questFieldName]
+        private.QuestIDFromName[questName] = questID
     end
 end
 
