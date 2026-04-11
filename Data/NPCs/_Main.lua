@@ -76,7 +76,7 @@ local NPCPrototype = {
 }
 
 local NPCMetatable = {
-    __index = NPCPrototype,
+    __index = NPCDataPrototype,
 }
 
 private.NPCMetatable = NPCMetatable
@@ -84,20 +84,21 @@ private.NPCMetatable = NPCMetatable
 --------------------------------------------------------------------------------
 ---- Helpers
 --------------------------------------------------------------------------------
+
 local function AssignNPCToQuest(npc, questFieldName)
     if npc[questFieldName] then
-        local npcs = QuestNPCs[npc[questFieldName]]
+        local questNPCs = QuestNPCs[npc[questFieldName]]
 
-        if not npcs then
-            npcs = {}
-            QuestNPCs[npc[questFieldName]] = npcs
+        if not questNPCs then
+            questNPCs = {}
+            QuestNPCs[npc[questFieldName]] = questNPCs
         end
 
-        npcs[npc.npcID] = npc
+        questNPCs[npc.npcID] = npc
 
         local questName = NPCScan:GetQuestNameFromID(npc[questFieldName])
 
-        if questName and questName ~= _G.UNKNOWN then
+        if questName and questName ~= UNKNOWN then
             private.QuestIDFromName[questName] = npc[questFieldName]
         end
     end
