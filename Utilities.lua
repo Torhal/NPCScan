@@ -44,6 +44,12 @@ end
 -----------------------------------------------------------------------
 -- Helpers
 -----------------------------------------------------------------------
+---@param animationGroup AnimationGroup
+---@param fromAlpha number
+---@param toAlpha number
+---@param duration number
+---@param startDelay? number
+---@param order? number
 local function CreateAlphaAnimation(animationGroup, fromAlpha, toAlpha, duration, startDelay, order)
     local animation = animationGroup:CreateAnimation("Alpha")
     animation:SetFromAlpha(fromAlpha)
@@ -63,6 +69,14 @@ end
 
 private.CreateAlphaAnimation = CreateAlphaAnimation
 
+---@param animationGroup AnimationGroup
+---@param fromScaleX number
+---@param fromScaleY number
+---@param toScaleX number
+---@param toScaleY number
+---@param duration number
+---@param startDelay? number
+---@param order? number
 local function CreateScaleAnimation(
     animationGroup,
     fromScaleX,
