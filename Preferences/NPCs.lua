@@ -10,7 +10,7 @@ local EventMessage = private.EventMessage
 
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
-local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
 
 --------------------------------------------------------------------------------
 ---- Constants
