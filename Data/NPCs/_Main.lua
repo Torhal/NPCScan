@@ -15,6 +15,8 @@ local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCS
 --------------------------------------------------------------------------------
 ---- Constants
 --------------------------------------------------------------------------------
+
+---@class NPCClassification
 local NPCClassification = {
     Elite = "elite",
     Minus = "minus",
