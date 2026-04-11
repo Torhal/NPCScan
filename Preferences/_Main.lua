@@ -5,6 +5,8 @@ local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
 local LibStub = _G.LibStub
+
+---@class NPCScan: AceAddon, AceConsole-3.0, AceEvent-3.0, AceTimer-3.0, AceBucket-3.0, LibSink-2.0
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 
 local AceConfigDialog = LibStub("AceConfigDialog-3.0")
