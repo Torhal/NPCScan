@@ -1,13 +1,4 @@
 --------------------------------------------------------------------------------
----- Localized Lua globals.
---------------------------------------------------------------------------------
--- Functions
-local pairs = _G.pairs
-
--- Libraries
-local table = _G.table
-
---------------------------------------------------------------------------------
 ---- AddOn Namespace
 ---------------------------------------------------------------------------------
 local AddOnFolderName = ... ---@type string
@@ -16,7 +7,6 @@ local private = select(2, ...) ---@class PrivateNamespace
 local Data = private.Data
 local EventMessage = private.EventMessage
 
-local LibStub = _G.LibStub
 local AceEvent = LibStub("AceEvent-3.0")
 local LibSharedMedia = LibStub("LibSharedMedia-3.0")
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
@@ -27,7 +17,7 @@ _G["BINDING_NAME_CLICK NPCScan_SearchMacroButton:LeftButton"] = "Targeting Macro
 
 --------------------------------------------------------------------------------
 ---- Constants
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 local LEFT_CLICK_TEXTURE = [[|TInterface\TUTORIALFRAME\UI-TUTORIAL-FRAME:19:11:-1:0:512:512:9:67:227:306|t]]
 local RIGHT_CLICK_TEXTURE = [[|TInterface\TUTORIALFRAME\UI-TUTORIAL-FRAME:20:12:0:-1:512:512:9:66:332:411|t]]
 
@@ -96,7 +86,7 @@ local function DismissButton_OnClick(self, mouseButton)
 
         if isBlacklisted then
             NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, parent.npcID)
-            NPCScan:Printf(_G.ERR_IGNORE_ADDED_S, NPCScan:GetNPCNameFromID(parent.npcID))
+            NPCScan:Printf(ERR_IGNORE_ADDED_S, NPCScan:GetNPCNameFromID(parent.npcID))
         end
     end
 
@@ -105,28 +95,28 @@ end
 
 local function DismissButton_OnEnter(self)
     if self:IsEnabled() then
-        local tooltip = _G.GameTooltip
+        local tooltip = GameTooltip
         tooltip:SetOwner(self, TOOLTIP_ANCHORS[self:GetParent():GetEffectiveSpawnPoint()], 0, -50)
-        tooltip:AddLine(LEFT_CLICK_TEXTURE .. " " .. _G.REMOVE, 0.5, 0.8, 1)
-        tooltip:AddLine(RIGHT_CLICK_TEXTURE .. " " .. _G.IGNORE, 0.5, 0.8, 1)
+        tooltip:AddLine(LEFT_CLICK_TEXTURE .. " " .. REMOVE, 0.5, 0.8, 1)
+        tooltip:AddLine(RIGHT_CLICK_TEXTURE .. " " .. IGNORE, 0.5, 0.8, 1)
 
         tooltip:Show()
     end
 end
 
 local function TargetButton_OnClick(self, mouseButton)
-    if mouseButton == "RightButton" and not _G.InCombatLockdown() then
+    if mouseButton == "RightButton" and not InCombatLockdown() then
         self.dismissAnimationGroup:Play()
     end
 end
 
 local function TargetButton_OnEnter(self)
-    local tooltip = _G.GameTooltip
+    local tooltip = GameTooltip
     tooltip:SetOwner(self, TOOLTIP_ANCHORS[self:GetEffectiveSpawnPoint()], 0, -50)
-    tooltip:AddLine(LEFT_CLICK_TEXTURE .. " " .. _G.TARGET, 0.5, 0.8, 1)
+    tooltip:AddLine(LEFT_CLICK_TEXTURE .. " " .. TARGET, 0.5, 0.8, 1)
 
-    if not _G.InCombatLockdown() then
-        tooltip:AddLine(RIGHT_CLICK_TEXTURE .. " " .. _G.REMOVE, 0.5, 0.8, 1)
+    if not InCombatLockdown() then
+        tooltip:AddLine(RIGHT_CLICK_TEXTURE .. " " .. REMOVE, 0.5, 0.8, 1)
     end
 
     tooltip:Show()
@@ -148,8 +138,9 @@ end
 --------------------------------------------------------------------------------
 ---- Event and message handlers.
 --------------------------------------------------------------------------------
+
 function TargetButtonPrototype:COMBAT_LOG_EVENT_UNFILTERED()
-    local _, subEvent, _, _, _, _, _, destGUID = _G.CombatLogGetCurrentEventInfo()
+    local _, subEvent, _, _, _, _, _, destGUID = CombatLogGetCurrentEventInfo()
 
     if subEvent == "UNIT_DIED" and destGUID and private.GUIDToCreatureID(destGUID) == self.npcID then
         self.isDead = true
@@ -173,7 +164,7 @@ function TargetButtonPrototype:PLAYER_REGEN_ENABLED()
     elseif self.isDead then
         local sound = private.db.profile.alert.sound
         if sound.isEnabled then
-            _G.PlaySoundFile(LibSharedMedia:Fetch("sound", "NPCScan Killed"), sound.channel)
+            PlaySoundFile(LibSharedMedia:Fetch("sound", "NPCScan Killed"), sound.channel)
         end
 
         self:SetSpecialText(true)
@@ -200,11 +191,7 @@ end
 
 function TargetButtonPrototype:UpdateData(_, data)
     if data.npcID == self.npcID then
-        if
-            data.unitClassification
-            and self.__classification ~= data.unitClassification
-            and not _G.InCombatLockdown()
-        then
+        if data.unitClassification and self.__classification ~= data.unitClassification and not InCombatLockdown() then
             self:SendMessage(EventMessage.TargetButtonNeedsReclassified, self, data)
             return
         end
@@ -246,7 +233,7 @@ function TargetButtonPrototype:Activate(data)
     self:SetSpecialText()
 
     if data.vignetteName and data.vignetteName ~= data.npcName then
-        self.SourceText:SetText(("%s %s"):format(data.sourceText, _G.PARENS_TEMPLATE:format(data.vignetteName)))
+        self.SourceText:SetText(("%s %s"):format(data.sourceText, PARENS_TEMPLATE:format(data.vignetteName)))
     else
         self.SourceText:SetText(data.sourceText)
     end
@@ -265,7 +252,7 @@ function TargetButtonPrototype:Activate(data)
     end
 
     local macroText = ("/targetexact %s"):format(data.npcName)
-    _G.NPCScan_RecentTargetButton:SetAttribute("macrotext", macroText)
+    NPCScan_RecentTargetButton:SetAttribute("macrotext", macroText)
 
     self:SetAttribute("macrotext", macroText)
 
@@ -356,7 +343,7 @@ end
 
 function TargetButtonPrototype:RequestDeactivate()
     if self.__isActive and not self.pausedDismissal then
-        if _G.InCombatLockdown() then
+        if InCombatLockdown() then
             self.pausedDismissal = true
             self:StopAnimations()
             return
@@ -372,10 +359,10 @@ function TargetButtonPrototype:GetEffectiveSpawnPoint()
         return private.DEFAULT_OS_SPAWN_POINT
     end
 
-    local horizontalName = (x > _G.UIParent:GetWidth() * 2 / 3) and "RIGHT"
-        or (x < _G.UIParent:GetWidth() / 3) and "LEFT"
+    local horizontalName = (x > UIParent:GetWidth() * 2 / 3) and "RIGHT"
+        or (x < UIParent:GetWidth() / 3) and "LEFT"
         or ""
-    local verticalName = (y > _G.UIParent:GetHeight() / 2) and "TOP" or "BOTTOM"
+    local verticalName = (y > UIParent:GetHeight() / 2) and "TOP" or "BOTTOM"
     return verticalName .. horizontalName
 end
 
@@ -384,15 +371,15 @@ function TargetButtonPrototype:SetRaidTarget(unitToken)
         self.raidIconID = table.remove(RaidIconIDs)
         self.RaidIcon:Show()
 
-        _G.SetRaidTargetIconTexture(self.RaidIcon, self.raidIconID)
+        SetRaidTargetIconTexture(self.RaidIcon, self.raidIconID)
 
         local raidMarker = private.db.profile.detection.raidMarker
         if
             raidMarker.add
-            and (raidMarker.addInGroup or not _G.IsInGroup())
-            and _G.GetRaidTargetIndex(unitToken) ~= self.raidIconID
+            and (raidMarker.addInGroup or not IsInGroup())
+            and GetRaidTargetIndex(unitToken) ~= self.raidIconID
         then
-            _G.SetRaidTarget(unitToken, self.raidIconID)
+            SetRaidTarget(unitToken, self.raidIconID)
         end
 
         self.needsRaidTarget = nil
@@ -412,7 +399,7 @@ function TargetButtonPrototype:SetSpecialText(fakeCriteriaCompleted)
 
         self.SpecialText:SetFormattedText(
             "%s%s|r",
-            isCriteriaCompleted and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE,
+            isCriteriaCompleted and GREEN_FONT_COLOR_CODE or RED_FONT_COLOR_CODE,
             achievementName
         )
     end
@@ -422,11 +409,11 @@ function TargetButtonPrototype:SetUnitData(data)
     if data.unitCreatureType then
         if data.unitLevel then
             local template = (self.__classification == "elite" or self.__classification == "rareelite")
-                    and _G.UNIT_TYPE_PLUS_LEVEL_TEMPLATE
-                or _G.UNIT_TYPE_LEVEL_TEMPLATE
+                    and UNIT_TYPE_PLUS_LEVEL_TEMPLATE
+                or UNIT_TYPE_LEVEL_TEMPLATE
             self.Classification:SetText(template:format(data.unitLevel, data.unitCreatureType))
 
-            local color = _G.GetRelativeDifficultyColor(_G.UnitLevel("player"), data.unitLevel)
+            local color = GetRelativeDifficultyColor(UnitLevel("player"), data.unitLevel)
             self.UnitName:SetFormattedText(
                 "|cff%02x%02x%02x%s|r",
                 color.r * 255,
@@ -435,8 +422,8 @@ function TargetButtonPrototype:SetUnitData(data)
                 data.npcName
             )
         else
-            self.Classification:SetText(_G.UNIT_TYPE_LETHAL_LEVEL_TEMPLATE:format(data.unitCreatureType))
-            self.UnitName:SetFormattedText("%s%s|r", _G.RED_FONT_COLOR_CODE, data.npcName)
+            self.Classification:SetText(UNIT_TYPE_LETHAL_LEVEL_TEMPLATE:format(data.unitCreatureType))
+            self.UnitName:SetFormattedText("%s%s|r", RED_FONT_COLOR_CODE, data.npcName)
         end
 
         self.needsUnitData = nil
@@ -462,11 +449,11 @@ do
     local macroLines = {}
 
     local function ResetMacroText(self)
-        self:SetAttribute("macrotext", ('/cleartarget\n/print "%s"'):format(_G.ERR_GENERIC_NO_TARGET))
+        self:SetAttribute("macrotext", ('/cleartarget\n/print "%s"'):format(ERR_GENERIC_NO_TARGET))
     end
 
     function NPCScan:InitializeTargetButton()
-        local recentButton = _G.CreateFrame("Button", "NPCScan_RecentTargetButton", nil, "SecureActionButtonTemplate")
+        local recentButton = CreateFrame("Button", "NPCScan_RecentTargetButton", nil, "SecureActionButtonTemplate")
         recentButton:SetAttribute("type", "macro")
         recentButton:Hide()
 
@@ -474,7 +461,7 @@ do
         recentButton:ResetMacroText()
 
         local macroButton =
-            AceEvent:Embed(_G.CreateFrame("Button", "NPCScan_SearchMacroButton", nil, "SecureActionButtonTemplate"))
+            AceEvent:Embed(CreateFrame("Button", "NPCScan_SearchMacroButton", nil, "SecureActionButtonTemplate"))
         macroButton:SetAttribute("type", "macro")
         macroButton:Hide()
 
@@ -491,7 +478,7 @@ do
         macroButton:RegisterEvent("PLAYER_REGEN_ENABLED")
 
         function macroButton:Update(_, scannerData)
-            if _G.InCombatLockdown() then
+            if InCombatLockdown() then
                 self.scannerData = scannerData
 
                 return
@@ -560,7 +547,7 @@ local function CreateTargetButton(unitClassification)
     dismissButton:RegisterForClicks("AnyUp")
     dismissButton:SetScript("OnClick", DismissButton_OnClick)
     dismissButton:SetScript("OnEnter", DismissButton_OnEnter)
-    dismissButton:SetScript("OnLeave", _G.GameTooltip_Hide)
+    dismissButton:SetScript("OnLeave", GameTooltip_Hide)
 
     button.DismissButton = dismissButton
 
