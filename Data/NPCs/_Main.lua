@@ -46,34 +46,65 @@ private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
 --------------------------------------------------------------------------------
 ---- Prototype
 --------------------------------------------------------------------------------
-local NPCPrototype = {
-    HasQuest = function(self)
-        local questID = self.questID or self.achievementQuestID
+---@class MountData
+---@field itemID integer
+---@field spellID integer
 
-        return questID and questID >= 0
-    end,
-    HasActiveWorldQuest = function(self)
-        local questID = self.worldQuestID
+---@class PetData
+---@field itemID integer
+---@field npcID integer
 
-        if not questID then
-            return false
-        end
+---@class ToyData
+---@field itemID integer
 
-        return _G.C_TaskQuest.IsActive(questID)
-    end,
-    IsAchievementCriteriaComplete = function(self)
-        if not self.achievementID then
-            return true
-        end
-
-        return Data.Achievements[self.achievementID].isCompleted or self.isCriteriaCompleted
-    end,
-    IsQuestComplete = function(self)
-        local questID = self.questID or self.achievementQuestID
-
-        return questID and questID >= 0 and _G.C_QuestLog.IsQuestFlaggedCompleted(questID)
-    end,
+---@class NPCData
+---@field achievementID? integer
+---@field achievementQuestID? integer
+---@field classification? NPCClassification
+---@field factionGroup? "Alliance" | "Horde"
+---@field isCriteriaCompleted? boolean
+---@field isTameable? boolean
+---@field mapIDs? integer[]
+---@field mounts? MountData[]
+---@field npcID integer
+---@field pets? PetData[]
+---@field questID? integer
+---@field toys? ToyData[]
+---@field vignetteID? integer
+---@field worldQuestID? integer
+local NPCDataPrototype = {
+    IsQuestComplete = function(self) end,
 }
+
+function NPCDataPrototype:HasQuest()
+    local questID = self.questID or self.achievementQuestID
+
+    return questID and questID >= 0
+end
+
+function NPCDataPrototype:HasActiveWorldQuest()
+    local questID = self.worldQuestID
+
+    if not questID then
+        return false
+    end
+
+    return C_TaskQuest.IsActive(questID)
+end
+
+function NPCDataPrototype:IsAchievementCriteriaComplete()
+    if not self.achievementID then
+        return true
+    end
+
+    return Data.Achievements[self.achievementID].isCompleted or self.isCriteriaCompleted
+end
+
+function NPCDataPrototype:IsQuestComplete()
+    local questID = self.questID or self.achievementQuestID
+
+    return questID and questID >= 0 and C_QuestLog.IsQuestFlaggedCompleted(questID)
+end
 
 local NPCMetatable = {
     __index = NPCDataPrototype,
