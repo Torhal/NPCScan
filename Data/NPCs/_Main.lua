@@ -106,6 +106,8 @@ private.NPCMetatable = NPCMetatable
 ---- Helpers
 --------------------------------------------------------------------------------
 
+---@param npc NPCData
+---@param questFieldName "achievementQuestID" | "questID"
 local function AssignNPCToQuest(npc, questFieldName)
     if not npc[questFieldName] then
         return
