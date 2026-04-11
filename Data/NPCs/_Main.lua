@@ -29,7 +29,9 @@ local NPCClassification = {
 
 Enum.NPCClassification = NPCClassification
 
+---@type table<integer, table<integer, NPCData>>
 local QuestNPCs = {}
+
 private.QuestNPCs = QuestNPCs
 
 local VignetteIDToNPCMapping = {}
