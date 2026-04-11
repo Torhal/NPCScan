@@ -20,6 +20,8 @@ local NPCs = Data.NPCs
 
 local LibStub = _G.LibStub
 
+local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
+
 --------------------------------------------------------------------------------
 ---- Constants
 --------------------------------------------------------------------------------
@@ -93,7 +95,7 @@ local function AssignNPCToQuest(npc, questFieldName)
 
         npcs[npc.npcID] = npc
 
-        local questName = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName):GetQuestNameFromID(npc[questFieldName])
+        local questName = NPCScan:GetQuestNameFromID(npc[questFieldName])
 
         if questName and questName ~= _G.UNKNOWN then
             private.QuestIDFromName[questName] = npc[questFieldName]
@@ -119,7 +121,7 @@ local function InitializeNPC(npcID)
     npc.npcID = npcID
 
     -- Sets value for NPCIDFromName.
-    LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName):GetNPCNameFromID(npcID)
+    NPCScan:GetNPCNameFromID(npcID)
 
     AssignNPCToQuest(npc, "questID")
     AssignNPCToQuest(npc, "achievementQuestID")
