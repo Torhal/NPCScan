@@ -8,8 +8,6 @@ local Data = private.Data
 local Enum = private.Enum
 local EventMessage = private.EventMessage
 
-local LibStub = _G.LibStub
-
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
@@ -19,7 +17,7 @@ local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 --------------------------------------------------------------------------------
 local EmptyListOption = {
     order = 1,
-    name = _G.EMPTY,
+    name = EMPTY,
     type = "header",
 }
 
@@ -149,18 +147,18 @@ local function GetNPCOptionsDescription(npcID)
         mapNames[#mapNames + 1] = Data.Maps[npc.mapIDs[mapIDIndex]].name
     end
 
-    return ("%s %s %s"):format(_G.ID, npcID, table.concat(mapNames, ", "))
+    return ("%s %s %s"):format(ID, npcID, table.concat(mapNames, ", "))
 end
 
 local ICON_QUEST_ACTIVE = private.FormatAtlasTexture("QuestDaily")
 local ICON_QUEST_COMPLETE = private.FormatAtlasTexture("QuestRepeatableTurnin")
 
 local function GetNPCOptionsName(npcID)
-    local colorCode = _G.NORMAL_FONT_COLOR_CODE
+    local colorCode = NORMAL_FONT_COLOR_CODE
     local npc = Data.NPCs[npcID]
 
     if npc.achievementID then
-        colorCode = npc:IsAchievementCriteriaComplete() and _G.GREEN_FONT_COLOR_CODE or _G.RED_FONT_COLOR_CODE
+        colorCode = npc:IsAchievementCriteriaComplete() and GREEN_FONT_COLOR_CODE or RED_FONT_COLOR_CODE
     end
 
     local prefix = ""
@@ -174,7 +172,7 @@ local function GetNPCOptionsName(npcID)
     local label = ""
 
     if assetName and assetName ~= npcName then
-        label = (" %s"):format(_G.PARENS_TEMPLATE:format(assetName))
+        label = (" %s"):format(PARENS_TEMPLATE:format(assetName))
     end
 
     return ("%s%s%s%s|r"):format(prefix, colorCode, npcName, label)
@@ -241,7 +239,7 @@ local function UpdateAchievementNPCOptions()
             args = {
                 status = {
                     order = 1,
-                    name = _G.STATUS,
+                    name = STATUS,
                     type = "select",
                     values = private.DetectionGroupStatusLabels,
                     get = function()
@@ -276,7 +274,7 @@ local function UpdateAchievementNPCOptions()
         table.wipe(npcNames)
 
         for npcID, npc in pairs(Data.Achievements[achievementID].criteriaNPCs) do
-            if npc.factionGroup ~= _G.UnitFactionGroup("player") then
+            if npc.factionGroup ~= UnitFactionGroup("player") then
                 npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
                 npcIDs[#npcIDs + 1] = npcID
             end
@@ -350,7 +348,7 @@ local function UpdateRareNPCOptions()
         for npcID, npc in pairs(Data.Maps[mapID].NPCs) do
             if
                 (not npc.classification or RareClassifications[npc.classification])
-                and npc.factionGroup ~= _G.UnitFactionGroup("player")
+                and npc.factionGroup ~= UnitFactionGroup("player")
             then
                 npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
                 npcIDs[#npcIDs + 1] = npcID
@@ -442,7 +440,7 @@ local function UpdateTameableRareNPCOptions()
         table.wipe(npcNames)
 
         for npcID, npc in pairs(Data.Maps[mapID].NPCs) do
-            if npc.isTameable and npc.factionGroup ~= _G.UnitFactionGroup("player") then
+            if npc.isTameable and npc.factionGroup ~= UnitFactionGroup("player") then
                 npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
                 npcIDs[#npcIDs + 1] = npcID
             end
@@ -520,7 +518,7 @@ private.UpdateTameableRareNPCOptions = UpdateTameableRareNPCOptions
 local NPCSearchOptions = {}
 
 local function AddApplicableSearchID(npc)
-    if npc.factionGroup ~= _G.UnitFactionGroup("player") then
+    if npc.factionGroup ~= UnitFactionGroup("player") then
         local npcID = npc.npcID
 
         npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
@@ -540,7 +538,7 @@ local function UpdateNPCSearchOptions()
 
             local achievementText = ""
             if npc.achievementID then
-                achievementText = _G.PARENS_TEMPLATE:format(Data.Achievements[npc.achievementID].name)
+                achievementText = PARENS_TEMPLATE:format(Data.Achievements[npc.achievementID].name)
             end
 
             NPCSearchOptions["npc" .. npcID] = {
@@ -732,21 +730,21 @@ local function GetOrUpdateNPCOptions()
             args = {
                 achievements = {
                     order = 1,
-                    name = _G.ACHIEVEMENTS,
+                    name = ACHIEVEMENTS,
                     type = "group",
                     childGroups = "tree",
                     args = AchievementNPCOptions,
                 },
                 rare = {
                     order = 2,
-                    name = _G.BATTLE_PET_BREED_QUALITY4,
+                    name = BATTLE_PET_BREED_QUALITY4,
                     type = "group",
                     childGroups = "tab",
                     args = {
                         isEnabled = {
                             order = 1,
                             type = "toggle",
-                            name = _G.ENABLE,
+                            name = ENABLE,
                             descStyle = "inline",
                             get = function()
                                 return profile.detection.rares
@@ -759,14 +757,14 @@ local function GetOrUpdateNPCOptions()
                         },
                         zoneNPCOptions = {
                             order = 2,
-                            name = _G.ZONE,
+                            name = ZONE,
                             descStyle = "inline",
                             type = "group",
                             args = ZoneRareNPCOptions,
                         },
                         dungeonNPCOptions = {
                             order = 3,
-                            name = _G.DUNGEONS,
+                            name = DUNGEONS,
                             descStyle = "inline",
                             type = "group",
                             args = DungeonRareNPCOptions,
@@ -775,14 +773,14 @@ local function GetOrUpdateNPCOptions()
                 },
                 tameableRare = {
                     order = 3,
-                    name = _G.TAMEABLE,
+                    name = TAMEABLE,
                     type = "group",
                     childGroups = "tab",
                     args = {
                         isEnabled = {
                             order = 1,
                             type = "toggle",
-                            name = _G.ENABLE,
+                            name = ENABLE,
                             descStyle = "inline",
                             get = function()
                                 return profile.detection.tameables
@@ -795,14 +793,14 @@ local function GetOrUpdateNPCOptions()
                         },
                         zoneNPCOptions = {
                             order = 2,
-                            name = _G.ZONE,
+                            name = ZONE,
                             descStyle = "inline",
                             type = "group",
                             args = ZoneTameableRareNPCOptions,
                         },
                         dungeonNPCOptions = {
                             order = 3,
-                            name = _G.DUNGEONS,
+                            name = DUNGEONS,
                             descStyle = "inline",
                             type = "group",
                             args = DungeonTameableRareNPCOptions,
@@ -811,7 +809,7 @@ local function GetOrUpdateNPCOptions()
                 },
                 search = {
                     order = 4,
-                    name = _G.SEARCH,
+                    name = SEARCH,
                     type = "group",
                     args = {
                         description = {
@@ -833,7 +831,7 @@ local function GetOrUpdateNPCOptions()
                         },
                         results = {
                             order = 3,
-                            name = _G.KBASE_SEARCH_RESULTS,
+                            name = KBASE_SEARCH_RESULTS,
                             type = "group",
                             inline = true,
                             args = NPCSearchOptions,
@@ -842,13 +840,13 @@ local function GetOrUpdateNPCOptions()
                 },
                 userDefined = {
                     order = 5,
-                    name = _G.CUSTOM,
+                    name = CUSTOM,
                     type = "group",
                     args = {
                         isEnabled = {
                             order = 1,
                             type = "toggle",
-                            name = _G.ENABLE,
+                            name = ENABLE,
                             descStyle = "inline",
                             get = function()
                                 return profile.detection.userDefined
@@ -861,7 +859,7 @@ local function GetOrUpdateNPCOptions()
                         },
                         npcID = {
                             order = 2,
-                            name = _G.ADD,
+                            name = ADD,
                             desc = L['Valid values are a numeric NPC ID, the word "mouseover" while you have your mouse cursor over an NPC, or the word "target" while you have an NPC set as your target.'],
                             type = "input",
                             disabled = function()
@@ -876,7 +874,7 @@ local function GetOrUpdateNPCOptions()
                         },
                         npcIDs = {
                             order = 3,
-                            name = _G.ASSIGNED_COLON,
+                            name = ASSIGNED_COLON,
                             type = "group",
                             inline = true,
                             disabled = function()
@@ -888,12 +886,12 @@ local function GetOrUpdateNPCOptions()
                 },
                 blacklisted = {
                     order = 6,
-                    name = _G.IGNORED,
+                    name = IGNORED,
                     type = "group",
                     args = {
                         npcIDs = {
                             order = 1,
-                            name = _G.ASSIGNED_COLON,
+                            name = ASSIGNED_COLON,
                             type = "group",
                             inline = true,
                             args = BlacklistedNPCOptions,
