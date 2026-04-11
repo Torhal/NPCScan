@@ -136,7 +136,10 @@ local function InitializeNPC(npcID)
             return npc
         end
     else
-        npc = {}
+        npc = {
+            npcID = npcID,
+        }
+
         NPCs[npcID] = npc
     end
 
