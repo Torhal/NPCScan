@@ -52,6 +52,7 @@ private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
 ---@field itemID integer
 
 ---@class NPCData
+---@field achievementCriteriaID? integer
 ---@field achievementID? integer
 ---@field achievementQuestID? integer
 ---@field classification? NPCClassification
