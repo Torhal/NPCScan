@@ -473,8 +473,10 @@ NPCs[39384] = {
     -- Noxious Whelp
     classification = NPCClassification.Normal,
     pets = {
-        itemID = 8498, -- Emerald Whelpling
-        npcID = 7545, -- Emerald Whelpling
+        {
+            itemID = 8498, -- Emerald Whelpling
+            npcID = 7545, -- Emerald Whelpling
+        },
     },
 }
 
