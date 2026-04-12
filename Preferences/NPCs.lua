@@ -131,15 +131,17 @@ private.AddUserDefinedNPC = AddUserDefinedNPC
 local function RemoveUserDefinedNPC(input)
     local isValid, npcID = ValidateUserDefinedNPCInput(input, "remove")
 
-    if isValid then
-        profile.userDefined.npcIDs[npcID] = nil
-
-        private.UpdateUserDefinedNPCOptions()
-
-        NPCScan:UpdateScanList()
-        NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
-        NPCScan:Printf(L["Removed %1$s (%2$d) from the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
+    if not isValid or not npcID then
+        return
     end
+
+    profile.userDefined.npcIDs[npcID] = nil
+
+    private.UpdateUserDefinedNPCOptions()
+
+    NPCScan:UpdateScanList()
+    NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
+    NPCScan:Printf(L["Removed %1$s (%2$d) from the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
 end
 
 private.RemoveUserDefinedNPC = RemoveUserDefinedNPC
