@@ -114,14 +114,16 @@ end
 local function AddUserDefinedNPC(input)
     local isValid, npcID = ValidateUserDefinedNPCInput(input, "add")
 
-    if isValid then
-        profile.userDefined.npcIDs[npcID] = true
-
-        private.UpdateUserDefinedNPCOptions()
-
-        NPCScan:UpdateScanList()
-        NPCScan:Printf(L["Added %1$s (%2$d) to the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
+    if not isValid or not npcID then
+        return
     end
+
+    profile.userDefined.npcIDs[npcID] = true
+
+    private.UpdateUserDefinedNPCOptions()
+
+    NPCScan:UpdateScanList()
+    NPCScan:Printf(L["Added %1$s (%2$d) to the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
 end
 
 private.AddUserDefinedNPC = AddUserDefinedNPC
