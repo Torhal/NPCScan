@@ -26,7 +26,6 @@ local EmptyListOption = {
 --------------------------------------------------------------------------------
 local npcIDs = {}
 local npcNames = {}
-local profile
 
 --------------------------------------------------------------------------------
 ---- Helpers
@@ -81,7 +80,7 @@ local function ValidateUserDefinedNPCInput(input, operationType)
             return false
         end
 
-        if profile.userDefined.npcIDs[npcID] then
+        if private.db.profile.userDefined.npcIDs[npcID] then
             if operationType == "add" then
                 NPCScan:Printf(
                     L["%1$s (%2$d) is already on the user-defined NPC list."],
@@ -118,7 +117,7 @@ local function AddUserDefinedNPC(input)
         return
     end
 
-    profile.userDefined.npcIDs[npcID] = true
+    private.db.profile.userDefined.npcIDs[npcID] = true
 
     private.UpdateUserDefinedNPCOptions()
 
@@ -135,7 +134,7 @@ local function RemoveUserDefinedNPC(input)
         return
     end
 
-    profile.userDefined.npcIDs[npcID] = nil
+    private.db.profile.userDefined.npcIDs[npcID] = nil
 
     private.UpdateUserDefinedNPCOptions()
 
@@ -230,6 +229,8 @@ local function UpdateAchievementNPCOptions()
             return Data.Achievements[a].name < Data.Achievements[b].name
         end)
     end
+
+    local profile = private.db.profile
 
     for achievementIDIndex = 1, #AchievementIDs do
         local achievementID = AchievementIDs[achievementIDIndex]
@@ -345,6 +346,7 @@ local function UpdateRareNPCOptions()
     table.wipe(ZoneRareNPCOptions)
 
     local sortedMapIDs = GetMapIDsAlphabetizedByName()
+    local profile = private.db.profile
 
     for mapIDIndex = 1, #sortedMapIDs do
         local mapID = sortedMapIDs[mapIDIndex]
@@ -439,6 +441,7 @@ local function UpdateTameableRareNPCOptions()
     table.wipe(ZoneTameableRareNPCOptions)
 
     local sortedMapIDs = GetMapIDsAlphabetizedByName()
+    local profile = private.db.profile
 
     for mapIDIndex = 1, #sortedMapIDs do
         local mapID = sortedMapIDs[mapIDIndex]
@@ -537,6 +540,8 @@ local function UpdateNPCSearchOptions()
     table.wipe(NPCSearchOptions)
 
     table.sort(npcIDs, SortByNPCNameThenByID)
+
+    local profile = private.db.profile
 
     if #npcIDs > 0 then
         for npcIDIndex = 1, #npcIDs do
@@ -647,7 +652,7 @@ local UserDefinedNPCOptions = {}
 local function UpdateUserDefinedNPCOptions()
     table.wipe(UserDefinedNPCOptions)
 
-    local savedNPCIDs = profile.userDefined.npcIDs
+    local savedNPCIDs = private.db.profile.userDefined.npcIDs
     SetNPCDataFromList(savedNPCIDs)
 
     if #npcIDs > 0 then
@@ -685,7 +690,7 @@ local BlacklistedNPCOptions = {}
 function UpdateBlacklistedNPCOptions()
     table.wipe(BlacklistedNPCOptions)
 
-    local savedNPCIDs = profile.blacklist.npcIDs
+    local savedNPCIDs = private.db.profile.blacklist.npcIDs
     SetNPCDataFromList(savedNPCIDs)
 
     if #npcIDs > 0 then
@@ -726,7 +731,7 @@ private.UpdateBlacklistedNPCOptions = UpdateBlacklistedNPCOptions
 local NPCOptions
 
 local function GetOrUpdateNPCOptions()
-    profile = private.db.profile
+    local profile = private.db.profile
 
     NPCOptions = NPCOptions
         or {
