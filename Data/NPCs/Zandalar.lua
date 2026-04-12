@@ -762,7 +762,7 @@ NPCs[129323] = {
 NPCs[129343] = {
     -- Avatar of Xolotal
     achievementQuestID = 49410, -- Avatar of Xolotal
-    classification = NPCs.Rare,
+    classification = NPCClassification.Rare,
     vignetteID = 2407,
     worldQuestID = 50863, -- Avatar of Xolotal
 }
