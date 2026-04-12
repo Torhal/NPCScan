@@ -53,7 +53,7 @@ local AlertNamesOptions = {}
 ---- Helpers
 ---------------------------------------------------------------------------------
 local function UpdateAlertNamesOptions()
-    local sharedMediaNames = profile.alert.sound.sharedMediaNames
+    local sharedMediaNames = private.db.profile.alert.sound.sharedMediaNames
     local sortedSoundNames = {}
 
     for soundName in pairs(sharedMediaNames) do
