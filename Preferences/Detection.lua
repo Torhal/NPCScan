@@ -23,11 +23,6 @@ local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 
 --------------------------------------------------------------------------------
----- Variables
---------------------------------------------------------------------------------
-local profile
-
---------------------------------------------------------------------------------
 ---- Ignored continent options.
 --------------------------------------------------------------------------------
 local AlphabeticalContinentMaps = {}
@@ -59,6 +54,8 @@ local function UpdateContinentAndMapOptions()
             table.sort(AlphabeticalContinentMaps[index], private.SortByMapNameThenByID)
         end
     end
+
+    local profile = private.db.profile
 
     for continentIndex = 1, #ContinentIDs do
         local continentID = ContinentIDs[continentIndex]
@@ -179,7 +176,7 @@ end
 local DetectionOptions
 
 local function GetDetectionOptions()
-    profile = private.db.profile
+    local profile = private.db.profile
 
     DetectionOptions = DetectionOptions
         or {
