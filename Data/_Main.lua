@@ -23,13 +23,19 @@ local addTableMeta = {
 
 private.Data = {
     Continents = {},
-    Maps = setmetatable({}, addTableMeta), ---@type table<integer, MapData>
-    NPCs = {}, ---@type table<integer, NPCData>
+
+    ---@type table<integer, MapData>
+    Maps = setmetatable({}, addTableMeta),
+
+    ---@type table<integer, NPCData>
+    NPCs = {},
+
+    ---@type ScannerData
     Scanner = {
         continentID = nil,
         mapID = nil,
         NPCCount = 0,
-        NPCs = {}, ---@type table<integer, NPCData>
+        NPCs = {},
     },
 }
 
@@ -42,4 +48,10 @@ private.Data = {
 ---@field ID integer
 ---@field isDungeon? boolean
 ---@field name string
+---@field NPCs table<integer, NPCData>
+
+---@class ScannerData
+---@field continentID? integer
+---@field mapID? integer
+---@field NPCCount integer
 ---@field NPCs table<integer, NPCData>
