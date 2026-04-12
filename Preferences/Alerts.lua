@@ -46,7 +46,7 @@ end
 ----------------------------------------------------------------------------------
 ---- Variables
 ---------------------------------------------------------------------------------
-local profile
+
 local AlertNamesOptions = {}
 
 ----------------------------------------------------------------------------------
@@ -99,11 +99,7 @@ local AlertOptions
 local firstRun = true
 
 local function GetAlertOptions()
-    profile = private.db.profile
-
-    if not profile then
-        return {}
-    end
+    local profile = private.db.profile
 
     local function IsSoundDisabled()
         return not profile.alert.sound.isEnabled

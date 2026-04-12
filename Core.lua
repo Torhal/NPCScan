@@ -2,7 +2,10 @@
 ----  AddOn Namespace
 --------------------------------------------------------------------------------
 local AddOnFolderName = ... ---@type string
-local private = select(2, ...) ---@class PrivateNamespace
+
+---@class PrivateNamespace
+---@field db NPCScanDB
+local private = select(2, ...)
 
 local Data = private.Data
 local Enum = private.Enum
@@ -340,3 +343,10 @@ do
         AceConfigDialog:Open(AddOnFolderName)
     end
 end -- do-block
+
+--------------------------------------------------------------------------------
+---- Types
+--------------------------------------------------------------------------------
+
+---@class NPCScanDB: AceDBObject-3.0
+---@field profile table
