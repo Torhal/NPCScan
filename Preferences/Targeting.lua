@@ -47,11 +47,6 @@ for index = 1, #SPAWN_POINTS do
 end
 
 ----------------------------------------------------------------------------------
----- Variables
----------------------------------------------------------------------------------
-local profile
-
-----------------------------------------------------------------------------------
 ---- Helpers
 ---------------------------------------------------------------------------------
 local function round(num, idp)
@@ -116,7 +111,7 @@ local function CreateAnchorFrame()
 
     anchorFrame:SetHeight(text:GetStringHeight() + title:GetStringHeight() + 25)
 
-    LibWindow.RegisterConfig(anchorFrame, profile.targetButtonGroup)
+    LibWindow.RegisterConfig(anchorFrame, private.db.profile.targetButtonGroup)
     LibWindow.RestorePosition(anchorFrame)
     LibWindow.MakeDraggable(anchorFrame)
 
@@ -130,7 +125,7 @@ local function CreateAnchorFrame()
 end
 
 local function IsTargetButtonGroupDisabled()
-    return not profile.targetButtonGroup.isEnabled
+    return not private.db.profile.targetButtonGroup.isEnabled
 end
 
 ----------------------------------------------------------------------------------
@@ -140,7 +135,8 @@ local TargetingOptions
 local anchorFrame
 
 local function GetTargetingOptions()
-    profile = private.db.profile
+    local profile = private.db.profile
+
     anchorFrame = anchorFrame or CreateAnchorFrame()
 
     TargetingOptions = TargetingOptions
