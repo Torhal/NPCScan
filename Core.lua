@@ -70,7 +70,7 @@ function NPCScan:OnInitialize()
     ---- Data Initialization
     --------------------------------------------------------------------------------
     local DefaultPreferences = private.DefaultPreferences
-    local UIMapType = _G.Enum.UIMapType
+    local UIMapType = Enum.UIMapType
 
     for _, achievementID in pairs(private.Enum.AchievementID) do
         DefaultPreferences.profile.detection.achievementIDs[achievementID] = private.Enum.DetectionGroupStatus.Enabled
@@ -94,13 +94,13 @@ function NPCScan:OnInitialize()
     end
 
     for mapID, map in pairs(Data.Maps) do
-        local parentMapInfo = _G.MapUtil.GetMapParentInfo(mapID, UIMapType.Continent)
-            or _G.MapUtil.GetMapParentInfo(mapID, UIMapType.World)
-            or _G.MapUtil.GetMapParentInfo(mapID, UIMapType.Cosmic)
+        local parentMapInfo = MapUtil.GetMapParentInfo(mapID, UIMapType.Continent)
+            or MapUtil.GetMapParentInfo(mapID, UIMapType.World)
+            or MapUtil.GetMapParentInfo(mapID, UIMapType.Cosmic)
 
         local continentID = parentMapInfo and private.Enum.MapContinentID[parentMapInfo.mapID]
             or private.Enum.ContinentID.Cosmic
-        local mapInfo = _G.C_Map.GetMapInfo(mapID)
+        local mapInfo = C_Map.GetMapInfo(mapID)
 
         if mapInfo.mapType == UIMapType.Dungeon or mapInfo.mapType == UIMapType.Orphan then
             map.isDungeon = true
@@ -108,7 +108,7 @@ function NPCScan:OnInitialize()
 
         map.continentID = continentID
         map.ID = mapID
-        map.name = HereBeDragons:GetLocalizedMap(mapID) or _G.UNKNOWN
+        map.name = HereBeDragons:GetLocalizedMap(mapID) or UNKNOWN
 
         Data.Continents[continentID].Maps[mapID] = map
     end
@@ -179,7 +179,7 @@ function NPCScan:OnEnable()
     }
 
     for mapID, map in pairs(Data.Maps) do
-        local continent = _G.MapUtil.GetMapParentInfo(mapID, _G.Enum.UIMapType.Continent, true)
+        local continent = MapUtil.GetMapParentInfo(mapID, Enum.UIMapType.Continent, true)
 
         local missingData = {}
         local mapHeaderPrinted
@@ -210,7 +210,7 @@ function NPCScan:OnEnable()
             if not mapHeaderPrinted then
                 mapHeaderPrinted = true
                 private.Debug("--------------------------------------------------------------------------------")
-                private.Debug("---- %s (%d)", HereBeDragons:GetLocalizedMap(mapID) or _G.UNKNOWN, mapID)
+                private.Debug("---- %s (%d)", HereBeDragons:GetLocalizedMap(mapID) or UNKNOWN, mapID)
                 private.Debug("--------------------------------------------------------------------------------")
             end
 
@@ -259,7 +259,7 @@ do
                 private.db.locale.npcNames[npcID] = npcName
                 NPCIDFromName[npcName] = npcID
             else
-                npcName = _G.UNKNOWN
+                npcName = UNKNOWN
             end
         end
 
@@ -270,13 +270,13 @@ do
         local questName = private.db.locale.questNames[questID]
 
         if not questName then
-            questName = _G.C_QuestLog.GetTitleForQuestID(questID)
+            questName = C_QuestLog.GetTitleForQuestID(questID)
 
             if questName and questName ~= "" then
                 private.db.locale.questNames[questID] = questName
                 private.QuestIDFromName[questName] = questID
             else
-                questName = _G.UNKNOWN
+                questName = UNKNOWN
             end
         end
 
@@ -315,7 +315,7 @@ do
                     local func = private.DUMP_COMMANDS[dumpType]
 
                     if func then
-                        private.TextDump = private.TextDump or _G.LibStub("LibTextDump-1.0"):New(AddOnFolderName, 750, 600)
+                        private.TextDump = private.TextDump or LibStub("LibTextDump-1.0"):New(AddOnFolderName, 750, 600)
                         func(parameters)
                     else
                         NPCScan:Print("Unknown dump command. Valid commands:")
