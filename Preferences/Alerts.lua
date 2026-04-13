@@ -1,28 +1,19 @@
-----------------------------------------------------------------------------------
----- Localized Lua globals.
----------------------------------------------------------------------------------
--- Libraries
-local table = _G.table
-
--- Functions
-local pairs = _G.pairs
-
-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ---- AddOn Namespace
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
-local LibStub = _G.LibStub
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) --[[@as NPCScan]]
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 local LibSharedMedia = LibStub("LibSharedMedia-3.0")
 
-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ---- Constants
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 local SOUND_CHANNELS = {
     "Ambience",
     "Master",
@@ -43,15 +34,16 @@ for index = 1, #SOUND_CHANNELS do
     SOUND_CHANNEL_INDICES[SOUND_CHANNELS[index]] = index
 end
 
-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ---- Variables
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 local AlertNamesOptions = {}
 
-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ---- Helpers
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 local function UpdateAlertNamesOptions()
     local sharedMediaNames = private.db.profile.alert.sound.sharedMediaNames
     local sortedSoundNames = {}
@@ -92,9 +84,10 @@ local function UpdateAlertNamesOptions()
     AceConfigRegistry:NotifyChange(AddOnFolderName)
 end
 
-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ---- Initialization.
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 local AlertOptions
 local firstRun = true
 
@@ -128,7 +121,7 @@ local function GetAlertOptions()
                     args = {
                         isEnabled = {
                             order = 1,
-                            name = _G.ENABLE,
+                            name = ENABLE,
                             descStyle = "inline",
                             type = "toggle",
                             width = "full",
@@ -141,11 +134,11 @@ local function GetAlertOptions()
                         },
                         texture = {
                             order = 2,
-                            name = _G.TEXTURES_SUBHEADER,
+                            name = TEXTURES_SUBHEADER,
                             descStyle = "inline",
                             type = "select",
                             dialogControl = "LSM30_Background",
-                            values = _G.AceGUIWidgetLSMlists.background,
+                            values = AceGUIWidgetLSMlists.background,
                             disabled = function()
                                 return not profile.alert.screenFlash.isEnabled
                             end,
@@ -158,7 +151,7 @@ local function GetAlertOptions()
                         },
                         color = {
                             order = 3,
-                            name = _G.COLOR,
+                            name = COLOR,
                             descStyle = "inline",
                             hasAlpha = true,
                             type = "color",
@@ -194,7 +187,7 @@ local function GetAlertOptions()
                         },
                         preview = {
                             order = 4,
-                            name = _G.PREVIEW,
+                            name = PREVIEW,
                             descStyle = "inline",
                             type = "execute",
                             width = "normal",
@@ -210,13 +203,13 @@ local function GetAlertOptions()
                 },
                 sound = {
                     order = 3,
-                    name = _G.SOUND,
+                    name = SOUND,
                     descStyle = "inline",
                     type = "group",
                     args = {
                         isEnabled = {
                             order = 10,
-                            name = _G.ENABLE,
+                            name = ENABLE,
                             descStyle = "inline",
                             type = "toggle",
                             get = function()
@@ -256,11 +249,11 @@ local function GetAlertOptions()
                         },
                         addAlertSound = {
                             order = 40,
-                            name = _G.ADD,
+                            name = ADD,
                             descStyle = "inline",
                             type = "select",
                             dialogControl = "LSM30_Sound",
-                            values = _G.AceGUIWidgetLSMlists.sound,
+                            values = AceGUIWidgetLSMlists.sound,
                             disabled = IsSoundDisabled,
                             get = function()
                                 -- Intentionally empty, since there can be multiple sounds.
@@ -272,7 +265,7 @@ local function GetAlertOptions()
                         },
                         sharedMediaNames = {
                             order = 50,
-                            name = _G.ASSIGNED_COLON,
+                            name = ASSIGNED_COLON,
                             type = "group",
                             inline = true,
                             disabled = IsSoundDisabled,
@@ -280,7 +273,7 @@ local function GetAlertOptions()
                         },
                         preview = {
                             order = 60,
-                            name = _G.PREVIEW,
+                            name = PREVIEW,
                             descStyle = "inline",
                             type = "execute",
                             width = "normal",
