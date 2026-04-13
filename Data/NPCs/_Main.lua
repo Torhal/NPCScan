@@ -40,6 +40,7 @@ private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
 --------------------------------------------------------------------------------
 ---- Prototype
 --------------------------------------------------------------------------------
+
 ---@class MountData
 ---@field itemID integer
 ---@field spellID integer
