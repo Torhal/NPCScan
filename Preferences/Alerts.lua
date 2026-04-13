@@ -290,7 +290,7 @@ local function GetAlertOptions()
     UpdateAlertNamesOptions()
 
     if firstRun then
-        firstRun = nil
+        firstRun = false
 
         local output = NPCScan:GetSinkAce3OptionsDataTable()
         output.order = 1
