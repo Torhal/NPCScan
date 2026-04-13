@@ -4,7 +4,7 @@
 local AddOnFolderName = ... ---@type string
 
 ---@class PrivateNamespace
----@field db NPCScanDB
+---@field db NPCScanDatabase
 local private = select(2, ...)
 
 local Data = private.Data
@@ -113,6 +113,7 @@ function NPCScan:OnInitialize()
         Data.Continents[continentID].Maps[mapID] = map
     end
 
+    ---@class NPCScanDatabase
     local db = LibStub("AceDB-3.0"):New("NPCScanDB", DefaultPreferences, "Default")
     db.RegisterCallback(self, "OnProfileChanged", "RefreshPreferences")
     db.RegisterCallback(self, "OnProfileCopied", "RefreshPreferences")
@@ -348,5 +349,5 @@ end -- do-block
 ---- Types
 --------------------------------------------------------------------------------
 
----@class NPCScanDB: AceDBObject-3.0
+---@class NPCScanDatabase: AceDBObject-3.0
 ---@field profile table
