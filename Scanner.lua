@@ -3,16 +3,15 @@
 --------------------------------------------------------------------------------
 
 local AddOnFolderName = ... ---@type string
-local private = select(2, ...) ---@type PrivateNamespace
+local private = select(2, ...) ---@class PrivateNamespace
 
 local Data = private.Data
-local Enum = private.Enum
 local EventMessage = private.EventMessage
 
 local HereBeDragons = LibStub("HereBeDragons-2.0")
 local LibSharedMedia = LibStub("LibSharedMedia-3.0")
 
-local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) --[[@as NPCScan]]
+local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
 
 --------------------------------------------------------------------------------
 ---- Helpers
@@ -136,7 +135,7 @@ local function CanAddToScanList(npcID)
     local achievementID = npc.achievementID
 
     if achievementID then
-        if detection.achievementIDs[achievementID] == Enum.DetectionGroupStatus.Disabled then
+        if detection.achievementIDs[achievementID] == private.Enum.DetectionGroupStatus.Disabled then
             return false
         end
 
@@ -185,7 +184,7 @@ function NPCScan:UpdateScanList(_, mapID)
 
     if
         profile.blacklist.mapIDs[scannerData.mapID]
-        or profile.detection.continentIDs[scannerData.continentID] == Enum.DetectionGroupStatus.Disabled
+        or profile.detection.continentIDs[scannerData.continentID] == private.Enum.DetectionGroupStatus.Disabled
     then
         private.Debug("continentID or mapID is blacklisted; terminating update.")
         self:SendMessage(EventMessage.ScannerDataUpdated, scannerData)
@@ -271,7 +270,7 @@ function NPCScan:ACHIEVEMENT_EARNED(_, achievementID)
 
         if private.db.profile.detection.ignoreCompletedAchievementCriteria then
             -- Disable tracking for the achievement, since the above setting implies it.
-            private.db.profile.detection.achievementIDs[achievementID] = Enum.DetectionGroupStatus.Disabled
+            private.db.profile.detection.achievementIDs[achievementID] = private.Enum.DetectionGroupStatus.Disabled
         end
 
         UpdateScanListAchievementCriteria()
