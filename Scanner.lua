@@ -1,16 +1,7 @@
 --------------------------------------------------------------------------------
----- Localized Lua globals.
---------------------------------------------------------------------------------
--- Functions
-local pairs = _G.pairs
-local time = _G.time
-
--- Libraries
-local table = _G.table
-
---------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@type PrivateNamespace
 
@@ -18,7 +9,6 @@ local Data = private.Data
 local Enum = private.Enum
 local EventMessage = private.EventMessage
 
-local LibStub = _G.LibStub
 local HereBeDragons = LibStub("HereBeDragons-2.0")
 local LibSharedMedia = LibStub("LibSharedMedia-3.0")
 
@@ -41,7 +31,7 @@ do
         if
             not Data.Scanner.NPCs[npcID]
             or (throttleTime and now < throttleTime + detection.intervalSeconds)
-            or (not detection.whileOnTaxi and _G.UnitOnTaxi("player"))
+            or (not detection.whileOnTaxi and UnitOnTaxi("player"))
         then
             return
         end
@@ -52,8 +42,8 @@ do
         detectionData.unitClassification = detectionData.unitClassification or "rare"
 
         NPCScan:Pour(
-            _G.ERR_ZONE_EXPLORED:format(
-                ("%s %s"):format(detectionData.npcName, _G.PARENS_TEMPLATE:format(detectionData.sourceText))
+            ERR_ZONE_EXPLORED:format(
+                ("%s %s"):format(detectionData.npcName, PARENS_TEMPLATE:format(detectionData.sourceText))
             ),
             0,
             1,
@@ -69,14 +59,14 @@ do
 end
 
 local function ProcessUnit(unitToken, sourceText)
-    if _G.UnitIsUnit("player", unitToken) then
+    if UnitIsUnit("player", unitToken) then
         return
     end
 
     local npcID = private.UnitTokenToCreatureID(unitToken)
 
     if npcID then
-        local unitIsDead = _G.UnitIsDead(unitToken)
+        local unitIsDead = UnitIsDead(unitToken)
 
         if private.db.profile.detection.ignoreDeadNPCs and unitIsDead then
             return
@@ -85,11 +75,11 @@ local function ProcessUnit(unitToken, sourceText)
         local detectionData = {
             isDead = unitIsDead,
             npcID = npcID,
-            npcName = _G.UnitName(unitToken),
+            npcName = UnitName(unitToken),
             sourceText = sourceText,
-            unitClassification = _G.UnitClassification(unitToken),
-            unitCreatureType = _G.UnitCreatureType(unitToken),
-            unitLevel = _G.UnitLevel(unitToken),
+            unitClassification = UnitClassification(unitToken),
+            unitCreatureType = UnitCreatureType(unitToken),
+            unitLevel = UnitLevel(unitToken),
             unitToken = unitToken,
         }
 
@@ -114,7 +104,7 @@ local function CanAddToScanList(npcID)
         return true
     end
 
-    if npc.factionGroup == _G.UnitFactionGroup("player") then
+    if npc.factionGroup == UnitFactionGroup("player") then
         return false
     end
 
@@ -164,7 +154,7 @@ end
 local function MergeUserDefinedWithScanList(npcList)
     if npcList and private.db.profile.detection.userDefined then
         for npcID in pairs(npcList) do
-            Data.Scanner.NPCs[npcID] = _G.setmetatable({}, private.NPCMetatable)
+            Data.Scanner.NPCs[npcID] = setmetatable({}, private.NPCMetatable)
         end
     end
 end
@@ -228,12 +218,13 @@ end
 --------------------------------------------------------------------------------
 ---- Events
 --------------------------------------------------------------------------------
+
 local function UpdateScanListAchievementCriteria()
     local needsUpdate = false
 
     for _, npc in pairs(Data.Scanner.NPCs) do
         if npc.achievementID and npc.achievementCriteriaID and not npc:IsAchievementCriteriaComplete() then
-            local _, _, isCompleted = _G.GetAchievementCriteriaInfoByID(npc.achievementID, npc.achievementCriteriaID)
+            local _, _, isCompleted = GetAchievementCriteriaInfoByID(npc.achievementID, npc.achievementCriteriaID)
 
             if isCompleted then
                 npc.isCriteriaCompleted = isCompleted
@@ -297,29 +288,29 @@ function NPCScan:LOOT_CLOSED()
 end
 
 function NPCScan:NAME_PLATE_UNIT_ADDED(_, unitToken)
-    ProcessUnit(unitToken, _G.UNIT_NAMEPLATES)
+    ProcessUnit(unitToken, UNIT_NAMEPLATES)
 end
 
 function NPCScan:PLAYER_ENTERING_WORLD()
-    self:UpdateScanList("PLAYER_ENTERING_WORLD", _G.C_Map.GetBestMapForUnit("player"))
+    self:UpdateScanList("PLAYER_ENTERING_WORLD", C_Map.GetBestMapForUnit("player"))
 end
 
 function NPCScan:PLAYER_TARGET_CHANGED()
-    ProcessUnit("target", _G.TARGET)
+    ProcessUnit("target", TARGET)
 end
 
 function NPCScan:UPDATE_MOUSEOVER_UNIT()
     local mouseoverID = private.UnitTokenToCreatureID("mouseover")
 
     if mouseoverID ~= private.UnitTokenToCreatureID("target") then
-        ProcessUnit("mouseover", _G.MOUSE_LABEL)
+        ProcessUnit("mouseover", MOUSE_LABEL)
     end
 end
 
 do
     local VignetteSourceToPreference = {
-        [_G.MINIMAP_LABEL] = "ignoreMiniMap",
-        [_G.WORLD_MAP] = "ignoreWorldMap",
+        [MINIMAP_LABEL] = "ignoreMiniMap",
+        [WORLD_MAP] = "ignoreWorldMap",
     }
 
     local IgnoredVignetteAtlasName = {
@@ -336,13 +327,13 @@ do
             return
         end
 
-        local vignetteInfo = _G.C_VignetteInfo.GetVignetteInfo(vignetteGUID)
+        local vignetteInfo = C_VignetteInfo.GetVignetteInfo(vignetteGUID)
 
         if not vignetteInfo or IgnoredVignetteAtlasName[vignetteInfo.atlasName] then
             return
         end
 
-        local sourceText = vignetteInfo.onWorldMap and _G.WORLD_MAP or _G.MINIMAP_LABEL
+        local sourceText = vignetteInfo.onWorldMap and WORLD_MAP or MINIMAP_LABEL
 
         if IsIgnoringSource(sourceText) then
             return
@@ -375,7 +366,7 @@ do
                 vignetteInfo.name,
                 vignetteInfo.vignetteID,
                 npcID or -1,
-                _G.C_Map.GetBestMapForUnit("player")
+                C_Map.GetBestMapForUnit("player")
             )
         end
 
@@ -406,7 +397,7 @@ do
             end
 
             return
-        elseif sourceText == _G.WORLD_MAP then
+        elseif sourceText == WORLD_MAP then
             return
         end
 
@@ -430,7 +421,7 @@ do
     end
 
     function NPCScan:VIGNETTES_UPDATED()
-        local vignetteGUIDs = _G.C_VignetteInfo.GetVignettes()
+        local vignetteGUIDs = C_VignetteInfo.GetVignettes()
 
         for index = 1, #vignetteGUIDs do
             ProcessVignetteGUID(vignetteGUIDs[index])
@@ -439,12 +430,13 @@ do
 end -- do-block
 
 --------------------------------------------------------------------------------
----- Sensory cues.
+---- Sensory Cues
 --------------------------------------------------------------------------------
+
 do
     local MAX_FLASH_LOOPS = 3
 
-    local flashFrame = _G.CreateFrame("Frame")
+    local flashFrame = CreateFrame("Frame")
     flashFrame:Hide()
     flashFrame:SetAllPoints()
     flashFrame:SetAlpha(0)
@@ -502,7 +494,7 @@ do
 
         local function ResetStoredSoundCVars()
             for cvar, value in pairs(StoredSoundCVars) do
-                _G.SetCVar(cvar, value)
+                SetCVar(cvar, value)
             end
 
             soundsAreOverridden = nil
@@ -514,11 +506,11 @@ do
             if overrideSoundCVars and not soundsAreOverridden then
                 local channelCVar = SoundChannelCVars[soundPreferences.channel]
 
-                StoredSoundCVars[channelCVar] = _G.GetCVar(channelCVar)
-                _G.SetCVar(channelCVar, 1)
+                StoredSoundCVars[channelCVar] = GetCVar(channelCVar)
+                SetCVar(channelCVar, 1)
 
-                StoredSoundCVars.Sound_EnableSoundWhenGameIsInBG = _G.GetCVar("Sound_EnableSoundWhenGameIsInBG")
-                _G.SetCVar("Sound_EnableSoundWhenGameIsInBG", 1)
+                StoredSoundCVars.Sound_EnableSoundWhenGameIsInBG = GetCVar("Sound_EnableSoundWhenGameIsInBG")
+                SetCVar("Sound_EnableSoundWhenGameIsInBG", 1)
 
                 soundsAreOverridden = true
                 NPCScan:ScheduleTimer(ResetStoredSoundCVars, SOUND_RESTORE_INTERVAL_SECONDS)
@@ -526,7 +518,7 @@ do
 
             for soundName in pairs(soundPreferences.sharedMediaNames) do
                 if soundPreferences.sharedMediaNames[soundName] ~= false then
-                    _G.PlaySoundFile(LibSharedMedia:Fetch("sound", soundName), soundPreferences.channel)
+                    PlaySoundFile(LibSharedMedia:Fetch("sound", soundName), soundPreferences.channel)
                 end
             end
         end
