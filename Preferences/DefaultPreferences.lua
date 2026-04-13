@@ -7,11 +7,14 @@ local private = select(2, ...) ---@class PrivateNamespace
 --------------------------------------------------------------------------------
 ---- Constants
 --------------------------------------------------------------------------------
+
 local DefaultPreferences = {
+    ---@type NPCScanDatabase.Locale
     locale = {
         npcNames = {},
         questNames = {},
     },
+    ---@type NPCScanDatabase.Profile
     profile = {
         alert = {
             output = {

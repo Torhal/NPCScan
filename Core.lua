@@ -344,10 +344,3 @@ do
         AceConfigDialog:Open(AddOnFolderName)
     end
 end -- do-block
-
---------------------------------------------------------------------------------
----- Types
---------------------------------------------------------------------------------
-
----@class NPCScanDatabase: AceDBObject-3.0
----@field profile table
