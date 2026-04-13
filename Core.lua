@@ -8,7 +8,6 @@ local AddOnFolderName = ... ---@type string
 local private = select(2, ...)
 
 local Data = private.Data
-local Enum = private.Enum
 
 local AceConfigDialog = LibStub("AceConfigDialog-3.0")
 local HereBeDragons = LibStub("HereBeDragons-2.0")
@@ -73,11 +72,11 @@ function NPCScan:OnInitialize()
     local DefaultPreferences = private.DefaultPreferences
     local UIMapType = _G.Enum.UIMapType
 
-    for _, achievementID in pairs(Enum.AchievementID) do
-        DefaultPreferences.profile.detection.achievementIDs[achievementID] = Enum.DetectionGroupStatus.Enabled
+    for _, achievementID in pairs(private.Enum.AchievementID) do
+        DefaultPreferences.profile.detection.achievementIDs[achievementID] = private.Enum.DetectionGroupStatus.Enabled
     end
 
-    for _, continentID in pairs(Enum.ContinentID) do
+    for _, continentID in pairs(private.Enum.ContinentID) do
         local continent = Data.Continents[continentID]
 
         if not continent then
@@ -89,9 +88,9 @@ function NPCScan:OnInitialize()
         end
 
         continent.ID = continentID
-        continent.name = HereBeDragons:GetLocalizedMap(Enum.ContinentMapID[continentID])
+        continent.name = HereBeDragons:GetLocalizedMap(private.Enum.ContinentMapID[continentID])
 
-        DefaultPreferences.profile.detection.continentIDs[continentID] = Enum.DetectionGroupStatus.Enabled
+        DefaultPreferences.profile.detection.continentIDs[continentID] = private.Enum.DetectionGroupStatus.Enabled
     end
 
     for mapID, map in pairs(Data.Maps) do
@@ -99,7 +98,8 @@ function NPCScan:OnInitialize()
             or _G.MapUtil.GetMapParentInfo(mapID, UIMapType.World)
             or _G.MapUtil.GetMapParentInfo(mapID, UIMapType.Cosmic)
 
-        local continentID = parentMapInfo and Enum.MapContinentID[parentMapInfo.mapID] or Enum.ContinentID.Cosmic
+        local continentID = parentMapInfo and private.Enum.MapContinentID[parentMapInfo.mapID]
+            or private.Enum.ContinentID.Cosmic
         local mapInfo = _G.C_Map.GetMapInfo(mapID)
 
         if mapInfo.mapType == UIMapType.Dungeon or mapInfo.mapType == UIMapType.Orphan then
@@ -161,21 +161,21 @@ function NPCScan:OnEnable()
     local hasChecked = {}
 
     local questMapIDs = {
-        [Enum.MapID.Argus] = true,
-        [Enum.MapID.BrokenIsles] = true,
-        [Enum.MapID.KulTiras] = true,
-        [Enum.MapID.Zandalar] = true,
-        [Enum.MapID.TheShadowlands] = true,
+        [private.Enum.MapID.Argus] = true,
+        [private.Enum.MapID.BrokenIsles] = true,
+        [private.Enum.MapID.KulTiras] = true,
+        [private.Enum.MapID.Zandalar] = true,
+        [private.Enum.MapID.TheShadowlands] = true,
     }
 
     local vignetteMapIDs = {
-        [Enum.MapID.Argus] = true,
-        [Enum.MapID.BrokenIsles] = true,
-        [Enum.MapID.Draenor] = true,
-        [Enum.MapID.KulTiras] = true,
-        [Enum.MapID.Pandaria] = true,
-        [Enum.MapID.Zandalar] = true,
-        [Enum.MapID.TheShadowlands] = true,
+        [private.Enum.MapID.Argus] = true,
+        [private.Enum.MapID.BrokenIsles] = true,
+        [private.Enum.MapID.Draenor] = true,
+        [private.Enum.MapID.KulTiras] = true,
+        [private.Enum.MapID.Pandaria] = true,
+        [private.Enum.MapID.Zandalar] = true,
+        [private.Enum.MapID.TheShadowlands] = true,
     }
 
     for mapID, map in pairs(Data.Maps) do
