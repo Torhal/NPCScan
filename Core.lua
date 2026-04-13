@@ -286,10 +286,10 @@ do
 end
 
 do
-    local SUBCOMMAND_FUNCS
+    local SUBCOMMAND_FUNCTIONS
 
     function NPCScan:ChatCommand(input)
-        SUBCOMMAND_FUNCS = SUBCOMMAND_FUNCS
+        SUBCOMMAND_FUNCTIONS = SUBCOMMAND_FUNCTIONS
             or {
                 ADD = private.AddUserDefinedNPC,
                 COMPARE = private.CompareData,
@@ -332,7 +332,7 @@ do
         local subcommand, arg1, arg2 = self:GetArgs(input, 3)
 
         if subcommand then
-            local func = SUBCOMMAND_FUNCS[subcommand:upper()]
+            local func = SUBCOMMAND_FUNCTIONS[subcommand:upper()]
 
             if func then
                 func(arg1, arg2)
