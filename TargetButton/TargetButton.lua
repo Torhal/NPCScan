@@ -43,8 +43,10 @@ for index = 1, private.NUM_RAID_ICONS do
 end
 
 --------------------------------------------------------------------------------
----- Prototype.
+---- Prototype
 --------------------------------------------------------------------------------
+
+---@class TargetButton
 local TargetButtonPrototype = CreateFrame("Button")
 
 local TargetButtonMetatable = {
