@@ -4,12 +4,6 @@
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
-local Data = private.Data
-local Enum = private.Enum
-local NPCs = Data.NPCs
-
-local LibStub = _G.LibStub
-
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
 
 --------------------------------------------------------------------------------
@@ -27,7 +21,7 @@ local NPCClassification = {
     WorldBoss = "worldboss",
 }
 
-Enum.NPCClassification = NPCClassification
+private.Enum.NPCClassification = NPCClassification
 
 ---@type table<integer, table<integer, NPCData>>
 local QuestNPCs = {}
@@ -67,7 +61,7 @@ function NPCDataPrototype:IsAchievementCriteriaComplete()
         return true
     end
 
-    return Data.Achievements[self.achievementID].isCompleted or self.isCriteriaCompleted
+    return private.Data.Achievements[self.achievementID].isCompleted or self.isCriteriaCompleted
 end
 
 function NPCDataPrototype:IsQuestComplete()
@@ -112,7 +106,7 @@ local function AssignNPCToQuest(npc, questFieldName)
 end
 
 local function InitializeNPC(npcID)
-    local npc = NPCs[npcID]
+    local npc = private.Data.NPCs[npcID]
 
     if npc then
         if getmetatable(npc) then
@@ -124,7 +118,7 @@ local function InitializeNPC(npcID)
             npcID = npcID,
         }
 
-        NPCs[npcID] = npc
+        private.Data.NPCs[npcID] = npc
     end
 
     setmetatable(npc, NPCMetatable)
