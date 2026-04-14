@@ -245,8 +245,8 @@ end
 function NPCScan:RefreshPreferences() end
 
 do
-    local DatamineTooltip = _G.CreateFrame("GameTooltip", "NPCScanDatamineTooltip", _G.UIParent, "GameTooltipTemplate")
-    DatamineTooltip:SetOwner(_G.WorldFrame, "ANCHOR_NONE")
+    local DatamineTooltip = CreateFrame("GameTooltip", "NPCScanDatamineTooltip", UIParent, "GameTooltipTemplate")
+    DatamineTooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
 
     function NPCScan:GetNPCNameFromID(npcID)
         local npcName = private.db.locale.npcNames[npcID]
