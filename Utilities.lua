@@ -231,7 +231,7 @@ do
         ["worldQuestID"] = true,
     }
 
-    local sectionDelimiter = "-- ----------------------------------------------------------------------------"
+    local sectionDelimiter = "--------------------------------------------------------------------------------"
 
     local function displayContinents()
         print("A continentID must be supplied. Valid choices:")
@@ -241,6 +241,7 @@ do
         end
     end
 
+    ---@param continentID integer
     function private.DumpNPCData(continentID)
         if not continentID then
             displayContinents()
@@ -248,7 +249,7 @@ do
             return
         end
 
-        local NPCScan = _G.LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+        local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
         local continent = Data.Continents[continentID]
 
         local sortedMapIDs = {}
@@ -280,9 +281,10 @@ do
         output:Clear()
 
         output:AddLine(sectionDelimiter)
-        output:AddLine("-- AddOn Namespace")
-        output:AddLine(sectionDelimiter)
-        output:AddLine("local AddOnFolderName, private = ...")
+        output:AddLine("---- AddOn Namespace")
+        output:AddLine(("%s\n"):format(sectionDelimiter))
+        output:AddLine("local AddOnFolderName = ... ---@type string")
+        output:AddLine("local private = select(2, ...) ---@class PrivateNamespace\n")
         output:AddLine("local NPCs = private.Data.NPCs")
         output:AddLine("local NPCClassification = private.Enum.NPCClassification\n")
 
@@ -305,8 +307,8 @@ do
                             addedZoneHeader = true
 
                             output:AddLine(sectionDelimiter)
-                            output:AddLine(("-- %s (%d)"):format(map.name, map.ID))
-                            output:AddLine(sectionDelimiter)
+                            output:AddLine(("---- %s (%d)"):format(map.name, map.ID))
+                            output:AddLine(("%s\n"):format(sectionDelimiter))
                         end
 
                         if not startedEntry then
