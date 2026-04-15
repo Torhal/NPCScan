@@ -1,31 +1,21 @@
-----------------------------------------------------------------------------------
----- Localized Lua globals.
----------------------------------------------------------------------------------
--- Functions
-local tonumber = _G.tonumber
-local tostring = _G.tostring
-
--- Libraries
-local math = _G.math
-
-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ---- AddOn Namespace
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
-
-local LibStub = _G.LibStub
 
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 local LibWindow = LibStub("LibWindow-1.1")
-local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
 
 local EventMessage = private.EventMessage
 
-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ---- Constants
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 local SPAWN_POINTS = {
     "CENTER",
     "BOTTOM",
@@ -46,19 +36,21 @@ for index = 1, #SPAWN_POINTS do
     SPAWN_INDICES[SPAWN_POINTS[index]] = index
 end
 
-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ---- Helpers
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 local function round(num, idp)
     local mult = 10 ^ (idp or 0)
     return math.floor(num * mult + 0.5) / mult
 end
 
-----------------------------------------------------------------------------------
----- TargetButton anchor frame.
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- TargetButton Anchor Frame
+--------------------------------------------------------------------------------
+
 local function CreateAnchorFrame()
-    local anchorFrame = _G.CreateFrame("Frame", nil, _G.UIParent, "BackdropTemplate")
+    local anchorFrame = CreateFrame("Frame", nil, UIParent, "BackdropTemplate")
     anchorFrame:SetSize(302, 119)
     anchorFrame:SetFrameStrata("DIALOG")
     anchorFrame:SetBackdrop({
@@ -97,7 +89,7 @@ local function CreateAnchorFrame()
     text:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -4)
     text:SetText(L["Drag to set the spawn point for targeting buttons."])
 
-    local dismissButton = _G.CreateFrame("Button", nil, anchorFrame)
+    local dismissButton = CreateFrame("Button", nil, anchorFrame)
     dismissButton:SetSize(18, 18)
     dismissButton:SetPoint("TOPRIGHT", anchorFrame, "TOPRIGHT", -4, -4)
     dismissButton:SetFrameStrata("DIALOG")
@@ -128,9 +120,10 @@ local function IsTargetButtonGroupDisabled()
     return not private.db.profile.targetButtonGroup.isEnabled
 end
 
-----------------------------------------------------------------------------------
----- Initialization.
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Initialization
+--------------------------------------------------------------------------------
+
 local TargetingOptions
 local anchorFrame
 
@@ -141,14 +134,14 @@ local function GetTargetingOptions()
 
     TargetingOptions = TargetingOptions
         or {
-            name = _G.BINDING_HEADER_TARGETING,
+            name = BINDING_HEADER_TARGETING,
             order = 3,
             type = "group",
             descStyle = "inline",
             args = {
                 isEnabled = {
                     order = 1,
-                    name = _G.ENABLE,
+                    name = ENABLE,
                     descStyle = "inline",
                     type = "toggle",
                     width = "full",
@@ -177,7 +170,7 @@ local function GetTargetingOptions()
                 },
                 scale = {
                     order = 3,
-                    name = _G.UI_SCALE,
+                    name = UI_SCALE,
                     type = "range",
                     width = "full",
                     min = 0.5,
