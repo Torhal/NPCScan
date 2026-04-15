@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -9,9 +9,11 @@ local EventMessage = private.EventMessage
 
 local AceEvent = LibStub("AceEvent-3.0")
 local LibSharedMedia = LibStub("LibSharedMedia-3.0")
+
+---@class NPCScan
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 
-_G.BINDING_HEADER_NPCSCAN = AddOnFolderName
+BINDING_HEADER_NPCSCAN = AddOnFolderName
 _G["BINDING_NAME_CLICK NPCScan_RecentTargetButton:LeftButton"] = "Target latest NPC"
 _G["BINDING_NAME_CLICK NPCScan_SearchMacroButton:LeftButton"] = "Targeting Macro"
 
@@ -56,14 +58,17 @@ local TargetButtonMetatable = {
 --------------------------------------------------------------------------------
 ---- Helpers
 --------------------------------------------------------------------------------
+---@param self AnimationGroup
 local function AnimationGroup_HideParent(self)
     self:GetParent():Hide()
 end
 
+---@param self AnimationGroup
 local function AnimationGroup_DismissGrandParent(self)
     self:GetParent():GetParent():RequestDeactivate()
 end
 
+---@param self AnimationGroup
 local function AnimationGroup_DismissParent(self)
     self:GetParent():RequestDeactivate()
 end
@@ -71,8 +76,11 @@ end
 --------------------------------------------------------------------------------
 ---- Scripts
 --------------------------------------------------------------------------------
+
+---@param self Button | UIPanelCloseButtonNoScripts
+---@param mouseButton MouseButton
 local function DismissButton_OnClick(self, mouseButton)
-    local parent = self:GetParent()
+    local parent = self:GetParent() --[[@as TargetButton]]
 
     if mouseButton == "RightButton" then
         -- TODO: Make this a general utility function - this is based on code from Preferences/NPCs
@@ -95,10 +103,13 @@ local function DismissButton_OnClick(self, mouseButton)
     parent:RequestDeactivate()
 end
 
+---@param self Button | UIPanelCloseButtonNoScripts
 local function DismissButton_OnEnter(self)
+    local parent = self:GetParent() --[[@as TargetButton]]
+
     if self:IsEnabled() then
         local tooltip = GameTooltip
-        tooltip:SetOwner(self, TOOLTIP_ANCHORS[self:GetParent():GetEffectiveSpawnPoint()], 0, -50)
+        tooltip:SetOwner(self, TOOLTIP_ANCHORS[parent:GetEffectiveSpawnPoint()], 0, -50)
         tooltip:AddLine(LEFT_CLICK_TEXTURE .. " " .. REMOVE, 0.5, 0.8, 1)
         tooltip:AddLine(RIGHT_CLICK_TEXTURE .. " " .. IGNORE, 0.5, 0.8, 1)
 
@@ -106,12 +117,15 @@ local function DismissButton_OnEnter(self)
     end
 end
 
+---@param self TargetButton
+---@param mouseButton MouseButton
 local function TargetButton_OnClick(self, mouseButton)
     if mouseButton == "RightButton" and not InCombatLockdown() then
         self.dismissAnimationGroup:Play()
     end
 end
 
+---@param self TargetButton
 local function TargetButton_OnEnter(self)
     local tooltip = GameTooltip
     tooltip:SetOwner(self, TOOLTIP_ANCHORS[self:GetEffectiveSpawnPoint()], 0, -50)
@@ -127,12 +141,14 @@ local function TargetButton_OnEnter(self)
     self.durationFadeAnimationGroup.animOut:SetStartDelay(private.db.profile.targetButtonGroup.durationSeconds)
 end
 
+---@param self TargetButton
 local function TargetButton_OnLeave(self)
-    _G.GameTooltip:Hide()
+    GameTooltip:Hide()
 
     self.durationFadeAnimationGroup:Play()
 end
 
+---@param self TargetButton
 local function TargetButton_OnShow(self)
     self.PortraitModel:SetPortraitZoom(1)
 end
@@ -368,6 +384,7 @@ function TargetButtonPrototype:GetEffectiveSpawnPoint()
     return verticalName .. horizontalName
 end
 
+---@param unitToken UnitToken
 function TargetButtonPrototype:SetRaidTarget(unitToken)
     if unitToken and not self.raidIconID and #RaidIconIDs > 0 then
         self.raidIconID = table.remove(RaidIconIDs)
@@ -513,7 +530,7 @@ do
     end
 end -- do-block
 
----@param unitClassification string
+---@param unitClassification UnitClassification
 ---@return TargetButton
 local function CreateTargetButton(unitClassification)
     local CreateAlphaAnimation = private.CreateAlphaAnimation
@@ -572,23 +589,23 @@ local function CreateTargetButton(unitClassification)
     background:SetBlendMode("BLEND")
     button.Background = background
 
-    local glowTexture = button:CreateTexture(nil, "OVERLAY")
+    local glowTexture = button:CreateTexture(nil, "OVERLAY") --[[@as AnimationGroupTexture]]
     glowTexture:SetBlendMode("ADD")
     glowTexture:SetAtlas("loottoast-glow")
     button.glowTexture = glowTexture
 
-    local shineTexture = button:CreateTexture(nil, "OVERLAY")
+    local shineTexture = button:CreateTexture(nil, "OVERLAY") --[[@as AnimationGroupTexture]]
     shineTexture:SetBlendMode("ADD")
     shineTexture:SetAtlas("loottoast-sheen")
     button.shineTexture = shineTexture
 
-    local killedBackgroundTexture = button:CreateTexture(nil, "OVERLAY")
+    local killedBackgroundTexture = button:CreateTexture(nil, "OVERLAY") --[[@as AnimationGroupTexture]]
     killedBackgroundTexture:Hide()
     killedBackgroundTexture:SetBlendMode("ADD")
     killedBackgroundTexture:SetTexture([[Interface\FullScreenTextures\LowHealth]])
     button.killedBackgroundTexture = killedBackgroundTexture
 
-    local killedTextureFrame = _G.CreateFrame("Frame", nil, button)
+    local killedTextureFrame = CreateFrame("Frame", nil, button)
     killedTextureFrame:SetSize(48, 48)
     killedTextureFrame:SetPoint("CENTER")
     button.killedTextureFrame = killedTextureFrame
@@ -660,7 +677,7 @@ local function CreateTargetButton(unitClassification)
     CreateAlphaAnimation(shineAnimationGroup, 1, 0, 0.25, 0.175, 2) -- Animate out.
 
     -- Killed Background
-    local killedBackgroundAnimationGroup = killedBackgroundTexture:CreateAnimationGroup()
+    local killedBackgroundAnimationGroup = killedBackgroundTexture:CreateAnimationGroup() --[[@as NamedAnimationGroup]]
     killedBackgroundAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissGrandParent)
     killedBackgroundAnimationGroup.name = "killedBackgroundAnimationGroup"
 
@@ -716,7 +733,7 @@ local function CreateTargetButton(unitClassification)
     dismissButtonAnimIn:SetChildKey("DismissButton")
 
     -- Dismissed
-    local dismissAnimationGroup = button:CreateAnimationGroup()
+    local dismissAnimationGroup = button:CreateAnimationGroup() --[[@as NamedAnimationGroup]]
     dismissAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissParent)
     dismissAnimationGroup.name = "dismissAnimationGroup"
 
@@ -725,7 +742,7 @@ local function CreateTargetButton(unitClassification)
     button.dismissAnimationGroup = dismissAnimationGroup
 
     -- Duration
-    local durationFadeAnimationGroup = button:CreateAnimationGroup()
+    local durationFadeAnimationGroup = button:CreateAnimationGroup() --[[@as FadeAnimationGroup]]
     durationFadeAnimationGroup:SetScript("OnFinished", AnimationGroup_DismissParent)
     durationFadeAnimationGroup.name = "durationFadeAnimationGroup"
 
@@ -741,7 +758,7 @@ local function CreateTargetButton(unitClassification)
     durationFadeAnimationGroup.animOut = durationFadeAnim
 
     --------------------------------------------------------------------------------
-    ---- Etcetera.
+    ---- Etcetera
     --------------------------------------------------------------------------------
     ClassificationDecorators[unitClassification](button)
     button.__classification = unitClassification
