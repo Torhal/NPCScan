@@ -571,7 +571,7 @@ local function CreateTargetButton(unitClassification)
     button.DismissButton = dismissButton
 
     --------------------------------------------------------------------------------
-    ---- Textures.
+    ---- Textures
     --------------------------------------------------------------------------------
     local raidIcon = button:CreateTexture(nil, "OVERLAY")
     raidIcon:Hide()
@@ -610,14 +610,14 @@ local function CreateTargetButton(unitClassification)
     killedTextureFrame:SetPoint("CENTER")
     button.killedTextureFrame = killedTextureFrame
 
-    local killLeftTexture = killedTextureFrame:CreateTexture(nil, "OVERLAY", 1)
+    local killLeftTexture = killedTextureFrame:CreateTexture(nil, "OVERLAY", nil, 1)
     killLeftTexture:SetAlpha(0)
     killLeftTexture:SetSize(64, 64)
     killLeftTexture:SetAtlas("GarrMission_EncounterBar-Xleft")
     killLeftTexture:SetPoint("CENTER")
     killedTextureFrame.left = killLeftTexture
 
-    local killRightTexture = killedTextureFrame:CreateTexture(nil, "OVERLAY", 1)
+    local killRightTexture = killedTextureFrame:CreateTexture(nil, "OVERLAY", nil, 1)
     killRightTexture:SetAlpha(0)
     killRightTexture:SetSize(64, 64)
     killRightTexture:SetAtlas("GarrMission_EncounterBar-Xright")
