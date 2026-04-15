@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 ----  AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 
 ---@class PrivateNamespace
@@ -26,6 +27,7 @@ local NPCScan = LibStub("AceAddon-3.0"):NewAddon(
 --------------------------------------------------------------------------------
 ---- Debugger
 --------------------------------------------------------------------------------
+
 do
     local TextDump = LibStub("LibTextDump-1.0")
 
@@ -56,6 +58,7 @@ end
 --------------------------------------------------------------------------------
 ---- Variables
 --------------------------------------------------------------------------------
+
 local NPCIDFromName = {}
 private.NPCIDFromName = NPCIDFromName
 
@@ -65,10 +68,12 @@ private.QuestIDFromName = QuestIDFromName
 --------------------------------------------------------------------------------
 ---- AddOn Methods
 --------------------------------------------------------------------------------
+
 function NPCScan:OnInitialize()
     --------------------------------------------------------------------------------
     ---- Data Initialization
     --------------------------------------------------------------------------------
+
     local DefaultPreferences = private.DefaultPreferences
     local UIMapType = Enum.UIMapType
 
@@ -127,6 +132,7 @@ function NPCScan:OnInitialize()
     --------------------------------------------------------------------------------
     ---- DB Migrations
     --------------------------------------------------------------------------------
+
     local sharedMediaNames = db.profile.alert.sound.sharedMediaNames
 
     for index = 1, 50 do
@@ -142,8 +148,9 @@ end
 
 function NPCScan:OnEnable()
     --------------------------------------------------------------------------------
-    ---- Build lookup tables
+    ---- Lookup Tables
     --------------------------------------------------------------------------------
+
     for mapID, map in pairs(Data.Maps) do
         for npcID in pairs(map.NPCs) do
             local npc = private.InitializeNPC(npcID)
