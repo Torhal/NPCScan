@@ -8,8 +8,6 @@ local AddOnFolderName = ... ---@type string
 ---@field db NPCScanDatabase
 local private = select(2, ...)
 
-local Data = private.Data
-
 local AceConfigDialog = LibStub("AceConfigDialog-3.0")
 local HereBeDragons = LibStub("HereBeDragons-2.0")
 
@@ -82,14 +80,14 @@ function NPCScan:OnInitialize()
     end
 
     for _, continentID in pairs(private.Enum.ContinentID) do
-        local continent = Data.Continents[continentID]
+        local continent = private.Data.Continents[continentID]
 
         if not continent then
             continent = {
                 Maps = {},
             }
 
-            Data.Continents[continentID] = continent
+            private.Data.Continents[continentID] = continent
         end
 
         continent.ID = continentID
@@ -98,7 +96,7 @@ function NPCScan:OnInitialize()
         DefaultPreferences.profile.detection.continentIDs[continentID] = private.Enum.DetectionGroupStatus.Enabled
     end
 
-    for mapID, map in pairs(Data.Maps) do
+    for mapID, map in pairs(private.Data.Maps) do
         local parentMapInfo = MapUtil.GetMapParentInfo(mapID, UIMapType.Continent)
             or MapUtil.GetMapParentInfo(mapID, UIMapType.World)
             or MapUtil.GetMapParentInfo(mapID, UIMapType.Cosmic)
@@ -115,7 +113,7 @@ function NPCScan:OnInitialize()
         map.ID = mapID
         map.name = HereBeDragons:GetLocalizedMap(mapID) or UNKNOWN
 
-        Data.Continents[continentID].Maps[mapID] = map
+        private.Data.Continents[continentID].Maps[mapID] = map
     end
 
     ---@class NPCScanDatabase
@@ -151,7 +149,7 @@ function NPCScan:OnEnable()
     ---- Lookup Tables
     --------------------------------------------------------------------------------
 
-    for mapID, map in pairs(Data.Maps) do
+    for mapID, map in pairs(private.Data.Maps) do
         for npcID in pairs(map.NPCs) do
             local npc = private.InitializeNPC(npcID)
 
@@ -186,7 +184,7 @@ function NPCScan:OnEnable()
         [private.Enum.MapID.TheShadowlands] = true,
     }
 
-    for mapID, map in pairs(Data.Maps) do
+    for mapID, map in pairs(private.Data.Maps) do
         local continent = MapUtil.GetMapParentInfo(mapID, Enum.UIMapType.Continent, true)
 
         local missingData = {}
