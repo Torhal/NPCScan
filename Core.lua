@@ -248,6 +248,7 @@ do
     local DatamineTooltip = CreateFrame("GameTooltip", "NPCScanDatamineTooltip", UIParent, "GameTooltipTemplate")
     DatamineTooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
 
+    ---@param npcID integer
     function NPCScan:GetNPCNameFromID(npcID)
         local npcName = private.db.locale.npcNames[npcID]
 
@@ -267,6 +268,7 @@ do
         return npcName
     end
 
+    ---@param questID integer
     function NPCScan:GetQuestNameFromID(questID)
         local questName = private.db.locale.questNames[questID]
 
@@ -288,6 +290,7 @@ end
 do
     local SUBCOMMAND_FUNCTIONS
 
+    ---@param input string
     function NPCScan:ChatCommand(input)
         SUBCOMMAND_FUNCTIONS = SUBCOMMAND_FUNCTIONS
             or {
