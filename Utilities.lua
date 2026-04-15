@@ -350,6 +350,7 @@ do
         output:Display()
     end
 
+    ---@param continentID integer
     function private.DumpNPCQuests(continentID)
         if not continentID then
             displayContinents()
