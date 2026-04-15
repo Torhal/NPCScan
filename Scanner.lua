@@ -20,6 +20,7 @@ local ProcessDetection
 do
     local throttledNPCs = {}
 
+    ---@param detectionData DetectionData
     function ProcessDetection(detectionData)
         local npcID = detectionData.npcID
         local profile = private.db.profile
