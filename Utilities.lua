@@ -219,6 +219,7 @@ do
         "classification",
         "factionGroup",
         "isTameable",
+        "npcID",
         "questID",
         "vignetteID",
         "vignetteName",
