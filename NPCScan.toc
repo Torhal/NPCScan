@@ -13,11 +13,14 @@ embeds.xml
 
 Localization\Manifest.xml
 Constants\Manifest.xml
+
+Core.lua
+
 Data\Manifest.xml
+Datamining\Manifest.xml
 
 Utilities.lua
 
-Core.lua
 Scanner.lua
 MapOverlays.lua
 Tooltip.lua
