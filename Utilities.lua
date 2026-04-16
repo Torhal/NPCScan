@@ -1,23 +1,22 @@
-----------------------------------------------------------------------------------
----- Localized Lua globals.
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Lua Builtins
+--------------------------------------------------------------------------------
+
 -- Functions
-local pairs = _G.pairs
-local tonumber = _G.tonumber
-local tostring = _G.tostring
-local type = _G.type
+local pairs = pairs
+local tonumber = tonumber
+local tostring = tostring
+local type = type
 
 -- Libraries
-local table = _G.table
+local table = table
 
------------------------------------------------------------------------
--- AddOn Namespace
------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- AddOn Namespace
+--------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
-
-local Data = private.Data
-local Enum = private.Enum
 
 -----------------------------------------------------------------------
 -- WoW 7 to 8 transition
@@ -41,9 +40,10 @@ function GetMapData(mapID)
     return { mapInfo = mapInfo, continentInfo = continentInfo, worldInfo = worldInfo }
 end
 
------------------------------------------------------------------------
--- Helpers
------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- Helpers
+--------------------------------------------------------------------------------
+
 ---@param animationGroup AnimationGroup
 ---@param fromAlpha number
 ---@param toAlpha number
@@ -140,30 +140,30 @@ end
 private.FormatAtlasTexture = FormatAtlasTexture
 
 local function GetMapOptionDescription(mapID)
-    local continentID = Data.Maps[mapID].continentID
+    local continentID = private.Data.Maps[mapID].continentID
 
     if continentID then
-        local continentName = Data.Continents[continentID].name
+        local continentName = private.Data.Continents[continentID].name
 
         if continentName then
-            return ("%s %s %s"):format(_G.ID, mapID, _G.PARENS_TEMPLATE:format(continentName))
+            return ("%s %s %s"):format(ID, mapID, PARENS_TEMPLATE:format(continentName))
         end
 
         private.Debug("GetMapOptionDescription: No continentName for mapID %d", mapID)
     end
 
-    return ("%s %s"):format(_G.ID, mapID)
+    return ("%s %s"):format(ID, mapID)
 end
 
 private.GetMapOptionDescription = GetMapOptionDescription
 
 local function GetMapOptionName(mapID)
-    local continentID = Data.Maps[mapID].continentID
+    local continentID = private.Data.Maps[mapID].continentID
     local profile = private.db.profile
     local isBlacklisted = profile.blacklist.mapIDs[mapID]
-        or profile.detection.continentIDs[continentID] == Enum.DetectionGroupStatus.Disabled
-    local colorCode = isBlacklisted and _G.RED_FONT_COLOR_CODE or _G.GREEN_FONT_COLOR_CODE
-    return ("%s%s|r"):format(colorCode, Data.Maps[mapID].name)
+        or profile.detection.continentIDs[continentID] == private.Enum.DetectionGroupStatus.Disabled
+    local colorCode = isBlacklisted and RED_FONT_COLOR_CODE or GREEN_FONT_COLOR_CODE
+    return ("%s%s|r"):format(colorCode, private.Data.Maps[mapID].name)
 end
 
 private.GetMapOptionName = GetMapOptionName
@@ -237,7 +237,7 @@ do
     local function displayContinents()
         print("A continentID must be supplied. Valid choices:")
 
-        for continentID, continent in pairs(Data.Continents) do
+        for continentID, continent in pairs(private.Data.Continents) do
             print(continentID .. ":", continent.name)
         end
     end
@@ -251,7 +251,7 @@ do
         end
 
         local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
-        local continent = Data.Continents[continentID]
+        local continent = private.Data.Continents[continentID]
 
         local sortedMapIDs = {}
         local sortedNPCIDs = {}
@@ -273,7 +273,7 @@ do
 
         local classificationEnumName = {}
 
-        for name, value in pairs(Enum.NPCClassification) do
+        for name, value in pairs(private.Enum.NPCClassification) do
             print(("Assigning %s as %s"):format(value, name))
             classificationEnumName[value] = name
         end
@@ -290,12 +290,12 @@ do
         output:AddLine("local NPCClassification = private.Enum.NPCClassification\n")
 
         for mapIndex = 1, #sortedMapIDs do
-            local map = Data.Maps[sortedMapIDs[mapIndex]]
+            local map = private.Data.Maps[sortedMapIDs[mapIndex]]
             local addedZoneHeader = false
 
             for npcIndex = 1, #sortedNPCIDs[map.ID] do
                 local npcID = sortedNPCIDs[map.ID][npcIndex]
-                local npc = Data.NPCs[npcID]
+                local npc = private.Data.NPCs[npcID]
 
                 local startedEntry = false
 
@@ -358,8 +358,8 @@ do
             return
         end
 
-        local NPCScan = _G.LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
-        local continent = Data.Continents[continentID]
+        local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+        local continent = private.Data.Continents[continentID]
 
         local sortedMapIDs = {}
         local sortedQuestIDs = {}
@@ -393,12 +393,12 @@ do
         output:AddLine("local Quests = private.Data.Quests\n")
 
         for mapIndex = 1, #sortedMapIDs do
-            local map = Data.Maps[sortedMapIDs[mapIndex]]
+            local map = private.Data.Maps[sortedMapIDs[mapIndex]]
             local addedZoneHeader = false
 
             for questIndex = 1, #sortedQuestIDs[map.ID] do
                 local questID = sortedQuestIDs[map.ID][questIndex]
-                local quest = Data.Quests[questID]
+                local quest = private.Data.Quests[questID]
 
                 local startedEntry = false
 
@@ -450,8 +450,8 @@ do
             return
         end
 
-        local NPCScan = _G.LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
-        local continent = Data.Continents[continentID]
+        local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+        local continent = private.Data.Continents[continentID]
 
         local sortedMapIDs = {}
         local sortedQuestIDs = {}
@@ -480,12 +480,12 @@ do
         output:AddLine("local Quests = private.Data.Quests\n")
 
         for mapIndex = 1, #sortedMapIDs do
-            local map = Data.Maps[sortedMapIDs[mapIndex]]
+            local map = private.Data.Maps[sortedMapIDs[mapIndex]]
             local addedZoneHeader = false
 
             for questIndex = 1, #sortedQuestIDs[map.ID] do
                 local questID = sortedQuestIDs[map.ID][questIndex]
-                local quest = Data.Quests[questID]
+                local quest = private.Data.Quests[questID]
 
                 local startedEntry = false
 
