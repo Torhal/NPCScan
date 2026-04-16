@@ -24,7 +24,7 @@
 ---@field ignoreCompletedAchievementCriteria boolean
 ---@field ignoreCompletedQuestObjectives boolean
 ---@field ignoreDeadNPCs boolean
----@field ignoreMinimap boolean
+---@field ignoreMiniMap boolean
 ---@field ignoreWorldMap boolean
 ---@field intervalSeconds integer
 ---@field raidMarker table<"add" | "addInGroup", boolean>
