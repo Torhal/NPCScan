@@ -6,7 +6,7 @@ local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
-local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 
 --------------------------------------------------------------------------------
