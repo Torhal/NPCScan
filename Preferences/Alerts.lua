@@ -88,9 +88,11 @@ end
 ---- Initialization.
 --------------------------------------------------------------------------------
 
+---@type AceConfig.OptionsTable | nil
 local AlertOptions
 local firstRun = true
 
+---@return AceConfig.OptionsTable
 local function GetAlertOptions()
     local profile = private.db.profile
 
