@@ -1,39 +1,29 @@
 --------------------------------------------------------------------------------
----- Localized Lua globals.
---------------------------------------------------------------------------------
--- Functions
-local pairs = _G.pairs
-
--- Libraries
-local table = _G.table
-
---------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
-
-local Data = private.Data
-local Enum = private.Enum
-
-local LibStub = _G.LibStub
 
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 
 --------------------------------------------------------------------------------
----- Ignored continent options.
+---- Ignored Continent Options
 --------------------------------------------------------------------------------
+
 local AlphabeticalContinentMaps = {}
 local ContinentAndMapOptions = {}
 local ContinentIDs = {}
 
 local function UpdateContinentAndMapOptions()
+    local Data = private.Data
+
     table.wipe(ContinentAndMapOptions)
 
     if #ContinentIDs == 0 then
-        for index = 1, #Enum.ContinentMapID do
+        for index = 1, #private.Enum.ContinentMapID do
             ContinentIDs[#ContinentIDs + 1] = index
         end
 
@@ -71,7 +61,7 @@ local function UpdateContinentAndMapOptions()
             args = {
                 status = {
                     order = 1,
-                    name = _G.STATUS,
+                    name = STATUS,
                     type = "select",
                     values = private.DetectionGroupStatusLabels,
                     get = function()
@@ -80,7 +70,7 @@ local function UpdateContinentAndMapOptions()
                     set = function(_, value)
                         profile.detection.continentIDs[continentID] = value
 
-                        if value ~= Enum.DetectionGroupStatus.UserDefined then
+                        if value ~= private.Enum.DetectionGroupStatus.UserDefined then
                             for mapID in pairs(continent.Maps) do
                                 profile.blacklist.mapIDs[mapID] = nil
                             end
@@ -105,12 +95,12 @@ local function UpdateContinentAndMapOptions()
             local mapOptions = {
                 order = mapIDIndex,
                 name = private.GetMapOptionName(mapID),
-                desc = ("%s %s"):format(_G.ID, mapID),
+                desc = ("%s %s"):format(ID, mapID),
                 type = "toggle",
                 width = "full",
                 descStyle = "inline",
                 disabled = function()
-                    return profile.detection.continentIDs[continentID] ~= Enum.DetectionGroupStatus.UserDefined
+                    return profile.detection.continentIDs[continentID] ~= private.Enum.DetectionGroupStatus.UserDefined
                 end,
                 get = function()
                     return not profile.blacklist.mapIDs[mapID]
@@ -137,7 +127,7 @@ local function UpdateContinentAndMapOptions()
                 if not dungeonOptionsTable then
                     dungeonOptionsTable = {
                         order = 3,
-                        name = _G.DUNGEONS,
+                        name = DUNGEONS,
                         type = "group",
                         args = {},
                     }
@@ -152,7 +142,7 @@ local function UpdateContinentAndMapOptions()
                 if not zoneOptionsTable then
                     zoneOptionsTable = {
                         order = 2,
-                        name = _G.ZONE,
+                        name = ZONE,
                         type = "group",
                         args = {},
                     }
@@ -171,8 +161,9 @@ local function UpdateContinentAndMapOptions()
 end
 
 --------------------------------------------------------------------------------
----- Initialization.
+---- Initialization
 --------------------------------------------------------------------------------
+
 local DetectionOptions
 
 local function GetDetectionOptions()
@@ -187,7 +178,7 @@ local function GetDetectionOptions()
             args = {
                 general = {
                     order = 1,
-                    name = _G.GENERAL_LABEL,
+                    name = GENERAL_LABEL,
                     type = "group",
                     args = {
                         interval = {
@@ -207,7 +198,7 @@ local function GetDetectionOptions()
                         },
                         ignore = {
                             order = 2,
-                            name = _G.IGNORE,
+                            name = IGNORE,
                             type = "group",
                             guiInline = true,
                             args = {
@@ -256,7 +247,7 @@ local function GetDetectionOptions()
                                 miniMap = {
                                     order = 4,
                                     type = "toggle",
-                                    name = _G.MINIMAP_LABEL,
+                                    name = MINIMAP_LABEL,
                                     descStyle = "inline",
                                     width = "full",
                                     get = function()
@@ -270,7 +261,7 @@ local function GetDetectionOptions()
                                 worldMap = {
                                     order = 5,
                                     type = "toggle",
-                                    name = _G.WORLD_MAP,
+                                    name = WORLD_MAP,
                                     descStyle = "inline",
                                     width = "full",
                                     get = function()
@@ -287,7 +278,7 @@ local function GetDetectionOptions()
                 },
                 continentsAndMaps = {
                     order = 2,
-                    name = _G.WORLD_MAP, -- Actually says "Map" - at least, in English.
+                    name = WORLD_MAP, -- Actually says "Map" - at least, in English.
                     type = "group",
                     childGroups = "tree",
                     args = ContinentAndMapOptions,
