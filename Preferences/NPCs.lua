@@ -112,6 +112,7 @@ local function ValidateUserDefinedNPCInput(input, operationType)
     return false
 end
 
+---@param input integer | string
 local function AddUserDefinedNPC(input)
     local isValid, npcID = ValidateUserDefinedNPCInput(input, "add")
 
@@ -129,6 +130,7 @@ end
 
 private.AddUserDefinedNPC = AddUserDefinedNPC
 
+---@param input integer | string
 local function RemoveUserDefinedNPC(input)
     local isValid, npcID = ValidateUserDefinedNPCInput(input, "remove")
 
@@ -147,6 +149,8 @@ end
 
 private.RemoveUserDefinedNPC = RemoveUserDefinedNPC
 
+---@param npcID integer
+---@return string
 local function GetNPCOptionsDescription(npcID)
     local npc = private.Data.NPCs[npcID]
     local mapNames = {}
@@ -161,6 +165,8 @@ end
 local ICON_QUEST_ACTIVE = private.FormatAtlasTexture("QuestDaily")
 local ICON_QUEST_COMPLETE = private.FormatAtlasTexture("QuestRepeatableTurnin")
 
+---@param npcID integer
+---@return string
 local function GetNPCOptionsName(npcID)
     local colorCode = NORMAL_FONT_COLOR_CODE
     local npc = private.Data.NPCs[npcID]
@@ -188,17 +194,21 @@ end
 
 private.GetNPCOptionsName = GetNPCOptionsName
 
-local function SortByNPCNameThenByID(a, b)
-    local nameA = npcNames[a]
-    local nameB = npcNames[b]
+---@param npcIDA integer
+---@param npcIDB integer
+---@return boolean
+local function SortByNPCNameThenByID(npcIDA, npcIDB)
+    local nameA = npcNames[npcIDA]
+    local nameB = npcNames[npcIDB]
 
     if nameA == nameB then
-        return a < b
+        return npcIDA < npcIDB
     end
 
     return nameA < nameB
 end
 
+---@param savedNPCIDs table<integer, boolean>
 local function SetNPCDataFromList(savedNPCIDs)
     table.wipe(npcIDs)
     table.wipe(npcNames)
@@ -740,8 +750,10 @@ private.UpdateBlacklistedNPCOptions = UpdateBlacklistedNPCOptions
 ---- Initialization
 --------------------------------------------------------------------------------
 
+---@type AceConfig.OptionsTable | nil
 local NPCOptions
 
+---@return AceConfig.OptionsTable
 local function GetOrUpdateNPCOptions()
     local profile = private.db.profile
 
@@ -752,6 +764,7 @@ local function GetOrUpdateNPCOptions()
             type = "group",
             childGroups = "tab",
             args = {
+                ---@type AceConfig.OptionsTable
                 achievements = {
                     order = 1,
                     name = ACHIEVEMENTS,
@@ -759,12 +772,14 @@ local function GetOrUpdateNPCOptions()
                     childGroups = "tree",
                     args = AchievementNPCOptions,
                 },
+                ---@type AceConfig.OptionsTable
                 rare = {
                     order = 2,
                     name = BATTLE_PET_BREED_QUALITY4,
                     type = "group",
                     childGroups = "tab",
                     args = {
+                        ---@type AceConfig.OptionsTable
                         isEnabled = {
                             order = 1,
                             type = "toggle",
@@ -779,6 +794,7 @@ local function GetOrUpdateNPCOptions()
                                 NPCScan:UpdateScanList()
                             end,
                         },
+                        ---@type AceConfig.OptionsTable
                         zoneNPCOptions = {
                             order = 2,
                             name = ZONE,
@@ -786,6 +802,7 @@ local function GetOrUpdateNPCOptions()
                             type = "group",
                             args = ZoneRareNPCOptions,
                         },
+                        ---@type AceConfig.OptionsTable
                         dungeonNPCOptions = {
                             order = 3,
                             name = DUNGEONS,
@@ -795,12 +812,14 @@ local function GetOrUpdateNPCOptions()
                         },
                     },
                 },
+                ---@type AceConfig.OptionsTable
                 tameableRare = {
                     order = 3,
                     name = TAMEABLE,
                     type = "group",
                     childGroups = "tab",
                     args = {
+                        ---@type AceConfig.OptionsTable
                         isEnabled = {
                             order = 1,
                             type = "toggle",
@@ -815,6 +834,7 @@ local function GetOrUpdateNPCOptions()
                                 NPCScan:UpdateScanList()
                             end,
                         },
+                        ---@type AceConfig.OptionsTable
                         zoneNPCOptions = {
                             order = 2,
                             name = ZONE,
@@ -822,6 +842,7 @@ local function GetOrUpdateNPCOptions()
                             type = "group",
                             args = ZoneTameableRareNPCOptions,
                         },
+                        ---@type AceConfig.OptionsTable
                         dungeonNPCOptions = {
                             order = 3,
                             name = DUNGEONS,
@@ -831,16 +852,19 @@ local function GetOrUpdateNPCOptions()
                         },
                     },
                 },
+                ---@type AceConfig.OptionsTable
                 search = {
                     order = 4,
                     name = SEARCH,
                     type = "group",
                     args = {
+                        ---@type AceConfig.OptionsTable
                         description = {
                             order = 1,
                             type = "description",
                             name = L["Type the name of a Continent, Dungeon, or Zone, or the partial name of an NPC. Accepts Lua patterns."],
                         },
+                        ---@type AceConfig.OptionsTable
                         entryBox = {
                             order = 2,
                             name = " ",
@@ -853,6 +877,7 @@ local function GetOrUpdateNPCOptions()
                                 PerformNPCSearch(value)
                             end,
                         },
+                        ---@type AceConfig.OptionsTable
                         results = {
                             order = 3,
                             name = KBASE_SEARCH_RESULTS,
@@ -862,11 +887,13 @@ local function GetOrUpdateNPCOptions()
                         },
                     },
                 },
+                ---@type AceConfig.OptionsTable
                 userDefined = {
                     order = 5,
                     name = CUSTOM,
                     type = "group",
                     args = {
+                        ---@type AceConfig.OptionsTable
                         isEnabled = {
                             order = 1,
                             type = "toggle",
@@ -881,6 +908,7 @@ local function GetOrUpdateNPCOptions()
                                 NPCScan:UpdateScanList()
                             end,
                         },
+                        ---@type AceConfig.OptionsTable
                         npcID = {
                             order = 2,
                             name = ADD,
@@ -896,6 +924,7 @@ local function GetOrUpdateNPCOptions()
                                 AddUserDefinedNPC(value)
                             end,
                         },
+                        ---@type AceConfig.OptionsTable
                         npcIDs = {
                             order = 3,
                             name = ASSIGNED_COLON,
@@ -908,11 +937,13 @@ local function GetOrUpdateNPCOptions()
                         },
                     },
                 },
+                ---@type AceConfig.OptionsTable
                 blacklisted = {
                     order = 6,
                     name = IGNORED,
                     type = "group",
                     args = {
+                        ---@type AceConfig.OptionsTable
                         npcIDs = {
                             order = 1,
                             name = ASSIGNED_COLON,
