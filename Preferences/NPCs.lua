@@ -4,10 +4,6 @@
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
-local Data = private.Data
-local Enum = private.Enum
-local EventMessage = private.EventMessage
-
 local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
@@ -40,6 +36,8 @@ do
         if mapIDs then
             return mapIDs
         end
+
+        local Data = private.Data
 
         mapIDs = {}
 
@@ -75,7 +73,7 @@ local function ValidateUserDefinedNPCInput(input, operationType)
     local npcID = tonumber(value)
 
     if npcID then
-        if operationType == "add" and Data.NPCs[npcID] then
+        if operationType == "add" and private.Data.NPCs[npcID] then
             NPCScan:Print(L["Predefined NPCs cannot be added to the user-defined NPC list."])
             return false
         end
@@ -139,18 +137,18 @@ local function RemoveUserDefinedNPC(input)
     private.UpdateUserDefinedNPCOptions()
 
     NPCScan:UpdateScanList()
-    NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
+    NPCScan:SendMessage(private.EventMessage.DismissTargetButtonByID, npcID)
     NPCScan:Printf(L["Removed %1$s (%2$d) from the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
 end
 
 private.RemoveUserDefinedNPC = RemoveUserDefinedNPC
 
 local function GetNPCOptionsDescription(npcID)
-    local npc = Data.NPCs[npcID]
+    local npc = private.Data.NPCs[npcID]
     local mapNames = {}
 
     for mapIDIndex = 1, #npc.mapIDs do
-        mapNames[#mapNames + 1] = Data.Maps[npc.mapIDs[mapIDIndex]].name
+        mapNames[#mapNames + 1] = private.Data.Maps[npc.mapIDs[mapIDIndex]].name
     end
 
     return ("%s %s %s"):format(ID, npcID, table.concat(mapNames, ", "))
@@ -161,7 +159,7 @@ local ICON_QUEST_COMPLETE = private.FormatAtlasTexture("QuestRepeatableTurnin")
 
 local function GetNPCOptionsName(npcID)
     local colorCode = NORMAL_FONT_COLOR_CODE
-    local npc = Data.NPCs[npcID]
+    local npc = private.Data.NPCs[npcID]
 
     if npc.achievementID then
         colorCode = npc:IsAchievementCriteriaComplete() and GREEN_FONT_COLOR_CODE or RED_FONT_COLOR_CODE
@@ -216,6 +214,8 @@ local AchievementIDs -- Populated below.
 local AchievementNPCOptions = {}
 
 local function UpdateAchievementNPCOptions()
+    local Data = private.Data
+
     table.wipe(AchievementNPCOptions)
 
     if not AchievementIDs then
@@ -256,7 +256,7 @@ local function UpdateAchievementNPCOptions()
                     set = function(_, value)
                         profile.detection.achievementIDs[achievementID] = value
 
-                        if value ~= Enum.DetectionGroupStatus.UserDefined then
+                        if value ~= private.Enum.DetectionGroupStatus.UserDefined then
                             for npcID in pairs(Data.Achievements[achievementID].criteriaNPCs) do
                                 profile.blacklist.npcIDs[npcID] = nil
                             end
@@ -301,7 +301,8 @@ local function UpdateAchievementNPCOptions()
                 width = "full",
                 descStyle = "inline",
                 disabled = function()
-                    return profile.detection.achievementIDs[achievementID] ~= Enum.DetectionGroupStatus.UserDefined
+                    return profile.detection.achievementIDs[achievementID]
+                        ~= private.Enum.DetectionGroupStatus.UserDefined
                 end,
                 get = function()
                     return not profile.blacklist.npcIDs[npcID]
@@ -316,7 +317,7 @@ local function UpdateAchievementNPCOptions()
                     NPCScan:UpdateScanList()
 
                     if isBlacklisted then
-                        NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
+                        NPCScan:SendMessage(private.EventMessage.DismissTargetButtonByID, npcID)
                     end
                 end,
             }
@@ -354,7 +355,7 @@ local function UpdateRareNPCOptions()
         table.wipe(npcIDs)
         table.wipe(npcNames)
 
-        for npcID, npc in pairs(Data.Maps[mapID].NPCs) do
+        for npcID, npc in pairs(private.Data.Maps[mapID].NPCs) do
             if
                 (not npc.classification or RareClassifications[npc.classification])
                 and npc.factionGroup ~= UnitFactionGroup("player")
@@ -410,14 +411,14 @@ local function UpdateRareNPCOptions()
                             NPCScan:UpdateScanList()
 
                             if isBlacklisted then
-                                NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
+                                NPCScan:SendMessage(private.EventMessage.DismissTargetButtonByID, npcID)
                             end
                         end,
                     }
                 end
             end
 
-            if Data.Maps[mapID].isDungeon then
+            if private.Data.Maps[mapID].isDungeon then
                 DungeonRareNPCOptions["map" .. mapID] = mapOptionsTable
             else
                 ZoneRareNPCOptions["map" .. mapID] = mapOptionsTable
@@ -449,7 +450,7 @@ local function UpdateTameableRareNPCOptions()
         table.wipe(npcIDs)
         table.wipe(npcNames)
 
-        for npcID, npc in pairs(Data.Maps[mapID].NPCs) do
+        for npcID, npc in pairs(private.Data.Maps[mapID].NPCs) do
             if npc.isTameable and npc.factionGroup ~= UnitFactionGroup("player") then
                 npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
                 npcIDs[#npcIDs + 1] = npcID
@@ -502,14 +503,14 @@ local function UpdateTameableRareNPCOptions()
                             NPCScan:UpdateScanList()
 
                             if isBlacklisted then
-                                NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
+                                NPCScan:SendMessage(private.EventMessage.DismissTargetButtonByID, npcID)
                             end
                         end,
                     }
                 end
             end
 
-            if Data.Maps[mapID].isDungeon then
+            if private.Data.Maps[mapID].isDungeon then
                 DungeonTameableRareNPCOptions["map" .. mapID] = mapOptionsTable
             else
                 ZoneTameableRareNPCOptions["map" .. mapID] = mapOptionsTable
@@ -546,11 +547,11 @@ local function UpdateNPCSearchOptions()
     if #npcIDs > 0 then
         for npcIDIndex = 1, #npcIDs do
             local npcID = npcIDs[npcIDIndex]
-            local npc = Data.NPCs[npcID]
+            local npc = private.Data.NPCs[npcID]
 
             local achievementText = ""
             if npc.achievementID then
-                achievementText = PARENS_TEMPLATE:format(Data.Achievements[npc.achievementID].name)
+                achievementText = PARENS_TEMPLATE:format(private.Data.Achievements[npc.achievementID].name)
             end
 
             NPCSearchOptions["npc" .. npcID] = {
@@ -564,7 +565,7 @@ local function UpdateNPCSearchOptions()
                     if
                         npc.achievementID
                         and profile.detection.achievementIDs[npc.achievementID]
-                            ~= Enum.DetectionGroupStatus.UserDefined
+                            ~= private.Enum.DetectionGroupStatus.UserDefined
                     then
                         return true
                     end
@@ -583,7 +584,7 @@ local function UpdateNPCSearchOptions()
                     NPCScan:UpdateScanList()
 
                     if isBlacklisted then
-                        NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, npcID)
+                        NPCScan:SendMessage(private.EventMessage.DismissTargetButtonByID, npcID)
                     end
                 end,
             }
@@ -601,8 +602,8 @@ local function PerformNPCSearch(searchString)
     table.wipe(npcIDs)
     table.wipe(npcNames)
 
-    for continentID = 1, #Enum.ContinentMapID do
-        local continent = Data.Continents[continentID]
+    for continentID = 1, #private.Enum.ContinentMapID do
+        local continent = private.Data.Continents[continentID]
 
         if continent.name:lower() == searchString then
             for _, map in pairs(continent.Maps) do
@@ -617,7 +618,7 @@ local function PerformNPCSearch(searchString)
         end
     end
 
-    for mapID, map in pairs(Data.Maps) do
+    for mapID, map in pairs(private.Data.Maps) do
         if not map.name then
             private.Debug("MapID %d: No map name", mapID)
         end
@@ -633,7 +634,7 @@ local function PerformNPCSearch(searchString)
         end
     end
 
-    for _, npc in pairs(Data.NPCs) do
+    for _, npc in pairs(private.Data.NPCs) do
         if NPCScan:GetNPCNameFromID(npc.npcID):lower():find(searchString) then
             AddApplicableSearchID(npc)
         end
