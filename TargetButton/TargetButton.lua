@@ -217,6 +217,7 @@ function TargetButtonPrototype:PLAYER_REGEN_ENABLED()
     self.hiddenForCombat = nil
 end
 
+---@param data DetectionData
 function TargetButtonPrototype:UpdateData(_, data)
     if data.npcID == self.npcID then
         if data.unitClassification and self.__classification ~= data.unitClassification and not InCombatLockdown() then
@@ -395,6 +396,7 @@ function TargetButtonPrototype:GetEffectiveSpawnPoint()
 end
 
 ---@param unitToken UnitToken
+---@return boolean wasSet
 function TargetButtonPrototype:SetRaidTarget(unitToken)
     if unitToken and not self.raidIconID and #RaidIconIDs > 0 then
         self.raidIconID = table.remove(RaidIconIDs)
