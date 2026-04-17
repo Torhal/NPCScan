@@ -18,3 +18,9 @@ for index = 1, #ValidEventMessages do
     local messageName = ValidEventMessages[index]
     EventMessage[messageName] = ("NPCScan_%s"):format(messageName)
 end
+
+--------------------------------------------------------------------------------
+---- Types
+--------------------------------------------------------------------------------
+
+---@alias NPCScan.EventMessage "DetectedNPC" | "DismissTargetButtonByID" | "ScannerDataUpdated" | "TargetButtonNeedsReclassified" | "TargetButtonRequestDeactivate" | "TargetButtonScaleChanged" | "UnitInformationAvailable"
