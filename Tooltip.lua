@@ -1,31 +1,16 @@
-----------------------------------------------------------------------------------
----- Localized globals.
----------------------------------------------------------------------------------
--- Lua Functions
-local pairs = _G.pairs
-
--- Lua Libraries
-local table = _G.table
-
--- WoW UI
-local C_PetJournal = _G.C_PetJournal
-local C_ToyBox = _G.C_ToyBox
-local GameTooltip = _G.GameTooltip
-
-----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ---- AddOn Namespace
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
 local Data = private.Data
 local EventMessage = private.EventMessage
 
-local LibStub = _G.LibStub
+local FormatAtlasTexture = private.FormatAtlasTexture
+
 local LibQTip = LibStub("LibQTip-1.0")
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) --[[@as NPCScan]]
-
-local FormatAtlasTexture = private.FormatAtlasTexture
 
 --------------------------------------------------------------------------------
 ---- Constants
@@ -47,7 +32,7 @@ local npcDisplayNames = {}
 local npcIDs = {}
 local npcNames = {}
 
-local TitleFont = _G.CreateFont("NPCScanTitleFont")
+local TitleFont = CreateFont("NPCScanTitleFont")
 TitleFont:SetTextColor(1, 0.82, 0)
 TitleFont:SetFontObject("QuestTitleFont")
 
@@ -90,7 +75,8 @@ end
 --------------------------------------------------------------------------------
 ---- Tooltip Achievement Headers
 --------------------------------------------------------------------------------
-local achievementProvider, achievementPrototype, baseCellPrototype = LibQTip:CreateCellProvider(LibQTip.LabelProvider)
+local achievementProvider, achievementPrototype, baseCellPrototype =
+    LibQTip:CreateCellProvider(LibQTip.LabelProvider)
 
 function achievementPrototype:getContentHeight()
     return 16
@@ -117,7 +103,8 @@ function achievementPrototype:ReleaseCell()
 end
 
 function achievementPrototype:SetupCell(tooltip, value, justification, font, r, g, b)
-    local width, height = baseCellPrototype.SetupCell(self, tooltip, value, justification, font, r, g, b)
+    local width, height =
+        baseCellPrototype.SetupCell(self, tooltip, value, justification, font, r, g, b)
 
     self.r, self.g, self.b = 1, 0.82, 0
 
@@ -125,18 +112,18 @@ function achievementPrototype:SetupCell(tooltip, value, justification, font, r, 
 end
 
 local function OpenToAchievement(_, achievementID)
-    if not _G.AchievementFrame or not _G.AchievementFrame:IsShown() then
-        _G.ToggleAchievementFrame()
+    if not AchievementFrame or not AchievementFrame:IsShown() then
+        ToggleAchievementFrame()
     end
 
-    _G.AchievementFrameBaseTab_OnClick(1)
-    _G.AchievementFrame_SelectAchievement(achievementID)
+    AchievementFrameBaseTab_OnClick(1)
+    AchievementFrame_SelectAchievement(achievementID)
 
-    local categoryID = _G.GetAchievementCategory(achievementID)
-    local _, parentCategoryID = _G.GetCategoryInfo(categoryID)
+    local categoryID = GetAchievementCategory(achievementID)
+    local _, parentCategoryID = GetCategoryInfo(categoryID)
 
     if parentCategoryID == -1 then
-        for _, entry in pairs(_G.ACHIEVEMENTUI_CATEGORIES) do
+        for _, entry in pairs(ACHIEVEMENTUI_CATEGORIES) do
             if entry.id == categoryID then
                 entry.collapsed = false
             elseif entry.parent == categoryID then
@@ -144,13 +131,13 @@ local function OpenToAchievement(_, achievementID)
             end
         end
 
-        _G.AchievementFrameCategories_Update()
+        AchievementFrameCategories_Update()
     end
 end
 
 local function ShowAchievementTooltip(tooltipCell, achievementID)
     Tooltip:SetFrameStrata("DIALOG")
-    _G.GameTooltip_SetDefaultAnchor(GameTooltip, tooltipCell)
+    GameTooltip_SetDefaultAnchor(GameTooltip, tooltipCell)
 
     GameTooltip:SetText(Data.Achievements[achievementID].description, 1, 1, 1, 1, true)
     GameTooltip:Show()
@@ -193,9 +180,9 @@ local function AddEntryToDataTooltip(iconPath, entryName, isCollected)
     local line = DataTooltip:AddLine(("|T%s:0:0|t %s"):format(iconPath, entryName))
 
     if isCollected then
-        DataTooltip:SetCell(line, 2, ("%s%s"):format(_G.GREEN_FONT_COLOR_CODE, _G.COLLECTED))
+        DataTooltip:SetCell(line, 2, ("%s%s"):format(GREEN_FONT_COLOR_CODE, COLLECTED))
     else
-        DataTooltip:SetCell(line, 2, ("%s%s"):format(_G.RED_FONT_COLOR_CODE, _G.NOT_COLLECTED))
+        DataTooltip:SetCell(line, 2, ("%s%s"):format(RED_FONT_COLOR_CODE, NOT_COLLECTED))
     end
 end
 
@@ -235,11 +222,11 @@ local function DisplayMountInfo(tooltipCell, mountList)
     AddEntryDataIDs(mountList, "spellID")
     InitializeDataTooltip(tooltipCell)
 
-    local mountIDs = _G.C_MountJournal.GetMountIDs()
+    local mountIDs = C_MountJournal.GetMountIDs()
 
     for index = 1, #mountIDs do
         local creatureName, spellID, iconPath, _, _, _, _, _, _, hideOnChar, isCollected =
-            _G.C_MountJournal.GetMountInfoByID(mountIDs[index])
+            C_MountJournal.GetMountInfoByID(mountIDs[index])
 
         if creatureName and not hideOnChar and entryFromID[spellID] then
             AddEntryToDataTooltip(iconPath, creatureName, isCollected)
@@ -254,21 +241,22 @@ local function DisplayPetInfo(tooltipCell, petList)
     AddEntryDataIDs(petList, "npcID")
     InitializeDataTooltip(tooltipCell)
 
-    C_PetJournal.SetFilterChecked(_G.LE_PET_JOURNAL_FILTER_COLLECTED, true)
-    C_PetJournal.SetFilterChecked(_G.LE_PET_JOURNAL_FILTER_FAVORITES, false)
-    C_PetJournal.SetFilterChecked(_G.LE_PET_JOURNAL_FILTER_NOT_COLLECTED, true)
+    C_PetJournal.SetFilterChecked(LE_PET_JOURNAL_FILTER_COLLECTED, true)
+    C_PetJournal.SetFilterChecked(LE_PET_JOURNAL_FILTER_FAVORITES, false)
+    C_PetJournal.SetFilterChecked(LE_PET_JOURNAL_FILTER_NOT_COLLECTED, true)
     C_PetJournal.SetAllPetTypesChecked(true)
     C_PetJournal.SetAllPetSourcesChecked(true)
     C_PetJournal.ClearSearchFilter()
 
-    if _G.PetJournalSearchBox then
-        _G.PetJournalSearchBox:SetText("")
+    if PetJournalSearchBox then
+        PetJournalSearchBox:SetText("")
     end
 
     local numPets = C_PetJournal.GetNumPets()
 
     for index = 1, numPets do
-        local _, _, isCollected, _, _, _, _, petName, iconPath, _, npcID = C_PetJournal.GetPetInfoByIndex(index)
+        local _, _, isCollected, _, _, _, _, petName, iconPath, _, npcID =
+            C_PetJournal.GetPetInfoByIndex(index)
 
         if petName and entryFromID[npcID] then
             AddEntryToDataTooltip(iconPath, petName, isCollected)
@@ -288,8 +276,8 @@ local function DisplayToyInfo(tooltipCell, toyList)
     C_ToyBox.SetCollectedShown(true)
     C_ToyBox.SetFilterString("")
 
-    if _G.ToyBox then
-        _G.ToyBox.searchBox:SetText("")
+    if ToyBox then
+        ToyBox.searchBox:SetText("")
     end
 
     local numToys = C_ToyBox.GetNumToys()
@@ -299,7 +287,7 @@ local function DisplayToyInfo(tooltipCell, toyList)
         local itemID, toyName, iconPath = C_ToyBox.GetToyInfo(toyID)
 
         if toyName and entryFromID[itemID] then
-            AddEntryToDataTooltip(iconPath, toyName, _G.PlayerHasToy(itemID))
+            AddEntryToDataTooltip(iconPath, toyName, PlayerHasToy(itemID))
         end
     end
 
@@ -335,7 +323,9 @@ local function GetTooltipData()
 
         -- The npcID may belong to a custom NPC, which will not have further information.
         if npc then
-            npcAchievementNames[npcID] = npc.achievementID and Data.Achievements[npc.achievementID].name or nil
+            npcAchievementNames[npcID] = npc.achievementID
+                    and Data.Achievements[npc.achievementID].name
+                or nil
             npcDisplayNames[npcID] = private.GetNPCOptionsName(npcID)
             npcIDs[#npcIDs + 1] = npcID
             npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
@@ -407,12 +397,17 @@ local ICON_PET = FormatAtlasTexture("WildBattlePetCapturable")
 
 local ICON_TAMEABLE
 do
-    local textureFormat = [[|TInterface\TargetingFrame\UI-CLASSES-CIRCLES:0:0:0:0:256:256:%d:%d:%d:%d|t]]
+    local textureFormat =
+        [[|TInterface\TargetingFrame\UI-CLASSES-CIRCLES:0:0:0:0:256:256:%d:%d:%d:%d|t]]
     local textureSize = 256
-    local left, right, top, bottom = _G.unpack(_G.CLASS_ICON_TCOORDS["HUNTER"])
+    local left, right, top, bottom = unpack(CLASS_ICON_TCOORDS["HUNTER"])
 
-    ICON_TAMEABLE =
-        textureFormat:format(left * textureSize, right * textureSize, top * textureSize, bottom * textureSize)
+    ICON_TAMEABLE = textureFormat:format(
+        left * textureSize,
+        right * textureSize,
+        top * textureSize,
+        bottom * textureSize
+    )
 end
 
 local ICON_TOY = [[|TInterface\Worldmap\TreasureChest_64:0:0|t]]
@@ -447,7 +442,7 @@ local function DrawTooltip(displayFrame)
     if DataObject.scannerData.NPCCount == 0 then
         Tooltip:AddSeparator(1, 0, 0, 0)
         Tooltip:AddSeparator(1, 1, 0.82, 0)
-        Tooltip:SetCell(Tooltip:AddLine(), 1, _G.ERR_GENERIC_NO_VALID_TARGETS, "CENTER", 0)
+        Tooltip:SetCell(Tooltip:AddLine(), 1, ERR_GENERIC_NO_VALID_TARGETS, "CENTER", 0)
 
         return
     end
@@ -482,8 +477,18 @@ local function DrawTooltip(displayFrame)
                     0,
                     achievementProvider
                 )
-                Tooltip:SetLineScript(achievementLine, "OnMouseUp", OpenToAchievement, npc.achievementID)
-                Tooltip:SetLineScript(achievementLine, "OnEnter", ShowAchievementTooltip, npc.achievementID)
+                Tooltip:SetLineScript(
+                    achievementLine,
+                    "OnMouseUp",
+                    OpenToAchievement,
+                    npc.achievementID
+                )
+                Tooltip:SetLineScript(
+                    achievementLine,
+                    "OnEnter",
+                    ShowAchievementTooltip,
+                    npc.achievementID
+                )
                 Tooltip:SetLineScript(achievementLine, "OnLeave", HideAchievementTooltip)
                 Tooltip:AddSeparator(1, 1, 0.82, 0)
             end
@@ -499,7 +504,7 @@ local function DrawTooltip(displayFrame)
 
             Tooltip:AddSeparator(1, 0, 0, 0)
             Tooltip:AddSeparator(1, 1, 0.82, 0)
-            Tooltip:SetCell(Tooltip:AddLine(), 1, _G.MISCELLANEOUS, "CENTER", 0)
+            Tooltip:SetCell(Tooltip:AddLine(), 1, MISCELLANEOUS, "CENTER", 0)
             Tooltip:AddSeparator(1, 1, 0.82, 0)
         end
 
@@ -513,13 +518,19 @@ local function DrawTooltip(displayFrame)
 
         if worldQuestColumn and npc:HasActiveWorldQuest() then
             Tooltip:SetCell(line, worldQuestColumn, ICON_WORLDQUEST)
-            Tooltip:SetCellScript(line, worldQuestColumn, "OnEnter", DisplayText, _G.TRACKER_HEADER_WORLD_QUESTS)
+            Tooltip:SetCellScript(
+                line,
+                worldQuestColumn,
+                "OnEnter",
+                DisplayText,
+                TRACKER_HEADER_WORLD_QUESTS
+            )
             Tooltip:SetCellScript(line, worldQuestColumn, "OnLeave", CleanupDataTooltip)
         end
 
         if tameableColumn and npc.isTameable then
             Tooltip:SetCell(line, tameableColumn, ICON_TAMEABLE)
-            Tooltip:SetCellScript(line, tameableColumn, "OnEnter", DisplayText, _G.TAMEABLE)
+            Tooltip:SetCellScript(line, tameableColumn, "OnEnter", DisplayText, TAMEABLE)
             Tooltip:SetCellScript(line, tameableColumn, "OnLeave", CleanupDataTooltip)
         end
 
@@ -563,7 +574,7 @@ function DataObject:OnLeave()
 end
 
 function DataObject:Update(_, scannerData)
-    self.text = scannerData.NPCCount > 0 and scannerData.NPCCount or _G.NONE
+    self.text = scannerData.NPCCount > 0 and scannerData.NPCCount or NONE
     self.scannerData = scannerData
 
     if DataObjectDisplay and Tooltip and Tooltip:IsShown() then
