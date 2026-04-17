@@ -542,7 +542,7 @@ do
     end
 end -- do-block
 
----@param unitClassification UnitClassification
+---@param unitClassification NPCClassification
 ---@return TargetButton
 local function CreateTargetButton(unitClassification)
     local CreateAlphaAnimation = private.CreateAlphaAnimation
