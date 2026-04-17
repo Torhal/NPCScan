@@ -500,6 +500,7 @@ do
             soundsAreOverridden = nil
         end
 
+        ---@param overrideSoundCVars boolean
         function PlayAlertSounds(overrideSoundCVars)
             local soundPreferences = private.db.profile.alert.sound
 
