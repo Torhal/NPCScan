@@ -23,8 +23,8 @@ local EmptyListOption = {
 ---- Variables
 --------------------------------------------------------------------------------
 
-local npcIDs = {}
-local npcNames = {}
+local npcIDs = {} ---@type table<integer, integer>
+local npcNames = {} ---@type table<integer, string>
 
 --------------------------------------------------------------------------------
 ---- Helpers
@@ -36,6 +36,7 @@ local GetMapIDsAlphabetizedByName
 do
     local mapIDs
 
+    ---@return table<integer, integer>
     function GetMapIDsAlphabetizedByName()
         if mapIDs then
             return mapIDs
@@ -49,12 +50,12 @@ do
             mapIDs[#mapIDs + 1] = mapID
         end
 
-        table.sort(mapIDs, function(a, b)
-            local mapNameA = Data.Maps[a].name
-            local mapNameB = Data.Maps[b].name
+        table.sort(mapIDs, function(mapIDA, mapIDB)
+            local mapNameA = Data.Maps[mapIDA].name
+            local mapNameB = Data.Maps[mapIDB].name
 
             if mapNameA == mapNameB then
-                return a < b
+                return mapIDA < mapIDB
             end
 
             return mapNameA < mapNameB
@@ -226,7 +227,7 @@ end
 --------------------------------------------------------------------------------
 
 local AchievementIDs -- Populated below.
-local AchievementNPCOptions = {}
+local AchievementNPCOptions = {} ---@class AceConfig.OptionsTable
 
 local function UpdateAchievementNPCOptions()
     local Data = private.Data
@@ -240,8 +241,8 @@ local function UpdateAchievementNPCOptions()
             AchievementIDs[#AchievementIDs + 1] = achievementID
         end
 
-        table.sort(AchievementIDs, function(a, b)
-            return Data.Achievements[a].name < Data.Achievements[b].name
+        table.sort(AchievementIDs, function(achievementIDA, achievementIDB)
+            return Data.Achievements[achievementIDA].name < Data.Achievements[achievementIDB].name
         end)
     end
 
@@ -251,6 +252,7 @@ local function UpdateAchievementNPCOptions()
         local achievementID = AchievementIDs[achievementIDIndex]
         local achievementStatus = profile.detection.achievementIDs[achievementID]
 
+        ---@type AceConfig.OptionsTable
         local achievementOptionsTable = {
             order = achievementIDIndex,
             name = ("%s%s|r"):format(
@@ -350,8 +352,8 @@ private.UpdateAchievementNPCOptions = UpdateAchievementNPCOptions
 ---- Rare Options
 --------------------------------------------------------------------------------
 
-local DungeonRareNPCOptions = {}
-local ZoneRareNPCOptions = {}
+local DungeonRareNPCOptions = {} ---@class AceConfig.OptionsTable
+local ZoneRareNPCOptions = {} ---@class AceConfig.OptionsTable
 
 local RareClassifications = {
     rare = true,
@@ -384,6 +386,7 @@ local function UpdateRareNPCOptions()
         if #npcIDs > 0 then
             table.sort(npcIDs, SortByNPCNameThenByID)
 
+            ---@type AceConfig.OptionsTable
             local mapOptionsTable = {
                 order = mapIDIndex,
                 name = private.GetMapOptionName(mapID),
