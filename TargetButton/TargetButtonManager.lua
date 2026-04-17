@@ -5,6 +5,7 @@
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@type PrivateNamespace
 
+---@class TargetButtonManager: AceEvent-3.0
 local TargetButtonManager = LibStub("AceEvent-3.0"):Embed({})
 
 local EventMessage = private.EventMessage
@@ -13,11 +14,11 @@ local EventMessage = private.EventMessage
 ---- Constants
 --------------------------------------------------------------------------------
 
-local ActiveTargetButtons = {}
-local QueuedData = {}
-local TargetButtonHeap = {}
+local ActiveTargetButtons = {} ---@type TargetButton[]
+local QueuedData = {} ---@type DetectionData[]
+local TargetButtonHeap = {} ---@type table<UnitClassification, TargetButton>
 
-local ActiveTargetButtonByNPCID = {}
+local ActiveTargetButtonByNPCID = {} ---@type table<integer, boolean|nil>
 
 local POINT_TRANSLATION = {
     CENTER = private.DEFAULT_OS_SPAWN_POINT,
@@ -69,6 +70,7 @@ local function ResetTargetButtonPoints()
     end
 end
 
+---@param unitClassification NPCClassification
 local function AcquireTargetButton(unitClassification)
     local heap = TargetButtonHeap[unitClassification]
     if not heap then
@@ -108,6 +110,8 @@ end
 
 TargetButtonManager:RegisterEvent("PLAYER_REGEN_ENABLED", "ProcessQueue")
 
+---@param eventName string
+---@param targetButton TargetButton
 function TargetButtonManager:Reclaim(eventName, targetButton)
     ActiveTargetButtonByNPCID[targetButton.npcID] = nil
 
@@ -150,6 +154,9 @@ end
 
 TargetButtonManager:RegisterMessage(EventMessage.DismissTargetButtonByID, "ReclaimByNPCID")
 
+---@param eventName NPCScan.EventMessage
+---@param targetButton TargetButton
+---@param data DetectionData
 function TargetButtonManager:RespawnAsClassification(eventName, targetButton, data)
     local targetButtonIndex
     for index = 1, #ActiveTargetButtons do
@@ -183,6 +190,8 @@ end
 
 TargetButtonManager:RegisterMessage(EventMessage.TargetButtonScaleChanged, "SetScale")
 
+---@param eventName NPCScan.EventMessage
+---@param data DetectionData
 function TargetButtonManager:Spawn(eventName, data)
     if (not private.db.profile.targetButtonGroup.isEnabled) or ActiveTargetButtonByNPCID[data.npcID] then
         return
