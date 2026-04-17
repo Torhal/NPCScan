@@ -58,6 +58,7 @@ local TargetButtonMetatable = {
 --------------------------------------------------------------------------------
 ---- Helpers
 --------------------------------------------------------------------------------
+
 ---@param self AnimationGroup
 local function AnimationGroup_HideParent(self)
     self:GetParent():Hide()
@@ -65,12 +66,17 @@ end
 
 ---@param self AnimationGroup
 local function AnimationGroup_DismissGrandParent(self)
-    self:GetParent():GetParent():RequestDeactivate()
+    local grandParent = self:GetParent():GetParent() --[[@as TargetButton?]]
+
+    if grandParent then
+        grandParent:RequestDeactivate()
+    end
 end
 
 ---@param self AnimationGroup
 local function AnimationGroup_DismissParent(self)
-    self:GetParent():RequestDeactivate()
+    local parent = self:GetParent() --[[@as TargetButton]]
+    parent:RequestDeactivate()
 end
 
 --------------------------------------------------------------------------------
@@ -85,8 +91,12 @@ local function DismissButton_OnClick(self, mouseButton)
     if mouseButton == "RightButton" then
         -- TODO: Make this a general utility function - this is based on code from Preferences/NPCs
         local profile = private.db.profile
+        local isBlacklisted = false
 
-        local isBlacklisted = not profile.blacklist.npcIDs[parent.npcID] and true or nil
+        if parent then
+            isBlacklisted = not profile.blacklist.npcIDs[parent.npcID] and true or false
+        end
+
         profile.blacklist.npcIDs[parent.npcID] = isBlacklisted
 
         private.UpdateAchievementNPCOptions()
