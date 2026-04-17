@@ -1,16 +1,10 @@
 --------------------------------------------------------------------------------
----- Localized Lua globals.
---------------------------------------------------------------------------------
--- Libraries
-local table = _G.table
-
---------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
-local AddOnFolderName = ... ---@type string
-local private = select(2, ...) ---@class PrivateNamespace
 
-local LibStub = _G.LibStub
+local AddOnFolderName = ... ---@type string
+local private = select(2, ...) ---@type PrivateNamespace
+
 local TargetButtonManager = LibStub("AceEvent-3.0"):Embed({})
 
 local EventMessage = private.EventMessage
@@ -18,6 +12,7 @@ local EventMessage = private.EventMessage
 --------------------------------------------------------------------------------
 ---- Constants
 --------------------------------------------------------------------------------
+
 local ActiveTargetButtons = {}
 local QueuedData = {}
 local TargetButtonHeap = {}
@@ -53,6 +48,7 @@ local SIBLING_OFFSET_Y = {
 --------------------------------------------------------------------------------
 ---- Helpers
 --------------------------------------------------------------------------------
+
 local function ResetTargetButtonPoints()
     for index = 1, #ActiveTargetButtons do
         local indexedButton = ActiveTargetButtons[index]
@@ -89,8 +85,9 @@ local function AcquireTargetButton(unitClassification)
 end
 
 --------------------------------------------------------------------------------
----- TargetButtonManager methods.
+---- TargetButtonManager Methods
 --------------------------------------------------------------------------------
+
 function TargetButtonManager:DismissAll()
     for index = 1, #ActiveTargetButtons do
         ActiveTargetButtons[index].dismissAnimationGroup:Play()
@@ -100,7 +97,7 @@ end
 LibStub("HereBeDragons-2.0").RegisterCallback(TargetButtonManager, "PlayerZoneChanged", "DismissAll")
 
 function TargetButtonManager:ProcessQueue(eventName)
-    if #ActiveTargetButtons < private.NUM_RAID_ICONS and not _G.InCombatLockdown() then
+    if #ActiveTargetButtons < private.NUM_RAID_ICONS and not InCombatLockdown() then
         local targetButtonData = table.remove(QueuedData, 1)
 
         if targetButtonData then
@@ -135,7 +132,7 @@ function TargetButtonManager:Reclaim(eventName, targetButton)
     self:ProcessQueue("Reclaim")
 
     if #ActiveTargetButtons == 0 then
-        _G.NPCScan_RecentTargetButton:ResetMacroText()
+        NPCScan_RecentTargetButton:ResetMacroText()
     end
 end
 
@@ -191,8 +188,8 @@ function TargetButtonManager:Spawn(eventName, data)
         return
     end
 
-    if #ActiveTargetButtons >= private.NUM_RAID_ICONS or _G.InCombatLockdown() then
-        data.sourceText = ("%s %s"):format(data.sourceText, _G.PARENS_TEMPLATE:format(_G.QUEUED_STATUS_QUEUED))
+    if #ActiveTargetButtons >= private.NUM_RAID_ICONS or InCombatLockdown() then
+        data.sourceText = ("%s %s"):format(data.sourceText, PARENS_TEMPLATE:format(QUEUED_STATUS_QUEUED))
         table.insert(QueuedData, data)
 
         return
