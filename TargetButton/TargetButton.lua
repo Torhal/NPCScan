@@ -547,7 +547,7 @@ local function CreateTargetButton(unitClassification)
     button:SetAttribute("type1", "macro")
     button:SetAttribute("_onshow", "self:Enable()")
     button:SetAttribute("_onhide", "self:Disable()")
-    button:RegisterForClicks("AnyUp")
+    button:RegisterForClicks("AnyDown", "AnyUp")
 
     button:HookScript("OnClick", TargetButton_OnClick)
     button:SetScript("OnEnter", TargetButton_OnEnter)
