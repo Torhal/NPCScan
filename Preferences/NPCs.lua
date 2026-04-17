@@ -76,40 +76,40 @@ local function ValidateUserDefinedNPCInput(input, operationType)
 
     local npcID = tonumber(value)
 
-    if npcID then
-        if operationType == "add" and private.Data.NPCs[npcID] then
-            NPCScan:Print(L["Predefined NPCs cannot be added to the user-defined NPC list."])
-            return false
-        end
+    if not npcID then
+        NPCScan:Print(
+            L['Valid values are a numeric NPC ID, the word "mouseover" while you have your mouse cursor over an NPC, or the word "target" while you have an NPC set as your target.']
+        )
 
-        if private.db.profile.userDefined.npcIDs[npcID] then
-            if operationType == "add" then
-                NPCScan:Printf(
-                    L["%1$s (%2$d) is already on the user-defined NPC list."],
-                    NPCScan:GetNPCNameFromID(npcID),
-                    npcID
-                )
-                return false
-            end
-        else
-            if operationType == "remove" then
-                NPCScan:Printf(
-                    L["%1$s (%2$d) is not on the user-defined NPC list."],
-                    NPCScan:GetNPCNameFromID(npcID),
-                    npcID
-                )
-                return false
-            end
-        end
-
-        return true, npcID
+        return false
     end
 
-    NPCScan:Print(
-        L['Valid values are a numeric NPC ID, the word "mouseover" while you have your mouse cursor over an NPC, or the word "target" while you have an NPC set as your target.']
-    )
+    if operationType == "add" and private.Data.NPCs[npcID] then
+        NPCScan:Print(L["Predefined NPCs cannot be added to the user-defined NPC list."])
+        return false
+    end
 
-    return false
+    if private.db.profile.userDefined.npcIDs[npcID] then
+        if operationType == "add" then
+            NPCScan:Printf(
+                L["%1$s (%2$d) is already on the user-defined NPC list."],
+                NPCScan:GetNPCNameFromID(npcID),
+                npcID
+            )
+            return false
+        end
+    else
+        if operationType == "remove" then
+            NPCScan:Printf(
+                L["%1$s (%2$d) is not on the user-defined NPC list."],
+                NPCScan:GetNPCNameFromID(npcID),
+                npcID
+            )
+            return false
+        end
+    end
+
+    return true, npcID
 end
 
 ---@param input integer | string
