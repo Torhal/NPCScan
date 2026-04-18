@@ -220,7 +220,9 @@ do
         "factionGroup",
         "isTameable",
         "npcID",
+        "pets",
         "questID",
+        "toys",
         "vignetteID",
         "vignetteName",
         "worldQuestID",
@@ -300,8 +302,8 @@ do
                 local startedEntry = false
 
                 for index = 1, #OrderedNPCDataFields do
-                    local field = OrderedNPCDataFields[index]
-                    local fieldValue = npc[field]
+                    local fieldName = OrderedNPCDataFields[index]
+                    local fieldValue = npc[fieldName]
 
                     if fieldValue then
                         if not addedZoneHeader then
@@ -317,27 +319,59 @@ do
                             output:AddLine(("NPCs[%d] = { -- %s"):format(npcID, NPCScan:GetNPCNameFromID(npcID)))
                         end
 
-                        if field == "classification" then
+                        local fieldInfoOutput = ""
+                        local questName = ""
+
+                        if fieldName == "classification" then
                             local enumName = classificationEnumName[fieldValue]
 
                             if enumName then
-                                fieldValue = ("NPCClassification.%s"):format(enumName)
+                                fieldInfoOutput = ("NPCClassification.%s"):format(enumName)
+                            end
+                        else
+                            local valueType = type(fieldValue)
+
+                            -- Seal the value by surrounding with quotes if it's a string.
+                            if valueType == "string" then
+                                fieldInfoOutput = ('"%s"'):format(fieldValue:gsub('"', '\\"')) or tostring(fieldValue)
+                            elseif valueType == "table" then
+                                fieldInfoOutput = "{\n"
+
+                                for childKey, childValue in pairs(fieldValue) do
+                                    if type(childValue) == "table" then
+                                        fieldInfoOutput = ("%s        {\n"):format(fieldInfoOutput)
+
+                                        for grandchildKey, grandchildValue in pairs(childValue) do
+                                            fieldInfoOutput = ("%s            %s = %s,\n"):format(
+                                                fieldInfoOutput,
+                                                grandchildKey,
+                                                grandchildValue
+                                            )
+                                        end
+
+                                        fieldInfoOutput = ("%s        },\n"):format(fieldInfoOutput)
+                                    else
+                                        fieldInfoOutput = ("%s    %s = %s,\n"):format(
+                                            fieldInfoOutput,
+                                            childKey,
+                                            childValue
+                                        )
+                                    end
+                                end
+
+                                fieldInfoOutput = ("%s    }"):format(fieldInfoOutput)
+                            elseif valueType == "number" then
+                                fieldInfoOutput = tostring(fieldValue)
+
+                                if IsQuestField[fieldName] then
+                                    questName = (" -- %s"):format(NPCScan:GetQuestNameFromID(fieldValue))
+                                end
+                            else
+                                fieldInfoOutput = tostring(fieldValue)
                             end
                         end
 
-                        -- Seal the value by surrounding with quotes if it's a string.
-                        local fieldInfoOutput = field ~= "classification"
-                                and type(fieldValue) == "string"
-                                and ('"%s"'):format(fieldValue:gsub('"', '\\"'))
-                            or tostring(fieldValue)
-
-                        output:AddLine(
-                            ("\t%s = %s,%s"):format(
-                                field,
-                                fieldInfoOutput,
-                                IsQuestField[field] and (" -- %s"):format(NPCScan:GetQuestNameFromID(fieldValue)) or ""
-                            )
-                        )
+                        output:AddLine(("    %s = %s,%s"):format(fieldName, fieldInfoOutput, questName))
                     end
                 end
 
