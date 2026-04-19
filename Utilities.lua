@@ -301,7 +301,10 @@ do
 
                         if not startedEntry then
                             startedEntry = true
-                            output:AddLine(("NPCs[%d] = { -- %s"):format(npcID, NPCScan:GetNPCNameFromID(npcID)))
+                            output:AddLine(("NPCs[%d] = {"):format(npcID))
+                            output:AddLine(("    %s"):format(sectionDelimiter))
+                            output:AddLine(("    ---- %s"):format(NPCScan:GetNPCNameFromID(npcID)))
+                            output:AddLine(("    %s"):format(sectionDelimiter))
                         end
 
                         local fieldInfoOutput = ""
