@@ -237,6 +237,7 @@ function NPCScan:OnEnable()
     self:RegisterEvent("NAME_PLATE_UNIT_ADDED")
     self:RegisterEvent("PLAYER_ENTERING_WORLD")
     self:RegisterEvent("PLAYER_TARGET_CHANGED")
+    self:RegisterEvent("QUEST_DATA_LOAD_RESULT")
     self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
     self:RegisterEvent("VIGNETTE_MINIMAP_UPDATED")
     self:RegisterBucketEvent("VIGNETTES_UPDATED", 0.5)
@@ -277,18 +278,32 @@ do
     function NPCScan:GetQuestNameFromID(questID)
         local questName = private.db.locale.questNames[questID]
 
-        if not questName then
-            questName = C_QuestLog.GetTitleForQuestID(questID)
-
-            if questName and questName ~= "" then
-                private.db.locale.questNames[questID] = questName
-                private.QuestIDFromName[questName] = questID
-            else
-                questName = UNKNOWN
-            end
+        if questName then
+            return questName
         end
 
-        return questName:gsub("Vignette: ", "")
+        questName = C_QuestLog.GetTitleForQuestID(questID)
+
+        if not questName then
+            C_QuestLog.RequestLoadQuestByID(questID)
+
+            return UNKNOWN
+        end
+
+        if questName ~= "" then
+            private.db.locale.questNames[questID] = questName
+            private.QuestIDFromName[questName] = questID
+        end
+    end
+end
+
+---@param questID integer
+---@param isSuccessful boolean
+function NPCScan:QUEST_DATA_LOAD_RESULT(_, questID, isSuccessful)
+    if isSuccessful then
+        print(("Quest %d has data!"):format(questID))
+
+        self:GetQuestNameFromID(questID)
     end
 end
 
