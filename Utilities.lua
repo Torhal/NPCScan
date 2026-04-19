@@ -254,7 +254,6 @@ do
         local classificationEnumName = {}
 
         for name, value in pairs(private.Enum.NPCClassification) do
-            print(("Assigning %s as %s"):format(value, name))
             classificationEnumName[value] = name
         end
 
