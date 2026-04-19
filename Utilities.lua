@@ -204,6 +204,7 @@ do
         "classification",
         "factionGroup",
         "isTameable",
+        "mounts",
         "npcID",
         "pets",
         "questID",
