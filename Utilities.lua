@@ -18,28 +18,6 @@ local table = table
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
------------------------------------------------------------------------
--- WoW 7 to 8 transition
------------------------------------------------------------------------
-function GetOldMapData(oldMapID)
-    local HBDMigrate = _G.LibStub("HereBeDragons-Migrate")
-    local newMapID = HBDMigrate:GetUIMapIDFromMapAreaId(oldMapID)
-    local mapInfo = _G.C_Map.GetMapInfo(newMapID)
-    local continentInfo = _G.MapUtil.GetMapParentInfo(newMapID, _G.Enum.UIMapType.Continent, true)
-
-    return { oldMapID = oldMapID, mapInfo = mapInfo, continentInfo = continentInfo }
-end
-
-function GetMapData(mapID)
-    mapID = mapID or _G.C_Map.GetBestMapForUnit("player")
-
-    local mapInfo = _G.C_Map.GetMapInfo(mapID)
-    local continentInfo = _G.MapUtil.GetMapParentInfo(mapID, _G.Enum.UIMapType.Continent, true)
-    local worldInfo = _G.MapUtil.GetMapParentInfo(mapID, _G.Enum.UIMapType.World, true)
-
-    return { mapInfo = mapInfo, continentInfo = continentInfo, worldInfo = worldInfo }
-end
-
 --------------------------------------------------------------------------------
 ---- Helpers
 --------------------------------------------------------------------------------
