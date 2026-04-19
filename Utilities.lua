@@ -83,8 +83,9 @@ end
 
 private.CreateScaleAnimation = CreateScaleAnimation
 
+---@param atlasName string
 local function FormatAtlasTexture(atlasName)
-    local atlasInfo = _G.C_Texture.GetAtlasInfo(atlasName)
+    local atlasInfo = C_Texture.GetAtlasInfo(atlasName)
 
     if not atlasInfo.file then
         return
@@ -117,6 +118,7 @@ end
 
 private.FormatAtlasTexture = FormatAtlasTexture
 
+---@param mapID integer
 local function GetMapOptionDescription(mapID)
     local continentID = private.Data.Maps[mapID].continentID
 
@@ -135,6 +137,7 @@ end
 
 private.GetMapOptionDescription = GetMapOptionDescription
 
+---@param mapID integer
 local function GetMapOptionName(mapID)
     local continentID = private.Data.Maps[mapID].continentID
     local profile = private.db.profile
@@ -152,6 +155,8 @@ do
         Vehicle = true,
     }
 
+    ---@param GUID string
+    ---@return integer | nil
     local function GUIDToCreatureID(GUID)
         local unitTypeName, _, _, _, _, unitID = ("-"):split(GUID)
         if ValidUnitTypeNames[unitTypeName] then
@@ -161,9 +166,11 @@ do
 
     private.GUIDToCreatureID = GUIDToCreatureID
 
+    ---@param unitToken UnitToken
+    ---@return integer | nil
     local function UnitTokenToCreatureID(unitToken)
         if unitToken then
-            local GUID = _G.UnitGUID(unitToken)
+            local GUID = UnitGUID(unitToken)
             if not GUID then
                 return
             end
