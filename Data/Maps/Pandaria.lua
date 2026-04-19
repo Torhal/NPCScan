@@ -267,6 +267,7 @@ Maps[MapID.ValeOfEternalBlossomsBFA].NPCs = {
     [154495] = true, -- Will of N'Zoth
     [154559] = true, -- Deeplord Zrihj
     [154600] = true, -- Teng the Awakened
+    [154638] = true, -- Grand Empress Shek'zara
     [155958] = true, -- Tashara
     [156083] = true, -- Sanguifang
     [157153] = true, -- Ha-Li
