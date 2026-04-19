@@ -31,4 +31,5 @@
 ---@field questID? integer
 ---@field toys? ToyData[]
 ---@field vignetteID? integer
+---@field vignetteName? string
 ---@field worldQuestID? integer
