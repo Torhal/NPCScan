@@ -327,13 +327,32 @@ do
 
                                 for childKey, childValue in pairs(fieldValue) do
                                     if type(childValue) == "table" then
+                                        local grandchildValueName = ""
+
                                         fieldInfoOutput = ("%s        {\n"):format(fieldInfoOutput)
 
                                         for grandchildKey, grandchildValue in pairs(childValue) do
-                                            fieldInfoOutput = ("%s            %s = %s,\n"):format(
+                                            if grandchildKey == "npcID" then
+                                                grandchildValueName = (" -- %s"):format(
+                                                    NPCScan:GetNPCNameFromID(grandchildValue)
+                                                )
+                                            elseif grandchildKey == "itemID" then
+                                                local itemName = C_Item.GetItemNameByID(grandchildValue)
+
+                                                if itemName then
+                                                    grandchildValueName = (" -- %s"):format(itemName)
+                                                end
+                                            elseif grandchildKey == "spellID" then
+                                                grandchildValueName = (" -- %s"):format(
+                                                    C_Spell.GetSpellInfo(grandchildValue).name
+                                                )
+                                            end
+
+                                            fieldInfoOutput = ("%s            %s = %s,%s\n"):format(
                                                 fieldInfoOutput,
                                                 grandchildKey,
-                                                grandchildValue
+                                                grandchildValue,
+                                                grandchildValueName
                                             )
                                         end
 
