@@ -23,12 +23,12 @@ local NPCClassification = {
 
 private.Enum.NPCClassification = NPCClassification
 
----@type table<integer, table<integer, NPCData>>
-local QuestNPCs = {}
+local QuestNPCs = {} ---@type table<integer, table<integer, NPCData>>
 
 private.QuestNPCs = QuestNPCs
 
-local VignetteIDToNPCMapping = {}
+local VignetteIDToNPCMapping = {} ---@type table<integer, NPCData>
+
 private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
 
 --------------------------------------------------------------------------------
