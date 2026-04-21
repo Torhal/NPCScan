@@ -1,6 +1,7 @@
 ----------------------------------------------------------------------------------
 ---- AddOn Namespace
 ---------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -10,6 +11,8 @@ local Enum = private.Enum
 --------------------------------------------------------------------------------
 ---- Constants
 --------------------------------------------------------------------------------
+
+---@type table<string, integer>
 local MapID = {
     AbyssalDepths = 204,
     AhnQirajTheFallenKingdom = 327,
