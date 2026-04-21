@@ -167,7 +167,7 @@ end
 ---- Initialization
 --------------------------------------------------------------------------------
 
-local DetectionOptions
+local DetectionOptions ---@type AceConfig.OptionsTable
 
 local function GetDetectionOptions()
     local profile = private.db.profile

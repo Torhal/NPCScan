@@ -124,7 +124,7 @@ end
 ---- Initialization
 --------------------------------------------------------------------------------
 
-local TargetingOptions
+local TargetingOptions ---@type AceConfig.OptionsTable
 local anchorFrame
 
 local function GetTargetingOptions()
