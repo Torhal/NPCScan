@@ -184,6 +184,7 @@ end
 
 private.DecorateEliteTargetButton = DecorateEliteTargetButton
 
+---@param button TargetButton
 local function DecorateRareEliteTargetButton(button)
     DecorateEliteTargetButton(button)
     button.Background:SetDesaturated(true)
