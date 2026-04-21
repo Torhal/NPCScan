@@ -1,4 +1,5 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
     <Script file="_Main.lua"/>
 
@@ -7,8 +8,10 @@
     <Script file="BrokenIsles.lua"/>
     <Script file="Cosmic.lua"/>
     <Script file="Draenor.lua"/>
+    <Script file="DragonIsles.lua"/>
     <Script file="EasternKingdoms.lua"/>
     <Script file="Kalimdor.lua"/>
+    <Script file="KhazAlgar.lua"/>
     <Script file="KulTiras.lua"/>
     <Script file="Northrend.lua"/>
     <Script file="Outland.lua"/>
