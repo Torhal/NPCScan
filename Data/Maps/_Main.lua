@@ -218,6 +218,7 @@ local MapID = {
 
 private.Enum.MapID = MapID
 
+---@type table<string, integer>
 local ContinentID = {
     Cosmic = 1,
     Azeroth = 2,
