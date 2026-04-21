@@ -231,6 +231,75 @@ do
     end
 
     ---@param continentID integer
+    function private.DumpMapNPCs(continentID)
+        if not continentID then
+            displayContinents()
+
+            return
+        end
+
+        local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
+        local continent = private.Data.Continents[continentID]
+
+        local sortedMapIDs = {}
+        local sortedNPCIDs = {}
+
+        for mapID, map in pairs(continent.Maps) do
+            local npcIDs = {}
+
+            sortedNPCIDs[mapID] = npcIDs
+            sortedMapIDs[#sortedMapIDs + 1] = mapID
+
+            for npcID in pairs(map.NPCs) do
+                npcIDs[#npcIDs + 1] = npcID
+            end
+
+            table.sort(sortedNPCIDs[mapID])
+        end
+
+        table.sort(sortedMapIDs, private.SortByMapNameThenByID)
+
+        local output = private.TextDump
+        output:Clear()
+
+        output:AddLine(sectionDelimiter)
+        output:AddLine("---- AddOn Namespace")
+        output:AddLine(("%s\n"):format(sectionDelimiter))
+        output:AddLine("local AddOnFolderName = ... ---@type string")
+        output:AddLine("local private = select(2, ...) ---@class PrivateNamespace\n")
+        output:AddLine("local Maps = private.Data.Maps")
+        output:AddLine("local MapID = private.Enum.MapID\n")
+
+        for mapIndex = 1, #sortedMapIDs do
+            local map = private.Data.Maps[sortedMapIDs[mapIndex]]
+
+            output:AddLine(sectionDelimiter)
+            output:AddLine(("---- %s (%d)"):format(map.name, map.ID))
+            output:AddLine(("%s\n"):format(sectionDelimiter))
+
+            local enumName = UNKNOWN
+
+            for entryName, entryID in pairs(private.Enum.MapID) do
+                if entryID == map.ID then
+                    enumName = entryName
+                    break
+                end
+            end
+
+            output:AddLine(("Maps[MapID.%s].NPCs = {"):format(enumName))
+            for npcIndex = 1, #sortedNPCIDs[map.ID] do
+                local npcID = sortedNPCIDs[map.ID][npcIndex]
+
+                output:AddLine(("    [%d] = true, -- %s"):format(npcID, NPCScan:GetNPCNameFromID(npcID)))
+            end
+
+            output:AddLine("}\n")
+        end
+
+        output:Display()
+    end
+
+    ---@param continentID integer
     function private.DumpNPCData(continentID)
         if not continentID then
             displayContinents()
@@ -491,7 +560,7 @@ do
             return
         end
 
-        local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
+        local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
         local continent = private.Data.Continents[continentID]
 
         local sortedMapIDs = {}
@@ -572,6 +641,9 @@ do
     end
 
     private.DUMP_COMMANDS = {
+        mapnpcs = function(parameters)
+            private.DumpMapNPCs(tonumber(parameters))
+        end,
         npcdata = function(parameters)
             private.DumpNPCData(tonumber(parameters))
         end,
