@@ -49,7 +49,7 @@ private.Data = {
 ---@field ID integer
 ---@field isDungeon? boolean
 ---@field name string
----@field NPCs table<integer, NPCData>
+---@field NPCs table<integer, NPCData | boolean>
 
 ---@class ScannerData
 ---@field continentID? integer
