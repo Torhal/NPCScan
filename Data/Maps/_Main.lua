@@ -233,6 +233,8 @@ local ContinentID = {
     Zandalar = 12,
     KulTiras = 13,
     TheShadowlands = 14,
+    DragonIsles = 15,
+    KhazAlgar = 16,
 }
 
 Enum.ContinentID = ContinentID
@@ -252,6 +254,8 @@ local ContinentMapID = {
     [ContinentID.Zandalar] = MapID.Zandalar,
     [ContinentID.KulTiras] = MapID.KulTiras,
     [ContinentID.TheShadowlands] = MapID.TheShadowlands,
+    [ContinentID.DragonIsles] = MapID.DragonIsles,
+    [ContinentID.KhazAlgar] = MapID.KhazAlgar,
 }
 
 Enum.ContinentMapID = ContinentMapID
@@ -290,11 +294,12 @@ end
 ---- Helpers
 --------------------------------------------------------------------------------
 
-    local mapNameA = Data.Maps[a].name
-    local mapNameB = Data.Maps[b].name
+local function SortByMapNameThenByID(mapIDA, mapIDB)
+    local mapNameA = Data.Maps[mapIDA].name
+    local mapNameB = Data.Maps[mapIDB].name
 
     if mapNameA == mapNameB then
-        return a < b
+        return mapIDA < mapIDB
     end
 
     return mapNameA < mapNameB
