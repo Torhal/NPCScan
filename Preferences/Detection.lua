@@ -33,10 +33,13 @@ local function UpdateContinentAndMapOptions()
     end
 
     if #AlphabeticalContinentMaps == 0 then
+        for continentID = 1, #private.Enum.ContinentMapID do
+            AlphabeticalContinentMaps[continentID] = AlphabeticalContinentMaps[continentID] or {}
+        end
+
         for mapID, mapData in pairs(Data.Maps) do
             local continentID = mapData.continentID
 
-            AlphabeticalContinentMaps[continentID] = AlphabeticalContinentMaps[continentID] or {}
             AlphabeticalContinentMaps[continentID][#AlphabeticalContinentMaps[continentID] + 1] = mapID
         end
 
