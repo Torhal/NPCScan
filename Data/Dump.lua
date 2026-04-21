@@ -5,6 +5,8 @@
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
+local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
+
 do
     local OrderedNPCDataFields = {
         "achievementQuestID",
@@ -45,7 +47,6 @@ do
             return
         end
 
-        local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
         local continent = private.Data.Continents[continentID]
 
         local sortedMapIDs = {}
@@ -114,7 +115,6 @@ do
             return
         end
 
-        local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
         local continent = private.Data.Continents[continentID]
 
         local sortedMapIDs = {}
@@ -275,7 +275,6 @@ do
             return
         end
 
-        local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
         local continent = private.Data.Continents[continentID]
 
         local sortedMapIDs = {}
@@ -367,7 +366,6 @@ do
             return
         end
 
-        local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
         local continent = private.Data.Continents[continentID]
 
         local sortedMapIDs = {}
