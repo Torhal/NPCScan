@@ -135,6 +135,13 @@ local CriteriaTypeFields = {
     [CriteriaType.Item] = "achievementItemID",
 }
 
+---@alias AchievementCriteriaTypeField "achievementItemID" | "achievementQuestID" | "achievementSpellID"
+
+---@param npc NPCData
+---@param achievementAssetName string?
+---@param achievementID integer
+---@param achievementCriteriaID integer?
+---@param isCriteriaCompleted boolean?
 local function AssignAchievementDataToNPC(
     npc,
     achievementAssetName,
@@ -148,6 +155,7 @@ local function AssignAchievementDataToNPC(
     npc.isCriteriaCompleted = isCriteriaCompleted
 end
 
+---@param npcDataField AchievementCriteriaTypeField
 local function TryAssignNPCToAchievement(
     npcDataField,
     achievement,
