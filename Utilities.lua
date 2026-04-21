@@ -118,37 +118,6 @@ end
 
 private.FormatAtlasTexture = FormatAtlasTexture
 
----@param mapID integer
-local function GetMapOptionDescription(mapID)
-    local continentID = private.Data.Maps[mapID].continentID
-
-    if continentID then
-        local continentName = private.Data.Continents[continentID].name
-
-        if continentName then
-            return ("%s %s %s"):format(ID, mapID, PARENS_TEMPLATE:format(continentName))
-        end
-
-        private.Debug("GetMapOptionDescription: No continentName for mapID %d", mapID)
-    end
-
-    return ("%s %s"):format(ID, mapID)
-end
-
-private.GetMapOptionDescription = GetMapOptionDescription
-
----@param mapID integer
-local function GetMapOptionName(mapID)
-    local continentID = private.Data.Maps[mapID].continentID
-    local profile = private.db.profile
-    local isBlacklisted = profile.blacklist.mapIDs[mapID]
-        or profile.detection.continentIDs[continentID] == private.Enum.DetectionGroupStatus.Disabled
-    local colorCode = isBlacklisted and RED_FONT_COLOR_CODE or GREEN_FONT_COLOR_CODE
-    return ("%s%s|r"):format(colorCode, private.Data.Maps[mapID].name)
-end
-
-private.GetMapOptionName = GetMapOptionName
-
 do
     local ValidUnitTypeNames = {
         Creature = true,
