@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -8,8 +9,43 @@ local Maps = private.Data.Maps
 local MapID = private.Enum.MapID
 
 --------------------------------------------------------------------------------
----- Frostfire Ridge
+---- Ashran (588)
 --------------------------------------------------------------------------------
+
+Maps[MapID.Ashran].NPCs = {
+    [82876] = true, -- Grand Marshal Tremblade
+    [82877] = true, -- High Warlord Volrath
+    [82878] = true, -- Marshal Gabriel
+    [82880] = true, -- Marshal Karsh Stormforge
+    [82882] = true, -- General Aevd
+    [82883] = true, -- Warlord Noktyn
+    [83683] = true, -- Mandragoraster
+    [83691] = true, -- Panthora
+    [83713] = true, -- Titarus
+    [83819] = true, -- Brickhouse
+    [84110] = true, -- Korthall Soulgorger
+    [84196] = true, -- Web-wrapped Soldier
+    [84465] = true, -- Leaping Gorger
+    [84746] = true, -- Captured Gor'vosh Stoneshaper
+    [84854] = true, -- Slippery Slime
+    [84875] = true, -- Ancient Inferno
+    [84893] = true, -- Goregore
+    [84904] = true, -- Oraggro
+    [84926] = true, -- Burning Power
+    [85763] = true, -- Cursed Ravager
+    [85765] = true, -- Cursed Kaliri
+    [85766] = true, -- Cursed Sharptalon
+    [85767] = true, -- Cursed Harbinger
+    [85771] = true, -- Elder Darkweaver Kath
+    [87362] = true, -- Gibby
+    [91921] = true, -- Wyrmple
+    [94113] = true, -- Rukmaz
+}
+
+--------------------------------------------------------------------------------
+---- Frostfire Ridge (525)
+--------------------------------------------------------------------------------
+
 Maps[MapID.FrostfireRidge].NPCs = {
     [50992] = true, -- Gorok
     [71665] = true, -- Giant-Slayer Kul
@@ -62,8 +98,296 @@ Maps[MapID.FrostfireRidge].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Tanaan Jungle
+---- Frostwall (590)
 --------------------------------------------------------------------------------
+
+Maps[MapID.Frostwall].NPCs = {
+    [96323] = true, -- Arachnis
+}
+
+--------------------------------------------------------------------------------
+---- Frostwall Mine (585)
+--------------------------------------------------------------------------------
+
+Maps[MapID.FrostwallMine].NPCs = {
+    [96323] = true, -- Arachnis
+}
+
+--------------------------------------------------------------------------------
+---- Gorgrond (543)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Gorgrond].NPCs = {
+    [50985] = true, -- Poundfist
+    [75207] = true, -- Biolante
+    [76473] = true, -- Mother Araneae
+    [77093] = true, -- Roardan the Sky Terror
+    [78260] = true, -- King Slime
+    [78269] = true, -- Gnarljaw
+    [79629] = true, -- Stomper Kreego
+    [80371] = true, -- Typhon
+    [80725] = true, -- Sulfurious
+    [80785] = true, -- Fungal Praetorian
+    [80868] = true, -- Glut
+    [81038] = true, -- Gelgor of the Blue Flame
+    [81528] = true, -- Crater Lord Igneous
+    [81529] = true, -- Dessicus of the Dead Pools
+    [81537] = true, -- Khargax the Devourer
+    [81540] = true, -- Erosian the Violent
+    [81548] = true, -- Charl Doomwing
+    [82058] = true, -- Depthroot
+    [82085] = true, -- Bashiok
+    [82311] = true, -- Char the Burning
+    [83522] = true, -- Hive Queen Skrikka
+    [84406] = true, -- Mandrakor
+    [84431] = true, -- Greldrok the Cunning
+    [85250] = true, -- Fossilwood the Petrified
+    [85264] = true, -- Rolkor
+    [85907] = true, -- Berthora
+    [85970] = true, -- Riptar
+    [86137] = true, -- Sunclaw
+    [86257] = true, -- Basten
+    [86258] = true, -- Nultra
+    [86259] = true, -- Valstil
+    [86266] = true, -- Venolasix
+    [86268] = true, -- Alkali
+    [86410] = true, -- Sylldross
+    [86520] = true, -- Stompalupagus
+    [86562] = true, -- Maniacal Madgard
+    [86566] = true, -- Defector Dazgo
+    [86571] = true, -- Durp the Hated
+    [86574] = true, -- Inventor Blammo
+    [86577] = true, -- Horgg
+    [86579] = true, -- Blademaster Ro'gor
+    [86582] = true, -- Morgo Kain
+    [88580] = true, -- Firestarter Grash
+    [88582] = true, -- Swift Onyx Flayer
+    [88583] = true, -- Grove Warden Yal
+    [88586] = true, -- Mogamago
+    [88672] = true, -- Hunter Bal'ra
+}
+
+--------------------------------------------------------------------------------
+---- Lunarfall (582)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Lunarfall].NPCs = {
+    [96323] = true, -- Arachnis
+}
+
+--------------------------------------------------------------------------------
+---- Lunarfall Excavation (579)
+--------------------------------------------------------------------------------
+
+Maps[MapID.LunarfallExcavation].NPCs = {
+    [96323] = true, -- Arachnis
+}
+
+--------------------------------------------------------------------------------
+---- Nagrand (550)
+--------------------------------------------------------------------------------
+
+Maps[MapID.NagrandDraenor].NPCs = {
+    [50981] = true, -- Luk'hok
+    [50990] = true, -- Nakk the Thunderer
+    [78161] = true, -- Hyperious
+    [79024] = true, -- Warmaster Blugthol
+    [79725] = true, -- Captain Ironbeard
+    [80057] = true, -- Soulfang
+    [80122] = true, -- Gaz'orda
+    [80370] = true, -- Lernaea
+    [82486] = true, -- Explorer Nozzand
+    [82755] = true, -- Redclaw the Feral
+    [82758] = true, -- Greatfeather
+    [82764] = true, -- Gar'lua
+    [82778] = true, -- Gnarlhoof the Rabid
+    [82826] = true, -- Berserk T-300 Series Mark II
+    [82899] = true, -- Ancient Blademaster
+    [82912] = true, -- Grizzlemaw
+    [82975] = true, -- Fangler
+    [83401] = true, -- Netherspawn
+    [83409] = true, -- Ophiis
+    [83428] = true, -- Windcaller Korast
+    [83483] = true, -- Flinthide
+    [83509] = true, -- Gorepetal
+    [83526] = true, -- Ru'klaa
+    [83542] = true, -- Sean Whitesea
+    [83591] = true, -- Tura'aka
+    [83603] = true, -- Hunter Blacktooth
+    [83634] = true, -- Scout Pokhar
+    [83643] = true, -- Malroc Stonesunder
+    [83680] = true, -- Outrider Duretha
+    [84263] = true, -- Graveltooth
+    [84435] = true, -- Mr. Pinchy Sr.
+    [86729] = true, -- Direhoof
+    [86732] = true, -- Bergruu
+    [86743] = true, -- Dekorhan
+    [86750] = true, -- Thek'talon
+    [86771] = true, -- Gagrog the Brutal
+    [86774] = true, -- Aogexon
+    [86835] = true, -- Xelganak
+    [86959] = true, -- Karosh Blackwind
+    [87234] = true, -- Brutag Grimblade
+    [87239] = true, -- Krahl Deadeye
+    [87344] = true, -- Gortag Steelgrip
+    [87666] = true, -- Mu'gra
+    [87788] = true, -- Durg Spinecrusher
+    [87837] = true, -- Bonebreaker
+    [87846] = true, -- Pit Slayer
+    [88208] = true, -- Pit Beast
+    [88210] = true, -- Krud the Eviscerator
+    [88951] = true, -- Vileclaw
+    [98198] = true, -- Rukdug
+    [98199] = true, -- Pugg
+    [98200] = true, -- Guk
+}
+
+--------------------------------------------------------------------------------
+---- Shadowmoon Valley (539)
+--------------------------------------------------------------------------------
+
+Maps[MapID.ShadowmoonValleyDraenor].NPCs = {
+    [50883] = true, -- Pathrunner
+    [72362] = true, -- Ku'targ the Voidseer
+    [72537] = true, -- Leaf-Reader Kurri
+    [72606] = true, -- Rockhoof
+    [74206] = true, -- Killmaw
+    [75071] = true, -- Mother Om'ra
+    [75434] = true, -- Windfang Matriarch
+    [75435] = true, -- Yggdrel
+    [75482] = true, -- Veloss
+    [75492] = true, -- Venomshade
+    [76380] = true, -- Gorum
+    [77085] = true, -- Dark Emanation
+    [77140] = true, -- Amaukwa
+    [77310] = true, -- Mad "King" Sporeon
+    [79524] = true, -- Hypnocroak
+    [79686] = true, -- Silverleaf Ancient
+    [79692] = true, -- Silverleaf Ancient
+    [79693] = true, -- Silverleaf Ancient
+    [81406] = true, -- Bahameye
+    [81639] = true, -- Brambleking Fili
+    [82207] = true, -- Faebright
+    [82268] = true, -- Darkmaster Go'vid
+    [82326] = true, -- Ba'ruun
+    [82362] = true, -- Morva Soultwister
+    [82374] = true, -- Rai'vosh
+    [82411] = true, -- Darktalon
+    [82415] = true, -- Shinri
+    [82676] = true, -- Enavra
+    [82742] = true, -- Enavra
+    [83385] = true, -- Voidseer Kalurg
+    [83553] = true, -- Insha'tar
+    [84911] = true, -- Demidos
+    [84925] = true, -- Quartermaster Hershak
+    [85001] = true, -- Master Sergeant Milgra
+    [85029] = true, -- Shadowspeaker Niir
+    [85121] = true, -- Lady Temptessa
+    [85451] = true, -- Malgosh Shadowkeeper
+    [85555] = true, -- Nagidna
+    [85568] = true, -- Avalanche
+    [85837] = true, -- Slivermaw
+    [86213] = true, -- Aqualir
+    [86689] = true, -- Sneevel
+}
+
+--------------------------------------------------------------------------------
+---- Spires of Arak (542)
+--------------------------------------------------------------------------------
+
+Maps[MapID.SpiresOfArak].NPCs = {
+    [79938] = true, -- Shadowbark
+    [80372] = true, -- Echidna
+    [80614] = true, -- Blade-Dancer Aeryx
+    [82050] = true, -- Varasha
+    [82247] = true, -- Nas Dunberlin
+    [83990] = true, -- Solar Magnifier
+    [84417] = true, -- Mutafen
+    [84775] = true, -- Tesska the Broken
+    [84805] = true, -- Stonespite
+    [84807] = true, -- Durkath Steelmaw
+    [84810] = true, -- Kalos the Bloodbathed
+    [84833] = true, -- Sangrikass
+    [84836] = true, -- Talonbreaker
+    [84838] = true, -- Poisonmaster Bortusk
+    [84856] = true, -- Blightglow
+    [84872] = true, -- Oskiira the Vengeful
+    [84887] = true, -- Betsi Boombasket
+    [84890] = true, -- Festerbloom
+    [84912] = true, -- Sunderthorn
+    [84951] = true, -- Gobblefin
+    [84955] = true, -- Jiasska the Sporegorger
+    [85026] = true, -- Soul-Twister Torek
+    [85036] = true, -- Formless Nightmare
+    [85037] = true, -- Kenos the Unraveler
+    [85078] = true, -- Voidreaver Urnae
+    [85504] = true, -- Rotcap
+    [85520] = true, -- Swarmleaf
+    [86621] = true, -- Morphed Sentient
+    [86724] = true, -- Hermit Palefur
+    [86978] = true, -- Gaze
+    [87019] = true, -- Gluttonous Giant
+    [87026] = true, -- Mecha Plunderer
+    [87027] = true, -- Shadow Hulk
+    [87029] = true, -- Giga Sentinel
+}
+
+--------------------------------------------------------------------------------
+---- Talador (535)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Talador].NPCs = {
+    [51015] = true, -- Silthide
+    [77529] = true, -- Yazheera the Incinerator
+    [77561] = true, -- Dr. Gloom
+    [77614] = true, -- Frenzied Golem
+    [77620] = true, -- Cro Fleshrender
+    [77626] = true, -- Hen-Mother Hami
+    [77634] = true, -- Taladorantula
+    [77664] = true, -- Aarko
+    [77715] = true, -- Hammertooth
+    [77719] = true, -- Glimmerwing
+    [77741] = true, -- Ra'kahn
+    [77750] = true, -- Kaavu the Crimson Claw
+    [77776] = true, -- Wandering Vindicator
+    [77784] = true, -- Lo'marg Jawcrusher
+    [77795] = true, -- Echo of Murmur
+    [77828] = true, -- Echo of Murmur
+    [78710] = true, -- Kharazos the Triumphant
+    [78713] = true, -- Galzomar
+    [78715] = true, -- Sikthiss, Maiden of Slaughter
+    [78872] = true, -- Klikixx
+    [79334] = true, -- No'losh
+    [79485] = true, -- Talonpriest Zorkra
+    [79543] = true, -- Shirzir
+    [80204] = true, -- Felbark
+    [80471] = true, -- Gennadian
+    [80524] = true, -- Underseer Bloodmane
+    [82920] = true, -- Lord Korinak
+    [82922] = true, -- Xothear, the Destroyer
+    [82930] = true, -- Shadowflame Terrorwalker
+    [82942] = true, -- Lady Demlash
+    [82988] = true, -- Kurlosh Doomfang
+    [82992] = true, -- Felfire Consort
+    [82998] = true, -- Matron of Sin
+    [83008] = true, -- Haakun the All-Consuming
+    [83019] = true, -- Gug'tol
+    [85572] = true, -- Grrbrrgle
+    [86549] = true, -- Steeltusk
+    [87597] = true, -- Bombardier Gu'gok
+    [87668] = true, -- Orumo the Observer
+    [88043] = true, -- Avatar of Socrethar
+    [88071] = true, -- Strategist Ankor
+    [88072] = true, -- Archmagus Tekar
+    [88083] = true, -- Soulbinder Naylana
+    [88436] = true, -- Vigilant Paarthos
+    [88494] = true, -- Legion Vanguard
+}
+
+--------------------------------------------------------------------------------
+---- Tanaan Jungle (534)
+--------------------------------------------------------------------------------
+
 Maps[MapID.TanaanJungle].NPCs = {
     [80398] = true, -- Keravnos
     [89675] = true, -- Commander Org'mok
@@ -138,309 +462,4 @@ Maps[MapID.TanaanJungle].NPCs = {
     [98284] = true, -- Gondar
     [98285] = true, -- Smashum Grabb
     [98408] = true, -- Fel Overseer Mudlump
-}
-
---------------------------------------------------------------------------------
----- Talador
---------------------------------------------------------------------------------
-Maps[MapID.Talador].NPCs = {
-    [51015] = true, -- Silthide
-    [77529] = true, -- Yazheera the Incinerator
-    [77561] = true, -- Dr. Gloom
-    [77614] = true, -- Frenzied Golem
-    [77620] = true, -- Cro Fleshrender
-    [77626] = true, -- Hen-Mother Hami
-    [77634] = true, -- Taladorantula
-    [77664] = true, -- Aarko
-    [77715] = true, -- Hammertooth
-    [77719] = true, -- Glimmerwing
-    [77741] = true, -- Ra'kahn
-    [77750] = true, -- Kaavu the Crimson Claw
-    [77776] = true, -- Wandering Vindicator
-    [77784] = true, -- Lo'marg Jawcrusher
-    [77795] = true, -- Echo of Murmur
-    [77828] = true, -- Echo of Murmur
-    [78710] = true, -- Kharazos the Triumphant
-    [78713] = true, -- Galzomar
-    [78715] = true, -- Sikthiss, Maiden of Slaughter
-    [78872] = true, -- Klikixx
-    [79334] = true, -- No'losh
-    [79485] = true, -- Talonpriest Zorkra
-    [79543] = true, -- Shirzir
-    [80204] = true, -- Felbark
-    [80471] = true, -- Gennadian
-    [80524] = true, -- Underseer Bloodmane
-    [82920] = true, -- Lord Korinak
-    [82922] = true, -- Xothear, the Destroyer
-    [82930] = true, -- Shadowflame Terrorwalker
-    [82942] = true, -- Lady Demlash
-    [82988] = true, -- Kurlosh Doomfang
-    [82992] = true, -- Felfire Consort
-    [82998] = true, -- Matron of Sin
-    [83008] = true, -- Haakun the All-Consuming
-    [83019] = true, -- Gug'tol
-    [85572] = true, -- Grrbrrgle
-    [86549] = true, -- Steeltusk
-    [87597] = true, -- Bombardier Gu'gok
-    [87668] = true, -- Orumo the Observer
-    [88043] = true, -- Avatar of Socrethar
-    [88071] = true, -- Strategist Ankor
-    [88072] = true, -- Archmagus Tekar
-    [88083] = true, -- Soulbinder Naylana
-    [88436] = true, -- Vigilant Paarthos
-    [88494] = true, -- Legion Vanguard
-}
-
---------------------------------------------------------------------------------
----- Shadowmoon Valley (Draenor)
---------------------------------------------------------------------------------
-Maps[MapID.ShadowmoonValleyDraenor].NPCs = {
-    [50883] = true, -- Pathrunner
-    [72362] = true, -- Ku'targ the Voidseer
-    [72537] = true, -- Leaf-Reader Kurri
-    [72606] = true, -- Rockhoof
-    [74206] = true, -- Killmaw
-    [75071] = true, -- Mother Om'ra
-    [75434] = true, -- Windfang Matriarch
-    [75435] = true, -- Yggdrel
-    [75482] = true, -- Veloss
-    [75492] = true, -- Venomshade
-    [76380] = true, -- Gorum
-    [77085] = true, -- Dark Emanation
-    [77140] = true, -- Amaukwa
-    [77310] = true, -- Mad "King" Sporeon
-    [79524] = true, -- Hypnocroak
-    [79686] = true, -- Silverleaf Ancient
-    [79692] = true, -- Silverleaf Ancient
-    [79693] = true, -- Silverleaf Ancient
-    [81406] = true, -- Bahameye
-    [81639] = true, -- Brambleking Fili
-    [82207] = true, -- Faebright
-    [82268] = true, -- Darkmaster Go'vid
-    [82326] = true, -- Ba'ruun
-    [82362] = true, -- Morva Soultwister
-    [82374] = true, -- Rai'vosh
-    [82411] = true, -- Darktalon
-    [82415] = true, -- Shinri
-    [82676] = true, -- Enavra
-    [82742] = true, -- Enavra
-    [83385] = true, -- Voidseer Kalurg
-    [83553] = true, -- Insha'tar
-    [84911] = true, -- Demidos
-    [84925] = true, -- Quartermaster Hershak
-    [85001] = true, -- Master Sergeant Milgra
-    [85029] = true, -- Shadowspeaker Niir
-    [85121] = true, -- Lady Temptessa
-    [85451] = true, -- Malgosh Shadowkeeper
-    [85555] = true, -- Nagidna
-    [85568] = true, -- Avalanche
-    [85837] = true, -- Slivermaw
-    [86213] = true, -- Aqualir
-    [86689] = true, -- Sneevel
-}
-
---------------------------------------------------------------------------------
----- Spires of Arak
---------------------------------------------------------------------------------
-Maps[MapID.SpiresOfArak].NPCs = {
-    [79938] = true, -- Shadowbark
-    [80372] = true, -- Echidna
-    [80614] = true, -- Blade-Dancer Aeryx
-    [82050] = true, -- Varasha
-    [82247] = true, -- Nas Dunberlin
-    [83990] = true, -- Solar Magnifier
-    [84417] = true, -- Mutafen
-    [84775] = true, -- Tesska the Broken
-    [84805] = true, -- Stonespite
-    [84807] = true, -- Durkath Steelmaw
-    [84810] = true, -- Kalos the Bloodbathed
-    [84833] = true, -- Sangrikass
-    [84836] = true, -- Talonbreaker
-    [84838] = true, -- Poisonmaster Bortusk
-    [84856] = true, -- Blightglow
-    [84872] = true, -- Oskiira the Vengeful
-    [84887] = true, -- Betsi Boombasket
-    [84890] = true, -- Festerbloom
-    [84912] = true, -- Sunderthorn
-    [84951] = true, -- Gobblefin
-    [84955] = true, -- Jiasska the Sporegorger
-    [85026] = true, -- Soul-Twister Torek
-    [85036] = true, -- Formless Nightmare
-    [85037] = true, -- Kenos the Unraveler
-    [85078] = true, -- Voidreaver Urnae
-    [85504] = true, -- Rotcap
-    [85520] = true, -- Swarmleaf
-    [86621] = true, -- Morphed Sentient
-    [86724] = true, -- Hermit Palefur
-    [86978] = true, -- Gaze
-    [87019] = true, -- Gluttonous Giant
-    [87026] = true, -- Mecha Plunderer
-    [87027] = true, -- Shadow Hulk
-    [87029] = true, -- Giga Sentinel
-}
-
---------------------------------------------------------------------------------
----- Gorgrond
---------------------------------------------------------------------------------
-Maps[MapID.Gorgrond].NPCs = {
-    [50985] = true, -- Poundfist
-    [75207] = true, -- Biolante
-    [76473] = true, -- Mother Araneae
-    [77093] = true, -- Roardan the Sky Terror
-    [78260] = true, -- King Slime
-    [78269] = true, -- Gnarljaw
-    [79629] = true, -- Stomper Kreego
-    [80371] = true, -- Typhon
-    [80725] = true, -- Sulfurious
-    [80785] = true, -- Fungal Praetorian
-    [80868] = true, -- Glut
-    [81038] = true, -- Gelgor of the Blue Flame
-    [81528] = true, -- Crater Lord Igneous
-    [81529] = true, -- Dessicus of the Dead Pools
-    [81537] = true, -- Khargax the Devourer
-    [81540] = true, -- Erosian the Violent
-    [81548] = true, -- Charl Doomwing
-    [82058] = true, -- Depthroot
-    [82085] = true, -- Bashiok
-    [82311] = true, -- Char the Burning
-    [83522] = true, -- Hive Queen Skrikka
-    [84406] = true, -- Mandrakor
-    [84431] = true, -- Greldrok the Cunning
-    [85250] = true, -- Fossilwood the Petrified
-    [85264] = true, -- Rolkor
-    [85907] = true, -- Berthora
-    [85970] = true, -- Riptar
-    [86137] = true, -- Sunclaw
-    [86257] = true, -- Basten
-    [86258] = true, -- Nultra
-    [86259] = true, -- Valstil
-    [86266] = true, -- Venolasix
-    [86268] = true, -- Alkali
-    [86410] = true, -- Sylldross
-    [86520] = true, -- Stompalupagus
-    [86562] = true, -- Maniacal Madgard
-    [86566] = true, -- Defector Dazgo
-    [86571] = true, -- Durp the Hated
-    [86574] = true, -- Inventor Blammo
-    [86577] = true, -- Horgg
-    [86579] = true, -- Blademaster Ro'gor
-    [86582] = true, -- Morgo Kain
-    [88580] = true, -- Firestarter Grash
-    [88582] = true, -- Swift Onyx Flayer
-    [88583] = true, -- Grove Warden Yal
-    [88586] = true, -- Mogamago
-    [88672] = true, -- Hunter Bal'ra
-}
-
---------------------------------------------------------------------------------
----- Nagrand (Draenor)
---------------------------------------------------------------------------------
-Maps[MapID.NagrandDraenor].NPCs = {
-    [50981] = true, -- Luk'hok
-    [50990] = true, -- Nakk the Thunderer
-    [78161] = true, -- Hyperious
-    [79024] = true, -- Warmaster Blugthol
-    [79725] = true, -- Captain Ironbeard
-    [80057] = true, -- Soulfang
-    [80122] = true, -- Gaz'orda
-    [80370] = true, -- Lernaea
-    [82486] = true, -- Explorer Nozzand
-    [82755] = true, -- Redclaw the Feral
-    [82758] = true, -- Greatfeather
-    [82764] = true, -- Gar'lua
-    [82778] = true, -- Gnarlhoof the Rabid
-    [82826] = true, -- Berserk T-300 Series Mark II
-    [82899] = true, -- Ancient Blademaster
-    [82912] = true, -- Grizzlemaw
-    [82975] = true, -- Fangler
-    [83401] = true, -- Netherspawn
-    [83409] = true, -- Ophiis
-    [83428] = true, -- Windcaller Korast
-    [83483] = true, -- Flinthide
-    [83509] = true, -- Gorepetal
-    [83526] = true, -- Ru'klaa
-    [83542] = true, -- Sean Whitesea
-    [83591] = true, -- Tura'aka
-    [83603] = true, -- Hunter Blacktooth
-    [83634] = true, -- Scout Pokhar
-    [83643] = true, -- Malroc Stonesunder
-    [83680] = true, -- Outrider Duretha
-    [84263] = true, -- Graveltooth
-    [84435] = true, -- Mr. Pinchy Sr.
-    [86729] = true, -- Direhoof
-    [86732] = true, -- Bergruu
-    [86743] = true, -- Dekorhan
-    [86750] = true, -- Thek'talon
-    [86771] = true, -- Gagrog the Brutal
-    [86774] = true, -- Aogexon
-    [86835] = true, -- Xelganak
-    [86959] = true, -- Karosh Blackwind
-    [87234] = true, -- Brutag Grimblade
-    [87239] = true, -- Krahl Deadeye
-    [87344] = true, -- Gortag Steelgrip
-    [87666] = true, -- Mu'gra
-    [87788] = true, -- Durg Spinecrusher
-    [87837] = true, -- Bonebreaker
-    [87846] = true, -- Pit Slayer
-    [88208] = true, -- Pit Beast
-    [88210] = true, -- Krud the Eviscerator
-    [88951] = true, -- Vileclaw
-    [98198] = true, -- Rukdug
-    [98199] = true, -- Pugg
-    [98200] = true, -- Guk
-}
-
---------------------------------------------------------------------------------
----- Ashran
---------------------------------------------------------------------------------
-Maps[MapID.Ashran].NPCs = {
-    [82876] = true, -- Grand Marshal Tremblade
-    [82877] = true, -- High Warlord Volrath
-    [82878] = true, -- Marshal Gabriel
-    [82880] = true, -- Marshal Karsh Stormforge
-    [82882] = true, -- General Aevd
-    [82883] = true, -- Warlord Noktyn
-    [83683] = true, -- Mandragoraster
-    [83691] = true, -- Panthora
-    [83713] = true, -- Titarus
-    [83819] = true, -- Brickhouse
-    [84110] = true, -- Korthall Soulgorger
-    [84196] = true, -- Web-wrapped Soldier
-    [84465] = true, -- Leaping Gorger
-    [84746] = true, -- Captured Gor'vosh Stoneshaper
-    [84854] = true, -- Slippery Slime
-    [84875] = true, -- Ancient Inferno
-    [84893] = true, -- Goregore
-    [84904] = true, -- Oraggro
-    [84926] = true, -- Burning Power
-    [85763] = true, -- Cursed Ravager
-    [85765] = true, -- Cursed Kaliri
-    [85766] = true, -- Cursed Sharptalon
-    [85767] = true, -- Cursed Harbinger
-    [85771] = true, -- Elder Darkweaver Kath
-    [87362] = true, -- Gibby
-    [91921] = true, -- Wyrmple
-    [94113] = true, -- Rukmaz
-}
-
---------------------------------------------------------------------------------
----- Alliance Garrison
---------------------------------------------------------------------------------
-Maps[MapID.LunarfallExcavation].NPCs = {
-    [96323] = true, -- Arachnis
-}
-
-Maps[MapID.Lunarfall].NPCs = {
-    [96323] = true, -- Arachnis
-}
-
---------------------------------------------------------------------------------
----- Horde Garrison
---------------------------------------------------------------------------------
-Maps[MapID.FrostwallMine].NPCs = {
-    [96323] = true, -- Arachnis
-}
-
-Maps[MapID.Frostwall].NPCs = {
-    [96323] = true, -- Arachnis
 }

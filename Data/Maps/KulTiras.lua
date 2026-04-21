@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -8,8 +9,9 @@ local Maps = private.Data.Maps
 local MapID = private.Enum.MapID
 
 --------------------------------------------------------------------------------
----- Boralus
+---- Boralus (1161)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Boralus].NPCs = {
     [137983] = true, -- Rear Admiral Hainsworth
     [138039] = true, -- Dark Ranger Clea
@@ -20,8 +22,9 @@ Maps[MapID.Boralus].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Drustvar
+---- Drustvar (896)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Drustvar].NPCs = {
     [124548] = true, -- Betsy
     [125453] = true, -- Quillrat Matriarch
@@ -84,8 +87,9 @@ Maps[MapID.Drustvar].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Mechagon Island
+---- Mechagon Island (1462)
 --------------------------------------------------------------------------------
+
 Maps[MapID.MechagonIsland].NPCs = {
     [149746] = true, -- Rusty Mechaspider
     [149847] = true, -- Crazed Trogg
@@ -141,8 +145,9 @@ Maps[MapID.MechagonIsland].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Stormsong Valley
+---- Stormsong Valley (942)
 --------------------------------------------------------------------------------
+
 Maps[MapID.StormsongValley].NPCs = {
     [129803] = true, -- Whiplash
     [129836] = true, -- Spelltwister Moephus
@@ -164,11 +169,11 @@ Maps[MapID.StormsongValley].NPCs = {
     [138963] = true, -- Nestmother Acada
     [139298] = true, -- Pinku'shon
     [139319] = true, -- Slickspill
-    [139328] = true, -- Sabertron (Red Sabertron)
-    [139335] = true, -- Sabertron (Yellow Sabertron)
-    [139336] = true, -- Sabertron (Green Sabertron)
-    [139356] = true, -- Sabertron (Orange Sabertron)
-    [139359] = true, -- Sabertron (Copper Sabertron)
+    [139328] = true, -- Sabertron
+    [139335] = true, -- Sabertron
+    [139336] = true, -- Sabertron
+    [139356] = true, -- Sabertron
+    [139359] = true, -- Sabertron
     [139385] = true, -- Deepfang
     [139968] = true, -- Corrupted Tideskipper
     [139980] = true, -- Taja the Tidehowler
@@ -215,8 +220,9 @@ Maps[MapID.StormsongValley].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Tiragarde Sound
+---- Tiragarde Sound (895)
 --------------------------------------------------------------------------------
+
 Maps[MapID.TiragardeSound].NPCs = {
     [127289] = true, -- Saurolisk Tamer Mugg
     [127290] = true, -- Mugg

@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -8,8 +9,9 @@ local Maps = private.Data.Maps
 local MapID = private.Enum.MapID
 
 --------------------------------------------------------------------------------
----- Borean Tundra
+---- Borean Tundra (114)
 --------------------------------------------------------------------------------
+
 Maps[MapID.BoreanTundra].NPCs = {
     [32357] = true, -- Old Crystalbark
     [32358] = true, -- Fumblub Gearwind
@@ -17,8 +19,9 @@ Maps[MapID.BoreanTundra].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Dragonblight
+---- Dragonblight (115)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Dragonblight].NPCs = {
     [32400] = true, -- Tukemuth
     [32409] = true, -- Crazed Indu'le Survivor
@@ -26,8 +29,9 @@ Maps[MapID.Dragonblight].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Grizzly Hills
+---- Grizzly Hills (116)
 --------------------------------------------------------------------------------
+
 Maps[MapID.GrizzlyHills].NPCs = {
     [32422] = true, -- Grocklar
     [32429] = true, -- Seething Hate
@@ -36,8 +40,9 @@ Maps[MapID.GrizzlyHills].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Howling Fjord
+---- Howling Fjord (117)
 --------------------------------------------------------------------------------
+
 Maps[MapID.HowlingFjord].NPCs = {
     [32377] = true, -- Perobas the Bloodthirster
     [32386] = true, -- Vigdis the War Maiden
@@ -45,8 +50,9 @@ Maps[MapID.HowlingFjord].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Icecrown
+---- Icecrown (118)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Icecrown].NPCs = {
     [32487] = true, -- Putridus the Ancient
     [32495] = true, -- Hildana Deathstealer
@@ -54,8 +60,9 @@ Maps[MapID.Icecrown].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Sholazar Basin
+---- Sholazar Basin (119)
 --------------------------------------------------------------------------------
+
 Maps[MapID.SholazarBasin].NPCs = {
     [32481] = true, -- Aotona
     [32485] = true, -- King Krush
@@ -63,8 +70,9 @@ Maps[MapID.SholazarBasin].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- The Storm Peaks
+---- The Storm Peaks (120)
 --------------------------------------------------------------------------------
+
 Maps[MapID.TheStormPeaks].NPCs = {
     [32491] = true, -- Time-Lost Proto-Drake
     [32500] = true, -- Dirkee
@@ -73,8 +81,9 @@ Maps[MapID.TheStormPeaks].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Zul'Drak
+---- Zul'Drak (121)
 --------------------------------------------------------------------------------
+
 Maps[MapID.ZulDrak].NPCs = {
     [32447] = true, -- Zul'drak Sentinel
     [32471] = true, -- Griegen

@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -8,8 +9,9 @@ local Maps = private.Data.Maps
 local MapID = private.Enum.MapID
 
 --------------------------------------------------------------------------------
----- Ardenweald
+---- Ardenweald (1565)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Ardenweald].NPCs = {
     [160448] = true, -- Hunter Vivanna
     [161481] = true, -- Vinyeti
@@ -36,8 +38,9 @@ Maps[MapID.Ardenweald].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Bastion
+---- Bastion (1533)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Bastion].NPCs = {
     [156339] = true, -- Eliminator Sotiros
     [158659] = true, -- Herculon
@@ -70,8 +73,9 @@ Maps[MapID.Bastion].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Maldraxxus
+---- Maldraxxus (1536)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Maldraxxus].NPCs = {
     [157058] = true, -- Corspecutter Moroc
     [157294] = true, -- Pulsing Leech
@@ -101,8 +105,9 @@ Maps[MapID.Maldraxxus].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Revendreth
+---- Revendreth (1525)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Revendreth].NPCs = {
     [155779] = true, -- Tomb Burster
     [156916] = true, -- Inquisitor Sorin
@@ -142,8 +147,9 @@ Maps[MapID.Revendreth].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- The Maw
+---- The Maw (1543)
 --------------------------------------------------------------------------------
+
 Maps[MapID.TheMaw].NPCs = {
     [154330] = true, -- Eternas the Tormentor
     [157833] = true, -- Borr-Geth

@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -8,16 +9,18 @@ local Maps = private.Data.Maps
 local MapID = private.Enum.MapID
 
 --------------------------------------------------------------------------------
----- Darkmon Island
+---- Darkmoon Island (407)
 --------------------------------------------------------------------------------
+
 Maps[MapID.DarkmoonIsland].NPCs = {
     [71992] = true, -- Moonfang
     [122899] = true, -- Death Metal Knight
 }
 
 --------------------------------------------------------------------------------
----- Nazjatar
+---- Nazjatar (1355)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Nazjatar].NPCs = {
     [144644] = true, -- Mirecrawler
     [149653] = true, -- Carnivorous Lasher

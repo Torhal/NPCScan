@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -8,15 +9,17 @@ local Maps = private.Data.Maps
 local MapID = private.Enum.MapID
 
 --------------------------------------------------------------------------------
----- Ahn'Qiraj: The Fallen Kingdom
+---- Ahn'Qiraj: The Fallen Kingdom (327)
 --------------------------------------------------------------------------------
+
 Maps[MapID.AhnQirajTheFallenKingdom].NPCs = {
     [50747] = true, -- Tix
 }
 
 --------------------------------------------------------------------------------
----- Ashenvale
+---- Ashenvale (63)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Ashenvale].NPCs = {
     [3735] = true, -- Apothecary Falthis
     [3736] = true, -- Darkslayer Mordenthal
@@ -33,8 +36,9 @@ Maps[MapID.Ashenvale].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Azshara
+---- Azshara (76)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Azshara].NPCs = {
     [6118] = true, -- Varo'then's Ghost
     [6648] = true, -- Antilos
@@ -47,36 +51,41 @@ Maps[MapID.Azshara].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Azuremyst Isle
+---- Azuremyst Isle (97)
 --------------------------------------------------------------------------------
+
 Maps[MapID.AzuremystIsle].NPCs = {
     [17591] = true, -- Blood Elf Bandit
 }
 
 --------------------------------------------------------------------------------
----- Blackfathom Deeps
+---- Blackfathom Deeps (221)
 --------------------------------------------------------------------------------
+
 Maps[MapID.BlackfathomDeeps].NPCs = {
     [12902] = true, -- Lorgus Jett
 }
 
 --------------------------------------------------------------------------------
----- Bloodmyst Isle
+---- Bloodmyst Isle (106)
 --------------------------------------------------------------------------------
+
 Maps[MapID.BloodmystIsle].NPCs = {
     [22060] = true, -- Fenissa the Assassin
 }
 
 --------------------------------------------------------------------------------
----- Camp Narache
+---- Camp Narache (462)
 --------------------------------------------------------------------------------
+
 Maps[MapID.CampNarache].NPCs = {
     [43720] = true, -- "Pokey" Thornmantle
 }
 
 --------------------------------------------------------------------------------
----- Darkshore
+---- Darkshore (62)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Darkshore].NPCs = {
     [2172] = true, -- Strider Clutchmother
     [2175] = true, -- Shadowclaw
@@ -131,8 +140,9 @@ Maps[MapID.Darkshore].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Desolace
+---- Desolace (66)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Desolace].NPCs = {
     [11688] = true, -- Cursed Centaur
     [14225] = true, -- Prince Kellen
@@ -144,16 +154,18 @@ Maps[MapID.Desolace].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Dire Maul
+---- Dire Maul (234)
 --------------------------------------------------------------------------------
+
 Maps[MapID.DireMaul].NPCs = {
     [11467] = true, -- Tsu'zee
     [14506] = true, -- Lord Hel'nurath
 }
 
 --------------------------------------------------------------------------------
----- Durotar
+---- Durotar (1)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Durotar].NPCs = {
     [5809] = true, -- Sergeant Curtis
     [5822] = true, -- Felweaver Scornn
@@ -163,8 +175,9 @@ Maps[MapID.Durotar].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Dustwallow Marsh
+---- Dustwallow Marsh (70)
 --------------------------------------------------------------------------------
+
 Maps[MapID.DustwallowMarsh].NPCs = {
     [4339] = true, -- Brimgore
     [4380] = true, -- Darkmist Widow
@@ -189,8 +202,9 @@ Maps[MapID.DustwallowMarsh].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Felwood
+---- Felwood (77)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Felwood].NPCs = {
     [7104] = true, -- Dessecus
     [7137] = true, -- Immolatus
@@ -215,8 +229,9 @@ Maps[MapID.Felwood].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Feralas
+---- Feralas (69)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Feralas].NPCs = {
     [5343] = true, -- Lady Szallah
     [5345] = true, -- Diamond Head
@@ -237,8 +252,17 @@ Maps[MapID.Feralas].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Molten Front
+---- Maraudon (280)
 --------------------------------------------------------------------------------
+
+Maps[MapID.Maraudon].NPCs = {
+    [12237] = true, -- Meshlok the Harvester
+}
+
+--------------------------------------------------------------------------------
+---- Molten Front (338)
+--------------------------------------------------------------------------------
+
 Maps[MapID.MoltenFront].NPCs = {
     [50815] = true, -- Skarr
     [50959] = true, -- Karkin
@@ -250,15 +274,9 @@ Maps[MapID.MoltenFront].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Maraudon
+---- Mount Hyjal (198)
 --------------------------------------------------------------------------------
-Maps[MapID.Maraudon].NPCs = {
-    [12237] = true, -- Meshlok the Harvester
-}
 
---------------------------------------------------------------------------------
----- Mount Hyjal
---------------------------------------------------------------------------------
 Maps[MapID.MountHyjal].NPCs = {
     [50053] = true, -- Thartuk the Exile
     [50056] = true, -- Garr
@@ -270,8 +288,9 @@ Maps[MapID.MountHyjal].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Mulgore
+---- Mulgore (7)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Mulgore].NPCs = {
     [3058] = true, -- Arra'chea
     [3068] = true, -- Mazzranache
@@ -283,8 +302,9 @@ Maps[MapID.Mulgore].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Northern Barrens
+---- Northern Barrens (10)
 --------------------------------------------------------------------------------
+
 Maps[MapID.NorthernBarrens].NPCs = {
     [3270] = true, -- Elder Mystic Razorsnout
     [3295] = true, -- Sludge Anomaly
@@ -305,15 +325,17 @@ Maps[MapID.NorthernBarrens].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Old Hillsbrad Foothills
+---- Old Hillsbrad Foothills (274)
 --------------------------------------------------------------------------------
+
 Maps[MapID.OldHillsbradFoothills].NPCs = {
     [56081] = true, -- Optimistic Benj
 }
 
 --------------------------------------------------------------------------------
----- Razorfen Kraul
+---- Razorfen Kraul (301)
 --------------------------------------------------------------------------------
+
 Maps[MapID.RazorfenKraul].NPCs = {
     [4425] = true, -- Blind Hunter
     [4842] = true, -- Earthcaller Halmgar
@@ -321,8 +343,9 @@ Maps[MapID.RazorfenKraul].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Silithus
+---- Silithus (81)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Silithus].NPCs = {
     [14471] = true, -- Setis
     [14472] = true, -- Gretheer
@@ -344,14 +367,15 @@ Maps[MapID.Silithus].NPCs = {
     [51004] = true, -- Toxx
     [54533] = true, -- Prince Lakma
     [132578] = true, -- Qroshekx
-    [132584] = true, -- Xaarshej
     [132580] = true, -- Ssinkrix
+    [132584] = true, -- Xaarshej
     [132591] = true, -- Ogmot the Mad
 }
 
 --------------------------------------------------------------------------------
----- Southern Barrens
+---- Southern Barrens (199)
 --------------------------------------------------------------------------------
+
 Maps[MapID.SouthernBarrens].NPCs = {
     [3253] = true, -- Silithid Harvester
     [5829] = true, -- Snort the Heckler
@@ -368,8 +392,9 @@ Maps[MapID.SouthernBarrens].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Stonetalon Mountains
+---- Stonetalon Mountains (65)
 --------------------------------------------------------------------------------
+
 Maps[MapID.StonetalonMountains].NPCs = {
     [4015] = true, -- Pridewing Patriarch
     [4066] = true, -- Nal'taszar
@@ -390,8 +415,9 @@ Maps[MapID.StonetalonMountains].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Tanaris
+---- Tanaris (71)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Tanaris].NPCs = {
     [8199] = true, -- Warleader Krazzilak
     [8200] = true, -- Jin'Zallah the Sandbringer
@@ -414,8 +440,9 @@ Maps[MapID.Tanaris].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Teldrassil
+---- Teldrassil (57)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Teldrassil].NPCs = {
     [2162] = true, -- Agal
     [3535] = true, -- Blackmoss the Fetid
@@ -427,15 +454,17 @@ Maps[MapID.Teldrassil].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- The Exodar
+---- The Exodar (775)
 --------------------------------------------------------------------------------
+
 Maps[MapID.TheExodar].NPCs = {
     [110486] = true, -- Huk'roth the Huntmaster
 }
 
 --------------------------------------------------------------------------------
----- Thousand Needles
+---- Thousand Needles (64)
 --------------------------------------------------------------------------------
+
 Maps[MapID.ThousandNeedles].NPCs = {
     [4132] = true, -- Krkk'kx
     [5933] = true, -- Achellios the Banished
@@ -457,20 +486,22 @@ Maps[MapID.ThousandNeedles].NPCs = {
 --------------------------------------------------------------------------------
 ---- Uldum (249)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Uldum].NPCs = {
     [50063] = true, -- Akma'hat
     [50064] = true, -- Cyrus the Black
     [50065] = true, -- Armagedillo
-    [50154] = true, -- Madexx - Brown
-    [51401] = true, -- Madexx - Red
-    [51402] = true, -- Madexx - Green
-    [51403] = true, -- Madexx - Black
-    [51404] = true, -- Madexx - Blue
+    [50154] = true, -- Madexx
+    [51401] = true, -- Madexx
+    [51402] = true, -- Madexx
+    [51403] = true, -- Madexx
+    [51404] = true, -- Madexx
 }
 
 --------------------------------------------------------------------------------
 ---- Uldum (1527)
 --------------------------------------------------------------------------------
+
 Maps[MapID.UldumBFA].NPCs = {
     [151609] = true, -- Sun Prophet Epaphos
     [151852] = true, -- Watcher Rehu
@@ -542,8 +573,9 @@ Maps[MapID.UldumBFA].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Un'Goro Crater
+---- Un'Goro Crater (78)
 --------------------------------------------------------------------------------
+
 Maps[MapID.UnGoroCrater].NPCs = {
     [6581] = true, -- Ravasaur Matriarch
     [6582] = true, -- Clutchmother Zavas
@@ -553,15 +585,17 @@ Maps[MapID.UnGoroCrater].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Wailing Caverns
+---- Wailing Caverns (279)
 --------------------------------------------------------------------------------
+
 Maps[MapID.WailingCaverns].NPCs = {
     [5912] = true, -- Deviate Faerie Dragon
 }
 
 --------------------------------------------------------------------------------
----- Winterspring
+---- Winterspring (83)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Winterspring].NPCs = {
     [10196] = true, -- General Colbatann
     [10197] = true, -- Mezzir the Howler
@@ -583,8 +617,9 @@ Maps[MapID.Winterspring].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Zul'Farrak
+---- Zul'Farrak (219)
 --------------------------------------------------------------------------------
+
 Maps[MapID.ZulFarrak].NPCs = {
     [10080] = true, -- Sandarr Dunereaver
     [10081] = true, -- Dustwraith

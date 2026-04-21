@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -8,8 +9,9 @@ local Maps = private.Data.Maps
 local MapID = private.Enum.MapID
 
 --------------------------------------------------------------------------------
----- Dazar'alor
+---- Dazar'alor (1165)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Dazaralor].NPCs = {
     [120899] = true, -- Kul'krazahn
     [122639] = true, -- Old R'gal
@@ -17,8 +19,9 @@ Maps[MapID.Dazaralor].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Nazmir
+---- Nazmir (863)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Nazmir].NPCs = {
     [121242] = true, -- Glompmaw
     [124375] = true, -- Overstuffed Saurolisk
@@ -39,8 +42,8 @@ Maps[MapID.Nazmir].NPCs = {
     [127820] = true, -- Scout Skrasniss
     [127873] = true, -- Scrounger Patriarch
     [128426] = true, -- Gutrip
-    [128584] = true, -- Vugthuth
     [128578] = true, -- Zujothgul
+    [128584] = true, -- Vugthuth
     [128610] = true, -- Maw of Shul-Nagruth
     [128930] = true, -- Rohnkor
     [128935] = true, -- Mala'kili
@@ -54,13 +57,13 @@ Maps[MapID.Nazmir].NPCs = {
     [133527] = true, -- Juba the Scarred
     [133531] = true, -- Xu'ba
     [133539] = true, -- Lo'kuno
-    [135565] = true, -- Guardian of Agussu
     [133812] = true, -- Zanxib
     [134002] = true, -- Underlord Xerxiz
     [134293] = true, -- Azerite-Infused Slag
     [134294] = true, -- Enraged Water Elemental
     [134296] = true, -- Lucille
     [134298] = true, -- Azerite-Infused Elemental
+    [135565] = true, -- Guardian of Agussu
     [143311] = true, -- Toadcruel
     [143316] = true, -- Skullcap
     [143898] = true, -- Makatau
@@ -80,8 +83,9 @@ Maps[MapID.Nazmir].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Vol'dun
+---- Vol'dun (864)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Voldun].NPCs = {
     [124722] = true, -- Commodore Calhoun
     [127776] = true, -- Scaleclaw Broodmother
@@ -135,15 +139,9 @@ Maps[MapID.Voldun].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Uncharted Island
+---- Zuldazar (862)
 --------------------------------------------------------------------------------
-Maps[MapID.UnchartedIsland].NPCs = {
-    [138948] = true, -- Akakakoo
-}
 
---------------------------------------------------------------------------------
----- Zuldazar
---------------------------------------------------------------------------------
 Maps[MapID.Zuldazar].NPCs = {
     [122004] = true, -- Umbra'jin
     [123502] = true, -- King K'tal
@@ -175,10 +173,10 @@ Maps[MapID.Zuldazar].NPCs = {
     [134760] = true, -- Darkspeaker Jo'la
     [134782] = true, -- Murderbeak
     [135510] = true, -- Azuresail the Ancient
-    [139365] = true, -- Queenfeather
     [135512] = true, -- Thunderfoot
     [136413] = true, -- Syrawon the Dominus
     [136428] = true, -- Dark Chronicler
+    [139365] = true, -- Queenfeather
     [142434] = true, -- Loo'ay
     [142475] = true, -- Ka'za the Mezmerizing
     [143314] = true, -- Bane of the Woods

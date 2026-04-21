@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -8,8 +9,20 @@ local Maps = private.Data.Maps
 local MapID = private.Enum.MapID
 
 --------------------------------------------------------------------------------
----- Arathi Highlands
+---- Abyssal Depths (204)
 --------------------------------------------------------------------------------
+
+Maps[MapID.AbyssalDepths].NPCs = {
+    [50005] = true, -- Poseidus
+    [50009] = true, -- Mobus
+    [50050] = true, -- Shok'sharak
+    [50051] = true, -- Ghostcrawler
+}
+
+--------------------------------------------------------------------------------
+---- Arathi Highlands (14)
+--------------------------------------------------------------------------------
+
 Maps[MapID.ArathiHighlands].NPCs = {
     [2598] = true, -- Darbel Montrose
     [2600] = true, -- Singer
@@ -36,6 +49,9 @@ Maps[MapID.ArathiHighlands].NPCs = {
     [141616] = true, -- Thundering Goliath
     [141618] = true, -- Cresting Goliath
     [141620] = true, -- Rumbling Goliath
+    [141668] = true, -- Echo of Myzrael
+    [141942] = true, -- Molok the Crusher
+    [142112] = true, -- Kor'gresh Coldrage
     [142423] = true, -- Overseer Krix
     [142433] = true, -- Fozruk
     [142435] = true, -- Plaguefeather
@@ -45,9 +61,6 @@ Maps[MapID.ArathiHighlands].NPCs = {
     [142440] = true, -- Yogursa
     [142508] = true, -- Branchlord Aldrus
     [142662] = true, -- Geomancer Flintdagger
-    [141668] = true, -- Echo of Myzrael
-    [141942] = true, -- Molok the Crusher
-    [142112] = true, -- Kor'gresh Coldrage
     [142682] = true, -- Zalas Witherbark
     [142683] = true, -- Ruul Onestone
     [142684] = true, -- Kovork
@@ -63,8 +76,9 @@ Maps[MapID.ArathiHighlands].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Badlands
+---- Badlands (15)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Badlands].NPCs = {
     [2744] = true, -- Shadowforge Commander
     [2749] = true, -- Barricade
@@ -86,8 +100,33 @@ Maps[MapID.Badlands].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Blasted Lands
+---- Blackrock Depths (242)
 --------------------------------------------------------------------------------
+
+Maps[MapID.BlackrockDepths].NPCs = {
+    [8923] = true, -- Panzor the Invincible
+}
+
+--------------------------------------------------------------------------------
+---- Blackrock Spire (250)
+--------------------------------------------------------------------------------
+
+Maps[MapID.BlackrockSpire].NPCs = {
+    [9217] = true, -- Spirestone Lord Magus
+    [9218] = true, -- Spirestone Battle Lord
+    [9219] = true, -- Spirestone Butcher
+    [9596] = true, -- Bannok Grimaxe
+    [9718] = true, -- Ghok Bashguud
+    [9736] = true, -- Quartermaster Zigris
+    [10263] = true, -- Burning Felguard
+    [10376] = true, -- Crystal Fang
+    [10509] = true, -- Jed Runewatcher
+}
+
+--------------------------------------------------------------------------------
+---- Blasted Lands (17)
+--------------------------------------------------------------------------------
+
 Maps[MapID.BlastedLands].NPCs = {
     [7846] = true, -- Teremus the Devourer
     [8296] = true, -- Mojo the Twisted
@@ -106,76 +145,74 @@ Maps[MapID.BlastedLands].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Tirisfal Glades
+---- Burning Steppes (36)
 --------------------------------------------------------------------------------
-Maps[MapID.TirisfalGlades].NPCs = {
-    [1531] = true, -- Lost Soul
-    [1533] = true, -- Tormented Spirit
-    [1910] = true, -- Muad
-    [1911] = true, -- Deeb
-    [1936] = true, -- Farmer Solliden
-    [10356] = true, -- Bayne
-    [10357] = true, -- Ressan the Needler
-    [10358] = true, -- Fellicent's Shade
-    [10359] = true, -- Sri'skulk
-    [50763] = true, -- Shadowstalker
-    [50803] = true, -- Bonechewer
-    [50908] = true, -- Nighthowl
-    [50930] = true, -- Hibernus the Sleeper
-    [51044] = true, -- Plague
+
+Maps[MapID.BurningSteppes].NPCs = {
+    [8924] = true, -- The Behemoth
+    [8976] = true, -- Hematos
+    [8978] = true, -- Thauris Balgarr
+    [8979] = true, -- Gruklash
+    [8981] = true, -- Malfunctioning Reaver
+    [9602] = true, -- Hahk'Zor
+    [9604] = true, -- Gorgon'och
+    [10077] = true, -- Deathmaw
+    [10078] = true, -- Terrorspark
+    [10119] = true, -- Volchan
+    [50357] = true, -- Sunwing
+    [50361] = true, -- Ornat
+    [50725] = true, -- Azelisk
+    [50730] = true, -- Venomspine
+    [50792] = true, -- Chiaa
+    [50807] = true, -- Catal
+    [50810] = true, -- Favored of Isiset
+    [50839] = true, -- Chromehound
+    [50842] = true, -- Magmagan
+    [50855] = true, -- Jaxx the Rabid
+    [51066] = true, -- Crystalfang
 }
 
 --------------------------------------------------------------------------------
----- Silverpine Forest
+---- Deathknell (465)
 --------------------------------------------------------------------------------
-Maps[MapID.SilverpineForest].NPCs = {
-    [12431] = true, -- Gorefang
-    [12433] = true, -- Krethis the Shadowspinner
-    [46981] = true, -- Nightlash
-    [46992] = true, -- Berard the Moon-Crazed
-    [47003] = true, -- Bolgaff
-    [47008] = true, -- Fenwick Thatros
-    [47009] = true, -- Aquarius the Unbound
-    [47012] = true, -- Effritus
-    [47015] = true, -- Lost Son of Arugal
-    [47023] = true, -- Thule Ravenclaw
-    [50330] = true, -- Kree
-    [50814] = true, -- Corpsefeeder
-    [50949] = true, -- Finn's Gambit
-    [51026] = true, -- Gnath
-    [51037] = true, -- Lost Gilnean Wardog
+
+Maps[MapID.Deathknell].NPCs = {
+    [50328] = true, -- Fangor
 }
 
 --------------------------------------------------------------------------------
----- Western Plaguelands
+---- Dun Morogh (27)
 --------------------------------------------------------------------------------
-Maps[MapID.WesternPlaguelands].NPCs = {
-    [1837] = true, -- Scarlet Judge
-    [1838] = true, -- Scarlet Interrogator
-    [1839] = true, -- Scarlet High Clerist
-    [1841] = true, -- Scarlet Executioner
-    [1847] = true, -- Foulmane
-    [1848] = true, -- Lord Maldazzar
-    [1849] = true, -- Dreadwhisper
-    [1850] = true, -- Putridius
-    [1851] = true, -- The Husk
-    [1885] = true, -- Scarlet Smith
-    [50345] = true, -- Alit
-    [50778] = true, -- Ironweb
-    [50809] = true, -- Heress
-    [50906] = true, -- Mutilax
-    [50922] = true, -- Warg
-    [50931] = true, -- Mange
-    [50937] = true, -- Hamhide
-    [51029] = true, -- Parasitus
-    [51031] = true, -- Tracker
-    [51058] = true, -- Aphis
-    [111122] = true, -- Large Vile Slime
+
+Maps[MapID.DunMorogh].NPCs = {
+    [1119] = true, -- Hammerspine
+    [1130] = true, -- Bjarn
+    [1137] = true, -- Edan the Howler
+    [1260] = true, -- Great Father Arctikus
 }
 
 --------------------------------------------------------------------------------
----- Eastern Plaguelands
+---- Duskwood (47)
 --------------------------------------------------------------------------------
+
+Maps[MapID.Duskwood].NPCs = {
+    [507] = true, -- Fenros
+    [521] = true, -- Lupos
+    [534] = true, -- Nefaru
+    [574] = true, -- Naraxis
+    [45739] = true, -- The Unknown Soldier
+    [45740] = true, -- Watcher Eva
+    [45771] = true, -- Marus
+    [45785] = true, -- Carved One
+    [45801] = true, -- Eliza
+    [45811] = true, -- Marina DeSirrus
+    [118244] = true, -- Lightning Paw
+}
+
+--------------------------------------------------------------------------------
+---- Eastern Plaguelands (23)
+--------------------------------------------------------------------------------
+
 Maps[MapID.EasternPlaguelands].NPCs = {
     [1843] = true, -- Foreman Jerris
     [1844] = true, -- Foreman Marcrid
@@ -203,8 +240,54 @@ Maps[MapID.EasternPlaguelands].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Hillsbrad Foothills
+---- Elwynn Forest (37)
 --------------------------------------------------------------------------------
+
+Maps[MapID.ElwynnForest].NPCs = {
+    [61] = true, -- Thuros Lightfingers
+    [62] = true, -- Gug Fatcandle
+    [79] = true, -- Narg the Taskmaster
+    [99] = true, -- Morgaine the Sly
+    [100] = true, -- Gruff Swiftbite
+    [471] = true, -- Mother Fang
+    [472] = true, -- Fedfennel
+    [50752] = true, -- Tarantis
+    [50916] = true, -- Lamepaw the Whimperer
+    [50926] = true, -- Grizzled Ben
+    [50942] = true, -- Snoot the Rooter
+    [51014] = true, -- Terrapis
+    [51077] = true, -- Bushtail
+}
+
+--------------------------------------------------------------------------------
+---- Eversong Woods (94)
+--------------------------------------------------------------------------------
+
+Maps[MapID.EversongWoods].NPCs = {
+    [16854] = true, -- Eldinarcus
+    [16855] = true, -- Tregla
+}
+
+--------------------------------------------------------------------------------
+---- Ghostlands (95)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Ghostlands].NPCs = {
+    [22062] = true, -- Dr. Whitherlimb
+}
+
+--------------------------------------------------------------------------------
+---- Gnomeregan (226)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Gnomeregan].NPCs = {
+    [6228] = true, -- Dark Iron Ambassador
+}
+
+--------------------------------------------------------------------------------
+---- Hillsbrad Foothills (25)
+--------------------------------------------------------------------------------
+
 Maps[MapID.HillsbradFoothills].NPCs = {
     [2258] = true, -- Maggarrak
     [2452] = true, -- Skhowl
@@ -234,35 +317,106 @@ Maps[MapID.HillsbradFoothills].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- The Hinterlands
+---- Karazhan (350)
 --------------------------------------------------------------------------------
-Maps[MapID.TheHinterlands].NPCs = {
-    [8210] = true, -- Razortalon
-    [8211] = true, -- Old Cliff Jumper
-    [8212] = true, -- The Reak
-    [8213] = true, -- Ironback
-    [8214] = true, -- Jalinde Summerdrake
-    [8215] = true, -- Grimungous
-    [8216] = true, -- Retherokk the Berserker
-    [8217] = true, -- Mith'rethis the Enchanter
-    [8218] = true, -- Witherheart the Stalker
-    [8219] = true, -- Zul'arek Hatefowler
-    [107617] = true, -- Ol' Muddle
+
+Maps[MapID.Karazhan].NPCs = {
+    [16179] = true, -- Hyakiss the Lurker
+    [16180] = true, -- Shadikith the Glider
+    [16181] = true, -- Rokad the Ravager
 }
 
 --------------------------------------------------------------------------------
----- Dun Morogh
+---- Kelp'thar Forest (201)
 --------------------------------------------------------------------------------
-Maps[MapID.DunMorogh].NPCs = {
-    [1119] = true, -- Hammerspine
-    [1130] = true, -- Bjarn
-    [1137] = true, -- Edan the Howler
+
+Maps[MapID.KelptharForest].NPCs = {
+    [49913] = true, -- Lady La-La
+}
+
+--------------------------------------------------------------------------------
+---- Loch Modan (48)
+--------------------------------------------------------------------------------
+
+Maps[MapID.LochModan].NPCs = {
+    [1398] = true, -- Boss Galgosh
+    [1399] = true, -- Magosh
+    [1425] = true, -- Kubb
+    [2476] = true, -- Gosh-Haldir
+    [14266] = true, -- Shanda the Spinner
+    [14267] = true, -- Emogg the Crusher
+    [14268] = true, -- Lord Condar
+    [45369] = true, -- Morick Darkbrew
+    [45380] = true, -- Ashtail
+    [45384] = true, -- Sagepaw
+    [45398] = true, -- Grizlak
+    [45399] = true, -- Optimo
+    [45401] = true, -- Whitefin
+    [45402] = true, -- Nix
+    [45404] = true, -- Geoshaper Maren
+}
+
+--------------------------------------------------------------------------------
+---- New Tinkertown (469)
+--------------------------------------------------------------------------------
+
+Maps[MapID.NewTinkertown].NPCs = {
+    [1132] = true, -- Timber
     [1260] = true, -- Great Father Arctikus
+    [8503] = true, -- Gibblewilt
+    [107431] = true, -- Weaponized Rabbot
 }
 
 --------------------------------------------------------------------------------
----- Searing Gorge
+---- Northern Stranglethorn (50)
 --------------------------------------------------------------------------------
+
+Maps[MapID.NorthernStranglethorn].NPCs = {
+    [11383] = true, -- High Priestess Hai'watna
+    [14487] = true, -- Gluggl
+    [14488] = true, -- Roloch
+    [51658] = true, -- Mogh the Dead
+    [51661] = true, -- Tsul'Kalu
+    [51662] = true, -- Mahamba
+    [51663] = true, -- Pogeyan
+}
+
+--------------------------------------------------------------------------------
+---- Northshire (425)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Northshire].NPCs = {
+    [62] = true, -- Gug Fatcandle
+}
+
+--------------------------------------------------------------------------------
+---- Redridge Mountains (49)
+--------------------------------------------------------------------------------
+
+Maps[MapID.RedridgeMountains].NPCs = {
+    [584] = true, -- Kazon
+    [616] = true, -- Chatter
+    [947] = true, -- Rohh the Silent
+    [14269] = true, -- Seeker Aqualon
+    [14270] = true, -- Squiddic
+    [14271] = true, -- Ribchaser
+    [14272] = true, -- Snarlflare
+    [14273] = true, -- Boulderheart
+    [52146] = true, -- Chitter
+}
+
+--------------------------------------------------------------------------------
+---- Scholomance (476)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Scholomance].NPCs = {
+    [59369] = true, -- Doctor Theolen Krastinov
+}
+
+--------------------------------------------------------------------------------
+---- Searing Gorge (32)
+--------------------------------------------------------------------------------
+
 Maps[MapID.SearingGorge].NPCs = {
     [8277] = true, -- Rekk'tilac
     [8278] = true, -- Smoldar
@@ -283,120 +437,68 @@ Maps[MapID.SearingGorge].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Burning Steppes
+---- Shadowfang Keep (310)
 --------------------------------------------------------------------------------
-Maps[MapID.BurningSteppes].NPCs = {
-    [8924] = true, -- The Behemoth
-    [8976] = true, -- Hematos
-    [8978] = true, -- Thauris Balgarr
-    [8979] = true, -- Gruklash
-    [8981] = true, -- Malfunctioning Reaver
-    [9602] = true, -- Hahk'Zor
-    [9604] = true, -- Gorgon'och
-    [10077] = true, -- Deathmaw
-    [10078] = true, -- Terrorspark
-    [10119] = true, -- Volchan
-    [50357] = true, -- Sunwing
-    [50361] = true, -- Ornat
-    [50725] = true, -- Azelisk
-    [50730] = true, -- Venomspine
-    [50792] = true, -- Chiaa
-    [50807] = true, -- Catal
-    [50810] = true, -- Favored of Isiset
-    [50839] = true, -- Chromehound
-    [50842] = true, -- Magmagan
-    [50855] = true, -- Jaxx the Rabid
-    [51066] = true, -- Crystalfang
+
+Maps[MapID.ShadowfangKeep].NPCs = {
+    [3872] = true, -- Deathsworn Captain
 }
 
 --------------------------------------------------------------------------------
----- Elwynn Forest
+---- Shimmering Expanse (205)
 --------------------------------------------------------------------------------
-Maps[MapID.ElwynnForest].NPCs = {
-    [61] = true, -- Thuros Lightfingers
-    [62] = true, -- Gug Fatcandle
-    [79] = true, -- Narg the Taskmaster
-    [99] = true, -- Morgaine the Sly
-    [100] = true, -- Gruff Swiftbite
-    [471] = true, -- Mother Fang
-    [472] = true, -- Fedfennel
-    [50752] = true, -- Tarantis
-    [50916] = true, -- Lamepaw the Whimperer
-    [50926] = true, -- Grizzled Ben
-    [50942] = true, -- Snoot the Rooter
-    [51014] = true, -- Terrapis
-    [51077] = true, -- Bushtail
+
+Maps[MapID.ShimmeringExpanse].NPCs = {
+    [50005] = true, -- Poseidus
+    [50052] = true, -- Burgy Blackheart
+    [51071] = true, -- Captain Florence
 }
 
 --------------------------------------------------------------------------------
----- Duskwood
+---- Silverpine Forest (21)
 --------------------------------------------------------------------------------
-Maps[MapID.Duskwood].NPCs = {
-    [507] = true, -- Fenros
-    [521] = true, -- Lupos
-    [534] = true, -- Nefaru
-    [574] = true, -- Naraxis
-    [45739] = true, -- The Unknown Soldier
-    [45740] = true, -- Watcher Eva
-    [45771] = true, -- Marus
-    [45785] = true, -- Carved One
-    [45801] = true, -- Eliza
-    [45811] = true, -- Marina DeSirrus
-    [118244] = true, -- Lightning Paw
+
+Maps[MapID.SilverpineForest].NPCs = {
+    [12431] = true, -- Gorefang
+    [12433] = true, -- Krethis the Shadowspinner
+    [46981] = true, -- Nightlash
+    [46992] = true, -- Berard the Moon-Crazed
+    [47003] = true, -- Bolgaff
+    [47008] = true, -- Fenwick Thatros
+    [47009] = true, -- Aquarius the Unbound
+    [47012] = true, -- Effritus
+    [47015] = true, -- Lost Son of Arugal
+    [47023] = true, -- Thule Ravenclaw
+    [50330] = true, -- Kree
+    [50814] = true, -- Corpsefeeder
+    [50949] = true, -- Finn's Gambit
+    [51026] = true, -- Gnath
+    [51037] = true, -- Lost Gilnean Wardog
 }
 
 --------------------------------------------------------------------------------
----- Loch Modan
+---- Stormwind City (84)
 --------------------------------------------------------------------------------
-Maps[MapID.LochModan].NPCs = {
-    [1398] = true, -- Boss Galgosh
-    [1399] = true, -- Magosh
-    [1425] = true, -- Kubb
-    [2476] = true, -- Gosh-Haldir
-    [14266] = true, -- Shanda the Spinner
-    [14267] = true, -- Emogg the Crusher
-    [14268] = true, -- Lord Condar
-    [45369] = true, -- Morick Darkbrew
-    [45380] = true, -- Ashtail
-    [45384] = true, -- Sagepaw
-    [45398] = true, -- Grizlak
-    [45399] = true, -- Optimo
-    [45401] = true, -- Whitefin
-    [45402] = true, -- Nix
-    [45404] = true, -- Geoshaper Maren
+
+Maps[MapID.StormwindCity].NPCs = {
+    [3581] = true, -- Sewer Beast
 }
 
 --------------------------------------------------------------------------------
----- Redridge Mountains
+---- Stratholme (317)
 --------------------------------------------------------------------------------
-Maps[MapID.RedridgeMountains].NPCs = {
-    [584] = true, -- Kazon
-    [616] = true, -- Chatter
-    [947] = true, -- Rohh the Silent
-    [14269] = true, -- Seeker Aqualon
-    [14270] = true, -- Squiddic
-    [14271] = true, -- Ribchaser
-    [14272] = true, -- Snarlflare
-    [14273] = true, -- Boulderheart
-    [52146] = true, -- Chitter
+
+Maps[MapID.Stratholme].NPCs = {
+    [10393] = true, -- Skul
+    [10558] = true, -- Hearthsinger Forresten
+    [10809] = true, -- Stonespine
+    [10820] = true, -- Duke Ragereaver
 }
 
 --------------------------------------------------------------------------------
----- Northern Stranglethorn
+---- Swamp of Sorrows (51)
 --------------------------------------------------------------------------------
-Maps[MapID.NorthernStranglethorn].NPCs = {
-    [11383] = true, -- High Priestess Hai'watna
-    [14487] = true, -- Gluggl
-    [14488] = true, -- Roloch
-    [51658] = true, -- Mogh the Dead
-    [51661] = true, -- Tsul'Kalu
-    [51662] = true, -- Mahamba
-    [51663] = true, -- Pogeyan
-}
 
---------------------------------------------------------------------------------
----- Swamp of Sorrows
---------------------------------------------------------------------------------
 Maps[MapID.SwampOfSorrows].NPCs = {
     [763] = true, -- Lost One Chieftain
     [1063] = true, -- Jade
@@ -417,8 +519,134 @@ Maps[MapID.SwampOfSorrows].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Westfall
+---- The Cape of Stranglethorn (210)
 --------------------------------------------------------------------------------
+
+Maps[MapID.TheCapeOfStranglethorn].NPCs = {
+    [1552] = true, -- Scale Belly
+    [2541] = true, -- Lord Sakrasis
+    [14490] = true, -- Rippa
+    [14491] = true, -- Kurmokk
+    [14492] = true, -- Verifonix
+    [108715] = true, -- Ol' Eary
+}
+
+--------------------------------------------------------------------------------
+---- The Deadmines (291)
+--------------------------------------------------------------------------------
+
+Maps[MapID.TheDeadmines].NPCs = {
+    [596] = true, -- Brainwashed Noble
+    [599] = true, -- Marisa du'Paige
+}
+
+--------------------------------------------------------------------------------
+---- The Hinterlands (26)
+--------------------------------------------------------------------------------
+
+Maps[MapID.TheHinterlands].NPCs = {
+    [8210] = true, -- Razortalon
+    [8211] = true, -- Old Cliff Jumper
+    [8212] = true, -- The Reak
+    [8213] = true, -- Ironback
+    [8214] = true, -- Jalinde Summerdrake
+    [8215] = true, -- Grimungous
+    [8216] = true, -- Retherokk the Berserker
+    [8217] = true, -- Mith'rethis the Enchanter
+    [8218] = true, -- Witherheart the Stalker
+    [8219] = true, -- Zul'arek Hatefowler
+    [107617] = true, -- Ol' Muddle
+}
+
+--------------------------------------------------------------------------------
+---- The Temple of Atal'Hakkar (220)
+--------------------------------------------------------------------------------
+
+Maps[MapID.TheTempleOfAtalHakkar].NPCs = {
+    [14445] = true, -- Captain Wyrmak
+}
+
+--------------------------------------------------------------------------------
+---- Tirisfal Glades (18)
+--------------------------------------------------------------------------------
+
+Maps[MapID.TirisfalGlades].NPCs = {
+    [1531] = true, -- Lost Soul
+    [1533] = true, -- Tormented Spirit
+    [1910] = true, -- Muad
+    [1911] = true, -- Deeb
+    [1936] = true, -- Farmer Solliden
+    [10356] = true, -- Bayne
+    [10357] = true, -- Ressan the Needler
+    [10358] = true, -- Fellicent's Shade
+    [10359] = true, -- Sri'skulk
+    [50763] = true, -- Shadowstalker
+    [50803] = true, -- Bonechewer
+    [50908] = true, -- Nighthowl
+    [50930] = true, -- Hibernus the Sleeper
+    [51044] = true, -- Plague
+}
+
+--------------------------------------------------------------------------------
+---- Twilight Highlands (241)
+--------------------------------------------------------------------------------
+
+Maps[MapID.TwilightHighlands].NPCs = {
+    [50085] = true, -- Overlord Sunderfury
+    [50086] = true, -- Tarvus the Vile
+    [50089] = true, -- Julak-Doom
+    [50138] = true, -- Karoma
+    [50159] = true, -- Sambas
+}
+
+--------------------------------------------------------------------------------
+---- Upper Blackrock Spire (616)
+--------------------------------------------------------------------------------
+
+Maps[MapID.UpperBlackrockSpire].NPCs = {
+    [77081] = true, -- The Lanticore
+}
+
+--------------------------------------------------------------------------------
+---- Vashj'ir (203)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Vashjir].NPCs = {
+    [51079] = true, -- Captain Foulwind
+}
+
+--------------------------------------------------------------------------------
+---- Western Plaguelands (22)
+--------------------------------------------------------------------------------
+
+Maps[MapID.WesternPlaguelands].NPCs = {
+    [1837] = true, -- Scarlet Judge
+    [1838] = true, -- Scarlet Interrogator
+    [1839] = true, -- Scarlet High Clerist
+    [1841] = true, -- Scarlet Executioner
+    [1847] = true, -- Foulmane
+    [1848] = true, -- Lord Maldazzar
+    [1849] = true, -- Dreadwhisper
+    [1850] = true, -- Putridius
+    [1851] = true, -- The Husk
+    [1885] = true, -- Scarlet Smith
+    [50345] = true, -- Alit
+    [50778] = true, -- Ironweb
+    [50809] = true, -- Heress
+    [50906] = true, -- Mutilax
+    [50922] = true, -- Warg
+    [50931] = true, -- Mange
+    [50937] = true, -- Hamhide
+    [51029] = true, -- Parasitus
+    [51031] = true, -- Tracker
+    [51058] = true, -- Aphis
+    [111122] = true, -- Large Vile Slime
+}
+
+--------------------------------------------------------------------------------
+---- Westfall (52)
+--------------------------------------------------------------------------------
+
 Maps[MapID.Westfall].NPCs = {
     [462] = true, -- Vultros
     [506] = true, -- Sergeant Brashclaw
@@ -432,8 +660,9 @@ Maps[MapID.Westfall].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Wetlands
+---- Wetlands (56)
 --------------------------------------------------------------------------------
+
 Maps[MapID.Wetlands].NPCs = {
     [1112] = true, -- Leech Widow
     [1140] = true, -- Razormaw Matriarch
@@ -447,190 +676,4 @@ Maps[MapID.Wetlands].NPCs = {
     [44226] = true, -- Sarltooth
     [44227] = true, -- Gazz the Loch-Hunter
     [50964] = true, -- Chops
-}
-
---------------------------------------------------------------------------------
----- Stormwind City
---------------------------------------------------------------------------------
-Maps[MapID.StormwindCity].NPCs = {
-    [3581] = true, -- Sewer Beast
-}
-
---------------------------------------------------------------------------------
----- Eversong Woods
---------------------------------------------------------------------------------
-Maps[MapID.EversongWoods].NPCs = {
-    [16854] = true, -- Eldinarcus
-    [16855] = true, -- Tregla
-}
-
---------------------------------------------------------------------------------
----- Ghostlands
---------------------------------------------------------------------------------
-Maps[MapID.Ghostlands].NPCs = {
-    [22062] = true, -- Dr. Whitherlimb
-}
-
---------------------------------------------------------------------------------
----- Kelp'thar Forest
---------------------------------------------------------------------------------
-Maps[MapID.KelptharForest].NPCs = {
-    [49913] = true, -- Lady La-La
-}
-
---------------------------------------------------------------------------------
----- Vashj'ir
---------------------------------------------------------------------------------
-Maps[MapID.Vashjir].NPCs = {
-    [51079] = true, -- Captain Foulwind
-}
-
---------------------------------------------------------------------------------
----- Abyssal Depths
---------------------------------------------------------------------------------
-Maps[MapID.AbyssalDepths].NPCs = {
-    [50005] = true, -- Poseidus
-    [50009] = true, -- Mobus
-    [50050] = true, -- Shok'sharak
-    [50051] = true, -- Ghostcrawler
-}
-
---------------------------------------------------------------------------------
----- Shimmering Expanse
---------------------------------------------------------------------------------
-Maps[MapID.ShimmeringExpanse].NPCs = {
-    [50005] = true, -- Poseidus
-    [50052] = true, -- Burgy Blackheart
-    [51071] = true, -- Captain Florence
-}
-
---------------------------------------------------------------------------------
----- The Cape of Stranglethorn
---------------------------------------------------------------------------------
-Maps[MapID.TheCapeOfStranglethorn].NPCs = {
-    [1552] = true, -- Scale Belly
-    [2541] = true, -- Lord Sakrasis
-    [14490] = true, -- Rippa
-    [14491] = true, -- Kurmokk
-    [14492] = true, -- Verifonix
-    [108715] = true, -- Ol' Eary
-}
-
---------------------------------------------------------------------------------
----- The Temple of Atal'Hakkar
---------------------------------------------------------------------------------
-Maps[MapID.TheTempleOfAtalHakkar].NPCs = {
-    [14445] = true, -- Captain Wyrmak
-}
-
---------------------------------------------------------------------------------
----- Gnomeregan
---------------------------------------------------------------------------------
-Maps[MapID.Gnomeregan].NPCs = {
-    [6228] = true, -- Dark Iron Ambassador
-}
-
---------------------------------------------------------------------------------
----- Twilight Highlands
---------------------------------------------------------------------------------
-Maps[MapID.TwilightHighlands].NPCs = {
-    [50085] = true, -- Overlord Sunderfury
-    [50086] = true, -- Tarvus the Vile
-    [50089] = true, -- Julak-Doom
-    [50138] = true, -- Karoma
-    [50159] = true, -- Sambas
-}
-
---------------------------------------------------------------------------------
----- Blackrock Depths
---------------------------------------------------------------------------------
-Maps[MapID.BlackrockDepths].NPCs = {
-    [8923] = true, -- Panzor the Invincible
-}
-
---------------------------------------------------------------------------------
----- Blackrock Spire
---------------------------------------------------------------------------------
-Maps[MapID.BlackrockSpire].NPCs = {
-    [9217] = true, -- Spirestone Lord Magus
-    [9218] = true, -- Spirestone Battle Lord
-    [9219] = true, -- Spirestone Butcher
-    [9596] = true, -- Bannok Grimaxe
-    [9718] = true, -- Ghok Bashguud
-    [9736] = true, -- Quartermaster Zigris
-    [10263] = true, -- Burning Felguard
-    [10376] = true, -- Crystal Fang
-    [10509] = true, -- Jed Runewatcher
-}
-
---------------------------------------------------------------------------------
----- The Deadmines
---------------------------------------------------------------------------------
-Maps[MapID.TheDeadmines].NPCs = {
-    [596] = true, -- Brainwashed Noble
-    [599] = true, -- Marisa du'Paige
-}
-
---------------------------------------------------------------------------------
----- Shadowfang Keep
---------------------------------------------------------------------------------
-Maps[MapID.ShadowfangKeep].NPCs = {
-    [3872] = true, -- Deathsworn Captain
-}
-
---------------------------------------------------------------------------------
----- Stratholme
---------------------------------------------------------------------------------
-Maps[MapID.Stratholme].NPCs = {
-    [10393] = true, -- Skul
-    [10558] = true, -- Hearthsinger Forresten
-    [10809] = true, -- Stonespine
-    [10820] = true, -- Duke Ragereaver
-}
-
---------------------------------------------------------------------------------
----- Karazhan
---------------------------------------------------------------------------------
-Maps[MapID.Karazhan].NPCs = {
-    [16179] = true, -- Hyakiss the Lurker
-    [16180] = true, -- Shadikith the Glider
-    [16181] = true, -- Rokad the Ravager
-}
-
---------------------------------------------------------------------------------
----- Northshire
---------------------------------------------------------------------------------
-Maps[MapID.Northshire].NPCs = {
-    [62] = true, -- Gug Fatcandle
-}
-
---------------------------------------------------------------------------------
----- Deathknell
---------------------------------------------------------------------------------
-Maps[MapID.Deathknell].NPCs = {
-    [50328] = true, -- Fangor
-}
-
---------------------------------------------------------------------------------
----- New Tinkertown
---------------------------------------------------------------------------------
-Maps[MapID.NewTinkertown].NPCs = {
-    [1132] = true, -- Timber
-    [1260] = true, -- Great Father Arctikus
-    [8503] = true, -- Gibblewilt
-    [107431] = true, -- Weaponized Rabbot
-}
-
---------------------------------------------------------------------------------
----- Scholomance
---------------------------------------------------------------------------------
-Maps[MapID.Scholomance].NPCs = {
-    [59369] = true, -- Doctor Theolen Krastinov
-}
-
---------------------------------------------------------------------------------
----- Upper Blackrock Spire
---------------------------------------------------------------------------------
-Maps[MapID.UpperBlackrockSpire].NPCs = {
-    [77081] = true, -- The Lanticore
 }

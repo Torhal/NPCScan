@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -8,57 +9,9 @@ local Maps = private.Data.Maps
 local MapID = private.Enum.MapID
 
 --------------------------------------------------------------------------------
----- Krokuun
+---- Antoran Wastes (885)
 --------------------------------------------------------------------------------
-Maps[MapID.Krokuun].NPCs = {
-    [120393] = true, -- Siegemaster Voraan
-    [122911] = true, -- Commander Vecaya
-    [122912] = true, -- Commander Sathrenael
-    [123464] = true, -- Sister Subversia
-    [123689] = true, -- Talestra the Vile
-    [124775] = true, -- Commander Endaxis
-    [124804] = true, -- Tereck the Selector
-    [125388] = true, -- Vagath the Betrayed
-    [125479] = true, -- Tar Spitter
-    [125820] = true, -- Imp Mother Laglath
-    [125824] = true, -- Khazaduum
-    [126419] = true, -- Naroua
-}
 
---------------------------------------------------------------------------------
----- Mac'Aree
---------------------------------------------------------------------------------
-Maps[MapID.MacAree].NPCs = {
-    [122838] = true, -- Shadowcaster Voruun
-    [126815] = true, -- Soultwisted Monstrosity
-    [126852] = true, -- Wrangler Kravos
-    [126860] = true, -- Kaara the Pale
-    [126862] = true, -- Baruut the Bloodthirsty
-    [126864] = true, -- Feasel the Muffin Thief
-    [126865] = true, -- Vigilant Thanos
-    [126866] = true, -- Vigilant Kuro
-    [126867] = true, -- Venomtail Skyfin
-    [126868] = true, -- Turek the Lucid
-    [126869] = true, -- Captain Faruq
-    [126885] = true, -- Umbraliss
-    [126887] = true, -- Ataxon
-    [126889] = true, -- Sorolis the Ill-Fated
-    [126896] = true, -- Herald of Chaos
-    [126898] = true, -- Sabuul
-    [126899] = true, -- Jed'hin Champion Vorusk
-    [124440] = true, -- Overseer Y'Beda
-    [125497] = true, -- Overseer Y'Sorna
-    [125498] = true, -- Overseer Y'Morna
-    [126900] = true, -- Instructor Tarahna
-    [126908] = true, -- Zul'tan the Numerous
-    [126910] = true, -- Commander Xethgar
-    [126912] = true, -- Skreeg the Devourer
-    [126913] = true, -- Slithon the Last
-}
-
---------------------------------------------------------------------------------
----- Antoran Wastes
---------------------------------------------------------------------------------
 Maps[MapID.AntoranWastes].NPCs = {
     [122947] = true, -- Mistress Il'thendra
     [122958] = true, -- Blistermaw
@@ -83,4 +36,55 @@ Maps[MapID.AntoranWastes].NPCs = {
     [127703] = true, -- Doomcaster Suprax
     [127705] = true, -- Mother Rosula
     [127706] = true, -- Rezira the Seer
+}
+
+--------------------------------------------------------------------------------
+---- Eredath (882)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Eredath].NPCs = {
+    [122838] = true, -- Shadowcaster Voruun
+    [124440] = true, -- Overseer Y'Beda
+    [125497] = true, -- Overseer Y'Sorna
+    [125498] = true, -- Overseer Y'Morna
+    [126815] = true, -- Soultwisted Monstrosity
+    [126852] = true, -- Wrangler Kravos
+    [126860] = true, -- Kaara the Pale
+    [126862] = true, -- Baruut the Bloodthirsty
+    [126864] = true, -- Feasel the Muffin Thief
+    [126865] = true, -- Vigilant Thanos
+    [126866] = true, -- Vigilant Kuro
+    [126867] = true, -- Venomtail Skyfin
+    [126868] = true, -- Turek the Lucid
+    [126869] = true, -- Captain Faruq
+    [126885] = true, -- Umbraliss
+    [126887] = true, -- Ataxon
+    [126889] = true, -- Sorolis the Ill-Fated
+    [126896] = true, -- Herald of Chaos
+    [126898] = true, -- Sabuul
+    [126899] = true, -- Jed'hin Champion Vorusk
+    [126900] = true, -- Instructor Tarahna
+    [126908] = true, -- Zul'tan the Numerous
+    [126910] = true, -- Commander Xethgar
+    [126912] = true, -- Skreeg the Devourer
+    [126913] = true, -- Slithon the Last
+}
+
+--------------------------------------------------------------------------------
+---- Krokuun (830)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Krokuun].NPCs = {
+    [120393] = true, -- Siegemaster Voraan
+    [122911] = true, -- Commander Vecaya
+    [122912] = true, -- Commander Sathrenael
+    [123464] = true, -- Sister Subversia
+    [123689] = true, -- Talestra the Vile
+    [124775] = true, -- Commander Endaxis
+    [124804] = true, -- Tereck the Selector
+    [125388] = true, -- Vagath the Betrayed
+    [125479] = true, -- Tar Spitter
+    [125820] = true, -- Imp Mother Laglath
+    [125824] = true, -- Khazaduum
+    [126419] = true, -- Naroua
 }

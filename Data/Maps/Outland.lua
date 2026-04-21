@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
@@ -8,35 +9,9 @@ local Maps = private.Data.Maps
 local MapID = private.Enum.MapID
 
 --------------------------------------------------------------------------------
----- Hellfire Peninsula
+---- Blade's Edge Mountains (105)
 --------------------------------------------------------------------------------
-Maps[MapID.HellfirePeninsula].NPCs = {
-    [18677] = true, -- Mekthorg the Wild
-    [18678] = true, -- Fulgorge
-    [18679] = true, -- Vorakem Doomspeaker
-}
 
---------------------------------------------------------------------------------
----- Zangarmarsh
---------------------------------------------------------------------------------
-Maps[MapID.Zangarmarsh].NPCs = {
-    [18680] = true, -- Marticar
-    [18681] = true, -- Coilfang Emissary
-    [18682] = true, -- Bog Lurker
-}
-
---------------------------------------------------------------------------------
----- Shadowmoon Valley (Outland)
---------------------------------------------------------------------------------
-Maps[MapID.ShadowmoonValleyOutland].NPCs = {
-    [18694] = true, -- Collidus the Warp-Watcher
-    [18695] = true, -- Ambassador Jerrikar
-    [18696] = true, -- Kraator
-}
-
---------------------------------------------------------------------------------
----- Blade's Edge Mountains
---------------------------------------------------------------------------------
 Maps[MapID.BladesEdgeMountains].NPCs = {
     [18690] = true, -- Morcrush
     [18692] = true, -- Hemathion
@@ -44,8 +19,19 @@ Maps[MapID.BladesEdgeMountains].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Nagrand (Outland)
+---- Hellfire Peninsula (100)
 --------------------------------------------------------------------------------
+
+Maps[MapID.HellfirePeninsula].NPCs = {
+    [18677] = true, -- Mekthorg the Wild
+    [18678] = true, -- Fulgorge
+    [18679] = true, -- Vorakem Doomspeaker
+}
+
+--------------------------------------------------------------------------------
+---- Nagrand (107)
+--------------------------------------------------------------------------------
+
 Maps[MapID.NagrandOutland].NPCs = {
     [17144] = true, -- Goretooth
     [18683] = true, -- Voidhunter Yar
@@ -53,8 +39,29 @@ Maps[MapID.NagrandOutland].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Terokkar Forest
+---- Netherstorm (109)
 --------------------------------------------------------------------------------
+
+Maps[MapID.Netherstorm].NPCs = {
+    [18697] = true, -- Chief Engineer Lorthander
+    [18698] = true, -- Ever-Core the Punisher
+    [20932] = true, -- Nuramoc
+}
+
+--------------------------------------------------------------------------------
+---- Shadowmoon Valley (104)
+--------------------------------------------------------------------------------
+
+Maps[MapID.ShadowmoonValleyOutland].NPCs = {
+    [18694] = true, -- Collidus the Warp-Watcher
+    [18695] = true, -- Ambassador Jerrikar
+    [18696] = true, -- Kraator
+}
+
+--------------------------------------------------------------------------------
+---- Terokkar Forest (108)
+--------------------------------------------------------------------------------
+
 Maps[MapID.TerokkarForest].NPCs = {
     [18685] = true, -- Okrek
     [18686] = true, -- Doomsayer Jurim
@@ -63,10 +70,11 @@ Maps[MapID.TerokkarForest].NPCs = {
 }
 
 --------------------------------------------------------------------------------
----- Netherstorm
+---- Zangarmarsh (102)
 --------------------------------------------------------------------------------
-Maps[MapID.Netherstorm].NPCs = {
-    [18697] = true, -- Chief Engineer Lorthander
-    [18698] = true, -- Ever-Core the Punisher
-    [20932] = true, -- Nuramoc
+
+Maps[MapID.Zangarmarsh].NPCs = {
+    [18680] = true, -- Marticar
+    [18681] = true, -- Coilfang Emissary
+    [18682] = true, -- Bog Lurker
 }
