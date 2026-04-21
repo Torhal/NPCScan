@@ -614,7 +614,9 @@ do
 
                         if not startedEntry then
                             startedEntry = true
-                            output:AddLine(("Quests[%d] = { -- %s"):format(npcID, NPCScan:GetQuestNameFromID(questID)))
+                            output:AddLine(
+                                ("Quests[%d] = { -- %s"):format(questID, NPCScan:GetQuestNameFromID(questID))
+                            )
                         end
 
                         local fieldInfoOutput
