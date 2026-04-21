@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 
 local AddOnFolderName = ... ---@type string
-local private = select(2, ...) ---@type PrivateNamespace
+local private = select(2, ...) ---@class PrivateNamespace
 
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
 
@@ -14,7 +14,7 @@ local AceConfigRegistry = LibStub("AceConfigRegistry-3.0")
 ---- Initialization
 --------------------------------------------------------------------------------
 
-local buildVersion = C_AddOns.GetAddOnMetadata(AddOnFolderName, "Version")
+local metadataVersion = C_AddOns.GetAddOnMetadata(AddOnFolderName, "Version")
 local isDevelopmentVersion = false
 local isAlphaVersion = false
 
@@ -26,9 +26,9 @@ isDevelopmentVersion = true
 isAlphaVersion = true
 --@end-alpha@
 
-buildVersion = isDevelopmentVersion and "Development Version"
-    or (isAlphaVersion and buildVersion .. "-Alpha")
-    or buildVersion
+local buildVersion = isDevelopmentVersion and "Development Version"
+    or (isAlphaVersion and metadataVersion .. "-Alpha")
+    or metadataVersion
 
 local Options ---@type AceConfig.OptionsTable
 
