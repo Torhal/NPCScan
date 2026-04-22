@@ -10,7 +10,8 @@ local private = select(2, ...) ---@class PrivateNamespace
 --------------------------------------------------------------------------------
 
 local addTableMeta = {
-    __index = function(t, mapID)
+    __index = function(t, input)
+        local mapID = tonumber(input) or -1
         if mapID < 0 then
             return
         end
