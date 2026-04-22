@@ -110,11 +110,11 @@ NPCs[126208] = {
     pets = {
         {
             itemID = 153054, -- Docile Skyfin
-            npcID = 128157, -- Unknown
+            npcID = 128157, -- Docile Skyfin
         },
         {
             itemID = 153055, -- Fel-Afflicted Skyfin
-            npcID = 128158, -- Unknown
+            npcID = 128158, -- Fel-Afflicted Skyfin
         },
     },
     questID = 48812, -- Unknown
@@ -239,7 +239,7 @@ NPCs[127581] = {
     pets = {
         {
             itemID = 153195, -- Uuna's Doll
-            npcID = 128396, -- Unknown
+            npcID = 128396, -- Uuna
         },
     },
     questID = 48966, -- Unknown
@@ -282,7 +282,7 @@ NPCs[127705] = {
     pets = {
         {
             itemID = 153252, -- Rebellious Imp
-            npcID = 128388, -- Unknown
+            npcID = 128388, -- Rebellious Imp
         },
     },
     questID = 48970, -- Unknown
@@ -477,7 +477,7 @@ NPCs[126887] = {
     pets = {
         {
             itemID = 153056, -- Grasping Manifestation
-            npcID = 128159, -- Unknown
+            npcID = 128159, -- Grasping Manifestation
         },
     },
     questID = 48709, -- Unknown
@@ -528,11 +528,11 @@ NPCs[126898] = {
     pets = {
         {
             itemID = 153054, -- Docile Skyfin
-            npcID = 128157, -- Unknown
+            npcID = 128157, -- Docile Skyfin
         },
         {
             itemID = 153055, -- Fel-Afflicted Skyfin
-            npcID = 128158, -- Unknown
+            npcID = 128158, -- Fel-Afflicted Skyfin
         },
     },
     questID = 48712, -- Unknown
@@ -744,11 +744,11 @@ NPCs[126419] = {
     pets = {
         {
             itemID = 153054, -- Docile Skyfin
-            npcID = 128157, -- Unknown
+            npcID = 128157, -- Docile Skyfin
         },
         {
             itemID = 153055, -- Fel-Afflicted Skyfin
-            npcID = 128158, -- Unknown
+            npcID = 128158, -- Fel-Afflicted Skyfin
         },
     },
     questID = 48667, -- Unknown
