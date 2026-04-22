@@ -55,6 +55,7 @@ Maps[MapID.FrostfireRidge].NPCs = {
     [72364] = true, -- Gorg'ak the Lava Guzzler
     [74613] = true, -- Broodmother Reeg'ak
     [74971] = true, -- Firefury Giant
+    [75120] = true, -- Clumsy Cragmaul Brute
     [76914] = true, -- Coldtusk
     [76918] = true, -- Primalist Mur'og
     [77513] = true, -- Coldstomp the Griever
@@ -73,6 +74,7 @@ Maps[MapID.FrostfireRidge].NPCs = {
     [78867] = true, -- Breathless
     [79104] = true, -- Ug'lok the Frozen
     [79145] = true, -- Yaga the Scarred
+    [79678] = true, -- Jehil the Climber
     [80190] = true, -- Gruuk
     [80235] = true, -- Gurun
     [80242] = true, -- Chillfang
@@ -95,6 +97,7 @@ Maps[MapID.FrostfireRidge].NPCs = {
     [87357] = true, -- Valkor
     [87600] = true, -- Jaluk the Pacifist
     [87622] = true, -- Ogom the Mangler
+    [90041] = true, -- The Last Voidtalon
 }
 
 --------------------------------------------------------------------------------
@@ -165,6 +168,7 @@ Maps[MapID.Gorgrond].NPCs = {
     [88583] = true, -- Grove Warden Yal
     [88586] = true, -- Mogamago
     [88672] = true, -- Hunter Bal'ra
+    [90041] = true, -- The Last Voidtalon
 }
 
 --------------------------------------------------------------------------------
@@ -196,6 +200,7 @@ Maps[MapID.NagrandDraenor].NPCs = {
     [80057] = true, -- Soulfang
     [80122] = true, -- Gaz'orda
     [80370] = true, -- Lernaea
+    [81330] = true, -- Warleader Tome
     [82486] = true, -- Explorer Nozzand
     [82755] = true, -- Redclaw the Feral
     [82758] = true, -- Greatfeather
@@ -230,13 +235,22 @@ Maps[MapID.NagrandDraenor].NPCs = {
     [87234] = true, -- Brutag Grimblade
     [87239] = true, -- Krahl Deadeye
     [87344] = true, -- Gortag Steelgrip
+    [87641] = true, -- Xelganak
+    [87647] = true, -- Aogexon
+    [87650] = true, -- Direhoof
+    [87653] = true, -- Vileclaw
+    [87655] = true, -- Thek'talon
+    [87660] = true, -- Dekorhan
+    [87661] = true, -- Bergruu
     [87666] = true, -- Mu'gra
+    [87667] = true, -- Mu'gra
     [87788] = true, -- Durg Spinecrusher
     [87837] = true, -- Bonebreaker
     [87846] = true, -- Pit Slayer
     [88208] = true, -- Pit Beast
     [88210] = true, -- Krud the Eviscerator
     [88951] = true, -- Vileclaw
+    [90041] = true, -- The Last Voidtalon
     [98198] = true, -- Rukdug
     [98199] = true, -- Pugg
     [98200] = true, -- Guk
@@ -289,6 +303,7 @@ Maps[MapID.ShadowmoonValleyDraenor].NPCs = {
     [85837] = true, -- Slivermaw
     [86213] = true, -- Aqualir
     [86689] = true, -- Sneevel
+    [90041] = true, -- The Last Voidtalon
 }
 
 --------------------------------------------------------------------------------
@@ -301,6 +316,7 @@ Maps[MapID.SpiresOfArak].NPCs = {
     [80614] = true, -- Blade-Dancer Aeryx
     [82050] = true, -- Varasha
     [82247] = true, -- Nas Dunberlin
+    [83746] = true, -- Rukhmar
     [83990] = true, -- Solar Magnifier
     [84417] = true, -- Mutafen
     [84775] = true, -- Tesska the Broken
@@ -330,6 +346,8 @@ Maps[MapID.SpiresOfArak].NPCs = {
     [87026] = true, -- Mecha Plunderer
     [87027] = true, -- Shadow Hulk
     [87029] = true, -- Giga Sentinel
+    [87493] = true, -- Rukhmar
+    [90041] = true, -- The Last Voidtalon
 }
 
 --------------------------------------------------------------------------------
@@ -338,6 +356,7 @@ Maps[MapID.SpiresOfArak].NPCs = {
 
 Maps[MapID.Talador].NPCs = {
     [51015] = true, -- Silthide
+    [76876] = true, -- O'mogg Blackheart
     [77529] = true, -- Yazheera the Incinerator
     [77561] = true, -- Dr. Gloom
     [77614] = true, -- Frenzied Golem
@@ -363,6 +382,7 @@ Maps[MapID.Talador].NPCs = {
     [80204] = true, -- Felbark
     [80471] = true, -- Gennadian
     [80524] = true, -- Underseer Bloodmane
+    [80785] = true, -- Fungal Praetorian
     [82920] = true, -- Lord Korinak
     [82922] = true, -- Xothear, the Destroyer
     [82930] = true, -- Shadowflame Terrorwalker
@@ -382,6 +402,7 @@ Maps[MapID.Talador].NPCs = {
     [88083] = true, -- Soulbinder Naylana
     [88436] = true, -- Vigilant Paarthos
     [88494] = true, -- Legion Vanguard
+    [90041] = true, -- The Last Voidtalon
 }
 
 --------------------------------------------------------------------------------
