@@ -19,6 +19,7 @@ Maps[MapID.Boralus].NPCs = {
     [143559] = true, -- Grand Marshal Tremblade
     [143560] = true, -- Marshal Gabriel
     [145161] = true, -- Siege Engineer Krackleboom
+    [147489] = true, -- Captain Greensails
 }
 
 --------------------------------------------------------------------------------
@@ -99,6 +100,7 @@ Maps[MapID.MechagonIsland].NPCs = {
     [150786] = true, -- Mechanized Crawler
     [150937] = true, -- Seaspit
     [151124] = true, -- Mechagonian Nullifier
+    [151159] = true, -- OOX-Fleetfoot/MG
     [151202] = true, -- Foul Manifestation
     [151296] = true, -- OOX-Avenger/MG
     [151308] = true, -- Boggac Skullbash
@@ -247,6 +249,8 @@ Maps[MapID.TiragardeSound].NPCs = {
     [134106] = true, -- Lumbergrasp Sentinel
     [136385] = true, -- Azurethos
     [137183] = true, -- Honey-Coated Slitherer
+    [137983] = true, -- Rear Admiral Hainsworth
+    [138039] = true, -- Dark Ranger Clea
     [138279] = true, -- Adhara White
     [138288] = true, -- Ghost of the Deep
     [138299] = true, -- Bloodmaw
@@ -259,6 +263,7 @@ Maps[MapID.TiragardeSound].NPCs = {
     [139278] = true, -- Ranja
     [139280] = true, -- Sythian the Swift
     [139285] = true, -- Shiverscale the Toxic
+    [139287] = true, -- Sawtooth
     [139289] = true, -- Tentulos the Drifter
     [139290] = true, -- Maison the Portable
     [144722] = true, -- Togoth Cruelarm
