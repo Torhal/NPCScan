@@ -11,6 +11,10 @@ local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCS
 ------- Constants
 --------------------------------------------------------------------------------
 
+local ItemIDFromName = {} ---@type table<string, integer>
+
+private.ItemIDFromName = ItemIDFromName
+
 local NPCIDFromName = {} ---@type table<string, integer>
 
 private.NPCIDFromName = NPCIDFromName
@@ -25,6 +29,30 @@ DatamineTooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
 --------------------------------------------------------------------------------
 ---- Data Mining Functions
 --------------------------------------------------------------------------------
+
+---@param itemID integer
+function GetItemNameFromID(itemID)
+    local itemName = private.db.locale.itemNames[itemID]
+
+    if itemName then
+        return itemName
+    end
+
+    itemName = C_Item.GetItemNameByID(itemID)
+
+    if not itemName then
+        return UNKNOWN
+    end
+
+    if itemName ~= "" then
+        private.db.locale.itemNames[itemID] = itemName
+        ItemIDFromName[itemName] = itemID
+    end
+
+    return itemName
+end
+
+private.GetItemNameFromID = GetItemNameFromID
 
 ---@param npcID integer
 function GetNPCNameFromID(npcID)
@@ -66,7 +94,7 @@ function GetQuestNameFromID(questID)
 
     if questName ~= "" then
         private.db.locale.questNames[questID] = questName
-        private.QuestIDFromName[questName] = questID
+        QuestIDFromName[questName] = questID
     end
 
     return questName

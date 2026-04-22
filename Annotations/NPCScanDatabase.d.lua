@@ -64,6 +64,7 @@
 ---@field userDefined NPCScanDatabase.Profile.UserDefined
 
 ---@class NPCScanDatabase.Locale
+---@field itemNames table<integer, string>
 ---@field npcNames table<integer, string>
 ---@field questNames table<integer, string>
 

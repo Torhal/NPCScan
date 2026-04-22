@@ -212,7 +212,7 @@ function private.DumpNPCData(continentID)
                                                 private.GetNPCNameFromID(grandchildValue)
                                             )
                                         elseif grandchildKey == "itemID" then
-                                            local itemName = C_Item.GetItemNameByID(grandchildValue)
+                                            local itemName = private.GetItemNameFromID(grandchildValue)
 
                                             if itemName then
                                                 grandchildValueName = (" -- %s"):format(itemName)

@@ -12,6 +12,7 @@ local private = select(2, ...) ---@class PrivateNamespace
 local DefaultPreferences = {
     ---@type NPCScanDatabase.Locale
     locale = {
+        itemNames = {},
         npcNames = {},
         questNames = {},
     },
