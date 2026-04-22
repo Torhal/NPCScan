@@ -88,6 +88,7 @@ Maps[MapID.Badlands].NPCs = {
     [2754] = true, -- Anathemus
     [2850] = true, -- Broken Tooth
     [2931] = true, -- Zaricotl
+    [7057] = true, -- Digmaster Shovelphlange
     [14224] = true, -- 7:XT
     [50726] = true, -- Kalixx
     [50728] = true, -- Deathstrike
@@ -154,6 +155,7 @@ Maps[MapID.BurningSteppes].NPCs = {
     [8978] = true, -- Thauris Balgarr
     [8979] = true, -- Gruklash
     [8981] = true, -- Malfunctioning Reaver
+    [9046] = true, -- Scarshield Quartermaster
     [9602] = true, -- Hahk'Zor
     [9604] = true, -- Gorgon'och
     [10077] = true, -- Deathmaw
@@ -189,6 +191,7 @@ Maps[MapID.DunMorogh].NPCs = {
     [1130] = true, -- Bjarn
     [1137] = true, -- Edan the Howler
     [1260] = true, -- Great Father Arctikus
+    [1271] = true, -- Old Icebeard
 }
 
 --------------------------------------------------------------------------------
@@ -196,10 +199,12 @@ Maps[MapID.DunMorogh].NPCs = {
 --------------------------------------------------------------------------------
 
 Maps[MapID.Duskwood].NPCs = {
+    [503] = true, -- Lord Malathrom
     [507] = true, -- Fenros
     [521] = true, -- Lupos
     [534] = true, -- Nefaru
     [574] = true, -- Naraxis
+    [771] = true, -- Commander Felstrom
     [45739] = true, -- The Unknown Soldier
     [45740] = true, -- Watcher Eva
     [45771] = true, -- Marus
@@ -403,6 +408,7 @@ Maps[MapID.RedridgeMountains].NPCs = {
     [14272] = true, -- Snarlflare
     [14273] = true, -- Boulderheart
     [52146] = true, -- Chitter
+    [147222] = true, -- Gnollfeaster
 }
 
 --------------------------------------------------------------------------------
@@ -410,6 +416,7 @@ Maps[MapID.RedridgeMountains].NPCs = {
 --------------------------------------------------------------------------------
 
 Maps[MapID.Scholomance].NPCs = {
+    [1850] = true, -- Putridius
     [59369] = true, -- Doctor Theolen Krastinov
 }
 
@@ -459,6 +466,9 @@ Maps[MapID.ShimmeringExpanse].NPCs = {
 --------------------------------------------------------------------------------
 
 Maps[MapID.SilverpineForest].NPCs = {
+    [1920] = true, -- Ambermill Spellscribe
+    [1948] = true, -- Snarlmane
+    [2283] = true, -- Ravenclaw Regent
     [12431] = true, -- Gorefang
     [12433] = true, -- Krethis the Shadowspinner
     [46981] = true, -- Nightlash
@@ -576,6 +586,7 @@ Maps[MapID.TirisfalGlades].NPCs = {
     [1910] = true, -- Muad
     [1911] = true, -- Deeb
     [1936] = true, -- Farmer Solliden
+    [1944] = true, -- Rot Hide Bruiser
     [10356] = true, -- Bayne
     [10357] = true, -- Ressan the Needler
     [10358] = true, -- Fellicent's Shade
@@ -597,6 +608,25 @@ Maps[MapID.TwilightHighlands].NPCs = {
     [50089] = true, -- Julak-Doom
     [50138] = true, -- Karoma
     [50159] = true, -- Sambas
+    [237853] = true, -- Berg the Spellfist
+    [237997] = true, -- Corla, Herald of Twilight
+    [246272] = true, -- Void Zealot Devinda
+    [246343] = true, -- Asira Dawnslayer
+    [246460] = true, -- Ray of Putrescence
+    [246462] = true, -- Archbishop Benedictus
+    [246471] = true, -- Ix the Bloodfallen
+    [246478] = true, -- Commander Ix'vaarha
+    [246549] = true, -- Ez'Haadosh the Liminality
+    [246558] = true, -- Saligrum the Observer
+    [246559] = true, -- Sharfadi, Bulwark of the Night
+    [246565] = true, -- Gustavan, Herald of the End
+    [246566] = true, -- Mirrorvise
+    [246572] = true, -- Redeye the Skullchewer
+    [246577] = true, -- Nedrand the Eyegorger
+    [246578] = true, -- Voidclaw Hexathor
+    [246840] = true, -- Executioner Lynthelma
+    [246844] = true, -- T'aavihan the Unbound
+    [253378] = true, -- Voice of the Eclipse
 }
 
 --------------------------------------------------------------------------------
