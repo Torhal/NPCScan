@@ -69,6 +69,7 @@ Maps[MapID.Azsuna].NPCs = {
     [109653] = true, -- Marblub the Massive
     [109677] = true, -- Chief Treasurer Jabrill
     [109702] = true, -- Deepclaw
+    [110824] = true, -- Tideclaw
     [111434] = true, -- Sea King Tidross
     [111454] = true, -- Bestrix
     [111674] = true, -- Cinderwing
@@ -127,6 +128,21 @@ Maps[MapID.BrokenShore].NPCs = {
     [121112] = true, -- Somber Dawn
     [121124] = true, -- Apocron
     [121134] = true, -- Duke Sithizi
+}
+
+--------------------------------------------------------------------------------
+---- Dalaran (628)
+--------------------------------------------------------------------------------
+
+Maps[MapID.DalaranLegion].NPCs = {
+    [97380] = true, -- Splint
+    [97381] = true, -- Screek
+    [97384] = true, -- Segacedi
+    [97387] = true, -- Mana Seeper
+    [97388] = true, -- Xullorax
+    [97390] = true, -- Thieving Scoundrel
+    [97587] = true, -- Crazed Mage
+    [97589] = true, -- Rotten Egg
 }
 
 --------------------------------------------------------------------------------
@@ -297,6 +313,7 @@ Maps[MapID.Stormheim].NPCs = {
     [109994] = true, -- Stormtalon
     [110363] = true, -- Roteye
     [111463] = true, -- Bulvinkel
+    [112350] = true, -- Withered J'im
     [117850] = true, -- Simone the Seductress
 }
 
