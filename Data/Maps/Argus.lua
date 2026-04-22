@@ -88,3 +88,11 @@ Maps[MapID.Krokuun].NPCs = {
     [125824] = true, -- Khazaduum
     [126419] = true, -- Naroua
 }
+
+--------------------------------------------------------------------------------
+---- The Seat of the Triumvirate (903)
+--------------------------------------------------------------------------------
+
+Maps[MapID.TheSeatOfTheTriumvirate].NPCs = {
+    [127882] = true, -- Vixx the Collector
+}
