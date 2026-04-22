@@ -15,17 +15,16 @@ local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) --[[@as NPCSca
 --------------------------------------------------------------------------------
 ---- Constants
 --------------------------------------------------------------------------------
-local DataObject =
-    LibStub("AceEvent-3.0"):Embed(LibStub("LibDataBroker-1.1"):NewDataObject(AddOnFolderName, {
-        icon = [[Interface\LFGFRAME\BattlenetWorking0]],
-        label = OBJECTIVES_LABEL,
-        scannerData = {
-            NPCCount = 0,
-            NPCs = {},
-        },
-        text = NONE,
-        type = "data source",
-    }))
+local DataObject = LibStub("AceEvent-3.0"):Embed(LibStub("LibDataBroker-1.1"):NewDataObject(AddOnFolderName, {
+    icon = [[Interface\LFGFRAME\BattlenetWorking0]],
+    label = OBJECTIVES_LABEL,
+    scannerData = {
+        NPCCount = 0,
+        NPCs = {},
+    },
+    text = NONE,
+    type = "data source",
+}))
 
 local npcAchievementNames = {}
 local npcDisplayNames = {}
@@ -75,8 +74,7 @@ end
 --------------------------------------------------------------------------------
 ---- Tooltip Achievement Headers
 --------------------------------------------------------------------------------
-local achievementProvider, achievementPrototype, baseCellPrototype =
-    LibQTip:CreateCellProvider(LibQTip.LabelProvider)
+local achievementProvider, achievementPrototype, baseCellPrototype = LibQTip:CreateCellProvider(LibQTip.LabelProvider)
 
 function achievementPrototype:getContentHeight()
     return 16
@@ -103,8 +101,7 @@ function achievementPrototype:ReleaseCell()
 end
 
 function achievementPrototype:SetupCell(tooltip, value, justification, font, r, g, b)
-    local width, height =
-        baseCellPrototype.SetupCell(self, tooltip, value, justification, font, r, g, b)
+    local width, height = baseCellPrototype.SetupCell(self, tooltip, value, justification, font, r, g, b)
 
     self.r, self.g, self.b = 1, 0.82, 0
 
@@ -255,8 +252,7 @@ local function DisplayPetInfo(tooltipCell, petList)
     local numPets = C_PetJournal.GetNumPets()
 
     for index = 1, numPets do
-        local _, _, isCollected, _, _, _, _, petName, iconPath, _, npcID =
-            C_PetJournal.GetPetInfoByIndex(index)
+        local _, _, isCollected, _, _, _, _, petName, iconPath, _, npcID = C_PetJournal.GetPetInfoByIndex(index)
 
         if petName and entryFromID[npcID] then
             AddEntryToDataTooltip(iconPath, petName, isCollected)
@@ -323,12 +319,10 @@ local function GetTooltipData()
 
         -- The npcID may belong to a custom NPC, which will not have further information.
         if npc then
-            npcAchievementNames[npcID] = npc.achievementID
-                    and Data.Achievements[npc.achievementID].name
-                or nil
+            npcAchievementNames[npcID] = npc.achievementID and Data.Achievements[npc.achievementID].name or nil
             npcDisplayNames[npcID] = private.GetNPCOptionsName(npcID)
             npcIDs[#npcIDs + 1] = npcID
-            npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
+            npcNames[npcID] = private.GetNPCNameFromID(npcID)
 
             if not hasTameable and npc.isTameable then
                 hasTameable = true
@@ -397,17 +391,12 @@ local ICON_PET = FormatAtlasTexture("WildBattlePetCapturable")
 
 local ICON_TAMEABLE
 do
-    local textureFormat =
-        [[|TInterface\TargetingFrame\UI-CLASSES-CIRCLES:0:0:0:0:256:256:%d:%d:%d:%d|t]]
+    local textureFormat = [[|TInterface\TargetingFrame\UI-CLASSES-CIRCLES:0:0:0:0:256:256:%d:%d:%d:%d|t]]
     local textureSize = 256
     local left, right, top, bottom = unpack(CLASS_ICON_TCOORDS["HUNTER"])
 
-    ICON_TAMEABLE = textureFormat:format(
-        left * textureSize,
-        right * textureSize,
-        top * textureSize,
-        bottom * textureSize
-    )
+    ICON_TAMEABLE =
+        textureFormat:format(left * textureSize, right * textureSize, top * textureSize, bottom * textureSize)
 end
 
 local ICON_TOY = [[|TInterface\Worldmap\TreasureChest_64:0:0|t]]
@@ -477,18 +466,8 @@ local function DrawTooltip(displayFrame)
                     0,
                     achievementProvider
                 )
-                Tooltip:SetLineScript(
-                    achievementLine,
-                    "OnMouseUp",
-                    OpenToAchievement,
-                    npc.achievementID
-                )
-                Tooltip:SetLineScript(
-                    achievementLine,
-                    "OnEnter",
-                    ShowAchievementTooltip,
-                    npc.achievementID
-                )
+                Tooltip:SetLineScript(achievementLine, "OnMouseUp", OpenToAchievement, npc.achievementID)
+                Tooltip:SetLineScript(achievementLine, "OnEnter", ShowAchievementTooltip, npc.achievementID)
                 Tooltip:SetLineScript(achievementLine, "OnLeave", HideAchievementTooltip)
                 Tooltip:AddSeparator(1, 1, 0.82, 0)
             end
@@ -518,13 +497,7 @@ local function DrawTooltip(displayFrame)
 
         if worldQuestColumn and npc:HasActiveWorldQuest() then
             Tooltip:SetCell(line, worldQuestColumn, ICON_WORLDQUEST)
-            Tooltip:SetCellScript(
-                line,
-                worldQuestColumn,
-                "OnEnter",
-                DisplayText,
-                TRACKER_HEADER_WORLD_QUESTS
-            )
+            Tooltip:SetCellScript(line, worldQuestColumn, "OnEnter", DisplayText, TRACKER_HEADER_WORLD_QUESTS)
             Tooltip:SetCellScript(line, worldQuestColumn, "OnLeave", CleanupDataTooltip)
         end
 

@@ -94,7 +94,7 @@ local function ValidateUserDefinedNPCInput(input, operationType)
         if operationType == "add" then
             NPCScan:Printf(
                 L["%1$s (%2$d) is already on the user-defined NPC list."],
-                NPCScan:GetNPCNameFromID(npcID),
+                private.GetNPCNameFromID(npcID),
                 npcID
             )
             return false
@@ -103,7 +103,7 @@ local function ValidateUserDefinedNPCInput(input, operationType)
         if operationType == "remove" then
             NPCScan:Printf(
                 L["%1$s (%2$d) is not on the user-defined NPC list."],
-                NPCScan:GetNPCNameFromID(npcID),
+                private.GetNPCNameFromID(npcID),
                 npcID
             )
             return false
@@ -126,7 +126,7 @@ local function AddUserDefinedNPC(input)
     private.UpdateUserDefinedNPCOptions()
 
     NPCScan:UpdateScanList()
-    NPCScan:Printf(L["Added %1$s (%2$d) to the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
+    NPCScan:Printf(L["Added %1$s (%2$d) to the user-defined NPC list."], private.GetNPCNameFromID(npcID), npcID)
 end
 
 private.AddUserDefinedNPC = AddUserDefinedNPC
@@ -145,7 +145,7 @@ local function RemoveUserDefinedNPC(input)
 
     NPCScan:UpdateScanList()
     NPCScan:SendMessage(private.EventMessage.DismissTargetButtonByID, npcID)
-    NPCScan:Printf(L["Removed %1$s (%2$d) from the user-defined NPC list."], NPCScan:GetNPCNameFromID(npcID), npcID)
+    NPCScan:Printf(L["Removed %1$s (%2$d) from the user-defined NPC list."], private.GetNPCNameFromID(npcID), npcID)
 end
 
 private.RemoveUserDefinedNPC = RemoveUserDefinedNPC
@@ -182,7 +182,7 @@ local function GetNPCOptionsName(npcID)
         prefix = npc:IsQuestComplete() and ICON_QUEST_COMPLETE or ICON_QUEST_ACTIVE
     end
 
-    local npcName = NPCScan:GetNPCNameFromID(npcID)
+    local npcName = private.GetNPCNameFromID(npcID)
     local assetName = npc.achievementAssetName
     local label = ""
 
@@ -215,7 +215,7 @@ local function SetNPCDataFromList(savedNPCIDs)
     table.wipe(npcNames)
 
     for npcID in pairs(savedNPCIDs) do
-        npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
+        npcNames[npcID] = private.GetNPCNameFromID(npcID)
         npcIDs[#npcIDs + 1] = npcID
     end
 
@@ -300,7 +300,7 @@ local function UpdateAchievementNPCOptions()
 
         for npcID, npc in pairs(Data.Achievements[achievementID].criteriaNPCs) do
             if npc.factionGroup ~= UnitFactionGroup("player") then
-                npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
+                npcNames[npcID] = private.GetNPCNameFromID(npcID)
                 npcIDs[#npcIDs + 1] = npcID
             end
         end
@@ -378,7 +378,7 @@ local function UpdateRareNPCOptions()
                 (not npc.classification or RareClassifications[npc.classification])
                 and npc.factionGroup ~= UnitFactionGroup("player")
             then
-                npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
+                npcNames[npcID] = private.GetNPCNameFromID(npcID)
                 npcIDs[#npcIDs + 1] = npcID
             end
         end
@@ -472,7 +472,7 @@ local function UpdateTameableRareNPCOptions()
 
         for npcID, npc in pairs(private.Data.Maps[mapID].NPCs) do
             if npc.isTameable and npc.factionGroup ~= UnitFactionGroup("player") then
-                npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
+                npcNames[npcID] = private.GetNPCNameFromID(npcID)
                 npcIDs[#npcIDs + 1] = npcID
             end
         end
@@ -553,7 +553,7 @@ local function AddApplicableSearchID(npc)
     if npc.factionGroup ~= UnitFactionGroup("player") then
         local npcID = npc.npcID
 
-        npcNames[npcID] = NPCScan:GetNPCNameFromID(npcID)
+        npcNames[npcID] = private.GetNPCNameFromID(npcID)
         npcIDs[#npcIDs + 1] = npcID
     end
 end
@@ -656,7 +656,7 @@ local function PerformNPCSearch(searchString)
     end
 
     for _, npc in pairs(private.Data.NPCs) do
-        if NPCScan:GetNPCNameFromID(npc.npcID):lower():find(searchString) then
+        if private.GetNPCNameFromID(npc.npcID):lower():find(searchString) then
             AddApplicableSearchID(npc)
         end
     end
@@ -684,7 +684,7 @@ local function UpdateUserDefinedNPCOptions()
 
             UserDefinedNPCOptions["npc" .. index] = {
                 order = index,
-                name = ("%s: %d"):format(NPCScan:GetNPCNameFromID(npcID), npcID),
+                name = ("%s: %d"):format(private.GetNPCNameFromID(npcID), npcID),
                 descStyle = "inline",
                 type = "toggle",
                 width = "full",
@@ -723,7 +723,7 @@ function UpdateBlacklistedNPCOptions()
 
             BlacklistedNPCOptions["npc" .. npcID] = {
                 order = index,
-                name = ("%s: %d"):format(NPCScan:GetNPCNameFromID(npcID), npcID),
+                name = ("%s: %d"):format(private.GetNPCNameFromID(npcID), npcID),
                 descStyle = "inline",
                 type = "toggle",
                 width = "full",

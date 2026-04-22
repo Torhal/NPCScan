@@ -97,7 +97,7 @@ function private.DumpMapNPCs(continentID)
         for npcIndex = 1, #sortedNPCIDs[map.ID] do
             local npcID = sortedNPCIDs[map.ID][npcIndex]
 
-            output:AddLine(("    [%d] = true, -- %s"):format(npcID, NPCScan:GetNPCNameFromID(npcID)))
+            output:AddLine(("    [%d] = true, -- %s"):format(npcID, private.GetNPCNameFromID(npcID)))
         end
 
         output:AddLine("}\n")
@@ -178,7 +178,7 @@ function private.DumpNPCData(continentID)
                         startedEntry = true
                         output:AddLine(("NPCs[%d] = {"):format(npcID))
                         output:AddLine(("    %s"):format(sectionDelimiter))
-                        output:AddLine(("    ---- %s"):format(NPCScan:GetNPCNameFromID(npcID)))
+                        output:AddLine(("    ---- %s"):format(private.GetNPCNameFromID(npcID)))
                         output:AddLine(("    %s"):format(sectionDelimiter))
                     end
 
@@ -209,7 +209,7 @@ function private.DumpNPCData(continentID)
                                     for grandchildKey, grandchildValue in pairs(childValue) do
                                         if grandchildKey == "npcID" then
                                             grandchildValueName = (" -- %s"):format(
-                                                NPCScan:GetNPCNameFromID(grandchildValue)
+                                                private.GetNPCNameFromID(grandchildValue)
                                             )
                                         elseif grandchildKey == "itemID" then
                                             local itemName = C_Item.GetItemNameByID(grandchildValue)
@@ -242,7 +242,7 @@ function private.DumpNPCData(continentID)
                             fieldInfoOutput = tostring(fieldValue)
 
                             if IsQuestField[fieldName] then
-                                questName = (" -- %s"):format(NPCScan:GetQuestNameFromID(fieldValue))
+                                questName = (" -- %s"):format(private.GetQuestNameFromID(fieldValue))
                             end
                         else
                             fieldInfoOutput = tostring(fieldValue)
@@ -328,7 +328,7 @@ function private.DumpNPCQuests(continentID)
 
                     if not startedEntry then
                         startedEntry = true
-                        output:AddLine(("Quests[%d] = { -- %s"):format(npcID, NPCScan:GetQuestNameFromID(questID)))
+                        output:AddLine(("Quests[%d] = { -- %s"):format(npcID, private.GetQuestNameFromID(questID)))
                     end
 
                     local fieldInfoOutput
@@ -339,7 +339,7 @@ function private.DumpNPCQuests(continentID)
                     end
 
                     local fieldInfoComment = field == "questID"
-                            and (" -- %s"):format(NPCScan:GetQuestNameFromID(fieldInfo))
+                            and (" -- %s"):format(private.GetQuestNameFromID(fieldInfo))
                         or ""
                     output:AddLine(("    %s = %s,%s"):format(field, fieldInfoOutput, fieldInfoComment))
                 end
@@ -414,7 +414,7 @@ function private.DumpQuestData(continentID)
 
                     if not startedEntry then
                         startedEntry = true
-                        output:AddLine(("Quests[%d] = { -- %s"):format(questID, NPCScan:GetQuestNameFromID(questID)))
+                        output:AddLine(("Quests[%d] = { -- %s"):format(questID, private.GetQuestNameFromID(questID)))
                     end
 
                     local fieldInfoOutput
@@ -425,7 +425,7 @@ function private.DumpQuestData(continentID)
                     end
 
                     local fieldInfoComment = field == "questID"
-                            and (" -- %s"):format(NPCScan:GetQuestNameFromID(fieldInfo))
+                            and (" -- %s"):format(private.GetQuestNameFromID(fieldInfo))
                         or ""
                     output:AddLine(("    %s = %s,%s"):format(field, fieldInfoOutput, fieldInfoComment))
                 end

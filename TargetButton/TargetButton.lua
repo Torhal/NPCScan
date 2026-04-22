@@ -106,7 +106,7 @@ local function DismissButton_OnClick(self, mouseButton)
 
         if isBlacklisted then
             NPCScan:SendMessage(EventMessage.DismissTargetButtonByID, parent.npcID)
-            NPCScan:Printf(ERR_IGNORE_ADDED_S, NPCScan:GetNPCNameFromID(parent.npcID))
+            NPCScan:Printf(ERR_IGNORE_ADDED_S, private.GetNPCNameFromID(parent.npcID))
         end
     end
 
@@ -518,7 +518,7 @@ do
             table.wipe(macroLines)
 
             for npcID in pairs(scannerData.NPCs) do
-                table.insert(macroLines, ("/cleartarget\n/targetexact %s"):format(NPCScan:GetNPCNameFromID(npcID)))
+                table.insert(macroLines, ("/cleartarget\n/targetexact %s"):format(private.GetNPCNameFromID(npcID)))
             end
 
             if #macroLines == 0 then

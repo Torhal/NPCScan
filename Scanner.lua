@@ -38,7 +38,7 @@ do
 
         throttledNPCs[npcID] = now
 
-        detectionData.npcName = detectionData.npcName or NPCScan:GetNPCNameFromID(npcID)
+        detectionData.npcName = detectionData.npcName or private.GetNPCNameFromID(npcID)
         detectionData.unitClassification = detectionData.unitClassification or "rare"
 
         NPCScan:Pour(
@@ -93,7 +93,7 @@ local function CanAddToScanList(npcID)
     local profile = private.db.profile
 
     if profile.blacklist.npcIDs[npcID] then
-        private.Debug("Skipping %s (%d) - blacklisted.", NPCScan:GetNPCNameFromID(npcID), npcID)
+        private.Debug("Skipping %s (%d) - blacklisted.", private.GetNPCNameFromID(npcID), npcID)
         return false
     end
 

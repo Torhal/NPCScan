@@ -98,7 +98,7 @@ local function AssignNPCToQuest(npc, questFieldName)
 
     questNPCs[npc.npcID] = npc
 
-    local questName = NPCScan:GetQuestNameFromID(questID)
+    local questName = private.GetQuestNameFromID(questID)
 
     if questName and questName ~= UNKNOWN then
         private.QuestIDFromName[questName] = questID
@@ -126,7 +126,7 @@ local function InitializeNPC(npcID)
     npc.npcID = npcID
 
     -- Sets value for NPCIDFromName.
-    NPCScan:GetNPCNameFromID(npcID)
+    private.GetNPCNameFromID(npcID)
 
     AssignNPCToQuest(npc, "questID")
     AssignNPCToQuest(npc, "achievementQuestID")

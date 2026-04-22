@@ -54,16 +54,6 @@ do
 end
 
 --------------------------------------------------------------------------------
----- Variables
---------------------------------------------------------------------------------
-
-local NPCIDFromName = {} ---@type table<string, integer>
-private.NPCIDFromName = NPCIDFromName
-
-local QuestIDFromName = {} ---@type table<string, integer>
-private.QuestIDFromName = QuestIDFromName
-
---------------------------------------------------------------------------------
 ---- AddOn Methods
 --------------------------------------------------------------------------------
 
@@ -220,13 +210,13 @@ function NPCScan:OnEnable()
                 private.Debug("--------------------------------------------------------------------------------")
             end
 
-            private.Debug("NPC %d (%s) is missing: %s.", npcID, self:GetNPCNameFromID(npcID), missingText)
+            private.Debug("NPC %d (%s) is missing: %s.", npcID, private.GetNPCNameFromID(npcID), missingText)
         end
     end
 
     -- Handle custom additions.
     for npcID, npcName in pairs(private.db.locale.npcNames) do
-        NPCIDFromName[npcName] = npcID
+        private.NPCIDFromName[npcName] = npcID
     end
 
     self:SetupOptions()
@@ -249,65 +239,6 @@ function NPCScan:OnEnable()
 end
 
 function NPCScan:RefreshPreferences() end
-
-do
-    local DatamineTooltip = CreateFrame("GameTooltip", "NPCScanDatamineTooltip", UIParent, "GameTooltipTemplate")
-    DatamineTooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
-
-    ---@param npcID integer
-    function NPCScan:GetNPCNameFromID(npcID)
-        local npcName = private.db.locale.npcNames[npcID]
-
-        if not npcName then
-            DatamineTooltip:SetHyperlink(("unit:Creature-0-0-0-0-%d"):format(npcID))
-
-            npcName = _G["NPCScanDatamineTooltipTextLeft1"]:GetText()
-
-            if npcName and npcName ~= "" then
-                private.db.locale.npcNames[npcID] = npcName
-                NPCIDFromName[npcName] = npcID
-            else
-                npcName = UNKNOWN
-            end
-        end
-
-        return npcName
-    end
-
-    ---@param questID integer
-    function NPCScan:GetQuestNameFromID(questID)
-        local questName = private.db.locale.questNames[questID]
-
-        if questName then
-            return questName
-        end
-
-        questName = C_QuestLog.GetTitleForQuestID(questID)
-
-        if not questName then
-            C_QuestLog.RequestLoadQuestByID(questID)
-
-            return UNKNOWN
-        end
-
-        if questName ~= "" then
-            private.db.locale.questNames[questID] = questName
-            private.QuestIDFromName[questName] = questID
-        end
-
-        return questName
-    end
-end
-
----@param questID integer
----@param isSuccessful boolean
-function NPCScan:QUEST_DATA_LOAD_RESULT(_, questID, isSuccessful)
-    if isSuccessful then
-        print(("Quest %d has data!"):format(questID))
-
-        self:GetQuestNameFromID(questID)
-    end
-end
 
 do
     local SUBCOMMAND_FUNCTIONS
