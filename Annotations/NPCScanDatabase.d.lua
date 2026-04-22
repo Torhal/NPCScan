@@ -67,6 +67,7 @@
 ---@field itemNames table<integer, string>
 ---@field npcNames table<integer, string>
 ---@field questNames table<integer, string>
+---@field spellNames table<integer, string>
 
 ---@class NPCScanDatabase: AceDBObject-3.0
 ---@field locale NPCScanDatabase.Locale

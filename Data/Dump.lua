@@ -219,7 +219,7 @@ function private.DumpNPCData(continentID)
                                             end
                                         elseif grandchildKey == "spellID" then
                                             grandchildValueName = (" -- %s"):format(
-                                                C_Spell.GetSpellInfo(grandchildValue).name
+                                                private.GetSpellNameFromID(grandchildValue)
                                             )
                                         end
 

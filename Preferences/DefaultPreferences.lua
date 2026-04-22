@@ -15,6 +15,7 @@ local DefaultPreferences = {
         itemNames = {},
         npcNames = {},
         questNames = {},
+        spellNames = {},
     },
     ---@type NPCScanDatabase.Profile
     profile = {

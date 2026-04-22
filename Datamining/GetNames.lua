@@ -23,6 +23,10 @@ local QuestIDFromName = {} ---@type table<string, integer>
 
 private.QuestIDFromName = QuestIDFromName
 
+local SpellIDFromName = {} ---@type table<string, integer>
+
+private.SpellIDFromName = SpellIDFromName
+
 local DatamineTooltip = CreateFrame("GameTooltip", "NPCScanDatamineTooltip", UIParent, "GameTooltipTemplate")
 DatamineTooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
 
@@ -101,6 +105,30 @@ function GetQuestNameFromID(questID)
 end
 
 private.GetQuestNameFromID = GetQuestNameFromID
+
+---@param spellID integer
+function GetSpellNameFromID(spellID)
+    local spellName = private.db.locale.spellNames[spellID]
+
+    if spellName then
+        return spellName
+    end
+
+    spellName = C_Spell.GetSpellInfo(spellID).name
+
+    if not spellName then
+        return UNKNOWN
+    end
+
+    if spellName ~= "" then
+        private.db.locale.spellNames[spellID] = spellName
+        SpellIDFromName[spellName] = spellID
+    end
+
+    return spellName
+end
+
+private.GetSpellNameFromID = GetSpellNameFromID
 
 --------------------------------------------------------------------------------
 ------- Event Handlers
