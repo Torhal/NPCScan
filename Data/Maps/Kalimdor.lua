@@ -370,6 +370,7 @@ Maps[MapID.Silithus].NPCs = {
     [132580] = true, -- Ssinkrix
     [132584] = true, -- Xaarshej
     [132591] = true, -- Ogmot the Mad
+    [137906] = true, -- Infused Bedrock
 }
 
 --------------------------------------------------------------------------------
@@ -554,6 +555,7 @@ Maps[MapID.UldumBFA].NPCs = {
     [160532] = true, -- Shoth the Darkened
     [160623] = true, -- Hungering Miasma
     [160631] = true, -- Hungering Miasma
+    [160970] = true, -- Vuk'laz the Earthbreaker
     [161033] = true, -- Shadowmaw
     [162140] = true, -- Skikx'traz
     [162141] = true, -- Zuythiz
