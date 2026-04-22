@@ -57,10 +57,10 @@ end
 ---- Variables
 --------------------------------------------------------------------------------
 
-local NPCIDFromName = {}
+local NPCIDFromName = {} ---@type table<string, integer>
 private.NPCIDFromName = NPCIDFromName
 
-local QuestIDFromName = {}
+local QuestIDFromName = {} ---@type table<string, integer>
 private.QuestIDFromName = QuestIDFromName
 
 --------------------------------------------------------------------------------
