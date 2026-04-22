@@ -294,6 +294,8 @@ do
             private.db.locale.questNames[questID] = questName
             private.QuestIDFromName[questName] = questID
         end
+
+        return questName
     end
 end
 
