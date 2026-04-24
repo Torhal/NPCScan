@@ -117,6 +117,7 @@ Maps[MapID.Korthia].NPCs = {
     [180042] = true, -- Fleshwing
     [180160] = true, -- Reliwik the Defiant
     [180162] = true, -- Ve'rayn
+    [180246] = true, -- Carriage Crusher
 }
 
 --------------------------------------------------------------------------------
