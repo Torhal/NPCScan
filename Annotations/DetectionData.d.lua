@@ -10,7 +10,7 @@
 ---@field npcID integer
 ---@field npcName string?
 ---@field sourceText string
----@field unitClassification NPCClassification
+---@field unitClassification NPCClassification | UnitClassification
 ---@field unitCreatureType string?
 ---@field unitLevel integer?
 ---@field unitToken UnitToken?
