@@ -5,9 +5,9 @@
 --------------------------------------------------------------------------------
 
 ---@class NPCScanDatabase.Profile.UserDefined
----@field continentNPCs table<integer, table<integer, NPCData>>
----@field mapNPCs table<integer, table<integer, NPCData>>
----@field npcIDs table<integer, boolean?>
+---@field continentNPCs table<ContinentID, table<NPCID, NPCData>>
+---@field mapNPCs table<MapID, table<NPCID, NPCData>>
+---@field npcIDs table<NPCID, boolean?>
 
 ---@class NPCScanDatabase.Profile.TargetButtonGroup
 ---@field durationSeconds integer
@@ -19,8 +19,8 @@
 ---@field y integer
 
 ---@class NPCScanDatabase.Profile.Detection
----@field achievementIDs table
----@field continentIDs table
+---@field achievementIDs table<AchievementID, DetectionGroupStatusValue>
+---@field continentIDs table<ContinentID, DetectionGroupStatusValue>
 ---@field ignoreCompletedAchievementCriteria boolean
 ---@field ignoreCompletedQuestObjectives boolean
 ---@field ignoreDeadNPCs boolean
@@ -34,8 +34,8 @@
 ---@field whileOnTaxi boolean
 
 ---@class NPCScanDatabase.Profile.Blacklist
----@field mapIDs table<integer, boolean>
----@field npcIDs table<integer, boolean>
+---@field mapIDs table<MapID, boolean>
+---@field npcIDs table<NPCID, boolean>
 
 ---@class NPCScanDatabase.Profile.Alert.Sound
 ---@field channel string
@@ -64,10 +64,10 @@
 ---@field userDefined NPCScanDatabase.Profile.UserDefined
 
 ---@class NPCScanDatabase.Locale
----@field itemNames table<integer, string>
----@field npcNames table<integer, string>
----@field questNames table<integer, string>
----@field spellNames table<integer, string>
+---@field itemNames table<ItemID, string>
+---@field npcNames table<NPCID, string>
+---@field questNames table<QuestID, string>
+---@field spellNames table<SpellID, string>
 
 ---@class NPCScanDatabase: AceDBObject-3.0
 ---@field locale NPCScanDatabase.Locale
