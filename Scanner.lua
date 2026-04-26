@@ -58,6 +58,8 @@ do
     end
 end
 
+---@param unitToken UnitToken
+---@param sourceText string
 local function ProcessUnit(unitToken, sourceText)
     if UnitIsUnit("player", unitToken) then
         return
@@ -72,6 +74,7 @@ local function ProcessUnit(unitToken, sourceText)
             return
         end
 
+        ---@type DetectionData
         local detectionData = {
             isDead = unitIsDead,
             npcID = npcID,
@@ -89,6 +92,7 @@ local function ProcessUnit(unitToken, sourceText)
     end
 end
 
+---@param npcID NPCID
 local function CanAddToScanList(npcID)
     local profile = private.db.profile
 
@@ -151,6 +155,7 @@ local function CanAddToScanList(npcID)
     return true
 end
 
+---@param npcList table<NPCID, NPCData | boolean?>
 local function MergeUserDefinedWithScanList(npcList)
     if npcList and private.db.profile.detection.userDefined then
         for npcID in pairs(npcList) do
@@ -159,7 +164,9 @@ local function MergeUserDefinedWithScanList(npcList)
     end
 end
 
-function NPCScan:UpdateScanList(_, mapID)
+---@param eventName? string
+---@param mapID? MapID
+function NPCScan:UpdateScanList(eventName, mapID)
     local scannerData = Data.Scanner
     mapID = mapID or HereBeDragons:GetPlayerZone()
 
@@ -265,6 +272,7 @@ end
 
 private.UpdateScanListQuestObjectives = UpdateScanListQuestObjectives
 
+---@param achievementID AchievementID
 function NPCScan:ACHIEVEMENT_EARNED(_, achievementID)
     if Data.Achievements[achievementID] then
         Data.Achievements[achievementID].isCompleted = true
@@ -287,6 +295,7 @@ function NPCScan:LOOT_CLOSED()
     UpdateScanListQuestObjectives()
 end
 
+---@param unitToken UnitToken
 function NPCScan:NAME_PLATE_UNIT_ADDED(_, unitToken)
     ProcessUnit(unitToken, UNIT_NAMEPLATES)
 end
@@ -318,10 +327,12 @@ do
         VignetteLootElite = true,
     }
 
+    ---@param sourceText string
     local function IsIgnoringSource(sourceText)
         return private.db.profile.detection[VignetteSourceToPreference[sourceText]]
     end
 
+    ---@param vignetteGUID WOWGUID
     local function ProcessVignetteGUID(vignetteGUID)
         if not vignetteGUID then
             return
@@ -416,6 +427,7 @@ do
         end
     end
 
+    ---@param vignetteGUID WOWGUID
     function NPCScan:VIGNETTE_MINIMAP_UPDATED(_, vignetteGUID)
         ProcessVignetteGUID(vignetteGUID)
     end
@@ -470,6 +482,8 @@ do
     local ALERT_SOUND_THROTTLE_INTERVAL_SECONDS = 2
     local lastSoundTime = time()
 
+    ---@param texturePath string
+    ---@param color ColorMixin
     function NPCScan:PlayFlashAnimation(texturePath, color)
         flashTexture:SetTexture(LibSharedMedia:Fetch("background", texturePath))
         flashTexture:SetVertexColor(color.r, color.g, color.b, color.a)
