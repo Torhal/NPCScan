@@ -5,31 +5,31 @@
 --------------------------------------------------------------------------------
 
 ---@class MountData
----@field itemID integer
----@field spellID integer
+---@field itemID ItemID
+---@field spellID SpellID
 
 ---@class PetData
----@field itemID integer
----@field npcID integer
+---@field itemID ItemID
+---@field npcID NPCID
 
 ---@class ToyData
----@field itemID integer
+---@field itemID ItemID
 
 ---@class NPCData
 ---@field achievementAssetName? string
----@field achievementCriteriaID? integer
----@field achievementID? integer
----@field achievementQuestID? integer
+---@field achievementCriteriaID? AchievementCriteriaID
+---@field achievementID? AchievementID
+---@field achievementQuestID? QuestID
 ---@field classification? UnitClassification
 ---@field factionGroup? "Alliance" | "Horde"
 ---@field isCriteriaCompleted? boolean
 ---@field isTameable? boolean
----@field mapIDs? integer[]
+---@field mapIDs? MapID[]
 ---@field mounts? MountData[]
----@field npcID integer
+---@field npcID NPCID
 ---@field pets? PetData[]
----@field questID? integer
+---@field questID? QuestID
 ---@field toys? ToyData[]
----@field vignetteID? integer
+---@field vignetteID? VignetteID
 ---@field vignetteName? string
----@field worldQuestID? integer
+---@field worldQuestID? QuestID
