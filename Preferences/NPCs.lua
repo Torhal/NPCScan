@@ -33,6 +33,57 @@ local npcNames = {} ---@type table<integer, string>
 
 local UpdateBlacklistedNPCOptions
 
+---@class CreateDungeonAndZoneOptionsParameters
+---@field detectionFieldName string
+---@field dungeonOptions AceConfig.OptionsTable
+---@field name string
+---@field order integer
+---@field zoneOptions AceConfig.OptionsTable
+
+---@param parameters CreateDungeonAndZoneOptionsParameters
+---@return AceConfig.OptionsTable
+local function CreateDungeonAndZoneOptions(parameters)
+    return {
+        order = parameters.order,
+        name = parameters.name,
+        type = "group",
+        childGroups = "tab",
+        args = {
+            ---@type AceConfig.OptionsTable
+            isEnabled = {
+                order = 1,
+                type = "toggle",
+                name = ENABLE,
+                descStyle = "inline",
+                get = function()
+                    return private.db.profile.detection[parameters.detectionFieldName]
+                end,
+                set = function(_, value)
+                    private.db.profile.detection[parameters.detectionFieldName] = value
+
+                    NPCScan:UpdateScanList()
+                end,
+            },
+            ---@type AceConfig.OptionsTable
+            zoneNPCOptions = {
+                order = 2,
+                name = ZONE,
+                descStyle = "inline",
+                type = "group",
+                args = parameters.zoneOptions,
+            },
+            ---@type AceConfig.OptionsTable
+            dungeonNPCOptions = {
+                order = 3,
+                name = DUNGEONS,
+                descStyle = "inline",
+                type = "group",
+                args = parameters.dungeonOptions,
+            },
+        },
+    }
+end
+
 local GetMapIDsAlphabetizedByName
 do
     local mapIDs
@@ -776,86 +827,23 @@ local function GetOrUpdateNPCOptions()
                     childGroups = "tree",
                     args = AchievementNPCOptions,
                 },
-                ---@type AceConfig.OptionsTable
-                rare = {
+
+                rare = CreateDungeonAndZoneOptions({
+                    detectionFieldName = "rares",
+                    dungeonOptions = DungeonRareNPCOptions,
+                    name = MAP_LEGEND_RARE,
                     order = 2,
-                    name = BATTLE_PET_BREED_QUALITY4,
-                    type = "group",
-                    childGroups = "tab",
-                    args = {
-                        ---@type AceConfig.OptionsTable
-                        isEnabled = {
-                            order = 1,
-                            type = "toggle",
-                            name = ENABLE,
-                            descStyle = "inline",
-                            get = function()
-                                return profile.detection.rares
-                            end,
-                            set = function(_, value)
-                                profile.detection.rares = value
+                    zoneOptions = ZoneRareNPCOptions,
+                }),
 
-                                NPCScan:UpdateScanList()
-                            end,
-                        },
-                        ---@type AceConfig.OptionsTable
-                        zoneNPCOptions = {
-                            order = 2,
-                            name = ZONE,
-                            descStyle = "inline",
-                            type = "group",
-                            args = ZoneRareNPCOptions,
-                        },
-                        ---@type AceConfig.OptionsTable
-                        dungeonNPCOptions = {
-                            order = 3,
-                            name = DUNGEONS,
-                            descStyle = "inline",
-                            type = "group",
-                            args = DungeonRareNPCOptions,
-                        },
-                    },
-                },
-                ---@type AceConfig.OptionsTable
-                tameableRare = {
-                    order = 3,
+                tameableRare = CreateDungeonAndZoneOptions({
+                    detectionFieldName = "tameables",
+                    dungeonOptions = DungeonTameableRareNPCOptions,
                     name = TAMEABLE,
-                    type = "group",
-                    childGroups = "tab",
-                    args = {
-                        ---@type AceConfig.OptionsTable
-                        isEnabled = {
-                            order = 1,
-                            type = "toggle",
-                            name = ENABLE,
-                            descStyle = "inline",
-                            get = function()
-                                return profile.detection.tameables
-                            end,
-                            set = function(_, value)
-                                profile.detection.tameables = value
+                    order = 3,
+                    zoneOptions = ZoneTameableRareNPCOptions,
+                }),
 
-                                NPCScan:UpdateScanList()
-                            end,
-                        },
-                        ---@type AceConfig.OptionsTable
-                        zoneNPCOptions = {
-                            order = 2,
-                            name = ZONE,
-                            descStyle = "inline",
-                            type = "group",
-                            args = ZoneTameableRareNPCOptions,
-                        },
-                        ---@type AceConfig.OptionsTable
-                        dungeonNPCOptions = {
-                            order = 3,
-                            name = DUNGEONS,
-                            descStyle = "inline",
-                            type = "group",
-                            args = DungeonTameableRareNPCOptions,
-                        },
-                    },
-                },
                 ---@type AceConfig.OptionsTable
                 search = {
                     order = 4,
