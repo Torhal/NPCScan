@@ -13,6 +13,7 @@ local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCS
 ---- Constants
 --------------------------------------------------------------------------------
 
+---@type AceConfig.OptionsTable
 local EmptyListOption = {
     order = 1,
     name = EMPTY,
