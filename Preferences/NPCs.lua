@@ -279,7 +279,9 @@ end
 --------------------------------------------------------------------------------
 
 local AchievementIDs -- Populated below.
-local AchievementNPCOptions = {} ---@class AceConfig.OptionsTable
+
+---@diagnostic disable-next-line: missing-fields
+local AchievementNPCOptions = {} ---@type AceConfig.OptionsTable
 
 local function UpdateAchievementNPCOptions()
     local Data = private.Data
@@ -404,8 +406,11 @@ private.UpdateAchievementNPCOptions = UpdateAchievementNPCOptions
 ---- Rare Options
 --------------------------------------------------------------------------------
 
-local DungeonRareNPCOptions = {} ---@class AceConfig.OptionsTable
-local ZoneRareNPCOptions = {} ---@class AceConfig.OptionsTable
+---@diagnostic disable-next-line: missing-fields
+local DungeonRareNPCOptions = {} ---@type AceConfig.OptionsTable
+
+---@diagnostic disable-next-line: missing-fields
+local ZoneRareNPCOptions = {} ---@type AceConfig.OptionsTable
 
 local RareClassifications = {
     rare = true,
@@ -506,8 +511,11 @@ private.UpdateRareNPCOptions = UpdateRareNPCOptions
 ---- Tameable Rare Options
 --------------------------------------------------------------------------------
 
-local DungeonTameableRareNPCOptions = {}
-local ZoneTameableRareNPCOptions = {}
+---@diagnostic disable-next-line: missing-fields
+local DungeonTameableRareNPCOptions = {} ---@type AceConfig.OptionsTable
+
+---@diagnostic disable-next-line: missing-fields
+local ZoneTameableRareNPCOptions = {} ---@type AceConfig.OptionsTable
 
 local function UpdateTameableRareNPCOptions()
     table.wipe(DungeonTameableRareNPCOptions)
@@ -532,6 +540,7 @@ local function UpdateTameableRareNPCOptions()
         if #npcIDs > 0 then
             table.sort(npcIDs, SortByNPCNameThenByID)
 
+            ---@type AceConfig.OptionsTable
             local mapOptionsTable = {
                 order = mapIDIndex,
                 name = private.GetMapOptionName(mapID),
@@ -599,7 +608,8 @@ private.UpdateTameableRareNPCOptions = UpdateTameableRareNPCOptions
 ---- Search Options
 --------------------------------------------------------------------------------
 
-local NPCSearchOptions = {}
+---@diagnostic disable-next-line: missing-fields
+local NPCSearchOptions = {} ---@type AceConfig.OptionsTable
 
 local function AddApplicableSearchID(npc)
     if npc.factionGroup ~= UnitFactionGroup("player") then
@@ -627,6 +637,7 @@ local function UpdateNPCSearchOptions()
                 achievementText = PARENS_TEMPLATE:format(private.Data.Achievements[npc.achievementID].name)
             end
 
+            ---@type AceConfig.OptionsTable
             NPCSearchOptions["npc" .. npcID] = {
                 order = npcIDIndex,
                 name = GetNPCOptionsName(npcID),
@@ -722,7 +733,8 @@ private.PerformNPCSearch = PerformNPCSearch
 ---- User-Defined NPC Options
 --------------------------------------------------------------------------------
 
-local UserDefinedNPCOptions = {}
+---@diagnostic disable-next-line: missing-fields
+local UserDefinedNPCOptions = {} ---@type AceConfig.OptionsTable
 
 local function UpdateUserDefinedNPCOptions()
     table.wipe(UserDefinedNPCOptions)
@@ -734,6 +746,7 @@ local function UpdateUserDefinedNPCOptions()
         for index = 1, #npcIDs do
             local npcID = npcIDs[index]
 
+            ---@type AceConfig.OptionsTable
             UserDefinedNPCOptions["npc" .. index] = {
                 order = index,
                 name = ("%s: %d"):format(private.GetNPCNameFromID(npcID), npcID),
@@ -761,7 +774,8 @@ private.UpdateUserDefinedNPCOptions = UpdateUserDefinedNPCOptions
 ---- Blacklisted NPC Options
 --------------------------------------------------------------------------------
 
-local BlacklistedNPCOptions = {}
+---@diagnostic disable-next-line: missing-fields
+local BlacklistedNPCOptions = {} ---@type AceConfig.OptionsTable
 
 function UpdateBlacklistedNPCOptions()
     table.wipe(BlacklistedNPCOptions)
@@ -773,6 +787,7 @@ function UpdateBlacklistedNPCOptions()
         for index = 1, #npcIDs do
             local npcID = npcIDs[index]
 
+            ---@type AceConfig.OptionsTable
             BlacklistedNPCOptions["npc" .. npcID] = {
                 order = index,
                 name = ("%s: %d"):format(private.GetNPCNameFromID(npcID), npcID),
