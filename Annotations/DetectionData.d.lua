@@ -7,7 +7,7 @@
 ---@class DetectionData
 ---@field isDead boolean?
 ---@field isFromQueue? boolean
----@field npcID integer
+---@field npcID NPCID
 ---@field npcName string?
 ---@field sourceText string
 ---@field unitClassification NPCClassification | UnitClassification
