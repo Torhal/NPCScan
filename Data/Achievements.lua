@@ -156,6 +156,12 @@ local function AssignAchievementDataToNPC(
 end
 
 ---@param npcDataField AchievementCriteriaTypeField
+---@param achievement AchievementData
+---@param achievementLabel string
+---@param achievementAssetID integer
+---@param achievementAssetName string
+---@param achievementCriteriaID AchievementCriteriaID
+---@param isCriteriaCompleted boolean
 local function TryAssignNPCToAchievement(
     npcDataField,
     achievement,
