@@ -24,6 +24,9 @@ local addTableMeta = {
 }
 
 private.Data = {
+    ---@type table<AchievementID, AchievementData>
+    Achievements = {},
+
     Continents = {},
 
     ---@type table<integer, MapData>
