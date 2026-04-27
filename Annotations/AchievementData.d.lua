@@ -6,7 +6,7 @@
 
 ---@class AchievementData
 ---@field ID AchievementID
----@field criteriaNPCs table --- TODO: FIX
+---@field criteriaNPCs table<NPCID, NPCData>
 ---@field description string
 ---@field iconTexturePath string | integer
 ---@field isCompleted boolean
