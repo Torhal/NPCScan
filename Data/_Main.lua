@@ -29,10 +29,10 @@ private.Data = {
 
     Continents = {},
 
-    ---@type table<integer, MapData>
+    ---@type table<MapID, MapData>
     Maps = setmetatable({}, addTableMeta),
 
-    ---@type table<integer, NPCData>
+    ---@type table<NPCID, NPCData>
     NPCs = {},
 
     ---@type ScannerData
