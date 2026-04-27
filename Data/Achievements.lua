@@ -204,6 +204,7 @@ local function InitializeAchievements()
     for achievementLabel, achievementID in pairs(AchievementID) do
         local _, name, _, isCompleted, _, _, _, description, _, iconTexturePath = GetAchievementInfo(achievementID)
 
+        ---@type AchievementData
         local achievement = {
             ID = achievementID,
             criteriaNPCs = {},
