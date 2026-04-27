@@ -11,19 +11,19 @@ local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCS
 ------- Constants
 --------------------------------------------------------------------------------
 
-local ItemIDFromName = {} ---@type table<string, integer>
+local ItemIDFromName = {} ---@type table<string, ItemID>
 
 private.ItemIDFromName = ItemIDFromName
 
-local NPCIDFromName = {} ---@type table<string, integer>
+local NPCIDFromName = {} ---@type table<string, NPCID>
 
 private.NPCIDFromName = NPCIDFromName
 
-local QuestIDFromName = {} ---@type table<string, integer>
+local QuestIDFromName = {} ---@type table<string, QuestID>
 
 private.QuestIDFromName = QuestIDFromName
 
-local SpellIDFromName = {} ---@type table<string, integer>
+local SpellIDFromName = {} ---@type table<string, SpellID>
 
 private.SpellIDFromName = SpellIDFromName
 
