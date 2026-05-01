@@ -433,6 +433,7 @@ NPCs[137825] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 137825,
+    questID = 37410, -- Vignette: Avalanche
     vignetteID = 2961,
     worldQuestID = 51542, -- Avalanche
 }
@@ -554,6 +555,7 @@ NPCs[140252] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     npcID = 140252,
+    questID = 52999, -- Unknown
     worldQuestID = 52157, -- A Chilling Encounter
 }
 
@@ -693,6 +695,7 @@ NPCs[149847] = {
     ---- Crazed Trogg
     --------------------------------------------------------------------------------
     npcID = 149847,
+    questID = 55812, -- Unknown
 }
 
 NPCs[150342] = {
@@ -708,6 +711,8 @@ NPCs[150394] = {
     ---- Armored Vaultbot
     --------------------------------------------------------------------------------
     npcID = 150394,
+    questID = 55546, -- Unknown
+    vignetteID = 3586,
 }
 
 NPCs[150575] = {
@@ -1423,6 +1428,7 @@ NPCs[140163] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     npcID = 140163,
+    questID = 52995, -- Unknown
     worldQuestID = 52166, -- The Faceless Herald
 }
 
@@ -1728,6 +1734,7 @@ NPCs[155069] = {
     ---- Honeyback Harvester
     --------------------------------------------------------------------------------
     npcID = 155069,
+    questID = 56414, -- Unknown
 }
 
 NPCs[155171] = {
@@ -1803,6 +1810,7 @@ NPCs[130508] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 130508,
+    questID = 49999, -- Unknown
     worldQuestID = 51665, -- Broodmother Razora
 }
 
@@ -1913,6 +1921,7 @@ NPCs[132088] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 132088,
+    questID = 50097, -- Unknown
     vignetteID = 2542,
     worldQuestID = 51848, -- Captain Wintersail
 }
@@ -2033,6 +2042,7 @@ NPCs[138279] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     npcID = 138279,
+    questID = 54953, -- Unknown
     vignetteID = 3528,
     worldQuestID = 51610, -- Adhara White
 }
