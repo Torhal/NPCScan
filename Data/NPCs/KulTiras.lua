@@ -230,6 +230,7 @@ NPCs[129805] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 49481, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 129805,
     vignetteID = 2420,
     worldQuestID = 51917, -- Beshol
@@ -241,6 +242,7 @@ NPCs[129835] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 49480, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 129835,
     vignetteID = 2419,
     worldQuestID = 51507, -- Gorehorn
@@ -1087,6 +1089,7 @@ NPCs[155583] = {
     ---- Scrapclaw
     --------------------------------------------------------------------------------
     achievementQuestID = 56737, -- Unknown
+    isTameable = true,
     npcID = 155583,
 }
 
@@ -1290,6 +1293,7 @@ NPCs[138963] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 51762, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 138963,
     vignetteID = 2981,
 }
@@ -1819,6 +1823,7 @@ NPCs[131262] = {
     ---- Pack Leader Asenya
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 131262,
     questID = 49923, -- Unknown
     vignetteID = 2492,
@@ -1874,6 +1879,7 @@ NPCs[132068] = {
     ---- Bashmu
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 132068,
     questID = 50094, -- Unknown
     vignetteID = 2539,
@@ -1966,6 +1972,7 @@ NPCs[133356] = {
     --------------------------------------------------------------------------------
     ---- Tempestria
     --------------------------------------------------------------------------------
+    isTameable = true,
     npcID = 133356,
     questID = 50301, -- Unknown
     vignetteID = 2591,
@@ -1994,6 +2001,7 @@ NPCs[137183] = {
     ---- Honey-Coated Slitherer
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 137183,
     questID = 51321, -- Unknown
     vignetteID = 2942,
@@ -2102,6 +2110,7 @@ NPCs[139235] = {
     --------------------------------------------------------------------------------
     ---- Tort Jaw
     --------------------------------------------------------------------------------
+    isTameable = true,
     npcID = 139235,
     questID = 51835, -- Unknown
     vignetteID = 2987,
