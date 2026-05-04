@@ -35,7 +35,7 @@ DatamineTooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
 --------------------------------------------------------------------------------
 
 ---@param itemID integer
-function GetItemNameFromID(itemID)
+local function GetItemNameFromID(itemID)
     local itemName = private.db.locale.itemNames[itemID]
 
     if itemName then
@@ -59,7 +59,7 @@ end
 private.GetItemNameFromID = GetItemNameFromID
 
 ---@param npcID integer
-function GetNPCNameFromID(npcID)
+local function GetNPCNameFromID(npcID)
     local npcName = private.db.locale.npcNames[npcID]
 
     if not npcName then
@@ -81,7 +81,7 @@ end
 private.GetNPCNameFromID = GetNPCNameFromID
 
 ---@param questID integer
-function GetQuestNameFromID(questID)
+local function GetQuestNameFromID(questID)
     local questName = private.db.locale.questNames[questID]
 
     if questName then
@@ -107,7 +107,7 @@ end
 private.GetQuestNameFromID = GetQuestNameFromID
 
 ---@param spellID integer
-function GetSpellNameFromID(spellID)
+local function GetSpellNameFromID(spellID)
     local spellName = private.db.locale.spellNames[spellID]
 
     if spellName then
