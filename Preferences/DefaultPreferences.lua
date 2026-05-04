@@ -9,6 +9,7 @@ local private = select(2, ...) ---@class PrivateNamespace
 ---- Constants
 --------------------------------------------------------------------------------
 
+---@type AceDB.Schema
 local DefaultPreferences = {
     ---@type NPCScanDatabase.Locale
     locale = {
