@@ -10,8 +10,8 @@ local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCS
 ---- Constants
 --------------------------------------------------------------------------------
 
----@class NPCClassification
-local NPCClassification = {
+---@enum NPCClassification
+private.Enum.NPCClassification = {
     Elite = "elite",
     Minus = "minus",
     Normal = "normal",
@@ -20,8 +20,6 @@ local NPCClassification = {
     Trivial = "trivial",
     WorldBoss = "worldboss",
 }
-
-private.Enum.NPCClassification = NPCClassification
 
 local QuestNPCs = {} ---@type table<integer, table<integer, NPCData>>
 
