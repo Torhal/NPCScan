@@ -36,9 +36,7 @@ private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
 --------------------------------------------------------------------------------
 
 ---@class NPCData
-local NPCDataPrototype = {
-    IsQuestComplete = function(self) end,
-}
+local NPCDataPrototype = {}
 
 function NPCDataPrototype:HasQuest()
     local questID = self.questID or self.achievementQuestID
