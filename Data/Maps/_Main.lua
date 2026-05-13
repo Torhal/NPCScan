@@ -12,7 +12,7 @@ local Enum = private.Enum
 ---- Constants
 --------------------------------------------------------------------------------
 
----@type table<string, integer>
+---@type table<string, MapID>
 local MapID = {
     AbyssalDepths = 204,
     AhnQirajTheFallenKingdom = 327,
@@ -223,7 +223,7 @@ local MapID = {
 
 private.Enum.MapID = MapID
 
----@type table<string, integer>
+---@type table<string, ContinentID>
 local ContinentID = {
     Cosmic = 1,
     Azeroth = 2,
