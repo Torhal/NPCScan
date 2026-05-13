@@ -79,6 +79,7 @@ NPCs[90057] = {
     --------------------------------------------------------------------------------
     ---- Daggerbeak
     --------------------------------------------------------------------------------
+    isTameable = true,
     npcID = 90057,
     questID = 37869, -- Daggerbeak
     vignetteID = 686,
@@ -142,6 +143,7 @@ NPCs[90901] = {
     --------------------------------------------------------------------------------
     ---- Pridelord Meowl
     --------------------------------------------------------------------------------
+    isTameable = true,
     npcID = 90901,
     questID = 38061, -- Pridelord Meowl
     vignetteID = 716,
@@ -455,6 +457,7 @@ NPCs[109594] = {
     --------------------------------------------------------------------------------
     ---- Stormfeather
     --------------------------------------------------------------------------------
+    isTameable = true,
     npcID = 109594,
     questID = 45497, -- Stormfeather
     vignetteID = 1822,
@@ -509,6 +512,7 @@ NPCs[109702] = {
     --------------------------------------------------------------------------------
     ---- Deepclaw
     --------------------------------------------------------------------------------
+    isTameable = true,
     npcID = 109702,
     questID = 45489, -- Deepclaw
     vignetteID = 1814,
@@ -565,6 +569,7 @@ NPCs[112636] = {
     ---- Sinister Leyrunner
     --------------------------------------------------------------------------------
     achievementQuestID = 44081, -- Treacherous Leyrunners
+    isTameable = true,
     npcID = 112636,
     vignetteID = 1623,
 }
@@ -574,6 +579,7 @@ NPCs[112637] = {
     ---- Devious Sunrunner
     --------------------------------------------------------------------------------
     achievementQuestID = 44081, -- Treacherous Leyrunners
+    isTameable = true,
     npcID = 112637,
     vignetteID = 1623,
 }
@@ -713,6 +719,7 @@ NPCs[117239] = {
     ---- Brutallus
     --------------------------------------------------------------------------------
     npcID = 117239,
+    questID = 47085, -- Unknown
 }
 
 NPCs[117303] = {
@@ -938,6 +945,7 @@ NPCs[121112] = {
     --------------------------------------------------------------------------------
     ---- Somber Dawn
     --------------------------------------------------------------------------------
+    isTameable = true,
     npcID = 121112,
     questID = 47028, -- Unknown
     vignetteID = 1955,
@@ -1129,6 +1137,7 @@ NPCs[92040] = {
     ---- Fenri
     --------------------------------------------------------------------------------
     achievementQuestID = 38461, -- Vignette: Guarms Mate (Fenri)
+    isTameable = true,
     npcID = 92040,
     vignetteID = 773,
 }
@@ -1257,7 +1266,7 @@ NPCs[97203] = {
     pets = {
         {
             itemID = 129175, -- Crispin
-            npcID = 98077, -- Unknown
+            npcID = 98077, -- Crispin
         },
     },
     vignetteID = 1001,
@@ -1287,6 +1296,7 @@ NPCs[97345] = {
     ---- Crawshuk the Hungry
     --------------------------------------------------------------------------------
     achievementQuestID = 39806, -- Crawshuk the Hungry
+    isTameable = true,
     npcID = 97345,
     vignetteID = 1006,
 }
@@ -1316,6 +1326,7 @@ NPCs[97653] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 39872, -- The Beastly Boxer
     npcID = 97653,
+    questID = 40609, -- Unknown
     vignetteID = 1043,
 }
 
@@ -1498,6 +1509,7 @@ NPCs[104481] = {
     --------------------------------------------------------------------------------
     ---- Ala'washte
     --------------------------------------------------------------------------------
+    isTameable = true,
     npcID = 104481,
     questID = 45514, -- Ala'washte
     vignetteID = 1838,
@@ -1673,9 +1685,10 @@ NPCs[91795] = {
     pets = {
         {
             itemID = 129208, -- Stormborne Whelpling
-            npcID = 97205, -- Unknown
+            npcID = 97205, -- Stormborne Whelpling
         },
     },
+    questID = 40939, -- Unknown
     vignetteID = 763,
 }
 
@@ -2352,6 +2365,7 @@ NPCs[105547] = {
     ---- Rauren
     --------------------------------------------------------------------------------
     achievementQuestID = 43484, -- Vignette: Rauren
+    isTameable = true,
     npcID = 105547,
     vignetteID = 1508,
 }
@@ -2362,7 +2376,7 @@ NPCs[105632] = {
     --------------------------------------------------------------------------------
     npcID = 105632,
     questID = -1, -- Unknown
-    vignetteID = -1,
+    vignetteID = 7361,
 }
 
 NPCs[105728] = {
@@ -2418,7 +2432,7 @@ NPCs[106532] = {
     pets = {
         {
             itemID = 136901, -- Eye of Inquisition
-            npcID = 97179, -- Unknown
+            npcID = 97179, -- Eye of Inquisition
         },
     },
     questID = 44569, -- Inquisitor Volitix
@@ -2582,11 +2596,12 @@ NPCs[111197] = {
     ---- Anax
     --------------------------------------------------------------------------------
     achievementQuestID = 43954, -- Anax
+    isTameable = true,
     npcID = 111197,
     pets = {
         {
             itemID = 140934, -- Benax
-            npcID = 113136, -- Unknown
+            npcID = 113136, -- Benax
         },
     },
     vignetteID = 1541,
@@ -2635,6 +2650,7 @@ NPCs[112497] = {
     achievementQuestID = 44072, -- Vignette: Maia the White
     isTameable = true,
     npcID = 112497,
+    questID = 44071, -- Unknown
     vignetteID = 1617,
 }
 
@@ -2762,7 +2778,7 @@ NPCs[92117] = {
     pets = {
         {
             itemID = 130154, -- Pygmy Owl
-            npcID = 108568, -- Unknown
+            npcID = 108568, -- Pygmy Owl
         },
     },
     questID = 38468, -- Gorebeak
@@ -2800,7 +2816,7 @@ NPCs[92965] = {
     pets = {
         {
             itemID = 130166, -- Risen Saber Kitten
-            npcID = 99403, -- Unknown
+            npcID = 99403, -- Risen Saber Kitten
         },
     },
     questID = 38767, -- Nightmaul
@@ -2879,7 +2895,7 @@ NPCs[94485] = {
     pets = {
         {
             itemID = 130168, -- Fetid Waveling
-            npcID = 99394, -- Unknown
+            npcID = 99394, -- Fetid Waveling
         },
     },
     vignetteID = 944,
@@ -2922,6 +2938,7 @@ NPCs[97504] = {
     ---- Wraithtalon
     --------------------------------------------------------------------------------
     achievementQuestID = 39856, -- Vignette: Wraithtalon
+    isTameable = true,
     npcID = 97504,
     vignetteID = 1027,
 }

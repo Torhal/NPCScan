@@ -249,7 +249,7 @@ NPCs[160721] = {
     --------------------------------------------------------------------------------
     ---- Fallen Acolyte Erisne
     --------------------------------------------------------------------------------
-    achievementQuestID = 58222,
+    achievementQuestID = 58222, -- Unknown
     npcID = 160721,
 }
 
@@ -357,7 +357,7 @@ NPCs[170832] = {
     --------------------------------------------------------------------------------
     ---- Champion of Loyalty
     --------------------------------------------------------------------------------
-    achievementQuestID = 60933,
+    achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
     npcID = 170832,
     questID = 60977, -- Unknown
@@ -367,7 +367,7 @@ NPCs[170833] = {
     --------------------------------------------------------------------------------
     ---- Champion of Wisdom
     --------------------------------------------------------------------------------
-    achievementQuestID = 60933,
+    achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
     npcID = 170833,
     questID = 60977, -- Unknown
@@ -377,7 +377,7 @@ NPCs[170834] = {
     --------------------------------------------------------------------------------
     ---- Champion of Purity
     --------------------------------------------------------------------------------
-    achievementQuestID = 60933,
+    achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
     npcID = 170834,
     questID = 60977, -- Unknown
@@ -387,7 +387,7 @@ NPCs[170835] = {
     --------------------------------------------------------------------------------
     ---- Champion of Courage
     --------------------------------------------------------------------------------
-    achievementQuestID = 60933,
+    achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
     npcID = 170835,
     questID = 60977, -- Unknown
@@ -397,7 +397,7 @@ NPCs[170836] = {
     --------------------------------------------------------------------------------
     ---- Champion of Humility
     --------------------------------------------------------------------------------
-    achievementQuestID = 60933,
+    achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
     npcID = 170836,
     questID = 60977, -- Unknown
@@ -424,7 +424,7 @@ NPCs[171009] = {
     --------------------------------------------------------------------------------
     ---- Enforcer Aegeon
     --------------------------------------------------------------------------------
-    achievementQuestID = 60998,
+    achievementQuestID = 60998, -- Unknown
     npcID = 171009,
     questID = 58222, -- Unknown
 }
@@ -1103,6 +1103,7 @@ NPCs[159157] = {
     --------------------------------------------------------------------------------
     ---- Grand Inquisitor Aurica
     --------------------------------------------------------------------------------
+    classification = NPCClassification.RareElite,
     npcID = 159157,
 }
 

@@ -209,6 +209,7 @@ NPCs[138122] = {
     classification = NPCClassification.Elite,
     factionGroup = "Horde",
     npcID = 138122,
+    questID = 53002, -- Unknown
     toys = {
         {
             itemID = 163828, -- Toy Siege Tower
@@ -362,9 +363,10 @@ NPCs[142437] = {
     --------------------------------------------------------------------------------
     ---- Skullripper
     --------------------------------------------------------------------------------
+    isTameable = true,
     mounts = {
         {
-            itemID = 163645, -- Skullripper
+            itemID = 163645, -- Unknown
             spellID = 279611, -- Skullripper
         },
     },
@@ -378,6 +380,7 @@ NPCs[142438] = {
     ---- Venomarus
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
+    isTameable = true,
     npcID = 142438,
     pets = {
         {
@@ -396,7 +399,7 @@ NPCs[142440] = {
     npcID = 142440,
     pets = {
         {
-            itemID = 163684, -- Scabby
+            itemID = 163684, -- Unknown
             npcID = 143533, -- Scabby
         },
     },
@@ -411,7 +414,7 @@ NPCs[142508] = {
     npcID = 142508,
     pets = {
         {
-            itemID = 163650, -- Aldrusian Sproutling
+            itemID = 163650, -- Unknown
             npcID = 143503, -- Aldrusian Sproutling
         },
     },
@@ -498,7 +501,7 @@ NPCs[142688] = {
     npcID = 142688,
     pets = {
         {
-            itemID = 163652, -- Tiny Grimoire
+            itemID = 163652, -- Unknown
             npcID = 143507, -- Voidwiggler
         },
     },
@@ -528,7 +531,7 @@ NPCs[142692] = {
     classification = NPCClassification.RareElite,
     mounts = {
         {
-            itemID = 163706, -- Witherbark Direwing
+            itemID = 163706, -- Unknown
             spellID = 279868, -- Witherbark Direwing
         },
     },
@@ -544,7 +547,7 @@ NPCs[142709] = {
     classification = NPCClassification.RareElite,
     mounts = {
         {
-            itemID = 163644, -- Swift Albino Raptor
+            itemID = 163644, -- Unknown
             spellID = 279569, -- Swift Albino Raptor
         },
     },
@@ -560,7 +563,7 @@ NPCs[142716] = {
     npcID = 142716,
     pets = {
         {
-            itemID = 163712, -- Mana-Warped Egg
+            itemID = 163712, -- Unknown
             npcID = 143628, -- Squawkling
         },
     },
@@ -590,7 +593,7 @@ NPCs[142739] = {
     factionGroup = "Alliance",
     mounts = {
         {
-            itemID = 163578, -- Broken Highland Mustang
+            itemID = 163578, -- Unknown
             spellID = 279457, -- Broken Highland Mustang
         },
     },
@@ -606,11 +609,12 @@ NPCs[142741] = {
     factionGroup = "Horde",
     mounts = {
         {
-            itemID = 163579, -- Highland Mustang
+            itemID = 163579, -- Unknown
             spellID = 279456, -- Highland Mustang
         },
     },
     npcID = 142741,
+    questID = 53085, -- Unknown
     vignetteID = 3209,
 }
 
@@ -2100,7 +2104,9 @@ NPCs[147222] = {
     --------------------------------------------------------------------------------
     ---- Gnollfeaster
     --------------------------------------------------------------------------------
+    isTameable = true,
     npcID = 147222,
+    questID = 54214, -- Unknown
 }
 
 --------------------------------------------------------------------------------
@@ -2914,6 +2920,7 @@ NPCs[237853] = {
     ---- Berg the Spellfist
     --------------------------------------------------------------------------------
     npcID = 237853,
+    vignetteID = 6755,
 }
 
 NPCs[237997] = {
@@ -2921,6 +2928,7 @@ NPCs[237997] = {
     ---- Corla, Herald of Twilight
     --------------------------------------------------------------------------------
     npcID = 237997,
+    vignetteID = 6761,
 }
 
 NPCs[246272] = {
@@ -2928,6 +2936,7 @@ NPCs[246272] = {
     ---- Void Zealot Devinda
     --------------------------------------------------------------------------------
     npcID = 246272,
+    vignetteID = 6988,
 }
 
 NPCs[246343] = {
@@ -2935,6 +2944,7 @@ NPCs[246343] = {
     ---- Asira Dawnslayer
     --------------------------------------------------------------------------------
     npcID = 246343,
+    vignetteID = 6994,
 }
 
 NPCs[246460] = {
@@ -2942,6 +2952,7 @@ NPCs[246460] = {
     ---- Ray of Putrescence
     --------------------------------------------------------------------------------
     npcID = 246460,
+    vignetteID = 6995,
 }
 
 NPCs[246462] = {
@@ -2949,6 +2960,7 @@ NPCs[246462] = {
     ---- Archbishop Benedictus
     --------------------------------------------------------------------------------
     npcID = 246462,
+    vignetteID = 6996,
 }
 
 NPCs[246471] = {
@@ -2956,6 +2968,7 @@ NPCs[246471] = {
     ---- Ix the Bloodfallen
     --------------------------------------------------------------------------------
     npcID = 246471,
+    vignetteID = 6997,
 }
 
 NPCs[246478] = {
@@ -2963,6 +2976,7 @@ NPCs[246478] = {
     ---- Commander Ix'vaarha
     --------------------------------------------------------------------------------
     npcID = 246478,
+    vignetteID = 6998,
 }
 
 NPCs[246549] = {
@@ -2970,6 +2984,7 @@ NPCs[246549] = {
     ---- Ez'Haadosh the Liminality
     --------------------------------------------------------------------------------
     npcID = 246549,
+    vignetteID = 7001,
 }
 
 NPCs[246558] = {
@@ -2977,6 +2992,7 @@ NPCs[246558] = {
     ---- Saligrum the Observer
     --------------------------------------------------------------------------------
     npcID = 246558,
+    vignetteID = 7003,
 }
 
 NPCs[246559] = {
@@ -2984,6 +3000,7 @@ NPCs[246559] = {
     ---- Sharfadi, Bulwark of the Night
     --------------------------------------------------------------------------------
     npcID = 246559,
+    vignetteID = 7004,
 }
 
 NPCs[246565] = {
@@ -2991,6 +3008,7 @@ NPCs[246565] = {
     ---- Gustavan, Herald of the End
     --------------------------------------------------------------------------------
     npcID = 246565,
+    vignetteID = 7005,
 }
 
 NPCs[246566] = {
@@ -2998,6 +3016,7 @@ NPCs[246566] = {
     ---- Mirrorvise
     --------------------------------------------------------------------------------
     npcID = 246566,
+    vignetteID = 7006,
 }
 
 NPCs[246572] = {
@@ -3005,6 +3024,7 @@ NPCs[246572] = {
     ---- Redeye the Skullchewer
     --------------------------------------------------------------------------------
     npcID = 246572,
+    vignetteID = 7007,
 }
 
 NPCs[246577] = {
@@ -3012,6 +3032,7 @@ NPCs[246577] = {
     ---- Nedrand the Eyegorger
     --------------------------------------------------------------------------------
     npcID = 246577,
+    vignetteID = 7008,
 }
 
 NPCs[246578] = {
@@ -3019,6 +3040,7 @@ NPCs[246578] = {
     ---- Voidclaw Hexathor
     --------------------------------------------------------------------------------
     npcID = 246578,
+    vignetteID = 7009,
 }
 
 NPCs[246840] = {
@@ -3026,6 +3048,7 @@ NPCs[246840] = {
     ---- Executioner Lynthelma
     --------------------------------------------------------------------------------
     npcID = 246840,
+    vignetteID = 7042,
 }
 
 NPCs[246844] = {
@@ -3033,6 +3056,7 @@ NPCs[246844] = {
     ---- T'aavihan the Unbound
     --------------------------------------------------------------------------------
     npcID = 246844,
+    vignetteID = 7043,
 }
 
 NPCs[253378] = {
@@ -3040,6 +3064,7 @@ NPCs[253378] = {
     ---- Voice of the Eclipse
     --------------------------------------------------------------------------------
     npcID = 253378,
+    vignetteID = 7340,
 }
 
 --------------------------------------------------------------------------------
