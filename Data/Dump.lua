@@ -442,15 +442,15 @@ end
 
 private.DUMP_COMMANDS = {
     mapnpcs = function(parameters)
-        private.DumpMapNPCs(tonumber(parameters))
+        private.DumpMapNPCs(tonumber(parameters) or private.Enum.ContinentID.Cosmic)
     end,
     npcdata = function(parameters)
-        private.DumpNPCData(tonumber(parameters))
+        private.DumpNPCData(tonumber(parameters) or private.Enum.ContinentID.Cosmic)
     end,
     npcquests = function(parameters)
-        private.DumpNPCQuests(tonumber(parameters))
+        private.DumpNPCQuests(tonumber(parameters) or private.Enum.ContinentID.Cosmic)
     end,
     questdata = function(parameters)
-        private.DumpQuestData(tonumber(parameters))
+        private.DumpQuestData(tonumber(parameters) or private.Enum.ContinentID.Cosmic)
     end,
 }
