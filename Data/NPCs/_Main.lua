@@ -25,7 +25,7 @@ local QuestNPCs = {} ---@type table<integer, table<integer, NPCData>>
 
 private.QuestNPCs = QuestNPCs
 
-local VignetteIDToNPCMapping = {} ---@type table<integer, NPCData>
+local VignetteIDToNPCMapping = {} ---@type table<VignetteID, NPCData[]>
 
 private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
 
