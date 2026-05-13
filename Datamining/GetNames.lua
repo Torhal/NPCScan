@@ -34,7 +34,7 @@ DatamineTooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
 ---- Data Mining Functions
 --------------------------------------------------------------------------------
 
----@param itemID integer
+---@param itemID ItemID
 local function GetItemNameFromID(itemID)
     local itemName = private.db.locale.itemNames[itemID]
 
@@ -58,7 +58,7 @@ end
 
 private.GetItemNameFromID = GetItemNameFromID
 
----@param npcID integer
+---@param npcID NPCID
 local function GetNPCNameFromID(npcID)
     local npcName = private.db.locale.npcNames[npcID]
 
@@ -80,7 +80,7 @@ end
 
 private.GetNPCNameFromID = GetNPCNameFromID
 
----@param questID integer
+---@param questID QuestID
 local function GetQuestNameFromID(questID)
     local questName = private.db.locale.questNames[questID]
 
@@ -106,7 +106,7 @@ end
 
 private.GetQuestNameFromID = GetQuestNameFromID
 
----@param spellID integer
+---@param spellID SpellID
 local function GetSpellNameFromID(spellID)
     local spellName = private.db.locale.spellNames[spellID]
 
@@ -134,7 +134,7 @@ private.GetSpellNameFromID = GetSpellNameFromID
 ------- Event Handlers
 --------------------------------------------------------------------------------
 
----@param questID integer
+---@param questID QuestID
 ---@param isSuccessful boolean
 function NPCScan:QUEST_DATA_LOAD_RESULT(_, questID, isSuccessful)
     if isSuccessful then
