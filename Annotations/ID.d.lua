@@ -4,12 +4,12 @@
 ---- Types
 --------------------------------------------------------------------------------
 
----@alias AchievementCriteriaID integer
----@alias AchievementID integer
----@alias ContinentID integer
----@alias ItemID integer
----@alias MapID integer
----@alias NPCID integer
----@alias SpellID integer
----@alias QuestID integer
----@alias VignetteID integer
+---@alias (opaque) AchievementCriteriaID integer
+---@alias (opaque) AchievementID integer
+---@alias (opaque) ContinentID integer
+---@alias (opaque) ItemID integer
+---@alias (opaque) MapID integer
+---@alias (opaque) NPCID integer
+---@alias (opaque) SpellID integer
+---@alias (opaque) QuestID integer
+---@alias (opaque) VignetteID integer
