@@ -58,7 +58,6 @@ local AchievementID = {
     MushroomHarvest = 13027,
     NaxtVictim = 11841,
     NazjatargetEliminated = 13690,
-    OneManArmy = 7317,
     PraiseTheSun = 8028,
     Predator = 10334,
     RestInPistons = 13470,
@@ -183,6 +182,7 @@ local function TryAssignNPCToAchievement(
                 achievementCriteriaID,
                 isCriteriaCompleted
             )
+
             achievement.criteriaNPCs[npcID] = npc
         end
     end
