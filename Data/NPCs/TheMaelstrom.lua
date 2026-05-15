@@ -49,6 +49,7 @@ NPCs[50060] = {
     ---- Terborus
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 50060,
 }
 
