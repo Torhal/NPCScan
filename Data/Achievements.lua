@@ -72,6 +72,7 @@ local AchievementID = {
     TimelessChampion = 8714,
     UnboundMonstrosities = 12587,
     UnleashedMonstrosities = 11160,
+    WildHunting = 14779,
     ZulAgain = 8078,
 }
 
