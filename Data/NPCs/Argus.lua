@@ -387,7 +387,7 @@ NPCs[126852] = {
     classification = NPCClassification.Rare,
     mounts = {
         {
-            itemID = 152814, -- Unknown
+            itemID = 152814, -- Maddened Chaosrunner
             spellID = 253058, -- Maddened Chaosrunner
         },
     },
@@ -502,6 +502,7 @@ NPCs[126885] = {
     ---- Umbraliss
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 126885,
     questID = 48708, -- Unknown
     vignetteID = 2241,
@@ -515,7 +516,7 @@ NPCs[126887] = {
     npcID = 126887,
     pets = {
         {
-            itemID = 153056, -- Unknown
+            itemID = 153056, -- Grasping Manifestation
             npcID = 128159, -- Grasping Manifestation
         },
     },
@@ -548,6 +549,7 @@ NPCs[126898] = {
     ---- Sabuul
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     mounts = {
         {
             itemID = 152840, -- Scintillating Mana Ray
@@ -639,7 +641,7 @@ NPCs[126912] = {
     classification = NPCClassification.Rare,
     mounts = {
         {
-            itemID = 152904, -- Unknown
+            itemID = 152904, -- Acid Belcher
             spellID = 253662, -- Acid Belcher
         },
     },
@@ -782,6 +784,7 @@ NPCs[126419] = {
     ---- Naroua
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     mounts = {
         {
             itemID = 152840, -- Scintillating Mana Ray

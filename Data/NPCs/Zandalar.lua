@@ -80,6 +80,7 @@ NPCs[124397] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 47843, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 124397,
     vignetteID = 2010,
     worldQuestID = 50505, -- Kal'draxa
@@ -91,6 +92,7 @@ NPCs[124399] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 47877, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 124399,
     vignetteID = 2013,
 }
@@ -218,6 +220,7 @@ NPCs[126926] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 48626, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 126926,
     vignetteID = 2221,
     worldQuestID = 50515, -- Venomjaw
@@ -251,6 +254,7 @@ NPCs[127873] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 48980, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 127873,
     vignetteID = 2310,
 }
@@ -405,6 +409,7 @@ NPCs[133527] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 50342, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 133527,
     vignetteID = 2599,
     worldQuestID = 50503, -- Juba the Scarred
@@ -427,6 +432,7 @@ NPCs[133539] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 50355, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 133539,
     vignetteID = 2601,
     worldQuestID = 50509, -- Lo'kuno
@@ -538,6 +544,7 @@ NPCs[148637] = {
     ---- Shadow Hunter Vol'tris
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148637,
 }
 
@@ -546,6 +553,7 @@ NPCs[148642] = {
     ---- Caravan Leader
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148642,
 }
 
@@ -554,6 +562,7 @@ NPCs[148651] = {
     ---- Overgrown Ancient
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148651,
 }
 
@@ -562,6 +571,7 @@ NPCs[148674] = {
     ---- Plague Master Herbert
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148674,
 }
 
@@ -570,6 +580,7 @@ NPCs[148679] = {
     ---- Arcanist Quintril
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148679,
 }
 
@@ -578,6 +589,7 @@ NPCs[148744] = {
     ---- Brewmaster Lin
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148744,
 }
 
@@ -586,6 +598,7 @@ NPCs[148753] = {
     ---- Ptin'go
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148753,
 }
 
@@ -594,6 +607,7 @@ NPCs[148759] = {
     ---- Stormcaller Morka
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148759,
 }
 
@@ -602,6 +616,7 @@ NPCs[148779] = {
     ---- Lightforged Warframe
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148779,
 }
 
@@ -610,7 +625,9 @@ NPCs[148792] = {
     ---- Skycaptain Thermospark
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148792,
+    questID = 54699, -- Classic Gnomish Engineering
 }
 
 NPCs[148813] = {
@@ -618,7 +635,9 @@ NPCs[148813] = {
     ---- Thomas Vandergrief
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148813,
+    questID = 54700, -- Thomas Vandergrief
 }
 
 NPCs[148842] = {
@@ -626,6 +645,7 @@ NPCs[148842] = {
     ---- Siegeotron
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148842,
 }
 
@@ -634,6 +654,7 @@ NPCs[149383] = {
     ---- Xizz Gutshank
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 149383,
 }
 
@@ -724,6 +745,7 @@ NPCs[129027] = {
     ---- Golanar
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
+    isTameable = true,
     npcID = 129027,
     questID = 50362, -- Unknown
     vignetteID = 2604,
@@ -769,6 +791,7 @@ NPCs[129476] = {
     ---- Bloated Krolusk
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 129476,
     questID = 47562, -- Unknown
     vignetteID = 2411,
@@ -780,6 +803,7 @@ NPCs[130401] = {
     ---- Vathikur
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 130401,
     questID = 49674, -- Unknown
     vignetteID = 2445,
@@ -815,6 +839,7 @@ NPCs[133843] = {
     ---- First Mate Swainbeak
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 133843,
     questID = 51073, -- Unknown
     vignetteID = 2889,
@@ -892,6 +917,7 @@ NPCs[135852] = {
     ---- Ak'tar
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 135852,
     questID = 51058, -- Unknown
     vignetteID = 2885,
@@ -1050,6 +1076,7 @@ NPCs[146942] = {
     ---- Grand Marshal Fury
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 146942,
 }
 
@@ -1058,6 +1085,7 @@ NPCs[146979] = {
     ---- Ormin Rocketbop
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 146979,
 }
 
@@ -1066,6 +1094,7 @@ NPCs[148446] = {
     ---- Wolfleader Skraug
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148446,
 }
 
@@ -1074,6 +1103,7 @@ NPCs[148451] = {
     ---- Siege O' Matic 9000
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148451,
 }
 
@@ -1082,6 +1112,7 @@ NPCs[148456] = {
     ---- Jin'tago
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148456,
 }
 
@@ -1090,6 +1121,7 @@ NPCs[148477] = {
     ---- Beastlord Drakara
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148477,
 }
 
@@ -1098,6 +1130,7 @@ NPCs[148494] = {
     ---- Sandbinder Sodir
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148494,
 }
 
@@ -1106,6 +1139,7 @@ NPCs[148510] = {
     ---- Drox'ar Morgar
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148510,
 }
 
@@ -1114,6 +1148,7 @@ NPCs[148534] = {
     ---- Evezon the Eternal
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148534,
 }
 
@@ -1122,6 +1157,7 @@ NPCs[148550] = {
     ---- Caravan Leader
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148550,
 }
 
@@ -1130,6 +1166,7 @@ NPCs[148558] = {
     ---- Rockfury
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148558,
 }
 
@@ -1138,6 +1175,7 @@ NPCs[148597] = {
     ---- Iron Shaman Grimbeard
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148597,
 }
 
@@ -1146,6 +1184,7 @@ NPCs[162681] = {
     ---- Elusive Quickhoof
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 162681,
 }
 
@@ -1169,6 +1208,7 @@ NPCs[122004] = {
     ---- Umbra'jin
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 122004,
     questID = 47567, -- Umbra'jin
     vignetteID = 1998,
@@ -1212,6 +1252,7 @@ NPCs[126637] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 48543, -- Kandak
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 126637,
     vignetteID = 2196,
     worldQuestID = 50859, -- Kandak
@@ -1235,6 +1276,7 @@ NPCs[128699] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 49267, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 128699,
     vignetteID = 2359,
     worldQuestID = 50862, -- Bloodbulge
@@ -1265,6 +1307,7 @@ NPCs[129954] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 50439, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 129954,
     vignetteID = 2636,
     worldQuestID = 50877, -- Gahz'ralka
@@ -1306,6 +1349,7 @@ NPCs[131233] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 49911, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 131233,
     vignetteID = 2496,
     worldQuestID = 50885, -- Lei-zhi
@@ -1352,6 +1396,7 @@ NPCs[131718] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 50034, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 131718,
     vignetteID = 2527,
     worldQuestID = 50868, -- Bramblewing
@@ -1417,6 +1462,7 @@ NPCs[133842] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 50438, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 133842,
     vignetteID = 2635,
     worldQuestID = 50872, -- Warcrawler Karkithiss
@@ -1428,6 +1474,7 @@ NPCs[134048] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 50508, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 134048,
     vignetteID = 2650,
     worldQuestID = 50873, -- Strange Egg
@@ -1483,6 +1530,7 @@ NPCs[134782] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 50281, -- Unknown
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 134782,
     vignetteID = 2651,
     worldQuestID = 50876, -- Murderbeak
@@ -1582,6 +1630,7 @@ NPCs[145391] = {
     ---- Caravan Leader
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 145391,
 }
 
@@ -1590,6 +1639,7 @@ NPCs[148198] = {
     ---- Scout Captain Grizzleknob
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148198,
 }
 
@@ -1598,6 +1648,7 @@ NPCs[148231] = {
     ---- Siegebreaker Vol'gar
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148231,
 }
 
@@ -1606,6 +1657,7 @@ NPCs[148253] = {
     ---- Death Captain Detheca
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148253,
 }
 
@@ -1614,6 +1666,7 @@ NPCs[148257] = {
     ---- Death Captain Danielle
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148257,
 }
 
@@ -1622,6 +1675,7 @@ NPCs[148259] = {
     ---- Death Captain Delilah
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148259,
 }
 
@@ -1630,6 +1684,7 @@ NPCs[148264] = {
     ---- Dinomancer Dajingo
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148264,
 }
 
@@ -1638,6 +1693,7 @@ NPCs[148276] = {
     ---- Tidebinder Maka
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148276,
 }
 
@@ -1646,6 +1702,7 @@ NPCs[148308] = {
     ---- Eric Quietfist
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148308,
 }
 
@@ -1654,6 +1711,7 @@ NPCs[148322] = {
     ---- Blinky Gizmospark
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148322,
 }
 
@@ -1662,6 +1720,7 @@ NPCs[148343] = {
     ---- Dinohunter Wildbeard
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148343,
 }
 
@@ -1670,6 +1729,7 @@ NPCs[148390] = {
     ---- Jessibelle Moonshield
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148390,
 }
 
@@ -1678,6 +1738,7 @@ NPCs[148393] = {
     ---- Ancient Defender
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148393,
 }
 
@@ -1686,6 +1747,7 @@ NPCs[148403] = {
     ---- Portal Keeper Romiir
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Alliance",
     npcID = 148403,
 }
 
@@ -1694,6 +1756,7 @@ NPCs[148428] = {
     ---- Bilestomper
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    factionGroup = "Horde",
     npcID = 148428,
 }
 
@@ -1702,5 +1765,7 @@ NPCs[149147] = {
     ---- N'chala the Egg Thief
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 149147,
+    questID = 54770, -- Unknown
 }

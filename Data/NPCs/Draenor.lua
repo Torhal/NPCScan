@@ -349,6 +349,7 @@ NPCs[75120] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 75120,
+    questID = 33531, -- Unknown
 }
 
 NPCs[76914] = {
@@ -544,6 +545,7 @@ NPCs[79678] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 79678,
+    questID = 34708, -- Unknown
 }
 
 NPCs[80190] = {
@@ -790,6 +792,7 @@ NPCs[90041] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90041,
+    questID = 37864, -- Unknown
 }
 
 --------------------------------------------------------------------------------
@@ -934,6 +937,7 @@ NPCs[80785] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 80785,
+    questID = 35153, -- Unknown
 }
 
 NPCs[80868] = {
@@ -1331,6 +1335,7 @@ NPCs[90041] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90041,
+    questID = 37864, -- Unknown
 }
 
 --------------------------------------------------------------------------------
@@ -1370,6 +1375,7 @@ NPCs[50981] = {
     ---- Luk'hok
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     mounts = {
         {
             itemID = 116661, -- Mottled Meadowstomper
@@ -1715,6 +1721,7 @@ NPCs[86729] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 86729,
+    questID = 37222, -- Direhoof's Hide
     vignetteID = 632,
 }
 
@@ -1725,6 +1732,7 @@ NPCs[86732] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 86732,
+    questID = 37211, -- Bergruu's Horn
     vignetteID = 626,
 }
 
@@ -1733,7 +1741,9 @@ NPCs[86743] = {
     ---- Dekorhan
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 86743,
+    questID = 37221, -- Dekorhan's Tusk
     vignetteID = 627,
 }
 
@@ -1744,6 +1754,7 @@ NPCs[86750] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 86750,
+    questID = 37225, -- Thek'talon's Talon
     vignetteID = 629,
 }
 
@@ -1753,6 +1764,7 @@ NPCs[86771] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 86771,
+    questID = 37223, -- Gagrog's Skull
     vignetteID = 628,
 }
 
@@ -1763,6 +1775,7 @@ NPCs[86774] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 86774,
+    questID = 37210, -- Aogexon's Fang
     vignetteID = 631,
 }
 
@@ -1773,6 +1786,7 @@ NPCs[86835] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 86835,
+    questID = 37226, -- Xelganak's Stinger
     vignetteID = 633,
 }
 
@@ -1861,6 +1875,7 @@ NPCs[87660] = {
     ---- Dekorhan
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 87660,
 }
 
@@ -1879,6 +1894,7 @@ NPCs[87666] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 87666,
+    questID = 37224, -- Mu'gra's Head
     vignetteID = 630,
 }
 
@@ -1925,6 +1941,7 @@ NPCs[88208] = {
     ---- Pit Beast
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 88208,
     questID = 37637, -- Vignette: Pit Beast
     vignetteID = 583,
@@ -1947,6 +1964,7 @@ NPCs[88951] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 88951,
+    questID = 37520, -- Vileclaw's Claw
     vignetteID = 634,
 }
 
@@ -1956,6 +1974,7 @@ NPCs[90041] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90041,
+    questID = 37864, -- Unknown
 }
 
 NPCs[98198] = {
@@ -2169,6 +2188,7 @@ NPCs[79524] = {
     ---- Hypnocroak
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 79524,
     questID = 35558, -- Vignette: Hypnocroak
     toys = {
@@ -2288,6 +2308,7 @@ NPCs[82411] = {
     ---- Darktalon
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 82411,
     questID = 35555, -- Vignette: Darktalon
     vignetteID = 365,
@@ -2315,6 +2336,7 @@ NPCs[82676] = {
     classification = NPCClassification.Rare,
     npcID = 82676,
     questID = 35688, -- Vignette: Enavra Varandi
+    vignetteID = 378,
 }
 
 NPCs[82742] = {
@@ -2470,6 +2492,7 @@ NPCs[90041] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90041,
+    questID = 37864, -- Unknown
 }
 
 --------------------------------------------------------------------------------
@@ -2533,7 +2556,9 @@ NPCs[83746] = {
     ---- Rukhmar
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 83746,
+    questID = 37464, -- Unknown
 }
 
 NPCs[83990] = {
@@ -2846,7 +2871,9 @@ NPCs[87493] = {
     ---- Rukhmar
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 87493,
+    questID = 37464, -- Unknown
 }
 
 NPCs[90041] = {
@@ -2855,6 +2882,7 @@ NPCs[90041] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90041,
+    questID = 37864, -- Unknown
 }
 
 --------------------------------------------------------------------------------
@@ -2882,6 +2910,7 @@ NPCs[76876] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 76876,
+    questID = 35219, -- Vignette: Burning Front
 }
 
 NPCs[77529] = {
@@ -3176,6 +3205,7 @@ NPCs[80785] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 80785,
+    questID = 35153, -- Unknown
 }
 
 NPCs[82920] = {
@@ -3282,6 +3312,7 @@ NPCs[86549] = {
     ---- Steeltusk
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 86549,
     questID = 36858, -- Vignette: Steeltusk
     vignetteID = 512,
@@ -3379,6 +3410,7 @@ NPCs[90041] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90041,
+    questID = 37864, -- Unknown
 }
 
 --------------------------------------------------------------------------------
@@ -3822,6 +3854,7 @@ NPCs[92606] = {
     ---- Sylissa
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 92606,
     questID = 38628, -- Vignette: Giant Python
     vignetteID = 827,
@@ -4084,6 +4117,7 @@ NPCs[95053] = {
     ---- Deathtalon
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     mounts = {
         {
             itemID = 116658, -- Tundra Icehoof

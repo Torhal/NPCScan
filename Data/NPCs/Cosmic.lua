@@ -18,6 +18,8 @@ NPCs[247976] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 247976,
+    questID = 91634, -- Poacher Rav'ik
+    vignetteID = 7117,
 }
 
 --------------------------------------------------------------------------------
@@ -30,6 +32,8 @@ NPCs[240129] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 240129,
+    questID = 92392, -- Unknown
+    vignetteID = 7300,
 }
 
 NPCs[244762] = {
@@ -38,6 +42,7 @@ NPCs[244762] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 244762,
+    questID = 92560, -- Lu'ashal
 }
 
 NPCs[246332] = {
@@ -46,6 +51,8 @@ NPCs[246332] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 246332,
+    questID = 91280, -- Unknown
+    vignetteID = 7363,
 }
 
 NPCs[246633] = {
@@ -54,6 +61,8 @@ NPCs[246633] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 246633,
+    questID = 91315, -- Unknown
+    vignetteID = 7002,
 }
 
 NPCs[250582] = {
@@ -62,6 +71,8 @@ NPCs[250582] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250582,
+    questID = 92366, -- Unknown
+    vignetteID = 7294,
 }
 
 NPCs[250683] = {
@@ -70,6 +81,8 @@ NPCs[250683] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250683,
+    questID = 92389, -- Unknown
+    vignetteID = 7298,
 }
 
 NPCs[250719] = {
@@ -78,6 +91,8 @@ NPCs[250719] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250719,
+    questID = 92391, -- Unknown
+    vignetteID = 7299,
 }
 
 NPCs[250754] = {
@@ -86,6 +101,8 @@ NPCs[250754] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250754,
+    questID = 92393, -- Unknown
+    vignetteID = 7301,
 }
 
 NPCs[250780] = {
@@ -94,6 +111,8 @@ NPCs[250780] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250780,
+    questID = 92395, -- Unknown
+    vignetteID = 7302,
 }
 
 NPCs[250806] = {
@@ -102,6 +121,8 @@ NPCs[250806] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250806,
+    questID = 92399, -- Unknown
+    vignetteID = 7303,
 }
 
 NPCs[250826] = {
@@ -110,6 +131,8 @@ NPCs[250826] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250826,
+    questID = 92403, -- Unknown
+    vignetteID = 7304,
 }
 
 NPCs[250841] = {
@@ -118,6 +141,8 @@ NPCs[250841] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250841,
+    questID = 92404, -- Unknown
+    vignetteID = 7305,
 }
 
 NPCs[250876] = {
@@ -126,6 +151,8 @@ NPCs[250876] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250876,
+    questID = 92409, -- Unknown
+    vignetteID = 7306,
 }
 
 NPCs[255302] = {
@@ -134,6 +161,8 @@ NPCs[255302] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 255302,
+    questID = 93550, -- Unknown
+    vignetteID = 7396,
 }
 
 NPCs[255329] = {
@@ -142,6 +171,8 @@ NPCs[255329] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 255329,
+    questID = 93555, -- Unknown
+    vignetteID = 7399,
 }
 
 NPCs[255348] = {
@@ -150,6 +181,8 @@ NPCs[255348] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 255348,
+    questID = 93561, -- Unknown
+    vignetteID = 7404,
 }
 
 --------------------------------------------------------------------------------
@@ -186,6 +219,8 @@ NPCs[248741] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 248741,
+    questID = 91832, -- Unknown
+    vignetteID = 7139,
 }
 
 NPCs[249776] = {
@@ -194,6 +229,7 @@ NPCs[249776] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 249776,
+    questID = 92034, -- Thorm'belan
 }
 
 NPCs[249844] = {
@@ -202,6 +238,8 @@ NPCs[249844] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 249844,
+    questID = 92137, -- Unknown
+    vignetteID = 7156,
 }
 
 NPCs[249849] = {
@@ -210,6 +248,8 @@ NPCs[249849] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 249849,
+    questID = 92142, -- Unknown
+    vignetteID = 7157,
 }
 
 NPCs[249902] = {
@@ -218,6 +258,8 @@ NPCs[249902] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 249902,
+    questID = 92148, -- Unknown
+    vignetteID = 7158,
 }
 
 NPCs[249962] = {
@@ -226,6 +268,8 @@ NPCs[249962] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 249962,
+    questID = 92154, -- Unknown
+    vignetteID = 7159,
 }
 
 NPCs[249997] = {
@@ -234,6 +278,8 @@ NPCs[249997] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 249997,
+    questID = 92161, -- Unknown
+    vignetteID = 7161,
 }
 
 NPCs[250086] = {
@@ -242,6 +288,8 @@ NPCs[250086] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250086,
+    questID = 92168, -- Unknown
+    vignetteID = 7162,
 }
 
 NPCs[250180] = {
@@ -250,6 +298,8 @@ NPCs[250180] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250180,
+    questID = 92170, -- Unknown
+    vignetteID = 7163,
 }
 
 NPCs[250226] = {
@@ -258,6 +308,8 @@ NPCs[250226] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250226,
+    questID = 92172, -- Unknown
+    vignetteID = 7164,
 }
 
 NPCs[250231] = {
@@ -266,6 +318,8 @@ NPCs[250231] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250231,
+    questID = 92176, -- Unknown
+    vignetteID = 7165,
 }
 
 NPCs[250246] = {
@@ -274,6 +328,8 @@ NPCs[250246] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250246,
+    questID = 92183, -- Unknown
+    vignetteID = 7166,
 }
 
 NPCs[250317] = {
@@ -282,6 +338,8 @@ NPCs[250317] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250317,
+    questID = 92190, -- Unknown
+    vignetteID = 7167,
 }
 
 NPCs[250321] = {
@@ -290,6 +348,8 @@ NPCs[250321] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250321,
+    questID = 92191, -- Unknown
+    vignetteID = 7168,
 }
 
 NPCs[250347] = {
@@ -298,6 +358,8 @@ NPCs[250347] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250347,
+    questID = 92193, -- Unknown
+    vignetteID = 7171,
 }
 
 NPCs[250358] = {
@@ -306,6 +368,8 @@ NPCs[250358] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 250358,
+    questID = 92194, -- Unknown
+    vignetteID = 7172,
 }
 
 --------------------------------------------------------------------------------
@@ -318,6 +382,8 @@ NPCs[239864] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 239864,
+    questID = 95010, -- Unknown
+    vignetteID = 7155,
 }
 
 NPCs[252465] = {
@@ -326,6 +392,8 @@ NPCs[252465] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 252465,
+    questID = 95011, -- Unknown
+    vignetteID = 7325,
 }
 
 --------------------------------------------------------------------------------
@@ -338,6 +406,8 @@ NPCs[245182] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 245182,
+    questID = 91047, -- Eruundi
+    vignetteID = 6963,
 }
 
 NPCs[257027] = {
@@ -346,6 +416,8 @@ NPCs[257027] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 257027,
+    questID = 93953, -- Rakshur the Bonegrinder
+    vignetteID = 7435,
 }
 
 NPCs[257199] = {
@@ -354,6 +426,8 @@ NPCs[257199] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 257199,
+    questID = 94461, -- Unknown
+    vignetteID = 7442,
 }
 
 NPCs[257231] = {
@@ -362,6 +436,8 @@ NPCs[257231] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 257231,
+    questID = 94461, -- Unknown
+    vignetteID = 7445,
 }
 
 --------------------------------------------------------------------------------
@@ -526,6 +602,8 @@ NPCs[238498] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 238498,
+    questID = 91050, -- Territorial Voidscythe
+    vignetteID = 6961,
 }
 
 NPCs[241443] = {
@@ -534,6 +612,8 @@ NPCs[241443] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 241443,
+    questID = 91048, -- Tremora
+    vignetteID = 6962,
 }
 
 NPCs[244272] = {
@@ -542,6 +622,8 @@ NPCs[244272] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 244272,
+    questID = 90805, -- Sundereth the Caller
+    vignetteID = 6949,
 }
 
 NPCs[245044] = {
@@ -550,6 +632,8 @@ NPCs[245044] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 245044,
+    questID = 91051, -- Nightbrood
+    vignetteID = 6964,
 }
 
 NPCs[245182] = {
@@ -558,6 +642,8 @@ NPCs[245182] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 245182,
+    questID = 91047, -- Eruundi
+    vignetteID = 6963,
 }
 
 NPCs[248068] = {
@@ -566,6 +652,8 @@ NPCs[248068] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 248068,
+    questID = 94460, -- Unknown
+    vignetteID = 7129,
 }
 
 NPCs[248459] = {
@@ -574,6 +662,8 @@ NPCs[248459] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 248459,
+    questID = 94458, -- Unknown
+    vignetteID = 7133,
 }
 
 NPCs[248700] = {
@@ -582,6 +672,8 @@ NPCs[248700] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 248700,
+    questID = 94462, -- Unknown
+    vignetteID = 7138,
 }
 
 NPCs[248791] = {
@@ -590,6 +682,8 @@ NPCs[248791] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 248791,
+    questID = 94459, -- Unknown
+    vignetteID = 7140,
 }
 
 NPCs[248823] = {
@@ -598,6 +692,8 @@ NPCs[248823] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 248823,
+    questID = 94463, -- Unknown
+    vignetteID = 7142,
 }
 
 NPCs[248864] = {
@@ -606,6 +702,7 @@ NPCs[248864] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 248864,
+    questID = 92636, -- Predaxas
 }
 
 NPCs[256770] = {
@@ -614,6 +711,8 @@ NPCs[256770] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 256770,
+    questID = 93884, -- Bilemaw the Gluttonous
+    vignetteID = 7422,
 }
 
 NPCs[256808] = {
@@ -622,6 +721,8 @@ NPCs[256808] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 256808,
+    questID = 93895, -- Ravengerus
+    vignetteID = 7426,
 }
 
 NPCs[256821] = {
@@ -630,6 +731,8 @@ NPCs[256821] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 256821,
+    questID = 93896, -- Far'thana the Mad
+    vignetteID = 7428,
 }
 
 NPCs[256922] = {
@@ -638,6 +741,8 @@ NPCs[256922] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 256922,
+    questID = 93966, -- Screammaxa the Matriarch
+    vignetteID = 7436,
 }
 
 NPCs[256923] = {
@@ -646,6 +751,8 @@ NPCs[256923] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 256923,
+    questID = 93946, -- Bane of the Vilebloods
+    vignetteID = 7433,
 }
 
 NPCs[256924] = {
@@ -654,6 +761,8 @@ NPCs[256924] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 256924,
+    questID = 93944, -- Aeonelle Blackstar
+    vignetteID = 7432,
 }
 
 NPCs[256925] = {
@@ -662,6 +771,8 @@ NPCs[256925] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 256925,
+    questID = 93947, -- Lotus Darkblossom
+    vignetteID = 7434,
 }
 
 NPCs[256926] = {
@@ -670,6 +781,8 @@ NPCs[256926] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 256926,
+    questID = 93934, -- Queen o' War
+    vignetteID = 7430,
 }
 
 NPCs[257027] = {
@@ -678,6 +791,8 @@ NPCs[257027] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 257027,
+    questID = 93953, -- Rakshur the Bonegrinder
+    vignetteID = 7435,
 }
 
 NPCs[257199] = {
@@ -686,6 +801,8 @@ NPCs[257199] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 257199,
+    questID = 94461, -- Unknown
+    vignetteID = 7442,
 }
 
 NPCs[257231] = {
@@ -694,6 +811,8 @@ NPCs[257231] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 257231,
+    questID = 94461, -- Unknown
+    vignetteID = 7445,
 }
 
 --------------------------------------------------------------------------------
@@ -706,6 +825,8 @@ NPCs[242023] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 242023,
+    questID = 89569, -- Necrohexxer Raz'ka
+    vignetteID = 6895,
 }
 
 NPCs[242024] = {
@@ -714,6 +835,8 @@ NPCs[242024] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 242024,
+    questID = 89570, -- The Snapping Scourge
+    vignetteID = 6896,
 }
 
 NPCs[242025] = {
@@ -722,6 +845,8 @@ NPCs[242025] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 242025,
+    questID = 89571, -- Skullcrusher Harak
+    vignetteID = 6897,
 }
 
 NPCs[242026] = {
@@ -730,6 +855,8 @@ NPCs[242026] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 242026,
+    questID = 89572, -- Elder Oaktalon
+    vignetteID = 6898,
 }
 
 NPCs[242027] = {
@@ -738,6 +865,8 @@ NPCs[242027] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 242027,
+    questID = 89573, -- Depthborn Eelamental
+    vignetteID = 6899,
 }
 
 NPCs[242028] = {
@@ -746,6 +875,8 @@ NPCs[242028] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 242028,
+    questID = 89575, -- Lightwood Borer
+    vignetteID = 6900,
 }
 
 NPCs[242031] = {
@@ -754,6 +885,8 @@ NPCs[242031] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 242031,
+    questID = 89578, -- Spinefrill
+    vignetteID = 6903,
 }
 
 NPCs[242032] = {
@@ -762,6 +895,8 @@ NPCs[242032] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 242032,
+    questID = 89579, -- Oophaga
+    vignetteID = 6904,
 }
 
 NPCs[242033] = {
@@ -770,6 +905,8 @@ NPCs[242033] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 242033,
+    questID = 89580, -- Tiny Vermin
+    vignetteID = 6905,
 }
 
 NPCs[242034] = {
@@ -778,6 +915,8 @@ NPCs[242034] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 242034,
+    questID = 89581, -- Voidtouched Crustacean
+    vignetteID = 6906,
 }
 
 NPCs[242035] = {
@@ -786,6 +925,8 @@ NPCs[242035] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 242035,
+    questID = 89583, -- The Devouring Invader
+    vignetteID = 6907,
 }
 
 NPCs[244424] = {
@@ -794,6 +935,7 @@ NPCs[244424] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 244424,
+    questID = 92123, -- Cragpine
 }
 
 NPCs[245691] = {
@@ -802,6 +944,8 @@ NPCs[245691] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 245691,
+    questID = 91072, -- The Decaying Diamondback
+    vignetteID = 6971,
 }
 
 NPCs[245692] = {
@@ -810,6 +954,8 @@ NPCs[245692] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 245692,
+    questID = 91073, -- Ash'an the Empowered
+    vignetteID = 6972,
 }
 
 NPCs[245975] = {
@@ -818,6 +964,8 @@ NPCs[245975] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 245975,
+    questID = 91174, -- Mrrlokk
+    vignetteID = 6977,
 }
 
 NPCs[247976] = {
@@ -826,4 +974,6 @@ NPCs[247976] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 247976,
+    questID = 91634, -- Poacher Rav'ik
+    vignetteID = 7117,
 }
