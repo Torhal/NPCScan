@@ -38,7 +38,7 @@ local function displayContinents()
     end
 end
 
----@param continentID integer
+---@param continentID ContinentID?
 function private.DumpMapNPCs(continentID)
     if not continentID then
         displayContinents()
@@ -106,7 +106,7 @@ function private.DumpMapNPCs(continentID)
     output:Display()
 end
 
----@param continentID integer
+---@param continentID ContinentID?
 function private.DumpNPCData(continentID)
     if not continentID then
         displayContinents()
@@ -262,7 +262,7 @@ function private.DumpNPCData(continentID)
     output:Display()
 end
 
----@param continentID integer
+---@param continentID ContinentID?
 function private.DumpNPCQuests(continentID)
     if not continentID then
         displayContinents()
@@ -354,6 +354,7 @@ function private.DumpNPCQuests(continentID)
     output:Display()
 end
 
+---@param continentID ContinentID?
 function private.DumpQuestData(continentID)
     if not continentID then
         displayContinents()
