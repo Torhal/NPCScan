@@ -65,6 +65,7 @@ NPCs[145161] = {
     --------------------------------------------------------------------------------
     ---- Siege Engineer Krackleboom
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145161,
 }
@@ -73,6 +74,7 @@ NPCs[147489] = {
     --------------------------------------------------------------------------------
     ---- Captain Greensails
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147489,
 }
@@ -309,6 +311,7 @@ NPCs[131735] = {
     --------------------------------------------------------------------------------
     ---- Idej the Wise
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 131735,
 }
 
@@ -563,6 +566,7 @@ NPCs[144855] = {
     --------------------------------------------------------------------------------
     ---- Apothecary Jerrod
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 144855,
 }
@@ -571,6 +575,7 @@ NPCs[145465] = {
     --------------------------------------------------------------------------------
     ---- Engineer Bolthold
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145465,
 }
@@ -579,6 +584,7 @@ NPCs[145466] = {
     --------------------------------------------------------------------------------
     ---- Shredatron-2000
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145466,
 }
@@ -587,6 +593,7 @@ NPCs[146607] = {
     --------------------------------------------------------------------------------
     ---- Omgar Doombow
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 146607,
 }
@@ -595,6 +602,7 @@ NPCs[148146] = {
     --------------------------------------------------------------------------------
     ---- Zul'aki the Headhunter
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148146,
 }
@@ -603,6 +611,7 @@ NPCs[148155] = {
     --------------------------------------------------------------------------------
     ---- Muk'luk
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148155,
 }
@@ -611,6 +620,7 @@ NPCs[148563] = {
     --------------------------------------------------------------------------------
     ---- Duchess Fallensong the Frigid
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148563,
 }
@@ -619,6 +629,7 @@ NPCs[148648] = {
     --------------------------------------------------------------------------------
     ---- Packmaster Swiftarrow
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148648,
 }
@@ -627,6 +638,7 @@ NPCs[148676] = {
     --------------------------------------------------------------------------------
     ---- Caravan Commander Veronica
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148676,
 }
@@ -635,6 +647,7 @@ NPCs[148695] = {
     --------------------------------------------------------------------------------
     ---- Doctor Lazane
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148695,
 }
@@ -643,6 +656,7 @@ NPCs[148717] = {
     --------------------------------------------------------------------------------
     ---- Inquisitor Erik
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148717,
 }
@@ -651,6 +665,7 @@ NPCs[148723] = {
     --------------------------------------------------------------------------------
     ---- Maddok the Sniper
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148723,
 }
@@ -659,6 +674,7 @@ NPCs[148739] = {
     --------------------------------------------------------------------------------
     ---- Magister Crystalynn
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148739,
 }
@@ -667,6 +683,7 @@ NPCs[148860] = {
     --------------------------------------------------------------------------------
     ---- Grizzwald
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148860,
 }
@@ -675,6 +692,7 @@ NPCs[148862] = {
     --------------------------------------------------------------------------------
     ---- Zillie Wunderwrench
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148862,
 }
@@ -687,6 +705,7 @@ NPCs[149746] = {
     --------------------------------------------------------------------------------
     ---- Rusty Mechaspider
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 149746,
 }
 
@@ -694,6 +713,7 @@ NPCs[149847] = {
     --------------------------------------------------------------------------------
     ---- Crazed Trogg
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 149847,
     questID = 55812, -- Unknown
 }
@@ -703,6 +723,7 @@ NPCs[150342] = {
     ---- Earthbreaker Gulroc
     --------------------------------------------------------------------------------
     achievementQuestID = 55814, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 150342,
 }
 
@@ -710,6 +731,7 @@ NPCs[150394] = {
     --------------------------------------------------------------------------------
     ---- Armored Vaultbot
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 150394,
     questID = 55546, -- Unknown
     vignetteID = 3586,
@@ -720,6 +742,7 @@ NPCs[150575] = {
     ---- Rumblerocks
     --------------------------------------------------------------------------------
     achievementQuestID = 55368, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 150575,
 }
 
@@ -727,6 +750,7 @@ NPCs[150786] = {
     --------------------------------------------------------------------------------
     ---- Mechanized Crawler
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 150786,
 }
 
@@ -735,6 +759,7 @@ NPCs[150937] = {
     ---- Seaspit
     --------------------------------------------------------------------------------
     achievementQuestID = 55545, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 150937,
 }
 
@@ -743,6 +768,7 @@ NPCs[151124] = {
     ---- Mechagonian Nullifier
     --------------------------------------------------------------------------------
     achievementQuestID = 55207, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151124,
 }
 
@@ -750,6 +776,7 @@ NPCs[151159] = {
     --------------------------------------------------------------------------------
     ---- OOX-Fleetfoot/MG
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 151159,
 }
 
@@ -758,6 +785,7 @@ NPCs[151202] = {
     ---- Foul Manifestation
     --------------------------------------------------------------------------------
     achievementQuestID = 55513, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151202,
 }
 
@@ -766,6 +794,7 @@ NPCs[151296] = {
     ---- OOX-Avenger/MG
     --------------------------------------------------------------------------------
     achievementQuestID = 55515, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151296,
 }
 
@@ -774,6 +803,7 @@ NPCs[151308] = {
     ---- Boggac Skullbash
     --------------------------------------------------------------------------------
     achievementQuestID = 55539, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151308,
 }
 
@@ -782,6 +812,7 @@ NPCs[151569] = {
     ---- Deepwater Maw
     --------------------------------------------------------------------------------
     achievementQuestID = 55514, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151569,
 }
 
@@ -790,6 +821,7 @@ NPCs[151623] = {
     ---- The Scrap King
     --------------------------------------------------------------------------------
     achievementQuestID = 55364, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151623,
 }
 
@@ -798,6 +830,7 @@ NPCs[151625] = {
     ---- The Scrap King
     --------------------------------------------------------------------------------
     achievementQuestID = 55364, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151625,
 }
 
@@ -806,6 +839,7 @@ NPCs[151627] = {
     ---- Mr. Fixthis
     --------------------------------------------------------------------------------
     achievementQuestID = 55859, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151627,
 }
 
@@ -814,6 +848,7 @@ NPCs[151672] = {
     ---- Mecharantula
     --------------------------------------------------------------------------------
     achievementQuestID = 55386, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151672,
 }
 
@@ -822,6 +857,7 @@ NPCs[151684] = {
     ---- Jawbreaker
     --------------------------------------------------------------------------------
     achievementQuestID = 55399, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151684,
 }
 
@@ -830,6 +866,7 @@ NPCs[151702] = {
     ---- Paol Pondwader
     --------------------------------------------------------------------------------
     achievementQuestID = 55405, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151702,
 }
 
@@ -838,6 +875,7 @@ NPCs[151884] = {
     ---- Fungarian Furor
     --------------------------------------------------------------------------------
     achievementQuestID = 55367, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151884,
 }
 
@@ -846,6 +884,7 @@ NPCs[151933] = {
     ---- Malfunctioning Beastbot
     --------------------------------------------------------------------------------
     achievementQuestID = 55544, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151933,
 }
 
@@ -854,6 +893,7 @@ NPCs[151934] = {
     ---- Arachnoid Harvester
     --------------------------------------------------------------------------------
     achievementQuestID = 55512, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151934,
 }
 
@@ -862,6 +902,7 @@ NPCs[151940] = {
     ---- Uncle T'Rogg
     --------------------------------------------------------------------------------
     achievementQuestID = 55538, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 151940,
 }
 
@@ -870,6 +911,7 @@ NPCs[152001] = {
     ---- Bonepicker
     --------------------------------------------------------------------------------
     achievementQuestID = 55537, -- Unknown
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 152001,
 }
@@ -879,6 +921,7 @@ NPCs[152007] = {
     ---- Killsaw
     --------------------------------------------------------------------------------
     achievementQuestID = 55369, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 152007,
 }
 
@@ -887,6 +930,7 @@ NPCs[152113] = {
     ---- The Kleptoboss
     --------------------------------------------------------------------------------
     achievementQuestID = 55858, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 152113,
 }
 
@@ -895,6 +939,7 @@ NPCs[152182] = {
     ---- Rustfeather
     --------------------------------------------------------------------------------
     achievementQuestID = 55811, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 152182,
 }
 
@@ -903,6 +948,7 @@ NPCs[152569] = {
     ---- Crazed Trogg
     --------------------------------------------------------------------------------
     achievementQuestID = 55812, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 152569,
 }
 
@@ -910,6 +956,7 @@ NPCs[152570] = {
     --------------------------------------------------------------------------------
     ---- Crazed Trogg
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 152570,
     questID = 55812, -- Unknown
 }
@@ -919,6 +966,7 @@ NPCs[152764] = {
     ---- Oxidized Leachbeast
     --------------------------------------------------------------------------------
     achievementQuestID = 55856, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 152764,
 }
 
@@ -926,6 +974,7 @@ NPCs[152922] = {
     --------------------------------------------------------------------------------
     ---- Data Anomaly
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 152922,
     questID = 57387, -- Unknown
 }
@@ -934,6 +983,7 @@ NPCs[152923] = {
     --------------------------------------------------------------------------------
     ---- Data Anomaly
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 152923,
     questID = 57385, -- Unknown
 }
@@ -942,6 +992,7 @@ NPCs[152958] = {
     --------------------------------------------------------------------------------
     ---- Data Anomaly
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 152958,
     questID = 57385, -- Unknown
 }
@@ -950,6 +1001,7 @@ NPCs[152961] = {
     --------------------------------------------------------------------------------
     ---- Data Anomaly
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 152961,
     questID = 57387, -- Unknown
 }
@@ -958,6 +1010,7 @@ NPCs[152979] = {
     --------------------------------------------------------------------------------
     ---- Data Anomaly
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 152979,
     questID = 57388, -- Unknown
 }
@@ -966,6 +1019,7 @@ NPCs[152983] = {
     --------------------------------------------------------------------------------
     ---- Data Anomaly
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 152983,
     questID = 57388, -- Unknown
 }
@@ -975,6 +1029,7 @@ NPCs[153000] = {
     ---- Sparkqueen P'Emp
     --------------------------------------------------------------------------------
     achievementQuestID = 55810, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 153000,
 }
 
@@ -982,6 +1037,7 @@ NPCs[153088] = {
     --------------------------------------------------------------------------------
     ---- Shiny Mechaspider
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 153088,
 }
 
@@ -990,6 +1046,7 @@ NPCs[153200] = {
     ---- Boilburn
     --------------------------------------------------------------------------------
     achievementQuestID = 55857, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 153200,
 }
 
@@ -998,6 +1055,7 @@ NPCs[153205] = {
     ---- Gemicide
     --------------------------------------------------------------------------------
     achievementQuestID = 55855, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 153205,
 }
 
@@ -1006,6 +1064,7 @@ NPCs[153206] = {
     ---- Ol' Big Tusk
     --------------------------------------------------------------------------------
     achievementQuestID = 55853, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 153206,
 }
 
@@ -1014,6 +1073,7 @@ NPCs[153226] = {
     ---- Steel Singer Freza
     --------------------------------------------------------------------------------
     achievementQuestID = 55854, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 153226,
 }
 
@@ -1022,6 +1082,7 @@ NPCs[153228] = {
     ---- Gear Checker Cogstar
     --------------------------------------------------------------------------------
     achievementQuestID = 55852, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 153228,
 }
 
@@ -1029,6 +1090,7 @@ NPCs[153486] = {
     --------------------------------------------------------------------------------
     ---- Data Anomaly
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 153486,
     questID = 57389, -- Unknown
 }
@@ -1038,6 +1100,7 @@ NPCs[154153] = {
     ---- Enforcer KX-T57
     --------------------------------------------------------------------------------
     achievementQuestID = 56207, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 154153,
 }
 
@@ -1046,6 +1109,7 @@ NPCs[154225] = {
     ---- The Rusty Prince
     --------------------------------------------------------------------------------
     achievementQuestID = 56182, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 154225,
 }
 
@@ -1053,6 +1117,7 @@ NPCs[154342] = {
     --------------------------------------------------------------------------------
     ---- Arachnoid Harvester
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 154342,
     questID = 55512, -- Unknown
 }
@@ -1062,6 +1127,7 @@ NPCs[154701] = {
     ---- Gorged Gear-Cruncher
     --------------------------------------------------------------------------------
     achievementQuestID = 56367, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 154701,
 }
 
@@ -1070,6 +1136,7 @@ NPCs[154739] = {
     ---- Caustic Mechaslime
     --------------------------------------------------------------------------------
     achievementQuestID = 56368, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 154739,
 }
 
@@ -1078,6 +1145,7 @@ NPCs[154968] = {
     ---- Armored Vaultbot
     --------------------------------------------------------------------------------
     achievementQuestID = 55546, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 154968,
 }
 
@@ -1086,6 +1154,7 @@ NPCs[155060] = {
     ---- Doppel Ganger
     --------------------------------------------------------------------------------
     achievementQuestID = 56419, -- The Doppel Gang
+    classification = NPCClassification.Rare,
     npcID = 155060,
 }
 
@@ -1094,6 +1163,7 @@ NPCs[155583] = {
     ---- Scrapclaw
     --------------------------------------------------------------------------------
     achievementQuestID = 56737, -- Unknown
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 155583,
 }
@@ -1117,6 +1187,7 @@ NPCs[129836] = {
     --------------------------------------------------------------------------------
     ---- Spelltwister Moephus
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 129836,
 }
 
@@ -1331,6 +1402,7 @@ NPCs[139328] = {
     ---- Sabertron
     --------------------------------------------------------------------------------
     achievementQuestID = 51956, -- Unknown
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139328,
     vignetteID = 3028,
@@ -1341,6 +1413,7 @@ NPCs[139335] = {
     ---- Sabertron
     --------------------------------------------------------------------------------
     achievementQuestID = 51956, -- Unknown
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139335,
     vignetteID = 3028,
@@ -1351,6 +1424,7 @@ NPCs[139336] = {
     ---- Sabertron
     --------------------------------------------------------------------------------
     achievementQuestID = 51956, -- Unknown
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139336,
     vignetteID = 3028,
@@ -1362,6 +1436,7 @@ NPCs[139356] = {
     ---- Sabertron
     --------------------------------------------------------------------------------
     achievementQuestID = 51956, -- Unknown
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139356,
     vignetteID = 3028,
@@ -1372,6 +1447,7 @@ NPCs[139359] = {
     ---- Sabertron
     --------------------------------------------------------------------------------
     achievementQuestID = 51956, -- Unknown
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139359,
     vignetteID = 3028,
@@ -1416,6 +1492,7 @@ NPCs[139988] = {
     ---- Sandfang
     --------------------------------------------------------------------------------
     achievementQuestID = 52125, -- Unknown
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139988,
     vignetteID = 3043,
@@ -1447,6 +1524,7 @@ NPCs[140474] = {
     --------------------------------------------------------------------------------
     ---- Adherent of the Abyss
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 140474,
 }
 
@@ -1534,6 +1612,7 @@ NPCs[141088] = {
     ---- Squall
     --------------------------------------------------------------------------------
     achievementQuestID = 52433, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 141088,
     vignetteID = 3059,
 }
@@ -1543,6 +1622,7 @@ NPCs[141143] = {
     ---- Sister Absinthe
     --------------------------------------------------------------------------------
     achievementQuestID = 52441, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 141143,
     vignetteID = 3062,
 }
@@ -1552,6 +1632,7 @@ NPCs[141175] = {
     ---- Song Mistress Dadalea
     --------------------------------------------------------------------------------
     achievementQuestID = 52448, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 141175,
     vignetteID = 3063,
 }
@@ -1561,6 +1642,7 @@ NPCs[141226] = {
     ---- Haegol the Hammer
     --------------------------------------------------------------------------------
     achievementQuestID = 52460, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 141226,
     vignetteID = 3065,
 }
@@ -1570,6 +1652,7 @@ NPCs[141239] = {
     ---- Osca the Bloodied
     --------------------------------------------------------------------------------
     achievementQuestID = 52461, -- Unknown
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 141239,
     vignetteID = 3067,
@@ -1580,6 +1663,7 @@ NPCs[141286] = {
     ---- Poacher Zane
     --------------------------------------------------------------------------------
     achievementQuestID = 52469, -- Unknown
+    classification = NPCClassification.Rare,
     npcID = 141286,
     vignetteID = 3069,
 }
@@ -1599,6 +1683,7 @@ NPCs[144915] = {
     --------------------------------------------------------------------------------
     ---- Firewarden Viton Darkflare
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 144915,
 }
@@ -1607,6 +1692,7 @@ NPCs[144987] = {
     --------------------------------------------------------------------------------
     ---- Shadow Hunter Mutumba
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 144987,
 }
@@ -1615,6 +1701,7 @@ NPCs[144997] = {
     --------------------------------------------------------------------------------
     ---- Gurin Stonebinder
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 144997,
 }
@@ -1623,6 +1710,7 @@ NPCs[145020] = {
     --------------------------------------------------------------------------------
     ---- Dolizite
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145020,
 }
@@ -1631,6 +1719,7 @@ NPCs[145278] = {
     --------------------------------------------------------------------------------
     ---- Dinomancer Zakuru
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145278,
 }
@@ -1639,6 +1728,7 @@ NPCs[145415] = {
     --------------------------------------------------------------------------------
     ---- Cap'n Gorok
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145415,
 }
@@ -1647,6 +1737,7 @@ NPCs[147562] = {
     --------------------------------------------------------------------------------
     ---- Mortar Master Zapfritz
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 147562,
 }
@@ -1655,6 +1746,7 @@ NPCs[147923] = {
     --------------------------------------------------------------------------------
     ---- Knight-Captain Joesiph
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147923,
 }
@@ -1663,6 +1755,7 @@ NPCs[147941] = {
     --------------------------------------------------------------------------------
     ---- Tidesage Clarissa
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147941,
 }
@@ -1671,6 +1764,7 @@ NPCs[147951] = {
     --------------------------------------------------------------------------------
     ---- Alkalinius
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147951,
 }
@@ -1679,6 +1773,7 @@ NPCs[147998] = {
     --------------------------------------------------------------------------------
     ---- Voidmaster Evenshade
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147998,
 }
@@ -1687,6 +1782,7 @@ NPCs[148044] = {
     --------------------------------------------------------------------------------
     ---- Owynn Graddock
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148044,
 }
@@ -1695,6 +1791,7 @@ NPCs[148075] = {
     --------------------------------------------------------------------------------
     ---- Beast Tamer Watkins
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148075,
 }
@@ -1703,6 +1800,7 @@ NPCs[148092] = {
     --------------------------------------------------------------------------------
     ---- Nalaess Featherseeker
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148092,
 }
@@ -1711,6 +1809,7 @@ NPCs[154154] = {
     --------------------------------------------------------------------------------
     ---- Honey Smasher
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 154154,
     questID = 57674, -- Unknown
 }
@@ -1719,6 +1818,7 @@ NPCs[155055] = {
     --------------------------------------------------------------------------------
     ---- Gurg the Hivethief
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 155055,
 }
 
@@ -1726,6 +1826,7 @@ NPCs[155059] = {
     --------------------------------------------------------------------------------
     ---- Yorag the Jelly Feaster
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 155059,
 }
 
@@ -1733,6 +1834,7 @@ NPCs[155069] = {
     --------------------------------------------------------------------------------
     ---- Honeyback Harvester
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 155069,
     questID = 56414, -- Unknown
 }
@@ -1741,6 +1843,7 @@ NPCs[155171] = {
     --------------------------------------------------------------------------------
     ---- The Hivekiller
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 155171,
 }
 
@@ -1748,6 +1851,7 @@ NPCs[155172] = {
     --------------------------------------------------------------------------------
     ---- Trapdoor Bee Hunter
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 155172,
 }
 
@@ -1755,6 +1859,7 @@ NPCs[155173] = {
     --------------------------------------------------------------------------------
     ---- Honeyback Usurper
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 155173,
 }
 
@@ -1762,6 +1867,7 @@ NPCs[155176] = {
     --------------------------------------------------------------------------------
     ---- Old Nasha
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 155176,
 }
 
@@ -1942,6 +2048,7 @@ NPCs[132179] = {
     --------------------------------------------------------------------------------
     ---- Raging Swell
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 132179,
     questID = 50148, -- Unknown
     vignetteID = 2545,
@@ -1951,6 +2058,7 @@ NPCs[132182] = {
     --------------------------------------------------------------------------------
     ---- Auditor Dolp
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 132182,
     questID = 50156, -- Unknown
     vignetteID = 2547,
@@ -1960,6 +2068,7 @@ NPCs[132211] = {
     --------------------------------------------------------------------------------
     ---- Fowlmouth
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 132211,
     questID = 50155, -- Unknown
@@ -1981,6 +2090,7 @@ NPCs[133356] = {
     --------------------------------------------------------------------------------
     ---- Tempestria
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 133356,
     questID = 50301, -- Unknown
@@ -1991,6 +2101,7 @@ NPCs[134106] = {
     --------------------------------------------------------------------------------
     ---- Lumbergrasp Sentinel
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 134106,
     questID = 50525, -- Unknown
     vignetteID = 2653,
@@ -2080,6 +2191,7 @@ NPCs[139145] = {
     --------------------------------------------------------------------------------
     ---- Blackthorne
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139145,
     questID = 51808, -- Unknown
@@ -2090,6 +2202,7 @@ NPCs[139152] = {
     --------------------------------------------------------------------------------
     ---- Carla Smirk
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 139152,
     questID = 51809, -- Unknown
     vignetteID = 2984,
@@ -2110,6 +2223,7 @@ NPCs[139233] = {
     --------------------------------------------------------------------------------
     ---- Gulliver
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139233,
     questID = 53373, -- Unknown
@@ -2120,6 +2234,7 @@ NPCs[139235] = {
     --------------------------------------------------------------------------------
     ---- Tort Jaw
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139235,
     questID = 51835, -- Unknown
@@ -2130,6 +2245,7 @@ NPCs[139278] = {
     --------------------------------------------------------------------------------
     ---- Ranja
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139278,
     questID = 51872, -- Unknown
@@ -2140,6 +2256,7 @@ NPCs[139280] = {
     --------------------------------------------------------------------------------
     ---- Sythian the Swift
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139280,
     questID = 51873, -- Unknown
@@ -2150,6 +2267,7 @@ NPCs[139285] = {
     --------------------------------------------------------------------------------
     ---- Shiverscale the Toxic
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139285,
     questID = 51876, -- Unknown
@@ -2171,6 +2289,7 @@ NPCs[139289] = {
     --------------------------------------------------------------------------------
     ---- Tentulos the Drifter
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     npcID = 139289,
     questID = 51879, -- Unknown
     vignetteID = 2995,
@@ -2180,6 +2299,7 @@ NPCs[139290] = {
     --------------------------------------------------------------------------------
     ---- Maison the Portable
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 139290,
     questID = 51880, -- Unknown
@@ -2190,6 +2310,7 @@ NPCs[144722] = {
     --------------------------------------------------------------------------------
     ---- Togoth Cruelarm
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 144722,
 }
@@ -2198,6 +2319,7 @@ NPCs[145112] = {
     --------------------------------------------------------------------------------
     ---- Zagg Brokeneye
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145112,
 }
@@ -2206,6 +2328,7 @@ NPCs[145286] = {
     --------------------------------------------------------------------------------
     ---- Motega Bloodshield
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145286,
 }
@@ -2214,6 +2337,7 @@ NPCs[145287] = {
     --------------------------------------------------------------------------------
     ---- Zunjo of Sen'jin
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145287,
 }
@@ -2222,6 +2346,7 @@ NPCs[145292] = {
     --------------------------------------------------------------------------------
     ---- Alsian Vistreth
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145292,
 }
@@ -2230,6 +2355,7 @@ NPCs[145308] = {
     --------------------------------------------------------------------------------
     ---- First Sergeant Steelfang
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145308,
 }
@@ -2260,6 +2386,7 @@ NPCs[146611] = {
     --------------------------------------------------------------------------------
     ---- Strong Arm John
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 146611,
 }
@@ -2268,6 +2395,7 @@ NPCs[146651] = {
     --------------------------------------------------------------------------------
     ---- Mistweaver Nian
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 146651,
 }
@@ -2276,6 +2404,7 @@ NPCs[146675] = {
     --------------------------------------------------------------------------------
     ---- Hartford Sternbach
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 146675,
 }
@@ -2284,6 +2413,7 @@ NPCs[146773] = {
     --------------------------------------------------------------------------------
     ---- First Mate Malone
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 146773,
 }
@@ -2292,6 +2422,7 @@ NPCs[147061] = {
     --------------------------------------------------------------------------------
     ---- Grubb
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 147061,
 }
@@ -2300,6 +2431,7 @@ NPCs[147489] = {
     --------------------------------------------------------------------------------
     ---- Captain Greensails
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147489,
 }
@@ -2308,6 +2440,7 @@ NPCs[147750] = {
     --------------------------------------------------------------------------------
     ---- Artillery Master Goodwin
     --------------------------------------------------------------------------------
+    classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147750,
 }
