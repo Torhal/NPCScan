@@ -187,15 +187,18 @@ function NPCScan:OnEnable()
 
         for npcID in pairs(map.NPCs) do
             local npc = map.NPCs[npcID]
-
-            if not hasChecked[npcID] then
-                local questID = npc.questID or npc.achievementQuestID
-
-                if not questID and not npc.worldQuestID and (not continent or questMapIDs[continent.mapID]) then
-                    missingData[npcID] = "questID"
-                end
-
-                if not npc.vignetteID and (not continent or vignetteMapIDs[continent.mapID]) then
+            if
+                not hasChecked[npcID]
+                and (
+                    npc.classification == private.Enum.NPCClassification.Rare
+                    or npc.classification == private.Enum.NPCClassification.RareElite
+                )
+            then
+                if npc.vignetteID then
+                    if not npc.questID and (not continent or questMapIDs[continent.mapID]) then
+                        missingData[npcID] = "questID"
+                    end
+                elseif not continent or vignetteMapIDs[continent.mapID] then
                     if missingData[npcID] then
                         missingData[npcID] = ("%s, vignetteID"):format(missingData[npcID])
                     else
