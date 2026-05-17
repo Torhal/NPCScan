@@ -27,6 +27,7 @@ private.Data = {
     ---@type table<AchievementID, AchievementData>
     Achievements = {},
 
+    ---@type ContinentData[]
     Continents = {},
 
     ---@type table<MapID, MapData>

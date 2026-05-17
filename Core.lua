@@ -74,7 +74,9 @@ function NPCScan:OnInitialize()
 
         if not continent then
             continent = {
+                ID = -1,
                 Maps = {},
+                name = "",
             }
 
             private.Data.Continents[continentID] = continent
