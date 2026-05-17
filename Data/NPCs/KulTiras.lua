@@ -1676,6 +1676,7 @@ NPCs[142088] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 142088,
+    questID = 52457, -- Unknown
     vignetteID = 3064,
 }
 
@@ -1686,6 +1687,8 @@ NPCs[144915] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 144915,
+    questID = 53715, -- Firewarden Viton Darkflare
+    vignetteID = 3444,
 }
 
 NPCs[144987] = {
@@ -1695,6 +1698,8 @@ NPCs[144987] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 144987,
+    questID = 53724, -- Shadow Hunter Mutumba
+    vignetteID = 3440,
 }
 
 NPCs[144997] = {
@@ -1704,6 +1709,8 @@ NPCs[144997] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 144997,
+    questID = 53771, -- Gurin Stonebinder
+    vignetteID = 3442,
 }
 
 NPCs[145020] = {
@@ -1713,6 +1720,7 @@ NPCs[145020] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145020,
+    questID = 53771, -- Gurin Stonebinder
     vignetteID = 3443,
 }
 
@@ -1723,6 +1731,8 @@ NPCs[145278] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145278,
+    questID = 53804, -- Dinomancer Zakuru
+    vignetteID = 3445,
 }
 
 NPCs[145415] = {
@@ -1732,6 +1742,8 @@ NPCs[145415] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145415,
+    questID = 53857, -- Cap'n Gorok
+    vignetteID = 3446,
 }
 
 NPCs[147562] = {
@@ -1741,6 +1753,8 @@ NPCs[147562] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 147562,
+    questID = 54266, -- Mortar Master Zapfritz
+    vignetteID = 3441,
 }
 
 NPCs[147923] = {
@@ -1750,6 +1764,8 @@ NPCs[147923] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147923,
+    questID = 54328, -- Knight-Captain Joesiph
+    vignetteID = 3438,
 }
 
 NPCs[147941] = {
@@ -1759,6 +1775,8 @@ NPCs[147941] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147941,
+    questID = 54403, -- Tidesage Clarissa
+    vignetteID = 3434,
 }
 
 NPCs[147951] = {
@@ -1768,6 +1786,8 @@ NPCs[147951] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147951,
+    questID = 54403, -- Tidesage Clarissa
+    vignetteID = 3435,
 }
 
 NPCs[147998] = {
@@ -1777,6 +1797,8 @@ NPCs[147998] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147998,
+    questID = 54434, -- Voidmaster Evenshade
+    vignetteID = 3433,
 }
 
 NPCs[148044] = {
@@ -1786,6 +1808,8 @@ NPCs[148044] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148044,
+    questID = 54437, -- Owynn Graddock
+    vignetteID = 3436,
 }
 
 NPCs[148075] = {
@@ -1795,6 +1819,8 @@ NPCs[148075] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148075,
+    questID = 54442, -- Beast Tamer Watkins
+    vignetteID = 3439,
 }
 
 NPCs[148092] = {
@@ -1804,6 +1830,8 @@ NPCs[148092] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148092,
+    questID = 54468, -- Nalaess Featherseeker
+    vignetteID = 3437,
 }
 
 NPCs[154154] = {
@@ -1813,6 +1841,7 @@ NPCs[154154] = {
     classification = NPCClassification.Rare,
     npcID = 154154,
     questID = 57674, -- Unknown
+    vignetteID = 3936,
 }
 
 NPCs[155055] = {
@@ -1821,6 +1850,7 @@ NPCs[155055] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 155055,
+    vignetteID = 3747,
 }
 
 NPCs[155059] = {
@@ -1829,6 +1859,7 @@ NPCs[155059] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 155059,
+    vignetteID = 3750,
 }
 
 NPCs[155069] = {
@@ -1838,6 +1869,7 @@ NPCs[155069] = {
     classification = NPCClassification.Rare,
     npcID = 155069,
     questID = 56414, -- Unknown
+    vignetteID = 3743,
 }
 
 NPCs[155171] = {
@@ -1846,6 +1878,7 @@ NPCs[155171] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 155171,
+    vignetteID = 3749,
 }
 
 NPCs[155172] = {
@@ -1854,6 +1887,7 @@ NPCs[155172] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 155172,
+    vignetteID = 3748,
 }
 
 NPCs[155173] = {
@@ -1862,6 +1896,7 @@ NPCs[155173] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 155173,
+    vignetteID = 3746,
 }
 
 NPCs[155176] = {
@@ -1870,6 +1905,7 @@ NPCs[155176] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 155176,
+    vignetteID = 3745,
 }
 
 --------------------------------------------------------------------------------
