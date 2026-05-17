@@ -678,6 +678,7 @@ NPCs[177336] = {
     classification = NPCClassification.Rare,
     npcID = 177336,
     questID = 64442, -- Unknown
+    vignetteID = 4863,
 }
 
 --------------------------------------------------------------------------------
@@ -691,6 +692,7 @@ NPCs[177336] = {
     classification = NPCClassification.Rare,
     npcID = 177336,
     questID = 64442, -- Unknown
+    vignetteID = 4863,
 }
 
 NPCs[177903] = {
