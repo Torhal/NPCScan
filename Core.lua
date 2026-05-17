@@ -117,6 +117,8 @@ function NPCScan:OnInitialize()
 
     private.db = db
 
+    private.TextDump = LibStub("LibTextDump-1.0"):New(AddOnFolderName, 750, 600)
+
     --------------------------------------------------------------------------------
     ---- DB Migrations
     --------------------------------------------------------------------------------
@@ -272,7 +274,6 @@ do
                     local func = private.DUMP_COMMANDS[dumpType]
 
                     if func then
-                        private.TextDump = private.TextDump or LibStub("LibTextDump-1.0"):New(AddOnFolderName, 750, 600)
                         func(parameters)
                     else
                         NPCScan:Print("Unknown dump command. Valid commands:")
