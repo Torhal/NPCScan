@@ -546,6 +546,7 @@ NPCs[79678] = {
     classification = NPCClassification.Rare,
     npcID = 79678,
     questID = 34708, -- Unknown
+    vignetteID = 317,
 }
 
 NPCs[80190] = {
