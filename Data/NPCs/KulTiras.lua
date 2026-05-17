@@ -1713,6 +1713,7 @@ NPCs[145020] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145020,
+    vignetteID = 3443,
 }
 
 NPCs[145278] = {
