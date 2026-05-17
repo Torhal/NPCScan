@@ -72,6 +72,7 @@ NPCs[149653] = {
     classification = NPCClassification.Rare,
     npcID = 149653,
     questID = 55366, -- Unknown
+    vignetteID = 3598,
 }
 
 NPCs[150191] = {
@@ -81,6 +82,7 @@ NPCs[150191] = {
     classification = NPCClassification.Rare,
     npcID = 150191,
     questID = 55584, -- Unknown
+    vignetteID = 3597,
 }
 
 NPCs[150468] = {
@@ -90,6 +92,7 @@ NPCs[150468] = {
     classification = NPCClassification.Rare,
     npcID = 150468,
     questID = 55603, -- Unknown
+    vignetteID = 3599,
 }
 
 NPCs[150583] = {
@@ -99,6 +102,7 @@ NPCs[150583] = {
     classification = NPCClassification.Rare,
     npcID = 150583,
     questID = 56291, -- Unknown
+    vignetteID = 3723,
 }
 
 NPCs[151719] = {
@@ -108,6 +112,7 @@ NPCs[151719] = {
     classification = NPCClassification.Rare,
     npcID = 151719,
     questID = 56300, -- Unknown
+    vignetteID = 3732,
 }
 
 NPCs[151870] = {
@@ -117,6 +122,7 @@ NPCs[151870] = {
     classification = NPCClassification.Rare,
     npcID = 151870,
     questID = 56276, -- Unknown
+    vignetteID = 3708,
 }
 
 NPCs[152290] = {
@@ -127,6 +133,7 @@ NPCs[152290] = {
     isTameable = true,
     npcID = 152290,
     questID = 56298, -- Unknown
+    vignetteID = 3730,
 }
 
 NPCs[152291] = {
@@ -136,6 +143,8 @@ NPCs[152291] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 152291,
+    questID = 56272, -- Unknown
+    vignetteID = 3704,
 }
 
 NPCs[152323] = {
@@ -145,6 +154,7 @@ NPCs[152323] = {
     classification = NPCClassification.Rare,
     npcID = 152323,
     questID = 55671, -- Unknown
+    vignetteID = 3619,
 }
 
 NPCs[152359] = {
@@ -155,6 +165,7 @@ NPCs[152359] = {
     isTameable = true,
     npcID = 152359,
     questID = 56297, -- Unknown
+    vignetteID = 3729,
 }
 
 NPCs[152360] = {
@@ -165,6 +176,7 @@ NPCs[152360] = {
     isTameable = true,
     npcID = 152360,
     questID = 56278, -- Unknown
+    vignetteID = 3710,
 }
 
 NPCs[152361] = {
@@ -175,6 +187,7 @@ NPCs[152361] = {
     isTameable = true,
     npcID = 152361,
     questID = 56282, -- Unknown
+    vignetteID = 3714,
 }
 
 NPCs[152397] = {
@@ -184,6 +197,7 @@ NPCs[152397] = {
     classification = NPCClassification.Rare,
     npcID = 152397,
     questID = 56288, -- Unknown
+    vignetteID = 3720,
 }
 
 NPCs[152414] = {
@@ -193,6 +207,7 @@ NPCs[152414] = {
     classification = NPCClassification.Rare,
     npcID = 152414,
     questID = 56284, -- Unknown
+    vignetteID = 3716,
 }
 
 NPCs[152415] = {
@@ -202,6 +217,7 @@ NPCs[152415] = {
     classification = NPCClassification.Rare,
     npcID = 152415,
     questID = 56279, -- Unknown
+    vignetteID = 3711,
 }
 
 NPCs[152416] = {
@@ -211,6 +227,7 @@ NPCs[152416] = {
     classification = NPCClassification.Rare,
     npcID = 152416,
     questID = 56280, -- Unknown
+    vignetteID = 3712,
 }
 
 NPCs[152448] = {
@@ -221,6 +238,7 @@ NPCs[152448] = {
     isTameable = true,
     npcID = 152448,
     questID = 56286, -- Unknown
+    vignetteID = 3718,
 }
 
 NPCs[152464] = {
@@ -231,6 +249,7 @@ NPCs[152464] = {
     isTameable = true,
     npcID = 152464,
     questID = 56283, -- Unknown
+    vignetteID = 3715,
 }
 
 NPCs[152465] = {
@@ -241,6 +260,7 @@ NPCs[152465] = {
     isTameable = true,
     npcID = 152465,
     questID = 56275, -- Unknown
+    vignetteID = 3707,
 }
 
 NPCs[152542] = {
@@ -251,6 +271,7 @@ NPCs[152542] = {
     isTameable = true,
     npcID = 152542,
     questID = 56294, -- Unknown
+    vignetteID = 3726,
 }
 
 NPCs[152545] = {
@@ -261,6 +282,7 @@ NPCs[152545] = {
     isTameable = true,
     npcID = 152545,
     questID = 56293, -- Unknown
+    vignetteID = 3725,
 }
 
 NPCs[152548] = {
@@ -271,6 +293,7 @@ NPCs[152548] = {
     isTameable = true,
     npcID = 152548,
     questID = 56292, -- Unknown
+    vignetteID = 3724,
 }
 
 NPCs[152552] = {
@@ -281,6 +304,7 @@ NPCs[152552] = {
     isTameable = true,
     npcID = 152552,
     questID = 56295, -- Unknown
+    vignetteID = 3727,
 }
 
 NPCs[152553] = {
@@ -291,6 +315,7 @@ NPCs[152553] = {
     isTameable = true,
     npcID = 152553,
     questID = 56273, -- Unknown
+    vignetteID = 3705,
 }
 
 NPCs[152555] = {
@@ -301,6 +326,7 @@ NPCs[152555] = {
     isTameable = true,
     npcID = 152555,
     questID = 56285, -- Unknown
+    vignetteID = 3717,
 }
 
 NPCs[152556] = {
@@ -311,6 +337,7 @@ NPCs[152556] = {
     isTameable = true,
     npcID = 152556,
     questID = 56270, -- Unknown
+    vignetteID = 3701,
 }
 
 NPCs[152566] = {
@@ -320,6 +347,7 @@ NPCs[152566] = {
     classification = NPCClassification.Rare,
     npcID = 152566,
     questID = 56281, -- Unknown
+    vignetteID = 3713,
 }
 
 NPCs[152567] = {
@@ -329,6 +357,7 @@ NPCs[152567] = {
     classification = NPCClassification.Rare,
     npcID = 152567,
     questID = 56287, -- Unknown
+    vignetteID = 3719,
 }
 
 NPCs[152568] = {
@@ -338,6 +367,7 @@ NPCs[152568] = {
     classification = NPCClassification.Rare,
     npcID = 152568,
     questID = 56299, -- Unknown
+    vignetteID = 3731,
 }
 
 NPCs[152681] = {
@@ -347,6 +377,7 @@ NPCs[152681] = {
     classification = NPCClassification.Rare,
     npcID = 152681,
     questID = 56289, -- Unknown
+    vignetteID = 3721,
 }
 
 NPCs[152682] = {
@@ -356,6 +387,7 @@ NPCs[152682] = {
     classification = NPCClassification.Rare,
     npcID = 152682,
     questID = 56290, -- Unknown
+    vignetteID = 3722,
 }
 
 NPCs[152697] = {
@@ -374,6 +406,7 @@ NPCs[152712] = {
     classification = NPCClassification.Rare,
     npcID = 152712,
     questID = 56269, -- Unknown
+    vignetteID = 3700,
 }
 
 NPCs[152729] = {
@@ -401,6 +434,7 @@ NPCs[152756] = {
     classification = NPCClassification.Rare,
     npcID = 152756,
     questID = 56271, -- Unknown
+    vignetteID = 3702,
 }
 
 NPCs[152794] = {
@@ -410,6 +444,7 @@ NPCs[152794] = {
     classification = NPCClassification.Rare,
     npcID = 152794,
     questID = 56268, -- Unknown
+    vignetteID = 3699,
 }
 
 NPCs[152795] = {
@@ -420,6 +455,7 @@ NPCs[152795] = {
     isTameable = true,
     npcID = 152795,
     questID = 56277, -- Unknown
+    vignetteID = 3709,
 }
 
 NPCs[153296] = {
@@ -567,6 +603,7 @@ NPCs[153658] = {
     isTameable = true,
     npcID = 153658,
     questID = 56296, -- Unknown
+    vignetteID = 3728,
 }
 
 NPCs[153898] = {
@@ -576,6 +613,7 @@ NPCs[153898] = {
     classification = NPCClassification.Rare,
     npcID = 153898,
     questID = 56122, -- Unknown
+    vignetteID = 3675,
 }
 
 NPCs[153928] = {
@@ -585,6 +623,7 @@ NPCs[153928] = {
     classification = NPCClassification.Rare,
     npcID = 153928,
     questID = 56123, -- Unknown
+    vignetteID = 3676,
 }
 
 NPCs[154148] = {
@@ -594,6 +633,7 @@ NPCs[154148] = {
     classification = NPCClassification.Rare,
     npcID = 154148,
     questID = 56106, -- Unknown
+    vignetteID = 3674,
 }
 
 NPCs[155811] = {
@@ -603,6 +643,7 @@ NPCs[155811] = {
     classification = NPCClassification.Rare,
     npcID = 155811,
     questID = 56882, -- Unknown
+    vignetteID = 3759,
 }
 
 NPCs[155836] = {
@@ -611,6 +652,8 @@ NPCs[155836] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 155836,
+    questID = 56890, -- Unknown
+    vignetteID = 3760,
 }
 
 NPCs[155838] = {
@@ -620,6 +663,7 @@ NPCs[155838] = {
     classification = NPCClassification.Rare,
     npcID = 155838,
     questID = 56895, -- Unknown
+    vignetteID = 3763,
 }
 
 NPCs[155840] = {
@@ -628,6 +672,8 @@ NPCs[155840] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 155840,
+    questID = 56893, -- Unknown
+    vignetteID = 3761,
 }
 
 NPCs[155841] = {
@@ -636,4 +682,6 @@ NPCs[155841] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 155841,
+    questID = 56894, -- Unknown
+    vignetteID = 3762,
 }
