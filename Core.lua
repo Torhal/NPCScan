@@ -6,6 +6,7 @@ local AddOnFolderName = ... ---@type string
 
 ---@class PrivateNamespace
 ---@field db NPCScanDatabase
+---@field TextDump LibTextDump.Interface
 local private = select(2, ...)
 
 local AceConfigDialog = LibStub("AceConfigDialog-3.0")
