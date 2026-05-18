@@ -2447,6 +2447,7 @@ NPCs[99610] = {
     achievementQuestID = 40897, -- Garvrulg
     classification = NPCClassification.Rare,
     npcID = 99610,
+    questID = 40897, -- Garvrulg
     vignetteID = 1236,
 }
 
@@ -2457,6 +2458,7 @@ NPCs[99792] = {
     achievementQuestID = 41319, -- Vignette: Elfbane
     classification = NPCClassification.Rare,
     npcID = 99792,
+    questID = 41319, -- Vignette: Elfbane
     vignetteID = 1263,
 }
 
@@ -2477,6 +2479,7 @@ NPCs[100864] = {
     achievementQuestID = 41135, -- 7.0 Suramar - Vignette: Cora'kar - twh
     classification = NPCClassification.Rare,
     npcID = 100864,
+    questID = 41135, -- 7.0 Suramar - Vignette: Cora'kar - twh
     vignetteID = 1249,
 }
 
@@ -2487,6 +2490,7 @@ NPCs[102303] = {
     achievementQuestID = 40905, -- Lieutenant Strathmar
     classification = NPCClassification.Rare,
     npcID = 102303,
+    questID = 40905, -- Lieutenant Strathmar
     vignetteID = 1239,
 }
 
@@ -2497,6 +2501,7 @@ NPCs[103183] = {
     achievementQuestID = 40680, -- 7.0 Suramar - Vignette: Rok'nash - twh
     classification = NPCClassification.Rare,
     npcID = 103183,
+    questID = 40680, -- 7.0 Suramar - Vignette: Rok'nash - twh
     vignetteID = 1220,
 }
 
@@ -2517,6 +2522,7 @@ NPCs[103214] = {
     achievementQuestID = 41136, -- 7.0 Suramar - Vignette: Har'kess - twh
     classification = NPCClassification.Rare,
     npcID = 103214,
+    questID = 41136, -- 7.0 Suramar - Vignette: Har'kess - twh
     vignetteID = 1250,
 }
 
@@ -2527,6 +2533,7 @@ NPCs[103223] = {
     achievementQuestID = 43993, -- Hertha Grimdottir
     classification = NPCClassification.Rare,
     npcID = 103223,
+    questID = 43993, -- Hertha Grimdottir
     vignetteID = 1251,
 }
 
@@ -2537,6 +2544,7 @@ NPCs[103575] = {
     achievementQuestID = 44003, -- Reef Lord Raj'his
     classification = NPCClassification.Rare,
     npcID = 103575,
+    questID = 44003, -- Reef Lord Raj'his
     vignetteID = 1259,
 }
 
@@ -2569,6 +2577,7 @@ NPCs[103841] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 103841,
+    questID = 43996, -- Vignette: Shadowquill
     vignetteID = 1610,
 }
 
@@ -2620,6 +2629,7 @@ NPCs[105547] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 105547,
+    questID = 43484, -- Vignette: Rauren
     vignetteID = 1508,
 }
 
@@ -2629,7 +2639,7 @@ NPCs[105632] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 105632,
-    questID = -1, -- Unknown
+    questID = 93441, -- Unknown
     vignetteID = 7361,
 }
 
@@ -2670,6 +2680,7 @@ NPCs[106351] = {
     achievementQuestID = 43717, -- Vignette: Artificer Lothaire
     classification = NPCClassification.Rare,
     npcID = 106351,
+    questID = 43717, -- Vignette: Artificer Lothaire
     vignetteID = 1547,
 }
 
@@ -2707,6 +2718,7 @@ NPCs[107846] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 107846,
+    questID = 43968, -- Pinchshank
     toys = {
         {
             itemID = 140314, -- Crab Shank
@@ -2722,6 +2734,7 @@ NPCs[109054] = {
     achievementQuestID = 42831, -- Vignette: Shal'an
     classification = NPCClassification.Rare,
     npcID = 109054,
+    questID = 42831, -- Vignette: Shal'an
     vignetteID = 1442,
 }
 
@@ -2742,6 +2755,7 @@ NPCs[109954] = {
     achievementQuestID = 43348, -- Vignette: Magister Phaedris
     classification = NPCClassification.Rare,
     npcID = 109954,
+    questID = 43348, -- Vignette: Magister Phaedris
     vignetteID = 1497,
 }
 
@@ -2752,6 +2766,7 @@ NPCs[110024] = {
     achievementQuestID = 43351, -- Mal'Dreth the Corrupter
     classification = NPCClassification.Rare,
     npcID = 110024,
+    questID = 43351, -- Mal'Dreth the Corrupter
     vignetteID = 1498,
 }
 
@@ -2773,6 +2788,7 @@ NPCs[110340] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 110340,
+    questID = 43358, -- Vignette: Myonix
     vignetteID = 1499,
 }
 
@@ -2783,6 +2799,7 @@ NPCs[110438] = {
     achievementQuestID = 43369, -- Vignette: Siegemaster Aedrin
     classification = NPCClassification.Rare,
     npcID = 110438,
+    questID = 43369, -- Vignette: Siegemaster Aedrin
     vignetteID = 1500,
 }
 
@@ -2793,6 +2810,7 @@ NPCs[110577] = {
     achievementQuestID = 43449, -- Vignette: Oreth the Vile
     classification = NPCClassification.Rare,
     npcID = 110577,
+    questID = 43449, -- Vignette: Oreth the Vile
     vignetteID = 1505,
 }
 
@@ -2803,6 +2821,7 @@ NPCs[110656] = {
     achievementQuestID = 43481, -- Vignette: Arcanist Lylandre
     classification = NPCClassification.Rare,
     npcID = 110656,
+    questID = 43481, -- Vignette: Arcanist Lylandre
     vignetteID = 1507,
 }
 
@@ -2813,6 +2832,7 @@ NPCs[110726] = {
     achievementQuestID = 43495, -- Vignette: Cadraeus
     classification = NPCClassification.Rare,
     npcID = 110726,
+    questID = 43495, -- Vignette: Cadraeus
     vignetteID = 1509,
 }
 
@@ -2824,6 +2844,7 @@ NPCs[110824] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 110824,
+    questID = 43542, -- Vignette: Tideclaw
     vignetteID = 1510,
 }
 
@@ -2834,6 +2855,7 @@ NPCs[110832] = {
     achievementQuestID = 43992, -- Gorgroth
     classification = NPCClassification.Rare,
     npcID = 110832,
+    questID = 43992, -- Gorgroth
     vignetteID = 1609,
 }
 
@@ -2844,6 +2866,7 @@ NPCs[110870] = {
     achievementQuestID = 43580, -- Vignette: Apothecary Faldren
     classification = NPCClassification.Rare,
     npcID = 110870,
+    questID = 43580, -- Vignette: Apothecary Faldren
     vignetteID = 1511,
 }
 
@@ -2854,6 +2877,7 @@ NPCs[110944] = {
     achievementQuestID = 43597, -- Vignette: Guardian Thor'el
     classification = NPCClassification.Rare,
     npcID = 110944,
+    questID = 43597, -- Vignette: Guardian Thor'el
     vignetteID = 1515,
 }
 
@@ -2864,6 +2888,7 @@ NPCs[111007] = {
     achievementQuestID = 43603, -- Vignette: Randril
     classification = NPCClassification.Rare,
     npcID = 111007,
+    questID = 43603, -- Vignette: Randril
     vignetteID = 1518,
 }
 
@@ -2881,6 +2906,7 @@ NPCs[111197] = {
             npcID = 113136, -- Benax
         },
     },
+    questID = 43954, -- Anax
     vignetteID = 1541,
 }
 
@@ -2891,6 +2917,7 @@ NPCs[111329] = {
     achievementQuestID = 43718, -- Vignette: Matron Hagatha
     classification = NPCClassification.Rare,
     npcID = 111329,
+    questID = 43718, -- Vignette: Matron Hagatha
     vignetteID = 1548,
 }
 
@@ -2901,6 +2928,7 @@ NPCs[111649] = {
     achievementQuestID = 43794, -- Ambassador D'vwinn
     classification = NPCClassification.Rare,
     npcID = 111649,
+    questID = 43794, -- Ambassador D'vwinn
     vignetteID = 1560,
 }
 
@@ -2911,6 +2939,7 @@ NPCs[111651] = {
     achievementQuestID = 43792, -- Degren
     classification = NPCClassification.Rare,
     npcID = 111651,
+    questID = 43792, -- Degren
     vignetteID = 1558,
 }
 
@@ -2921,6 +2950,7 @@ NPCs[111653] = {
     achievementQuestID = 43793, -- Miasu
     classification = NPCClassification.Rare,
     npcID = 111653,
+    questID = 43793, -- Miasu
     vignetteID = 1559,
 }
 
@@ -2932,7 +2962,7 @@ NPCs[112497] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 112497,
-    questID = 44071, -- Unknown
+    questID = 44072, -- Vignette: Maia the White
     vignetteID = 1617,
 }
 
@@ -3004,6 +3034,7 @@ NPCs[112802] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 112802,
+    questID = 44124, -- Vignette: Mar'tura
     vignetteID = 1642,
 }
 
@@ -3405,6 +3436,7 @@ NPCs[109708] = {
     achievementQuestID = 43176, -- Grell Waves Tracking Flag
     classification = NPCClassification.Rare,
     npcID = 109708,
+    questID = 43176, -- Grell Waves Tracking Flag
     vignetteID = 1453,
 }
 
@@ -3466,6 +3498,7 @@ NPCs[110562] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 110562,
+    questID = 43446, -- Vignette: Bahagar
     vignetteID = 1504,
 }
 
