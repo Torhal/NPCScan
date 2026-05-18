@@ -1084,6 +1084,8 @@ NPCs[97380] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97380,
+    questID = -1, -- Unknown
+    vignetteID = 1038,
 }
 
 NPCs[97381] = {
@@ -1092,6 +1094,8 @@ NPCs[97381] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97381,
+    questID = -1, -- Unknown
+    vignetteID = 1035,
 }
 
 NPCs[97384] = {
@@ -1100,6 +1104,8 @@ NPCs[97384] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97384,
+    questID = -1, -- Unknown
+    vignetteID = 1036,
 }
 
 NPCs[97387] = {
@@ -1108,6 +1114,8 @@ NPCs[97387] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97387,
+    questID = -1, -- Unknown
+    vignetteID = 1034,
 }
 
 NPCs[97388] = {
@@ -1116,6 +1124,8 @@ NPCs[97388] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97388,
+    questID = -1, -- Unknown
+    vignetteID = 1039,
 }
 
 NPCs[97390] = {
@@ -1124,6 +1134,8 @@ NPCs[97390] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97390,
+    questID = -1, -- Unknown
+    vignetteID = 1037,
 }
 
 NPCs[97587] = {
@@ -1132,6 +1144,8 @@ NPCs[97587] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97587,
+    questID = -1, -- Unknown
+    vignetteID = 1033,
 }
 
 NPCs[97589] = {
@@ -1140,6 +1154,8 @@ NPCs[97589] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97589,
+    questID = -1, -- Unknown
+    vignetteID = 1032,
 }
 
 --------------------------------------------------------------------------------
