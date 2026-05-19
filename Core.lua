@@ -179,6 +179,8 @@ function NPCScan:OnEnable()
         [private.Enum.MapID.TheShadowlands] = true,
     }
 
+    local NPCIDs = {}
+
     for mapID, map in pairs(private.Data.Maps) do
         local continent = MapUtil.GetMapParentInfo(mapID, Enum.UIMapType.Continent, true)
 
@@ -194,6 +196,8 @@ function NPCScan:OnEnable()
                     or npc.classification == private.Enum.NPCClassification.RareElite
                 )
             then
+                table.insert(NPCIDs, npcID)
+
                 if npc.vignetteID then
                     if not npc.questID and (not continent or questMapIDs[continent.mapID]) then
                         missingData[npcID] = "questID"
@@ -210,15 +214,22 @@ function NPCScan:OnEnable()
             end
         end
 
-        for npcID, missingText in pairs(missingData) do
-            if not mapHeaderPrinted then
-                mapHeaderPrinted = true
-                private.Debug("--------------------------------------------------------------------------------")
-                private.Debug("---- %s (%d)", HereBeDragons:GetLocalizedMap(mapID) or UNKNOWN, mapID)
-                private.Debug("--------------------------------------------------------------------------------")
-            end
+        table.sort(NPCIDs)
 
-            private.Debug("NPC %d (%s) is missing: %s.", npcID, private.GetNPCNameFromID(npcID), missingText)
+        for index = 1, #NPCIDs do
+            local npcID = NPCIDs[index]
+            local missingText = missingData[npcID]
+
+            if missingText then
+                if not mapHeaderPrinted then
+                    mapHeaderPrinted = true
+                    private.Debug("--------------------------------------------------------------------------------")
+                    private.Debug("---- %s (%d)", HereBeDragons:GetLocalizedMap(mapID) or UNKNOWN, mapID)
+                    private.Debug("--------------------------------------------------------------------------------")
+                end
+
+                private.Debug("NPC %d - %s - is missing: %s.", npcID, private.GetNPCNameFromID(npcID), missingText)
+            end
         end
     end
 
