@@ -199,7 +199,7 @@ function NPCScan:OnEnable()
                 table.insert(NPCIDs, npcID)
 
                 if npc.vignetteID then
-                    if not npc.questID and (not continent or questMapIDs[continent.mapID]) then
+                    if npc.vignetteID ~= -1 and not npc.questID and (not continent or questMapIDs[continent.mapID]) then
                         missingData[npcID] = "questID"
                     end
                 elseif not continent or vignetteMapIDs[continent.mapID] then
