@@ -101,7 +101,9 @@ local function AssignNPCToQuest(npc, questFieldName)
     end
 end
 
-local function InitializeNPC(npcID)
+---@param npcID NPCID
+---@return NPCData
+function private.InitializeNPC(npcID)
     local npc = private.Data.NPCs[npcID]
 
     if npc then
@@ -135,5 +137,3 @@ local function InitializeNPC(npcID)
 
     return npc
 end
-
-private.InitializeNPC = InitializeNPC
