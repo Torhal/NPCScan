@@ -138,7 +138,7 @@ end
 ---@param self TargetButton
 local function TargetButton_OnEnter(self)
     local tooltip = GameTooltip
-    tooltip:SetOwner(self, TOOLTIP_ANCHORS[self:GetEffectiveSpawnPoint()], 0, -50)
+    tooltip:SetOwner(self, TOOLTIP_ANCHORS[self:GetEffectiveSpawnPoint()], 0, -50) ---@diagnostic disable-line: need-check-nil
     tooltip:AddLine(LEFT_CLICK_TEXTURE .. " " .. TARGET, 0.5, 0.8, 1)
 
     if not InCombatLockdown() then
