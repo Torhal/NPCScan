@@ -3,13 +3,16 @@
         "disable": [
             "cannot-call",
             "create-global",
+            "deprecated",
+            "generic-constraint-mismatch",
             "need-check-nil",
             "redefined-local",
             "redundant-parameter",
             "type-mismatch",
             "unbalanced-assignments",
             "undefined-field",
-            "undefined-global"
+            "undefined-global",
+            "wrong-flavor-api"
         ]
     },
     "framexml": false
