@@ -27,6 +27,7 @@ NPCs[160448] = {
     classification = NPCClassification.Rare,
     npcID = 160448,
     questID = 59221, -- Unknown
+    vignetteID = 4120,
 }
 
 NPCs[161481] = {
@@ -71,6 +72,7 @@ NPCs[163229] = {
     classification = NPCClassification.Rare,
     npcID = 163229,
     questID = 58987, -- Unknown
+    vignetteID = 4096,
 }
 
 NPCs[163370] = {
@@ -81,6 +83,7 @@ NPCs[163370] = {
     isTameable = true,
     npcID = 163370,
     questID = 59006, -- Unknown
+    vignetteID = 4100,
 }
 
 NPCs[164093] = {
@@ -100,6 +103,7 @@ NPCs[164107] = {
     classification = NPCClassification.Rare,
     npcID = 164107,
     questID = 59145, -- Unknown
+    vignetteID = 4114,
 }
 
 NPCs[164112] = {
@@ -109,6 +113,7 @@ NPCs[164112] = {
     classification = NPCClassification.Rare,
     npcID = 164112,
     questID = 59157, -- Unknown
+    vignetteID = 1144,
 }
 
 NPCs[164147] = {
@@ -129,16 +134,19 @@ NPCs[164238] = {
     isTameable = true,
     npcID = 164238,
     questID = 59201, -- Unknown
+    vignetteID = 4116,
 }
 
 NPCs[164391] = {
     --------------------------------------------------------------------------------
     ---- Old Ardeite
     --------------------------------------------------------------------------------
+    achievementQuestID = 60273, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 164391,
-    questID = 60273, -- Unknown
+    questID = 59208, -- Unknown
+    vignetteID = 4117,
 }
 
 NPCs[164415] = {
@@ -168,6 +176,7 @@ NPCs[164547] = {
     classification = NPCClassification.Rare,
     npcID = 164547,
     questID = 59235, -- Unknown
+    vignetteID = 4122,
 }
 
 NPCs[165053] = {
@@ -177,6 +186,7 @@ NPCs[165053] = {
     classification = NPCClassification.Rare,
     npcID = 165053,
     questID = 59431, -- Unknown
+    vignetteID = 4131,
 }
 
 NPCs[165912] = {
@@ -256,6 +266,7 @@ NPCs[168135] = {
     isTameable = true,
     npcID = 168135,
     questID = 60306, -- Unknown
+    vignetteID = 4195,
 }
 
 NPCs[168647] = {
@@ -265,6 +276,7 @@ NPCs[168647] = {
     classification = NPCClassification.Rare,
     npcID = 168647,
     questID = 61632, -- Unknown
+    vignetteID = 4473,
 }
 
 NPCs[169750] = {
@@ -326,6 +338,7 @@ NPCs[171451] = {
     classification = NPCClassification.Rare,
     npcID = 171451,
     questID = 61177, -- Unknown
+    vignetteID = 4398,
 }
 
 NPCs[171688] = {
@@ -335,6 +348,7 @@ NPCs[171688] = {
     classification = NPCClassification.Rare,
     npcID = 171688,
     questID = 61184, -- Unknown
+    vignetteID = 4400,
 }
 
 --------------------------------------------------------------------------------
@@ -393,6 +407,7 @@ NPCs[160882] = {
     achievementQuestID = 58319, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 160882,
+    questID = -1, -- Unknown
     vignetteID = 4007,
 }
 
@@ -403,6 +418,7 @@ NPCs[160985] = {
     achievementQuestID = 58320, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 160985,
+    questID = -1, -- Unknown
     vignetteID = 4571,
 }
 
@@ -414,6 +430,7 @@ NPCs[161527] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 161527,
+    questID = -1, -- Unknown
     vignetteID = 4032,
 }
 
@@ -425,6 +442,7 @@ NPCs[161528] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 161528,
+    questID = -1, -- Unknown
     vignetteID = 4032,
 }
 
@@ -436,6 +454,7 @@ NPCs[161529] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 161529,
+    questID = -1, -- Unknown
     vignetteID = 4032,
 }
 
@@ -447,6 +466,7 @@ NPCs[161530] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 161530,
+    questID = -1, -- Unknown
     vignetteID = 4032,
 }
 
@@ -583,6 +603,7 @@ NPCs[171010] = {
     achievementQuestID = 60999, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 171010,
+    questID = 60999, -- Unknown
     vignetteID = 4340,
 }
 

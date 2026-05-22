@@ -828,4 +828,6 @@ NPCs[127882] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 127882,
+    questID = -1, -- Unknown
+    vignetteID = 2313,
 }

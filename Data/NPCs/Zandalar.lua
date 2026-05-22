@@ -19,6 +19,7 @@ NPCs[120899] = {
     achievementQuestID = 48333, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 120899,
+    questID = 48333, -- Unknown
     vignetteID = 2038,
     worldQuestID = 50845, -- Kul'krazahn
 }
@@ -58,6 +59,7 @@ NPCs[121242] = {
     achievementQuestID = 50361, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 121242,
+    questID = 50361, -- Unknown
     vignetteID = 2603,
     worldQuestID = 50496, -- Glompmaw
 }
@@ -82,6 +84,7 @@ NPCs[124397] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 124397,
+    questID = 47843, -- Unknown
     vignetteID = 2010,
     worldQuestID = 50505, -- Kal'draxa
 }
@@ -94,6 +97,7 @@ NPCs[124399] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 124399,
+    questID = 47877, -- Unknown
     vignetteID = 2013,
 }
 
@@ -115,6 +119,7 @@ NPCs[125214] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 125214,
+    questID = 48052, -- Unknown
     vignetteID = 2028,
     worldQuestID = 50507, -- Krubbs
 }
@@ -126,6 +131,7 @@ NPCs[125232] = {
     achievementQuestID = 48057, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 125232,
+    questID = 48057, -- Unknown
     vignetteID = 2029,
     worldQuestID = 50492, -- Cursed Chest
 }
@@ -138,6 +144,7 @@ NPCs[125250] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 125250,
+    questID = 48063, -- Unknown
     vignetteID = 2031,
     worldQuestID = 50488, -- Ancient Jawbreaker
 }
@@ -149,6 +156,7 @@ NPCs[126056] = {
     achievementQuestID = 48406, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 126056,
+    questID = 48406, -- Unknown
     vignetteID = 2068,
     worldQuestID = 50514, -- Totem Maker Jash'ga
 }
@@ -161,6 +169,7 @@ NPCs[126142] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 126142,
+    questID = 48439, -- Unknown
     vignetteID = 2120,
     worldQuestID = 50511, -- Bajiatha
 }
@@ -178,6 +187,7 @@ NPCs[126187] = {
         },
     },
     npcID = 126187,
+    questID = 48462, -- Unknown
     vignetteID = 2130,
     worldQuestID = 50491, -- Corpse Bringer Yal'kar
 }
@@ -189,6 +199,7 @@ NPCs[126460] = {
     achievementQuestID = 48508, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 126460,
+    questID = 48508, -- Unknown
     vignetteID = 2192,
     worldQuestID = 50513, -- Tainted Guardian
 }
@@ -200,6 +211,7 @@ NPCs[126635] = {
     achievementQuestID = 48541, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 126635,
+    questID = 48541, -- Unknown
     vignetteID = 2195,
 }
 
@@ -210,6 +222,7 @@ NPCs[126907] = {
     achievementQuestID = 48623, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 126907,
+    questID = 48623, -- Unknown
     vignetteID = 2219,
     worldQuestID = 50516, -- Wardrummer Zurula
 }
@@ -222,6 +235,7 @@ NPCs[126926] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 126926,
+    questID = 48626, -- Unknown
     vignetteID = 2221,
     worldQuestID = 50515, -- Venomjaw
 }
@@ -233,6 +247,7 @@ NPCs[127001] = {
     achievementQuestID = 48638, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 127001,
+    questID = 48638, -- Unknown
     vignetteID = 2224,
     worldQuestID = 50499, -- Gwugnug
 }
@@ -244,6 +259,7 @@ NPCs[127820] = {
     achievementQuestID = 48972, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 127820,
+    questID = 48972, -- Unknown
     vignetteID = 2306,
     worldQuestID = 50512, -- Scout Skrasniss
 }
@@ -256,6 +272,7 @@ NPCs[127873] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 127873,
+    questID = 48980, -- Unknown
     vignetteID = 2310,
 }
 
@@ -266,6 +283,7 @@ NPCs[128426] = {
     achievementQuestID = 49231, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 128426,
+    questID = 49231, -- Unknown
     vignetteID = 2337,
     worldQuestID = 50498, -- Gutrip
 }
@@ -310,6 +328,7 @@ NPCs[128930] = {
     achievementQuestID = 50040, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 128930,
+    questID = 50040, -- Unknown
     vignetteID = 2529,
     worldQuestID = 50517, -- Mala'kili and Rohnkor
 }
@@ -321,6 +340,7 @@ NPCs[128935] = {
     achievementQuestID = 50040, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 128935,
+    questID = 50040, -- Unknown
     vignetteID = 2529,
     worldQuestID = 50517, -- Mala'kili and Rohnkor
 }
@@ -332,6 +352,7 @@ NPCs[128965] = {
     achievementQuestID = 49305, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 128965,
+    questID = 49305, -- Unknown
     vignetteID = 2376,
     worldQuestID = 50490, -- Uroku the Bound
 }
@@ -344,6 +365,7 @@ NPCs[128974] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 128974,
+    questID = 49312, -- Unknown
     vignetteID = 2381,
     worldQuestID = 50501, -- Queen Tzxi'kik
 }
@@ -356,6 +378,7 @@ NPCs[129005] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 129005,
+    questID = 49317, -- Unknown
     vignetteID = 2383,
     worldQuestID = 50506, -- King Kooba
 }
@@ -367,6 +390,7 @@ NPCs[129657] = {
     achievementQuestID = 49469, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 129657,
+    questID = 49469, -- Unknown
     vignetteID = 2194,
     worldQuestID = 50519, -- Za'amar
 }
@@ -388,6 +412,7 @@ NPCs[133373] = {
     achievementQuestID = 50307, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 133373,
+    questID = 50307, -- Unknown
     vignetteID = 2593,
     worldQuestID = 50502, -- Jax'teb the Reanimated
 }
@@ -411,6 +436,7 @@ NPCs[133527] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 133527,
+    questID = 50342, -- Unknown
     vignetteID = 2599,
     worldQuestID = 50503, -- Juba the Scarred
 }
@@ -422,6 +448,7 @@ NPCs[133531] = {
     achievementQuestID = 50348, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 133531,
+    questID = 50348, -- Unknown
     vignetteID = 2600,
     worldQuestID = 50489, -- Xu'ba
 }
@@ -434,6 +461,7 @@ NPCs[133539] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 133539,
+    questID = 50355, -- Unknown
     vignetteID = 2601,
     worldQuestID = 50509, -- Lo'kuno
 }
@@ -446,6 +474,7 @@ NPCs[133812] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 133812,
+    questID = 50423, -- Unknown
     vignetteID = 2630,
     worldQuestID = 50518, -- Zanxib
 }
@@ -468,6 +497,7 @@ NPCs[134293] = {
     achievementQuestID = 50563, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 134293,
+    questID = 50563, -- Unknown
     vignetteID = 2658,
     worldQuestID = 50564, -- Azerite Infused Slag
 }
@@ -479,6 +509,7 @@ NPCs[134294] = {
     achievementQuestID = 50565, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 134294,
+    questID = 50565, -- Unknown
     vignetteID = 2659,
     worldQuestID = 50566, -- Lost Scroll
 }
@@ -490,6 +521,7 @@ NPCs[134296] = {
     achievementQuestID = 50567, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 134296,
+    questID = 50567, -- Unknown
     vignetteID = 2660,
     worldQuestID = 50568, -- Chag's Challenge
 }
@@ -501,6 +533,7 @@ NPCs[134298] = {
     achievementQuestID = 50569, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 134298,
+    questID = 50569, -- Unknown
     vignetteID = 2661,
     worldQuestID = 50570, -- Azerite Infused Elemental
 }
@@ -1199,6 +1232,7 @@ NPCs[120899] = {
     achievementQuestID = 48333, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 120899,
+    questID = 48333, -- Unknown
     vignetteID = 2038,
     worldQuestID = 50845, -- Kul'krazahn
 }
@@ -1242,6 +1276,7 @@ NPCs[124185] = {
     achievementQuestID = 47792, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 124185,
+    questID = 47792, -- Unknown
     vignetteID = 2004,
     worldQuestID = 50857, -- Golrakahn
 }
@@ -1254,6 +1289,7 @@ NPCs[126637] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 126637,
+    questID = 48543, -- Kandak
     vignetteID = 2196,
     worldQuestID = 50859, -- Kandak
 }
@@ -1266,6 +1302,7 @@ NPCs[127939] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 127939,
+    questID = 49004, -- Unknown
     vignetteID = 2314,
     worldQuestID = 50861, -- Torraske the Eternal
 }
@@ -1278,6 +1315,7 @@ NPCs[128699] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 128699,
+    questID = 49267, -- Unknown
     vignetteID = 2359,
     worldQuestID = 50862, -- Bloodbulge
 }
@@ -1297,6 +1335,7 @@ NPCs[129343] = {
     achievementQuestID = 49410, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 129343,
+    questID = 49410, -- Unknown
     vignetteID = 2407,
     worldQuestID = 50863, -- Avatar of Xolotal
 }
@@ -1309,6 +1348,7 @@ NPCs[129954] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 129954,
+    questID = 50439, -- Unknown
     vignetteID = 2636,
     worldQuestID = 50877, -- Gahz'ralka
 }
@@ -1320,6 +1360,7 @@ NPCs[129961] = {
     achievementQuestID = 50280, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 129961,
+    questID = 50280, -- Unknown
     vignetteID = 2588,
     worldQuestID = 50864, -- Atal'zul Gotaka
 }
@@ -1351,6 +1392,7 @@ NPCs[131233] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 131233,
+    questID = 49911, -- Unknown
     vignetteID = 2496,
     worldQuestID = 50885, -- Lei-zhi
 }
@@ -1362,6 +1404,7 @@ NPCs[131476] = {
     achievementQuestID = 49972, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 131476,
+    questID = 49972, -- Unknown
     vignetteID = 2513,
     worldQuestID = 50866, -- Zayoos
 }
@@ -1374,6 +1417,7 @@ NPCs[131687] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 131687,
+    questID = 50013, -- Unknown
     vignetteID = 2524,
     worldQuestID = 50867, -- Tambano
 }
@@ -1398,6 +1442,7 @@ NPCs[131718] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 131718,
+    questID = 50034, -- Unknown
     vignetteID = 2527,
     worldQuestID = 50868, -- Bramblewing
 }
@@ -1410,6 +1455,7 @@ NPCs[132244] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 132244,
+    questID = 50159, -- Unknown
     vignetteID = 2548,
     worldQuestID = 50869, -- Kiboku
 }
@@ -1430,6 +1476,7 @@ NPCs[133155] = {
     achievementQuestID = 50260, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 133155,
+    questID = 50260, -- Unknown
     vignetteID = 2581,
     worldQuestID = 50870, -- G'Naat
 }
@@ -1452,6 +1499,7 @@ NPCs[133190] = {
     achievementQuestID = 50269, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 133190,
+    questID = 50269, -- Unknown
     vignetteID = 2587,
     worldQuestID = 50871, -- Daggerjaw
 }
@@ -1464,6 +1512,7 @@ NPCs[133842] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 133842,
+    questID = 50438, -- Unknown
     vignetteID = 2635,
     worldQuestID = 50872, -- Warcrawler Karkithiss
 }
@@ -1476,6 +1525,7 @@ NPCs[134048] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 134048,
+    questID = 50508, -- Unknown
     vignetteID = 2650,
     worldQuestID = 50873, -- Strange Egg
 }
@@ -1509,6 +1559,7 @@ NPCs[134738] = {
     achievementQuestID = 50677, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 134738,
+    questID = 50677, -- Unknown
     vignetteID = 2682,
     worldQuestID = 50874, -- Hakbi the Risen
 }
@@ -1520,6 +1571,7 @@ NPCs[134760] = {
     achievementQuestID = 50693, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 134760,
+    questID = 50693, -- Unknown
     vignetteID = 2685,
     worldQuestID = 50875, -- Darkspeaker Jo'la
 }
@@ -1532,6 +1584,7 @@ NPCs[134782] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 134782,
+    questID = 50281, -- Unknown
     vignetteID = 2651,
     worldQuestID = 50876, -- Murderbeak
 }
@@ -1560,6 +1613,7 @@ NPCs[136413] = {
     achievementQuestID = 51080, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 136413,
+    questID = 51080, -- Unknown
     vignetteID = 2895,
     worldQuestID = 51081, -- Syrawon the Dominus
 }
@@ -1571,6 +1625,7 @@ NPCs[136428] = {
     achievementQuestID = 51083, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 136428,
+    questID = 51083, -- Unknown
     vignetteID = 2897,
     worldQuestID = 51084, -- Dark Chronicler
 }
@@ -1686,6 +1741,8 @@ NPCs[148264] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148264,
+    questID = 54513, -- Dino Time!
+    vignetteID = 3470,
 }
 
 NPCs[148276] = {

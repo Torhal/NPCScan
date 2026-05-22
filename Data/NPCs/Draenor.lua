@@ -939,6 +939,7 @@ NPCs[80785] = {
     classification = NPCClassification.Rare,
     npcID = 80785,
     questID = 35153, -- Unknown
+    vignetteID = 343,
 }
 
 NPCs[80868] = {
@@ -3075,6 +3076,7 @@ NPCs[77828] = {
             itemID = 113670, -- Mournful Moan of Murmur
         },
     },
+    vignetteID = 251,
 }
 
 NPCs[78710] = {
@@ -3207,6 +3209,7 @@ NPCs[80785] = {
     classification = NPCClassification.Rare,
     npcID = 80785,
     questID = 35153, -- Unknown
+    vignetteID = 343,
 }
 
 NPCs[82920] = {
@@ -3894,6 +3897,7 @@ NPCs[92645] = {
     classification = NPCClassification.Rare,
     npcID = 92645,
     questID = 38632, -- Vignette: Night Haunter
+    vignetteID = 830,
 }
 
 NPCs[92647] = {

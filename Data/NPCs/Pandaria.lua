@@ -233,6 +233,7 @@ NPCs[50358] = {
             npcID = 69778, -- Sunreaver Micro-Sentry
         },
     },
+    vignetteID = 6142,
 }
 
 NPCs[69099] = {
@@ -661,6 +662,7 @@ NPCs[60491] = {
     },
     npcID = 60491,
     questID = 32099, -- Unknown
+    vignetteID = 6519,
 }
 
 NPCs[69768] = {
@@ -1798,6 +1800,7 @@ NPCs[63510] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 63510,
+    vignetteID = 44,
 }
 
 NPCs[63691] = {

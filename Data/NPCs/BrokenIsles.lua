@@ -19,6 +19,7 @@ NPCs[89016] = {
     achievementQuestID = 37537, -- Ravyn-Drath
     classification = NPCClassification.Rare,
     npcID = 89016,
+    questID = 37537, -- Ravyn-Drath
     vignetteID = 636,
 }
 
@@ -130,6 +131,7 @@ NPCs[90244] = {
     achievementQuestID = 37932, -- Unbound Rift
     classification = NPCClassification.Rare,
     npcID = 90244,
+    questID = 37932, -- Unbound Rift
     vignetteID = 694,
 }
 
@@ -140,6 +142,7 @@ NPCs[90505] = {
     achievementQuestID = 37989, -- Syphonus
     classification = NPCClassification.Rare,
     npcID = 90505,
+    questID = 37989, -- Syphonus
     vignetteID = 697,
 }
 
@@ -150,6 +153,7 @@ NPCs[90803] = {
     achievementQuestID = 38037, -- Cache of Infernals
     classification = NPCClassification.Rare,
     npcID = 90803,
+    questID = 38037, -- Cache of Infernals
     vignetteID = 707,
 }
 
@@ -171,6 +175,7 @@ NPCs[91100] = {
     achievementQuestID = 38212, -- Brogozog
     classification = NPCClassification.Rare,
     npcID = 91100,
+    questID = 38212, -- Brogozog
     vignetteID = 720,
 }
 
@@ -201,6 +206,7 @@ NPCs[91115] = {
     achievementQuestID = 38217, -- Tide Behemoth
     classification = NPCClassification.Rare,
     npcID = 91115,
+    questID = 38217, -- Tide Behemoth
     vignetteID = 721,
 }
 
@@ -231,6 +237,7 @@ NPCs[91579] = {
     achievementQuestID = 38352, -- Kazrok
     classification = NPCClassification.Rare,
     npcID = 91579,
+    questID = 38352, -- Kazrok
     vignetteID = 737,
 }
 
@@ -309,6 +316,7 @@ NPCs[105938] = {
     achievementQuestID = 42069, -- Felbats
     classification = NPCClassification.Rare,
     npcID = 105938,
+    questID = 42069, -- Felbats
     vignetteID = 1299,
 }
 
@@ -339,6 +347,7 @@ NPCs[107113] = {
     achievementQuestID = 42280, -- Vorthax
     classification = NPCClassification.Rare,
     npcID = 107113,
+    questID = 42280, -- Vorthax
     vignetteID = 1337,
 }
 
@@ -399,6 +408,7 @@ NPCs[107269] = {
     achievementQuestID = 42376, -- Inquisitor Tivos
     classification = NPCClassification.Rare,
     npcID = 107269,
+    questID = 42376, -- Inquisitor Tivos
     vignetteID = 1367,
 }
 
@@ -419,6 +429,7 @@ NPCs[107657] = {
     achievementQuestID = 42505, -- Arcanist Shal'iman
     classification = NPCClassification.Rare,
     npcID = 107657,
+    questID = 42505, -- Arcanist Shal'iman
     vignetteID = 1378,
 }
 
@@ -580,6 +591,7 @@ NPCs[110824] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 110824,
+    questID = 43542, -- Vignette: Tideclaw
     vignetteID = 1510,
 }
 
@@ -631,6 +643,7 @@ NPCs[112636] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 112636,
+    questID = 44081, -- Treacherous Leyrunners
     vignetteID = 1623,
 }
 
@@ -642,6 +655,7 @@ NPCs[112637] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 112637,
+    questID = 44081, -- Treacherous Leyrunners
     vignetteID = 1623,
 }
 
@@ -950,6 +964,7 @@ NPCs[121049] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 121049,
+    questID = -1, -- Unknown
     vignetteID = 1959,
 }
 
@@ -959,6 +974,7 @@ NPCs[121051] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 121051,
+    questID = -1, -- Unknown
     vignetteID = 1968,
 }
 
@@ -968,6 +984,7 @@ NPCs[121056] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 121056,
+    questID = -1, -- Unknown
     vignetteID = 1961,
 }
 
@@ -977,6 +994,7 @@ NPCs[121068] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 121068,
+    questID = -1, -- Unknown
     vignetteID = 1966,
 }
 
@@ -986,6 +1004,7 @@ NPCs[121073] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 121073,
+    questID = -1, -- Unknown
     vignetteID = 1962,
 }
 
@@ -995,6 +1014,7 @@ NPCs[121077] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 121077,
+    questID = -1, -- Unknown
     vignetteID = 1967,
 }
 
@@ -1004,6 +1024,7 @@ NPCs[121088] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 121088,
+    questID = -1, -- Unknown
     vignetteID = 1960,
 }
 
@@ -1013,6 +1034,7 @@ NPCs[121090] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 121090,
+    questID = -1, -- Unknown
     vignetteID = 1963,
 }
 
@@ -1022,6 +1044,7 @@ NPCs[121092] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 121092,
+    questID = -1, -- Unknown
     vignetteID = 1965,
 }
 
@@ -1041,6 +1064,7 @@ NPCs[121108] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 121108,
+    questID = -1, -- Unknown
     vignetteID = 1964,
 }
 
@@ -1168,6 +1192,7 @@ NPCs[99362] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 99362,
+    questID = -1, -- Unknown
     vignetteID = 1244,
 }
 
@@ -1177,6 +1202,7 @@ NPCs[101660] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 101660,
+    questID = -1, -- Unknown
     vignetteID = 1243,
 }
 
@@ -1280,6 +1306,7 @@ NPCs[92040] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 92040,
+    questID = 38461, -- Vignette: Guarms Mate (Fenri)
     vignetteID = 773,
 }
 
@@ -1290,6 +1317,7 @@ NPCs[97630] = {
     achievementQuestID = 39870, -- Vignette: Soulthirster
     classification = NPCClassification.Rare,
     npcID = 97630,
+    questID = 39870, -- Vignette: Soulthirster
     vignetteID = 1041,
 }
 
@@ -1299,7 +1327,8 @@ NPCs[109163] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     npcID = 109163,
-    vignetteID = -1,
+    questID = -1, -- Unknown
+    vignetteID = 1538,
     worldQuestID = 42864, -- DANGER: Captain Dargun
 }
 
@@ -1334,6 +1363,7 @@ NPCs[95872] = {
     achievementQuestID = 39465, -- Skywhisker Taskmaster
     classification = NPCClassification.Rare,
     npcID = 95872,
+    questID = 39465, -- Skywhisker Taskmaster
     vignetteID = 973,
 }
 
@@ -1355,6 +1385,7 @@ NPCs[96410] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 96410,
+    questID = 39646, -- Albino Elderhorn
     toys = {
         {
             itemID = 131900, -- Majestic Elderhorn Hoof
@@ -1370,6 +1401,7 @@ NPCs[96590] = {
     achievementQuestID = 40347, -- Gurbog da Basher
     classification = NPCClassification.Rare,
     npcID = 96590,
+    questID = 40347, -- Gurbog da Basher
     vignetteID = 1126,
 }
 
@@ -1380,6 +1412,7 @@ NPCs[96621] = {
     achievementQuestID = 40242, -- Mellok, Son of Torok
     classification = NPCClassification.Rare,
     npcID = 96621,
+    questID = 40242, -- Mellok, Son of Torok
     vignetteID = 1111,
 }
 
@@ -1390,6 +1423,7 @@ NPCs[97093] = {
     achievementQuestID = 39762, -- Feltotem Warlock
     classification = NPCClassification.Rare,
     npcID = 97093,
+    questID = 39762, -- Feltotem Warlock
     toys = {
         {
             itemID = 131900, -- Majestic Elderhorn Hoof
@@ -1405,6 +1439,7 @@ NPCs[97102] = {
     achievementQuestID = 39766, -- Treasure Worm
     classification = NPCClassification.Rare,
     npcID = 97102,
+    questID = 39766, -- Treasure Worm
     vignetteID = 1000,
 }
 
@@ -1421,6 +1456,7 @@ NPCs[97203] = {
             npcID = 98077, -- Crispin
         },
     },
+    questID = 39782, -- The Exiled Shaman
     vignetteID = 1001,
 }
 
@@ -1432,6 +1468,7 @@ NPCs[97220] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 97220,
+    questID = 39784, -- Beastmaster Pao'lek
     vignetteID = 1003,
 }
 
@@ -1442,6 +1479,7 @@ NPCs[97326] = {
     achievementQuestID = 39802, -- Hartli the Snatcher
     classification = NPCClassification.Rare,
     npcID = 97326,
+    questID = 39802, -- Hartli the Snatcher
     vignetteID = 1004,
 }
 
@@ -1453,6 +1491,7 @@ NPCs[97345] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 97345,
+    questID = 39806, -- Crawshuk the Hungry
     vignetteID = 1006,
 }
 
@@ -1464,6 +1503,7 @@ NPCs[97449] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 97449,
+    questID = 40405, -- Bristlemaul
     vignetteID = 1148,
 }
 
@@ -1474,6 +1514,7 @@ NPCs[97593] = {
     achievementQuestID = 39866, -- Scout Harefoot
     classification = NPCClassification.Rare,
     npcID = 97593,
+    questID = 39866, -- Scout Harefoot
     vignetteID = 1031,
 }
 
@@ -1506,6 +1547,7 @@ NPCs[97928] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 97928,
+    questID = 39994, -- Crab Rider Grmlrml
     vignetteID = 1056,
 }
 
@@ -1516,6 +1558,7 @@ NPCs[97933] = {
     achievementQuestID = 39994, -- Crab Rider Grmlrml
     classification = NPCClassification.Rare,
     npcID = 97933,
+    questID = 39994, -- Crab Rider Grmlrml
     vignetteID = 1056,
 }
 
@@ -1526,6 +1569,7 @@ NPCs[98024] = {
     achievementQuestID = 40406, -- Luggut the Eggeater
     classification = NPCClassification.Rare,
     npcID = 98024,
+    questID = 40406, -- Luggut the Eggeater
     vignetteID = 1147,
 }
 
@@ -1536,6 +1580,7 @@ NPCs[98299] = {
     achievementQuestID = 40084, -- Zugdug the Hoarder
     classification = NPCClassification.Rare,
     npcID = 98299,
+    questID = 40084, -- Zugdug the Hoarder
     vignetteID = 1073,
 }
 
@@ -1546,6 +1591,7 @@ NPCs[98311] = {
     achievementQuestID = 40096, -- Mrrklr
     classification = NPCClassification.Rare,
     npcID = 98311,
+    questID = 40096, -- Mrrklr
     vignetteID = 1084,
 }
 
@@ -1557,6 +1603,7 @@ NPCs[98890] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 98890,
+    questID = 40175, -- Sleeping Bear
     vignetteID = 1106,
 }
 
@@ -1597,6 +1644,7 @@ NPCs[100230] = {
     achievementQuestID = 40413, -- Amateur Hunters
     classification = NPCClassification.Rare,
     npcID = 100230,
+    questID = 40413, -- Amateur Hunters
     vignetteID = 1150,
 }
 
@@ -1607,6 +1655,7 @@ NPCs[100231] = {
     achievementQuestID = 40413, -- Amateur Hunters
     classification = NPCClassification.Rare,
     npcID = 100231,
+    questID = 40413, -- Amateur Hunters
     vignetteID = 1150,
 }
 
@@ -1617,6 +1666,7 @@ NPCs[100232] = {
     achievementQuestID = 40413, -- Amateur Hunters
     classification = NPCClassification.Rare,
     npcID = 100232,
+    questID = 40413, -- Amateur Hunters
     vignetteID = 1150,
 }
 
@@ -1627,6 +1677,7 @@ NPCs[100302] = {
     achievementQuestID = 40423, -- Unethical Adventurers
     classification = NPCClassification.Rare,
     npcID = 100302,
+    questID = 40423, -- Unethical Adventurers
     vignetteID = 724,
 }
 
@@ -1637,6 +1688,7 @@ NPCs[100303] = {
     achievementQuestID = 40423, -- Unethical Adventurers
     classification = NPCClassification.Rare,
     npcID = 100303,
+    questID = 40423, -- Unethical Adventurers
     vignetteID = 724,
 }
 
@@ -1647,6 +1699,7 @@ NPCs[100495] = {
     achievementQuestID = 40414, -- Devouring Darkness
     classification = NPCClassification.Rare,
     npcID = 100495,
+    questID = 40414, -- Devouring Darkness
     vignetteID = 1218,
 }
 
@@ -1658,6 +1711,7 @@ NPCs[101077] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 101077,
+    questID = 40681, -- Snarf
     vignetteID = 1221,
 }
 
@@ -1750,6 +1804,7 @@ NPCs[109498] = {
     achievementQuestID = 40423, -- Unethical Adventurers
     classification = NPCClassification.Rare,
     npcID = 109498,
+    questID = 40423, -- Unethical Adventurers
     vignetteID = 724,
 }
 
@@ -1760,6 +1815,7 @@ NPCs[109500] = {
     achievementQuestID = 40423, -- Unethical Adventurers
     classification = NPCClassification.Rare,
     npcID = 109500,
+    questID = 40423, -- Unethical Adventurers
     vignetteID = 724,
 }
 
@@ -1770,6 +1826,7 @@ NPCs[109501] = {
     achievementQuestID = 40423, -- Unethical Adventurers
     classification = NPCClassification.Rare,
     npcID = 109501,
+    questID = 40423, -- Unethical Adventurers
     vignetteID = 724,
 }
 
@@ -1848,6 +1905,7 @@ NPCs[90139] = {
     achievementQuestID = 37908, -- Inquisitor Ernstenbok
     classification = NPCClassification.Rare,
     npcID = 90139,
+    questID = 37908, -- Inquisitor Ernstenbok
     vignetteID = 691,
 }
 
@@ -1858,6 +1916,7 @@ NPCs[91529] = {
     achievementQuestID = 38333, -- Vignette: Drake Wrestler
     classification = NPCClassification.Rare,
     npcID = 91529,
+    questID = 38333, -- Vignette: Drake Wrestler
     vignetteID = 735,
 }
 
@@ -1895,6 +1954,7 @@ NPCs[91803] = {
     achievementQuestID = 38425, -- Vignette: Fel Thorignir
     classification = NPCClassification.Rare,
     npcID = 91803,
+    questID = 38425, -- Vignette: Fel Thorignir
     vignetteID = 765,
 }
 
@@ -1905,6 +1965,7 @@ NPCs[91874] = {
     achievementQuestID = 38431, -- Vignette: Bladesquall
     classification = NPCClassification.Rare,
     npcID = 91874,
+    questID = 38431, -- Vignette: Bladesquall
     vignetteID = 769,
 }
 
@@ -1915,6 +1976,7 @@ NPCs[91892] = {
     achievementQuestID = 38424, -- Thane's Mead Hall
     classification = NPCClassification.Rare,
     npcID = 91892,
+    questID = 38424, -- Thane's Mead Hall
     toys = {
         {
             itemID = 129113, -- Faintly Glowing Flagon of Mead
@@ -1930,6 +1992,7 @@ NPCs[92152] = {
     achievementQuestID = 38472, -- Whitewater Typhoon
     classification = NPCClassification.Rare,
     npcID = 92152,
+    questID = 38472, -- Whitewater Typhoon
     vignetteID = 779,
 }
 
@@ -1963,6 +2026,7 @@ NPCs[92599] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 92599,
+    questID = 38626, -- Worg Pack
     vignetteID = 825,
 }
 
@@ -2061,6 +2125,7 @@ NPCs[92682] = {
     achievementQuestID = 38642, -- Vrykul Longboat
     classification = NPCClassification.Rare,
     npcID = 92682,
+    questID = 38642, -- Vrykul Longboat
     vignetteID = 833,
 }
 
@@ -2071,6 +2136,7 @@ NPCs[92685] = {
     achievementQuestID = 38642, -- Vrykul Longboat
     classification = NPCClassification.Rare,
     npcID = 92685,
+    questID = 38642, -- Vrykul Longboat
     vignetteID = 833,
 }
 
@@ -2081,6 +2147,7 @@ NPCs[92703] = {
     achievementQuestID = 38642, -- Vrykul Longboat
     classification = NPCClassification.Rare,
     npcID = 92703,
+    questID = 38642, -- Vrykul Longboat
     vignetteID = 833,
 }
 
@@ -2091,6 +2158,7 @@ NPCs[92751] = {
     achievementQuestID = 39031, -- Vignette: Ivory Sentinel
     classification = NPCClassification.Rare,
     npcID = 92751,
+    questID = 39031, -- Vignette: Ivory Sentinel
     vignetteID = 897,
 }
 
@@ -2101,6 +2169,7 @@ NPCs[92763] = {
     achievementQuestID = 38685, -- The Nameless King
     classification = NPCClassification.Rare,
     npcID = 92763,
+    questID = 38685, -- The Nameless King
     vignetteID = 840,
 }
 
@@ -2122,6 +2191,7 @@ NPCs[93166] = {
     achievementQuestID = 38774, -- Lost Ettin
     classification = NPCClassification.Rare,
     npcID = 93166,
+    questID = 38774, -- Lost Ettin
     vignetteID = 867,
 }
 
@@ -2132,6 +2202,7 @@ NPCs[93371] = {
     achievementQuestID = 38837, -- Vignette: Mordvigbjorn
     classification = NPCClassification.Rare,
     npcID = 93371,
+    questID = 38837, -- Vignette: Mordvigbjorn
     vignetteID = 877,
 }
 
@@ -2142,6 +2213,7 @@ NPCs[93401] = {
     achievementQuestID = 38847, -- Vignette: Berserker
     classification = NPCClassification.Rare,
     npcID = 93401,
+    questID = 38847, -- Vignette: Berserker
     vignetteID = 879,
 }
 
@@ -2174,6 +2246,7 @@ NPCs[94413] = {
     achievementQuestID = 39120, -- Vignette: Shield Forger
     classification = NPCClassification.Rare,
     npcID = 94413,
+    questID = 39120, -- Vignette: Shield Forger
     vignetteID = 940,
 }
 
@@ -2184,6 +2257,7 @@ NPCs[98188] = {
     achievementQuestID = 40068, -- 7.0 Stormheim - Vignette: Egyl the Enduring - twh
     classification = NPCClassification.Rare,
     npcID = 98188,
+    questID = 40068, -- 7.0 Stormheim - Vignette: Egyl the Enduring - twh
     vignetteID = 1065,
 }
 
@@ -2194,6 +2268,7 @@ NPCs[98268] = {
     achievementQuestID = 40081, -- 7.0 Stormheim - Vignette: Tarben - twh
     classification = NPCClassification.Rare,
     npcID = 98268,
+    questID = 40081, -- 7.0 Stormheim - Vignette: Tarben - twh
     vignetteID = 1071,
 }
 
@@ -2204,6 +2279,7 @@ NPCs[98421] = {
     achievementQuestID = 40109, -- Vignette - Kottr Vondyr
     classification = NPCClassification.Rare,
     npcID = 98421,
+    questID = 40109, -- Vignette - Kottr Vondyr
     vignetteID = 1093,
 }
 
@@ -2214,6 +2290,7 @@ NPCs[98503] = {
     achievementQuestID = 40113, -- Vignette: Grrvrgull the Conquerer
     classification = NPCClassification.Rare,
     npcID = 98503,
+    questID = 40113, -- Vignette: Grrvrgull the Conquerer
     vignetteID = 1095,
 }
 
@@ -2306,6 +2383,7 @@ NPCs[107926] = {
     achievementQuestID = 42591, -- Vignette - Hannval the Butcher
     classification = NPCClassification.Rare,
     npcID = 107926,
+    questID = 42591, -- Vignette - Hannval the Butcher
     vignetteID = 1400,
 }
 
@@ -2424,6 +2502,7 @@ NPCs[110363] = {
     achievementQuestID = 43342, -- Vignette - Roteye
     classification = NPCClassification.Rare,
     npcID = 110363,
+    questID = 43342, -- Vignette - Roteye
     vignetteID = 1495,
 }
 
@@ -3087,6 +3166,7 @@ NPCs[101077] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 101077,
+    questID = 40681, -- Snarf
     vignetteID = 1221,
 }
 
@@ -3101,6 +3181,7 @@ NPCs[92104] = {
     achievementQuestID = 38466, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 92104,
+    questID = 38466, -- Unknown
     toys = {
         {
             itemID = 130147, -- Thistleleaf Branch
@@ -3194,6 +3275,7 @@ NPCs[93654] = {
     achievementQuestID = 38887, -- 7.0 Val'sharah - Bluffs - Vignette: Swiftflight - TRACKING - twh
     classification = NPCClassification.Rare,
     npcID = 93654,
+    questID = 38887, -- 7.0 Val'sharah - Bluffs - Vignette: Swiftflight - TRACKING - twh
     vignetteID = 887,
 }
 
@@ -3204,6 +3286,7 @@ NPCs[93679] = {
     achievementQuestID = 44070, -- Gathenak
     classification = NPCClassification.Rare,
     npcID = 93679,
+    questID = 44070, -- Gathenak
     vignetteID = 1615,
 }
 
@@ -3224,6 +3307,7 @@ NPCs[93758] = {
     achievementQuestID = 38900, -- 7.0 Val'sharah - Bluffs - Vignette: Nightcaller - TRACKING - twh
     classification = NPCClassification.Rare,
     npcID = 93758,
+    questID = 38900, -- 7.0 Val'sharah - Bluffs - Vignette: Nightcaller - TRACKING - twh
     vignetteID = 891,
 }
 
@@ -3234,6 +3318,7 @@ NPCs[94414] = {
     achievementQuestID = 39121, -- Vignette: Haunted Manor
     classification = NPCClassification.Rare,
     npcID = 94414,
+    questID = 39121, -- Vignette: Haunted Manor
     vignetteID = 941,
 }
 
@@ -3250,6 +3335,7 @@ NPCs[94485] = {
             npcID = 99394, -- Fetid Waveling
         },
     },
+    questID = 39130, -- 7.0 Val'sharah - River: Vignette: Purging the River - TRACKING - twh
     vignetteID = 944,
 }
 
@@ -3260,6 +3346,7 @@ NPCs[95123] = {
     achievementQuestID = 40126, -- Vignette: Grelda
     classification = NPCClassification.Rare,
     npcID = 95123,
+    questID = 40126, -- Vignette: Grelda
     vignetteID = 1099,
 }
 
@@ -3270,6 +3357,7 @@ NPCs[95221] = {
     achievementQuestID = 39357, -- 7.0 Val'sharah - Grove - Vignette: Eileen - TRACKING - twh
     classification = NPCClassification.Rare,
     npcID = 95221,
+    questID = 39357, -- 7.0 Val'sharah - Grove - Vignette: Eileen - TRACKING - twh
     toys = {
         {
             itemID = 130214, -- Worn Doll
@@ -3285,6 +3373,7 @@ NPCs[95318] = {
     achievementQuestID = 39596, -- 7.0 Val'sharah - Vale - Vignette: Perrexx - TRACKING - twh
     classification = NPCClassification.Rare,
     npcID = 95318,
+    questID = 39596, -- 7.0 Val'sharah - Vale - Vignette: Perrexx - TRACKING - twh
     vignetteID = 993,
 }
 
@@ -3296,6 +3385,7 @@ NPCs[97504] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 97504,
+    questID = 39856, -- Vignette: Wraithtalon
     vignetteID = 1027,
 }
 
@@ -3306,6 +3396,7 @@ NPCs[97517] = {
     achievementQuestID = 39858, -- Vignette: Dreadbog
     classification = NPCClassification.Rare,
     npcID = 97517,
+    questID = 39858, -- Vignette: Dreadbog
     vignetteID = 1028,
 }
 
@@ -3316,6 +3407,7 @@ NPCs[98241] = {
     achievementQuestID = 40079, -- Vignette: Lyrath Moonfeather
     classification = NPCClassification.Rare,
     npcID = 98241,
+    questID = 40079, -- Vignette: Lyrath Moonfeather
     vignetteID = 1069,
 }
 
