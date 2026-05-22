@@ -1,0 +1,16 @@
+{
+    "diagnostics": {
+        "disable": [
+            "cannot-call",
+            "create-global",
+            "need-check-nil",
+            "redefined-local",
+            "redundant-parameter",
+            "type-mismatch",
+            "unbalanced-assignments",
+            "undefined-field",
+            "undefined-global"
+        ]
+    },
+    "framexml": false
+}
