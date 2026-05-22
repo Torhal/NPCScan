@@ -167,10 +167,8 @@ end
 ---- Event and message handlers.
 --------------------------------------------------------------------------------
 
-function TargetButtonPrototype:COMBAT_LOG_EVENT_UNFILTERED()
-    local _, subEvent, _, _, _, _, _, destGUID = CombatLogGetCurrentEventInfo()
-
-    if subEvent == "UNIT_DIED" and destGUID and private.GUIDToCreatureID(destGUID) == self.npcID then
+function TargetButtonPrototype:UNIT_DIED(_, unitGUID)
+    if unitGUID and private.GUIDToCreatureID(unitGUID) == self.npcID then
         self.isDead = true
     end
 end
@@ -318,14 +316,14 @@ function TargetButtonPrototype:Activate(data)
 
     self.__isActive = true
 
-    self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+    self:RegisterEvent("UNIT_DIED")
     self:RegisterEvent("PLAYER_REGEN_ENABLED")
     self:RegisterEvent("PLAYER_REGEN_DISABLED")
     self:RegisterMessage(EventMessage.UnitInformationAvailable, "UpdateData")
 end
 
 function TargetButtonPrototype:Deactivate()
-    self:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+    self:UnregisterEvent("UNIT_DIED")
     self:UnregisterEvent("PLAYER_REGEN_ENABLED")
     self:UnregisterMessage("NPCScan_UnitInformationAvailable")
 
