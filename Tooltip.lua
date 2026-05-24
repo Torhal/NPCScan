@@ -190,7 +190,7 @@ end
 
 local function InitializeDataTooltip(tooltipCell)
     if not DataTooltip then
-        DataTooltip = QTip:Acquire(AddOnFolderName .. "DataTooltip", 2)
+        DataTooltip = QTip:AcquireTooltip(AddOnFolderName .. "DataTooltip", 2)
         DataTooltip:SetAutoHideDelay(0.1, tooltipCell, DataTooltip_OnRelease)
         DataTooltip:SmartAnchorTo(tooltipCell)
         DataTooltip:SetBackdropColor(0.05, 0.05, 0.05, 1)
