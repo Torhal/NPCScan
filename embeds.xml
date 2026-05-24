@@ -1,4 +1,5 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
     <Script file="Libraries\LibStub\LibStub.lua"/>
     <Include file="Libraries\CallbackHandler-1.0\CallbackHandler-1.0.xml"/>
@@ -16,9 +17,9 @@
     <Include file="Libraries\AceLocale-3.0\AceLocale-3.0.xml"/>
     <Include file="Libraries\AceTimer-3.0\AceTimer-3.0.xml"/>
     <Script file="Libraries\HereBeDragons\HereBeDragons-2.0.lua"/>
-	<Script file="Libraries\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>
+    <Script file="Libraries\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>
     <Include file="Libraries\LibDialog-1.0\lib.xml"/>
-    <Include file="Libraries\LibQTip-1.0\lib.xml"/>
+    <Include file="Libraries\LibQTip-2.0\LibQTip-2.0.xml"/>
     <Include file="Libraries\LibSink-2.0\lib.xml"/>
     <Include file="Libraries\LibTextDump-1.0\lib.xml"/>
     <Include file="Libraries\LibToast-1.0\lib.xml"/>

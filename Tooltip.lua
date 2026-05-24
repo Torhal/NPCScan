@@ -9,7 +9,7 @@ local EventMessage = private.EventMessage
 
 local FormatAtlasTexture = private.FormatAtlasTexture
 
-local LibQTip = LibStub("LibQTip-1.0")
+local QTip = LibStub("LibQTip-2.0")
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) --[[@as NPCScan]]
 
 --------------------------------------------------------------------------------
@@ -74,17 +74,19 @@ end
 --------------------------------------------------------------------------------
 ---- Tooltip Achievement Headers
 --------------------------------------------------------------------------------
-local achievementProvider, achievementPrototype, baseCellPrototype = LibQTip:CreateCellProvider(LibQTip.LabelProvider)
+local providerValues = QTip:CreateCellProvider()
+local achievementCell = providerValues.newCellPrototype
+local baseCell = providerValues.baseCellPrototype
 
-function achievementPrototype:getContentHeight()
-    return 16
+function achievementCell:GetContentHeight()
+    return math.max(baseCell.GetContentHeight(self), 24)
 end
 
-function achievementPrototype:InitializeCell()
-    baseCellPrototype.InitializeCell(self)
+function achievementCell:OnCreation()
+    baseCell.OnCreation(self)
 
     if not self.atlas then
-        local background = self:CreateTexture(nil, "TOOLTIP")
+        local background = self:CreateTexture(nil, "ARTWORK")
         background:SetBlendMode("ADD")
         background:SetAtlas("Objective-Header", true)
         background:SetPoint("CENTER", 0, -17)
@@ -93,19 +95,11 @@ function achievementPrototype:InitializeCell()
     end
 
     self.r, self.g, self.b = 1, 0.82, 0
-    self.fontString:SetTextColor(self.r, self.g, self.b, 1)
+    self.FontString:SetTextColor(self.r, self.g, self.b, 1)
 end
 
-function achievementPrototype:ReleaseCell()
+function achievementCell:OnRelease()
     self.r, self.g, self.b = 1, 1, 1
-end
-
-function achievementPrototype:SetupCell(tooltip, value, justification, font, r, g, b)
-    local width, height = baseCellPrototype.SetupCell(self, tooltip, value, justification, font, r, g, b)
-
-    self.r, self.g, self.b = 1, 0.82, 0
-
-    return width, height
 end
 
 local function OpenToAchievement(_, achievementID)
@@ -196,7 +190,7 @@ end
 
 local function InitializeDataTooltip(tooltipCell)
     if not DataTooltip then
-        DataTooltip = LibQTip:Acquire(AddOnFolderName .. "DataTooltip", 2)
+        DataTooltip = QTip:Acquire(AddOnFolderName .. "DataTooltip", 2)
         DataTooltip:SetAutoHideDelay(0.1, tooltipCell, DataTooltip_OnRelease)
         DataTooltip:SmartAnchorTo(tooltipCell)
         DataTooltip:SetBackdropColor(0.05, 0.05, 0.05, 1)
@@ -409,13 +403,13 @@ local function DrawTooltip(displayFrame)
 
     DataObjectDisplay = displayFrame
 
-    if LibQTip:IsAcquired(AddOnFolderName) then
-        LibQTip:Release(AddOnFolderName)
+    if QTip:IsAcquiredTooltip(AddOnFolderName) then
+        QTip:ReleaseTooltip(Tooltip)
     end
 
     local tooltipData = GetTooltipData()
 
-    Tooltip = LibQTip:Acquire(AddOnFolderName, tooltipData.numTooltipColumns)
+    Tooltip = QTip:AcquireTooltip(AddOnFolderName, tooltipData.numTooltipColumns)
     Tooltip:SmartAnchorTo(displayFrame)
     Tooltip:SetAutoHideDelay(0.25, displayFrame)
     Tooltip:Clear()
@@ -425,13 +419,13 @@ local function DrawTooltip(displayFrame)
 
     Tooltip.OnRelease = Tooltip_OnRelease
 
-    Tooltip:SetCell(Tooltip:AddLine(), 1, AddOnFolderName, TitleFont, "CENTER", 0)
+    Tooltip:AddRow(AddOnFolderName):GetCell(1):SetFontObject(TitleFont):SetJustifyH("CENTER")
     Tooltip:AddSeparator(1, 0, 0, 0)
 
     if DataObject.scannerData.NPCCount == 0 then
         Tooltip:AddSeparator(1, 0, 0, 0)
         Tooltip:AddSeparator(1, 1, 0.82, 0)
-        Tooltip:SetCell(Tooltip:AddLine(), 1, ERR_GENERIC_NO_VALID_TARGETS, "CENTER", 0)
+        Tooltip:AddRow(ERR_GENERIC_NO_VALID_TARGETS):GetCell(1):SetJustifyH("CENTER")
 
         return
     end
@@ -456,19 +450,18 @@ local function DrawTooltip(displayFrame)
                 Tooltip:AddSeparator(1, 1, 0.82, 0)
 
                 local achievementData = Data.Achievements[npc.achievementID]
-                local achievementLine = Tooltip:AddLine()
+                local achievementRow = Tooltip:AddRow()
 
-                Tooltip:SetCell(
-                    achievementLine,
-                    1,
-                    ("|T%s:0|t %s"):format(achievementData.iconTexturePath, achievementData.name),
-                    "CENTER",
-                    0,
-                    achievementProvider
-                )
-                Tooltip:SetLineScript(achievementLine, "OnMouseUp", OpenToAchievement, npc.achievementID)
-                Tooltip:SetLineScript(achievementLine, "OnEnter", ShowAchievementTooltip, npc.achievementID)
-                Tooltip:SetLineScript(achievementLine, "OnLeave", HideAchievementTooltip)
+                achievementRow
+                    :GetCell(1, providerValues.newCellProvider)
+                    :SetFormattedText("|T%s:0|t %s", achievementData.iconTexturePath, achievementData.name)
+                    :SetJustifyH("CENTER")
+
+                achievementRow
+                    :SetScript("OnMouseUp", OpenToAchievement, tostring(npc.achievementID))
+                    :SetScript("OnEnter", ShowAchievementTooltip, tostring(npc.achievementID))
+                    :SetScript("OnLeave", HideAchievementTooltip)
+
                 Tooltip:AddSeparator(1, 1, 0.82, 0)
             end
         elseif not currentAchievementID then
@@ -483,46 +476,53 @@ local function DrawTooltip(displayFrame)
 
             Tooltip:AddSeparator(1, 0, 0, 0)
             Tooltip:AddSeparator(1, 1, 0.82, 0)
-            Tooltip:SetCell(Tooltip:AddLine(), 1, MISCELLANEOUS, "CENTER", 0)
+
+            Tooltip:AddRow(MISCELLANEOUS):GetCell(1):SetJustifyH("CENTER")
+
             Tooltip:AddSeparator(1, 1, 0.82, 0)
         end
 
-        local line = Tooltip:AddLine()
+        local row = Tooltip:AddRow()
 
-        if line % 2 == 0 then
-            Tooltip:SetLineColor(line, 0.20, 0.20, 0.20)
+        if index % 2 == 0 then
+            row:SetColor(0.20, 0.20, 0.20)
         end
 
-        Tooltip:SetCell(line, 1, npcDisplayNames[npcID])
+        row:GetCell(1):SetText(npcDisplayNames[npcID])
 
         if worldQuestColumn and npc:HasActiveWorldQuest() then
-            Tooltip:SetCell(line, worldQuestColumn, ICON_WORLDQUEST)
-            Tooltip:SetCellScript(line, worldQuestColumn, "OnEnter", DisplayText, TRACKER_HEADER_WORLD_QUESTS)
-            Tooltip:SetCellScript(line, worldQuestColumn, "OnLeave", CleanupDataTooltip)
+            row:GetCell(worldQuestColumn)
+                :SetText(ICON_WORLDQUEST)
+                :SetScript("OnEnter", DisplayText, TRACKER_HEADER_WORLD_QUESTS)
+                :SetScript("OnLeave", CleanupDataTooltip)
         end
 
         if tameableColumn and npc.isTameable then
-            Tooltip:SetCell(line, tameableColumn, ICON_TAMEABLE)
-            Tooltip:SetCellScript(line, tameableColumn, "OnEnter", DisplayText, TAMEABLE)
-            Tooltip:SetCellScript(line, tameableColumn, "OnLeave", CleanupDataTooltip)
+            row:GetCell(tameableColumn)
+                :SetText(ICON_TAMEABLE)
+                :SetScript("OnEnter", DisplayText, TAMEABLE)
+                :SetScript("OnLeave", CleanupDataTooltip)
         end
 
         if mountsColumn and npc.mounts then
-            Tooltip:SetCell(line, mountsColumn, ICON_MOUNT)
-            Tooltip:SetCellScript(line, mountsColumn, "OnEnter", DisplayMountInfo, npc.mounts)
-            Tooltip:SetCellScript(line, mountsColumn, "OnLeave", CleanupDataTooltip)
+            row:GetCell(mountsColumn)
+                :SetText(ICON_MOUNT)
+                :SetScript("OnEnter", DisplayMountInfo, npc.mounts)
+                :SetScript("OnLeave", CleanupDataTooltip)
         end
 
         if petsColumn and npc.pets then
-            Tooltip:SetCell(line, petsColumn, ICON_PET)
-            Tooltip:SetCellScript(line, petsColumn, "OnEnter", DisplayPetInfo, npc.pets)
-            Tooltip:SetCellScript(line, petsColumn, "OnLeave", CleanupDataTooltip)
+            row:GetCell(petsColumn)
+                :SetText(ICON_PET)
+                :SetScript("OnEnter", DisplayPetInfo, npc.pets)
+                :SetScript("OnLeave", CleanupDataTooltip)
         end
 
         if toysColumn and npc.toys then
-            Tooltip:SetCell(line, toysColumn, ICON_TOY)
-            Tooltip:SetCellScript(line, toysColumn, "OnEnter", DisplayToyInfo, npc.toys)
-            Tooltip:SetCellScript(line, toysColumn, "OnLeave", CleanupDataTooltip)
+            row:GetCell(toysColumn)
+                :SetText(ICON_TOY)
+                :SetScript("OnEnter", DisplayToyInfo, npc.toys)
+                :SetScript("OnLeave", CleanupDataTooltip)
         end
     end
 end
@@ -537,7 +537,6 @@ end
 function DataObject:OnEnter()
     if not Tooltip or not Tooltip:IsShown() then
         DrawTooltip(self)
-        Tooltip:UpdateScrolling()
         Tooltip:Show()
     end
 end
