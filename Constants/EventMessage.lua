@@ -1,26 +1,23 @@
+--------------------------------------------------------------------------------
+---- AddOn Namespace
+--------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
-
-local ValidEventMessages = {
-    "DetectedNPC",
-    "DismissTargetButtonByID",
-    "ScannerDataUpdated",
-    "TargetButtonNeedsReclassified",
-    "TargetButtonRequestDeactivate",
-    "TargetButtonScaleChanged",
-    "UnitInformationAvailable",
-}
-
-local EventMessage = {}
-private.EventMessage = EventMessage
-
-for index = 1, #ValidEventMessages do
-    local messageName = ValidEventMessages[index]
-    EventMessage[messageName] = ("NPCScan_%s"):format(messageName)
-end
 
 --------------------------------------------------------------------------------
 ---- Types
 --------------------------------------------------------------------------------
 
----@alias NPCScan.EventMessage "DetectedNPC" | "DismissTargetButtonByID" | "ScannerDataUpdated" | "TargetButtonNeedsReclassified" | "TargetButtonRequestDeactivate" | "TargetButtonScaleChanged" | "UnitInformationAvailable"
+---@enum NPCScan.EventMessage
+local EventMessage = {
+    DetectedNPC = "NPCScan_DetectedNPC",
+    DismissTargetButtonByID = "NPCScan_DismissTargetButtonByID",
+    ScannerDataUpdated = "NPCScan_ScannerDataUpdated",
+    TargetButtonNeedsReclassified = "NPCScan_TargetButtonNeedsReclassified",
+    TargetButtonRequestDeactivate = "NPCScan_TargetButtonRequestDeactivate",
+    TargetButtonScaleChanged = "NPCScan_TargetButtonScaleChanged",
+    UnitInformationAvailable = "NPCScan_UnitInformationAvailable",
+}
+
+private.EventMessage = EventMessage
