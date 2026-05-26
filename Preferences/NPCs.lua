@@ -119,7 +119,7 @@ end -- do-block
 
 ---@param input integer | string
 ---@param operationType "add" | "remove"
----@return boolean, integer? -- isValidated, npcID
+---@return (boolean isValidated, NPCID? npcID)
 local function ValidateUserDefinedNPCInput(input, operationType)
     local value = type(input) == "string" and input:gsub('"', "") or input
 
