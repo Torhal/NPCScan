@@ -23,6 +23,8 @@ Utilities.lua
 
 Scanner.lua
 MapOverlays.lua
+
+SpecializedCells\Manifest.xml
 Tooltip.lua
 
 Preferences\Manifest.xml

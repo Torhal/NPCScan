@@ -1,8 +1,9 @@
 --------------------------------------------------------------------------------
 ---- AddOn Namespace
 --------------------------------------------------------------------------------
+
 local AddOnFolderName = ... ---@type string
-local private = select(2, ...) ---@class PrivateNamespace
+local private = select(2, ...) ---@type PrivateNamespace
 
 local Data = private.Data
 local EventMessage = private.EventMessage
@@ -10,21 +11,52 @@ local EventMessage = private.EventMessage
 local FormatAtlasTexture = private.FormatAtlasTexture
 
 local QTip = LibStub("LibQTip-2.0")
-local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) --[[@as NPCScan]]
 
 --------------------------------------------------------------------------------
 ---- Constants
 --------------------------------------------------------------------------------
+
+---@class DataObject: LibDataBroker.DataDisplay & Frame & AceEvent-3.0
+---@field ScannerData ScannerData
 local DataObject = LibStub("AceEvent-3.0"):Embed(LibStub("LibDataBroker-1.1"):NewDataObject(AddOnFolderName, {
     icon = [[Interface\LFGFRAME\BattlenetWorking0]],
     label = OBJECTIVES_LABEL,
-    scannerData = {
+    ScannerData = {
         NPCCount = 0,
         NPCs = {},
     },
     text = NONE,
     type = "data source",
 }))
+
+---@class TooltipHandler
+---@field Tooltip TooltipHandler.Tooltip
+local TooltipHandler = {
+
+    ---@class TooltipHandler.Tooltip
+    ---@field Data? LibQTip-2.0.Tooltip
+    ---@field Main? LibQTip-2.0.Tooltip
+    Tooltip = {
+        Data = nil,
+        Main = nil,
+    },
+}
+
+local ICON_MOUNT = FormatAtlasTexture("StableMaster")
+local ICON_PET = FormatAtlasTexture("WildBattlePetCapturable")
+
+local ICON_TAMEABLE
+do
+    local textureFormat = [[|TInterface\TargetingFrame\UI-CLASSES-CIRCLES:0:0:0:0:256:256:%d:%d:%d:%d|t]]
+    local textureSize = 256
+    local left, right, top, bottom = unpack(CLASS_ICON_TCOORDS["HUNTER"])
+
+    ICON_TAMEABLE =
+        textureFormat:format(left * textureSize, right * textureSize, top * textureSize, bottom * textureSize)
+end
+
+local ICON_TOY = [[|TInterface\Worldmap\TreasureChest_64:0:0|t]]
+local ICON_WORLDQUEST = FormatAtlasTexture("worldquest-tracker-questmarker")
 
 local npcAchievementNames = {}
 local npcDisplayNames = {}
@@ -35,12 +67,10 @@ local TitleFont = CreateFont("NPCScanTitleFont")
 TitleFont:SetTextColor(1, 0.82, 0)
 TitleFont:SetFontObject("QuestTitleFont")
 
-local Tooltip
-local DataObjectDisplay -- Used for updates.
-
 --------------------------------------------------------------------------------
 ---- Helper Functions
 --------------------------------------------------------------------------------
+
 local function SortByNPCNameThenByID(a, b)
     local nameA = npcNames[a]
     local nameB = npcNames[b]
@@ -72,49 +102,24 @@ local function SortByNPCAchievementNameThenByNameThenByID(a, b)
 end
 
 --------------------------------------------------------------------------------
----- Tooltip Achievement Headers
+---- Cell Scripts
 --------------------------------------------------------------------------------
-local providerValues = QTip:CreateCellProvider()
-local achievementCell = providerValues.newCellPrototype
-local baseCell = providerValues.baseCellPrototype
 
-function achievementCell:GetContentHeight()
-    return math.max(baseCell.GetContentHeight(self), 24)
-end
-
-function achievementCell:OnCreation()
-    baseCell.OnCreation(self)
-
-    if not self.atlas then
-        local background = self:CreateTexture(nil, "ARTWORK")
-        background:SetBlendMode("ADD")
-        background:SetAtlas("Objective-Header", true)
-        background:SetPoint("CENTER", 0, -17)
-
-        self.atlas = background
-    end
-
-    self.r, self.g, self.b = 1, 0.82, 0
-    self.FontString:SetTextColor(self.r, self.g, self.b, 1)
-end
-
-function achievementCell:OnRelease()
-    self.r, self.g, self.b = 1, 1, 1
-end
-
+---@param achievementID AchievementID
 local function OpenToAchievement(_, achievementID)
     if not AchievementFrame or not AchievementFrame:IsShown() then
         ToggleAchievementFrame()
     end
 
     AchievementFrameBaseTab_OnClick(1)
-    AchievementFrame_SelectAchievement(achievementID)
+    AchievementFrame_SelectAchievement(achievementID, true)
 
     local categoryID = GetAchievementCategory(achievementID)
-    local _, parentCategoryID = GetCategoryInfo(categoryID)
+    local categoryTitle, parentCategoryID = GetCategoryInfo(categoryID)
+    local parentCategoryTitle = GetCategoryInfo(parentCategoryID)
 
     if parentCategoryID == -1 then
-        for _, entry in pairs(ACHIEVEMENTUI_CATEGORIES) do
+        for _, entry in pairs(ACHIEVEMENT_FUNCTIONS.categories) do
             if entry.id == categoryID then
                 entry.collapsed = false
             elseif entry.parent == categoryID then
@@ -126,36 +131,40 @@ local function OpenToAchievement(_, achievementID)
     end
 end
 
+---@param tooltipCell LibQTip-2.0.Cell
+---@param achievementID AchievementID
 local function ShowAchievementTooltip(tooltipCell, achievementID)
-    Tooltip:SetFrameStrata("DIALOG")
     GameTooltip_SetDefaultAnchor(GameTooltip, tooltipCell)
 
-    GameTooltip:SetText(Data.Achievements[achievementID].description, 1, 1, 1, 1, true)
+    local description = Data.Achievements[achievementID] and Data.Achievements[achievementID].description or UNKNOWN
+    GameTooltip:SetText(description, 1, 1, 1, 1, true)
     GameTooltip:Show()
 end
 
 local function HideAchievementTooltip()
-    Tooltip:SetFrameStrata("TOOLTIP")
     GameTooltip:Hide()
 end
 
 --------------------------------------------------------------------------------
----- NPC tidbit helpers
+---- NPC Tidbit Helpers
 --------------------------------------------------------------------------------
+
 local entryFromID = {}
 
-local function Tooltip_OnRelease()
-    Tooltip = nil
-    DataObjectDisplay = nil
-end
+---@param dataTooltip LibQTip-2.0.Tooltip
+---@param iconPath number
+---@param entryName string
+---@param isCollected boolean
+local function AddEntryToDataTooltip(dataTooltip, iconPath, entryName, isCollected)
+    local row = dataTooltip:AddRow()
 
-local DataTooltip
+    row:GetCell(1):SetFormattedText("|T%s:0:0|t %s", iconPath, entryName)
+    row:GetCell(2):SetText("    ")
 
-local function DataTooltip_OnRelease()
-    DataTooltip = nil
-
-    if Tooltip then
-        Tooltip:SetFrameStrata("TOOLTIP")
+    if isCollected then
+        row:GetCell(3):SetFormattedText("%s%s", GREEN_FONT_COLOR_CODE, COLLECTED)
+    else
+        row:GetCell(3):SetFormattedText("%s%s", RED_FONT_COLOR_CODE, NOT_COLLECTED)
     end
 end
 
@@ -167,51 +176,56 @@ local function AddEntryDataIDs(list, fieldName)
     end
 end
 
-local function AddEntryToDataTooltip(iconPath, entryName, isCollected)
-    local line = DataTooltip:AddLine(("|T%s:0:0|t %s"):format(iconPath, entryName))
+--------------------------------------------------------------------------------
+---- Data Tooltip Helpers
+--------------------------------------------------------------------------------
 
-    if isCollected then
-        DataTooltip:SetCell(line, 2, ("%s%s"):format(GREEN_FONT_COLOR_CODE, COLLECTED))
-    else
-        DataTooltip:SetCell(line, 2, ("%s%s"):format(RED_FONT_COLOR_CODE, NOT_COLLECTED))
+---@param tooltipCell LibQTip-2.0.Cell
+local function ReleaseDataTooltip(tooltipCell)
+    if TooltipHandler.Tooltip.Data then
+        TooltipHandler.Tooltip.Data:Hide()
+        TooltipHandler.Tooltip.Data:Release()
     end
 end
 
-local function CleanupDataTooltip()
-    if DataTooltip then
-        DataTooltip:Hide()
-        DataTooltip:Release()
+---@param tooltipCell LibQTip-2.0.Cell
+---@return LibQTip-2.0.Tooltip
+local function AcquireDataTooltip(tooltipCell)
+    local dataTooltip = TooltipHandler.Tooltip.Data
+
+    if not dataTooltip then
+        dataTooltip = QTip:AcquireTooltip(AddOnFolderName .. "DataTooltip", 3)
+
+        dataTooltip
+            :SetAutoHideDelay(0.1, tooltipCell)
+            :SmartAnchorTo(tooltipCell)
+            :SetCellMarginH(10)
+            :SetBackdropColor(0.05, 0.05, 0.05, 1)
+
+        TooltipHandler.Tooltip.Data = dataTooltip
+
+        QTip.RegisterCallback(TooltipHandler, "OnReleaseTooltip", "OnReleaseTooltip")
     end
 
-    if Tooltip then
-        Tooltip:SetFrameStrata("TOOLTIP")
-    end
+    dataTooltip:Clear()
+
+    return dataTooltip
 end
 
-local function InitializeDataTooltip(tooltipCell)
-    if not DataTooltip then
-        DataTooltip = QTip:AcquireTooltip(AddOnFolderName .. "DataTooltip", 2)
-        DataTooltip:SetAutoHideDelay(0.1, tooltipCell, DataTooltip_OnRelease)
-        DataTooltip:SmartAnchorTo(tooltipCell)
-        DataTooltip:SetBackdropColor(0.05, 0.05, 0.05, 1)
-        DataTooltip:SetCellMarginH(0)
-    end
+---@param tooltipCell LibQTip-2.0.Cell
+---@param text string
+local function DisplayDataText(tooltipCell, text)
+    local dataTooltip = AcquireDataTooltip(tooltipCell)
 
-    Tooltip:SetFrameStrata("DIALOG")
-    DataTooltip:Clear()
-
-    return DataTooltip
+    dataTooltip:AddRow():GetCell(1):SetColSpan(3):SetText(text)
+    dataTooltip:Show()
 end
 
-local function DisplayText(tooltipCell, text)
-    InitializeDataTooltip(tooltipCell)
-    DataTooltip:AddLine(text)
-    DataTooltip:Show()
-end
-
+---@param tooltipCell LibQTip-2.0.Cell
 local function DisplayMountInfo(tooltipCell, mountList)
+    local dataTooltip = AcquireDataTooltip(tooltipCell)
+
     AddEntryDataIDs(mountList, "spellID")
-    InitializeDataTooltip(tooltipCell)
 
     local mountIDs = C_MountJournal.GetMountIDs()
 
@@ -220,17 +234,18 @@ local function DisplayMountInfo(tooltipCell, mountList)
             C_MountJournal.GetMountInfoByID(mountIDs[index])
 
         if creatureName and not hideOnChar and entryFromID[spellID] then
-            AddEntryToDataTooltip(iconPath, creatureName, isCollected)
+            AddEntryToDataTooltip(dataTooltip, iconPath, creatureName, isCollected)
         end
     end
 
-    DataTooltip:UpdateScrolling()
-    DataTooltip:Show()
+    dataTooltip:Show()
 end
 
+---@param tooltipCell LibQTip-2.0.Cell
 local function DisplayPetInfo(tooltipCell, petList)
+    local dataTooltip = AcquireDataTooltip(tooltipCell)
+
     AddEntryDataIDs(petList, "npcID")
-    InitializeDataTooltip(tooltipCell)
 
     C_PetJournal.SetFilterChecked(LE_PET_JOURNAL_FILTER_COLLECTED, true)
     C_PetJournal.SetFilterChecked(LE_PET_JOURNAL_FILTER_FAVORITES, false)
@@ -249,18 +264,18 @@ local function DisplayPetInfo(tooltipCell, petList)
         local _, _, isCollected, _, _, _, _, petName, iconPath, _, npcID = C_PetJournal.GetPetInfoByIndex(index)
 
         if petName and entryFromID[npcID] then
-            AddEntryToDataTooltip(iconPath, petName, isCollected)
+            AddEntryToDataTooltip(dataTooltip, iconPath, petName, isCollected)
             entryFromID[npcID] = nil -- Prevent multiples if already collected.
         end
     end
 
-    DataTooltip:UpdateScrolling()
-    DataTooltip:Show()
+    dataTooltip:Show()
 end
 
 local function DisplayToyInfo(tooltipCell, toyList)
+    local dataTooltip = AcquireDataTooltip(tooltipCell)
+
     AddEntryDataIDs(toyList, "itemID")
-    InitializeDataTooltip(tooltipCell)
 
     C_ToyBox.SetAllSourceTypeFilters(true)
     C_ToyBox.SetCollectedShown(true)
@@ -277,18 +292,14 @@ local function DisplayToyInfo(tooltipCell, toyList)
         local itemID, toyName, iconPath = C_ToyBox.GetToyInfo(toyID)
 
         if toyName and entryFromID[itemID] then
-            AddEntryToDataTooltip(iconPath, toyName, PlayerHasToy(itemID))
+            AddEntryToDataTooltip(dataTooltip, iconPath, toyName, PlayerHasToy(itemID))
         end
     end
 
-    DataTooltip:UpdateScrolling()
-    DataTooltip:Show()
+    dataTooltip:Show()
 end
 
-----------------------------------------------------------------------------------
----- DataBroker Tooltip helpers.
----------------------------------------------------------------------------------
-local function GetTooltipData()
+local function GenerateData()
     local hasMounts = false
     local hasPets = false
     local hasToys = false
@@ -308,7 +319,7 @@ local function GetTooltipData()
     table.wipe(npcIDs)
     table.wipe(npcNames)
 
-    for npcID in pairs(DataObject.scannerData.NPCs) do
+    for npcID in pairs(DataObject.ScannerData.NPCs) do
         local npc = Data.NPCs[npcID]
 
         -- The npcID may belong to a custom NPC, which will not have further information.
@@ -377,55 +388,63 @@ local function GetTooltipData()
     }
 end
 
-----------------------------------------------------------------------------------
----- DataBroker Tooltip
----------------------------------------------------------------------------------
-local ICON_MOUNT = FormatAtlasTexture("StableMaster")
-local ICON_PET = FormatAtlasTexture("WildBattlePetCapturable")
+--------------------------------------------------------------------------------
+---- Display Rendering
+--------------------------------------------------------------------------------
 
-local ICON_TAMEABLE
-do
-    local textureFormat = [[|TInterface\TargetingFrame\UI-CLASSES-CIRCLES:0:0:0:0:256:256:%d:%d:%d:%d|t]]
-    local textureSize = 256
-    local left, right, top, bottom = unpack(CLASS_ICON_TCOORDS["HUNTER"])
+---@param eventName string The name of the event that triggered this method. Unused.
+---@param tooltip LibQTip-2.0.Tooltip The tooltip which has just been released.
+function TooltipHandler:OnReleaseTooltip(eventName, tooltip)
+    -- QTip.UnregisterCallback(tooltip, "OnReleaseTooltip")
 
-    ICON_TAMEABLE =
-        textureFormat:format(left * textureSize, right * textureSize, top * textureSize, bottom * textureSize)
+    if tooltip == self.Tooltip.Main then
+        tooltip:SetFrameStrata("TOOLTIP")
+
+        self.Tooltip.Main = nil
+    elseif tooltip == self.Tooltip.Data then
+        self.Tooltip.Data = nil
+    end
 end
 
-local ICON_TOY = [[|TInterface\Worldmap\TreasureChest_64:0:0|t]]
-local ICON_WORLDQUEST = FormatAtlasTexture("worldquest-tracker-questmarker")
-
-local function DrawTooltip(displayFrame)
-    if not displayFrame then
+---@param anchorFrame LibDataBroker.DataDisplay & Frame
+function TooltipHandler:Render(anchorFrame)
+    if not anchorFrame then
         return
     end
 
-    DataObjectDisplay = displayFrame
+    local tooltipData = GenerateData()
 
-    if QTip:IsAcquiredTooltip(AddOnFolderName) then
-        QTip:ReleaseTooltip(Tooltip)
+    if tooltip and QTip:IsAcquiredTooltip(AddOnFolderName) then
+        QTip:ReleaseTooltip(tooltip)
     end
 
-    local tooltipData = GetTooltipData()
+    local tooltip = self.Tooltip.Main
 
-    Tooltip = QTip:AcquireTooltip(AddOnFolderName, tooltipData.numTooltipColumns)
-    Tooltip:SmartAnchorTo(displayFrame)
-    Tooltip:SetAutoHideDelay(0.25, displayFrame)
-    Tooltip:Clear()
-    Tooltip:SetBackdropColor(0.05, 0.05, 0.05, 1)
-    Tooltip:SetCellMarginH(0)
-    Tooltip:SetCellMarginV(1)
+    if not tooltip then
+        tooltip = QTip:AcquireTooltip(AddOnFolderName, tooltipData.numTooltipColumns)
+        tooltip:SetFrameStrata("DIALOG")
 
-    Tooltip.OnRelease = Tooltip_OnRelease
+        tooltip
+            :Clear()
+            :SmartAnchorTo(anchorFrame)
+            :SetAutoHideDelay(0.25, anchorFrame)
+            :SetCellMarginH(0)
+            :SetCellMarginV(1)
+            :SetBackdropColor(0.05, 0.05, 0.05, 1)
 
-    Tooltip:AddRow(AddOnFolderName):GetCell(1):SetFontObject(TitleFont):SetJustifyH("CENTER")
-    Tooltip:AddSeparator(1, 0, 0, 0)
+        self.Tooltip.Main = tooltip
 
-    if DataObject.scannerData.NPCCount == 0 then
-        Tooltip:AddSeparator(1, 0, 0, 0)
-        Tooltip:AddSeparator(1, 1, 0.82, 0)
-        Tooltip:AddRow(ERR_GENERIC_NO_VALID_TARGETS):GetCell(1):SetJustifyH("CENTER")
+        QTip.RegisterCallback(self, "OnReleaseTooltip", "OnReleaseTooltip")
+    end
+
+    tooltip:Show()
+    tooltip:Clear():AddRow(AddOnFolderName):GetCell(1):SetFontObject(TitleFont):SetJustifyH("CENTER")
+    tooltip:AddSeparator(1, 0, 0, 0)
+
+    if DataObject.ScannerData.NPCCount == 0 then
+        tooltip:AddSeparator(1, 0, 0, 0)
+        tooltip:AddSeparator(1, 1, 0.82, 0)
+        tooltip:AddRow(ERR_GENERIC_NO_VALID_TARGETS):GetCell(1):SetJustifyH("CENTER")
 
         return
     end
@@ -446,43 +465,41 @@ local function DrawTooltip(displayFrame)
             if npc.achievementID ~= currentAchievementID then
                 currentAchievementID = npc.achievementID
 
-                Tooltip:AddSeparator(1, 0, 0, 0)
-                Tooltip:AddSeparator(1, 1, 0.82, 0)
+                tooltip:AddSeparator(1, 0, 0, 0)
+                tooltip:AddSeparator(1, 1, 0.82, 0)
 
                 local achievementData = Data.Achievements[npc.achievementID]
-                local achievementRow = Tooltip:AddRow()
 
-                achievementRow
-                    :GetCell(1, providerValues.newCellProvider)
+                tooltip
+                    :AddRow()
+                    :GetCell(1, QTip:GetCellProvider("NPCScan Section Header"))
                     :SetFormattedText("|T%s:0|t %s", achievementData.iconTexturePath, achievementData.name)
                     :SetJustifyH("CENTER")
-
-                achievementRow
                     :SetScript("OnMouseUp", OpenToAchievement, tostring(npc.achievementID))
                     :SetScript("OnEnter", ShowAchievementTooltip, tostring(npc.achievementID))
                     :SetScript("OnLeave", HideAchievementTooltip)
 
-                Tooltip:AddSeparator(1, 1, 0.82, 0)
+                tooltip:AddSeparator(1, 1, 0.82, 0)
             end
         elseif not currentAchievementID then
             -- No achievement section before this, and it's the first entry
             currentAchievementID = -1
 
-            Tooltip:AddSeparator(1, 0, 0, 0)
-            Tooltip:AddSeparator(1, 1, 0.82, 0)
+            tooltip:AddSeparator(1, 0, 0, 0)
+            tooltip:AddSeparator(1, 1, 0.82, 0)
         elseif currentAchievementID >= 0 then
             -- End of achievements.
             currentAchievementID = -1
 
-            Tooltip:AddSeparator(1, 0, 0, 0)
-            Tooltip:AddSeparator(1, 1, 0.82, 0)
+            tooltip:AddSeparator(1, 0, 0, 0)
+            tooltip:AddSeparator(1, 1, 0.82, 0)
 
-            Tooltip:AddRow(MISCELLANEOUS):GetCell(1):SetJustifyH("CENTER")
+            tooltip:AddRow(MISCELLANEOUS):GetCell(1):SetJustifyH("CENTER")
 
-            Tooltip:AddSeparator(1, 1, 0.82, 0)
+            tooltip:AddSeparator(1, 1, 0.82, 0)
         end
 
-        local row = Tooltip:AddRow()
+        local row = tooltip:AddRow()
 
         if index % 2 == 0 then
             row:SetColor(0.20, 0.20, 0.20)
@@ -493,65 +510,72 @@ local function DrawTooltip(displayFrame)
         if worldQuestColumn and npc:HasActiveWorldQuest() then
             row:GetCell(worldQuestColumn)
                 :SetText(ICON_WORLDQUEST)
-                :SetScript("OnEnter", DisplayText, TRACKER_HEADER_WORLD_QUESTS)
-                :SetScript("OnLeave", CleanupDataTooltip)
+                :SetScript("OnEnter", DisplayDataText, TRACKER_HEADER_WORLD_QUESTS)
+                :SetScript("OnLeave", ReleaseDataTooltip)
         end
 
         if tameableColumn and npc.isTameable then
             row:GetCell(tameableColumn)
                 :SetText(ICON_TAMEABLE)
-                :SetScript("OnEnter", DisplayText, TAMEABLE)
-                :SetScript("OnLeave", CleanupDataTooltip)
+                :SetScript("OnEnter", DisplayDataText, TAMEABLE)
+                :SetScript("OnLeave", ReleaseDataTooltip)
         end
 
         if mountsColumn and npc.mounts then
             row:GetCell(mountsColumn)
                 :SetText(ICON_MOUNT)
                 :SetScript("OnEnter", DisplayMountInfo, npc.mounts)
-                :SetScript("OnLeave", CleanupDataTooltip)
+                :SetScript("OnLeave", ReleaseDataTooltip)
         end
 
         if petsColumn and npc.pets then
             row:GetCell(petsColumn)
                 :SetText(ICON_PET)
                 :SetScript("OnEnter", DisplayPetInfo, npc.pets)
-                :SetScript("OnLeave", CleanupDataTooltip)
+                :SetScript("OnLeave", ReleaseDataTooltip)
         end
 
         if toysColumn and npc.toys then
             row:GetCell(toysColumn)
                 :SetText(ICON_TOY)
                 :SetScript("OnEnter", DisplayToyInfo, npc.toys)
-                :SetScript("OnLeave", CleanupDataTooltip)
+                :SetScript("OnLeave", ReleaseDataTooltip)
         end
     end
 end
 
-----------------------------------------------------------------------------------
----- DataObject methods.
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---- DataObject Methods
+--------------------------------------------------------------------------------
+
 function DataObject:OnClick()
     LibStub("AceConfigDialog-3.0"):Open(AddOnFolderName)
 end
 
 function DataObject:OnEnter()
-    if not Tooltip or not Tooltip:IsShown() then
-        DrawTooltip(self)
-        Tooltip:Show()
-    end
+    TooltipHandler:Render(self)
 end
 
 function DataObject:OnLeave()
     -- Null operation: Some LDB displays get cranky if this method is missing.
 end
 
-function DataObject:Update(_, scannerData)
-    self.text = scannerData.NPCCount > 0 and scannerData.NPCCount or NONE
-    self.scannerData = scannerData
+local UpdateDisplayThrottleIntervalSeconds = 5
+local lastUpdateTime = time()
 
-    if DataObjectDisplay and Tooltip and Tooltip:IsShown() then
-        DrawTooltip(DataObjectDisplay)
+function DataObject:UpdateDisplay(_, scannerData)
+    self.text = scannerData.NPCCount > 0 and scannerData.NPCCount or NONE
+    self.ScannerData = scannerData
+
+    if TooltipHandler.Tooltip.Main and TooltipHandler.Tooltip.Main:IsShown() then
+        local now = time()
+
+        if now > lastUpdateTime + UpdateDisplayThrottleIntervalSeconds then
+            lastUpdateTime = now
+
+            TooltipHandler:Render(self)
+        end
     end
 end
 
-DataObject:RegisterMessage(EventMessage.ScannerDataUpdated, "Update")
+DataObject:RegisterMessage(EventMessage.ScannerDataUpdated, "UpdateDisplay")
