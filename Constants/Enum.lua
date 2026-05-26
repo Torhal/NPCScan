@@ -8,7 +8,7 @@ local private = select(2, ...) ---@class PrivateNamespace
 ---- Constants
 --------------------------------------------------------------------------------
 private.Enum = {
-    ---@type table<DetectionGroupStatusName, DetectionGroupStatusValue>
+    ---@enum DetectionGroupStatus
     DetectionGroupStatus = {
         Enabled = 1,
         UserDefined = 2,
