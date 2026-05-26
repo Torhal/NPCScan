@@ -79,28 +79,28 @@ local function DecorateEliteTargetButton(button)
     ring1:SetPoint("CENTER", -80, -4)
     button.Ring1 = ring1
 
-    local particle3 = button:CreateTexture(nil, "BACKGROUND", 1)
+    local particle3 = button:CreateTexture(nil, "BACKGROUND")
     particle3:SetAlpha(0)
     particle3:SetBlendMode("BLEND")
     particle3:SetAtlas("LegendaryToast-particles3", true)
     particle3:SetPoint("CENTER", -80, 0)
     button.Particles3 = particle3
 
-    local particles2 = button:CreateTexture(nil, "BACKGROUND", 2)
+    local particles2 = button:CreateTexture(nil, "BACKGROUND")
     particles2:SetAlpha(0)
     particles2:SetBlendMode("BLEND")
     particles2:SetAtlas("LegendaryToast-particles2", true)
     particles2:SetPoint("CENTER", -80, 0)
     button.Particles2 = particles2
 
-    local particles1 = button:CreateTexture(nil, "BACKGROUND", 3)
+    local particles1 = button:CreateTexture(nil, "BACKGROUND")
     particles1:SetAlpha(0)
     particles1:SetBlendMode("BLEND")
     particles1:SetAtlas("LegendaryToast-particles1", true)
     particles1:SetPoint("CENTER", -80, 0)
     button.Particles1 = particles1
 
-    local starGlow = button:CreateTexture(nil, "BACKGROUND", 4)
+    local starGlow = button:CreateTexture(nil, "BACKGROUND")
     starGlow:SetSize(230, 230)
     starGlow:SetAlpha(0)
     starGlow:SetBlendMode("ADD")
