@@ -24,8 +24,7 @@ Utilities.lua
 Scanner.lua
 MapOverlays.lua
 
-SpecializedCells\Manifest.xml
-Tooltip.lua
+Tooltip\Manifest.xml
 
 Preferences\Manifest.xml
 TargetButton\Manifest.xml
