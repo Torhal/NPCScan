@@ -42,22 +42,6 @@ local TooltipHandler = {
     },
 }
 
-local ICON_MOUNT = FormatAtlasTexture("StableMaster")
-local ICON_PET = FormatAtlasTexture("WildBattlePetCapturable")
-
-local ICON_TAMEABLE
-do
-    local textureFormat = [[|TInterface\TargetingFrame\UI-CLASSES-CIRCLES:0:0:0:0:256:256:%d:%d:%d:%d|t]]
-    local textureSize = 256
-    local left, right, top, bottom = unpack(CLASS_ICON_TCOORDS["HUNTER"])
-
-    ICON_TAMEABLE =
-        textureFormat:format(left * textureSize, right * textureSize, top * textureSize, bottom * textureSize)
-end
-
-local ICON_TOY = [[|TInterface\Worldmap\TreasureChest_64:0:0|t]]
-local ICON_WORLDQUEST = FormatAtlasTexture("worldquest-tracker-questmarker")
-
 local npcAchievementNames = {}
 local npcDisplayNames = {}
 local npcIDs = {}
@@ -515,38 +499,93 @@ function TooltipHandler:Render(anchorFrame)
         row:GetCell(1):SetText(npcDisplayNames[npcID])
 
         if worldQuestColumn and npc:HasActiveWorldQuest() then
-            row:GetCell(worldQuestColumn)
-                :SetText(ICON_WORLDQUEST)
-                :SetScript("OnEnter", DisplayDataText, TRACKER_HEADER_WORLD_QUESTS)
-                :SetScript("OnLeave", ReleaseDataTooltip)
+            local atlasInfo = C_Texture.GetAtlasInfo("worldquest-tracker-questmarker")
+
+            if atlasInfo.file then
+                row
+                    :GetCell(worldQuestColumn, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
+                    :SetIconTexture(atlasInfo.file)
+                    :SetIconTexCoord(
+                        atlasInfo.leftTexCoord,
+                        atlasInfo.rightTexCoord,
+                        atlasInfo.topTexCoord,
+                        atlasInfo.bottomTexCoord
+                    )
+                    :SetScript("OnEnter", DisplayDataText, TRACKER_HEADER_WORLD_QUESTS)
+                    :SetScript("OnLeave", ReleaseDataTooltip)
+            end
         end
 
         if tameableColumn and npc.isTameable then
-            row:GetCell(tameableColumn)
-                :SetText(ICON_TAMEABLE)
-                :SetScript("OnEnter", DisplayDataText, TAMEABLE)
-                :SetScript("OnLeave", ReleaseDataTooltip)
+            local atlasInfo = C_Texture.GetAtlasInfo("UI-HUD-UnitFrame-Player-Portrait-ClassIcon-Hunter")
+
+            if atlasInfo.file then
+                row
+                    :GetCell(tameableColumn, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
+                    :SetIconTexture(atlasInfo.file)
+                    :SetIconTexCoord(
+                        atlasInfo.leftTexCoord,
+                        atlasInfo.rightTexCoord,
+                        atlasInfo.topTexCoord,
+                        atlasInfo.bottomTexCoord
+                    )
+                    :SetScript("OnEnter", DisplayDataText, TAMEABLE)
+                    :SetScript("OnLeave", ReleaseDataTooltip)
+            end
         end
 
         if mountsColumn and npc.mounts then
-            row:GetCell(mountsColumn)
-                :SetText(ICON_MOUNT)
-                :SetScript("OnEnter", DisplayMountInfo, npc.mounts)
-                :SetScript("OnLeave", ReleaseDataTooltip)
+            local atlasInfo = C_Texture.GetAtlasInfo("StableMaster")
+
+            if atlasInfo.file then
+                row
+                    :GetCell(mountsColumn, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
+                    :SetIconTexture(atlasInfo.file)
+                    :SetIconTexCoord(
+                        atlasInfo.leftTexCoord,
+                        atlasInfo.rightTexCoord,
+                        atlasInfo.topTexCoord,
+                        atlasInfo.bottomTexCoord
+                    )
+                    :SetScript("OnEnter", DisplayMountInfo, npc.mounts)
+                    :SetScript("OnLeave", ReleaseDataTooltip)
+            end
         end
 
         if petsColumn and npc.pets then
-            row:GetCell(petsColumn)
-                :SetText(ICON_PET)
-                :SetScript("OnEnter", DisplayPetInfo, npc.pets)
-                :SetScript("OnLeave", ReleaseDataTooltip)
+            local atlasInfo = C_Texture.GetAtlasInfo("WildBattlePetCapturable")
+
+            if atlasInfo.file then
+                row
+                    :GetCell(petsColumn, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
+                    :SetIconTexture(atlasInfo.file)
+                    :SetIconTexCoord(
+                        atlasInfo.leftTexCoord,
+                        atlasInfo.rightTexCoord,
+                        atlasInfo.topTexCoord,
+                        atlasInfo.bottomTexCoord
+                    )
+                    :SetScript("OnEnter", DisplayPetInfo, npc.pets)
+                    :SetScript("OnLeave", ReleaseDataTooltip)
+            end
         end
 
         if toysColumn and npc.toys then
-            row:GetCell(toysColumn)
-                :SetText(ICON_TOY)
-                :SetScript("OnEnter", DisplayToyInfo, npc.toys)
-                :SetScript("OnLeave", ReleaseDataTooltip)
+            local atlasInfo = C_Texture.GetAtlasInfo("BonusLoot-Chest")
+
+            if atlasInfo.file then
+                row
+                    :GetCell(toysColumn, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
+                    :SetIconTexture(atlasInfo.file)
+                    :SetIconTexCoord(
+                        atlasInfo.leftTexCoord,
+                        atlasInfo.rightTexCoord,
+                        atlasInfo.topTexCoord,
+                        atlasInfo.bottomTexCoord
+                    )
+                    :SetScript("OnEnter", DisplayToyInfo, npc.toys)
+                    :SetScript("OnLeave", ReleaseDataTooltip)
+            end
         end
     end
 
