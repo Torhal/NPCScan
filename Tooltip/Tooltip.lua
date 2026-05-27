@@ -142,8 +142,11 @@ local entryFromID = {}
 local function AddEntryToDataTooltip(dataTooltip, iconPath, entryName, isCollected)
     local row = dataTooltip:AddRow()
 
-    row:GetCell(1):SetFormattedText("|T%s:0:0|t %s", iconPath, entryName)
-    row:GetCell(2):SetText("    ")
+    row
+        :GetCell(1, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
+        :SetIconTexture(iconPath)
+
+    row:GetCell(2):SetFormattedText("%s    ", entryName)
 
     if isCollected then
         row:GetCell(3):SetFormattedText("%s%s", GREEN_FONT_COLOR_CODE, COLLECTED)
