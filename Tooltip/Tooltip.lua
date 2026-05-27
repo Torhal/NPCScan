@@ -64,7 +64,7 @@ local npcIDs = {}
 local npcNames = {}
 
 local TitleFont = CreateFont("NPCScanTitleFont")
-TitleFont:SetTextColor(1, 0.82, 0)
+TitleFont:SetTextColor(0.510, 0.773, 1.0)
 TitleFont:SetFontObject("QuestTitleFont")
 
 --------------------------------------------------------------------------------
