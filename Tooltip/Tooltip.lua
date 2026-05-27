@@ -428,8 +428,6 @@ function TooltipHandler:Render(anchorFrame)
             :Clear()
             :SmartAnchorTo(anchorFrame)
             :SetAutoHideDelay(0.25, anchorFrame)
-            :SetCellMarginH(0)
-            :SetCellMarginV(1)
             :SetBackdropColor(0.05, 0.05, 0.05, 1)
 
         self.Tooltip.Main = tooltip
