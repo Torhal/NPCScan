@@ -209,6 +209,7 @@ local function DisplayDataText(tooltipCell, text)
 end
 
 ---@param tooltipCell LibQTip-2.0.Cell
+---@param mountList MountData[]
 local function DisplayMountInfo(tooltipCell, mountList)
     local dataTooltip = AcquireDataTooltip(tooltipCell)
 
@@ -229,6 +230,7 @@ local function DisplayMountInfo(tooltipCell, mountList)
 end
 
 ---@param tooltipCell LibQTip-2.0.Cell
+---@param petList PetData[]
 local function DisplayPetInfo(tooltipCell, petList)
     local dataTooltip = AcquireDataTooltip(tooltipCell)
 
@@ -259,6 +261,8 @@ local function DisplayPetInfo(tooltipCell, petList)
     dataTooltip:Show()
 end
 
+---@param tooltipCell LibQTip-2.0.Cell
+---@param toyList ToyData[]
 local function DisplayToyInfo(tooltipCell, toyList)
     local dataTooltip = AcquireDataTooltip(tooltipCell)
 
