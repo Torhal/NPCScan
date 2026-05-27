@@ -428,6 +428,8 @@ function TooltipHandler:Render(anchorFrame)
             :Clear()
             :SmartAnchorTo(anchorFrame)
             :SetAutoHideDelay(0.25, anchorFrame)
+            :SetHighlightTexture([[Interface\ClassTrainerFrame\TrainerTextures]])
+            :SetHighlightTexCoord(0.00195313, 0.57421875, 0.75390625, 0.84570313)
             :SetBackdropColor(0.05, 0.05, 0.05, 1)
 
         self.Tooltip.Main = tooltip
