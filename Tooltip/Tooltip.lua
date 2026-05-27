@@ -425,7 +425,6 @@ function TooltipHandler:Render(anchorFrame)
         tooltip:SetFrameStrata("DIALOG")
 
         tooltip
-            :Clear()
             :SmartAnchorTo(anchorFrame)
             :SetAutoHideDelay(0.25, anchorFrame)
             :SetHighlightTexture([[Interface\ClassTrainerFrame\TrainerTextures]])
@@ -437,8 +436,16 @@ function TooltipHandler:Render(anchorFrame)
         QTip.RegisterCallback(self, "OnReleaseTooltip", "OnReleaseTooltip")
     end
 
-    tooltip:Clear():AddRow(AddOnFolderName):GetCell(1):SetFontObject(TitleFont):SetJustifyH("CENTER")
-    tooltip:AddSeparator(1, 0, 0, 0)
+    tooltip
+        :Clear()
+        :AddRow()
+        :GetCell(1)
+        :SetColSpan(0)
+        :SetJustifyH("CENTER")
+        :SetFontObject(TitleFont)
+        :SetText(AddOnFolderName)
+
+    tooltip:AddSeparator(1, 0.510, 0.773, 1.0)
 
     if DataObject.ScannerData.NPCCount == 0 then
         tooltip:AddSeparator(1, 0, 0, 0)
@@ -472,6 +479,7 @@ function TooltipHandler:Render(anchorFrame)
                 tooltip
                     :AddRow()
                     :GetCell(1, QTip:GetCellProvider("NPCScan Section Header"))
+                    :SetColSpan(0)
                     :SetFormattedText("|T%s:0|t %s", achievementData.iconTexturePath, achievementData.name)
                     :SetJustifyH("CENTER")
                     :SetScript("OnMouseUp", OpenToAchievement, tostring(npc.achievementID))
