@@ -437,7 +437,6 @@ function TooltipHandler:Render(anchorFrame)
         QTip.RegisterCallback(self, "OnReleaseTooltip", "OnReleaseTooltip")
     end
 
-    tooltip:Show()
     tooltip:Clear():AddRow(AddOnFolderName):GetCell(1):SetFontObject(TitleFont):SetJustifyH("CENTER")
     tooltip:AddSeparator(1, 0, 0, 0)
 
@@ -542,6 +541,8 @@ function TooltipHandler:Render(anchorFrame)
                 :SetScript("OnLeave", ReleaseDataTooltip)
         end
     end
+
+    tooltip:Show()
 end
 
 --------------------------------------------------------------------------------
