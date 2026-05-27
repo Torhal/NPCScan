@@ -75,7 +75,7 @@ function IconCell:SetIconTexCoord(...)
 end
 
 --- Populates the Cell with an icon texture.
----@param texturePath string The path to the icon asset.
+---@param texturePath number|string The path to the icon asset.
 ---@return LibQTip-2.0.IconCell
 function IconCell:SetIconTexture(texturePath)
 	self.IconTexture:SetTexture(texturePath)
