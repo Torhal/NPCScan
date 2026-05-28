@@ -291,20 +291,6 @@ local function DisplayToyInfo(tooltipCell, toyList)
 end
 
 local function GenerateData()
-    local hasMounts = false
-    local hasPets = false
-    local hasToys = false
-    local hasTameable = false
-    local hasWorldQuest = false
-
-    local mountsColumn
-    local petsColumn
-    local tameableColumn
-    local toysColumn
-    local worldQuestColumn
-
-    local numTooltipColumns = 1
-
     table.wipe(npcAchievementNames)
     table.wipe(npcDisplayNames)
     table.wipe(npcIDs)
@@ -319,64 +305,10 @@ local function GenerateData()
             npcDisplayNames[npcID] = private.GetNPCOptionsName(npcID)
             npcIDs[#npcIDs + 1] = npcID
             npcNames[npcID] = private.GetNPCNameFromID(npcID)
-
-            if not hasTameable and npc.isTameable then
-                hasTameable = true
-            end
-
-            if not hasMounts and npc.mounts then
-                hasMounts = true
-            end
-
-            if not hasPets and npc.pets then
-                hasPets = true
-            end
-
-            if not hasToys and npc.toys then
-                hasToys = true
-            end
-
-            if not hasWorldQuest and npc:HasActiveWorldQuest() then
-                hasWorldQuest = true
-            end
         end
     end
 
-    if hasMounts then
-        numTooltipColumns = numTooltipColumns + 1
-        mountsColumn = numTooltipColumns
-    end
-
-    if hasPets then
-        numTooltipColumns = numTooltipColumns + 1
-        petsColumn = numTooltipColumns
-    end
-
-    if hasToys then
-        numTooltipColumns = numTooltipColumns + 1
-        toysColumn = numTooltipColumns
-    end
-
-    if hasTameable then
-        numTooltipColumns = numTooltipColumns + 1
-        tameableColumn = numTooltipColumns
-    end
-
-    if hasWorldQuest then
-        numTooltipColumns = numTooltipColumns + 1
-        worldQuestColumn = numTooltipColumns
-    end
-
     table.sort(npcIDs, SortByNPCAchievementNameThenByNameThenByID)
-
-    return {
-        mountsColumn = mountsColumn,
-        petsColumn = petsColumn,
-        tameableColumn = tameableColumn,
-        toysColumn = toysColumn,
-        worldQuestColumn = worldQuestColumn,
-        numTooltipColumns = numTooltipColumns,
-    }
 end
 
 --------------------------------------------------------------------------------
@@ -422,13 +354,24 @@ local function RenderIcon(parameters)
     end
 end
 
+local TooltipColumnCount = 6
+
+local TooltipColumnID = {
+    Name = 1,
+    Mount = 2,
+    Pet = 3,
+    Toy = 4,
+    Tameable = 5,
+    WorldQuest = 6,
+}
+
 ---@param anchorFrame LibDataBroker.DataDisplay & Frame
 function TooltipHandler:Render(anchorFrame)
     if not anchorFrame then
         return
     end
 
-    local tooltipData = GenerateData()
+    GenerateData()
 
     if tooltip and QTip:IsAcquiredTooltip(AddOnFolderName) then
         QTip:ReleaseTooltip(tooltip)
@@ -437,7 +380,7 @@ function TooltipHandler:Render(anchorFrame)
     local tooltip = self.Tooltip.Main
 
     if not tooltip then
-        tooltip = QTip:AcquireTooltip(AddOnFolderName, tooltipData.numTooltipColumns)
+        tooltip = QTip:AcquireTooltip(AddOnFolderName, TooltipColumnCount)
         tooltip:SetFrameStrata("DIALOG")
 
         tooltip
@@ -470,12 +413,6 @@ function TooltipHandler:Render(anchorFrame)
 
         return
     end
-
-    local mountsColumn = tooltipData.mountsColumn
-    local petsColumn = tooltipData.petsColumn
-    local tameableColumn = tooltipData.tameableColumn
-    local toysColumn = tooltipData.toysColumn
-    local worldQuestColumn = tooltipData.worldQuestColumn
 
     local currentAchievementID
 
@@ -528,52 +465,52 @@ function TooltipHandler:Render(anchorFrame)
             row:SetColor(0.20, 0.20, 0.20)
         end
 
-        row:GetCell(1):SetText(npcDisplayNames[npcID])
+        row:GetCell(TooltipColumnID.Name):SetText(npcDisplayNames[npcID])
 
-        if worldQuestColumn and npc:HasActiveWorldQuest() then
+        if npc:HasActiveWorldQuest() then
             RenderIcon({
                 atlasName = "worldquest-tracker-questmarker",
-                columnIndex = worldQuestColumn,
+                columnIndex = TooltipColumnID.WorldQuest,
                 onEnterArgument = TRACKER_HEADER_WORLD_QUESTS,
                 onEnterFunction = DisplayDataText,
                 row = row,
             })
         end
 
-        if tameableColumn and npc.isTameable then
+        if npc.isTameable then
             RenderIcon({
                 atlasName = "UI-HUD-UnitFrame-Player-Portrait-ClassIcon-Hunter",
-                columnIndex = tameableColumn,
+                columnIndex = TooltipColumnID.Tameable,
                 onEnterArgument = TAMEABLE,
                 onEnterFunction = DisplayDataText,
                 row = row,
             })
         end
 
-        if mountsColumn and npc.mounts then
+        if npc.mounts then
             RenderIcon({
                 atlasName = "StableMaster",
-                columnIndex = mountsColumn,
+                columnIndex = TooltipColumnID.Mount,
                 onEnterArgument = npc.mounts,
                 onEnterFunction = DisplayMountInfo,
                 row = row,
             })
         end
 
-        if petsColumn and npc.pets then
+        if npc.pets then
             RenderIcon({
                 atlasName = "WildBattlePetCapturable",
-                columnIndex = petsColumn,
+                columnIndex = TooltipColumnID.Pet,
                 onEnterArgument = npc.pets,
                 onEnterFunction = DisplayPetInfo,
                 row = row,
             })
         end
 
-        if toysColumn and npc.toys then
+        if npc.toys then
             RenderIcon({
                 atlasName = "BonusLoot-Chest",
-                columnIndex = toysColumn,
+                columnIndex = TooltipColumnID.Toy,
                 onEnterArgument = npc.toys,
                 onEnterFunction = DisplayToyInfo,
                 row = row,
