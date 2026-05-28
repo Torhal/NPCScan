@@ -386,8 +386,6 @@ end
 ---@param eventName string The name of the event that triggered this method. Unused.
 ---@param tooltip LibQTip-2.0.Tooltip The tooltip which has just been released.
 function TooltipHandler:OnReleaseTooltip(eventName, tooltip)
-    -- QTip.UnregisterCallback(tooltip, "OnReleaseTooltip")
-
     if tooltip == self.Tooltip.Main then
         tooltip:SetFrameStrata("TOOLTIP")
 
