@@ -429,6 +429,7 @@ NPCs[126864] = {
     npcID = 126864,
     questID = 48702, -- Unknown
     vignetteID = 2235,
+    worldQuestID = 48722, -- Feasel the Muffin Thief
 }
 
 NPCs[126865] = {
@@ -475,6 +476,7 @@ NPCs[126867] = {
     npcID = 126867,
     questID = 48705, -- Unknown
     vignetteID = 2238,
+    worldQuestID = 48725, -- Venomtail Skyfin
 }
 
 NPCs[126868] = {
@@ -485,6 +487,7 @@ NPCs[126868] = {
     npcID = 126868,
     questID = 48706, -- Unknown
     vignetteID = 2239,
+    worldQuestID = 48726, -- Turek the Lucid
 }
 
 NPCs[126869] = {
@@ -542,6 +545,7 @@ NPCs[126896] = {
     npcID = 126896,
     questID = 48711, -- Unknown
     vignetteID = 2244,
+    worldQuestID = 48731, -- Herald of Chaos
 }
 
 NPCs[126898] = {
@@ -648,6 +652,7 @@ NPCs[126912] = {
     npcID = 126912,
     questID = 48721, -- Unknown
     vignetteID = 2252,
+    worldQuestID = 48740, -- Skreeg the Devourer
 }
 
 NPCs[126913] = {
