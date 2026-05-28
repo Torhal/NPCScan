@@ -187,7 +187,7 @@ NPCs[127096] = {
     --------------------------------------------------------------------------------
     ---- All-Seer Xanarian
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 127096,
     questID = 48818, -- Unknown
     vignetteID = 2274,
