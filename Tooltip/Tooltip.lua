@@ -397,6 +397,33 @@ function TooltipHandler:OnReleaseTooltip(eventName, tooltip)
     end
 end
 
+---@class RenderIconParameters
+---@field atlasName string
+---@field columnIndex number
+---@field onEnterArgument unknown
+---@field onEnterFunction fun(tooltipCell: LibQTip-2.0.Cell, arg: unknown)
+---@field row LibQTip-2.0.Row
+
+---@param parameters RenderIconParameters
+local function RenderIcon(parameters)
+    local atlasInfo = C_Texture.GetAtlasInfo(parameters.atlasName)
+
+    if atlasInfo.file then
+        parameters
+            .row
+            :GetCell(parameters.columnIndex, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
+            :SetIconTexture(atlasInfo.file)
+            :SetIconTexCoord(
+                atlasInfo.leftTexCoord,
+                atlasInfo.rightTexCoord,
+                atlasInfo.topTexCoord,
+                atlasInfo.bottomTexCoord
+            )
+            :SetScript("OnEnter", parameters.onEnterFunction, parameters.onEnterArgument)
+            :SetScript("OnLeave", ReleaseDataTooltip)
+    end
+end
+
 ---@param anchorFrame LibDataBroker.DataDisplay & Frame
 function TooltipHandler:Render(anchorFrame)
     if not anchorFrame then
@@ -506,93 +533,53 @@ function TooltipHandler:Render(anchorFrame)
         row:GetCell(1):SetText(npcDisplayNames[npcID])
 
         if worldQuestColumn and npc:HasActiveWorldQuest() then
-            local atlasInfo = C_Texture.GetAtlasInfo("worldquest-tracker-questmarker")
-
-            if atlasInfo.file then
-                row
-                    :GetCell(worldQuestColumn, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
-                    :SetIconTexture(atlasInfo.file)
-                    :SetIconTexCoord(
-                        atlasInfo.leftTexCoord,
-                        atlasInfo.rightTexCoord,
-                        atlasInfo.topTexCoord,
-                        atlasInfo.bottomTexCoord
-                    )
-                    :SetScript("OnEnter", DisplayDataText, TRACKER_HEADER_WORLD_QUESTS)
-                    :SetScript("OnLeave", ReleaseDataTooltip)
-            end
+            RenderIcon({
+                atlasName = "worldquest-tracker-questmarker",
+                columnIndex = worldQuestColumn,
+                onEnterArgument = TRACKER_HEADER_WORLD_QUESTS,
+                onEnterFunction = DisplayDataText,
+                row = row,
+            })
         end
 
         if tameableColumn and npc.isTameable then
-            local atlasInfo = C_Texture.GetAtlasInfo("UI-HUD-UnitFrame-Player-Portrait-ClassIcon-Hunter")
-
-            if atlasInfo.file then
-                row
-                    :GetCell(tameableColumn, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
-                    :SetIconTexture(atlasInfo.file)
-                    :SetIconTexCoord(
-                        atlasInfo.leftTexCoord,
-                        atlasInfo.rightTexCoord,
-                        atlasInfo.topTexCoord,
-                        atlasInfo.bottomTexCoord
-                    )
-                    :SetScript("OnEnter", DisplayDataText, TAMEABLE)
-                    :SetScript("OnLeave", ReleaseDataTooltip)
-            end
+            RenderIcon({
+                atlasName = "UI-HUD-UnitFrame-Player-Portrait-ClassIcon-Hunter",
+                columnIndex = tameableColumn,
+                onEnterArgument = TAMEABLE,
+                onEnterFunction = DisplayDataText,
+                row = row,
+            })
         end
 
         if mountsColumn and npc.mounts then
-            local atlasInfo = C_Texture.GetAtlasInfo("StableMaster")
-
-            if atlasInfo.file then
-                row
-                    :GetCell(mountsColumn, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
-                    :SetIconTexture(atlasInfo.file)
-                    :SetIconTexCoord(
-                        atlasInfo.leftTexCoord,
-                        atlasInfo.rightTexCoord,
-                        atlasInfo.topTexCoord,
-                        atlasInfo.bottomTexCoord
-                    )
-                    :SetScript("OnEnter", DisplayMountInfo, npc.mounts)
-                    :SetScript("OnLeave", ReleaseDataTooltip)
-            end
+            RenderIcon({
+                atlasName = "StableMaster",
+                columnIndex = mountsColumn,
+                onEnterArgument = npc.mounts,
+                onEnterFunction = DisplayMountInfo,
+                row = row,
+            })
         end
 
         if petsColumn and npc.pets then
-            local atlasInfo = C_Texture.GetAtlasInfo("WildBattlePetCapturable")
-
-            if atlasInfo.file then
-                row
-                    :GetCell(petsColumn, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
-                    :SetIconTexture(atlasInfo.file)
-                    :SetIconTexCoord(
-                        atlasInfo.leftTexCoord,
-                        atlasInfo.rightTexCoord,
-                        atlasInfo.topTexCoord,
-                        atlasInfo.bottomTexCoord
-                    )
-                    :SetScript("OnEnter", DisplayPetInfo, npc.pets)
-                    :SetScript("OnLeave", ReleaseDataTooltip)
-            end
+            RenderIcon({
+                atlasName = "WildBattlePetCapturable",
+                columnIndex = petsColumn,
+                onEnterArgument = npc.pets,
+                onEnterFunction = DisplayPetInfo,
+                row = row,
+            })
         end
 
         if toysColumn and npc.toys then
-            local atlasInfo = C_Texture.GetAtlasInfo("BonusLoot-Chest")
-
-            if atlasInfo.file then
-                row
-                    :GetCell(toysColumn, QTip:GetCellProvider("LibQTip-2.0 Icon")) --[[@as LibQTip-2.0.IconCell]]
-                    :SetIconTexture(atlasInfo.file)
-                    :SetIconTexCoord(
-                        atlasInfo.leftTexCoord,
-                        atlasInfo.rightTexCoord,
-                        atlasInfo.topTexCoord,
-                        atlasInfo.bottomTexCoord
-                    )
-                    :SetScript("OnEnter", DisplayToyInfo, npc.toys)
-                    :SetScript("OnLeave", ReleaseDataTooltip)
-            end
+            RenderIcon({
+                atlasName = "BonusLoot-Chest",
+                columnIndex = toysColumn,
+                onEnterArgument = npc.toys,
+                onEnterFunction = DisplayToyInfo,
+                row = row,
+            })
         end
     end
 
