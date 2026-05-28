@@ -509,6 +509,7 @@ NPCs[126885] = {
     npcID = 126885,
     questID = 48708, -- Unknown
     vignetteID = 2241,
+    worldQuestID = 48728, -- Umbraliss
 }
 
 NPCs[126887] = {
