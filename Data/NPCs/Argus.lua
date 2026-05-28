@@ -191,6 +191,7 @@ NPCs[127096] = {
     npcID = 127096,
     questID = 48818, -- Unknown
     vignetteID = 2274,
+    worldQuestID = 48837, -- All-Seer Xanarian
 }
 
 NPCs[127118] = {
@@ -227,6 +228,7 @@ NPCs[127291] = {
     npcID = 127291,
     questID = 48822, -- Unknown
     vignetteID = 2278,
+    worldQuestID = 48836, -- Watcher Aival
 }
 
 NPCs[127300] = {
@@ -237,6 +239,7 @@ NPCs[127300] = {
     npcID = 127300,
     questID = 48824, -- Unknown
     vignetteID = 2279,
+    worldQuestID = 48866, -- Void Warden Valsuran
 }
 
 NPCs[127376] = {
