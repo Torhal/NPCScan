@@ -397,6 +397,7 @@ NPCs[152697] = {
     classification = NPCClassification.Rare,
     npcID = 152697,
     questID = 56057, -- The Soulbinder
+    vignetteID = -1,
 }
 
 NPCs[152712] = {
@@ -416,6 +417,7 @@ NPCs[152729] = {
     classification = NPCClassification.Rare,
     npcID = 152729,
     questID = 56057, -- The Soulbinder
+    vignetteID = -1,
 }
 
 NPCs[152736] = {
@@ -425,6 +427,7 @@ NPCs[152736] = {
     classification = NPCClassification.Rare,
     npcID = 152736,
     questID = 56057, -- The Soulbinder
+    vignetteID = -1,
 }
 
 NPCs[152756] = {
@@ -465,6 +468,7 @@ NPCs[153296] = {
     achievementQuestID = 55898, -- Tempest-Speaker Shalan'ali
     classification = NPCClassification.Rare,
     npcID = 153296,
+    vignetteID = -1,
 }
 
 NPCs[153299] = {
@@ -474,6 +478,7 @@ NPCs[153299] = {
     achievementQuestID = 55897, -- Szun, Breaker of Slaves
     classification = NPCClassification.Rare,
     npcID = 153299,
+    vignetteID = -1,
 }
 
 NPCs[153300] = {
@@ -483,6 +488,7 @@ NPCs[153300] = {
     achievementQuestID = 55894, -- Zoko, Her Iron Defender
     classification = NPCClassification.Rare,
     npcID = 153300,
+    vignetteID = -1,
 }
 
 NPCs[153301] = {
@@ -492,6 +498,7 @@ NPCs[153301] = {
     achievementQuestID = 55899, -- Starseeker of the Shirakess
     classification = NPCClassification.Rare,
     npcID = 153301,
+    vignetteID = -1,
 }
 
 NPCs[153302] = {
@@ -501,6 +508,7 @@ NPCs[153302] = {
     achievementQuestID = 55895, -- Frozen Winds of Zhiela
     classification = NPCClassification.Rare,
     npcID = 153302,
+    vignetteID = -1,
 }
 
 NPCs[153303] = {
@@ -510,6 +518,7 @@ NPCs[153303] = {
     achievementQuestID = 55900, -- Kassar, Wielder of Dark Blades
     classification = NPCClassification.Rare,
     npcID = 153303,
+    vignetteID = -1,
 }
 
 NPCs[153304] = {
@@ -519,6 +528,7 @@ NPCs[153304] = {
     achievementQuestID = 55896, -- Undana, Chilling Assassin
     classification = NPCClassification.Rare,
     npcID = 153304,
+    vignetteID = -1,
 }
 
 NPCs[153305] = {
@@ -528,6 +538,7 @@ NPCs[153305] = {
     achievementQuestID = 55886, -- The Zanj'ir Brutalizer
     classification = NPCClassification.Rare,
     npcID = 153305,
+    vignetteID = -1,
 }
 
 NPCs[153309] = {
@@ -538,6 +549,7 @@ NPCs[153309] = {
     classification = NPCClassification.Rare,
     npcID = 153309,
     questID = 57169, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[153310] = {
@@ -547,6 +559,7 @@ NPCs[153310] = {
     achievementQuestID = 55888, -- Champion Qalina, Spear of Ice
     classification = NPCClassification.Rare,
     npcID = 153310,
+    vignetteID = -1,
 }
 
 NPCs[153311] = {
@@ -556,6 +569,7 @@ NPCs[153311] = {
     achievementQuestID = 55893, -- Azanz, the Slitherblade
     classification = NPCClassification.Rare,
     npcID = 153311,
+    vignetteID = -1,
 }
 
 NPCs[153312] = {
@@ -566,6 +580,7 @@ NPCs[153312] = {
     classification = NPCClassification.Rare,
     npcID = 153312,
     questID = 57168, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[153313] = {
@@ -575,6 +590,7 @@ NPCs[153313] = {
     achievementQuestID = 55890, -- Champion Vyz'olgo the Mind-Taker
     classification = NPCClassification.Rare,
     npcID = 153313,
+    vignetteID = -1,
 }
 
 NPCs[153314] = {
@@ -584,6 +600,7 @@ NPCs[153314] = {
     achievementQuestID = 55891, -- Champion Aldrantiss, Defender of Her Kingdom
     classification = NPCClassification.Rare,
     npcID = 153314,
+    vignetteID = -1,
 }
 
 NPCs[153315] = {
@@ -593,6 +610,7 @@ NPCs[153315] = {
     achievementQuestID = 55892, -- Champion Eldanar, Shield of Her Glory
     classification = NPCClassification.Rare,
     npcID = 153315,
+    vignetteID = -1,
 }
 
 NPCs[153658] = {

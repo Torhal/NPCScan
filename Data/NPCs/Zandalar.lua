@@ -1066,6 +1066,7 @@ NPCs[137553] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 137553,
+    vignetteID = -1,
 }
 
 NPCs[137681] = {
@@ -1093,6 +1094,7 @@ NPCs[138794] = {
         },
     },
     npcID = 138794,
+    vignetteID = -1,
     worldQuestID = 52196, -- Sandswept Bones
 }
 
@@ -1102,6 +1104,7 @@ NPCs[143313] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 143313,
+    vignetteID = -1,
 }
 
 NPCs[146942] = {
@@ -1467,6 +1470,7 @@ NPCs[132253] = {
     classification = NPCClassification.RareElite,
     npcID = 132253,
     worldQuestID = 52169, -- The Matriarch
+    vignetteID = -1,
 }
 
 NPCs[133155] = {
@@ -1645,6 +1649,7 @@ NPCs[142434] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 142434,
+    vignetteID = -1,
 }
 
 NPCs[142475] = {
@@ -1653,6 +1658,7 @@ NPCs[142475] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 142475,
+    vignetteID = -1,
 }
 
 NPCs[143314] = {
@@ -1661,6 +1667,7 @@ NPCs[143314] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 143314,
+    vignetteID = -1,
 }
 
 NPCs[143536] = {

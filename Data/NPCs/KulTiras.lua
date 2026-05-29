@@ -61,6 +61,7 @@ NPCs[143560] = {
     classification = NPCClassification.RareElite,
     factionGroup = "Alliance",
     npcID = 143560,
+    vignetteID = -1,
 }
 
 NPCs[145161] = {
@@ -336,6 +337,7 @@ NPCs[131735] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 131735,
+    vignetteID = -1,
 }
 
 NPCs[132319] = {
@@ -598,6 +600,7 @@ NPCs[140252] = {
     npcID = 140252,
     questID = 52999, -- Unknown
     worldQuestID = 52157, -- A Chilling Encounter
+    vignetteID = -1,
 }
 
 NPCs[144855] = {
@@ -629,6 +632,7 @@ NPCs[145466] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145466,
+    vignetteID = -1,
 }
 
 NPCs[146607] = {
@@ -1333,6 +1337,7 @@ NPCs[129836] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 129836,
+    vignetteID = -1,
 }
 
 NPCs[130079] = {
@@ -1674,6 +1679,7 @@ NPCs[140163] = {
     npcID = 140163,
     questID = 52995, -- Unknown
     worldQuestID = 52166, -- The Faceless Herald
+    vignetteID = -1,
 }
 
 NPCs[140398] = {
@@ -1693,6 +1699,7 @@ NPCs[140474] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 140474,
+    vignetteID = -1,
 }
 
 NPCs[140925] = {
