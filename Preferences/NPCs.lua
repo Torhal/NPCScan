@@ -278,6 +278,7 @@ end
 ---- Achievement Options
 --------------------------------------------------------------------------------
 
+---@type AchievementID[]
 local AchievementIDs -- Populated below.
 
 ---@diagnostic disable-next-line: missing-fields
