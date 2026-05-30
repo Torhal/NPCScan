@@ -125,15 +125,15 @@ do
     }
 
     ---@param GUID string
-    ---@return integer | nil
-    local function GUIDToCreatureID(GUID)
+    ---@return NPCID | nil
+    function private.GUIDToCreatureID(GUID)
         local unitTypeName, _, _, _, _, unitID = ("-"):split(GUID)
         if ValidUnitTypeNames[unitTypeName] then
             return tonumber(unitID)
         end
     end
 
-    private.GUIDToCreatureID = GUIDToCreatureID
+    local GUIDToCreatureID = private.GUIDToCreatureID
 
     ---@param unitToken UnitToken
     ---@return integer | nil
