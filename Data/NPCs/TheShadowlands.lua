@@ -487,6 +487,12 @@ NPCs[163460] = {
     achievementQuestID = 62650, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 163460,
+    pets = {
+        itemID = 180856,
+        npcID = 171693,
+    },
+    questID = 62650, -- Unknown
+    vignetteID = 4575,
 }
 
 NPCs[167078] = {
