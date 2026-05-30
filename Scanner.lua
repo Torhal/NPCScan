@@ -372,13 +372,27 @@ do
 
             return
         else
-            private.Debug(
-                "Unknown vignette: %s - vignetteID %d (NPC ID %d) in mapID %d",
-                vignetteInfo.name,
-                vignetteInfo.vignetteID,
-                npcID or -1,
-                C_Map.GetBestMapForUnit("player")
-            )
+            local npc = npcID and private.Data.NPCs[npcID] or nil
+
+            if npc and (not npc.vignetteID or npc.vignetteID == -1) then
+                npc.vignetteID = vignetteInfo.vignetteID
+
+                private.Debug(
+                    "*****]] Added vignette: %s - vignetteID %d to NPC ID %d (%s)",
+                    vignetteInfo.name,
+                    vignetteInfo.vignetteID,
+                    npcID,
+                    private.GetNPCNameFromID(npcID)
+                )
+            else
+                private.Debug(
+                    "Unknown vignette: %s - vignetteID %d (NPC ID %d) in mapID %d",
+                    vignetteInfo.name,
+                    vignetteInfo.vignetteID,
+                    npcID or -1,
+                    C_Map.GetBestMapForUnit("player")
+                )
+            end
         end
 
         local npc = npcID and Data.Scanner.NPCs[npcID] or nil
