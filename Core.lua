@@ -144,7 +144,9 @@ function NPCScan:OnEnable()
     ---- Lookup Tables
     --------------------------------------------------------------------------------
 
+    local mapIDs = {}
     for mapID, map in pairs(private.Data.Maps) do
+        table.insert(mapIDs, mapID)
         for npcID in pairs(map.NPCs) do
             local npc = private.InitializeNPC(npcID)
 
@@ -181,7 +183,11 @@ function NPCScan:OnEnable()
 
     local NPCIDs = {}
 
-    for mapID, map in pairs(private.Data.Maps) do
+    table.sort(mapIDs)
+
+    for index = 1, #mapIDs do
+        local mapID = mapIDs[index]
+        local map = private.Data.Maps[mapID]
         local continent = MapUtil.GetMapParentInfo(mapID, Enum.UIMapType.Continent, true)
 
         local missingData = {}
