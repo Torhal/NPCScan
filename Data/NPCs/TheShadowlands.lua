@@ -364,6 +364,8 @@ NPCs[156339] = {
     achievementQuestID = 61634, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 156339,
+    questID = 61634, -- Unknown
+    vignetteID = 4476,
 }
 
 NPCs[156340] = {
@@ -373,6 +375,8 @@ NPCs[156340] = {
     achievementQuestID = 61634, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 156340,
+    questID = 61634, -- Unknown
+    vignetteID = 4476,
 }
 
 NPCs[158659] = {
@@ -382,6 +386,8 @@ NPCs[158659] = {
     achievementQuestID = 57705, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 158659,
+    questID = 57705, -- Unknown
+    vignetteID = 3895,
 }
 
 NPCs[160629] = {
@@ -391,6 +397,8 @@ NPCs[160629] = {
     achievementQuestID = 58648, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 160629,
+    questID = 58648, -- Unknown
+    vignetteID = 4047,
 }
 
 NPCs[160721] = {
@@ -488,6 +496,8 @@ NPCs[167078] = {
     achievementQuestID = 60314, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 167078,
+    questID = 60314, -- Unknown
+    vignetteID = 4198,
 }
 
 NPCs[170548] = {
@@ -497,7 +507,15 @@ NPCs[170548] = {
     achievementQuestID = 60862, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
+    mounts = {
+        {
+            itemID = 180773, -- Sundancer
+            spellID = 312765, -- Sundancer
+        },
+    },
     npcID = 170548,
+    questID = 60862, -- Unknown
+    vignetteID = 4248,
 }
 
 NPCs[170623] = {
@@ -525,8 +543,15 @@ NPCs[170832] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
+    mounts = {
+        {
+            itemID = 183741, -- Ascended Skymane
+            spellID = 342335, -- Ascended Skymane
+        },
+    },
     npcID = 170832,
     questID = 60977, -- Unknown
+    vignetteID = 60933,
 }
 
 NPCs[170833] = {
@@ -535,8 +560,15 @@ NPCs[170833] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
+    mounts = {
+        {
+            itemID = 183741, -- Ascended Skymane
+            spellID = 342335, -- Ascended Skymane
+        },
+    },
     npcID = 170833,
     questID = 60977, -- Unknown
+    vignetteID = 60933,
 }
 
 NPCs[170834] = {
@@ -545,8 +577,15 @@ NPCs[170834] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
+    mounts = {
+        {
+            itemID = 183741, -- Ascended Skymane
+            spellID = 342335, -- Ascended Skymane
+        },
+    },
     npcID = 170834,
     questID = 60977, -- Unknown
+    vignetteID = 60933,
 }
 
 NPCs[170835] = {
@@ -555,8 +594,15 @@ NPCs[170835] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
+    mounts = {
+        {
+            itemID = 183741, -- Ascended Skymane
+            spellID = 342335, -- Ascended Skymane
+        },
+    },
     npcID = 170835,
     questID = 60977, -- Unknown
+    vignetteID = 60933,
 }
 
 NPCs[170836] = {
@@ -565,8 +611,15 @@ NPCs[170836] = {
     --------------------------------------------------------------------------------
     achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
+    mounts = {
+        {
+            itemID = 183741, -- Ascended Skymane
+            spellID = 342335, -- Ascended Skymane
+        },
+    },
     npcID = 170836,
     questID = 60977, -- Unknown
+    vignetteID = 60933,
 }
 
 NPCs[170932] = {
@@ -577,6 +630,8 @@ NPCs[170932] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 170932,
+    questID = 60978, -- Unknown
+    vignetteID = 4322,
 }
 
 NPCs[171008] = {

@@ -402,6 +402,7 @@ NPCs[132701] = {
     classification = NPCClassification.RareElite,
     npcID = 132701,
     questID = 52996, -- Unknown
+    vignetteID = -1,
     worldQuestID = 52181, -- Smoke and Shadow
 }
 
@@ -554,6 +555,7 @@ NPCs[143311] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 143311,
+    vignetteID = -1,
 }
 
 NPCs[143316] = {
@@ -562,6 +564,7 @@ NPCs[143316] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 143316,
+    vignetteID = -1,
 }
 
 NPCs[143898] = {
@@ -570,6 +573,7 @@ NPCs[143898] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
     npcID = 143898,
+    vignetteID = -1,
 }
 
 NPCs[148637] = {
@@ -579,6 +583,8 @@ NPCs[148637] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148637,
+    questID = 54663, -- Shadow Hunter Vol'tris
+    vignetteID = 3485,
 }
 
 NPCs[148642] = {
@@ -597,6 +603,8 @@ NPCs[148651] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148651,
+    questID = 54671, -- Overgrown Ancient
+    vignetteID = 3487,
 }
 
 NPCs[148674] = {
@@ -606,6 +614,8 @@ NPCs[148674] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148674,
+    questID = 54680, -- Plague Master Herbert
+    vignetteID = 3488,
 }
 
 NPCs[148679] = {
@@ -615,6 +625,8 @@ NPCs[148679] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148679,
+    questID = 54684, -- Arcanist Quintril
+    vignetteID = 3489,
 }
 
 NPCs[148744] = {
@@ -624,6 +636,8 @@ NPCs[148744] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148744,
+    questID = 54691, -- Brewmaster Lin
+    vignetteID = 3490,
 }
 
 NPCs[148753] = {
@@ -633,6 +647,8 @@ NPCs[148753] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148753,
+    questID = 54693, -- Pterror of the Horde
+    vignetteID = 3491,
 }
 
 NPCs[148759] = {
@@ -642,6 +658,8 @@ NPCs[148759] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148759,
+    questID = 54694, -- Stormcaller Morka
+    vignetteID = 3492,
 }
 
 NPCs[148779] = {
@@ -651,6 +669,8 @@ NPCs[148779] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148779,
+    questID = 54697, -- Lightforged Warframe
+    vignetteID = 3493,
 }
 
 NPCs[148792] = {
@@ -661,6 +681,7 @@ NPCs[148792] = {
     factionGroup = "Alliance",
     npcID = 148792,
     questID = 54699, -- Classic Gnomish Engineering
+    vignetteID = 3494,
 }
 
 NPCs[148813] = {
@@ -671,6 +692,7 @@ NPCs[148813] = {
     factionGroup = "Alliance",
     npcID = 148813,
     questID = 54700, -- Thomas Vandergrief
+    vignetteID = 3495,
 }
 
 NPCs[148842] = {
@@ -680,6 +702,8 @@ NPCs[148842] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148842,
+    questID = 54707, -- Siegeotron
+    vignetteID = 3496,
 }
 
 NPCs[149383] = {
@@ -689,6 +713,8 @@ NPCs[149383] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 149383,
+    questID = 54839, -- Rightfully Ours
+    vignetteID = 3505,
 }
 
 --------------------------------------------------------------------------------
@@ -1114,6 +1140,8 @@ NPCs[146942] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 146942,
+    questID = 54646, -- Grand Marshal Fury
+    vignetteID = 3484,
 }
 
 NPCs[146979] = {
@@ -1123,6 +1151,8 @@ NPCs[146979] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 146979,
+    questID = 54170, -- Ormin Rocketbop
+    vignetteID = 3513,
 }
 
 NPCs[148446] = {
@@ -1132,6 +1162,8 @@ NPCs[148446] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148446,
+    questID = 54554, -- Wolfleader Skraug
+    vignetteID = 3474,
 }
 
 NPCs[148451] = {
@@ -1141,6 +1173,8 @@ NPCs[148451] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148451,
+    questID = 54555, -- Siege O' Matic 9000
+    vignetteID = 3475,
 }
 
 NPCs[148456] = {
@@ -1150,6 +1184,8 @@ NPCs[148456] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148456,
+    questID = 54574, -- Jin'tago
+    vignetteID = 3476,
 }
 
 NPCs[148477] = {
@@ -1159,6 +1195,8 @@ NPCs[148477] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148477,
+    questID = 54609, -- Beastlord Drakara
+    vignetteID = 3477,
 }
 
 NPCs[148494] = {
@@ -1168,6 +1206,8 @@ NPCs[148494] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148494,
+    questID = 54636, -- Sandbinder Sodir
+    vignetteID = 3478,
 }
 
 NPCs[148510] = {
@@ -1177,6 +1217,8 @@ NPCs[148510] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148510,
+    questID = 54638, -- Beat Up the Drums
+    vignetteID = 3479,
 }
 
 NPCs[148534] = {
@@ -1186,6 +1228,8 @@ NPCs[148534] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148534,
+    questID = 54643, -- Evezon the Eternal
+    vignetteID = 3480,
 }
 
 NPCs[148550] = {
@@ -1204,6 +1248,8 @@ NPCs[148558] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148558,
+    questID = 54645, -- Fury of the Earth
+    vignetteID = 3482,
 }
 
 NPCs[148597] = {
@@ -1213,6 +1259,8 @@ NPCs[148597] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148597,
+    questID = 54649, -- Flames of War
+    vignetteID = 3483,
 }
 
 NPCs[162681] = {
@@ -1222,6 +1270,7 @@ NPCs[162681] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 162681,
+    vignetteID = -1,
 }
 
 --------------------------------------------------------------------------------
@@ -1469,8 +1518,8 @@ NPCs[132253] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     npcID = 132253,
-    worldQuestID = 52169, -- The Matriarch
     vignetteID = -1,
+    worldQuestID = 52169, -- The Matriarch
 }
 
 NPCs[133155] = {
@@ -1677,6 +1726,8 @@ NPCs[143536] = {
     classification = NPCClassification.RareElite,
     factionGroup = "Horde",
     npcID = 143536,
+    questID = -1, -- Unknown
+    vignetteID = 612,
 }
 
 NPCs[143910] = {
@@ -1703,6 +1754,8 @@ NPCs[148198] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148198,
+    questID = 54504, -- Scout Captain Grizzleknob
+    vignetteID = 3469,
 }
 
 NPCs[148231] = {
@@ -1712,6 +1765,8 @@ NPCs[148231] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148231,
+    questID = 54508, -- No Bridge Too Dire
+    vignetteID = 3468,
 }
 
 NPCs[148253] = {
@@ -1721,6 +1776,8 @@ NPCs[148253] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148253,
+    questID = 54511, -- Down with the Death Captains!
+    vignetteID = 3471,
 }
 
 NPCs[148257] = {
@@ -1730,6 +1787,8 @@ NPCs[148257] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148257,
+    questID = 54511, -- Down with the Death Captains!
+    vignetteID = 3472,
 }
 
 NPCs[148259] = {
@@ -1739,6 +1798,8 @@ NPCs[148259] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148259,
+    questID = 54511, -- Down with the Death Captains!
+    vignetteID = 3473,
 }
 
 NPCs[148264] = {
@@ -1759,6 +1820,8 @@ NPCs[148276] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148276,
+    questID = 54515, -- Tidebinder Maka
+    vignetteID = 3467,
 }
 
 NPCs[148308] = {
@@ -1768,6 +1831,8 @@ NPCs[148308] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148308,
+    questID = 54522, -- Short for an Orc
+    vignetteID = 3463,
 }
 
 NPCs[148322] = {
@@ -1777,6 +1842,8 @@ NPCs[148322] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148322,
+    questID = 54523, -- Blinky Gizmospark
+    vignetteID = 3465,
 }
 
 NPCs[148343] = {
@@ -1786,6 +1853,8 @@ NPCs[148343] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148343,
+    questID = 54527, -- Dinohunter Wildbeard
+    vignetteID = 3464,
 }
 
 NPCs[148390] = {
@@ -1795,6 +1864,8 @@ NPCs[148390] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148390,
+    questID = 54532, -- Receding Treeline
+    vignetteID = 3461,
 }
 
 NPCs[148393] = {
@@ -1804,6 +1875,8 @@ NPCs[148393] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148393,
+    questID = 54532, -- Receding Treeline
+    vignetteID = 3462,
 }
 
 NPCs[148403] = {
@@ -1813,6 +1886,8 @@ NPCs[148403] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148403,
+    questID = 54535, -- Portal Keeper Romiir
+    vignetteID = 3460,
 }
 
 NPCs[148428] = {
@@ -1822,6 +1897,8 @@ NPCs[148428] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 148428,
+    questID = 54537, -- Bilestomper
+    vignetteID = 3506,
 }
 
 NPCs[149147] = {
@@ -1832,4 +1909,5 @@ NPCs[149147] = {
     isTameable = true,
     npcID = 149147,
     questID = 54770, -- Unknown
+    vignetteID = 3504,
 }

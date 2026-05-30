@@ -80,6 +80,7 @@ NPCs[50805] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 50805,
+    vignetteID = 122,
 }
 
 NPCs[50821] = {

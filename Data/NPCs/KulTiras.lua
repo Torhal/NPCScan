@@ -19,6 +19,7 @@ NPCs[137983] = {
     classification = NPCClassification.RareElite,
     factionGroup = "Alliance",
     npcID = 137983,
+    vignetteID = -1,
     worldQuestID = 51580, -- Rear Admiral Hainsworth
 }
 
@@ -29,6 +30,7 @@ NPCs[138039] = {
     classification = NPCClassification.RareElite,
     factionGroup = "Horde",
     npcID = 138039,
+    vignetteID = -1,
     worldQuestID = 51579, -- Dark Ranger Clea
 }
 
@@ -599,8 +601,8 @@ NPCs[140252] = {
     classification = NPCClassification.RareElite,
     npcID = 140252,
     questID = 52999, -- Unknown
-    worldQuestID = 52157, -- A Chilling Encounter
     vignetteID = -1,
+    worldQuestID = 52157, -- A Chilling Encounter
 }
 
 NPCs[144855] = {
@@ -752,6 +754,8 @@ NPCs[148860] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 148860,
+    questID = 54711, -- Zillie Wunderwrench and Grizzwald
+    vignetteID = 3447,
 }
 
 NPCs[148862] = {
@@ -1678,8 +1682,8 @@ NPCs[140163] = {
     classification = NPCClassification.RareElite,
     npcID = 140163,
     questID = 52995, -- Unknown
-    worldQuestID = 52166, -- The Faceless Herald
     vignetteID = -1,
+    worldQuestID = 52166, -- The Faceless Herald
 }
 
 NPCs[140398] = {
@@ -2145,6 +2149,7 @@ NPCs[130508] = {
     isTameable = true,
     npcID = 130508,
     questID = 49999, -- Unknown
+    vignetteID = 2522,
     worldQuestID = 51665, -- Broodmother Razora
 }
 
@@ -2341,6 +2346,7 @@ NPCs[136385] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     npcID = 136385,
+    vignetteID = -1,
     worldQuestID = 52163, -- The Winged Typhoon
 }
 
@@ -2362,6 +2368,7 @@ NPCs[137983] = {
     classification = NPCClassification.RareElite,
     factionGroup = "Alliance",
     npcID = 137983,
+    vignetteID = -1,
     worldQuestID = 51580, -- Rear Admiral Hainsworth
 }
 
@@ -2372,6 +2379,7 @@ NPCs[138039] = {
     classification = NPCClassification.RareElite,
     factionGroup = "Horde",
     npcID = 138039,
+    vignetteID = -1,
     worldQuestID = 51579, -- Dark Ranger Clea
 }
 
@@ -2392,6 +2400,7 @@ NPCs[138288] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     npcID = 138288,
+    vignetteID = -1,
     worldQuestID = 51611, -- Ghost of the Deep
 }
 
@@ -2401,6 +2410,8 @@ NPCs[138299] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     npcID = 138299,
+    questID = 81893, -- Unknown
+    vignetteID = 6045,
     worldQuestID = 51613, -- Bloodmaw
 }
 
