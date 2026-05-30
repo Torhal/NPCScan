@@ -50,14 +50,14 @@ private.Data = {
 --------------------------------------------------------------------------------
 
 ---@class MapData
----@field continentID integer
----@field ID integer
+---@field continentID ContinentID
+---@field ID MapID
 ---@field isDungeon? boolean
 ---@field name string
----@field NPCs table<integer, NPCData | boolean>
+---@field NPCs table<NPCID, NPCData | boolean>
 
 ---@class ScannerData
----@field continentID? integer
----@field mapID? integer
+---@field continentID? ContinentID
+---@field mapID? MapID
 ---@field NPCCount integer
----@field NPCs table<integer, NPCData>
+---@field NPCs table<NPCID, NPCData>
