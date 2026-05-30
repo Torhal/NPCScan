@@ -1,6 +1,13 @@
 {
     "diagnostics": {
-        "enable": ["need-check-nil"]
+        "enable": [
+            "need-check-nil"
+        ]
     },
-    "flavors": ["retail"]
+    "flavors": [
+        "retail"
+    ],
+    "library": [
+        "Libraries"
+    ]
 }
