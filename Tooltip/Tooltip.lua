@@ -89,39 +89,14 @@ end
 ---- Cell Scripts
 --------------------------------------------------------------------------------
 
----@param achievementID AchievementID
-local function OpenToAchievement(_, achievementID)
-    if not AchievementFrame or not AchievementFrame:IsShown() then
-        ToggleAchievementFrame()
-    end
-
-    AchievementFrameBaseTab_OnClick(1)
-    AchievementFrame_SelectAchievement(achievementID, true)
-
-    local categoryID = GetAchievementCategory(achievementID)
-    local categoryTitle, parentCategoryID = GetCategoryInfo(categoryID)
-    local parentCategoryTitle = GetCategoryInfo(parentCategoryID)
-
-    if parentCategoryID == -1 then
-        for _, entry in pairs(ACHIEVEMENT_FUNCTIONS.categories) do
-            if entry.id == categoryID then
-                entry.collapsed = false
-            elseif entry.parent == categoryID then
-                entry.hidden = false
-            end
-        end
-
-        AchievementFrameCategories_Update()
-    end
-end
-
 ---@param tooltipCell LibQTip-2.0.Cell
 ---@param achievementID AchievementID
 local function ShowAchievementTooltip(tooltipCell, achievementID)
-    GameTooltip_SetDefaultAnchor(GameTooltip, tooltipCell)
-
-    local description = Data.Achievements[achievementID] and Data.Achievements[achievementID].description or UNKNOWN
-    GameTooltip:SetText(description, 1, 1, 1, 1, true)
+    GameTooltip:SetOwner(
+        tooltipCell,
+        UIParent:GetCenter() > tooltipCell:GetCenter() and "ANCHOR_RIGHT" or "ANCHOR_LEFT"
+    )
+    GameTooltip:SetHyperlink(GetAchievementLink(achievementID))
     GameTooltip:Show()
 end
 
@@ -435,7 +410,6 @@ function TooltipHandler:Render(anchorFrame)
                     :SetColSpan(0)
                     :SetFormattedText("|T%s:0|t %s", achievementData.iconTexturePath, achievementData.name)
                     :SetJustifyH("CENTER")
-                    :SetScript("OnMouseUp", OpenToAchievement, tostring(npc.achievementID))
                     :SetScript("OnEnter", ShowAchievementTooltip, tostring(npc.achievementID))
                     :SetScript("OnLeave", HideAchievementTooltip)
 
