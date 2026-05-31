@@ -89,13 +89,18 @@ end
 ---- Cell Scripts
 --------------------------------------------------------------------------------
 
-local function HideGameTooltip()
+---@param tooltipCell LibQTip-2.0.Cell
+local function HideGameTooltip(tooltipCell)
+    tooltipCell.Tooltip:SetFrameStrata("TOOLTIP")
+
     GameTooltip:Hide()
 end
 
 ---@param tooltipCell LibQTip-2.0.Cell
 ---@param achievementID AchievementID
 local function ShowAchievementTooltip(tooltipCell, achievementID)
+    tooltipCell.Tooltip:SetFrameStrata("DIALOG")
+
     GameTooltip:SetOwner(
         tooltipCell,
         UIParent:GetCenter() > tooltipCell:GetCenter() and "ANCHOR_RIGHT" or "ANCHOR_LEFT"
@@ -108,6 +113,8 @@ end
 ---@param tooltipCell LibQTip-2.0.Cell
 ---@param npcID NPCID
 local function ShowNPCTooltip(tooltipCell, npcID)
+    tooltipCell.Tooltip:SetFrameStrata("DIALOG")
+
     GameTooltip:SetOwner(
         tooltipCell,
         UIParent:GetCenter() > tooltipCell:GetCenter() and "ANCHOR_RIGHT" or "ANCHOR_LEFT"
@@ -157,6 +164,8 @@ end
 
 ---@param tooltipCell LibQTip-2.0.Cell
 local function ReleaseDataTooltip(tooltipCell)
+    tooltipCell.Tooltip:SetFrameStrata("TOOLTIP")
+
     if TooltipHandler.Tooltip.Data then
         TooltipHandler.Tooltip.Data:Hide()
         TooltipHandler.Tooltip.Data:Release()
@@ -307,8 +316,6 @@ end
 ---@param tooltip LibQTip-2.0.Tooltip The tooltip which has just been released.
 function TooltipHandler:OnReleaseTooltip(eventName, tooltip)
     if tooltip == self.Tooltip.Main then
-        tooltip:SetFrameStrata("TOOLTIP")
-
         self.Tooltip.Main = nil
     elseif tooltip == self.Tooltip.Data then
         self.Tooltip.Data = nil
@@ -369,7 +376,6 @@ function TooltipHandler:Render(anchorFrame)
 
     if not tooltip then
         tooltip = QTip:AcquireTooltip(AddOnFolderName, TooltipColumnCount)
-        tooltip:SetFrameStrata("DIALOG")
 
         tooltip
             :SmartAnchorTo(anchorFrame)
