@@ -89,6 +89,10 @@ end
 ---- Cell Scripts
 --------------------------------------------------------------------------------
 
+local function HideGameTooltip()
+    GameTooltip:Hide()
+end
+
 ---@param tooltipCell LibQTip-2.0.Cell
 ---@param achievementID AchievementID
 local function ShowAchievementTooltip(tooltipCell, achievementID)
@@ -96,12 +100,9 @@ local function ShowAchievementTooltip(tooltipCell, achievementID)
         tooltipCell,
         UIParent:GetCenter() > tooltipCell:GetCenter() and "ANCHOR_RIGHT" or "ANCHOR_LEFT"
     )
+
     GameTooltip:SetHyperlink(GetAchievementLink(achievementID))
     GameTooltip:Show()
-end
-
-local function HideAchievementTooltip()
-    GameTooltip:Hide()
 end
 
 --------------------------------------------------------------------------------
@@ -411,7 +412,7 @@ function TooltipHandler:Render(anchorFrame)
                     :SetFormattedText("|T%s:0|t %s", achievementData.iconTexturePath, achievementData.name)
                     :SetJustifyH("CENTER")
                     :SetScript("OnEnter", ShowAchievementTooltip, tostring(npc.achievementID))
-                    :SetScript("OnLeave", HideAchievementTooltip)
+                    :SetScript("OnLeave", HideGameTooltip)
 
                 tooltip:AddSeparator(1, 1, 0.82, 0)
             end
