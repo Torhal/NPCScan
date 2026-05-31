@@ -535,9 +535,10 @@ do
             if overrideSoundCVars and not soundsAreOverridden then
                 local channelCVar = SoundChannelCVars[soundPreferences.channel]
 
-                StoredSoundCVars[channelCVar] = GetCVar(channelCVar)
-                SetCVar(channelCVar, 1)
-
+                if channelCVar then
+                    StoredSoundCVars[channelCVar] = GetCVar(channelCVar)
+                    SetCVar(channelCVar, 1)
+                end
                 StoredSoundCVars.Sound_EnableSoundWhenGameIsInBG = GetCVar("Sound_EnableSoundWhenGameIsInBG")
                 SetCVar("Sound_EnableSoundWhenGameIsInBG", 1)
 
@@ -546,8 +547,10 @@ do
             end
 
             for soundName in pairs(soundPreferences.sharedMediaNames) do
-                if soundPreferences.sharedMediaNames[soundName] ~= false then
-                    PlaySoundFile(LibSharedMedia:Fetch("sound", soundName), soundPreferences.channel)
+                local sound = LibSharedMedia:Fetch("sound", soundName)
+
+                if sound and soundPreferences.sharedMediaNames[soundName] ~= false then
+                    PlaySoundFile(sound, soundPreferences.channel)
                 end
             end
         end
