@@ -39,7 +39,22 @@ do
         throttledNPCs[npcID] = now
 
         detectionData.npcName = detectionData.npcName or private.GetNPCNameFromID(npcID)
-        detectionData.unitClassification = detectionData.unitClassification or "rare"
+        detectionData.unitClassification = detectionData.unitClassification or private.Enum.NPCClassification.Rare
+
+        local npc = private.Data.NPCs[npcID]
+
+        if npc and npc.classification ~= detectionData.unitClassification then
+            private.Debug(
+                ("*****]] Updated classification for %s (%d): %s => %s"):format(
+                    private.GetNPCNameFromID(npcID),
+                    npcID,
+                    npc.classification,
+                    detectionData.unitClassification
+                )
+            )
+
+            npc.classification = detectionData.unitClassification
+        end
 
         NPCScan:Pour(
             ERR_ZONE_EXPLORED:format(
