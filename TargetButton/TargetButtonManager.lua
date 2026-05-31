@@ -16,7 +16,7 @@ local EventMessage = private.EventMessage
 
 local ActiveTargetButtons = {} ---@type TargetButton[]
 local QueuedData = {} ---@type DetectionData[]
-local TargetButtonHeap = {} ---@type table<UnitClassification, TargetButton>
+local TargetButtonHeap = {} ---@type table<UnitClassification, TargetButton[]>
 
 local ActiveTargetButtonByNPCID = {} ---@type table<integer, boolean|nil>
 

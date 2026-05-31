@@ -22,7 +22,7 @@
 
 ---@class TargetButton: AceEvent-3.0, Button, SecureActionButtonTemplate, SecureHandlerShowHideTemplate
 ---@field __isActive? boolean
----@field __classification UnitClassification
+---@field __classification UnitClassification | NPCClassification
 ---@field Background Texture
 ---@field Classification FontString
 ---@field DismissButton UIPanelCloseButtonNoScripts
@@ -44,8 +44,8 @@
 ---@field needsRaidTarget? boolean
 ---@field needsUnitData? boolean
 ---@field npcData? NPCData
----@field npcID? integer
+---@field npcID! NPCID
 ---@field npcName? string
 ---@field pausedDismissal? boolean
----@field raidIconID integer
+---@field raidIconID! integer
 ---@field shineTexture AnimationGroupTexture
