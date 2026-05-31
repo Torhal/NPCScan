@@ -84,6 +84,8 @@ NPCs[147489] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147489,
+    questID = 54257, -- Captain Greensails
+    vignetteID = 3413,
 }
 
 --------------------------------------------------------------------------------
@@ -779,6 +781,7 @@ NPCs[149746] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 149746,
+    vignetteID = -1,
 }
 
 NPCs[149847] = {
@@ -788,6 +791,7 @@ NPCs[149847] = {
     classification = NPCClassification.Rare,
     npcID = 149847,
     questID = 55812, -- Unknown
+    vignetteID = 3626,
 }
 
 NPCs[150342] = {
@@ -828,6 +832,7 @@ NPCs[150786] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 150786,
+    vignetteID = -1,
 }
 
 NPCs[150937] = {
@@ -880,6 +885,8 @@ NPCs[151296] = {
     achievementQuestID = 55515, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 151296,
+    questID = 55515, -- Unknown
+    vignetteID = 3575,
 }
 
 NPCs[151308] = {
@@ -900,6 +907,8 @@ NPCs[151569] = {
     achievementQuestID = 55514, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 151569,
+    questID = 55514, -- Unknown
+    vignetteID = 3571,
 }
 
 NPCs[151623] = {
@@ -1166,6 +1175,7 @@ NPCs[153088] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 153088,
+    vignetteID = -1,
 }
 
 NPCs[153200] = {
@@ -1305,6 +1315,7 @@ NPCs[155060] = {
     achievementQuestID = 56419, -- The Doppel Gang
     classification = NPCClassification.Rare,
     npcID = 155060,
+    vignetteID = -1,
 }
 
 NPCs[155583] = {
@@ -2552,6 +2563,8 @@ NPCs[144722] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 144722,
+    questID = 54237, -- Togoth Cruelarm
+    vignetteID = 3418,
 }
 
 NPCs[145112] = {
@@ -2561,6 +2574,8 @@ NPCs[145112] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145112,
+    questID = 53772, -- Zagg Brokeneye
+    vignetteID = 3417,
 }
 
 NPCs[145286] = {
@@ -2570,6 +2585,8 @@ NPCs[145286] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145286,
+    questID = 53812, -- A Carefully Laid Trap
+    vignetteID = 3424,
 }
 
 NPCs[145287] = {
@@ -2579,6 +2596,8 @@ NPCs[145287] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145287,
+    questID = 53812, -- A Carefully Laid Trap
+    vignetteID = 3425,
 }
 
 NPCs[145292] = {
@@ -2588,6 +2607,8 @@ NPCs[145292] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 145292,
+    questID = 53812, -- A Carefully Laid Trap
+    vignetteID = 3426,
 }
 
 NPCs[145308] = {
@@ -2632,6 +2653,8 @@ NPCs[146611] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 146611,
+    questID = 54091, -- Strong Arm John
+    vignetteID = 3416,
 }
 
 NPCs[146651] = {
@@ -2641,6 +2664,8 @@ NPCs[146651] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 146651,
+    questID = 54112, -- Mistweaver Nian
+    vignetteID = 3415,
 }
 
 NPCs[146675] = {
@@ -2650,6 +2675,8 @@ NPCs[146675] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 146675,
+    questID = 54119, -- Hartford Sternbach
+    vignetteID = 3414,
 }
 
 NPCs[146773] = {
@@ -2659,6 +2686,8 @@ NPCs[146773] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 146773,
+    questID = 54129, -- First Mate Malone
+    vignetteID = 3423,
 }
 
 NPCs[147061] = {
@@ -2668,6 +2697,8 @@ NPCs[147061] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 147061,
+    questID = 54182, -- Bilgewater Bash Brothers
+    vignetteID = 3420,
 }
 
 NPCs[147489] = {
@@ -2677,6 +2708,8 @@ NPCs[147489] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147489,
+    questID = 54257, -- Captain Greensails
+    vignetteID = 3413,
 }
 
 NPCs[147750] = {
@@ -2686,4 +2719,6 @@ NPCs[147750] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 147750,
+    questID = 54295, -- Artillery Master Goodwin
+    vignetteID = 3412,
 }
