@@ -199,6 +199,8 @@ end
 ---@param tooltipCell LibQTip-2.0.Cell
 ---@param text string
 local function DisplayDataText(tooltipCell, text)
+    tooltipCell.Tooltip:SetFrameStrata("DIALOG")
+
     local dataTooltip = AcquireDataTooltip(tooltipCell)
 
     dataTooltip:AddRow():GetCell(1):SetColSpan(3):SetText(text)
@@ -208,6 +210,8 @@ end
 ---@param tooltipCell LibQTip-2.0.Cell
 ---@param mountList MountData[]
 local function DisplayMountInfo(tooltipCell, mountList)
+    tooltipCell.Tooltip:SetFrameStrata("DIALOG")
+
     local dataTooltip = AcquireDataTooltip(tooltipCell)
 
     AddEntryDataIDs(mountList, "spellID")
@@ -229,6 +233,8 @@ end
 ---@param tooltipCell LibQTip-2.0.Cell
 ---@param petList PetData[]
 local function DisplayPetInfo(tooltipCell, petList)
+    tooltipCell.Tooltip:SetFrameStrata("DIALOG")
+
     local dataTooltip = AcquireDataTooltip(tooltipCell)
 
     AddEntryDataIDs(petList, "npcID")
@@ -261,6 +267,8 @@ end
 ---@param tooltipCell LibQTip-2.0.Cell
 ---@param toyList ToyData[]
 local function DisplayToyInfo(tooltipCell, toyList)
+    tooltipCell.Tooltip:SetFrameStrata("DIALOG")
+
     local dataTooltip = AcquireDataTooltip(tooltipCell)
 
     AddEntryDataIDs(toyList, "itemID")
