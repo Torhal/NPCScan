@@ -554,6 +554,7 @@ do
                     StoredSoundCVars[channelCVar] = GetCVar(channelCVar)
                     SetCVar(channelCVar, 1)
                 end
+
                 StoredSoundCVars.Sound_EnableSoundWhenGameIsInBG = GetCVar("Sound_EnableSoundWhenGameIsInBG")
                 SetCVar("Sound_EnableSoundWhenGameIsInBG", 1)
 
