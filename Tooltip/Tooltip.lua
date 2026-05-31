@@ -105,6 +105,18 @@ local function ShowAchievementTooltip(tooltipCell, achievementID)
     GameTooltip:Show()
 end
 
+---@param tooltipCell LibQTip-2.0.Cell
+---@param npcID NPCID
+local function ShowNPCTooltip(tooltipCell, npcID)
+    GameTooltip:SetOwner(
+        tooltipCell,
+        UIParent:GetCenter() > tooltipCell:GetCenter() and "ANCHOR_RIGHT" or "ANCHOR_LEFT"
+    )
+
+    GameTooltip:SetHyperlink(("unit:Creature-0-0-0-0-%d"):format(npcID))
+    GameTooltip:Show()
+end
+
 --------------------------------------------------------------------------------
 ---- NPC Tidbit Helpers
 --------------------------------------------------------------------------------
@@ -440,7 +452,10 @@ function TooltipHandler:Render(anchorFrame)
             row:SetColor(0.20, 0.20, 0.20)
         end
 
-        row:GetCell(TooltipColumnID.Name):SetText(npcDisplayNames[npcID])
+        row:GetCell(TooltipColumnID.Name)
+            :SetText(npcDisplayNames[npcID])
+            :SetScript("OnEnter", ShowNPCTooltip, npcID)
+            :SetScript("OnLeave", HideGameTooltip)
 
         if npc:HasActiveWorldQuest() then
             RenderIcon({
