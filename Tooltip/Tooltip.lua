@@ -43,7 +43,6 @@ local TooltipHandler = {
 }
 
 local npcAchievementNames = {}
-local npcDisplayNames = {}
 local npcIDs = {}
 local npcNames = {}
 
@@ -317,7 +316,6 @@ end
 
 local function GenerateData()
     table.wipe(npcAchievementNames)
-    table.wipe(npcDisplayNames)
     table.wipe(npcIDs)
     table.wipe(npcNames)
 
@@ -327,7 +325,6 @@ local function GenerateData()
         -- The npcID may belong to a custom NPC, which will not have further information.
         if npc then
             npcAchievementNames[npcID] = npc.achievementID and Data.Achievements[npc.achievementID].name or nil
-            npcDisplayNames[npcID] = FormatNPCName(npcID)
             npcIDs[#npcIDs + 1] = npcID
             npcNames[npcID] = private.GetNPCNameFromID(npcID)
         end
@@ -487,7 +484,7 @@ function TooltipHandler:Render(anchorFrame)
         end
 
         row:GetCell(TooltipColumnID.Name)
-            :SetText(npcDisplayNames[npcID])
+            :SetText(FormatNPCName(npcID))
             :SetScript("OnEnter", ShowNPCTooltip, npcID)
             :SetScript("OnLeave", HideGameTooltip)
 
