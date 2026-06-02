@@ -17,14 +17,9 @@ local QTip = LibStub("LibQTip-2.0")
 --------------------------------------------------------------------------------
 
 ---@class DataObject: LibDataBroker.DataDisplay & Frame & AceEvent-3.0
----@field ScannerData ScannerData
 local DataObject = LibStub("AceEvent-3.0"):Embed(LibStub("LibDataBroker-1.1"):NewDataObject(AddOnFolderName, {
     icon = [[Interface\LFGFRAME\BattlenetWorking0]],
     label = OBJECTIVES_LABEL,
-    ScannerData = {
-        NPCCount = 0,
-        NPCs = {},
-    },
     text = NONE,
     type = "data source",
 }))
@@ -87,7 +82,7 @@ end
 ---@param npcID NPCID
 ---@return string formattedName
 local function FormatNPCName(npcID)
-    local npc = private.Data.NPCs[npcID]
+    local npc = Data.NPCs[npcID]
     local colorCode = NORMAL_FONT_COLOR_CODE
 
     if npc.achievementID then
@@ -319,7 +314,7 @@ local function GenerateData()
     table.wipe(npcIDs)
     table.wipe(npcNames)
 
-    for npcID in pairs(DataObject.ScannerData.NPCs) do
+    for npcID in pairs(Data.Scanner.NPCs) do
         local npc = Data.NPCs[npcID]
 
         -- The npcID may belong to a custom NPC, which will not have further information.
@@ -426,7 +421,7 @@ function TooltipHandler:Render(anchorFrame)
 
     tooltip:AddSeparator(1, 0.510, 0.773, 1.0)
 
-    if DataObject.ScannerData.NPCCount == 0 then
+    if Data.Scanner.NPCCount == 0 then
         tooltip:AddSeparator(1, 0, 0, 0)
         tooltip:AddSeparator(1, 1, 0.82, 0)
         tooltip:AddRow(ERR_GENERIC_NO_VALID_TARGETS):GetCell(1):SetJustifyH("CENTER")
@@ -574,7 +569,6 @@ local lastUpdateTime = time()
 
 function DataObject:UpdateDisplay(_, scannerData)
     self.text = scannerData.NPCCount > 0 and scannerData.NPCCount or NONE
-    self.ScannerData = scannerData
 
     if TooltipHandler.Tooltip.Main and TooltipHandler.Tooltip.Main:IsShown() then
         local now = time()
