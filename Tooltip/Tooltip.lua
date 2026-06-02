@@ -374,16 +374,17 @@ local function RenderIcon(parameters)
     end
 end
 
-local TooltipColumnCount = 6
-
 local TooltipColumnID = {
-    Name = 1,
-    Mount = 2,
-    Pet = 3,
-    Toy = 4,
-    Tameable = 5,
-    WorldQuest = 6,
+    Quest = 1,
+    Name = 2,
+    Mount = 3,
+    Pet = 4,
+    Toy = 5,
+    Tameable = 6,
+    WorldQuest = 7,
 }
+
+local TooltipColumnCount = 7
 
 ---@param anchorFrame LibDataBroker.DataDisplay & Frame
 function TooltipHandler:Render(anchorFrame)
@@ -487,6 +488,16 @@ function TooltipHandler:Render(anchorFrame)
             :SetText(FormatNPCName(npcID))
             :SetScript("OnEnter", ShowNPCTooltip, npcID)
             :SetScript("OnLeave", HideGameTooltip)
+
+        if npc:HasQuest() then
+            RenderIcon({
+                atlasName = npc:IsQuestComplete() and "QuestLog-icon-checkmark-yellow" or "QuestDaily",
+                columnIndex = TooltipColumnID.Quest,
+                onEnterArgument = npc:IsQuestComplete() and COMPLETE or INCOMPLETE,
+                onEnterFunction = DisplayDataText,
+                row = row,
+            })
+        end
 
         if npc:HasActiveWorldQuest() then
             RenderIcon({
