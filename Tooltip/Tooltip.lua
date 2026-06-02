@@ -85,6 +85,26 @@ local function SortByNPCAchievementNameThenByNameThenByID(a, b)
     return achievementNameA < achievementNameB
 end
 
+---@param npcID NPCID
+---@return string formattedName
+local function FormatNPCName(npcID)
+    local npc = private.Data.NPCs[npcID]
+    local colorCode = NORMAL_FONT_COLOR_CODE
+
+    if npc.achievementID then
+        colorCode = npc:IsAchievementCriteriaComplete() and GREEN_FONT_COLOR_CODE or RED_FONT_COLOR_CODE
+    end
+
+    local npcName = private.GetNPCNameFromID(npcID)
+    local assetName = npc.achievementAssetName
+
+    return ("%s%s%s|r"):format(
+        colorCode,
+        npcName,
+        (assetName and assetName ~= npcName) and (" %s"):format(PARENS_TEMPLATE:format(assetName)) or ""
+    )
+end
+
 --------------------------------------------------------------------------------
 ---- Cell Scripts
 --------------------------------------------------------------------------------
@@ -307,7 +327,7 @@ local function GenerateData()
         -- The npcID may belong to a custom NPC, which will not have further information.
         if npc then
             npcAchievementNames[npcID] = npc.achievementID and Data.Achievements[npc.achievementID].name or nil
-            npcDisplayNames[npcID] = private.GetNPCOptionsName(npcID)
+            npcDisplayNames[npcID] = FormatNPCName(npcID)
             npcIDs[#npcIDs + 1] = npcID
             npcNames[npcID] = private.GetNPCNameFromID(npcID)
         end
