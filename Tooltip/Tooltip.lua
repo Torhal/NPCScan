@@ -536,7 +536,7 @@ function TooltipHandler:Render(anchorFrame)
 
         if npc.toys then
             RenderIcon({
-                atlasName = "BonusLoot-Chest",
+                atlasName = "mechagon-projects",
                 columnIndex = TooltipColumnID.Toy,
                 onEnterArgument = npc.toys,
                 onEnterFunction = DisplayToyInfo,
