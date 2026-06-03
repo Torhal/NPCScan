@@ -468,7 +468,7 @@ function TooltipHandler:Render(anchorFrame)
             tooltip:AddSeparator(1, 0, 0, 0)
             tooltip:AddSeparator(1, 1, 0.82, 0)
 
-            tooltip:AddRow(MISCELLANEOUS):GetCell(1):SetJustifyH("CENTER")
+            tooltip:AddRow():GetCell(1):SetColSpan(0):SetText(MISCELLANEOUS):SetJustifyH("CENTER")
 
             tooltip:AddSeparator(1, 1, 0.82, 0)
         end
