@@ -13,7 +13,7 @@ local LibSharedMedia = LibStub("LibSharedMedia-3.0")
 ---@class NPCScan
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName)
 
-BINDING_HEADER_NPCSCAN = AddOnFolderName
+_G.BINDING_HEADER_NPCSCAN = AddOnFolderName
 _G["BINDING_NAME_CLICK NPCScan_RecentTargetButton:LeftButton"] = "Target latest NPC"
 _G["BINDING_NAME_CLICK NPCScan_SearchMacroButton:LeftButton"] = "Targeting Macro"
 
