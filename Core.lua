@@ -144,6 +144,7 @@ function NPCScan:OnEnable()
     ---- Lookup Tables
     --------------------------------------------------------------------------------
 
+    local MapID = private.Enum.MapID
     local mapIDs = {}
     for mapID, map in pairs(private.Data.Maps) do
         table.insert(mapIDs, mapID)
@@ -164,21 +165,25 @@ function NPCScan:OnEnable()
     local hasChecked = {}
 
     local questMapIDs = {
-        [private.Enum.MapID.Argus] = true,
-        [private.Enum.MapID.BrokenIsles] = true,
-        [private.Enum.MapID.KulTiras] = true,
-        [private.Enum.MapID.Zandalar] = true,
-        [private.Enum.MapID.TheShadowlands] = true,
+        [MapID.Argus] = true,
+        [MapID.BrokenIsles] = true,
+        [MapID.KulTiras] = true,
+        [MapID.Zandalar] = true,
+        [MapID.TheShadowlands] = true,
+        [MapID.DragonIsles] = true,
+        [MapID.KhazAlgar] = true,
     }
 
     local vignetteMapIDs = {
-        [private.Enum.MapID.Argus] = true,
-        [private.Enum.MapID.BrokenIsles] = true,
-        [private.Enum.MapID.Draenor] = true,
-        [private.Enum.MapID.KulTiras] = true,
-        [private.Enum.MapID.Pandaria] = true,
-        [private.Enum.MapID.Zandalar] = true,
-        [private.Enum.MapID.TheShadowlands] = true,
+        [MapID.Argus] = true,
+        [MapID.BrokenIsles] = true,
+        [MapID.Draenor] = true,
+        [MapID.KulTiras] = true,
+        [MapID.Pandaria] = true,
+        [MapID.Zandalar] = true,
+        [MapID.TheShadowlands] = true,
+        [MapID.DragonIsles] = true,
+        [MapID.KhazAlgar] = true,
     }
 
     local NPCIDs = {}
