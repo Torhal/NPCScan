@@ -322,6 +322,17 @@ NPCs[212133] = {
 ---- Ohn'ahran Plains (2023)
 --------------------------------------------------------------------------------
 
+NPCs[187219] = {
+    --------------------------------------------------------------------------------
+    ---- Nokhud Warmaster
+    --------------------------------------------------------------------------------
+    achievementQuestID = 56081, -- Octo-Grab
+    classification = NPCClassification.Rare,
+    npcID = 187219,
+    questID = -1, -- Unknown
+    vignetteID = 5062,
+}
+
 NPCs[187559] = {
     --------------------------------------------------------------------------------
     ---- Shade of Grief
@@ -384,6 +395,11 @@ NPCs[191354] = {
     classification = NPCClassification.Rare,
     npcID = 191354,
     questID = 66970, -- Ty'foon the Ascended
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
     vignetteID = 5131,
 }
 
@@ -545,6 +561,11 @@ NPCs[193165] = {
     classification = NPCClassification.Rare,
     npcID = 193165,
     questID = 73896, -- Unknown
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
 }
 
 NPCs[193168] = {
@@ -609,6 +630,11 @@ NPCs[193215] = {
     classification = NPCClassification.Rare,
     npcID = 193215,
     questID = 74073, -- Unknown
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
     vignetteID = 5190,
 }
 
@@ -703,8 +729,15 @@ NPCs[193654] = {
     --------------------------------------------------------------------------------
     ---- Gravlion
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193654,
+    questID = 69960, -- Gravlion
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
+    vignetteID = 5233,
 }
 
 NPCs[193655] = {
@@ -722,6 +755,11 @@ NPCs[193669] = {
     classification = NPCClassification.Rare,
     npcID = 193669,
     questID = 72815, -- Unknown
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
     vignetteID = 5240,
 }
 
@@ -780,8 +818,15 @@ NPCs[193682] = {
     --------------------------------------------------------------------------------
     ---- Rouen Icewind
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193682,
+    questID = 69973, -- Rouen Icewind
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
+    vignetteID = 5245,
 }
 
 NPCs[193684] = {
@@ -862,6 +907,26 @@ NPCs[196010] = {
     npcID = 196010,
     questID = 70698, -- Researcher Sneakwing
     vignetteID = 5378,
+}
+
+NPCs[196334] = {
+    --------------------------------------------------------------------------------
+    ---- The Great Enla
+    --------------------------------------------------------------------------------
+    classification = NPCClassification.Elite,
+    npcID = 196334,
+    questID = -1, -- Unknown
+    vignetteID = -1,
+}
+
+NPCs[196350] = {
+    --------------------------------------------------------------------------------
+    ---- Old Stormhide
+    --------------------------------------------------------------------------------
+    classification = NPCClassification.Elite,
+    npcID = 196350,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[197009] = {
@@ -1050,6 +1115,11 @@ NPCs[193128] = {
     classification = NPCClassification.Rare,
     npcID = 193128,
     questID = 73869, -- Unknown
+    toys = {
+        {
+            itemID = 200178, -- Infected Ichor
+        },
+    },
 }
 
 NPCs[193130] = {
@@ -1197,6 +1267,7 @@ NPCs[193273] = {
     ---- Liskron the Dazzling
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 193273,
     questID = 72116, -- Liskron the Dazzling
     vignetteID = 5437,
@@ -1206,7 +1277,7 @@ NPCs[193533] = {
     --------------------------------------------------------------------------------
     ---- Liskanoth
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.Elite,
     npcID = 193533,
     questID = 69928, -- Liskanoth
 }
@@ -1273,8 +1344,15 @@ NPCs[193654] = {
     --------------------------------------------------------------------------------
     ---- Gravlion
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193654,
+    questID = 69960, -- Gravlion
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
+    vignetteID = 5233,
 }
 
 NPCs[193655] = {
@@ -1289,9 +1367,14 @@ NPCs[193658] = {
     --------------------------------------------------------------------------------
     ---- Corrupted Proto-Dragon
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193658,
     questID = 74060, -- Unknown
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
     vignetteID = 5235,
 }
 
@@ -1332,6 +1415,11 @@ NPCs[193668] = {
     classification = NPCClassification.Rare,
     npcID = 193668,
     questID = 72813, -- Unknown
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
     vignetteID = 5239,
 }
 
@@ -1390,8 +1478,15 @@ NPCs[193682] = {
     --------------------------------------------------------------------------------
     ---- Rouen Icewind
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193682,
+    questID = 69973, -- Rouen Icewind
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
+    vignetteID = 5245,
 }
 
 NPCs[193684] = {
@@ -1605,6 +1700,11 @@ NPCs[193178] = {
     classification = NPCClassification.Rare,
     npcID = 193178,
     questID = 69858, -- Blightfur
+    toys = {
+        {
+            itemID = 200178, -- Infected Ichor
+        },
+    },
     vignetteID = 5184,
 }
 
@@ -1785,8 +1885,15 @@ NPCs[193654] = {
     --------------------------------------------------------------------------------
     ---- Gravlion
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193654,
+    questID = 69960, -- Gravlion
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
+    vignetteID = 5233,
 }
 
 NPCs[193655] = {
@@ -1852,8 +1959,15 @@ NPCs[193682] = {
     --------------------------------------------------------------------------------
     ---- Rouen Icewind
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193682,
+    questID = 69973, -- Rouen Icewind
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
+    vignetteID = 5245,
 }
 
 NPCs[193684] = {
@@ -1978,9 +2092,14 @@ NPCs[197356] = {
     --------------------------------------------------------------------------------
     ---- High Shaman Rotknuckle
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 197356,
     questID = 74004, -- Unknown
+    toys = {
+        {
+            itemID = 200178, -- Infected Ichor
+        },
+    },
     vignetteID = 5416,
 }
 
@@ -2015,6 +2134,36 @@ NPCs[201054] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 201054,
+}
+
+NPCs[201556] = {
+    --------------------------------------------------------------------------------
+    ---- Waterpots
+    --------------------------------------------------------------------------------
+    classification = NPCClassification.RareElite,
+    npcID = 201556,
+    questID = 74460,
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
+    vignetteID = 5555,
+}
+
+NPCs[201559] = {
+    --------------------------------------------------------------------------------
+    ---- Shiobhan Waterborn
+    --------------------------------------------------------------------------------
+    classification = NPCClassification.RareElite,
+    npcID = 201559,
+    questID = 74462, -- Shiobhan Waterborn
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
+    vignetteID = 5557,
 }
 
 NPCs[203698] = {
@@ -2568,6 +2717,11 @@ NPCs[187209] = {
     classification = NPCClassification.Rare,
     npcID = 187209,
     questID = 72841, -- Unknown
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
     vignetteID = 5127,
 }
 
@@ -2660,9 +2814,14 @@ NPCs[190991] = {
     --------------------------------------------------------------------------------
     ---- Char
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 190991,
     questID = 74043, -- Unknown
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
     vignetteID = 5115,
 }
 
@@ -2815,6 +2974,11 @@ NPCs[193171] = {
     classification = NPCClassification.Rare,
     npcID = 193171,
     questID = 72850, -- Unknown
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
     vignetteID = 5387,
 }
 
@@ -2997,8 +3161,15 @@ NPCs[193654] = {
     --------------------------------------------------------------------------------
     ---- Gravlion
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193654,
+    questID = 69960, -- Gravlion
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
+    vignetteID = 5233,
 }
 
 NPCs[193655] = {
@@ -3064,8 +3235,15 @@ NPCs[193682] = {
     --------------------------------------------------------------------------------
     ---- Rouen Icewind
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193682,
+    questID = 69973, -- Rouen Icewind
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
+    vignetteID = 5245,
 }
 
 NPCs[193684] = {

@@ -83,6 +83,12 @@ NPCs[163370] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 163370,
+    pets = {
+        {
+            itemID = 183196, -- Lavender Nibbler
+            npcID = 173993, -- Lavender Nibbler
+        },
+    },
     questID = 59006, -- Unknown
     vignetteID = 4100,
 }
@@ -93,6 +99,12 @@ NPCs[164093] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 164093,
+    pets = {
+        {
+            itemID = 180644, -- Rocky
+            npcID = 171246, -- Rocky
+        },
+    },
     questID = 59140, -- Unknown
     vignetteID = 4113,
 }
@@ -102,6 +114,12 @@ NPCs[164107] = {
     ---- Gormtamer Tizo
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    mounts = {
+        {
+            itemID = 180725, -- Spinemaw Gladechewer
+            spellID = 334364, -- Spinemaw Gladechewer
+        },
+    },
     npcID = 164107,
     questID = 59145, -- Unknown
     vignetteID = 4114,
@@ -111,7 +129,13 @@ NPCs[164112] = {
     --------------------------------------------------------------------------------
     ---- Humon'gozz
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
+    mounts = {
+        {
+            itemID = 182650, -- Arboreal Gulper
+            spellID = 339632, -- Arboreal Gulper
+        },
+    },
     npcID = 164112,
     questID = 59157, -- Unknown
     vignetteID = 1144,
@@ -134,6 +158,12 @@ NPCs[164238] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 164238,
+    pets = {
+        {
+            itemID = 180631, -- Gorm Needler
+            npcID = 171231, -- Gorm Needler
+        },
+    },
     questID = 59201, -- Unknown
     vignetteID = 4116,
 }
@@ -146,6 +176,12 @@ NPCs[164391] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 164391,
+    pets = {
+        {
+            itemID = 180643, -- Chirpy Valeshrieker
+            npcID = 171239, -- Chirpy Valeshrieker
+        },
+    },
     questID = 59208, -- Unknown
     vignetteID = 4117,
 }
@@ -230,7 +266,7 @@ NPCs[167721] = {
 
 NPCs[167724] = {
     --------------------------------------------------------------------------------
-    ---- Rotbriar Changeling
+    ---- Rotbriar Boggart
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 167724,
@@ -263,8 +299,14 @@ NPCs[168135] = {
     --------------------------------------------------------------------------------
     ---- Night Mare
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     isTameable = true,
+    mounts = {
+        {
+            itemID = 180728, -- Swift Gloomhoof
+            spellID = 312767, -- Swift Gloomhoof
+        },
+    },
     npcID = 168135,
     questID = 60306, -- Unknown
     vignetteID = 4195,
@@ -274,7 +316,13 @@ NPCs[168647] = {
     --------------------------------------------------------------------------------
     ---- Valfir the Unrelenting
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
+    mounts = {
+        {
+            itemID = 180730, -- Wild Glimmerfur Prowler
+            spellID = 334366, -- Wild Glimmerfur Prowler
+        },
+    },
     npcID = 168647,
     questID = 61632, -- Unknown
     vignetteID = 4473,
@@ -329,6 +377,12 @@ NPCs[171206] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 171206,
+    pets = {
+        {
+            itemID = 180645, -- Dodger
+            npcID = 171247, -- Dodger
+        },
+    },
     questID = 61086, -- Unknown
     vignetteID = -1,
 }
@@ -431,7 +485,7 @@ NPCs[160882] = {
 
 NPCs[160985] = {
     --------------------------------------------------------------------------------
-    ---- Nikara the Reborn
+    ---- Selena the Reborn
     --------------------------------------------------------------------------------
     achievementQuestID = 58320, -- Unknown
     classification = NPCClassification.Rare,
@@ -642,7 +696,7 @@ NPCs[170836] = {
 
 NPCs[170932] = {
     --------------------------------------------------------------------------------
-    ---- Cloudfeather Patriarch
+    ---- Cloudfeather Guardian
     --------------------------------------------------------------------------------
     achievementQuestID = 60978, -- Unknown
     classification = NPCClassification.Rare,
@@ -1069,7 +1123,7 @@ NPCs[180246] = {
 
 NPCs[157058] = {
     --------------------------------------------------------------------------------
-    ---- Corspecutter Moroc
+    ---- Corpsecutter Moroc
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 157058,
@@ -1382,7 +1436,7 @@ NPCs[162880] = {
 
 NPCs[168147] = {
     --------------------------------------------------------------------------------
-    ---- Sabreil the Bonecleaver
+    ---- Sabriel the Bonecleaver
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     npcID = 168147,
@@ -1533,7 +1587,7 @@ NPCs[159156] = {
     --------------------------------------------------------------------------------
     ---- Grand Inquisitor Nicu
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 159156,
     questID = -1, -- Unknown
     vignetteID = 4660,
@@ -1636,6 +1690,11 @@ NPCs[160857] = {
     classification = NPCClassification.Rare,
     npcID = 160857,
     questID = 58263, -- Unknown
+    toys = {
+        {
+            itemID = 180873, -- Smolderheart
+        },
+    },
     vignetteID = 3983,
 }
 
