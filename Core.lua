@@ -195,13 +195,7 @@ function NPCScan:OnEnable()
 
         for npcID in pairs(map.NPCs) do
             local npc = map.NPCs[npcID]
-            if
-                not hasChecked[npcID]
-                and (
-                    npc.classification == private.Enum.NPCClassification.Rare
-                    or npc.classification == private.Enum.NPCClassification.RareElite
-                )
-            then
+            if not hasChecked[npcID] then
                 table.insert(NPCIDs, npcID)
 
                 if npc.vignetteID then
