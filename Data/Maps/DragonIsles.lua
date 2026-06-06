@@ -58,6 +58,7 @@ Maps[MapID.EmeraldDream].NPCs = {
 --------------------------------------------------------------------------------
 
 Maps[MapID.OhnahranPlains].NPCs = {
+    [187219] = true, -- Nokhud Warmaster
     [187559] = true, -- Shade of Grief
     [187781] = true, -- Hamett
     [188095] = true, -- Hunter of the Deep
@@ -118,6 +119,8 @@ Maps[MapID.OhnahranPlains].NPCs = {
     [195409] = true, -- Makhra the Ashtouched
     [195895] = true, -- Nergazurai
     [196010] = true, -- Researcher Sneakwing
+    [196334] = true, -- The Great Enla
+    [196350] = true, -- Old Stormhide
     [197009] = true, -- Liskheszaera
     [197411] = true, -- Astray Splasher
     [200832] = true, -- Fyrakk
@@ -260,6 +263,8 @@ Maps[MapID.TheAzureSpan].NPCs = {
     [198004] = true, -- Mange the Outcast
     [200832] = true, -- Fyrakk
     [201054] = true, -- Crimson Oldblood
+    [201556] = true, -- Waterpots
+    [201559] = true, -- Shiobhan Waterborn
     [203698] = true, -- Rampant Shadowflame
     [203699] = true, -- Half-bound Rageflame
     [203700] = true, -- Flamebringer Shaman
