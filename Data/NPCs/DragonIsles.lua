@@ -2142,13 +2142,28 @@ NPCs[201556] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     npcID = 201556,
-    questID = 74460,
+    questID = 74460, -- Waterpots
     toys = {
         {
             itemID = 200198, -- Primalist Prison
         },
     },
     vignetteID = 5555,
+}
+
+NPCs[201558] = {
+    --------------------------------------------------------------------------------
+    ---- Malgain Rockknell
+    --------------------------------------------------------------------------------
+    classification = NPCClassification.RareElite,
+    npcID = 201558,
+    questID = 74461, -- Malgain Rockknell
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
+    vignetteID = 5556,
 }
 
 NPCs[201559] = {
@@ -2609,9 +2624,14 @@ NPCs[201545] = {
     --------------------------------------------------------------------------------
     ---- Shapemaster Za'lani
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 201545,
     questID = 74454, -- Shapemaster Za'lani
+    toys = {
+        {
+            itemID = 200198, -- Primalist Prison
+        },
+    },
 }
 
 NPCs[201562] = {
