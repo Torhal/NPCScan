@@ -472,51 +472,109 @@ function private.DumpQuestData(continentID)
     output:Display()
 end
 
-local ToyRegistry = {}
-local ToyLabelToItemID = {}
-local SortedToyLabels = {}
+do
+    local MountRegistry = {}
+    local MountLabelToItemID = {}
+    local MountLabelToSpellID = {}
+    local SortedMountLabels = {}
 
-function private.DumpToyData()
-    local output = private.TextDump
-    output:Clear()
+    function private.DumpMountData()
+        local output = private.TextDump
+        output:Clear()
 
-    for continentID, continent in pairs(private.Data.Continents) do
-        for mapID, map in pairs(continent.Maps) do
-            for npcID, npc in pairs(map.NPCs) do
-                if npc.toys then
-                    for index, toy in ipairs(npc.toys) do
-                        if not ToyRegistry[toy.itemID] then
-                            ToyRegistry[toy.itemID] = true
+        for continentID, continent in pairs(private.Data.Continents) do
+            for mapID, map in pairs(continent.Maps) do
+                for npcID, npc in pairs(map.NPCs) do
+                    if npc.mounts then
+                        for index, mount in ipairs(npc.mounts) do
+                            if not MountRegistry[mount.itemID] then
+                                MountRegistry[mount.itemID] = true
 
-                            local toyLabel =
-                                private.GetItemNameFromID(toy.itemID):gsub("(%a)([%w_']*)", ToTitleCase):gsub("%W", "")
+                                local mountLabel = private
+                                    .GetSpellNameFromID(mount.spellID)
+                                    :gsub("(%a)([%w_']*)", ToTitleCase)
+                                    :gsub("%W", "")
 
-                            ToyLabelToItemID[toyLabel] = toy.itemID
-                            table.insert(SortedToyLabels, toyLabel)
+                                MountLabelToItemID[mountLabel] = mount.itemID
+                                MountLabelToSpellID[mountLabel] = mount.spellID
+
+                                table.insert(SortedMountLabels, mountLabel)
+                            end
                         end
                     end
                 end
             end
         end
+
+        table.sort(SortedMountLabels)
+
+        for index = 1, #SortedMountLabels do
+            local label = SortedMountLabels[index]
+            local itemID = MountLabelToItemID[label]
+            local spellID = MountLabelToSpellID[label]
+
+            output:AddLine(("    %s = {"):format(label))
+            output:AddLine(("        itemID = %d, -- %s"):format(itemID, private.GetItemNameFromID(itemID)))
+            output:AddLine(("        spellID = %d, -- %s"):format(spellID, private.GetSpellNameFromID(spellID)))
+            output:AddLine("    },")
+        end
+
+        output:Display()
     end
+end
 
-    table.sort(SortedToyLabels)
+do
+    local ToyRegistry = {}
+    local ToyLabelToItemID = {}
+    local SortedToyLabels = {}
 
-    for index = 1, #SortedToyLabels do
-        local label = SortedToyLabels[index]
-        local itemID = ToyLabelToItemID[label]
+    function private.DumpToyData()
+        local output = private.TextDump
+        output:Clear()
 
-        output:AddLine(("    %s = {"):format(label))
-        output:AddLine(("        itemID = %d, -- %s"):format(itemID, private.GetItemNameFromID(itemID)))
-        output:AddLine("    },")
+        for continentID, continent in pairs(private.Data.Continents) do
+            for mapID, map in pairs(continent.Maps) do
+                for npcID, npc in pairs(map.NPCs) do
+                    if npc.toys then
+                        for index, toy in ipairs(npc.toys) do
+                            if not ToyRegistry[toy.itemID] then
+                                ToyRegistry[toy.itemID] = true
+
+                                local toyLabel = private
+                                    .GetItemNameFromID(toy.itemID)
+                                    :gsub("(%a)([%w_']*)", ToTitleCase)
+                                    :gsub("%W", "")
+
+                                ToyLabelToItemID[toyLabel] = toy.itemID
+                                table.insert(SortedToyLabels, toyLabel)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
+        table.sort(SortedToyLabels)
+
+        for index = 1, #SortedToyLabels do
+            local label = SortedToyLabels[index]
+            local itemID = ToyLabelToItemID[label]
+
+            output:AddLine(("    %s = {"):format(label))
+            output:AddLine(("        itemID = %d, -- %s"):format(itemID, private.GetItemNameFromID(itemID)))
+            output:AddLine("    },")
+        end
+
+        output:Display()
     end
-
-    output:Display()
 end
 
 private.DUMP_COMMANDS = {
     mapnpcs = function(parameters)
         private.DumpMapNPCs(tonumber(parameters))
+    end,
+    mounts = function(parameters)
+        private.DumpMountData()
     end,
     npcdata = function(parameters)
         private.DumpNPCData(tonumber(parameters))
