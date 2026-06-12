@@ -7,6 +7,28 @@ local private = select(2, ...) ---@class PrivateNamespace
 
 local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCScan
 
+--------------------------------------------------------------------------------
+---- Helpers
+--------------------------------------------------------------------------------
+
+---@param first string
+---@param rest string
+local function ToTitleCase(first, rest)
+    return first:upper() .. rest:lower()
+end
+
+local function DisplayContinents()
+    print("A continentID must be supplied. Valid choices:")
+
+    for continentID, continent in pairs(private.Data.Continents) do
+        print(continentID .. ":", continent.name)
+    end
+end
+
+--------------------------------------------------------------------------------
+---- Constants
+--------------------------------------------------------------------------------
+
 local OrderedNPCDataFields = {
     "achievementQuestID",
     "classification",
@@ -30,18 +52,14 @@ local IsQuestField = {
 
 local sectionDelimiter = "--------------------------------------------------------------------------------"
 
-local function displayContinents()
-    print("A continentID must be supplied. Valid choices:")
-
-    for continentID, continent in pairs(private.Data.Continents) do
-        print(continentID .. ":", continent.name)
-    end
-end
+--------------------------------------------------------------------------------
+---- Dump Functions
+--------------------------------------------------------------------------------
 
 ---@param continentID ContinentID?
 function private.DumpMapNPCs(continentID)
     if not continentID then
-        displayContinents()
+        DisplayContinents()
 
         return
     end
@@ -109,7 +127,7 @@ end
 ---@param continentID ContinentID?
 function private.DumpNPCData(continentID)
     if not continentID then
-        displayContinents()
+        DisplayContinents()
 
         return
     end
@@ -265,7 +283,7 @@ end
 ---@param continentID ContinentID?
 function private.DumpNPCQuests(continentID)
     if not continentID then
-        displayContinents()
+        DisplayContinents()
 
         return
     end
@@ -357,7 +375,7 @@ end
 ---@param continentID ContinentID?
 function private.DumpQuestData(continentID)
     if not continentID then
-        displayContinents()
+        DisplayContinents()
 
         return
     end
