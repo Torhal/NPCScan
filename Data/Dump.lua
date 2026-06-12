@@ -168,6 +168,7 @@ function private.DumpNPCData(continentID)
     output:AddLine("local private = select(2, ...) ---@class PrivateNamespace\n")
     output:AddLine("local NPCs = private.Data.NPCs")
     output:AddLine("local NPCClassification = private.Enum.NPCClassification\n")
+    output:AddLine("local Mount = private.Enum.Mount")
     output:AddLine("local Toy = private.Enum.Toy\n")
 
     for mapIndex = 1, #sortedMapIDs do
@@ -210,6 +211,18 @@ function private.DumpNPCData(continentID)
                         if enumName then
                             fieldInfoOutput = ("NPCClassification.%s"):format(enumName)
                         end
+                    elseif fieldName == "mounts" then
+                        fieldInfoOutput = "{\n"
+
+                        for _, mount in ipairs(fieldValue) do
+                            for mountLabel, mountData in pairs(private.Enum.Mount) do
+                                if mount.itemID == mountData.itemID then
+                                    fieldInfoOutput = ("%s        Mount.%s,\n"):format(fieldInfoOutput, mountLabel)
+                                end
+                            end
+                        end
+
+                        fieldInfoOutput = ("%s        }"):format(fieldInfoOutput)
                     elseif fieldName == "toys" then
                         fieldInfoOutput = "{\n"
 
