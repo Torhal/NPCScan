@@ -459,6 +459,48 @@ function private.DumpQuestData(continentID)
     output:Display()
 end
 
+local ToyRegistry = {}
+local ToyLabelToItemID = {}
+local SortedToyLabels = {}
+
+function private.DumpToyData()
+    local output = private.TextDump
+    output:Clear()
+
+    for continentID, continent in pairs(private.Data.Continents) do
+        for mapID, map in pairs(continent.Maps) do
+            for npcID, npc in pairs(map.NPCs) do
+                if npc.toys then
+                    for index, toy in ipairs(npc.toys) do
+                        if not ToyRegistry[toy.itemID] then
+                            ToyRegistry[toy.itemID] = true
+
+                            local toyLabel =
+                                private.GetItemNameFromID(toy.itemID):gsub("(%a)([%w_']*)", ToTitleCase):gsub("%W", "")
+
+                            ToyLabelToItemID[toyLabel] = toy.itemID
+                            table.insert(SortedToyLabels, toyLabel)
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    table.sort(SortedToyLabels)
+
+    for index = 1, #SortedToyLabels do
+        local label = SortedToyLabels[index]
+        local itemID = ToyLabelToItemID[label]
+
+        output:AddLine(("    %s = {"):format(label))
+        output:AddLine(("        itemID = %d, -- %s"):format(itemID, private.GetItemNameFromID(itemID)))
+        output:AddLine("    },")
+    end
+
+    output:Display()
+end
+
 private.DUMP_COMMANDS = {
     mapnpcs = function(parameters)
         private.DumpMapNPCs(tonumber(parameters))
@@ -471,5 +513,8 @@ private.DUMP_COMMANDS = {
     end,
     questdata = function(parameters)
         private.DumpQuestData(tonumber(parameters))
+    end,
+    toys = function(parameters)
+        private.DumpToyData()
     end,
 }
