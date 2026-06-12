@@ -168,6 +168,7 @@ function private.DumpNPCData(continentID)
     output:AddLine("local private = select(2, ...) ---@class PrivateNamespace\n")
     output:AddLine("local NPCs = private.Data.NPCs")
     output:AddLine("local NPCClassification = private.Enum.NPCClassification\n")
+    output:AddLine("local Toy = private.Enum.Toy\n")
 
     for mapIndex = 1, #sortedMapIDs do
         local map = private.Data.Maps[sortedMapIDs[mapIndex]]
@@ -209,6 +210,18 @@ function private.DumpNPCData(continentID)
                         if enumName then
                             fieldInfoOutput = ("NPCClassification.%s"):format(enumName)
                         end
+                    elseif fieldName == "toys" then
+                        fieldInfoOutput = "{\n"
+
+                        for _, toy in ipairs(fieldValue) do
+                            for toyLabel, toyData in pairs(private.Enum.Toy) do
+                                if toy.itemID == toyData.itemID then
+                                    fieldInfoOutput = ("%s        Toy.%s,\n"):format(fieldInfoOutput, toyLabel)
+                                end
+                            end
+                        end
+
+                        fieldInfoOutput = ("%s        }"):format(fieldInfoOutput)
                     else
                         local valueType = type(fieldValue)
 
