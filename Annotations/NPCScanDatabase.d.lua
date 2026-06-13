@@ -27,6 +27,8 @@
 ---@field ignoreMiniMap boolean
 ---@field ignoreWorldMap boolean
 ---@field intervalSeconds integer
+---@field mounts boolean
+---@field pets boolean
 ---@field raidMarker table<"add" | "addInGroup", boolean>
 ---@field rares boolean
 ---@field tameables boolean

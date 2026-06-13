@@ -9,7 +9,7 @@ local private = select(2, ...) ---@class PrivateNamespace
 ---- Constants
 --------------------------------------------------------------------------------
 
----@type AceDB.Schema
+---@class DefaultPreferences: AceDB.Schema
 local DefaultPreferences = {
     ---@type NPCScanDatabase.Locale
     locale = {
@@ -61,6 +61,8 @@ local DefaultPreferences = {
                 add = true,
                 addInGroup = false,
             },
+            mounts = true,
+            pets = true,
             rares = true,
             tameables = true,
             userDefined = true,
