@@ -24,7 +24,7 @@
 ---@field factionGroup? "Alliance" | "Horde"
 ---@field isCriteriaCompleted? boolean
 ---@field isTameable? boolean
----@field mapIDs? MapID[]
+---@field mapIDs MapID[]!
 ---@field mounts? MountData[]
 ---@field npcID NPCID
 ---@field pets? PetData[]
