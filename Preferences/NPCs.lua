@@ -215,34 +215,6 @@ local function GetNPCOptionsDescription(npcID)
     return ("%s %s %s"):format(ID, npcID, table.concat(mapNames, ", "))
 end
 
----@param npcID integer
----@return string
-local function GetNPCMountOptionsDescription(npcID)
-    local npc = private.Data.NPCs[npcID]
-    local mapNames = {}
-    local mountNames = {}
-
-    for mapIDIndex = 1, #npc.mapIDs do
-        mapNames[#mapNames + 1] = private.Data.Maps[npc.mapIDs[mapIDIndex]].name
-    end
-
-    if npc.mounts then
-        for index, mount in ipairs(npc.mounts) do
-            table.insert(mountNames, private.GetItemNameFromID(mount.itemID))
-        end
-    end
-
-    table.sort(mountNames)
-
-    return ("%s %s\n\n%s %s\n\n%s"):format(
-        ID,
-        npcID,
-        LOCATION_COLON,
-        table.concat(mapNames, ", "),
-        RENOWN_REWARD_MOUNT_NAME_FORMAT:format(table.concat(mountNames, ", "))
-    )
-end
-
 local ICON_QUEST_ACTIVE = private.FormatAtlasTexture("QuestDaily")
 local ICON_QUEST_COMPLETE = private.FormatAtlasTexture("QuestRepeatableTurnin")
 
@@ -636,6 +608,34 @@ private.UpdateTameableRareNPCOptions = UpdateTameableRareNPCOptions
 --------------------------------------------------------------------------------
 ---- Mount Options
 --------------------------------------------------------------------------------
+
+---@param npcID integer
+---@return string
+local function GetNPCMountOptionsDescription(npcID)
+    local npc = private.Data.NPCs[npcID]
+    local mapNames = {}
+    local mountNames = {}
+
+    for mapIDIndex = 1, #npc.mapIDs do
+        mapNames[#mapNames + 1] = private.Data.Maps[npc.mapIDs[mapIDIndex]].name
+    end
+
+    if npc.mounts then
+        for index, mount in ipairs(npc.mounts) do
+            table.insert(mountNames, private.GetItemNameFromID(mount.itemID))
+        end
+    end
+
+    table.sort(mountNames)
+
+    return ("%s %s\n\n%s %s\n\n%s"):format(
+        ID,
+        npcID,
+        LOCATION_COLON,
+        table.concat(mapNames, ", "),
+        RENOWN_REWARD_MOUNT_NAME_FORMAT:format(table.concat(mountNames, ", "))
+    )
+end
 
 ---@diagnostic disable-next-line: missing-fields
 local DungeonMountNPCOptions = {} ---@type AceConfig.OptionsTable
