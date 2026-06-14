@@ -734,6 +734,34 @@ private.UpdateMountNPCOptions = UpdateMountNPCOptions
 ---- Pet Options
 --------------------------------------------------------------------------------
 
+---@param npcID integer
+---@return string
+local function GetNPCPetOptionsDescription(npcID)
+    local npc = private.Data.NPCs[npcID]
+    local mapNames = {}
+    local petNames = {}
+
+    for mapIDIndex = 1, #npc.mapIDs do
+        mapNames[#mapNames + 1] = private.Data.Maps[npc.mapIDs[mapIDIndex]].name
+    end
+
+    if npc.pets then
+        for index, pet in ipairs(npc.pets) do
+            table.insert(petNames, private.GetItemNameFromID(pet.itemID))
+        end
+    end
+
+    table.sort(petNames)
+
+    return ("%s %s\n\n%s %s\n\n%s"):format(
+        ID,
+        npcID,
+        LOCATION_COLON,
+        table.concat(mapNames, ", "),
+        TOOLTIP_BATTLE_PET_NAME:format(table.concat(petNames, ", "))
+    )
+end
+
 ---@diagnostic disable-next-line: missing-fields
 local DungeonPetNPCOptions = {} ---@type AceConfig.OptionsTable
 
@@ -787,7 +815,7 @@ local function UpdatePetNPCOptions()
                     mapOptionsTable.args.npcs.args["npc" .. npcID] = {
                         order = npcIDIndex,
                         name = GetNPCOptionsName(npcID),
-                        desc = GetNPCOptionsDescription(npcID),
+                        desc = GetNPCPetOptionsDescription(npcID),
                         descStyle = "inline",
                         type = "toggle",
                         width = "full",
