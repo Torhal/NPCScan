@@ -6,6 +6,7 @@
     <Include file="Maps\Manifest.xml"/>
     <Script file="Achievements.lua"/>
     <Script file="Mounts.lua"/>
+    <Script file="Pets.lua"/>
     <Script file="Toys.lua"/>
     <Script file="Dump.lua"/>
     <Include file="NPCs\Manifest.xml"/>
