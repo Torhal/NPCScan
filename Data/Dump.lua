@@ -541,6 +541,61 @@ do
 end
 
 --------------------------------------------------------------------------------
+---- Pets
+--------------------------------------------------------------------------------
+
+do
+    local PetRegistry = {}
+    local PetLabelToItemID = {}
+    local PetLabelToNPCID = {}
+    local SortedPetLabels = {}
+
+    function private.DumpPetData()
+        local output = private.TextDump
+        output:Clear()
+
+        for continentID, continent in pairs(private.Data.Continents) do
+            for mapID, map in pairs(continent.Maps) do
+                for npcID, npc in pairs(map.NPCs) do
+                    if npc.pets then
+                        for index, pet in ipairs(npc.pets) do
+                            if not PetRegistry[pet.itemID] then
+                                PetRegistry[pet.itemID] = true
+
+                                local petLabel = private
+                                    .GetNPCNameFromID(pet.npcID)
+                                    :gsub("(%a)([%w_']*)", ToTitleCase)
+                                    :gsub("%W", "")
+
+                                PetLabelToItemID[petLabel] = pet.itemID
+                                PetLabelToNPCID[petLabel] = pet.npcID
+
+                                table.insert(SortedPetLabels, petLabel)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
+        table.sort(SortedPetLabels)
+
+        for index = 1, #SortedPetLabels do
+            local label = SortedPetLabels[index]
+            local itemID = PetLabelToItemID[label]
+            local npcID = PetLabelToNPCID[label]
+
+            output:AddLine(("    %s = {"):format(label))
+            output:AddLine(("        itemID = %d, -- %s"):format(itemID, private.GetItemNameFromID(itemID)))
+            output:AddLine(("        npcID = %d, -- %s"):format(npcID, private.GetNPCNameFromID(npcID)))
+            output:AddLine("    },")
+        end
+
+        output:Display()
+    end
+end
+
+--------------------------------------------------------------------------------
 ---- Toys
 --------------------------------------------------------------------------------
 
@@ -602,6 +657,9 @@ private.DUMP_COMMANDS = {
     end,
     npcquests = function(parameters)
         private.DumpNPCQuests(tonumber(parameters))
+    end,
+    pets = function(parameters)
+        private.DumpPetData()
     end,
     questdata = function(parameters)
         private.DumpQuestData(tonumber(parameters))
