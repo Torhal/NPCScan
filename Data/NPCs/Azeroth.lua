@@ -8,6 +8,9 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Pet = private.Enum.Pet
+local Toy = private.Enum.Toy
+
 --------------------------------------------------------------------------------
 ---- Darkmoon Island (407)
 --------------------------------------------------------------------------------
@@ -19,18 +22,11 @@ NPCs[71992] = {
     classification = NPCClassification.Elite,
     npcID = 71992,
     pets = {
-        {
-            itemID = 101570, -- Moon Moon
-            npcID = 72160, -- Moon Moon
-        },
+        Pet.MoonMoon,
     },
     toys = {
-        {
-            itemID = 101571, -- Moonfang Shroud
-        },
-        {
-            itemID = 105898, -- Moonfang's Paw
-        },
+        Toy.MoonfangShroud,
+        Toy.MoonfangsPaw,
     },
     vignetteID = 63,
 }
@@ -56,10 +52,7 @@ NPCs[144644] = {
     classification = NPCClassification.Rare,
     npcID = 144644,
     pets = {
-        {
-            itemID = 169366, -- Wriggler
-            npcID = 154839, -- Wriggler
-        },
+        Pet.Wriggler,
     },
     questID = 56274, -- Unknown
     vignetteID = 3706,

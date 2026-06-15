@@ -8,6 +8,10 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Mount = private.Enum.Mount
+local Pet = private.Enum.Pet
+local Toy = private.Enum.Toy
+
 --------------------------------------------------------------------------------
 ---- Ashran (588)
 --------------------------------------------------------------------------------
@@ -273,10 +277,7 @@ NPCs[50992] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 116674, -- Great Greytusk
-            spellID = 171636, -- Great Greytusk
-        },
+        Mount.GreatGreytusk,
     },
     npcID = 50992,
     vignetteID = 616,
@@ -523,9 +524,7 @@ NPCs[78867] = {
     npcID = 78867,
     questID = 34497, -- Vignette: Breathless
     toys = {
-        {
-            itemID = 111476, -- Stolen Breath
-        },
+        Toy.StolenBreath,
     },
     vignetteID = 285,
 }
@@ -608,10 +607,7 @@ NPCs[81001] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     mounts = {
-        {
-            itemID = 116794, -- Garn Nighthowl
-            spellID = 171851, -- Garn Nighthowl
-        },
+        Mount.GarnNighthowl,
     },
     npcID = 81001,
     vignetteID = -1,
@@ -667,9 +663,7 @@ NPCs[82618] = {
     npcID = 82618,
     questID = 37384, -- Vignette: Tor'goroth
     toys = {
-        {
-            itemID = 119163, -- Soul Inhaler
-        },
+        Toy.SoulInhaler,
     },
     vignetteID = 375,
 }
@@ -752,9 +746,7 @@ NPCs[87352] = {
     npcID = 87352,
     questID = 37380, -- Vignette: Giblette the Cowardly
     toys = {
-        {
-            itemID = 119180, -- Goren "Log" Roller
-        },
+        Toy.GorenLogRoller,
     },
     vignetteID = 546,
 }
@@ -847,10 +839,7 @@ NPCs[50985] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 116792, -- Sunhide Gronnling
-            spellID = 171849, -- Sunhide Gronnling
-        },
+        Mount.SunhideGronnling,
     },
     npcID = 50985,
     vignetteID = 619,
@@ -914,9 +903,7 @@ NPCs[79629] = {
     npcID = 79629,
     questID = 35910, -- Vignette: Stomper Kreego
     toys = {
-        {
-            itemID = 118224, -- Ogre Brewing Kit
-        },
+        Toy.OgreBrewingKit,
     },
     vignetteID = 409,
 }
@@ -939,9 +926,7 @@ NPCs[80725] = {
     npcID = 80725,
     questID = 36394, -- Sulfurious
     toys = {
-        {
-            itemID = 114227, -- Bubble Wand
-        },
+        Toy.BubbleWand,
     },
     vignetteID = 340,
 }
@@ -1041,9 +1026,7 @@ NPCs[82085] = {
     npcID = 82085,
     questID = 35335, -- Vignette: Bashiok
     toys = {
-        {
-            itemID = 118222, -- Spirit of Bashiok
-        },
+        Toy.SpiritOfBashiok,
     },
     vignetteID = 355,
 }
@@ -1076,10 +1059,7 @@ NPCs[84406] = {
     classification = NPCClassification.Rare,
     npcID = 84406,
     pets = {
-        {
-            itemID = 118709, -- Doom Bloom
-            npcID = 88103, -- Doom Bloom
-        },
+        Pet.DoomBloom,
     },
     questID = 36178, -- Vignette: Mandrakor the Night Hunter
     vignetteID = 428,
@@ -1103,9 +1083,7 @@ NPCs[85250] = {
     npcID = 85250,
     questID = 36387, -- Fossil the Petrified
     toys = {
-        {
-            itemID = 118221, -- Petrification Stone
-        },
+        Toy.PetrificationStone,
     },
     vignetteID = 467,
 }
@@ -1160,9 +1138,7 @@ NPCs[86257] = {
     npcID = 86257,
     questID = 37369, -- Vignette: Protectors of the Grove
     toys = {
-        {
-            itemID = 119432, -- Botani Camouflage
-        },
+        Toy.BotaniCamouflage,
     },
     vignetteID = 586,
 }
@@ -1399,10 +1375,7 @@ NPCs[50981] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     mounts = {
-        {
-            itemID = 116661, -- Mottled Meadowstomper
-            spellID = 171622, -- Mottled Meadowstomper
-        },
+        Mount.MottledMeadowstomper,
     },
     npcID = 50981,
     vignetteID = 620,
@@ -1415,10 +1388,7 @@ NPCs[50990] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     mounts = {
-        {
-            itemID = 116659, -- Bloodhoof Bull
-            spellID = 171620, -- Bloodhoof Bull
-        },
+        Mount.BloodhoofBull,
     },
     npcID = 50990,
     vignetteID = 618,
@@ -1452,9 +1422,7 @@ NPCs[79725] = {
     npcID = 79725,
     questID = 34727, -- Vignette: Sea Lord Torglork
     toys = {
-        {
-            itemID = 118244, -- Iron Buccaneer's Hat
-        },
+        Toy.IronBuccaneersHat,
     },
     vignetteID = 318,
 }
@@ -1600,12 +1568,9 @@ NPCs[83401] = {
     classification = NPCClassification.Rare,
     npcID = 83401,
     pets = {
-        {
-            itemID = 116815, -- Netherspawn, Spawn of Netherspawn
-            npcID = 86081, -- Netherspawn, Spawn of Netherspawn
-        },
+        Pet.NetherspawnSpawnOfNetherspawn,
     },
-    questID = 35865, -- Nagrand - Vignette Boss 018 - Void Ooze
+    questID = 35865, -- Unknown
     vignetteID = 396,
 }
 
@@ -2020,12 +1985,9 @@ NPCs[98198] = {
     classification = NPCClassification.Rare,
     npcID = 98198,
     pets = {
-        {
-            itemID = 129216, -- Vibrating Arcane Crystal
-            npcID = 98236, -- Energized Manafiend
-        },
+        Pet.EnergizedManafiend,
     },
-    questID = 40075, -- Rukdug
+    questID = 40075, -- Unknown
     vignetteID = 1068,
 }
 
@@ -2036,12 +1998,9 @@ NPCs[98199] = {
     classification = NPCClassification.Rare,
     npcID = 98199,
     pets = {
-        {
-            itemID = 129217, -- Warm Arcane Crystal
-            npcID = 98237, -- Empowered Manafiend
-        },
+        Pet.EmpoweredManafiend,
     },
-    questID = 40073, -- Pugg
+    questID = 40073, -- Unknown
     vignetteID = 1066,
 }
 
@@ -2052,12 +2011,9 @@ NPCs[98200] = {
     classification = NPCClassification.Rare,
     npcID = 98200,
     pets = {
-        {
-            itemID = 129218, -- Glittering Arcane Crystal
-            npcID = 98238, -- Empyreal Manafiend
-        },
+        Pet.EmpyrealManafiend,
     },
-    questID = 40074, -- Guk
+    questID = 40074, -- Unknown
     vignetteID = 1067,
 }
 
@@ -2071,10 +2027,7 @@ NPCs[50883] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 116773, -- Swift Breezestrider
-            spellID = 171830, -- Swift Breezestrider
-        },
+        Mount.SwiftBreezestrider,
     },
     npcID = 50883,
     vignetteID = 621,
@@ -2150,9 +2103,7 @@ NPCs[75435] = {
     npcID = 75435,
     questID = 33389, -- Vignette: Yggdrel the Corrupted
     toys = {
-        {
-            itemID = 113570, -- Ancient's Bloom
-        },
+        Toy.AncientsBloom,
     },
     vignetteID = 30,
 }
@@ -2228,9 +2179,7 @@ NPCs[79524] = {
     npcID = 79524,
     questID = 35558, -- Vignette: Hypnocroak
     toys = {
-        {
-            itemID = 113631, -- Hypnosis Goggles
-        },
+        Toy.HypnosisGoggles,
     },
     vignetteID = 482,
 }
@@ -2310,9 +2259,7 @@ NPCs[82326] = {
     npcID = 82326,
     questID = 35731, -- Vignette: Ba'ruun
     toys = {
-        {
-            itemID = 113540, -- Ba'ruun's Bountiful Bloom
-        },
+        Toy.BaruunsBountifulBloom,
     },
     vignetteID = 386,
 }
@@ -2335,9 +2282,7 @@ NPCs[82374] = {
     npcID = 82374,
     questID = 35553, -- Vignette: Rai'vosh
     toys = {
-        {
-            itemID = 113542, -- Whispers of Rai'Vosh
-        },
+        Toy.WhispersOfRaivosh,
     },
     vignetteID = 364,
 }
@@ -2361,9 +2306,7 @@ NPCs[82415] = {
     npcID = 82415,
     questID = 35732, -- Vignette: Shinri
     toys = {
-        {
-            itemID = 113543, -- Spirit of Shinri
-        },
+        Toy.SpiritOfShinri,
     },
     vignetteID = 387,
 }
@@ -2416,10 +2359,7 @@ NPCs[84911] = {
     classification = NPCClassification.Rare,
     npcID = 84911,
     pets = {
-        {
-            itemID = 119431, -- Servant of Demidos
-            npcID = 88692, -- Servant of Demidos
-        },
+        Pet.ServantOfDemidos,
     },
     questID = 37351, -- Vignette: Demidos
     vignetteID = 478,
@@ -2774,9 +2714,7 @@ NPCs[85026] = {
     npcID = 85026,
     questID = 37358, -- Vignette: Soul-Twister Torek
     toys = {
-        {
-            itemID = 119178, -- Black Whirlwind
-        },
+        Toy.BlackWhirlwind,
     },
     vignetteID = 366,
 }
@@ -2818,10 +2756,7 @@ NPCs[85504] = {
     classification = NPCClassification.Rare,
     npcID = 85504,
     pets = {
-        {
-            itemID = 118107, -- Brilliant Spore
-            npcID = 86719, -- Brilliant Spore
-        },
+        Pet.BrilliantSpore,
     },
     questID = 36470, -- Spires - Vignette Boss 006 - Rotcap
     vignetteID = 602,
@@ -2938,10 +2873,7 @@ NPCs[51015] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 116767, -- Sapphire Riverbeast
-            spellID = 171824, -- Sapphire Riverbeast
-        },
+        Mount.SapphireRiverbeast,
     },
     npcID = 51015,
     vignetteID = 617,
@@ -3049,9 +2981,7 @@ NPCs[77719] = {
     npcID = 77719,
     questID = 34189, -- Vignette: Glimmerwing
     toys = {
-        {
-            itemID = 116113, -- Breath of Talador
-        },
+        Toy.BreathOfTalador,
     },
     vignetteID = 243,
 }
@@ -3115,9 +3045,7 @@ NPCs[77828] = {
     npcID = 77828,
     questID = 34220, -- Vignette: Echo of Murmur
     toys = {
-        {
-            itemID = 113670, -- Mournful Moan of Murmur
-        },
+        Toy.MournfulMoanOfMurmur,
     },
     vignetteID = 251,
 }
@@ -3130,9 +3058,7 @@ NPCs[78710] = {
     npcID = 78710,
     questID = 35219, -- Vignette: Burning Front
     toys = {
-        {
-            itemID = 116122, -- Burning Legion Missive
-        },
+        Toy.BurningLegionMissive,
     },
     vignetteID = 262,
 }
@@ -3145,9 +3071,7 @@ NPCs[78713] = {
     npcID = 78713,
     questID = 35219, -- Vignette: Burning Front
     toys = {
-        {
-            itemID = 116122, -- Burning Legion Missive
-        },
+        Toy.BurningLegionMissive,
     },
     vignetteID = 263,
 }
@@ -3160,9 +3084,7 @@ NPCs[78715] = {
     npcID = 78715,
     questID = 35219, -- Vignette: Burning Front
     toys = {
-        {
-            itemID = 116122, -- Burning Legion Missive
-        },
+        Toy.BurningLegionMissive,
     },
     vignetteID = 346,
 }
@@ -3176,9 +3098,7 @@ NPCs[78872] = {
     npcID = 78872,
     questID = 34498, -- Vignette: Klikixx
     toys = {
-        {
-            itemID = 116125, -- Klikixx's Webspinner
-        },
+        Toy.KlikixxsWebspinner,
     },
     vignetteID = 286,
 }
@@ -3383,10 +3303,7 @@ NPCs[87668] = {
     classification = NPCClassification.Rare,
     npcID = 87668,
     pets = {
-        {
-            itemID = 119170, -- Eye of Observation
-            npcID = 88490, -- Eye of Observation
-        },
+        Pet.EyeOfObservation,
     },
     questID = 37344, -- Vignette: Orumo the Observer
     vignetteID = 572,
@@ -3398,7 +3315,7 @@ NPCs[88043] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 88043,
-    questID = 37338, -- Vignette: Avatar of Sothrecar
+    questID = 37338, -- Unknown
     vignetteID = 561,
 }
 
@@ -3408,7 +3325,7 @@ NPCs[88071] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 88071,
-    questID = 37337, -- Vignette: Strategist Ankor
+    questID = 37337, -- Unknown
     vignetteID = 565,
 }
 
@@ -3418,7 +3335,7 @@ NPCs[88072] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 88072,
-    questID = 37337, -- Vignette: Strategist Ankor
+    questID = 37337, -- Unknown
     vignetteID = 565,
 }
 
@@ -3428,7 +3345,7 @@ NPCs[88083] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 88083,
-    questID = 37337, -- Vignette: Strategist Ankor
+    questID = 37337, -- Unknown
     vignetteID = 565,
 }
 
@@ -3438,7 +3355,7 @@ NPCs[88436] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 88436,
-    questID = 37350, -- Vignette: Vigilant Paarthos
+    questID = 37350, -- Unknown
     vignetteID = 588,
 }
 
@@ -3448,7 +3365,7 @@ NPCs[88494] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 88494,
-    questID = 37342, -- Vignette: Legion Vanguard
+    questID = 37342, -- Unknown
     vignetteID = 590,
 }
 
@@ -3473,7 +3390,7 @@ NPCs[80398] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 80398,
-    questID = 37407, -- Vignette: Keravnos
+    questID = 37407, -- Unknown
     vignetteID = 593,
 }
 
@@ -3483,7 +3400,7 @@ NPCs[89675] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 89675,
-    questID = 38749, -- Vignette: Commander Org'mok
+    questID = 38749, -- Unknown
     vignetteID = 858,
 }
 
@@ -3493,7 +3410,7 @@ NPCs[90024] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90024,
-    questID = 37953, -- Vignette: Sergeant Mor'grak
+    questID = 37953, -- Unknown
     vignetteID = 696,
 }
 
@@ -3503,7 +3420,7 @@ NPCs[90094] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90094,
-    questID = 39046, -- Vignette: Harbormaster Korak
+    questID = 39046, -- Unknown
     vignetteID = 687,
 }
 
@@ -3513,7 +3430,7 @@ NPCs[90122] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90122,
-    questID = 39045, -- Vignette: Zoug
+    questID = 39045, -- Unknown
     vignetteID = 688,
 }
 
@@ -3523,11 +3440,9 @@ NPCs[90429] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90429,
-    questID = 38026, -- Vignette: Imp-Master Valessa
+    questID = 38026, -- Unknown
     toys = {
-        {
-            itemID = 127655, -- Sassy Imp
-        },
+        Toy.SassyImp,
     },
     vignetteID = 700,
 }
@@ -3538,7 +3453,7 @@ NPCs[90434] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90434,
-    questID = 38031, -- Vignette: Ceraxas
+    questID = 38031, -- Unknown
     vignetteID = 704,
 }
 
@@ -3548,7 +3463,7 @@ NPCs[90437] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90437,
-    questID = 38030, -- Vignette: Houndmaster Jax'zor
+    questID = 38030, -- Unknown
     vignetteID = 703,
 }
 
@@ -3558,7 +3473,7 @@ NPCs[90438] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90438,
-    questID = 38029, -- Vignette: Lady Oran
+    questID = 38029, -- Unknown
     vignetteID = 702,
 }
 
@@ -3568,7 +3483,7 @@ NPCs[90442] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90442,
-    questID = 38032, -- Vignette: Mistress Thavra
+    questID = 38032, -- Unknown
     vignetteID = 705,
 }
 
@@ -3578,7 +3493,7 @@ NPCs[90519] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90519,
-    questID = 37990, -- Vignette: Cindral
+    questID = 37990, -- Unknown
     vignetteID = 698,
 }
 
@@ -3588,11 +3503,9 @@ NPCs[90777] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90777,
-    questID = 38028, -- Vignette: High Priest Ikzan
+    questID = 38028, -- Unknown
     toys = {
-        {
-            itemID = 122117, -- Cursed Feather of Ikzan
-        },
+        Toy.CursedFeatherOfIkzan,
     },
     vignetteID = 701,
 }
@@ -3603,7 +3516,7 @@ NPCs[90782] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90782,
-    questID = 38034, -- Vignette: Rasthe
+    questID = 38034, -- Unknown
     vignetteID = 706,
 }
 
@@ -3613,7 +3526,7 @@ NPCs[90884] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90884,
-    questID = 38262, -- Vignette: Bilkor the Thrower
+    questID = 38262, -- Unknown
     vignetteID = 725,
 }
 
@@ -3623,7 +3536,7 @@ NPCs[90885] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90885,
-    questID = 38263, -- Vignette: Rogond
+    questID = 38263, -- Unknown
     vignetteID = 726,
 }
 
@@ -3633,7 +3546,7 @@ NPCs[90887] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90887,
-    questID = 38265, -- Vignette: Dorg
+    questID = 38265, -- Unknown
     vignetteID = 728,
 }
 
@@ -3643,7 +3556,7 @@ NPCs[90888] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90888,
-    questID = 38264, -- Vignette: Drivnul
+    questID = 38264, -- Unknown
     vignetteID = 727,
 }
 
@@ -3653,7 +3566,7 @@ NPCs[90936] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90936,
-    questID = 38266, -- Vignette: Zulk
+    questID = 38266, -- Unknown
     vignetteID = 729,
 }
 
@@ -3663,7 +3576,7 @@ NPCs[91009] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91009,
-    questID = 38457, -- Vignette: Putre'thar
+    questID = 38457, -- Unknown
     vignetteID = 772,
 }
 
@@ -3673,7 +3586,7 @@ NPCs[91087] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91087,
-    questID = 38207, -- Vignette: Zeter'el
+    questID = 38207, -- Unknown
     vignetteID = 717,
 }
 
@@ -3683,11 +3596,9 @@ NPCs[91093] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91093,
-    questID = 38209, -- Vignette: Bramblefell
+    questID = 38209, -- Unknown
     toys = {
-        {
-            itemID = 127652, -- Felflame Campfire
-        },
+        Toy.FelflameCampfire,
     },
     vignetteID = 718,
 }
@@ -3698,7 +3609,7 @@ NPCs[91098] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91098,
-    questID = 38211, -- Vignette: Felspark
+    questID = 38211, -- Unknown
     vignetteID = 719,
 }
 
@@ -3708,11 +3619,9 @@ NPCs[91227] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91227,
-    questID = 39159, -- Vignette: Blood Moon Boss
+    questID = 39159, -- Unknown
     toys = {
-        {
-            itemID = 127666, -- Vial of Red Goo
-        },
+        Toy.VialOfRedGoo,
     },
     vignetteID = 730,
 }
@@ -3723,7 +3632,7 @@ NPCs[91232] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91232,
-    questID = 38746, -- Vignette: Iron Front Captain 1
+    questID = 38746, -- Unknown
     vignetteID = 856,
 }
 
@@ -3733,7 +3642,7 @@ NPCs[91243] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91243,
-    questID = 38747, -- Vignette: Iron Front Captain 2
+    questID = 38747, -- Unknown
     vignetteID = 857,
 }
 
@@ -3743,7 +3652,7 @@ NPCs[91374] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91374,
-    questID = 38282, -- Vignette: Wakkawam
+    questID = 38282, -- Unknown
     vignetteID = 734,
 }
 
@@ -3753,7 +3662,7 @@ NPCs[91695] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91695,
-    questID = 38400, -- Vignette: Grand Warlock Nethekurse
+    questID = 38400, -- Unknown
     vignetteID = 758,
 }
 
@@ -3763,7 +3672,7 @@ NPCs[91727] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91727,
-    questID = 38411, -- Vignette: Executor Riloth
+    questID = 38411, -- Unknown
     vignetteID = 759,
 }
 
@@ -3773,7 +3682,7 @@ NPCs[91871] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91871,
-    questID = 38430, -- Vignette: Argosh the Destroyer
+    questID = 38430, -- Unknown
     vignetteID = 768,
 }
 
@@ -3783,7 +3692,7 @@ NPCs[92197] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92197,
-    questID = 38496, -- Vignette: BH Master Scout
+    questID = 38496, -- Unknown
     vignetteID = 798,
 }
 
@@ -3793,7 +3702,7 @@ NPCs[92274] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92274,
-    questID = 38557, -- Vignette: Invasion Point: Devastation
+    questID = 38557, -- Unknown
     vignetteID = 813,
 }
 
@@ -3803,7 +3712,7 @@ NPCs[92408] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92408,
-    questID = 38579, -- Vignette: Xanzith the Everlasting
+    questID = 38579, -- Unknown
     vignetteID = 815,
 }
 
@@ -3813,7 +3722,7 @@ NPCs[92411] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92411,
-    questID = 38580, -- Vignette: Overlord Ma'gruth
+    questID = 38580, -- Unknown
     vignetteID = 816,
 }
 
@@ -3824,7 +3733,7 @@ NPCs[92429] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 92429,
-    questID = 38589, -- Vignette: Ravager Broodlord
+    questID = 38589, -- Unknown
     vignetteID = 817,
 }
 
@@ -3834,7 +3743,7 @@ NPCs[92451] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92451,
-    questID = 37937, -- Vignette: Varyx the Damned
+    questID = 37937, -- Unknown
     vignetteID = 695,
 }
 
@@ -3844,7 +3753,7 @@ NPCs[92465] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92465,
-    questID = 38597, -- Vignette: Panther Saberon Boss
+    questID = 38597, -- Unknown
     vignetteID = 818,
 }
 
@@ -3854,7 +3763,7 @@ NPCs[92495] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92495,
-    questID = 38600, -- Vignette: Fel Saberon Shaman
+    questID = 38600, -- Unknown
     vignetteID = 819,
 }
 
@@ -3864,7 +3773,7 @@ NPCs[92508] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92508,
-    questID = 38604, -- Vignette: Saberon Shaman
+    questID = 38604, -- Unknown
     vignetteID = 820,
 }
 
@@ -3874,7 +3783,7 @@ NPCs[92517] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92517,
-    questID = 38605, -- Vignette: Saberon Blademaster
+    questID = 38605, -- Unknown
     vignetteID = 821,
 }
 
@@ -3884,7 +3793,7 @@ NPCs[92552] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92552,
-    questID = 38609, -- Vignette: Iron Tunnel Foreman
+    questID = 38609, -- Unknown
     vignetteID = 822,
 }
 
@@ -3894,7 +3803,7 @@ NPCs[92574] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92574,
-    questID = 38620, -- Vignette: Pale Assassin
+    questID = 38620, -- Unknown
     vignetteID = 823,
 }
 
@@ -3905,7 +3814,7 @@ NPCs[92606] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 92606,
-    questID = 38628, -- Vignette: Giant Python
+    questID = 38628, -- Unknown
     vignetteID = 827,
 }
 
@@ -3916,7 +3825,7 @@ NPCs[92627] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 92627,
-    questID = 38631, -- Vignette: Alpha Bat
+    questID = 38631, -- Unknown
     vignetteID = 829,
 }
 
@@ -3926,11 +3835,9 @@ NPCs[92636] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92636,
-    questID = 38632, -- Vignette: Night Haunter
+    questID = 38632, -- Unknown
     toys = {
-        {
-            itemID = 127652, -- Felflame Campfire
-        },
+        Toy.FelflameCampfire,
     },
     vignetteID = 830,
 }
@@ -3941,7 +3848,7 @@ NPCs[92645] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92645,
-    questID = 38632, -- Vignette: Night Haunter
+    questID = 38632, -- Unknown
     vignetteID = 830,
 }
 
@@ -3951,7 +3858,7 @@ NPCs[92647] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92647,
-    questID = 38634, -- Vignette: Felsmith Damorka
+    questID = 38634, -- Unknown
     vignetteID = 831,
 }
 
@@ -3961,7 +3868,7 @@ NPCs[92657] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92657,
-    questID = 38696, -- Vignette: Bleeding Hollow Horror
+    questID = 38696, -- Unknown
     vignetteID = 841,
 }
 
@@ -3972,7 +3879,7 @@ NPCs[92694] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 92694,
-    questID = 38654, -- Vignette: Giant Raptor
+    questID = 38654, -- Unknown
     vignetteID = 834,
 }
 
@@ -4010,7 +3917,7 @@ NPCs[92887] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 92887,
-    questID = 38700, -- Vignette: Steelsnout
+    questID = 38700, -- Unknown
     vignetteID = 842,
 }
 
@@ -4020,7 +3927,7 @@ NPCs[92941] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92941,
-    questID = 38709, -- Vignette: Cave Keeper
+    questID = 38709, -- Unknown
     vignetteID = 846,
 }
 
@@ -4030,7 +3937,7 @@ NPCs[92977] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92977,
-    questID = 38751, -- Vignette: Iron Houndmaster
+    questID = 38751, -- Unknown
     vignetteID = 860,
 }
 
@@ -4040,7 +3947,7 @@ NPCs[93001] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 93001,
-    questID = 38752, -- Vignette: Szirek
+    questID = 38752, -- Unknown
     vignetteID = 861,
 }
 
@@ -4051,7 +3958,7 @@ NPCs[93002] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 93002,
-    questID = 38726, -- Vignette: Magwia
+    questID = 38726, -- Unknown
     vignetteID = 850,
 }
 
@@ -4061,7 +3968,7 @@ NPCs[93028] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 93028,
-    questID = 38736, -- Vignette: IH Elite Sniper
+    questID = 38736, -- Unknown
     vignetteID = 853,
 }
 
@@ -4071,7 +3978,7 @@ NPCs[93057] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 93057,
-    questID = 38750, -- Vignette: Iron Front Captain 3
+    questID = 38750, -- Unknown
     vignetteID = 859,
 }
 
@@ -4081,11 +3988,9 @@ NPCs[93076] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 93076,
-    questID = 38756, -- Vignette: Dead Orc Captain
+    questID = 38756, -- Unknown
     toys = {
-        {
-            itemID = 127659, -- Ghostly Iron Buccaneer's Hat
-        },
+        Toy.GhostlyIronBuccaneersHat,
     },
     vignetteID = 862,
 }
@@ -4096,7 +4001,7 @@ NPCs[93125] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 93125,
-    questID = 38764, -- Vignette: Murktide Alpha
+    questID = 38764, -- Unknown
     vignetteID = 864,
 }
 
@@ -4106,7 +4011,7 @@ NPCs[93168] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 93168,
-    questID = 38775, -- Felbore
+    questID = 38775, -- Unknown
     vignetteID = 868,
 }
 
@@ -4117,7 +4022,7 @@ NPCs[93236] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 93236,
-    questID = 38812, -- Vignette: Shadowthrash
+    questID = 38812, -- Unknown
     vignetteID = 873,
 }
 
@@ -4127,7 +4032,7 @@ NPCs[93264] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 93264,
-    questID = 38820, -- Vignette: Captain Grok'mar
+    questID = 38820, -- Unknown
     vignetteID = 874,
 }
 
@@ -4137,7 +4042,7 @@ NPCs[93279] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 93279,
-    questID = 38825, -- Blazing Crusader
+    questID = 38825, -- Unknown
     vignetteID = 875,
 }
 
@@ -4147,21 +4052,12 @@ NPCs[95044] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 116658, -- Tundra Icehoof
-            spellID = 171619, -- Tundra Icehoof
-        },
-        {
-            itemID = 116669, -- Armored Razorback
-            spellID = 171630, -- Armored Razorback
-        },
-        {
-            itemID = 116780, -- Warsong Direfang
-            spellID = 171837, -- Warsong Direfang
-        },
+        Mount.TundraIcehoof,
+        Mount.ArmoredRazorback,
+        Mount.WarsongDirefang,
     },
     npcID = 95044,
-    questID = 39288, -- Terrorfist
+    questID = 39288, -- Unknown
     vignetteID = 956,
 }
 
@@ -4172,21 +4068,12 @@ NPCs[95053] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     mounts = {
-        {
-            itemID = 116658, -- Tundra Icehoof
-            spellID = 171619, -- Tundra Icehoof
-        },
-        {
-            itemID = 116669, -- Armored Razorback
-            spellID = 171630, -- Armored Razorback
-        },
-        {
-            itemID = 116780, -- Warsong Direfang
-            spellID = 171837, -- Warsong Direfang
-        },
+        Mount.TundraIcehoof,
+        Mount.ArmoredRazorback,
+        Mount.WarsongDirefang,
     },
     npcID = 95053,
-    questID = 39287, -- Deathtalon
+    questID = 39287, -- Unknown
     vignetteID = 959,
 }
 
@@ -4196,21 +4083,12 @@ NPCs[95054] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 116658, -- Tundra Icehoof
-            spellID = 171619, -- Tundra Icehoof
-        },
-        {
-            itemID = 116669, -- Armored Razorback
-            spellID = 171630, -- Armored Razorback
-        },
-        {
-            itemID = 116780, -- Warsong Direfang
-            spellID = 171837, -- Warsong Direfang
-        },
+        Mount.TundraIcehoof,
+        Mount.ArmoredRazorback,
+        Mount.WarsongDirefang,
     },
     npcID = 95054,
-    questID = 39290, -- Vengeance
+    questID = 39290, -- Unknown
     vignetteID = 958,
 }
 
@@ -4220,21 +4098,12 @@ NPCs[95056] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 116658, -- Tundra Icehoof
-            spellID = 171619, -- Tundra Icehoof
-        },
-        {
-            itemID = 116669, -- Armored Razorback
-            spellID = 171630, -- Armored Razorback
-        },
-        {
-            itemID = 116780, -- Warsong Direfang
-            spellID = 171837, -- Warsong Direfang
-        },
+        Mount.TundraIcehoof,
+        Mount.ArmoredRazorback,
+        Mount.WarsongDirefang,
     },
     npcID = 95056,
-    questID = 39289, -- Doomroller
+    questID = 39289, -- Unknown
     vignetteID = 957,
 }
 
@@ -4253,11 +4122,9 @@ NPCs[98283] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 98283,
-    questID = 40105, -- Drakum
+    questID = 40105, -- Unknown
     toys = {
-        {
-            itemID = 108631, -- Crashin' Thrashin' Roller Controller
-        },
+        Toy.CrashinThrashinRollerController,
     },
     vignetteID = 1090,
 }
@@ -4268,11 +4135,9 @@ NPCs[98284] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 98284,
-    questID = 40106, -- Gondar
+    questID = 40106, -- Unknown
     toys = {
-        {
-            itemID = 108633, -- Crashin' Thrashin' Cannon Controller
-        },
+        Toy.CrashinThrashinCannonController,
     },
     vignetteID = 1089,
 }
@@ -4283,11 +4148,9 @@ NPCs[98285] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 98285,
-    questID = 40104, -- Smashum Grabb
+    questID = 40104, -- Unknown
     toys = {
-        {
-            itemID = 108634, -- Crashin' Thrashin' Mortar Controller
-        },
+        Toy.CrashinThrashinMortarController,
     },
     vignetteID = 1088,
 }
@@ -4298,6 +4161,6 @@ NPCs[98408] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 98408,
-    questID = 40107, -- Mudlump
+    questID = 40107, -- Unknown
     vignetteID = 1091,
 }

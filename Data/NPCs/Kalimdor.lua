@@ -8,6 +8,9 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Mount = private.Enum.Mount
+local Pet = private.Enum.Pet
+
 --------------------------------------------------------------------------------
 ---- Ahn'Qiraj: The Fallen Kingdom (327)
 --------------------------------------------------------------------------------
@@ -340,10 +343,7 @@ NPCs[147240] = {
     classification = NPCClassification.RareElite,
     npcID = 147240,
     pets = {
-        {
-            itemID = 166452, -- Bottled Essence of Hydrath
-            npcID = 148841, -- Hydrath Droplet
-        },
+        Pet.HydrathDroplet,
     },
     questID = 54228, -- Unknown
     vignetteID = 3351,
@@ -356,10 +356,7 @@ NPCs[147241] = {
     classification = NPCClassification.RareElite,
     npcID = 147241,
     pets = {
-        {
-            itemID = 166448, -- Binding of Cyclarus
-            npcID = 148784, -- Gust of Cyclarus
-        },
+        Pet.GustOfCyclarus,
     },
     questID = 54230, -- Unknown
     vignetteID = 3352,
@@ -372,10 +369,7 @@ NPCs[147260] = {
     classification = NPCClassification.RareElite,
     npcID = 147260,
     pets = {
-        {
-            itemID = 166451, -- Rattling Bones
-            npcID = 148825, -- Detective Ray
-        },
+        Pet.DetectiveRay,
     },
     questID = 54233, -- Unknown
     vignetteID = 3353,
@@ -556,10 +550,7 @@ NPCs[148787] = {
     classification = NPCClassification.RareElite,
     isTameable = true,
     mounts = {
-        {
-            itemID = 166432, -- Ashenvale Chimaera
-            spellID = 288495, -- Ashenvale Chimaera
-        },
+        Mount.AshenvaleChimaera,
     },
     npcID = 148787,
     questID = 54696, -- Unknown
@@ -572,10 +563,7 @@ NPCs[148790] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Normal,
     mounts = {
-        {
-            itemID = 166433, -- Frightened Kodo
-            spellID = 288499, -- Frightened Kodo
-        },
+        Mount.FrightenedKodo,
     },
     npcID = 148790,
 }
@@ -1336,10 +1324,7 @@ NPCs[39384] = {
     classification = NPCClassification.Normal,
     npcID = 39384,
     pets = {
-        {
-            itemID = 8498, -- Emerald Whelpling
-            npcID = 7545, -- Emerald Whelpling
-        },
+        Pet.EmeraldWhelpling,
     },
 }
 
@@ -3100,6 +3085,7 @@ NPCs[159087] = {
     classification = NPCClassification.Rare,
     npcID = 159087,
     questID = 57834, -- Unknown
+    vignetteID = 3934,
 }
 
 NPCs[160532] = {

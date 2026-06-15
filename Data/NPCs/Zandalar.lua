@@ -8,6 +8,8 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Mount = private.Enum.Mount
+
 --------------------------------------------------------------------------------
 ---- Dazar'alor (1165)
 --------------------------------------------------------------------------------
@@ -181,10 +183,7 @@ NPCs[126187] = {
     achievementQuestID = 48462, -- Unknown
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 163575, -- Reins of a Tamed Bloodfeaster
-            spellID = 243795, -- Leaping Veinseeker
-        },
+        Mount.LeapingVeinseeker,
     },
     npcID = 126187,
     questID = 48462, -- Unknown
@@ -1114,10 +1113,7 @@ NPCs[138794] = {
     classification = NPCClassification.RareElite,
     isTameable = true,
     mounts = {
-        {
-            itemID = 174842, -- Slightly Damp Pile of Fur
-            spellID = 298367, -- Mollie
-        },
+        Mount.Mollie,
     },
     npcID = 138794,
     vignetteID = -1,

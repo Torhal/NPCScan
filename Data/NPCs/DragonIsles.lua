@@ -8,6 +8,10 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Mount = private.Enum.Mount
+local Pet = private.Enum.Pet
+local Toy = private.Enum.Toy
+
 --------------------------------------------------------------------------------
 ---- Barrows of Reverie (2254)
 --------------------------------------------------------------------------------
@@ -396,9 +400,7 @@ NPCs[191354] = {
     npcID = 191354,
     questID = 66970, -- Ty'foon the Ascended
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5131,
 }
@@ -562,9 +564,7 @@ NPCs[193165] = {
     npcID = 193165,
     questID = 73896, -- Unknown
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
 }
 
@@ -631,9 +631,7 @@ NPCs[193215] = {
     npcID = 193215,
     questID = 74073, -- Unknown
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5190,
 }
@@ -733,9 +731,7 @@ NPCs[193654] = {
     npcID = 193654,
     questID = 69960, -- Gravlion
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5233,
 }
@@ -756,9 +752,7 @@ NPCs[193669] = {
     npcID = 193669,
     questID = 72815, -- Unknown
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5240,
 }
@@ -822,9 +816,7 @@ NPCs[193682] = {
     npcID = 193682,
     questID = 69973, -- Rouen Icewind
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5245,
 }
@@ -1116,9 +1108,7 @@ NPCs[193128] = {
     npcID = 193128,
     questID = 73869, -- Unknown
     toys = {
-        {
-            itemID = 200178, -- Infected Ichor
-        },
+        Toy.InfectedIchor,
     },
 }
 
@@ -1348,9 +1338,7 @@ NPCs[193654] = {
     npcID = 193654,
     questID = 69960, -- Gravlion
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5233,
 }
@@ -1371,9 +1359,7 @@ NPCs[193658] = {
     npcID = 193658,
     questID = 74060, -- Unknown
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5235,
 }
@@ -1416,9 +1402,7 @@ NPCs[193668] = {
     npcID = 193668,
     questID = 72813, -- Unknown
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5239,
 }
@@ -1482,9 +1466,7 @@ NPCs[193682] = {
     npcID = 193682,
     questID = 69973, -- Rouen Icewind
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5245,
 }
@@ -1701,9 +1683,7 @@ NPCs[193178] = {
     npcID = 193178,
     questID = 69858, -- Blightfur
     toys = {
-        {
-            itemID = 200178, -- Infected Ichor
-        },
+        Toy.InfectedIchor,
     },
     vignetteID = 5184,
 }
@@ -1889,9 +1869,7 @@ NPCs[193654] = {
     npcID = 193654,
     questID = 69960, -- Gravlion
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5233,
 }
@@ -1963,9 +1941,7 @@ NPCs[193682] = {
     npcID = 193682,
     questID = 69973, -- Rouen Icewind
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5245,
 }
@@ -2096,9 +2072,7 @@ NPCs[197356] = {
     npcID = 197356,
     questID = 74004, -- Unknown
     toys = {
-        {
-            itemID = 200178, -- Infected Ichor
-        },
+        Toy.InfectedIchor,
     },
     vignetteID = 5416,
 }
@@ -2144,9 +2118,7 @@ NPCs[201556] = {
     npcID = 201556,
     questID = 74460, -- Waterpots
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5555,
 }
@@ -2159,9 +2131,7 @@ NPCs[201558] = {
     npcID = 201558,
     questID = 74461, -- Malgain Rockknell
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5556,
 }
@@ -2174,9 +2144,7 @@ NPCs[201559] = {
     npcID = 201559,
     questID = 74462, -- Shiobhan Waterborn
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5557,
 }
@@ -2628,9 +2596,7 @@ NPCs[201545] = {
     npcID = 201545,
     questID = 74454, -- Shapemaster Za'lani
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
 }
 
@@ -2738,9 +2704,7 @@ NPCs[187209] = {
     npcID = 187209,
     questID = 72841, -- Unknown
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5127,
 }
@@ -2838,9 +2802,7 @@ NPCs[190991] = {
     npcID = 190991,
     questID = 74043, -- Unknown
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5115,
 }
@@ -2995,9 +2957,7 @@ NPCs[193171] = {
     npcID = 193171,
     questID = 72850, -- Unknown
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5387,
 }
@@ -3185,9 +3145,7 @@ NPCs[193654] = {
     npcID = 193654,
     questID = 69960, -- Gravlion
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5233,
 }
@@ -3259,9 +3217,7 @@ NPCs[193682] = {
     npcID = 193682,
     questID = 69973, -- Rouen Icewind
     toys = {
-        {
-            itemID = 200198, -- Primalist Prison
-        },
+        Toy.PrimalistPrison,
     },
     vignetteID = 5245,
 }

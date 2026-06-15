@@ -8,6 +8,10 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Mount = private.Enum.Mount
+local Pet = private.Enum.Pet
+local Toy = private.Enum.Toy
+
 --------------------------------------------------------------------------------
 ---- Antoran Wastes (885)
 --------------------------------------------------------------------------------
@@ -28,10 +32,7 @@ NPCs[122958] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 152905, -- Crimson Slavermaw
-            spellID = 253661, -- Crimson Slavermaw
-        },
+        Mount.CrimsonSlavermaw,
     },
     npcID = 122958,
     questID = 49183, -- Unknown
@@ -54,10 +55,7 @@ NPCs[126040] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 152903, -- Biletooth Gnasher
-            spellID = 253660, -- Biletooth Gnasher
-        },
+        Mount.BiletoothGnasher,
     },
     npcID = 126040,
     questID = 48809, -- Unknown
@@ -80,10 +78,7 @@ NPCs[126199] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 152903, -- Biletooth Gnasher
-            spellID = 253660, -- Biletooth Gnasher
-        },
+        Mount.BiletoothGnasher,
     },
     npcID = 126199,
     questID = 48810, -- Unknown
@@ -96,33 +91,15 @@ NPCs[126208] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 152840, -- Scintillating Mana Ray
-            spellID = 253109, -- Scintillating Mana Ray
-        },
-        {
-            itemID = 152841, -- Felglow Mana Ray
-            spellID = 253108, -- Felglow Mana Ray
-        },
-        {
-            itemID = 152842, -- Vibrant Mana Ray
-            spellID = 253106, -- Vibrant Mana Ray
-        },
-        {
-            itemID = 152843, -- Darkspore Mana Ray
-            spellID = 235764, -- Darkspore Mana Ray
-        },
+        Mount.ScintillatingManaRay,
+        Mount.FelglowManaRay,
+        Mount.VibrantManaRay,
+        Mount.DarksporeManaRay,
     },
     npcID = 126208,
     pets = {
-        {
-            itemID = 153054, -- Docile Skyfin
-            npcID = 128157, -- Docile Skyfin
-        },
-        {
-            itemID = 153055, -- Fel-Afflicted Skyfin
-            npcID = 128158, -- Fel-Afflicted Skyfin
-        },
+        Pet.DocileSkyfin,
+        Pet.FelAfflictedSkyfin,
     },
     questID = 48812, -- Unknown
     vignetteID = 2268,
@@ -146,9 +123,7 @@ NPCs[126338] = {
     npcID = 126338,
     questID = 48814, -- Unknown
     toys = {
-        {
-            itemID = 153126, -- Micro-Artillery Controller
-        },
+        Toy.MicroArtilleryController,
     },
     vignetteID = 2270,
 }
@@ -210,10 +185,7 @@ NPCs[127288] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 152790, -- Vile Fiend
-            spellID = 243652, -- Vile Fiend
-        },
+        Mount.VileFiend,
     },
     npcID = 127288,
     questID = 48821, -- Unknown
@@ -259,10 +231,7 @@ NPCs[127581] = {
     classification = NPCClassification.Rare,
     npcID = 127581,
     pets = {
-        {
-            itemID = 153195, -- Uuna's Doll
-            npcID = 128396, -- Uuna
-        },
+        Pet.Uuna,
     },
     questID = 48966, -- Unknown
     vignetteID = 2300,
@@ -276,9 +245,7 @@ NPCs[127700] = {
     npcID = 127700,
     questID = 48967, -- Unknown
     toys = {
-        {
-            itemID = 153253, -- S.F.E. Interceptor
-        },
+        Toy.SFEInterceptor,
     },
     vignetteID = 2301,
 }
@@ -291,9 +258,7 @@ NPCs[127703] = {
     npcID = 127703,
     questID = 48968, -- Unknown
     toys = {
-        {
-            itemID = 153194, -- Legion Communication Orb
-        },
+        Toy.LegionCommunicationOrb,
     },
     vignetteID = 2302,
 }
@@ -305,10 +270,7 @@ NPCs[127705] = {
     classification = NPCClassification.Rare,
     npcID = 127705,
     pets = {
-        {
-            itemID = 153252, -- Rebellious Imp
-            npcID = 128388, -- Rebellious Imp
-        },
+        Pet.RebelliousImp,
     },
     questID = 48970, -- Unknown
     vignetteID = 2304,
@@ -322,9 +284,7 @@ NPCs[127706] = {
     npcID = 127706,
     questID = 48971, -- Unknown
     toys = {
-        {
-            itemID = 153293, -- Sightless Eye
-        },
+        Toy.SightlessEye,
     },
     vignetteID = 2305,
 }
@@ -389,10 +349,7 @@ NPCs[126852] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 152814, -- Maddened Chaosrunner
-            spellID = 253058, -- Maddened Chaosrunner
-        },
+        Mount.MaddenedChaosrunner,
     },
     npcID = 126852,
     questID = 48695, -- Unknown
@@ -417,9 +374,7 @@ NPCs[126862] = {
     npcID = 126862,
     questID = 48700, -- Unknown
     toys = {
-        {
-            itemID = 153193, -- Baarut the Brisk
-        },
+        Toy.BaarutTheBrisk,
     },
     vignetteID = 2234,
 }
@@ -443,9 +398,7 @@ NPCs[126865] = {
     npcID = 126865,
     questID = 48703, -- Unknown
     toys = {
-        {
-            itemID = 153183, -- Barrier Generator
-        },
+        Toy.BarrierGenerator,
     },
     vignetteID = 2236,
 }
@@ -458,9 +411,7 @@ NPCs[126866] = {
     npcID = 126866,
     questID = 48704, -- Unknown
     toys = {
-        {
-            itemID = 153183, -- Barrier Generator
-        },
+        Toy.BarrierGenerator,
     },
     vignetteID = 2237,
 }
@@ -471,10 +422,7 @@ NPCs[126867] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 152844, -- Lambent Mana Ray
-            spellID = 253107, -- Lambent Mana Ray
-        },
+        Mount.LambentManaRay,
     },
     npcID = 126867,
     questID = 48705, -- Unknown
@@ -522,10 +470,7 @@ NPCs[126887] = {
     classification = NPCClassification.Rare,
     npcID = 126887,
     pets = {
-        {
-            itemID = 153056, -- Grasping Manifestation
-            npcID = 128159, -- Grasping Manifestation
-        },
+        Pet.GraspingManifestation,
     },
     questID = 48709, -- Unknown
     vignetteID = 2242,
@@ -559,33 +504,15 @@ NPCs[126898] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     mounts = {
-        {
-            itemID = 152840, -- Scintillating Mana Ray
-            spellID = 253109, -- Scintillating Mana Ray
-        },
-        {
-            itemID = 152841, -- Felglow Mana Ray
-            spellID = 253108, -- Felglow Mana Ray
-        },
-        {
-            itemID = 152842, -- Vibrant Mana Ray
-            spellID = 253106, -- Vibrant Mana Ray
-        },
-        {
-            itemID = 152843, -- Darkspore Mana Ray
-            spellID = 235764, -- Darkspore Mana Ray
-        },
+        Mount.ScintillatingManaRay,
+        Mount.FelglowManaRay,
+        Mount.VibrantManaRay,
+        Mount.DarksporeManaRay,
     },
     npcID = 126898,
     pets = {
-        {
-            itemID = 153054, -- Docile Skyfin
-            npcID = 128157, -- Docile Skyfin
-        },
-        {
-            itemID = 153055, -- Fel-Afflicted Skyfin
-            npcID = 128158, -- Fel-Afflicted Skyfin
-        },
+        Pet.DocileSkyfin,
+        Pet.FelAfflictedSkyfin,
     },
     questID = 48712, -- Unknown
     vignetteID = 2253,
@@ -609,15 +536,9 @@ NPCs[126900] = {
     npcID = 126900,
     questID = 48718, -- Unknown
     toys = {
-        {
-            itemID = 153179, -- Blue Conservatory Scroll
-        },
-        {
-            itemID = 153180, -- Yellow Conservatory Scroll
-        },
-        {
-            itemID = 153181, -- Red Conservatory Scroll
-        },
+        Toy.BlueConservatoryScroll,
+        Toy.YellowConservatoryScroll,
+        Toy.RedConservatoryScroll,
     },
     vignetteID = 2249,
 }
@@ -648,10 +569,7 @@ NPCs[126912] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 152904, -- Acid Belcher
-            spellID = 253662, -- Acid Belcher
-        },
+        Mount.AcidBelcher,
     },
     npcID = 126912,
     questID = 48721, -- Unknown
@@ -711,9 +629,7 @@ NPCs[123464] = {
     npcID = 123464,
     questID = 48565, -- Unknown
     toys = {
-        {
-            itemID = 153124, -- Spire of Spite
-        },
+        Toy.SpireOfSpite,
     },
     vignetteID = 2201,
 }
@@ -795,33 +711,15 @@ NPCs[126419] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     mounts = {
-        {
-            itemID = 152840, -- Scintillating Mana Ray
-            spellID = 253109, -- Scintillating Mana Ray
-        },
-        {
-            itemID = 152841, -- Felglow Mana Ray
-            spellID = 253108, -- Felglow Mana Ray
-        },
-        {
-            itemID = 152842, -- Vibrant Mana Ray
-            spellID = 253106, -- Vibrant Mana Ray
-        },
-        {
-            itemID = 152843, -- Darkspore Mana Ray
-            spellID = 235764, -- Darkspore Mana Ray
-        },
+        Mount.ScintillatingManaRay,
+        Mount.FelglowManaRay,
+        Mount.VibrantManaRay,
+        Mount.DarksporeManaRay,
     },
     npcID = 126419,
     pets = {
-        {
-            itemID = 153054, -- Docile Skyfin
-            npcID = 128157, -- Docile Skyfin
-        },
-        {
-            itemID = 153055, -- Fel-Afflicted Skyfin
-            npcID = 128158, -- Fel-Afflicted Skyfin
-        },
+        Pet.DocileSkyfin,
+        Pet.FelAfflictedSkyfin,
     },
     questID = 48667, -- Unknown
     vignetteID = 2229,

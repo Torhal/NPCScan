@@ -8,6 +8,9 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Pet = private.Enum.Pet
+local Toy = private.Enum.Toy
+
 --------------------------------------------------------------------------------
 ---- Azsuna (630)
 --------------------------------------------------------------------------------
@@ -16,10 +19,10 @@ NPCs[89016] = {
     --------------------------------------------------------------------------------
     ---- Ravyn-Drath
     --------------------------------------------------------------------------------
-    achievementQuestID = 37537, -- Ravyn-Drath
+    achievementQuestID = 37537, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 89016,
-    questID = 37537, -- Ravyn-Drath
+    questID = 37537, -- Unknown
     vignetteID = 636,
 }
 
@@ -29,7 +32,7 @@ NPCs[89650] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 89650,
-    questID = 37726, -- Valiyaka the Stormbringer
+    questID = 37726, -- Unknown
     vignetteID = 677,
 }
 
@@ -39,7 +42,7 @@ NPCs[89816] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 89816,
-    questID = 37820, -- Hatecoil Reinforcements
+    questID = 37820, -- Unknown
     vignetteID = 678,
 }
 
@@ -49,7 +52,7 @@ NPCs[89846] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 89846,
-    questID = 37821, -- Captain Volo'ren
+    questID = 37821, -- Unknown
     vignetteID = 679,
 }
 
@@ -59,7 +62,7 @@ NPCs[89850] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 89850,
-    questID = 37822, -- The Oracle
+    questID = 37822, -- Unknown
     vignetteID = 680,
 }
 
@@ -69,7 +72,7 @@ NPCs[89865] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 89865,
-    questID = 37823, -- Mrrgrl the Tide Reaver
+    questID = 37823, -- Unknown
     vignetteID = 681,
 }
 
@@ -79,7 +82,7 @@ NPCs[89884] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 89884,
-    questID = 37824, -- Flog the Captain-Eater
+    questID = 37824, -- Unknown
     vignetteID = 682,
 }
 
@@ -90,7 +93,7 @@ NPCs[90057] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 90057,
-    questID = 37869, -- Daggerbeak
+    questID = 37869, -- Unknown
     vignetteID = 686,
 }
 
@@ -100,7 +103,7 @@ NPCs[90164] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90164,
-    questID = 37909, -- Warbringer Mox'na
+    questID = 37909, -- Unknown
     vignetteID = 692,
 }
 
@@ -110,7 +113,7 @@ NPCs[90173] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90173,
-    questID = 37909, -- Warbringer Mox'na
+    questID = 37909, -- Unknown
     vignetteID = 692,
 }
 
@@ -120,7 +123,7 @@ NPCs[90217] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 90217,
-    questID = 37928, -- Normantis the Deposed
+    questID = 37928, -- Unknown
     vignetteID = 693,
 }
 
@@ -128,10 +131,10 @@ NPCs[90244] = {
     --------------------------------------------------------------------------------
     ---- Arcavellus
     --------------------------------------------------------------------------------
-    achievementQuestID = 37932, -- Unbound Rift
+    achievementQuestID = 37932, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 90244,
-    questID = 37932, -- Unbound Rift
+    questID = 37932, -- Unknown
     vignetteID = 694,
 }
 
@@ -139,10 +142,10 @@ NPCs[90505] = {
     --------------------------------------------------------------------------------
     ---- Syphonus
     --------------------------------------------------------------------------------
-    achievementQuestID = 37989, -- Syphonus
+    achievementQuestID = 37989, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 90505,
-    questID = 37989, -- Syphonus
+    questID = 37989, -- Unknown
     vignetteID = 697,
 }
 
@@ -150,10 +153,10 @@ NPCs[90803] = {
     --------------------------------------------------------------------------------
     ---- Infernal Lord
     --------------------------------------------------------------------------------
-    achievementQuestID = 38037, -- Cache of Infernals
+    achievementQuestID = 38037, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 90803,
-    questID = 38037, -- Cache of Infernals
+    questID = 38037, -- Unknown
     vignetteID = 707,
 }
 
@@ -164,7 +167,7 @@ NPCs[90901] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 90901,
-    questID = 38061, -- Pridelord Meowl
+    questID = 38061, -- Unknown
     vignetteID = 716,
 }
 
@@ -172,10 +175,10 @@ NPCs[91100] = {
     --------------------------------------------------------------------------------
     ---- Brogozog
     --------------------------------------------------------------------------------
-    achievementQuestID = 38212, -- Brogozog
+    achievementQuestID = 38212, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 91100,
-    questID = 38212, -- Brogozog
+    questID = 38212, -- Unknown
     vignetteID = 720,
 }
 
@@ -185,7 +188,7 @@ NPCs[91113] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91113,
-    questID = 38217, -- Tide Behemoth
+    questID = 38217, -- Unknown
     vignetteID = -1,
 }
 
@@ -195,7 +198,7 @@ NPCs[91114] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91114,
-    questID = 38217, -- Tide Behemoth
+    questID = 38217, -- Unknown
     vignetteID = -1,
 }
 
@@ -203,10 +206,10 @@ NPCs[91115] = {
     --------------------------------------------------------------------------------
     ---- Tide Behemoth
     --------------------------------------------------------------------------------
-    achievementQuestID = 38217, -- Tide Behemoth
+    achievementQuestID = 38217, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 91115,
-    questID = 38217, -- Tide Behemoth
+    questID = 38217, -- Unknown
     vignetteID = 721,
 }
 
@@ -216,7 +219,7 @@ NPCs[91187] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91187,
-    questID = 38238, -- Beacher
+    questID = 38238, -- Unknown
     vignetteID = 723,
 }
 
@@ -226,7 +229,7 @@ NPCs[91289] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91289,
-    questID = 38268, -- Darkbane
+    questID = 38268, -- Unknown
     vignetteID = 731,
 }
 
@@ -234,10 +237,10 @@ NPCs[91579] = {
     --------------------------------------------------------------------------------
     ---- Doomlord Kazrok
     --------------------------------------------------------------------------------
-    achievementQuestID = 38352, -- Kazrok
+    achievementQuestID = 38352, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 91579,
-    questID = 38352, -- Kazrok
+    questID = 38352, -- Unknown
     vignetteID = 737,
 }
 
@@ -247,7 +250,7 @@ NPCs[93622] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 93622,
-    questID = 45516, -- Mortiferous
+    questID = 45516, -- Unknown
     vignetteID = 1840,
 }
 
@@ -277,7 +280,7 @@ NPCs[101596] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 101596,
-    questID = 40766, -- Charfeather
+    questID = 40766, -- Unknown
     vignetteID = 1233,
 }
 
@@ -287,7 +290,7 @@ NPCs[102064] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 102064,
-    questID = 44035, -- Torrentius
+    questID = 44035, -- Unknown
     vignetteID = 1613,
 }
 
@@ -306,7 +309,7 @@ NPCs[103975] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 103975,
-    questID = 43957, -- Jade Darkhaven
+    questID = 43957, -- Unknown
     vignetteID = 1605,
 }
 
@@ -314,10 +317,10 @@ NPCs[105938] = {
     --------------------------------------------------------------------------------
     ---- Felwing
     --------------------------------------------------------------------------------
-    achievementQuestID = 42069, -- Felbats
+    achievementQuestID = 42069, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 105938,
-    questID = 42069, -- Felbats
+    questID = 42069, -- Unknown
     vignetteID = 1299,
 }
 
@@ -327,7 +330,7 @@ NPCs[106990] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 106990,
-    questID = 42221, -- Chief Bitterbrine
+    questID = 42221, -- Unknown
     vignetteID = 1326,
 }
 
@@ -337,7 +340,7 @@ NPCs[107105] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 107105,
-    questID = 44670, -- Broodmother Lizax
+    questID = 44670, -- Unknown
     vignetteID = 1688,
 }
 
@@ -345,10 +348,10 @@ NPCs[107113] = {
     --------------------------------------------------------------------------------
     ---- Vorthax
     --------------------------------------------------------------------------------
-    achievementQuestID = 42280, -- Vorthax
+    achievementQuestID = 42280, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 107113,
-    questID = 42280, -- Vorthax
+    questID = 42280, -- Unknown
     vignetteID = 1337,
 }
 
@@ -358,7 +361,7 @@ NPCs[107127] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 107127,
-    questID = 42450, -- Brawlgoth
+    questID = 42450, -- Unknown
     vignetteID = 1348,
 }
 
@@ -368,7 +371,7 @@ NPCs[107136] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 107136,
-    questID = 42286, -- Houndmaster Stroxis
+    questID = 42286, -- Unknown
     vignetteID = 1351,
 }
 
@@ -378,7 +381,7 @@ NPCs[107169] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 107169,
-    questID = 42286, -- Houndmaster Stroxis
+    questID = 42286, -- Unknown
     vignetteID = 1351,
 }
 
@@ -388,7 +391,7 @@ NPCs[107170] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 107170,
-    questID = 42286, -- Houndmaster Stroxis
+    questID = 42286, -- Unknown
     vignetteID = 1351,
 }
 
@@ -398,7 +401,7 @@ NPCs[107266] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 107266,
-    questID = 44673, -- Commander Soraax
+    questID = 44673, -- Unknown
     vignetteID = 1690,
 }
 
@@ -406,10 +409,10 @@ NPCs[107269] = {
     --------------------------------------------------------------------------------
     ---- Inquisitor Tivos
     --------------------------------------------------------------------------------
-    achievementQuestID = 42376, -- Inquisitor Tivos
+    achievementQuestID = 42376, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 107269,
-    questID = 42376, -- Inquisitor Tivos
+    questID = 42376, -- Unknown
     vignetteID = 1367,
 }
 
@@ -419,7 +422,7 @@ NPCs[107327] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 107327,
-    questID = 42417, -- Bilebrain
+    questID = 42417, -- Unknown
     vignetteID = 1370,
 }
 
@@ -427,10 +430,10 @@ NPCs[107657] = {
     --------------------------------------------------------------------------------
     ---- Arcanist Shal'iman
     --------------------------------------------------------------------------------
-    achievementQuestID = 42505, -- Arcanist Shal'iman
+    achievementQuestID = 42505, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 107657,
-    questID = 42505, -- Arcanist Shal'iman
+    questID = 42505, -- Unknown
     vignetteID = 1378,
 }
 
@@ -440,7 +443,7 @@ NPCs[108136] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 108136,
-    questID = 44671, -- The Muscle
+    questID = 44671, -- Unknown
     vignetteID = 1689,
 }
 
@@ -459,7 +462,7 @@ NPCs[108255] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 108255,
-    questID = 42699, -- Coura, Master of Arcana
+    questID = 42699, -- Unknown
     vignetteID = 1410,
 }
 
@@ -489,7 +492,7 @@ NPCs[109504] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109504,
-    questID = 44108, -- Ragemaw
+    questID = 44108, -- Unknown
     vignetteID = 1636,
 }
 
@@ -499,7 +502,7 @@ NPCs[109575] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109575,
-    questID = 45515, -- Valakar the Thirsty
+    questID = 45515, -- Unknown
     vignetteID = 1839,
 }
 
@@ -509,7 +512,7 @@ NPCs[109584] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109584,
-    questID = 45499, -- Fjordun
+    questID = 45499, -- Unknown
     vignetteID = 1823,
 }
 
@@ -520,7 +523,7 @@ NPCs[109594] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 109594,
-    questID = 45497, -- Stormfeather
+    questID = 45497, -- Unknown
     vignetteID = 1822,
 }
 
@@ -530,7 +533,7 @@ NPCs[109620] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109620,
-    questID = 45496, -- The Whisperer
+    questID = 45496, -- Unknown
     vignetteID = 1821,
 }
 
@@ -540,7 +543,7 @@ NPCs[109630] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109630,
-    questID = 45495, -- Immolian
+    questID = 45495, -- Unknown
     vignetteID = 1820,
 }
 
@@ -550,7 +553,7 @@ NPCs[109641] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109641,
-    questID = 45494, -- Arcanor Prime
+    questID = 45494, -- Unknown
     vignetteID = 1819,
 }
 
@@ -560,7 +563,7 @@ NPCs[109653] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109653,
-    questID = 45492, -- Marblub the Massive
+    questID = 45492, -- Unknown
     vignetteID = 1817,
 }
 
@@ -570,7 +573,7 @@ NPCs[109677] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109677,
-    questID = 45491, -- Chief Treasurer Jabrill
+    questID = 45491, -- Unknown
     vignetteID = 1816,
 }
 
@@ -581,7 +584,7 @@ NPCs[109702] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 109702,
-    questID = 45489, -- Deepclaw
+    questID = 45489, -- Unknown
     vignetteID = 1814,
 }
 
@@ -589,11 +592,11 @@ NPCs[110824] = {
     --------------------------------------------------------------------------------
     ---- Tideclaw
     --------------------------------------------------------------------------------
-    achievementQuestID = 43542, -- Vignette: Tideclaw
+    achievementQuestID = 43542, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 110824,
-    questID = 43542, -- Vignette: Tideclaw
+    questID = 43542, -- Unknown
     vignetteID = 1510,
 }
 
@@ -603,7 +606,7 @@ NPCs[111434] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 111434,
-    questID = 44039, -- Sea King Tidross
+    questID = 44039, -- Unknown
     vignetteID = 1614,
 }
 
@@ -633,7 +636,7 @@ NPCs[111939] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 111939,
-    questID = 43956, -- Lysanis Shadesoul
+    questID = 43956, -- Unknown
     vignetteID = 1604,
 }
 
@@ -641,11 +644,11 @@ NPCs[112636] = {
     --------------------------------------------------------------------------------
     ---- Sinister Leyrunner
     --------------------------------------------------------------------------------
-    achievementQuestID = 44081, -- Treacherous Leyrunners
+    achievementQuestID = 44081, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 112636,
-    questID = 44081, -- Treacherous Leyrunners
+    questID = 44081, -- Unknown
     vignetteID = 1623,
 }
 
@@ -653,11 +656,11 @@ NPCs[112637] = {
     --------------------------------------------------------------------------------
     ---- Devious Sunrunner
     --------------------------------------------------------------------------------
-    achievementQuestID = 44081, -- Treacherous Leyrunners
+    achievementQuestID = 44081, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 112637,
-    questID = 44081, -- Treacherous Leyrunners
+    questID = 44081, -- Unknown
     vignetteID = 1623,
 }
 
@@ -847,7 +850,7 @@ NPCs[118993] = {
 
 NPCs[119629] = {
     --------------------------------------------------------------------------------
-    ---- Lord Hel'Nurath
+    ---- Lord Hel'nurath
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 119629,
@@ -1278,7 +1281,7 @@ NPCs[111573] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 111573,
-    questID = 45479, -- Kosumoth the Hungering
+    questID = 45479, -- Unknown
     vignetteID = 1808,
 }
 
@@ -1314,11 +1317,11 @@ NPCs[92040] = {
     --------------------------------------------------------------------------------
     ---- Fenri
     --------------------------------------------------------------------------------
-    achievementQuestID = 38461, -- Vignette: Guarms Mate (Fenri)
+    achievementQuestID = 38461, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 92040,
-    questID = 38461, -- Vignette: Guarms Mate (Fenri)
+    questID = 38461, -- Unknown
     vignetteID = 773,
 }
 
@@ -1326,10 +1329,10 @@ NPCs[97630] = {
     --------------------------------------------------------------------------------
     ---- Soulthirster
     --------------------------------------------------------------------------------
-    achievementQuestID = 39870, -- Vignette: Soulthirster
+    achievementQuestID = 39870, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 97630,
-    questID = 39870, -- Vignette: Soulthirster
+    questID = 39870, -- Unknown
     vignetteID = 1041,
 }
 
@@ -1354,7 +1357,7 @@ NPCs[94877] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 94877,
-    questID = 39235, -- Buba
+    questID = 39235, -- Unknown
     vignetteID = 954,
 }
 
@@ -1364,7 +1367,7 @@ NPCs[95204] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 95204,
-    questID = 39435, -- Oubdob da Smasher
+    questID = 39435, -- Unknown
     vignetteID = 970,
 }
 
@@ -1372,10 +1375,10 @@ NPCs[95872] = {
     --------------------------------------------------------------------------------
     ---- Skullhat
     --------------------------------------------------------------------------------
-    achievementQuestID = 39465, -- Skywhisker Taskmaster
+    achievementQuestID = 39465, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 95872,
-    questID = 39465, -- Skywhisker Taskmaster
+    questID = 39465, -- Unknown
     vignetteID = 973,
 }
 
@@ -1385,7 +1388,7 @@ NPCs[96072] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 96072,
-    questID = 45508, -- Durguth
+    questID = 45508, -- Unknown
     vignetteID = -1,
 }
 
@@ -1393,15 +1396,13 @@ NPCs[96410] = {
     --------------------------------------------------------------------------------
     ---- Majestic Elderhorn
     --------------------------------------------------------------------------------
-    achievementQuestID = 39646, -- Albino Elderhorn
+    achievementQuestID = 39646, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 96410,
-    questID = 39646, -- Albino Elderhorn
+    questID = 39646, -- Unknown
     toys = {
-        {
-            itemID = 131900, -- Majestic Elderhorn Hoof
-        },
+        Toy.MajesticElderhornHoof,
     },
     vignetteID = 995,
 }
@@ -1410,10 +1411,10 @@ NPCs[96590] = {
     --------------------------------------------------------------------------------
     ---- Gurbog da Basher
     --------------------------------------------------------------------------------
-    achievementQuestID = 40347, -- Gurbog da Basher
+    achievementQuestID = 40347, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 96590,
-    questID = 40347, -- Gurbog da Basher
+    questID = 40347, -- Unknown
     vignetteID = 1126,
 }
 
@@ -1421,10 +1422,10 @@ NPCs[96621] = {
     --------------------------------------------------------------------------------
     ---- Mellok, Son of Torok
     --------------------------------------------------------------------------------
-    achievementQuestID = 40242, -- Mellok, Son of Torok
+    achievementQuestID = 40242, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 96621,
-    questID = 40242, -- Mellok, Son of Torok
+    questID = 40242, -- Unknown
     vignetteID = 1111,
 }
 
@@ -1432,14 +1433,12 @@ NPCs[97093] = {
     --------------------------------------------------------------------------------
     ---- Shara Felbreath
     --------------------------------------------------------------------------------
-    achievementQuestID = 39762, -- Feltotem Warlock
+    achievementQuestID = 39762, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 97093,
-    questID = 39762, -- Feltotem Warlock
+    questID = 39762, -- Unknown
     toys = {
-        {
-            itemID = 131900, -- Majestic Elderhorn Hoof
-        },
+        Toy.MajesticElderhornHoof,
     },
     vignetteID = 999,
 }
@@ -1448,10 +1447,10 @@ NPCs[97102] = {
     --------------------------------------------------------------------------------
     ---- Ram'Pag
     --------------------------------------------------------------------------------
-    achievementQuestID = 39766, -- Treasure Worm
+    achievementQuestID = 39766, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 97102,
-    questID = 39766, -- Treasure Worm
+    questID = 39766, -- Unknown
     vignetteID = 1000,
 }
 
@@ -1459,16 +1458,13 @@ NPCs[97203] = {
     --------------------------------------------------------------------------------
     ---- Tenpak Flametotem
     --------------------------------------------------------------------------------
-    achievementQuestID = 39782, -- The Exiled Shaman
+    achievementQuestID = 39782, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 97203,
     pets = {
-        {
-            itemID = 129175, -- Crispin
-            npcID = 98077, -- Crispin
-        },
+        Pet.Crispin,
     },
-    questID = 39782, -- The Exiled Shaman
+    questID = 39782, -- Unknown
     vignetteID = 1001,
 }
 
@@ -1476,11 +1472,11 @@ NPCs[97220] = {
     --------------------------------------------------------------------------------
     ---- Arru
     --------------------------------------------------------------------------------
-    achievementQuestID = 39784, -- Beastmaster Pao'lek
+    achievementQuestID = 39784, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 97220,
-    questID = 39784, -- Beastmaster Pao'lek
+    questID = 39784, -- Unknown
     vignetteID = 1003,
 }
 
@@ -1488,10 +1484,10 @@ NPCs[97326] = {
     --------------------------------------------------------------------------------
     ---- Hartli the Snatcher
     --------------------------------------------------------------------------------
-    achievementQuestID = 39802, -- Hartli the Snatcher
+    achievementQuestID = 39802, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 97326,
-    questID = 39802, -- Hartli the Snatcher
+    questID = 39802, -- Unknown
     vignetteID = 1004,
 }
 
@@ -1499,11 +1495,11 @@ NPCs[97345] = {
     --------------------------------------------------------------------------------
     ---- Crawshuk the Hungry
     --------------------------------------------------------------------------------
-    achievementQuestID = 39806, -- Crawshuk the Hungry
+    achievementQuestID = 39806, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 97345,
-    questID = 39806, -- Crawshuk the Hungry
+    questID = 39806, -- Unknown
     vignetteID = 1006,
 }
 
@@ -1511,11 +1507,11 @@ NPCs[97449] = {
     --------------------------------------------------------------------------------
     ---- Bristlemaul
     --------------------------------------------------------------------------------
-    achievementQuestID = 40405, -- Bristlemaul
+    achievementQuestID = 40405, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 97449,
-    questID = 40405, -- Bristlemaul
+    questID = 40405, -- Unknown
     vignetteID = 1148,
 }
 
@@ -1523,10 +1519,10 @@ NPCs[97593] = {
     --------------------------------------------------------------------------------
     ---- Mynta Talonscreech
     --------------------------------------------------------------------------------
-    achievementQuestID = 39866, -- Scout Harefoot
+    achievementQuestID = 39866, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 97593,
-    questID = 39866, -- Scout Harefoot
+    questID = 39866, -- Unknown
     vignetteID = 1031,
 }
 
@@ -1534,7 +1530,7 @@ NPCs[97653] = {
     --------------------------------------------------------------------------------
     ---- Taurson
     --------------------------------------------------------------------------------
-    achievementQuestID = 39872, -- The Beastly Boxer
+    achievementQuestID = 39872, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 97653,
     questID = 40609, -- Unknown
@@ -1547,7 +1543,7 @@ NPCs[97793] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97793,
-    questID = 39963, -- Abandoned Fishing Pole
+    questID = 39963, -- Unknown
     vignetteID = 1047,
 }
 
@@ -1555,11 +1551,11 @@ NPCs[97928] = {
     --------------------------------------------------------------------------------
     ---- Tamed Coralback
     --------------------------------------------------------------------------------
-    achievementQuestID = 39994, -- Crab Rider Grmlrml
+    achievementQuestID = 39994, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 97928,
-    questID = 39994, -- Crab Rider Grmlrml
+    questID = 39994, -- Unknown
     vignetteID = 1056,
 }
 
@@ -1567,10 +1563,10 @@ NPCs[97933] = {
     --------------------------------------------------------------------------------
     ---- Crab Rider Grmlrml
     --------------------------------------------------------------------------------
-    achievementQuestID = 39994, -- Crab Rider Grmlrml
+    achievementQuestID = 39994, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 97933,
-    questID = 39994, -- Crab Rider Grmlrml
+    questID = 39994, -- Unknown
     vignetteID = 1056,
 }
 
@@ -1578,10 +1574,10 @@ NPCs[98024] = {
     --------------------------------------------------------------------------------
     ---- Luggut the Eggeater
     --------------------------------------------------------------------------------
-    achievementQuestID = 40406, -- Luggut the Eggeater
+    achievementQuestID = 40406, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 98024,
-    questID = 40406, -- Luggut the Eggeater
+    questID = 40406, -- Unknown
     vignetteID = 1147,
 }
 
@@ -1589,10 +1585,10 @@ NPCs[98299] = {
     --------------------------------------------------------------------------------
     ---- Bodash the Hoarder
     --------------------------------------------------------------------------------
-    achievementQuestID = 40084, -- Zugdug the Hoarder
+    achievementQuestID = 40084, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 98299,
-    questID = 40084, -- Zugdug the Hoarder
+    questID = 40084, -- Unknown
     vignetteID = 1073,
 }
 
@@ -1600,10 +1596,10 @@ NPCs[98311] = {
     --------------------------------------------------------------------------------
     ---- Mrrklr
     --------------------------------------------------------------------------------
-    achievementQuestID = 40096, -- Mrrklr
+    achievementQuestID = 40096, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 98311,
-    questID = 40096, -- Mrrklr
+    questID = 40096, -- Unknown
     vignetteID = 1084,
 }
 
@@ -1611,11 +1607,11 @@ NPCs[98890] = {
     --------------------------------------------------------------------------------
     ---- Slumber
     --------------------------------------------------------------------------------
-    achievementQuestID = 40175, -- Sleeping Bear
+    achievementQuestID = 40175, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 98890,
-    questID = 40175, -- Sleeping Bear
+    questID = 40175, -- Unknown
     vignetteID = 1106,
 }
 
@@ -1645,7 +1641,7 @@ NPCs[99929] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 99929,
-    questID = 41126, -- 7.0 Suramar - Vignette: Flotsam - twh
+    questID = 41126, -- Unknown
     vignetteID = 1245,
 }
 
@@ -1653,10 +1649,10 @@ NPCs[100230] = {
     --------------------------------------------------------------------------------
     ---- "Sure-Shot" Arnie
     --------------------------------------------------------------------------------
-    achievementQuestID = 40413, -- Amateur Hunters
+    achievementQuestID = 40413, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 100230,
-    questID = 40413, -- Amateur Hunters
+    questID = 40413, -- Unknown
     vignetteID = 1150,
 }
 
@@ -1664,10 +1660,10 @@ NPCs[100231] = {
     --------------------------------------------------------------------------------
     ---- Dargok Thunderuin
     --------------------------------------------------------------------------------
-    achievementQuestID = 40413, -- Amateur Hunters
+    achievementQuestID = 40413, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 100231,
-    questID = 40413, -- Amateur Hunters
+    questID = 40413, -- Unknown
     vignetteID = 1150,
 }
 
@@ -1675,10 +1671,10 @@ NPCs[100232] = {
     --------------------------------------------------------------------------------
     ---- Ryael Dawndrifter
     --------------------------------------------------------------------------------
-    achievementQuestID = 40413, -- Amateur Hunters
+    achievementQuestID = 40413, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 100232,
-    questID = 40413, -- Amateur Hunters
+    questID = 40413, -- Unknown
     vignetteID = 1150,
 }
 
@@ -1686,10 +1682,10 @@ NPCs[100302] = {
     --------------------------------------------------------------------------------
     ---- Puck
     --------------------------------------------------------------------------------
-    achievementQuestID = 40423, -- Unethical Adventurers
+    achievementQuestID = 40423, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 100302,
-    questID = 40423, -- Unethical Adventurers
+    questID = 40423, -- Unknown
     vignetteID = 724,
 }
 
@@ -1697,10 +1693,10 @@ NPCs[100303] = {
     --------------------------------------------------------------------------------
     ---- Zenobia
     --------------------------------------------------------------------------------
-    achievementQuestID = 40423, -- Unethical Adventurers
+    achievementQuestID = 40423, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 100303,
-    questID = 40423, -- Unethical Adventurers
+    questID = 40423, -- Unknown
     vignetteID = 724,
 }
 
@@ -1708,10 +1704,10 @@ NPCs[100495] = {
     --------------------------------------------------------------------------------
     ---- Devouring Darkness
     --------------------------------------------------------------------------------
-    achievementQuestID = 40414, -- Devouring Darkness
+    achievementQuestID = 40414, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 100495,
-    questID = 40414, -- Devouring Darkness
+    questID = 40414, -- Unknown
     vignetteID = 1218,
 }
 
@@ -1719,11 +1715,11 @@ NPCs[101077] = {
     --------------------------------------------------------------------------------
     ---- Sekhan
     --------------------------------------------------------------------------------
-    achievementQuestID = 40681, -- Snarf
+    achievementQuestID = 40681, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 101077,
-    questID = 40681, -- Snarf
+    questID = 40681, -- Unknown
     vignetteID = 1221,
 }
 
@@ -1733,7 +1729,7 @@ NPCs[101649] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 101649,
-    questID = 40773, -- Bloodshard
+    questID = 40773, -- Unknown
     vignetteID = 1673,
 }
 
@@ -1744,7 +1740,7 @@ NPCs[102863] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 102863,
-    questID = 41042, -- Champion Chomper
+    questID = 41042, -- Unknown
     vignetteID = 1240,
 }
 
@@ -1755,7 +1751,7 @@ NPCs[104481] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 104481,
-    questID = 45514, -- Ala'washte
+    questID = 45514, -- Unknown
     vignetteID = 1838,
 }
 
@@ -1765,7 +1761,7 @@ NPCs[104484] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 104484,
-    questID = 45511, -- Olokk the Shipbreaker
+    questID = 45511, -- Unknown
     vignetteID = 1835,
 }
 
@@ -1775,7 +1771,7 @@ NPCs[104513] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 104513,
-    questID = 45513, -- Defilia
+    questID = 45513, -- Unknown
     vignetteID = 1837,
 }
 
@@ -1785,7 +1781,7 @@ NPCs[104517] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 104517,
-    questID = 45512, -- Mawat'aki
+    questID = 45512, -- Unknown
     vignetteID = 1836,
 }
 
@@ -1795,7 +1791,7 @@ NPCs[104524] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 104524,
-    questID = 45510, -- Ormagrogg
+    questID = 45510, -- Unknown
     vignetteID = 1834,
 }
 
@@ -1813,10 +1809,10 @@ NPCs[109498] = {
     --------------------------------------------------------------------------------
     ---- Xaander
     --------------------------------------------------------------------------------
-    achievementQuestID = 40423, -- Unethical Adventurers
+    achievementQuestID = 40423, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 109498,
-    questID = 40423, -- Unethical Adventurers
+    questID = 40423, -- Unknown
     vignetteID = 724,
 }
 
@@ -1824,10 +1820,10 @@ NPCs[109500] = {
     --------------------------------------------------------------------------------
     ---- Jak
     --------------------------------------------------------------------------------
-    achievementQuestID = 40423, -- Unethical Adventurers
+    achievementQuestID = 40423, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 109500,
-    questID = 40423, -- Unethical Adventurers
+    questID = 40423, -- Unknown
     vignetteID = 724,
 }
 
@@ -1835,10 +1831,10 @@ NPCs[109501] = {
     --------------------------------------------------------------------------------
     ---- Darkful
     --------------------------------------------------------------------------------
-    achievementQuestID = 40423, -- Unethical Adventurers
+    achievementQuestID = 40423, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 109501,
-    questID = 40423, -- Unethical Adventurers
+    questID = 40423, -- Unknown
     vignetteID = 724,
 }
 
@@ -1872,7 +1868,7 @@ NPCs[97057] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97057,
-    questID = 40233, -- The Brood Queen's Court: Overseer Brutarg
+    questID = 40233, -- Unknown
     vignetteID = 1109,
 }
 
@@ -1882,7 +1878,7 @@ NPCs[97058] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97058,
-    questID = 40231, -- The Brood Queen's Court: Count Nefarious
+    questID = 40231, -- Unknown
     vignetteID = 1107,
 }
 
@@ -1892,7 +1888,7 @@ NPCs[97059] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97059,
-    questID = 40232, -- The Brood Queen's Court: King Voras
+    questID = 40232, -- Unknown
     vignetteID = 1108,
 }
 
@@ -1902,7 +1898,7 @@ NPCs[97370] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97370,
-    questID = 40234, -- The Brood Queen's Court: General Volroth
+    questID = 40234, -- Unknown
     vignetteID = 1110,
 }
 
@@ -1914,10 +1910,10 @@ NPCs[90139] = {
     --------------------------------------------------------------------------------
     ---- Inquisitor Ernstenbok
     --------------------------------------------------------------------------------
-    achievementQuestID = 37908, -- Inquisitor Ernstenbok
+    achievementQuestID = 37908, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 90139,
-    questID = 37908, -- Inquisitor Ernstenbok
+    questID = 37908, -- Unknown
     vignetteID = 691,
 }
 
@@ -1925,10 +1921,10 @@ NPCs[91529] = {
     --------------------------------------------------------------------------------
     ---- Glimar Ironfist
     --------------------------------------------------------------------------------
-    achievementQuestID = 38333, -- Vignette: Drake Wrestler
+    achievementQuestID = 38333, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 91529,
-    questID = 38333, -- Vignette: Drake Wrestler
+    questID = 38333, -- Unknown
     vignetteID = 735,
 }
 
@@ -1938,7 +1934,7 @@ NPCs[91780] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 91780,
-    questID = 38422, -- Makrura Wave Event
+    questID = 38422, -- Unknown
     vignetteID = 762,
 }
 
@@ -1946,14 +1942,11 @@ NPCs[91795] = {
     --------------------------------------------------------------------------------
     ---- Stormwing Matriarch
     --------------------------------------------------------------------------------
-    achievementQuestID = 38423, -- Vignette: Stormdrake Matriarch
+    achievementQuestID = 38423, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 91795,
     pets = {
-        {
-            itemID = 129208, -- Stormborne Whelpling
-            npcID = 97205, -- Stormborne Whelpling
-        },
+        Pet.StormborneWhelpling,
     },
     questID = 40939, -- Unknown
     vignetteID = 763,
@@ -1963,10 +1956,10 @@ NPCs[91803] = {
     --------------------------------------------------------------------------------
     ---- Fathnyr
     --------------------------------------------------------------------------------
-    achievementQuestID = 38425, -- Vignette: Fel Thorignir
+    achievementQuestID = 38425, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 91803,
-    questID = 38425, -- Vignette: Fel Thorignir
+    questID = 38425, -- Unknown
     vignetteID = 765,
 }
 
@@ -1974,10 +1967,10 @@ NPCs[91874] = {
     --------------------------------------------------------------------------------
     ---- Bladesquall
     --------------------------------------------------------------------------------
-    achievementQuestID = 38431, -- Vignette: Bladesquall
+    achievementQuestID = 38431, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 91874,
-    questID = 38431, -- Vignette: Bladesquall
+    questID = 38431, -- Unknown
     vignetteID = 769,
 }
 
@@ -1985,14 +1978,12 @@ NPCs[91892] = {
     --------------------------------------------------------------------------------
     ---- Thane Irglov the Merciless
     --------------------------------------------------------------------------------
-    achievementQuestID = 38424, -- Thane's Mead Hall
+    achievementQuestID = 38424, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 91892,
-    questID = 38424, -- Thane's Mead Hall
+    questID = 38424, -- Unknown
     toys = {
-        {
-            itemID = 129113, -- Faintly Glowing Flagon of Mead
-        },
+        Toy.FaintlyGlowingFlagonOfMead,
     },
     vignetteID = 764,
 }
@@ -2001,10 +1992,10 @@ NPCs[92152] = {
     --------------------------------------------------------------------------------
     ---- Whitewater Typhoon
     --------------------------------------------------------------------------------
-    achievementQuestID = 38472, -- Whitewater Typhoon
+    achievementQuestID = 38472, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 92152,
-    questID = 38472, -- Whitewater Typhoon
+    questID = 38472, -- Unknown
     vignetteID = 779,
 }
 
@@ -2015,7 +2006,7 @@ NPCs[92590] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 92590,
-    questID = 38625, -- Hook & Sinker
+    questID = 38625, -- Unknown
     vignetteID = 824,
 }
 
@@ -2026,7 +2017,7 @@ NPCs[92591] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 92591,
-    questID = 38625, -- Hook & Sinker
+    questID = 38625, -- Unknown
     vignetteID = 824,
 }
 
@@ -2034,11 +2025,11 @@ NPCs[92599] = {
     --------------------------------------------------------------------------------
     ---- Bloodstalker Alpha
     --------------------------------------------------------------------------------
-    achievementQuestID = 38626, -- Worg Pack
+    achievementQuestID = 38626, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 92599,
-    questID = 38626, -- Worg Pack
+    questID = 38626, -- Unknown
     vignetteID = 825,
 }
 
@@ -2049,7 +2040,7 @@ NPCs[92604] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 92604,
-    questID = 38627, -- Worgen Stalkers (Horde Only)
+    questID = 38627, -- Unknown
     vignetteID = 826,
 }
 
@@ -2060,7 +2051,7 @@ NPCs[92609] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 92609,
-    questID = 38627, -- Worgen Stalkers (Horde Only)
+    questID = 38627, -- Unknown
     vignetteID = 826,
 }
 
@@ -2071,7 +2062,7 @@ NPCs[92611] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 92611,
-    questID = 38627, -- Worgen Stalkers (Horde Only)
+    questID = 38627, -- Unknown
     vignetteID = 826,
 }
 
@@ -2082,7 +2073,7 @@ NPCs[92613] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 92613,
-    questID = 38627, -- Worgen Stalkers (Horde Only)
+    questID = 38627, -- Unknown
     vignetteID = 826,
 }
 
@@ -2093,7 +2084,7 @@ NPCs[92626] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 92626,
-    questID = 38630, -- Horde Kill Squad (Alliance Only)
+    questID = 38630, -- Unknown
     vignetteID = 828,
 }
 
@@ -2104,7 +2095,7 @@ NPCs[92631] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 92631,
-    questID = 38630, -- Horde Kill Squad (Alliance Only)
+    questID = 38630, -- Unknown
     vignetteID = 828,
 }
 
@@ -2115,7 +2106,7 @@ NPCs[92633] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 92633,
-    questID = 38630, -- Horde Kill Squad (Alliance Only)
+    questID = 38630, -- Unknown
     vignetteID = 828,
 }
 
@@ -2126,7 +2117,7 @@ NPCs[92634] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 92634,
-    questID = 38630, -- Horde Kill Squad (Alliance Only)
+    questID = 38630, -- Unknown
     vignetteID = 828,
 }
 
@@ -2134,10 +2125,10 @@ NPCs[92682] = {
     --------------------------------------------------------------------------------
     ---- Helmouth Raider
     --------------------------------------------------------------------------------
-    achievementQuestID = 38642, -- Vrykul Longboat
+    achievementQuestID = 38642, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 92682,
-    questID = 38642, -- Vrykul Longboat
+    questID = 38642, -- Unknown
     vignetteID = 833,
 }
 
@@ -2145,10 +2136,10 @@ NPCs[92685] = {
     --------------------------------------------------------------------------------
     ---- Captain Brvet
     --------------------------------------------------------------------------------
-    achievementQuestID = 38642, -- Vrykul Longboat
+    achievementQuestID = 38642, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 92685,
-    questID = 38642, -- Vrykul Longboat
+    questID = 38642, -- Unknown
     vignetteID = 833,
 }
 
@@ -2156,10 +2147,10 @@ NPCs[92703] = {
     --------------------------------------------------------------------------------
     ---- Helmouth Raider
     --------------------------------------------------------------------------------
-    achievementQuestID = 38642, -- Vrykul Longboat
+    achievementQuestID = 38642, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 92703,
-    questID = 38642, -- Vrykul Longboat
+    questID = 38642, -- Unknown
     vignetteID = 833,
 }
 
@@ -2167,10 +2158,10 @@ NPCs[92751] = {
     --------------------------------------------------------------------------------
     ---- Ivory Sentinel
     --------------------------------------------------------------------------------
-    achievementQuestID = 39031, -- Vignette: Ivory Sentinel
+    achievementQuestID = 39031, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 92751,
-    questID = 39031, -- Vignette: Ivory Sentinel
+    questID = 39031, -- Unknown
     vignetteID = 897,
 }
 
@@ -2178,10 +2169,10 @@ NPCs[92763] = {
     --------------------------------------------------------------------------------
     ---- The Nameless King
     --------------------------------------------------------------------------------
-    achievementQuestID = 38685, -- The Nameless King
+    achievementQuestID = 38685, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 92763,
-    questID = 38685, -- The Nameless King
+    questID = 38685, -- Unknown
     vignetteID = 840,
 }
 
@@ -2192,7 +2183,7 @@ NPCs[92951] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 92951,
-    questID = 38712, -- Houndmaster Ely
+    questID = 38712, -- Unknown
     vignetteID = 847,
 }
 
@@ -2200,10 +2191,10 @@ NPCs[93166] = {
     --------------------------------------------------------------------------------
     ---- Tiptog the Lost
     --------------------------------------------------------------------------------
-    achievementQuestID = 38774, -- Lost Ettin
+    achievementQuestID = 38774, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 93166,
-    questID = 38774, -- Lost Ettin
+    questID = 38774, -- Unknown
     vignetteID = 867,
 }
 
@@ -2211,10 +2202,10 @@ NPCs[93371] = {
     --------------------------------------------------------------------------------
     ---- Mordvigbjorn
     --------------------------------------------------------------------------------
-    achievementQuestID = 38837, -- Vignette: Mordvigbjorn
+    achievementQuestID = 38837, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 93371,
-    questID = 38837, -- Vignette: Mordvigbjorn
+    questID = 38837, -- Unknown
     vignetteID = 877,
 }
 
@@ -2222,10 +2213,10 @@ NPCs[93401] = {
     --------------------------------------------------------------------------------
     ---- Urgev the Flayer
     --------------------------------------------------------------------------------
-    achievementQuestID = 38847, -- Vignette: Berserker
+    achievementQuestID = 38847, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 93401,
-    questID = 38847, -- Vignette: Berserker
+    questID = 38847, -- Unknown
     vignetteID = 879,
 }
 
@@ -2236,7 +2227,7 @@ NPCs[94313] = {
     classification = NPCClassification.Rare,
     factionGroup = "Alliance",
     npcID = 94313,
-    questID = 39048, -- Vignette: Demolitionist
+    questID = 39048, -- Unknown
     vignetteID = 900,
 }
 
@@ -2247,7 +2238,7 @@ NPCs[94347] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     npcID = 94347,
-    questID = 43343, -- Vignette: Dread-Rider Cortis
+    questID = 43343, -- Unknown
     vignetteID = 1496,
 }
 
@@ -2255,10 +2246,10 @@ NPCs[94413] = {
     --------------------------------------------------------------------------------
     ---- Isel the Hammer
     --------------------------------------------------------------------------------
-    achievementQuestID = 39120, -- Vignette: Shield Forger
+    achievementQuestID = 39120, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 94413,
-    questID = 39120, -- Vignette: Shield Forger
+    questID = 39120, -- Unknown
     vignetteID = 940,
 }
 
@@ -2266,10 +2257,10 @@ NPCs[98188] = {
     --------------------------------------------------------------------------------
     ---- Egyl the Enduring
     --------------------------------------------------------------------------------
-    achievementQuestID = 40068, -- 7.0 Stormheim - Vignette: Egyl the Enduring - twh
+    achievementQuestID = 40068, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 98188,
-    questID = 40068, -- 7.0 Stormheim - Vignette: Egyl the Enduring - twh
+    questID = 40068, -- Unknown
     vignetteID = 1065,
 }
 
@@ -2277,10 +2268,10 @@ NPCs[98268] = {
     --------------------------------------------------------------------------------
     ---- Tarben
     --------------------------------------------------------------------------------
-    achievementQuestID = 40081, -- 7.0 Stormheim - Vignette: Tarben - twh
+    achievementQuestID = 40081, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 98268,
-    questID = 40081, -- 7.0 Stormheim - Vignette: Tarben - twh
+    questID = 40081, -- Unknown
     vignetteID = 1071,
 }
 
@@ -2288,10 +2279,10 @@ NPCs[98421] = {
     --------------------------------------------------------------------------------
     ---- Kottr Vondyr
     --------------------------------------------------------------------------------
-    achievementQuestID = 40109, -- Vignette - Kottr Vondyr
+    achievementQuestID = 40109, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 98421,
-    questID = 40109, -- Vignette - Kottr Vondyr
+    questID = 40109, -- Unknown
     vignetteID = 1093,
 }
 
@@ -2299,10 +2290,10 @@ NPCs[98503] = {
     --------------------------------------------------------------------------------
     ---- Grrvrgull the Conqueror
     --------------------------------------------------------------------------------
-    achievementQuestID = 40113, -- Vignette: Grrvrgull the Conquerer
+    achievementQuestID = 40113, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 98503,
-    questID = 40113, -- Vignette: Grrvrgull the Conquerer
+    questID = 40113, -- Unknown
     vignetteID = 1095,
 }
 
@@ -2381,7 +2372,7 @@ NPCs[107487] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 107487,
-    questID = 42437, -- Vignette: Starbuck
+    questID = 42437, -- Unknown
     vignetteID = 1371,
 }
 
@@ -2399,10 +2390,10 @@ NPCs[107926] = {
     --------------------------------------------------------------------------------
     ---- Hannval the Butcher
     --------------------------------------------------------------------------------
-    achievementQuestID = 42591, -- Vignette - Hannval the Butcher
+    achievementQuestID = 42591, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 107926,
-    questID = 42591, -- Vignette - Hannval the Butcher
+    questID = 42591, -- Unknown
     vignetteID = 1400,
 }
 
@@ -2441,7 +2432,7 @@ NPCs[108827] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 108827,
-    questID = 45507, -- Fjorlag, the Grave's Chill
+    questID = 45507, -- Unknown
     vignetteID = 1831,
 }
 
@@ -2471,7 +2462,7 @@ NPCs[109113] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109113,
-    questID = 40067, -- 7.0 Stormheim - Vignette: Boulderfall - twh
+    questID = 40067, -- Unknown
     vignetteID = 1537,
 }
 
@@ -2519,10 +2510,10 @@ NPCs[110363] = {
     --------------------------------------------------------------------------------
     ---- Roteye
     --------------------------------------------------------------------------------
-    achievementQuestID = 43342, -- Vignette - Roteye
+    achievementQuestID = 43342, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 110363,
-    questID = 43342, -- Vignette - Roteye
+    questID = 43342, -- Unknown
     vignetteID = 1495,
 }
 
@@ -2562,10 +2553,10 @@ NPCs[99610] = {
     --------------------------------------------------------------------------------
     ---- Garvrulg
     --------------------------------------------------------------------------------
-    achievementQuestID = 40897, -- Garvrulg
+    achievementQuestID = 40897, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 99610,
-    questID = 40897, -- Garvrulg
+    questID = 40897, -- Unknown
     vignetteID = 1236,
 }
 
@@ -2573,10 +2564,10 @@ NPCs[99792] = {
     --------------------------------------------------------------------------------
     ---- Elfbane
     --------------------------------------------------------------------------------
-    achievementQuestID = 41319, -- Vignette: Elfbane
+    achievementQuestID = 41319, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 99792,
-    questID = 41319, -- Vignette: Elfbane
+    questID = 41319, -- Unknown
     vignetteID = 1263,
 }
 
@@ -2586,7 +2577,7 @@ NPCs[99899] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 99899,
-    questID = 44669, -- Vicious Whale Shark
+    questID = 44669, -- Unknown
     vignetteID = 1144,
 }
 
@@ -2594,10 +2585,10 @@ NPCs[100864] = {
     --------------------------------------------------------------------------------
     ---- Cora'kar
     --------------------------------------------------------------------------------
-    achievementQuestID = 41135, -- 7.0 Suramar - Vignette: Cora'kar - twh
+    achievementQuestID = 41135, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 100864,
-    questID = 41135, -- 7.0 Suramar - Vignette: Cora'kar - twh
+    questID = 41135, -- Unknown
     vignetteID = 1249,
 }
 
@@ -2605,10 +2596,10 @@ NPCs[102303] = {
     --------------------------------------------------------------------------------
     ---- Lieutenant Strathmar
     --------------------------------------------------------------------------------
-    achievementQuestID = 40905, -- Lieutenant Strathmar
+    achievementQuestID = 40905, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 102303,
-    questID = 40905, -- Lieutenant Strathmar
+    questID = 40905, -- Unknown
     vignetteID = 1239,
 }
 
@@ -2616,10 +2607,10 @@ NPCs[103183] = {
     --------------------------------------------------------------------------------
     ---- Rok'nash
     --------------------------------------------------------------------------------
-    achievementQuestID = 40680, -- 7.0 Suramar - Vignette: Rok'nash - twh
+    achievementQuestID = 40680, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 103183,
-    questID = 40680, -- 7.0 Suramar - Vignette: Rok'nash - twh
+    questID = 40680, -- Unknown
     vignetteID = 1220,
 }
 
@@ -2629,7 +2620,7 @@ NPCs[103203] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 103203,
-    questID = 41134, -- 7.0 Suramar - Vignette: Jetsam - twh
+    questID = 41134, -- Unknown
     vignetteID = 1248,
 }
 
@@ -2637,10 +2628,10 @@ NPCs[103214] = {
     --------------------------------------------------------------------------------
     ---- Har'kess the Insatiable
     --------------------------------------------------------------------------------
-    achievementQuestID = 41136, -- 7.0 Suramar - Vignette: Har'kess - twh
+    achievementQuestID = 41136, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 103214,
-    questID = 41136, -- 7.0 Suramar - Vignette: Har'kess - twh
+    questID = 41136, -- Unknown
     vignetteID = 1250,
 }
 
@@ -2648,10 +2639,10 @@ NPCs[103223] = {
     --------------------------------------------------------------------------------
     ---- Hertha Grimdottir
     --------------------------------------------------------------------------------
-    achievementQuestID = 43993, -- Hertha Grimdottir
+    achievementQuestID = 43993, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 103223,
-    questID = 43993, -- Hertha Grimdottir
+    questID = 43993, -- Unknown
     vignetteID = 1251,
 }
 
@@ -2659,10 +2650,10 @@ NPCs[103575] = {
     --------------------------------------------------------------------------------
     ---- Reef Lord Raj'his
     --------------------------------------------------------------------------------
-    achievementQuestID = 44003, -- Reef Lord Raj'his
+    achievementQuestID = 44003, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 103575,
-    questID = 44003, -- Reef Lord Raj'his
+    questID = 44003, -- Unknown
     vignetteID = 1259,
 }
 
@@ -2683,7 +2674,7 @@ NPCs[103827] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 103827,
-    questID = 41786, -- 7.0 Suramar - Vignette: Sea Giant King - twh
+    questID = 41786, -- Unknown
     vignetteID = 1281,
 }
 
@@ -2691,11 +2682,11 @@ NPCs[103841] = {
     --------------------------------------------------------------------------------
     ---- Shadowquill
     --------------------------------------------------------------------------------
-    achievementQuestID = 43996, -- Vignette: Shadowquill
+    achievementQuestID = 43996, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 103841,
-    questID = 43996, -- Vignette: Shadowquill
+    questID = 43996, -- Unknown
     vignetteID = 1610,
 }
 
@@ -2705,7 +2696,7 @@ NPCs[104519] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 104519,
-    questID = 45503, -- Colerian
+    questID = 45503, -- Unknown
     vignetteID = 1827,
 }
 
@@ -2715,7 +2706,7 @@ NPCs[104521] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 104521,
-    questID = 45504, -- Alteria
+    questID = 45504, -- Unknown
     vignetteID = 1828,
 }
 
@@ -2725,7 +2716,7 @@ NPCs[104522] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 104522,
-    questID = 45502, -- Selenyi
+    questID = 45502, -- Unknown
     vignetteID = 1826,
 }
 
@@ -2735,7 +2726,7 @@ NPCs[104698] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 104698,
-    questID = 45503, -- Colerian
+    questID = 45503, -- Unknown
     vignetteID = -1,
 }
 
@@ -2743,11 +2734,11 @@ NPCs[105547] = {
     --------------------------------------------------------------------------------
     ---- Rauren
     --------------------------------------------------------------------------------
-    achievementQuestID = 43484, -- Vignette: Rauren
+    achievementQuestID = 43484, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 105547,
-    questID = 43484, -- Vignette: Rauren
+    questID = 43484, -- Unknown
     vignetteID = 1508,
 }
 
@@ -2767,7 +2758,7 @@ NPCs[105728] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 105728,
-    questID = 45505, -- Scythemaster Cil'raman
+    questID = 45505, -- Unknown
     vignetteID = 1829,
 }
 
@@ -2787,7 +2778,7 @@ NPCs[105899] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 105899,
-    questID = 45506, -- Oglok the Furious
+    questID = 45506, -- Unknown
     vignetteID = 1830,
 }
 
@@ -2795,10 +2786,10 @@ NPCs[106351] = {
     --------------------------------------------------------------------------------
     ---- Artificer Lothaire
     --------------------------------------------------------------------------------
-    achievementQuestID = 43717, -- Vignette: Artificer Lothaire
+    achievementQuestID = 43717, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 106351,
-    questID = 43717, -- Vignette: Artificer Lothaire
+    questID = 43717, -- Unknown
     vignetteID = 1547,
 }
 
@@ -2808,7 +2799,7 @@ NPCs[106526] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 106526,
-    questID = 44675, -- Lady Rivantas
+    questID = 44675, -- Unknown
     vignetteID = 1691,
 }
 
@@ -2819,12 +2810,9 @@ NPCs[106532] = {
     classification = NPCClassification.Rare,
     npcID = 106532,
     pets = {
-        {
-            itemID = 136901, -- Eye of Inquisition
-            npcID = 97179, -- Eye of Inquisition
-        },
+        Pet.EyeOfInquisition,
     },
-    questID = 44569, -- Inquisitor Volitix
+    questID = 44569, -- Unknown
     vignetteID = 1685,
 }
 
@@ -2832,15 +2820,13 @@ NPCs[107846] = {
     --------------------------------------------------------------------------------
     ---- Pinchshank
     --------------------------------------------------------------------------------
-    achievementQuestID = 43968, -- Pinchshank
+    achievementQuestID = 43968, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 107846,
-    questID = 43968, -- Pinchshank
+    questID = 43968, -- Unknown
     toys = {
-        {
-            itemID = 140314, -- Crab Shank
-        },
+        Toy.CrabShank,
     },
     vignetteID = 1608,
 }
@@ -2849,10 +2835,10 @@ NPCs[109054] = {
     --------------------------------------------------------------------------------
     ---- Shal'an
     --------------------------------------------------------------------------------
-    achievementQuestID = 42831, -- Vignette: Shal'an
+    achievementQuestID = 42831, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 109054,
-    questID = 42831, -- Vignette: Shal'an
+    questID = 42831, -- Unknown
     vignetteID = 1442,
 }
 
@@ -2862,7 +2848,7 @@ NPCs[109943] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109943,
-    questID = 44501, -- Tracking Quest
+    questID = 44501, -- Unknown
     vignetteID = -1,
 }
 
@@ -2870,10 +2856,10 @@ NPCs[109954] = {
     --------------------------------------------------------------------------------
     ---- Magister Phaedris
     --------------------------------------------------------------------------------
-    achievementQuestID = 43348, -- Vignette: Magister Phaedris
+    achievementQuestID = 43348, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 109954,
-    questID = 43348, -- Vignette: Magister Phaedris
+    questID = 43348, -- Unknown
     vignetteID = 1497,
 }
 
@@ -2881,10 +2867,10 @@ NPCs[110024] = {
     --------------------------------------------------------------------------------
     ---- Mal'Dreth the Corruptor
     --------------------------------------------------------------------------------
-    achievementQuestID = 43351, -- Mal'Dreth the Corrupter
+    achievementQuestID = 43351, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 110024,
-    questID = 43351, -- Mal'Dreth the Corrupter
+    questID = 43351, -- Unknown
     vignetteID = 1498,
 }
 
@@ -2902,11 +2888,11 @@ NPCs[110340] = {
     --------------------------------------------------------------------------------
     ---- Myonix
     --------------------------------------------------------------------------------
-    achievementQuestID = 43358, -- Vignette: Myonix
+    achievementQuestID = 43358, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 110340,
-    questID = 43358, -- Vignette: Myonix
+    questID = 43358, -- Unknown
     vignetteID = 1499,
 }
 
@@ -2914,10 +2900,10 @@ NPCs[110438] = {
     --------------------------------------------------------------------------------
     ---- Siegemaster Aedrin
     --------------------------------------------------------------------------------
-    achievementQuestID = 43369, -- Vignette: Siegemaster Aedrin
+    achievementQuestID = 43369, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 110438,
-    questID = 43369, -- Vignette: Siegemaster Aedrin
+    questID = 43369, -- Unknown
     vignetteID = 1500,
 }
 
@@ -2925,10 +2911,10 @@ NPCs[110577] = {
     --------------------------------------------------------------------------------
     ---- Oreth the Vile
     --------------------------------------------------------------------------------
-    achievementQuestID = 43449, -- Vignette: Oreth the Vile
+    achievementQuestID = 43449, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 110577,
-    questID = 43449, -- Vignette: Oreth the Vile
+    questID = 43449, -- Unknown
     vignetteID = 1505,
 }
 
@@ -2936,10 +2922,10 @@ NPCs[110656] = {
     --------------------------------------------------------------------------------
     ---- Arcanist Lylandre
     --------------------------------------------------------------------------------
-    achievementQuestID = 43481, -- Vignette: Arcanist Lylandre
+    achievementQuestID = 43481, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 110656,
-    questID = 43481, -- Vignette: Arcanist Lylandre
+    questID = 43481, -- Unknown
     vignetteID = 1507,
 }
 
@@ -2947,10 +2933,10 @@ NPCs[110726] = {
     --------------------------------------------------------------------------------
     ---- Cadraeus
     --------------------------------------------------------------------------------
-    achievementQuestID = 43495, -- Vignette: Cadraeus
+    achievementQuestID = 43495, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 110726,
-    questID = 43495, -- Vignette: Cadraeus
+    questID = 43495, -- Unknown
     vignetteID = 1509,
 }
 
@@ -2958,11 +2944,11 @@ NPCs[110824] = {
     --------------------------------------------------------------------------------
     ---- Tideclaw
     --------------------------------------------------------------------------------
-    achievementQuestID = 43542, -- Vignette: Tideclaw
+    achievementQuestID = 43542, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 110824,
-    questID = 43542, -- Vignette: Tideclaw
+    questID = 43542, -- Unknown
     vignetteID = 1510,
 }
 
@@ -2970,10 +2956,10 @@ NPCs[110832] = {
     --------------------------------------------------------------------------------
     ---- Gorgroth
     --------------------------------------------------------------------------------
-    achievementQuestID = 43992, -- Gorgroth
+    achievementQuestID = 43992, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 110832,
-    questID = 43992, -- Gorgroth
+    questID = 43992, -- Unknown
     vignetteID = 1609,
 }
 
@@ -2981,10 +2967,10 @@ NPCs[110870] = {
     --------------------------------------------------------------------------------
     ---- Apothecary Faldren
     --------------------------------------------------------------------------------
-    achievementQuestID = 43580, -- Vignette: Apothecary Faldren
+    achievementQuestID = 43580, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 110870,
-    questID = 43580, -- Vignette: Apothecary Faldren
+    questID = 43580, -- Unknown
     vignetteID = 1511,
 }
 
@@ -2992,10 +2978,10 @@ NPCs[110944] = {
     --------------------------------------------------------------------------------
     ---- Guardian Thor'el
     --------------------------------------------------------------------------------
-    achievementQuestID = 43597, -- Vignette: Guardian Thor'el
+    achievementQuestID = 43597, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 110944,
-    questID = 43597, -- Vignette: Guardian Thor'el
+    questID = 43597, -- Unknown
     vignetteID = 1515,
 }
 
@@ -3003,10 +2989,10 @@ NPCs[111007] = {
     --------------------------------------------------------------------------------
     ---- Randril
     --------------------------------------------------------------------------------
-    achievementQuestID = 43603, -- Vignette: Randril
+    achievementQuestID = 43603, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 111007,
-    questID = 43603, -- Vignette: Randril
+    questID = 43603, -- Unknown
     vignetteID = 1518,
 }
 
@@ -3014,17 +3000,14 @@ NPCs[111197] = {
     --------------------------------------------------------------------------------
     ---- Anax
     --------------------------------------------------------------------------------
-    achievementQuestID = 43954, -- Anax
+    achievementQuestID = 43954, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 111197,
     pets = {
-        {
-            itemID = 140934, -- Benax
-            npcID = 113136, -- Benax
-        },
+        Pet.Benax,
     },
-    questID = 43954, -- Anax
+    questID = 43954, -- Unknown
     vignetteID = 1541,
 }
 
@@ -3032,10 +3015,10 @@ NPCs[111329] = {
     --------------------------------------------------------------------------------
     ---- Matron Hagatha
     --------------------------------------------------------------------------------
-    achievementQuestID = 43718, -- Vignette: Matron Hagatha
+    achievementQuestID = 43718, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 111329,
-    questID = 43718, -- Vignette: Matron Hagatha
+    questID = 43718, -- Unknown
     vignetteID = 1548,
 }
 
@@ -3043,10 +3026,10 @@ NPCs[111649] = {
     --------------------------------------------------------------------------------
     ---- Ambassador D'vwinn
     --------------------------------------------------------------------------------
-    achievementQuestID = 43794, -- Ambassador D'vwinn
+    achievementQuestID = 43794, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 111649,
-    questID = 43794, -- Ambassador D'vwinn
+    questID = 43794, -- Unknown
     vignetteID = 1560,
 }
 
@@ -3054,10 +3037,10 @@ NPCs[111651] = {
     --------------------------------------------------------------------------------
     ---- Degren
     --------------------------------------------------------------------------------
-    achievementQuestID = 43792, -- Degren
+    achievementQuestID = 43792, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 111651,
-    questID = 43792, -- Degren
+    questID = 43792, -- Unknown
     vignetteID = 1558,
 }
 
@@ -3065,10 +3048,10 @@ NPCs[111653] = {
     --------------------------------------------------------------------------------
     ---- Miasu
     --------------------------------------------------------------------------------
-    achievementQuestID = 43793, -- Miasu
+    achievementQuestID = 43793, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 111653,
-    questID = 43793, -- Miasu
+    questID = 43793, -- Unknown
     vignetteID = 1559,
 }
 
@@ -3076,11 +3059,11 @@ NPCs[112497] = {
     --------------------------------------------------------------------------------
     ---- Maia the White
     --------------------------------------------------------------------------------
-    achievementQuestID = 44072, -- Vignette: Maia the White
+    achievementQuestID = 44072, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 112497,
-    questID = 44072, -- Vignette: Maia the White
+    questID = 44072, -- Unknown
     vignetteID = 1617,
 }
 
@@ -3090,7 +3073,7 @@ NPCs[112705] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 112705,
-    questID = 45478, -- Achronos
+    questID = 45478, -- Unknown
     vignetteID = 1807,
 }
 
@@ -3100,7 +3083,7 @@ NPCs[112756] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 112756,
-    questID = 45477, -- Sorallus
+    questID = 45477, -- Unknown
     vignetteID = 1806,
 }
 
@@ -3110,7 +3093,7 @@ NPCs[112757] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 112757,
-    questID = 45476, -- Magistrix Vilessa
+    questID = 45476, -- Unknown
     vignetteID = 1805,
 }
 
@@ -3120,7 +3103,7 @@ NPCs[112758] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 112758,
-    questID = 45475, -- Auditor Esiel
+    questID = 45475, -- Unknown
     vignetteID = 1804,
 }
 
@@ -3130,7 +3113,7 @@ NPCs[112759] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 112759,
-    questID = 45471, -- Az'jatar
+    questID = 45471, -- Unknown
     vignetteID = 1802,
 }
 
@@ -3140,7 +3123,7 @@ NPCs[112760] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 112760,
-    questID = 45474, -- Volshax, Breaker of Will
+    questID = 45474, -- Unknown
     vignetteID = 1803,
 }
 
@@ -3148,11 +3131,11 @@ NPCs[112802] = {
     --------------------------------------------------------------------------------
     ---- Mar'tura
     --------------------------------------------------------------------------------
-    achievementQuestID = 44124, -- Vignette: Mar'tura
+    achievementQuestID = 44124, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 112802,
-    questID = 44124, -- Vignette: Mar'tura
+    questID = 44124, -- Unknown
     vignetteID = 1642,
 }
 
@@ -3162,7 +3145,7 @@ NPCs[113368] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 113368,
-    questID = 44676, -- Llorian
+    questID = 44676, -- Unknown
     vignetteID = 1692,
 }
 
@@ -3185,11 +3168,11 @@ NPCs[101077] = {
     --------------------------------------------------------------------------------
     ---- Sekhan
     --------------------------------------------------------------------------------
-    achievementQuestID = 40681, -- Snarf
+    achievementQuestID = 40681, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 101077,
-    questID = 40681, -- Snarf
+    questID = 40681, -- Unknown
     vignetteID = 1221,
 }
 
@@ -3206,9 +3189,7 @@ NPCs[92104] = {
     npcID = 92104,
     questID = 38466, -- Unknown
     toys = {
-        {
-            itemID = 130147, -- Thistleleaf Branch
-        },
+        Toy.ThistleleafBranch,
     },
     vignetteID = 775,
 }
@@ -3221,12 +3202,9 @@ NPCs[92117] = {
     isTameable = true,
     npcID = 92117,
     pets = {
-        {
-            itemID = 130154, -- Pygmy Owl
-            npcID = 108568, -- Pygmy Owl
-        },
+        Pet.PygmyOwl,
     },
-    questID = 38468, -- Gorebeak
+    questID = 38468, -- Unknown
     vignetteID = 776,
 }
 
@@ -3236,11 +3214,9 @@ NPCs[92180] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92180,
-    questID = 38479, -- Seersei
+    questID = 38479, -- Unknown
     toys = {
-        {
-            itemID = 130171, -- Cursed Orb
-        },
+        Toy.CursedOrb,
     },
     vignetteID = 784,
 }
@@ -3251,7 +3227,7 @@ NPCs[92423] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 92423,
-    questID = 38772, -- Banshee Boss
+    questID = 38772, -- Unknown
     vignetteID = 866,
 }
 
@@ -3262,12 +3238,9 @@ NPCs[92965] = {
     classification = NPCClassification.Rare,
     npcID = 92965,
     pets = {
-        {
-            itemID = 130166, -- Risen Saber Kitten
-            npcID = 99403, -- Risen Saber Kitten
-        },
+        Pet.RisenSaberKitten,
     },
-    questID = 38767, -- Nightmaul
+    questID = 38767, -- Unknown
     vignetteID = 865,
 }
 
@@ -3277,7 +3250,7 @@ NPCs[93030] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 93030,
-    questID = 40080, -- Vignette: Ironbrancch
+    questID = 40080, -- Unknown
     vignetteID = 1070,
 }
 
@@ -3287,7 +3260,7 @@ NPCs[93205] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 93205,
-    questID = 38780, -- 7.0 Val'sharah - River - Vignette: Thondrax - TRACKING - twh
+    questID = 38780, -- Unknown
     vignetteID = 869,
 }
 
@@ -3295,10 +3268,10 @@ NPCs[93654] = {
     --------------------------------------------------------------------------------
     ---- Skul'vrax
     --------------------------------------------------------------------------------
-    achievementQuestID = 38887, -- 7.0 Val'sharah - Bluffs - Vignette: Swiftflight - TRACKING - twh
+    achievementQuestID = 38887, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 93654,
-    questID = 38887, -- 7.0 Val'sharah - Bluffs - Vignette: Swiftflight - TRACKING - twh
+    questID = 38887, -- Unknown
     vignetteID = 887,
 }
 
@@ -3306,10 +3279,10 @@ NPCs[93679] = {
     --------------------------------------------------------------------------------
     ---- Gathenak the Subjugator
     --------------------------------------------------------------------------------
-    achievementQuestID = 44070, -- Gathenak
+    achievementQuestID = 44070, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 93679,
-    questID = 44070, -- Gathenak
+    questID = 44070, -- Unknown
     vignetteID = 1615,
 }
 
@@ -3327,10 +3300,10 @@ NPCs[93758] = {
     --------------------------------------------------------------------------------
     ---- Antydas Nightcaller
     --------------------------------------------------------------------------------
-    achievementQuestID = 38900, -- 7.0 Val'sharah - Bluffs - Vignette: Nightcaller - TRACKING - twh
+    achievementQuestID = 38900, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 93758,
-    questID = 38900, -- 7.0 Val'sharah - Bluffs - Vignette: Nightcaller - TRACKING - twh
+    questID = 38900, -- Unknown
     vignetteID = 891,
 }
 
@@ -3338,10 +3311,10 @@ NPCs[94414] = {
     --------------------------------------------------------------------------------
     ---- Kiranys Duskwhisper
     --------------------------------------------------------------------------------
-    achievementQuestID = 39121, -- Vignette: Haunted Manor
+    achievementQuestID = 39121, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 94414,
-    questID = 39121, -- Vignette: Haunted Manor
+    questID = 39121, -- Unknown
     vignetteID = 941,
 }
 
@@ -3349,16 +3322,13 @@ NPCs[94485] = {
     --------------------------------------------------------------------------------
     ---- Pollous the Fetid
     --------------------------------------------------------------------------------
-    achievementQuestID = 39130, -- 7.0 Val'sharah - River: Vignette: Purging the River - TRACKING - twh
+    achievementQuestID = 39130, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 94485,
     pets = {
-        {
-            itemID = 130168, -- Fetid Waveling
-            npcID = 99394, -- Fetid Waveling
-        },
+        Pet.FetidWaveling,
     },
-    questID = 39130, -- 7.0 Val'sharah - River: Vignette: Purging the River - TRACKING - twh
+    questID = 39130, -- Unknown
     vignetteID = 944,
 }
 
@@ -3366,10 +3336,10 @@ NPCs[95123] = {
     --------------------------------------------------------------------------------
     ---- Grelda the Hag
     --------------------------------------------------------------------------------
-    achievementQuestID = 40126, -- Vignette: Grelda
+    achievementQuestID = 40126, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 95123,
-    questID = 40126, -- Vignette: Grelda
+    questID = 40126, -- Unknown
     vignetteID = 1099,
 }
 
@@ -3377,14 +3347,12 @@ NPCs[95221] = {
     --------------------------------------------------------------------------------
     ---- Mad Henryk
     --------------------------------------------------------------------------------
-    achievementQuestID = 39357, -- 7.0 Val'sharah - Grove - Vignette: Eileen - TRACKING - twh
+    achievementQuestID = 39357, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 95221,
-    questID = 39357, -- 7.0 Val'sharah - Grove - Vignette: Eileen - TRACKING - twh
+    questID = 39357, -- Unknown
     toys = {
-        {
-            itemID = 130214, -- Worn Doll
-        },
+        Toy.WornDoll,
     },
     vignetteID = 967,
 }
@@ -3393,10 +3361,10 @@ NPCs[95318] = {
     --------------------------------------------------------------------------------
     ---- Perrexx
     --------------------------------------------------------------------------------
-    achievementQuestID = 39596, -- 7.0 Val'sharah - Vale - Vignette: Perrexx - TRACKING - twh
+    achievementQuestID = 39596, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 95318,
-    questID = 39596, -- 7.0 Val'sharah - Vale - Vignette: Perrexx - TRACKING - twh
+    questID = 39596, -- Unknown
     vignetteID = 993,
 }
 
@@ -3404,11 +3372,11 @@ NPCs[97504] = {
     --------------------------------------------------------------------------------
     ---- Wraithtalon
     --------------------------------------------------------------------------------
-    achievementQuestID = 39856, -- Vignette: Wraithtalon
+    achievementQuestID = 39856, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 97504,
-    questID = 39856, -- Vignette: Wraithtalon
+    questID = 39856, -- Unknown
     vignetteID = 1027,
 }
 
@@ -3416,10 +3384,10 @@ NPCs[97517] = {
     --------------------------------------------------------------------------------
     ---- Dreadbog
     --------------------------------------------------------------------------------
-    achievementQuestID = 39858, -- Vignette: Dreadbog
+    achievementQuestID = 39858, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 97517,
-    questID = 39858, -- Vignette: Dreadbog
+    questID = 39858, -- Unknown
     vignetteID = 1028,
 }
 
@@ -3427,10 +3395,10 @@ NPCs[98241] = {
     --------------------------------------------------------------------------------
     ---- Lyrath Moonfeather
     --------------------------------------------------------------------------------
-    achievementQuestID = 40079, -- Vignette: Lyrath Moonfeather
+    achievementQuestID = 40079, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 98241,
-    questID = 40079, -- Vignette: Lyrath Moonfeather
+    questID = 40079, -- Unknown
     vignetteID = 1069,
 }
 
@@ -3471,7 +3439,7 @@ NPCs[104523] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 104523,
-    questID = 45500, -- Shalas'aman
+    questID = 45500, -- Unknown
     vignetteID = 1824,
 }
 
@@ -3531,11 +3499,9 @@ NPCs[109281] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109281,
-    questID = 45501, -- Malisandra
+    questID = 45501, -- Unknown
     toys = {
-        {
-            itemID = 130171, -- Cursed Orb
-        },
+        Toy.CursedOrb,
     },
     vignetteID = 1825,
 }
@@ -3546,7 +3512,7 @@ NPCs[109648] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109648,
-    questID = 45493, -- Witchdoctor Grgl-Brgl
+    questID = 45493, -- Unknown
     vignetteID = 1818,
 }
 
@@ -3556,7 +3522,7 @@ NPCs[109692] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109692,
-    questID = 45490, -- Lytheron
+    questID = 45490, -- Unknown
     vignetteID = 1815,
 }
 
@@ -3564,10 +3530,10 @@ NPCs[109708] = {
     --------------------------------------------------------------------------------
     ---- Undergrell Ringleader
     --------------------------------------------------------------------------------
-    achievementQuestID = 43176, -- Grell Waves Tracking Flag
+    achievementQuestID = 43176, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 109708,
-    questID = 43176, -- Grell Waves Tracking Flag
+    questID = 43176, -- Unknown
     vignetteID = 1453,
 }
 
@@ -3577,7 +3543,7 @@ NPCs[109990] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 109990,
-    questID = 45488, -- Nylaathria the Forgotten
+    questID = 45488, -- Unknown
     vignetteID = 1813,
 }
 
@@ -3587,7 +3553,7 @@ NPCs[110342] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 110342,
-    questID = 45487, -- Rabxach
+    questID = 45487, -- Unknown
     vignetteID = 1812,
 }
 
@@ -3607,7 +3573,7 @@ NPCs[110361] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 110361,
-    questID = 45484, -- Harbinger of Screams
+    questID = 45484, -- Unknown
     vignetteID = 1810,
 }
 
@@ -3617,7 +3583,7 @@ NPCs[110367] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 110367,
-    questID = 45483, -- Ealdis
+    questID = 45483, -- Unknown
     vignetteID = 1809,
 }
 
@@ -3625,11 +3591,11 @@ NPCs[110562] = {
     --------------------------------------------------------------------------------
     ---- Bahagar
     --------------------------------------------------------------------------------
-    achievementQuestID = 43446, -- Vignette: Bahagar
+    achievementQuestID = 43446, -- Unknown
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 110562,
-    questID = 43446, -- Vignette: Bahagar
+    questID = 43446, -- Unknown
     vignetteID = 1504,
 }
 
@@ -3643,7 +3609,7 @@ NPCs[96997] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 96997,
-    questID = 40251, -- Vignette: Kethrazor
+    questID = 40251, -- Unknown
     vignetteID = 1112,
 }
 
@@ -3653,6 +3619,6 @@ NPCs[97069] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 97069,
-    questID = 40301, -- Vignette: Phalanx Captain
+    questID = 40301, -- Unknown
     vignetteID = 1119,
 }

@@ -8,6 +8,10 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Mount = private.Enum.Mount
+local Pet = private.Enum.Pet
+local Toy = private.Enum.Toy
+
 --------------------------------------------------------------------------------
 ---- Ardenweald (1565)
 --------------------------------------------------------------------------------
@@ -84,10 +88,7 @@ NPCs[163370] = {
     isTameable = true,
     npcID = 163370,
     pets = {
-        {
-            itemID = 183196, -- Lavender Nibbler
-            npcID = 173993, -- Lavender Nibbler
-        },
+        Pet.LavenderNibbler,
     },
     questID = 59006, -- Unknown
     vignetteID = 4100,
@@ -100,10 +101,7 @@ NPCs[164093] = {
     classification = NPCClassification.Rare,
     npcID = 164093,
     pets = {
-        {
-            itemID = 180644, -- Rocky
-            npcID = 171246, -- Rocky
-        },
+        Pet.Rocky,
     },
     questID = 59140, -- Unknown
     vignetteID = 4113,
@@ -115,10 +113,7 @@ NPCs[164107] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 180725, -- Spinemaw Gladechewer
-            spellID = 334364, -- Spinemaw Gladechewer
-        },
+        Mount.SpinemawGladechewer,
     },
     npcID = 164107,
     questID = 59145, -- Unknown
@@ -131,10 +126,7 @@ NPCs[164112] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     mounts = {
-        {
-            itemID = 182650, -- Arboreal Gulper
-            spellID = 339632, -- Arboreal Gulper
-        },
+        Mount.ArborealGulper,
     },
     npcID = 164112,
     questID = 59157, -- Unknown
@@ -159,10 +151,7 @@ NPCs[164238] = {
     isTameable = true,
     npcID = 164238,
     pets = {
-        {
-            itemID = 180631, -- Gorm Needler
-            npcID = 171231, -- Gorm Needler
-        },
+        Pet.GormNeedler,
     },
     questID = 59201, -- Unknown
     vignetteID = 4116,
@@ -177,10 +166,7 @@ NPCs[164391] = {
     isTameable = true,
     npcID = 164391,
     pets = {
-        {
-            itemID = 180643, -- Chirpy Valeshrieker
-            npcID = 171239, -- Chirpy Valeshrieker
-        },
+        Pet.ChirpyValeshrieker,
     },
     questID = 59208, -- Unknown
     vignetteID = 4117,
@@ -302,10 +288,7 @@ NPCs[168135] = {
     classification = NPCClassification.RareElite,
     isTameable = true,
     mounts = {
-        {
-            itemID = 180728, -- Swift Gloomhoof
-            spellID = 312767, -- Swift Gloomhoof
-        },
+        Mount.SwiftGloomhoof,
     },
     npcID = 168135,
     questID = 60306, -- Unknown
@@ -318,10 +301,7 @@ NPCs[168647] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     mounts = {
-        {
-            itemID = 180730, -- Wild Glimmerfur Prowler
-            spellID = 334366, -- Wild Glimmerfur Prowler
-        },
+        Mount.WildGlimmerfurProwler,
     },
     npcID = 168647,
     questID = 61632, -- Unknown
@@ -378,10 +358,7 @@ NPCs[171206] = {
     classification = NPCClassification.Rare,
     npcID = 171206,
     pets = {
-        {
-            itemID = 180645, -- Dodger
-            npcID = 171247, -- Dodger
-        },
+        Pet.Dodger,
     },
     questID = 61086, -- Unknown
     vignetteID = -1,
@@ -430,10 +407,7 @@ NPCs[156340] = {
     classification = NPCClassification.Rare,
     npcID = 156340,
     pets = {
-        {
-            itemID = 184401, -- Larion Pouncer
-            npcID = 175562, -- Larion Pouncer
-        },
+        Pet.LarionPouncer,
     },
     questID = 61634, -- Unknown
     vignetteID = 4476,
@@ -549,10 +523,7 @@ NPCs[163460] = {
     achievementQuestID = 62650, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 163460,
-    pets = {
-        itemID = 180856,
-        npcID = 171693,
-    },
+    pets = {},
     questID = 62650, -- Unknown
     vignetteID = 4575,
 }
@@ -576,10 +547,7 @@ NPCs[170548] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     mounts = {
-        {
-            itemID = 180773, -- Sundancer
-            spellID = 312765, -- Sundancer
-        },
+        Mount.Sundancer,
     },
     npcID = 170548,
     questID = 60862, -- Unknown
@@ -616,10 +584,7 @@ NPCs[170832] = {
     achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
     mounts = {
-        {
-            itemID = 183741, -- Ascended Skymane
-            spellID = 342335, -- Ascended Skymane
-        },
+        Mount.AscendedSkymane,
     },
     npcID = 170832,
     questID = 60977, -- Unknown
@@ -633,10 +598,7 @@ NPCs[170833] = {
     achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
     mounts = {
-        {
-            itemID = 183741, -- Ascended Skymane
-            spellID = 342335, -- Ascended Skymane
-        },
+        Mount.AscendedSkymane,
     },
     npcID = 170833,
     questID = 60977, -- Unknown
@@ -650,10 +612,7 @@ NPCs[170834] = {
     achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
     mounts = {
-        {
-            itemID = 183741, -- Ascended Skymane
-            spellID = 342335, -- Ascended Skymane
-        },
+        Mount.AscendedSkymane,
     },
     npcID = 170834,
     questID = 60977, -- Unknown
@@ -667,10 +626,7 @@ NPCs[170835] = {
     achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
     mounts = {
-        {
-            itemID = 183741, -- Ascended Skymane
-            spellID = 342335, -- Ascended Skymane
-        },
+        Mount.AscendedSkymane,
     },
     npcID = 170835,
     questID = 60977, -- Unknown
@@ -684,10 +640,7 @@ NPCs[170836] = {
     achievementQuestID = 60933, -- Unknown
     classification = NPCClassification.RareElite,
     mounts = {
-        {
-            itemID = 183741, -- Ascended Skymane
-            spellID = 342335, -- Ascended Skymane
-        },
+        Mount.AscendedSkymane,
     },
     npcID = 170836,
     questID = 60977, -- Unknown
@@ -703,10 +656,7 @@ NPCs[170932] = {
     isTameable = true,
     npcID = 170932,
     pets = {
-        {
-            itemID = 180812, -- Golden Cloudfeather
-            npcID = 171565, -- Golden Cloudfeather
-        },
+        Pet.GoldenCloudfeather,
     },
     questID = 60978, -- Unknown
     vignetteID = 4322,
@@ -721,9 +671,7 @@ NPCs[171008] = {
     npcID = 171008,
     questID = 60997, -- Unknown
     toys = {
-        {
-            itemID = 184413, -- Mnemonic Attunement Pane
-        },
+        Toy.MnemonicAttunementPane,
     },
     vignetteID = 4338,
 }
@@ -737,9 +685,7 @@ NPCs[171009] = {
     npcID = 171009,
     questID = 58222, -- Unknown
     toys = {
-        {
-            itemID = 184404, -- Ever-Abundant Hearth
-        },
+        Toy.EverAbundantHearth,
     },
     vignetteID = 4339,
 }
@@ -1691,9 +1637,7 @@ NPCs[160857] = {
     npcID = 160857,
     questID = 58263, -- Unknown
     toys = {
-        {
-            itemID = 180873, -- Smolderheart
-        },
+        Toy.Smolderheart,
     },
     vignetteID = 3983,
 }
@@ -1784,10 +1728,7 @@ NPCs[165290] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 180461, -- Horrid Dredwing
-            spellID = 332882, -- Horrid Dredwing
-        },
+        Mount.HorridDredwing,
     },
     npcID = 165290,
     questID = 59612, -- Unknown

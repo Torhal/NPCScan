@@ -8,6 +8,10 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Mount = private.Enum.Mount
+local Pet = private.Enum.Pet
+local Toy = private.Enum.Toy
+
 --------------------------------------------------------------------------------
 ---- Dread Wastes (422)
 --------------------------------------------------------------------------------
@@ -28,10 +32,7 @@ NPCs[50347] = {
     classification = NPCClassification.Rare,
     npcID = 50347,
     pets = {
-        {
-            itemID = 86564, -- Imbued Jade Fragment
-            npcID = 64634, -- Grinder
-        },
+        Pet.Grinder,
     },
     vignetteID = 150,
 }
@@ -52,9 +53,7 @@ NPCs[50739] = {
     classification = NPCClassification.Rare,
     npcID = 50739,
     toys = {
-        {
-            itemID = 86578, -- Eternal Warrior's Sigil
-        },
+        Toy.EternalWarriorsSigil,
     },
     vignetteID = 136,
 }
@@ -66,10 +65,7 @@ NPCs[50776] = {
     classification = NPCClassification.Rare,
     npcID = 50776,
     pets = {
-        {
-            itemID = 86563, -- Hollow Reed
-            npcID = 64633, -- Aqua Strider
-        },
+        Pet.AquaStrider,
     },
     vignetteID = 129,
 }
@@ -90,9 +86,7 @@ NPCs[50821] = {
     classification = NPCClassification.Rare,
     npcID = 50821,
     toys = {
-        {
-            itemID = 86589, -- Ai-Li's Skymirror
-        },
+        Toy.AiLisSkymirror,
     },
     vignetteID = 115,
 }
@@ -104,9 +98,7 @@ NPCs[50836] = {
     classification = NPCClassification.Rare,
     npcID = 50836,
     toys = {
-        {
-            itemID = 86593, -- Hozen Beach Ball
-        },
+        Toy.HozenBeachBall,
     },
     vignetteID = 108,
 }
@@ -117,10 +109,7 @@ NPCs[69768] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94230, -- Reins of the Amber Primordial Direhorn
-            spellID = 138424, -- Amber Primordial Direhorn
-        },
+        Mount.AmberPrimordialDirehorn,
     },
     npcID = 69768,
     vignetteID = 98,
@@ -132,10 +121,7 @@ NPCs[69769] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94229, -- Reins of the Slate Primordial Direhorn
-            spellID = 138425, -- Slate Primordial Direhorn
-        },
+        Mount.SlatePrimordialDirehorn,
     },
     npcID = 69769,
     vignetteID = 163,
@@ -147,10 +133,7 @@ NPCs[69841] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94230, -- Reins of the Amber Primordial Direhorn
-            spellID = 138424, -- Amber Primordial Direhorn
-        },
+        Mount.AmberPrimordialDirehorn,
     },
     npcID = 69841,
     vignetteID = 163,
@@ -162,10 +145,7 @@ NPCs[69842] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94231, -- Reins of the Jade Primordial Direhorn
-            spellID = 138426, -- Jade Primordial Direhorn
-        },
+        Mount.JadePrimordialDirehorn,
     },
     npcID = 69842,
     vignetteID = 163,
@@ -182,10 +162,7 @@ NPCs[69161] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     mounts = {
-        {
-            itemID = 94228, -- Reins of the Cobalt Primordial Direhorn
-            spellID = 138423, -- Cobalt Primordial Direhorn
-        },
+        Mount.CobaltPrimordialDirehorn,
     },
     npcID = 69161,
     questID = 32519, -- Unknown
@@ -199,22 +176,10 @@ NPCs[70096] = {
     classification = NPCClassification.Rare,
     npcID = 70096,
     pets = {
-        {
-            itemID = 94126, -- Zandalari Kneebiter
-            npcID = 69796, -- Zandalari Kneebiter
-        },
-        {
-            itemID = 95422, -- Zandalari Anklerender
-            npcID = 70451, -- Zandalari Anklerender
-        },
-        {
-            itemID = 95423, -- Zandalari Footslasher
-            npcID = 70452, -- Zandalari Footslasher
-        },
-        {
-            itemID = 95424, -- Zandalari Toenibbler
-            npcID = 70453, -- Zandalari Toenibbler
-        },
+        Pet.ZandalariKneebiter,
+        Pet.ZandalariAnklerender,
+        Pet.ZandalariFootslasher,
+        Pet.ZandalariToenibbler,
     },
     vignetteID = 164,
 }
@@ -230,10 +195,7 @@ NPCs[50358] = {
     classification = NPCClassification.Rare,
     npcID = 50358,
     pets = {
-        {
-            itemID = 94124, -- Sunreaver Micro-Sentry
-            npcID = 69778, -- Sunreaver Micro-Sentry
-        },
+        Pet.SunreaverMicroSentry,
     },
     vignetteID = 6142,
 }
@@ -245,10 +207,7 @@ NPCs[69099] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     mounts = {
-        {
-            itemID = 95057, -- Reins of the Thundering Cobalt Cloud Serpent
-            spellID = 139442, -- Thundering Cobalt Cloud Serpent
-        },
+        Mount.ThunderingCobaltCloudSerpent,
     },
     npcID = 69099,
     questID = 32518, -- Unknown
@@ -488,10 +447,7 @@ NPCs[69768] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94230, -- Reins of the Amber Primordial Direhorn
-            spellID = 138424, -- Amber Primordial Direhorn
-        },
+        Mount.AmberPrimordialDirehorn,
     },
     npcID = 69768,
     vignetteID = 98,
@@ -503,10 +459,7 @@ NPCs[69769] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94229, -- Reins of the Slate Primordial Direhorn
-            spellID = 138425, -- Slate Primordial Direhorn
-        },
+        Mount.SlatePrimordialDirehorn,
     },
     npcID = 69769,
     vignetteID = 163,
@@ -518,10 +471,7 @@ NPCs[69841] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94230, -- Reins of the Amber Primordial Direhorn
-            spellID = 138424, -- Amber Primordial Direhorn
-        },
+        Mount.AmberPrimordialDirehorn,
     },
     npcID = 69841,
     vignetteID = 163,
@@ -533,10 +483,7 @@ NPCs[69842] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94231, -- Reins of the Jade Primordial Direhorn
-            spellID = 138426, -- Jade Primordial Direhorn
-        },
+        Mount.JadePrimordialDirehorn,
     },
     npcID = 69842,
     vignetteID = 163,
@@ -580,9 +527,7 @@ NPCs[50354] = {
     classification = NPCClassification.Rare,
     npcID = 50354,
     toys = {
-        {
-            itemID = 86573, -- Shard of Archstone
-        },
+        Toy.ShardOfArchstone,
     },
     vignetteID = 145,
 }
@@ -594,9 +539,7 @@ NPCs[50733] = {
     classification = NPCClassification.Rare,
     npcID = 50733,
     toys = {
-        {
-            itemID = 86577, -- Rod of Ambershaping
-        },
+        Toy.RodOfAmbershaping,
     },
     vignetteID = 138,
 }
@@ -608,9 +551,7 @@ NPCs[50769] = {
     classification = NPCClassification.Rare,
     npcID = 50769,
     toys = {
-        {
-            itemID = 86581, -- Farwater Conch
-        },
+        Toy.FarwaterConch,
     },
     vignetteID = 131,
 }
@@ -622,9 +563,7 @@ NPCs[50789] = {
     classification = NPCClassification.Rare,
     npcID = 50789,
     toys = {
-        {
-            itemID = 86584, -- Hardened Shell
-        },
+        Toy.HardenedShell,
     },
     vignetteID = 124,
 }
@@ -636,9 +575,7 @@ NPCs[50817] = {
     classification = NPCClassification.Rare,
     npcID = 50817,
     toys = {
-        {
-            itemID = 86588, -- Pandaren Firework Launcher
-        },
+        Toy.PandarenFireworkLauncher,
     },
     vignetteID = 117,
 }
@@ -658,10 +595,7 @@ NPCs[60491] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 87771, -- Reins of the Heavenly Onyx Cloud Serpent
-            spellID = 127158, -- Heavenly Onyx Cloud Serpent
-        },
+        Mount.HeavenlyOnyxCloudSerpent,
     },
     npcID = 60491,
     questID = 32099, -- Unknown
@@ -674,10 +608,7 @@ NPCs[69768] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94230, -- Reins of the Amber Primordial Direhorn
-            spellID = 138424, -- Amber Primordial Direhorn
-        },
+        Mount.AmberPrimordialDirehorn,
     },
     npcID = 69768,
     vignetteID = 98,
@@ -689,10 +620,7 @@ NPCs[69769] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94229, -- Reins of the Slate Primordial Direhorn
-            spellID = 138425, -- Slate Primordial Direhorn
-        },
+        Mount.SlatePrimordialDirehorn,
     },
     npcID = 69769,
     vignetteID = 163,
@@ -704,10 +632,7 @@ NPCs[69841] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94230, -- Reins of the Amber Primordial Direhorn
-            spellID = 138424, -- Amber Primordial Direhorn
-        },
+        Mount.AmberPrimordialDirehorn,
     },
     npcID = 69841,
     vignetteID = 163,
@@ -719,10 +644,7 @@ NPCs[69842] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94231, -- Reins of the Jade Primordial Direhorn
-            spellID = 138426, -- Jade Primordial Direhorn
-        },
+        Mount.JadePrimordialDirehorn,
     },
     npcID = 69842,
     vignetteID = 163,
@@ -819,10 +741,7 @@ NPCs[69768] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94230, -- Reins of the Amber Primordial Direhorn
-            spellID = 138424, -- Amber Primordial Direhorn
-        },
+        Mount.AmberPrimordialDirehorn,
     },
     npcID = 69768,
     vignetteID = 98,
@@ -834,10 +753,7 @@ NPCs[69769] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94229, -- Reins of the Slate Primordial Direhorn
-            spellID = 138425, -- Slate Primordial Direhorn
-        },
+        Mount.SlatePrimordialDirehorn,
     },
     npcID = 69769,
     vignetteID = 163,
@@ -849,10 +765,7 @@ NPCs[69841] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94230, -- Reins of the Amber Primordial Direhorn
-            spellID = 138424, -- Amber Primordial Direhorn
-        },
+        Mount.AmberPrimordialDirehorn,
     },
     npcID = 69841,
     vignetteID = 163,
@@ -864,10 +777,7 @@ NPCs[69842] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94231, -- Reins of the Jade Primordial Direhorn
-            spellID = 138426, -- Jade Primordial Direhorn
-        },
+        Mount.JadePrimordialDirehorn,
     },
     npcID = 69842,
     vignetteID = 163,
@@ -992,10 +902,7 @@ NPCs[71919] = {
     classification = NPCClassification.Rare,
     npcID = 71919,
     pets = {
-        {
-            itemID = 104167, -- Skunky Alemental
-            npcID = 73367, -- Skunky Alemental
-        },
+        Pet.SkunkyAlemental,
     },
     questID = 32959, -- Unknown
     vignetteID = 49,
@@ -1009,9 +916,7 @@ NPCs[72045] = {
     npcID = 72045,
     questID = 32966, -- Unknown
     toys = {
-        {
-            itemID = 86584, -- Hardened Shell
-        },
+        Toy.HardenedShell,
     },
     vignetteID = 59,
 }
@@ -1072,10 +977,7 @@ NPCs[72769] = {
     classification = NPCClassification.Rare,
     npcID = 72769,
     pets = {
-        {
-            itemID = 104307, -- Jadefire Spirit
-            npcID = 73738, -- Jadefire Spirit
-        },
+        Pet.JadefireSpirit,
     },
     questID = 33293, -- Unknown
     vignetteID = 70,
@@ -1089,10 +991,7 @@ NPCs[72775] = {
     isTameable = true,
     npcID = 72775,
     pets = {
-        {
-            itemID = 104169, -- Gulp Froglet
-            npcID = 73359, -- Gulp Froglet
-        },
+        Pet.GulpFroglet,
     },
     questID = 33301, -- Unknown
     vignetteID = 81,
@@ -1116,10 +1015,7 @@ NPCs[72909] = {
     classification = NPCClassification.Rare,
     npcID = 72909,
     pets = {
-        {
-            itemID = 104291, -- Swarmling of Gu'chi
-            npcID = 73730, -- Gu'chi Swarmling
-        },
+        Pet.GuchiSwarmling,
     },
     questID = 33294, -- Unknown
     vignetteID = 69,
@@ -1133,9 +1029,7 @@ NPCs[72970] = {
     npcID = 72970,
     questID = 33315, -- Unknown
     toys = {
-        {
-            itemID = 104262, -- Odd Polished Stone
-        },
+        Toy.OddPolishedStone,
     },
     vignetteID = 83,
 }
@@ -1181,9 +1075,7 @@ NPCs[73161] = {
     npcID = 73161,
     questID = 33297, -- Unknown
     toys = {
-        {
-            itemID = 86584, -- Hardened Shell
-        },
+        Toy.HardenedShell,
     },
     vignetteID = 67,
 }
@@ -1196,10 +1088,7 @@ NPCs[73163] = {
     isTameable = true,
     npcID = 73163,
     pets = {
-        {
-            itemID = 104161, -- Death Adder Hatchling
-            npcID = 73364, -- Death Adder Hatchling
-        },
+        Pet.DeathAdderHatchling,
     },
     questID = 33303, -- Unknown
     vignetteID = 84,
@@ -1213,10 +1102,7 @@ NPCs[73166] = {
     isTameable = true,
     npcID = 73166,
     pets = {
-        {
-            itemID = 104168, -- Spineclaw Crab
-            npcID = 73366, -- Spineclaw Crab
-        },
+        Pet.SpineclawCrab,
     },
     questID = 33302, -- Unknown
     vignetteID = 80,
@@ -1229,10 +1115,7 @@ NPCs[73167] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     mounts = {
-        {
-            itemID = 104269, -- Reins of the Thundering Onyx Cloud Serpent
-            spellID = 148476, -- Thundering Onyx Cloud Serpent
-        },
+        Mount.ThunderingOnyxCloudSerpent,
     },
     npcID = 73167,
     questID = 33311, -- Unknown
@@ -1247,9 +1130,7 @@ NPCs[73169] = {
     npcID = 73169,
     questID = 33306, -- Unknown
     toys = {
-        {
-            itemID = 104331, -- Warning Sign
-        },
+        Toy.WarningSign,
     },
     vignetteID = 89,
 }
@@ -1272,9 +1153,7 @@ NPCs[73171] = {
     npcID = 73171,
     questID = 33299, -- Unknown
     toys = {
-        {
-            itemID = 104302, -- Blackflame Daggers
-        },
+        Toy.BlackflameDaggers,
     },
     vignetteID = 91,
 }
@@ -1287,9 +1166,7 @@ NPCs[73172] = {
     npcID = 73172,
     questID = 33309, -- Unknown
     toys = {
-        {
-            itemID = 104309, -- Eternal Kiln
-        },
+        Toy.EternalKiln,
     },
     vignetteID = 90,
 }
@@ -1331,10 +1208,7 @@ NPCs[73277] = {
     classification = NPCClassification.Rare,
     npcID = 73277,
     pets = {
-        {
-            itemID = 104156, -- Ashleaf Spriteling
-            npcID = 73533, -- Ashleaf Spriteling
-        },
+        Pet.AshleafSpriteling,
     },
     questID = 33298, -- Unknown
     vignetteID = 66,
@@ -1358,9 +1232,7 @@ NPCs[73281] = {
     npcID = 73281,
     questID = 33314, -- Unknown
     toys = {
-        {
-            itemID = 104294, -- Rime of the Time-Lost Mariner
-        },
+        Toy.RimeOfTheTimeLostMariner,
     },
     vignetteID = 82,
 }
@@ -1372,10 +1244,7 @@ NPCs[73282] = {
     classification = NPCClassification.Rare,
     npcID = 73282,
     pets = {
-        {
-            itemID = 104159, -- Ruby Droplet
-            npcID = 73356, -- Ruby Droplet
-        },
+        Pet.RubyDroplet,
     },
     questID = 33300, -- Unknown
     vignetteID = 75,
@@ -1510,10 +1379,7 @@ NPCs[69768] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94230, -- Reins of the Amber Primordial Direhorn
-            spellID = 138424, -- Amber Primordial Direhorn
-        },
+        Mount.AmberPrimordialDirehorn,
     },
     npcID = 69768,
     vignetteID = 98,
@@ -1525,10 +1391,7 @@ NPCs[69769] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94229, -- Reins of the Slate Primordial Direhorn
-            spellID = 138425, -- Slate Primordial Direhorn
-        },
+        Mount.SlatePrimordialDirehorn,
     },
     npcID = 69769,
     vignetteID = 163,
@@ -1540,10 +1403,7 @@ NPCs[69841] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94230, -- Reins of the Amber Primordial Direhorn
-            spellID = 138424, -- Amber Primordial Direhorn
-        },
+        Mount.AmberPrimordialDirehorn,
     },
     npcID = 69841,
     vignetteID = 163,
@@ -1555,10 +1415,7 @@ NPCs[69842] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 94231, -- Reins of the Jade Primordial Direhorn
-            spellID = 138426, -- Jade Primordial Direhorn
-        },
+        Mount.JadePrimordialDirehorn,
     },
     npcID = 69842,
     vignetteID = 163,
@@ -1584,9 +1441,7 @@ NPCs[50336] = {
     classification = NPCClassification.Rare,
     npcID = 50336,
     toys = {
-        {
-            itemID = 86568, -- Mr. Smite's Brass Compass
-        },
+        Toy.MrSmitesBrassCompass,
     },
     vignetteID = 156,
 }
@@ -1598,9 +1453,7 @@ NPCs[50349] = {
     classification = NPCClassification.Rare,
     npcID = 50349,
     toys = {
-        {
-            itemID = 86571, -- Kang's Bindstone
-        },
+        Toy.KangsBindstone,
     },
     vignetteID = 149,
 }
@@ -1612,9 +1465,7 @@ NPCs[50359] = {
     classification = NPCClassification.Rare,
     npcID = 50359,
     toys = {
-        {
-            itemID = 86575, -- Chalice of Secrets
-        },
+        Toy.ChaliceOfSecrets,
     },
     vignetteID = 142,
 }
@@ -1626,9 +1477,7 @@ NPCs[50749] = {
     classification = NPCClassification.Rare,
     npcID = 50749,
     toys = {
-        {
-            itemID = 134023, -- Bottled Tornado
-        },
+        Toy.BottledTornado,
     },
     vignetteID = 135,
 }
@@ -1640,9 +1489,7 @@ NPCs[50780] = {
     classification = NPCClassification.Rare,
     npcID = 50780,
     toys = {
-        {
-            itemID = 86582, -- Aqua Jewel
-        },
+        Toy.AquaJewel,
     },
     vignetteID = 128,
 }
@@ -1654,9 +1501,7 @@ NPCs[50806] = {
     classification = NPCClassification.Rare,
     npcID = 50806,
     toys = {
-        {
-            itemID = 86586, -- Panflute of Pandaria
-        },
+        Toy.PanfluteOfPandaria,
     },
     vignetteID = 121,
 }
@@ -1668,9 +1513,7 @@ NPCs[50822] = {
     classification = NPCClassification.Rare,
     npcID = 50822,
     toys = {
-        {
-            itemID = 86590, -- Essence of the Breeze
-        },
+        Toy.EssenceOfTheBreeze,
     },
     vignetteID = 114,
 }
@@ -1682,9 +1525,7 @@ NPCs[50840] = {
     classification = NPCClassification.Rare,
     npcID = 50840,
     toys = {
-        {
-            itemID = 86594, -- Helpful Wikky's Whistle
-        },
+        Toy.HelpfulWikkysWhistle,
     },
     vignetteID = 107,
 }
@@ -2349,9 +2190,7 @@ NPCs[50783] = {
     classification = NPCClassification.Rare,
     npcID = 50783,
     toys = {
-        {
-            itemID = 86583, -- Salyin Battle Banner
-        },
+        Toy.SalyinBattleBanner,
     },
     vignetteID = 126,
 }
@@ -2372,9 +2211,7 @@ NPCs[50828] = {
     classification = NPCClassification.Rare,
     npcID = 50828,
     toys = {
-        {
-            itemID = 86591, -- Magic Banana
-        },
+        Toy.MagicBanana,
     },
     vignetteID = 112,
 }
@@ -2386,9 +2223,7 @@ NPCs[51059] = {
     classification = NPCClassification.Rare,
     npcID = 51059,
     toys = {
-        {
-            itemID = 86565, -- Battle Horn
-        },
+        Toy.BattleHorn,
     },
     vignetteID = 106,
 }
@@ -2399,10 +2234,7 @@ NPCs[62346] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 89783, -- Son of Galleon's Saddle
-            spellID = 130965, -- Son of Galleon
-        },
+        Mount.SonOfGalleon,
     },
     npcID = 62346,
     questID = 32098, -- Unknown

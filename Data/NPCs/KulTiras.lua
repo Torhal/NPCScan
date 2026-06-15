@@ -8,6 +8,8 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Mount = private.Enum.Mount
+
 --------------------------------------------------------------------------------
 ---- Boralus (1161)
 --------------------------------------------------------------------------------
@@ -472,7 +474,7 @@ NPCs[137825] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 137825,
-    questID = 37410, -- Vignette: Avalanche
+    questID = 37410, -- Unknown
     vignetteID = 2961,
     worldQuestID = 51542, -- Avalanche
 }
@@ -1386,10 +1388,7 @@ NPCs[131404] = {
     achievementQuestID = 49951, -- Unknown
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 163573, -- Goldenmane's Reins
-            spellID = 260175, -- Goldenmane
-        },
+        Mount.Goldenmane,
     },
     npcID = 131404,
     questID = 49951, -- Unknown

@@ -8,6 +8,10 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Mount = private.Enum.Mount
+local Pet = private.Enum.Pet
+local Toy = private.Enum.Toy
+
 --------------------------------------------------------------------------------
 ---- Abyssal Depths (204)
 --------------------------------------------------------------------------------
@@ -218,9 +222,7 @@ NPCs[137374] = {
     factionGroup = "Alliance",
     npcID = 137374,
     toys = {
-        {
-            itemID = 163829, -- Toy War Machine
-        },
+        Toy.ToyWarMachine,
     },
     worldQuestID = 52848, -- The Lion's Roar
 }
@@ -234,9 +236,7 @@ NPCs[138122] = {
     npcID = 138122,
     questID = 53002, -- Unknown
     toys = {
-        {
-            itemID = 163828, -- Toy Siege Tower
-        },
+        Toy.ToySiegeTower,
     },
     worldQuestID = 52847, -- Doom's Howl
 }
@@ -288,10 +288,7 @@ NPCs[141668] = {
     classification = NPCClassification.Rare,
     npcID = 141668,
     pets = {
-        {
-            itemID = 163677, -- Teeny Titan Orb
-            npcID = 143515, -- Teeny Titan Orb
-        },
+        Pet.TeenyTitanOrb,
     },
     questID = 53508, -- Unknown
     vignetteID = 3204,
@@ -305,9 +302,7 @@ NPCs[141942] = {
     npcID = 141942,
     questID = 53516, -- Unknown
     toys = {
-        {
-            itemID = 163775, -- Molok Morion
-        },
+        Toy.MolokMorion,
     },
     vignetteID = 3202,
 }
@@ -320,9 +315,7 @@ NPCs[142112] = {
     npcID = 142112,
     questID = 53513, -- Unknown
     toys = {
-        {
-            itemID = 163744, -- Coldrage's Cooler
-        },
+        Toy.ColdragesCooler,
     },
     vignetteID = 3203,
 }
@@ -333,10 +326,7 @@ NPCs[142423] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     mounts = {
-        {
-            itemID = 163646, -- Lil' Donkey
-            spellID = 279608, -- Lil' Donkey
-        },
+        Mount.LilDonkey,
     },
     npcID = 142423,
     questID = 53518, -- Unknown
@@ -350,10 +340,7 @@ NPCs[142433] = {
     classification = NPCClassification.Rare,
     npcID = 142433,
     pets = {
-        {
-            itemID = 163711, -- Shard of Fozruk
-            npcID = 143627, -- Fozling
-        },
+        Pet.Fozling,
     },
     questID = 53510, -- Unknown
     vignetteID = 3196,
@@ -367,10 +354,7 @@ NPCs[142435] = {
     isTameable = true,
     npcID = 142435,
     pets = {
-        {
-            itemID = 163690, -- Plagued Egg
-            npcID = 143564, -- Foulfeather
-        },
+        Pet.Foulfeather,
     },
     questID = 53519, -- Unknown
     vignetteID = 3197,
@@ -383,10 +367,7 @@ NPCs[142436] = {
     classification = NPCClassification.Rare,
     npcID = 142436,
     pets = {
-        {
-            itemID = 163689, -- Angry Egg
-            npcID = 143563, -- Ragepeep
-        },
+        Pet.Ragepeep,
     },
     questID = 53522, -- Unknown
     vignetteID = 3193,
@@ -399,10 +380,7 @@ NPCs[142437] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     mounts = {
-        {
-            itemID = 163645, -- Skullripper
-            spellID = 279611, -- Skullripper
-        },
+        Mount.Skullripper,
     },
     npcID = 142437,
     questID = 53526, -- Unknown
@@ -417,10 +395,7 @@ NPCs[142438] = {
     isTameable = true,
     npcID = 142438,
     pets = {
-        {
-            itemID = 163648, -- Fuzzy Creepling
-            npcID = 143499, -- Fuzzy Creepling
-        },
+        Pet.FuzzyCreepling,
     },
     questID = 53528, -- Unknown
     vignetteID = 3201,
@@ -433,10 +408,7 @@ NPCs[142440] = {
     classification = NPCClassification.Rare,
     npcID = 142440,
     pets = {
-        {
-            itemID = 163684, -- Scabby
-            npcID = 143533, -- Scabby
-        },
+        Pet.Scabby,
     },
     questID = 53529, -- Unknown
     vignetteID = 3192,
@@ -449,10 +421,7 @@ NPCs[142508] = {
     classification = NPCClassification.Rare,
     npcID = 142508,
     pets = {
-        {
-            itemID = 163650, -- Aldrusian Sproutling
-            npcID = 143503, -- Aldrusian Sproutling
-        },
+        Pet.AldrusianSproutling,
     },
     questID = 53505, -- Unknown
     vignetteID = 3190,
@@ -466,9 +435,7 @@ NPCs[142662] = {
     npcID = 142662,
     questID = 53511, -- Unknown
     toys = {
-        {
-            itemID = 163713, -- Brazier Cap
-        },
+        Toy.BrazierCap,
     },
     vignetteID = 3205,
 }
@@ -481,9 +448,7 @@ NPCs[142682] = {
     npcID = 142682,
     questID = 53530, -- Unknown
     toys = {
-        {
-            itemID = 163745, -- Witherbark Gong
-        },
+        Toy.WitherbarkGong,
     },
     vignetteID = 3218,
 }
@@ -496,9 +461,7 @@ NPCs[142683] = {
     npcID = 142683,
     questID = 53524, -- Unknown
     toys = {
-        {
-            itemID = 163741, -- Magic Fun Rock
-        },
+        Toy.MagicFunRock,
     },
     vignetteID = 3216,
 }
@@ -511,9 +474,7 @@ NPCs[142684] = {
     npcID = 142684,
     questID = 53514, -- Unknown
     toys = {
-        {
-            itemID = 163750, -- Kovork Kostume
-        },
+        Toy.KovorkKostume,
     },
     vignetteID = 3213,
 }
@@ -526,9 +487,7 @@ NPCs[142686] = {
     npcID = 142686,
     questID = 53509, -- Unknown
     toys = {
-        {
-            itemID = 163735, -- Foul Belly
-        },
+        Toy.FoulBelly,
     },
     vignetteID = 3210,
 }
@@ -540,10 +499,7 @@ NPCs[142688] = {
     classification = NPCClassification.RareElite,
     npcID = 142688,
     pets = {
-        {
-            itemID = 163652, -- Tiny Grimoire
-            npcID = 143507, -- Voidwiggler
-        },
+        Pet.Voidwiggler,
     },
     questID = 53507, -- Unknown
     vignetteID = 3208,
@@ -557,9 +513,7 @@ NPCs[142690] = {
     npcID = 142690,
     questID = 53525, -- Unknown
     toys = {
-        {
-            itemID = 163738, -- Syndicate Mask
-        },
+        Toy.SyndicateMask,
     },
     vignetteID = 3217,
 }
@@ -570,10 +524,7 @@ NPCs[142692] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     mounts = {
-        {
-            itemID = 163706, -- Witherbark Direwing
-            spellID = 279868, -- Witherbark Direwing
-        },
+        Mount.WitherbarkDirewing,
     },
     npcID = 142692,
     questID = 53517, -- Unknown
@@ -586,10 +537,7 @@ NPCs[142709] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     mounts = {
-        {
-            itemID = 163644, -- Swift Albino Raptor
-            spellID = 279569, -- Swift Albino Raptor
-        },
+        Mount.SwiftAlbinoRaptor,
     },
     npcID = 142709,
     questID = 53504, -- Unknown
@@ -603,10 +551,7 @@ NPCs[142716] = {
     classification = NPCClassification.Rare,
     npcID = 142716,
     pets = {
-        {
-            itemID = 163712, -- Mana-Warped Egg
-            npcID = 143628, -- Squawkling
-        },
+        Pet.Squawkling,
     },
     questID = 53515, -- Unknown
     vignetteID = 3214,
@@ -620,9 +565,7 @@ NPCs[142725] = {
     npcID = 142725,
     questID = 53512, -- Unknown
     toys = {
-        {
-            itemID = 163736, -- Spectral Visage
-        },
+        Toy.SpectralVisage,
     },
     vignetteID = 3211,
 }
@@ -634,10 +577,7 @@ NPCs[142739] = {
     classification = NPCClassification.RareElite,
     factionGroup = "Alliance",
     mounts = {
-        {
-            itemID = 163578, -- Broken Highland Mustang
-            spellID = 279457, -- Broken Highland Mustang
-        },
+        Mount.BrokenHighlandMustang,
     },
     npcID = 142739,
     questID = 53088, -- Unknown
@@ -651,10 +591,7 @@ NPCs[142741] = {
     classification = NPCClassification.Rare,
     factionGroup = "Horde",
     mounts = {
-        {
-            itemID = 163579, -- Highland Mustang
-            spellID = 279456, -- Highland Mustang
-        },
+        Mount.HighlandMustang,
     },
     npcID = 142741,
     questID = 53085, -- Unknown

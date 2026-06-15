@@ -8,6 +8,8 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Pet = private.Enum.Pet
+
 --------------------------------------------------------------------------------
 ---- Deepholm (207)
 --------------------------------------------------------------------------------
@@ -29,10 +31,7 @@ NPCs[49822] = {
     isTameable = true,
     npcID = 49822,
     pets = {
-        {
-            itemID = 64494, -- Tiny Shale Spider
-            npcID = 48982, -- Tiny Shale Spider
-        },
+        Pet.TinyShaleSpider,
     },
 }
 
