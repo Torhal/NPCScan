@@ -135,19 +135,25 @@ function private.DumpNPCData(continentID)
     local continent = private.Data.Continents[continentID]
 
     local sortedMapIDs = {}
-    local sortedNPCIDs = {}
+    local sortedNPCIDsByMapID = {}
+
+    -- Since an NPC can be located in multiple Maps, we need to make sure it only exists exactly once in the dump output.
+    local npcRegistry = {}
 
     for mapID, map in pairs(continent.Maps) do
         local npcIDs = {}
 
-        sortedNPCIDs[mapID] = npcIDs
+        sortedNPCIDsByMapID[mapID] = npcIDs
         sortedMapIDs[#sortedMapIDs + 1] = mapID
 
         for npcID in pairs(map.NPCs) do
-            npcIDs[#npcIDs + 1] = npcID
+            if not npcRegistry[npcID] then
+                npcRegistry[npcID] = true
+                npcIDs[#npcIDs + 1] = npcID
+            end
         end
 
-        table.sort(sortedNPCIDs[mapID])
+        table.sort(sortedNPCIDsByMapID[mapID])
     end
 
     table.sort(sortedMapIDs, private.SortByMapNameThenByID)
@@ -176,8 +182,8 @@ function private.DumpNPCData(continentID)
         local map = private.Data.Maps[sortedMapIDs[mapIndex]]
         local addedZoneHeader = false
 
-        for npcIndex = 1, #sortedNPCIDs[map.ID] do
-            local npcID = sortedNPCIDs[map.ID][npcIndex]
+        for npcIndex = 1, #sortedNPCIDsByMapID[map.ID] do
+            local npcID = sortedNPCIDsByMapID[map.ID][npcIndex]
             local npc = private.Data.NPCs[npcID]
 
             local startedEntry = false
