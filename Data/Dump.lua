@@ -223,7 +223,7 @@ function private.DumpNPCData(continentID)
                             end
                         end
 
-                        fieldInfoOutput = ("%s        }"):format(fieldInfoOutput)
+                        fieldInfoOutput = ("%s    }"):format(fieldInfoOutput)
                     elseif fieldName == "pets" then
                         fieldInfoOutput = "{\n"
 
@@ -235,7 +235,7 @@ function private.DumpNPCData(continentID)
                             end
                         end
 
-                        fieldInfoOutput = ("%s        }"):format(fieldInfoOutput)
+                        fieldInfoOutput = ("%s    }"):format(fieldInfoOutput)
                     elseif fieldName == "toys" then
                         fieldInfoOutput = "{\n"
 
@@ -247,7 +247,7 @@ function private.DumpNPCData(continentID)
                             end
                         end
 
-                        fieldInfoOutput = ("%s        }"):format(fieldInfoOutput)
+                        fieldInfoOutput = ("%s    }"):format(fieldInfoOutput)
                     else
                         local valueType = type(fieldValue)
 
