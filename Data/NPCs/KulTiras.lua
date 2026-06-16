@@ -14,39 +14,6 @@ local Mount = private.Enum.Mount
 ---- Boralus (1161)
 --------------------------------------------------------------------------------
 
-NPCs[137983] = {
-    --------------------------------------------------------------------------------
-    ---- Rear Admiral Hainsworth
-    --------------------------------------------------------------------------------
-    classification = NPCClassification.RareElite,
-    factionGroup = "Alliance",
-    npcID = 137983,
-    vignetteID = -1,
-    worldQuestID = 51580, -- Rear Admiral Hainsworth
-}
-
-NPCs[138039] = {
-    --------------------------------------------------------------------------------
-    ---- Dark Ranger Clea
-    --------------------------------------------------------------------------------
-    classification = NPCClassification.RareElite,
-    factionGroup = "Horde",
-    npcID = 138039,
-    vignetteID = -1,
-    worldQuestID = 51579, -- Dark Ranger Clea
-}
-
-NPCs[139287] = {
-    --------------------------------------------------------------------------------
-    ---- Sawtooth
-    --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
-    npcID = 139287,
-    questID = 51877, -- Unknown
-    vignetteID = 2993,
-    worldQuestID = 51893, -- Sawtooth
-}
-
 NPCs[143559] = {
     --------------------------------------------------------------------------------
     ---- Grand Marshal Tremblade
@@ -77,17 +44,6 @@ NPCs[145161] = {
     npcID = 145161,
     questID = 53784, -- Siege Engineer Krackleboom
     vignetteID = 3419,
-}
-
-NPCs[147489] = {
-    --------------------------------------------------------------------------------
-    ---- Captain Greensails
-    --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
-    factionGroup = "Alliance",
-    npcID = 147489,
-    questID = 54257, -- Captain Greensails
-    vignetteID = 3413,
 }
 
 --------------------------------------------------------------------------------

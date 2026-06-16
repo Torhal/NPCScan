@@ -1273,18 +1273,6 @@ NPCs[162681] = {
 ---- Zuldazar (862)
 --------------------------------------------------------------------------------
 
-NPCs[120899] = {
-    --------------------------------------------------------------------------------
-    ---- Kul'krazahn
-    --------------------------------------------------------------------------------
-    achievementQuestID = 48333, -- Unknown
-    classification = NPCClassification.Rare,
-    npcID = 120899,
-    questID = 48333, -- Unknown
-    vignetteID = 2038,
-    worldQuestID = 50845, -- Kul'krazahn
-}
-
 NPCs[122004] = {
     --------------------------------------------------------------------------------
     ---- Umbra'jin
@@ -1295,18 +1283,6 @@ NPCs[122004] = {
     questID = 47567, -- Umbra'jin
     vignetteID = 1998,
     worldQuestID = 50854, -- Crimsonclaw
-}
-
-NPCs[122639] = {
-    --------------------------------------------------------------------------------
-    ---- Old R'gal
-    --------------------------------------------------------------------------------
-    classification = NPCClassification.RareElite,
-    factionGroup = "Horde",
-    npcID = 122639,
-    questID = 50856, -- Unknown
-    vignetteID = 2784,
-    worldQuestID = 50855, -- Old R'gal
 }
 
 NPCs[123502] = {
