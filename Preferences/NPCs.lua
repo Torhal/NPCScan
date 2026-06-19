@@ -624,6 +624,8 @@ local function GetNPCMountOptionsDescription(npcID)
         for index, mount in ipairs(npc.mounts) do
             table.insert(mountNames, private.GetItemNameFromID(mount.itemID))
         end
+    else
+        table.insert(mountNames, NONE)
     end
 
     table.sort(mountNames)
@@ -749,6 +751,8 @@ local function GetNPCPetOptionsDescription(npcID)
         for index, pet in ipairs(npc.pets) do
             table.insert(petNames, private.GetItemNameFromID(pet.itemID))
         end
+    else
+        table.insert(petNames, NONE)
     end
 
     table.sort(petNames)
