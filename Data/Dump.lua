@@ -325,184 +325,184 @@ function private.DumpNPCData(continentID)
     output:Display()
 end
 
----@param continentID ContinentID?
-function private.DumpNPCQuests(continentID)
-    if not continentID then
-        DisplayContinents()
+-- ---@param continentID ContinentID?
+-- function private.DumpNPCQuests(continentID)
+--     if not continentID then
+--         DisplayContinents()
 
-        return
-    end
+--         return
+--     end
 
-    local continent = private.Data.Continents[continentID]
+--     local continent = private.Data.Continents[continentID]
 
-    local sortedMapIDs = {}
-    local sortedQuestIDs = {}
+--     local sortedMapIDs = {}
+--     local sortedQuestIDs = {}
 
-    for mapID, map in pairs(continent.Maps) do
-        local questIDs = {}
+--     for mapID, map in pairs(continent.Maps) do
+--         local questIDs = {}
 
-        sortedQuestIDs[mapID] = questIDs
-        sortedMapIDs[#sortedMapIDs + 1] = mapID
+--         sortedQuestIDs[mapID] = questIDs
+--         sortedMapIDs[#sortedMapIDs + 1] = mapID
 
-        for npcID in pairs(map.NPCs) do
-            local npc = map.NPCs[npcID]
+--         for npcID in pairs(map.NPCs) do
+--             local npc = map.NPCs[npcID]
 
-            if npc.questID then
-                questIDs[#questIDs + 1] = npc.questID
-            end
-        end
+--             if npc.questID then
+--                 questIDs[#questIDs + 1] = npc.questID
+--             end
+--         end
 
-        table.sort(sortedQuestIDs[mapID])
-    end
+--         table.sort(sortedQuestIDs[mapID])
+--     end
 
-    table.sort(sortedMapIDs, private.SortByMapNameThenByID)
+--     table.sort(sortedMapIDs, private.SortByMapNameThenByID)
 
-    local output = private.TextDump
-    output:Clear()
+--     local output = private.TextDump
+--     output:Clear()
 
-    output:AddLine(sectionDelimiter)
-    output:AddLine("-- AddOn Namespace")
-    output:AddLine(sectionDelimiter)
-    output:AddLine("local AddOnFolderName, private = ...")
-    output:AddLine("local Quests = private.Data.Quests\n")
+--     output:AddLine(sectionDelimiter)
+--     output:AddLine("-- AddOn Namespace")
+--     output:AddLine(sectionDelimiter)
+--     output:AddLine("local AddOnFolderName, private = ...")
+--     output:AddLine("local Quests = private.Data.Quests\n")
 
-    for mapIndex = 1, #sortedMapIDs do
-        local map = private.Data.Maps[sortedMapIDs[mapIndex]]
-        local addedZoneHeader = false
+--     for mapIndex = 1, #sortedMapIDs do
+--         local map = private.Data.Maps[sortedMapIDs[mapIndex]]
+--         local addedZoneHeader = false
 
-        for questIndex = 1, #sortedQuestIDs[map.ID] do
-            local questID = sortedQuestIDs[map.ID][questIndex]
-            local quest = private.Data.Quests[questID]
+--         for questIndex = 1, #sortedQuestIDs[map.ID] do
+--             local questID = sortedQuestIDs[map.ID][questIndex]
+--             local quest = private.Data.Quests[questID]
 
-            local startedEntry = false
+--             local startedEntry = false
 
-            for index = 1, #OrderedQuestDataFields do
-                local field = OrderedQuestDataFields[index]
-                local fieldInfo = quest[field]
+--             for index = 1, #OrderedQuestDataFields do
+--                 local field = OrderedQuestDataFields[index]
+--                 local fieldInfo = quest[field]
 
-                if fieldInfo then
-                    if not addedZoneHeader then
-                        addedZoneHeader = true
+--                 if fieldInfo then
+--                     if not addedZoneHeader then
+--                         addedZoneHeader = true
 
-                        output:AddLine(sectionDelimiter)
-                        output:AddLine(("-- %s (%d)"):format(map.name, map.ID))
-                        output:AddLine(sectionDelimiter)
-                    end
+--                         output:AddLine(sectionDelimiter)
+--                         output:AddLine(("-- %s (%d)"):format(map.name, map.ID))
+--                         output:AddLine(sectionDelimiter)
+--                     end
 
-                    if not startedEntry then
-                        startedEntry = true
-                        output:AddLine(("Quests[%d] = { -- %s"):format(npcID, private.GetQuestNameFromID(questID)))
-                    end
+--                     if not startedEntry then
+--                         startedEntry = true
+--                         output:AddLine(("Quests[%d] = { -- %s"):format(npcID, private.GetQuestNameFromID(questID)))
+--                     end
 
-                    local fieldInfoOutput
-                    if type(fieldInfo) == "string" then
-                        fieldInfoOutput = ('"%s"'):format(fieldInfo:gsub('"', '\\"'))
-                    else
-                        fieldInfoOutput = tostring(fieldInfo)
-                    end
+--                     local fieldInfoOutput
+--                     if type(fieldInfo) == "string" then
+--                         fieldInfoOutput = ('"%s"'):format(fieldInfo:gsub('"', '\\"'))
+--                     else
+--                         fieldInfoOutput = tostring(fieldInfo)
+--                     end
 
-                    local fieldInfoComment = field == "questID"
-                            and (" -- %s"):format(private.GetQuestNameFromID(fieldInfo))
-                        or ""
-                    output:AddLine(("    %s = %s,%s"):format(field, fieldInfoOutput, fieldInfoComment))
-                end
-            end
+--                     local fieldInfoComment = field == "questID"
+--                             and (" -- %s"):format(private.GetQuestNameFromID(fieldInfo))
+--                         or ""
+--                     output:AddLine(("    %s = %s,%s"):format(field, fieldInfoOutput, fieldInfoComment))
+--                 end
+--             end
 
-            if startedEntry then
-                output:AddLine("}\n")
-            end
-        end
-    end
+--             if startedEntry then
+--                 output:AddLine("}\n")
+--             end
+--         end
+--     end
 
-    output:Display()
-end
+--     output:Display()
+-- end
 
----@param continentID ContinentID?
-function private.DumpQuestData(continentID)
-    if not continentID then
-        DisplayContinents()
+-- ---@param continentID ContinentID?
+-- function private.DumpQuestData(continentID)
+--     if not continentID then
+--         DisplayContinents()
 
-        return
-    end
+--         return
+--     end
 
-    local continent = private.Data.Continents[continentID]
+--     local continent = private.Data.Continents[continentID]
 
-    local sortedMapIDs = {}
-    local sortedQuestIDs = {}
+--     local sortedMapIDs = {}
+--     local sortedQuestIDs = {}
 
-    for mapID, map in pairs(continent.Maps) do
-        local questIDs = {}
-        sortedQuestIDs[mapID] = questIDs
-        sortedMapIDs[#sortedMapIDs + 1] = mapID
+--     for mapID, map in pairs(continent.Maps) do
+--         local questIDs = {}
+--         sortedQuestIDs[mapID] = questIDs
+--         sortedMapIDs[#sortedMapIDs + 1] = mapID
 
-        for questID in pairs(map.Quests) do
-            questIDs[#questIDs + 1] = questID
-        end
+--         for questID in pairs(map.Quests) do
+--             questIDs[#questIDs + 1] = questID
+--         end
 
-        table.sort(sortedQuestIDs[mapID])
-    end
+--         table.sort(sortedQuestIDs[mapID])
+--     end
 
-    table.sort(sortedMapIDs, private.SortByMapNameThenByID)
+--     table.sort(sortedMapIDs, private.SortByMapNameThenByID)
 
-    local output = private.TextDump
-    output:Clear()
+--     local output = private.TextDump
+--     output:Clear()
 
-    output:AddLine(sectionDelimiter)
-    output:AddLine("-- AddOn Namespace")
-    output:AddLine(sectionDelimiter)
-    output:AddLine("local AddOnFolderName, private = ...")
-    output:AddLine("local Quests = private.Data.Quests\n")
+--     output:AddLine(sectionDelimiter)
+--     output:AddLine("-- AddOn Namespace")
+--     output:AddLine(sectionDelimiter)
+--     output:AddLine("local AddOnFolderName, private = ...")
+--     output:AddLine("local Quests = private.Data.Quests\n")
 
-    for mapIndex = 1, #sortedMapIDs do
-        local map = private.Data.Maps[sortedMapIDs[mapIndex]]
-        local addedZoneHeader = false
+--     for mapIndex = 1, #sortedMapIDs do
+--         local map = private.Data.Maps[sortedMapIDs[mapIndex]]
+--         local addedZoneHeader = false
 
-        for questIndex = 1, #sortedQuestIDs[map.ID] do
-            local questID = sortedQuestIDs[map.ID][questIndex]
-            local quest = private.Data.Quests[questID]
+--         for questIndex = 1, #sortedQuestIDs[map.ID] do
+--             local questID = sortedQuestIDs[map.ID][questIndex]
+--             local quest = private.Data.Quests[questID]
 
-            local startedEntry = false
+--             local startedEntry = false
 
-            for index = 1, #OrderedQuestDataFields do
-                local field = OrderedQuestDataFields[index]
-                local fieldInfo = quest[field]
+--             for index = 1, #OrderedQuestDataFields do
+--                 local field = OrderedQuestDataFields[index]
+--                 local fieldInfo = quest[field]
 
-                if fieldInfo then
-                    if not addedZoneHeader then
-                        addedZoneHeader = true
+--                 if fieldInfo then
+--                     if not addedZoneHeader then
+--                         addedZoneHeader = true
 
-                        output:AddLine(sectionDelimiter)
-                        output:AddLine(("-- %s (%d)"):format(map.name, map.ID))
-                        output:AddLine(sectionDelimiter)
-                    end
+--                         output:AddLine(sectionDelimiter)
+--                         output:AddLine(("-- %s (%d)"):format(map.name, map.ID))
+--                         output:AddLine(sectionDelimiter)
+--                     end
 
-                    if not startedEntry then
-                        startedEntry = true
-                        output:AddLine(("Quests[%d] = { -- %s"):format(questID, private.GetQuestNameFromID(questID)))
-                    end
+--                     if not startedEntry then
+--                         startedEntry = true
+--                         output:AddLine(("Quests[%d] = { -- %s"):format(questID, private.GetQuestNameFromID(questID)))
+--                     end
 
-                    local fieldInfoOutput
-                    if type(fieldInfo) == "string" then
-                        fieldInfoOutput = ('"%s"'):format(fieldInfo:gsub('"', '\\"'))
-                    else
-                        fieldInfoOutput = tostring(fieldInfo)
-                    end
+--                     local fieldInfoOutput
+--                     if type(fieldInfo) == "string" then
+--                         fieldInfoOutput = ('"%s"'):format(fieldInfo:gsub('"', '\\"'))
+--                     else
+--                         fieldInfoOutput = tostring(fieldInfo)
+--                     end
 
-                    local fieldInfoComment = field == "questID"
-                            and (" -- %s"):format(private.GetQuestNameFromID(fieldInfo))
-                        or ""
-                    output:AddLine(("    %s = %s,%s"):format(field, fieldInfoOutput, fieldInfoComment))
-                end
-            end
+--                     local fieldInfoComment = field == "questID"
+--                             and (" -- %s"):format(private.GetQuestNameFromID(fieldInfo))
+--                         or ""
+--                     output:AddLine(("    %s = %s,%s"):format(field, fieldInfoOutput, fieldInfoComment))
+--                 end
+--             end
 
-            if startedEntry then
-                output:AddLine("}\n")
-            end
-        end
-    end
+--             if startedEntry then
+--                 output:AddLine("}\n")
+--             end
+--         end
+--     end
 
-    output:Display()
-end
+--     output:Display()
+-- end
 
 --------------------------------------------------------------------------------
 ---- Mounts
@@ -674,15 +674,15 @@ private.DUMP_COMMANDS = {
     npcdata = function(parameters)
         private.DumpNPCData(tonumber(parameters))
     end,
-    npcquests = function(parameters)
-        private.DumpNPCQuests(tonumber(parameters))
-    end,
+    -- npcquests = function(parameters)
+    --     private.DumpNPCQuests(tonumber(parameters))
+    -- end,
     pets = function(parameters)
         private.DumpPetData()
     end,
-    questdata = function(parameters)
-        private.DumpQuestData(tonumber(parameters))
-    end,
+    -- questdata = function(parameters)
+    --     private.DumpQuestData(tonumber(parameters))
+    -- end,
     toys = function(parameters)
         private.DumpToyData()
     end,
