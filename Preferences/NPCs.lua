@@ -766,10 +766,7 @@ local function GetNPCPetOptionsDescription(npcID)
     )
 end
 
----@diagnostic disable-next-line: missing-fields
 local DungeonPetNPCOptions = {} ---@type AceConfig.OptionsTable
-
----@diagnostic disable-next-line: missing-fields
 local ZonePetNPCOptions = {} ---@type AceConfig.OptionsTable
 
 local function UpdatePetNPCOptions()
@@ -860,6 +857,130 @@ end
 private.UpdatePetNPCOptions = UpdatePetNPCOptions
 
 --------------------------------------------------------------------------------
+---- Toy Options
+--------------------------------------------------------------------------------
+
+---@param npcID NPCID
+---@return string
+local function GetNPCToyOptionsDescription(npcID)
+    local npc = private.Data.NPCs[npcID]
+    local mapNames = {}
+    local toyNames = {}
+
+    for mapIDIndex = 1, #npc.mapIDs do
+        mapNames[#mapNames + 1] = private.Data.Maps[npc.mapIDs[mapIDIndex]].name
+    end
+
+    if npc.toys then
+        for index, toy in ipairs(npc.toys) do
+            table.insert(toyNames, private.GetItemNameFromID(toy.itemID))
+        end
+    else
+        table.insert(toyNames, NONE)
+    end
+
+    table.sort(toyNames)
+
+    return ("%s %s\n\n%s %s\n\n%s"):format(
+        ID,
+        npcID,
+        LOCATION_COLON,
+        table.concat(mapNames, ", "),
+        ("%s%s %s"):format(TOY, HEADER_COLON, table.concat(toyNames, ", "))
+    )
+end
+
+local DungeonToyNPCOptions = {} ---@type AceConfig.OptionsTable
+local ZoneToyNPCOptions = {} ---@type AceConfig.OptionsTable
+
+local function UpdateToyNPCOptions()
+    table.wipe(DungeonToyNPCOptions)
+    table.wipe(ZoneToyNPCOptions)
+
+    local sortedMapIDs = GetMapIDsAlphabetizedByName()
+    local profile = private.db.profile
+
+    for mapIDIndex = 1, #sortedMapIDs do
+        local mapID = sortedMapIDs[mapIDIndex]
+
+        table.wipe(npcIDs)
+        table.wipe(npcNames)
+
+        for npcID, npc in pairs(private.Data.Maps[mapID].NPCs) do
+            if npc.toys and npc.factionGroup ~= UnitFactionGroup("player") then
+                npcNames[npcID] = private.GetNPCNameFromID(npcID)
+                npcIDs[#npcIDs + 1] = npcID
+            end
+        end
+
+        if #npcIDs > 0 then
+            table.sort(npcIDs, SortByNPCNameThenByID)
+
+            ---@type AceConfig.OptionsTable
+            local mapOptionsTable = {
+                order = mapIDIndex,
+                name = private.GetMapOptionName(mapID),
+                desc = private.GetMapOptionDescription(mapID),
+                type = "group",
+                args = {
+                    npcs = {
+                        order = 1,
+                        name = " ",
+                        type = "group",
+                        guiInline = true,
+                        args = {},
+                    },
+                },
+            }
+
+            for npcIDIndex = 1, #npcIDs do
+                local npcID = npcIDs[npcIDIndex]
+
+                if npcID then
+                    mapOptionsTable.args.npcs.args["npc" .. npcID] = {
+                        order = npcIDIndex,
+                        name = GetNPCOptionsName(npcID),
+                        desc = GetNPCToyOptionsDescription(npcID),
+                        descStyle = "inline",
+                        type = "toggle",
+                        width = "full",
+                        disabled = function()
+                            return not profile.detection.toys
+                        end,
+                        get = function()
+                            return not profile.blacklist.npcIDs[npcID]
+                        end,
+                        set = function()
+                            local isBlacklisted = not profile.blacklist.npcIDs[npcID] and true or nil
+                            profile.blacklist.npcIDs[npcID] = isBlacklisted
+
+                            UpdateToyNPCOptions()
+                            UpdateBlacklistedNPCOptions()
+
+                            NPCScan:UpdateScanList()
+
+                            if isBlacklisted then
+                                NPCScan:SendMessage(private.EventMessage.DismissTargetButtonByID, npcID)
+                            end
+                        end,
+                    }
+                end
+            end
+
+            if private.Data.Maps[mapID].isDungeon then
+                DungeonToyNPCOptions["map" .. mapID] = mapOptionsTable
+            else
+                ZoneToyNPCOptions["map" .. mapID] = mapOptionsTable
+            end
+        end
+    end
+
+    AceConfigRegistry:NotifyChange(AddOnFolderName)
+end
+
+private.UpdateToyNPCOptions = UpdateToyNPCOptions
+
+--------------------------------------------------------------------------------
 ---- Search Options
 --------------------------------------------------------------------------------
 
@@ -920,6 +1041,7 @@ local function UpdateNPCSearchOptions()
                     UpdateTameableRareNPCOptions()
                     UpdateMountNPCOptions()
                     UpdatePetNPCOptions()
+                    UpdateToyNPCOptions()
                     UpdateBlacklistedNPCOptions()
 
                     NPCScan:UpdateScanList()
@@ -1132,9 +1254,17 @@ local function GetOrUpdateNPCOptions()
                     zoneOptions = ZonePetNPCOptions,
                 }),
 
+                toys = CreateDungeonAndZoneOptions({
+                    detectionFieldName = "toys",
+                    dungeonOptions = DungeonToyNPCOptions,
+                    name = TOY,
+                    order = 6,
+                    zoneOptions = ZoneToyNPCOptions,
+                }),
+
                 ---@type AceConfig.OptionsTable
                 search = {
-                    order = 6,
+                    order = 7,
                     name = SEARCH,
                     type = "group",
                     args = {
@@ -1169,7 +1299,7 @@ local function GetOrUpdateNPCOptions()
                 },
                 ---@type AceConfig.OptionsTable
                 userDefined = {
-                    order = 7,
+                    order = 8,
                     name = CUSTOM,
                     type = "group",
                     args = {
@@ -1219,7 +1349,7 @@ local function GetOrUpdateNPCOptions()
                 },
                 ---@type AceConfig.OptionsTable
                 blacklisted = {
-                    order = 8,
+                    order = 9,
                     name = IGNORED,
                     type = "group",
                     args = {
@@ -1241,6 +1371,7 @@ local function GetOrUpdateNPCOptions()
     UpdateTameableRareNPCOptions()
     UpdateMountNPCOptions()
     UpdatePetNPCOptions()
+    UpdateToyNPCOptions()
     UpdateUserDefinedNPCOptions()
     UpdateBlacklistedNPCOptions()
 

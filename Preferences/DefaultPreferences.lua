@@ -65,6 +65,7 @@ local DefaultPreferences = {
             pets = true,
             rares = true,
             tameables = true,
+            toys = true,
             userDefined = true,
             whileOnTaxi = false,
         },

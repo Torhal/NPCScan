@@ -29,6 +29,7 @@
 ---@field intervalSeconds integer
 ---@field mounts boolean
 ---@field pets boolean
+---@field toys boolean
 ---@field raidMarker table<"add" | "addInGroup", boolean>
 ---@field rares boolean
 ---@field tameables boolean
