@@ -1,8 +1,29 @@
 {
     "diagnostics": {
         "enable": [
-            "need-check-nil"
-        ]
+            "implicit-nil-return",
+            "need-check-nil",
+            "unknown-field-type",
+            "unknown-local-type",
+            "unknown-param-type",
+            "unknown-return-type",
+            "unused-function"
+        ],
+        "severity": {
+            "code-after-break": "error",
+            "empty-block": "warning",
+            "inject-field": "error",
+            "implicit-nil-return": "warning",
+            "not-precedence": "error",
+            "redefined-local": "error",
+            "redundant-return": "error",
+            "shadowed-local": "error",
+            "unknown-field-type": "warning",
+            "unknown-local-type": "warning",
+            "unknown-param-type": "warning",
+            "unknown-return-type": "warning",
+            "unreachable-code": "error"
+        }
     },
     "flavors": [
         "retail"
