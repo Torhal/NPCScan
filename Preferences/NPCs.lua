@@ -24,8 +24,8 @@ local EmptyListOption = {
 ---- Variables
 --------------------------------------------------------------------------------
 
-local npcIDs = {} ---@type table<integer, integer>
-local npcNames = {} ---@type table<integer, string>
+local npcIDs = {} ---@type NPCID[]
+local npcNames = {} ---@type string[]
 
 --------------------------------------------------------------------------------
 ---- Helpers
