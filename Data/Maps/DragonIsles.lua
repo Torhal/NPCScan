@@ -264,6 +264,7 @@ Maps[MapID.TheAzureSpan].NPCs = {
     [200832] = true, -- Fyrakk
     [201054] = true, -- Crimson Oldblood
     [201556] = true, -- Waterpots
+    [201557] = true, -- Graniteclaw
     [201558] = true, -- Malgain Rockknell
     [201559] = true, -- Shiobhan Waterborn
     [203698] = true, -- Rampant Shadowflame
