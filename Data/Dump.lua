@@ -512,7 +512,7 @@ do
     local MountRegistry = {}
     local MountLabelToItemID = {}
     local MountLabelToSpellID = {}
-    local SortedMountLabels = {}
+    local SortedMountLabels = {} ---@type string[]
 
     function private.DumpMountData()
         local output = private.TextDump
@@ -567,7 +567,7 @@ do
     local PetRegistry = {}
     local PetLabelToItemID = {}
     local PetLabelToNPCID = {}
-    local SortedPetLabels = {}
+    local SortedPetLabels = {} ---@type string[]
 
     function private.DumpPetData()
         local output = private.TextDump
@@ -621,7 +621,7 @@ end
 do
     local ToyRegistry = {}
     local ToyLabelToItemID = {}
-    local SortedToyLabels = {}
+    local SortedToyLabels = {} ---@type string[]
 
     function private.DumpToyData()
         local output = private.TextDump
