@@ -6,7 +6,7 @@
 
 ---@class DetectionData
 ---@field isDead boolean?
----@field isFromQueue? boolean
+---@field isFromQueue boolean?
 ---@field npcID NPCID
 ---@field npcName string?
 ---@field sourceText string
@@ -14,3 +14,4 @@
 ---@field unitCreatureType string?
 ---@field unitLevel integer?
 ---@field unitToken UnitToken?
+---@field vignetteName string?
