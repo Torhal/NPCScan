@@ -27,6 +27,7 @@ private.QuestNPCs = QuestNPCs
 
 local VignetteIDToNPCMapping = {} ---@type table<VignetteID, NPCData[]>
 
+---@type table<VignetteID, NPCData[]>
 private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
 
 --------------------------------------------------------------------------------
@@ -36,10 +37,11 @@ private.VignetteIDToNPCMapping = VignetteIDToNPCMapping
 ---@class NPCData
 local NPCDataPrototype = {}
 
+---@return boolean
 function NPCDataPrototype:HasQuest()
     local questID = self.questID or self.achievementQuestID
 
-    return questID and questID >= 0
+    return questID and questID >= 0 or false
 end
 
 function NPCDataPrototype:HasActiveWorldQuest()

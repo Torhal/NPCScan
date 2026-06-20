@@ -86,6 +86,7 @@ end
 
 local GetMapIDsAlphabetizedByName
 do
+    ---@type MapID[]
     local mapIDs
 
     ---@return table<integer, integer>
@@ -987,6 +988,7 @@ private.UpdateToyNPCOptions = UpdateToyNPCOptions
 ---@diagnostic disable-next-line: missing-fields
 local NPCSearchOptions = {} ---@type AceConfig.OptionsTable
 
+---@param npc NPCData
 local function AddApplicableSearchID(npc)
     if npc.factionGroup ~= UnitFactionGroup("player") then
         local npcID = npc.npcID
@@ -1059,6 +1061,7 @@ local function UpdateNPCSearchOptions()
     AceConfigRegistry:NotifyChange(AddOnFolderName)
 end
 
+---@param searchString string
 local function PerformNPCSearch(searchString)
     searchString = searchString:lower():trim()
 
@@ -1071,7 +1074,7 @@ local function PerformNPCSearch(searchString)
         if continent.name:lower() == searchString then
             for _, map in pairs(continent.Maps) do
                 for _, npc in pairs(map.NPCs) do
-                    AddApplicableSearchID(npc)
+                    AddApplicableSearchID(npc --[[@as NPCData]])
                 end
             end
 
@@ -1088,7 +1091,7 @@ local function PerformNPCSearch(searchString)
 
         if map.name and map.name:lower() == searchString then
             for _, npc in pairs(map.NPCs) do
-                AddApplicableSearchID(npc)
+                AddApplicableSearchID(npc --[[@as NPCData]])
             end
 
             UpdateNPCSearchOptions()
