@@ -13,7 +13,7 @@ local Enum = private.Enum
 --------------------------------------------------------------------------------
 
 ---@type table<string, MapID>
-local MapID = {
+private.Enum.MapID = {
     AbyssalDepths = 204,
     AhnQirajTheFallenKingdom = 327,
     AntoranWastes = 885,
@@ -221,10 +221,10 @@ local MapID = {
     ZulFarrak = 219,
 }
 
-private.Enum.MapID = MapID
+local MapID = private.Enum.MapID
 
 ---@type table<string, ContinentID>
-local ContinentID = {
+private.Enum.ContinentID = {
     Cosmic = 1,
     Azeroth = 2,
     Kalimdor = 3,
@@ -243,9 +243,10 @@ local ContinentID = {
     KhazAlgar = 16,
 }
 
-Enum.ContinentID = ContinentID
+local ContinentID = private.Enum.ContinentID
 
-local ContinentMapID = {
+---@type table<ContinentID, MapID>
+private.Enum.ContinentMapID = {
     [ContinentID.Cosmic] = MapID.Cosmic,
     [ContinentID.Azeroth] = MapID.Azeroth,
     [ContinentID.Kalimdor] = MapID.Kalimdor,
@@ -264,15 +265,13 @@ local ContinentMapID = {
     [ContinentID.KhazAlgar] = MapID.KhazAlgar,
 }
 
-Enum.ContinentMapID = ContinentMapID
+local ContinentMapID = private.Enum.ContinentMapID
 
-local MapContinentID = {}
+private.Enum.MapContinentID = {}
 
 for continentID, mapID in _G.pairs(ContinentMapID) do
-    MapContinentID[mapID] = continentID
+    private.Enum.MapContinentID[mapID] = continentID
 end
-
-Enum.MapContinentID = MapContinentID
 
 -----------------------------------------------------------------------
 -- WoW 7 to 8 transition

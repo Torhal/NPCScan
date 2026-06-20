@@ -33,6 +33,7 @@ do
     local DEBUGGER_WIDTH = 750
     local DEBUGGER_HEIGHT = 800
 
+    ---@type LibTextDump.Interface
     local debugger
 
     local function GetDebugger()
@@ -58,7 +59,7 @@ end
 ---- AddOn Methods
 --------------------------------------------------------------------------------
 
-function NPCScan:OnInitialize()
+function NPCScan:OnInitialize() ---@diagnostic disable-line: unused-function
     --------------------------------------------------------------------------------
     ---- Data Initialization
     --------------------------------------------------------------------------------
@@ -138,14 +139,15 @@ function NPCScan:OnInitialize()
 
     self:RegisterChatCommand("npcscan", "ChatCommand")
 end
-
+---@diagnostic disable-line: unused-function
 function NPCScan:OnEnable()
     --------------------------------------------------------------------------------
     ---- Lookup Tables
     --------------------------------------------------------------------------------
 
     local MapID = private.Enum.MapID
-    local mapIDs = {}
+    local mapIDs = {} ---@type MapID[]
+
     for mapID, map in pairs(private.Data.Maps) do
         table.insert(mapIDs, mapID)
         for npcID in pairs(map.NPCs) do
@@ -186,7 +188,7 @@ function NPCScan:OnEnable()
         [MapID.KhazAlgar] = true,
     }
 
-    local NPCIDs = {}
+    local NPCIDs = {} ---@type NPCID[]
 
     table.sort(mapIDs)
 
@@ -221,8 +223,8 @@ function NPCScan:OnEnable()
 
         table.sort(NPCIDs)
 
-        for index = 1, #NPCIDs do
-            local npcID = NPCIDs[index]
+        for IDIndex = 1, #NPCIDs do
+            local npcID = NPCIDs[IDIndex]
             local missingText = missingData[npcID]
 
             if missingText then
@@ -265,6 +267,7 @@ end
 function NPCScan:RefreshPreferences() end
 
 do
+    ---@type table<string, function>?
     local SUBCOMMAND_FUNCTIONS
 
     ---@param input string
@@ -274,6 +277,7 @@ do
                 ADD = private.AddUserDefinedNPC,
                 COMPARE = private.CompareData,
                 REMOVE = private.RemoveUserDefinedNPC,
+                ---@param subject string
                 SEARCH = function(subject)
                     AceConfigDialog:Open(AddOnFolderName)
                     AceConfigDialog:SelectGroup(AddOnFolderName, "npcOptions", "search")
@@ -292,6 +296,8 @@ do
 
                     debugger:Display()
                 end,
+                ---@param dumpType string
+                ---@param parameters string?
                 DUMP = function(dumpType, parameters)
                     local func = private.DUMP_COMMANDS[dumpType]
 

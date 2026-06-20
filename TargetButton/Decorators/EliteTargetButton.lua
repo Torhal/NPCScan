@@ -7,6 +7,8 @@ local private = select(2, ...) ---@class PrivateNamespace
 ----------------------------------------------------------------------------------
 ---- Helpers
 ---------------------------------------------------------------------------------
+
+---@param parentFrame Frame
 local function CreateAnimatedBackground(parentFrame)
     local CreateAlphaAnimation = private.CreateAlphaAnimation
 
