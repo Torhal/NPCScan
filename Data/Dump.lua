@@ -668,7 +668,7 @@ private.DUMP_COMMANDS = {
     mapnpcs = function(parameters)
         private.DumpMapNPCs(tonumber(parameters))
     end,
-    mounts = function(parameters)
+    mounts = function()
         private.DumpMountData()
     end,
     npcdata = function(parameters)
@@ -677,13 +677,13 @@ private.DUMP_COMMANDS = {
     -- npcquests = function(parameters)
     --     private.DumpNPCQuests(tonumber(parameters))
     -- end,
-    pets = function(parameters)
+    pets = function()
         private.DumpPetData()
     end,
     -- questdata = function(parameters)
     --     private.DumpQuestData(tonumber(parameters))
     -- end,
-    toys = function(parameters)
+    toys = function()
         private.DumpToyData()
     end,
 }
