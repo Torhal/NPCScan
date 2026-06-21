@@ -1,7 +1,7 @@
 local AddOnFolderName = ... ---@type string
 local private = select(2, ...) ---@class PrivateNamespace
 
-local L = _G.LibStub("AceLocale-3.0"):NewLocale(AddOnFolderName, "enUS", true)
+local L = LibStub("AceLocale-3.0"):NewLocale(AddOnFolderName, "enUS", true) --[[@as table]]
 
 L["Added %1$s (%2$d) to the user-defined NPC list."] = true
 L["Alerts"] = true
