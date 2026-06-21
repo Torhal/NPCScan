@@ -198,7 +198,7 @@ function NPCScan:OnEnable()
         local continent = MapUtil.GetMapParentInfo(mapID, Enum.UIMapType.Continent, true)
 
         local missingData = {}
-        local mapHeaderPrinted
+        local mapHeaderPrinted = false
 
         for npcID in pairs(map.NPCs) do
             local npc = map.NPCs[npcID]
