@@ -30,7 +30,8 @@ local buildVersion = isDevelopmentVersion and "Development Version"
     or (isAlphaVersion and metadataVersion .. "-Alpha")
     or metadataVersion
 
-local Options ---@type AceConfig.OptionsTable
+---@type AceConfig.OptionsTable
+local Options
 
 local function GetOptions()
     Options = Options

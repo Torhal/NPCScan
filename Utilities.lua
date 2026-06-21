@@ -141,7 +141,7 @@ do
         if unitToken then
             local GUID = UnitGUID(unitToken)
             if not GUID then
-                return
+                return nil
             end
 
             return GUIDToCreatureID(GUID)

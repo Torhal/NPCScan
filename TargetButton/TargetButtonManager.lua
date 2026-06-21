@@ -98,6 +98,7 @@ end
 
 LibStub("HereBeDragons-2.0").RegisterCallback(TargetButtonManager, "PlayerZoneChanged", "DismissAll")
 
+---@param eventName string
 function TargetButtonManager:ProcessQueue(eventName)
     if #ActiveTargetButtons < private.NUM_RAID_ICONS and not InCombatLockdown() then
         local targetButtonData = table.remove(QueuedData, 1)
@@ -119,7 +120,9 @@ function TargetButtonManager:Reclaim(eventName, targetButton)
 
     table.insert(TargetButtonHeap[targetButton.__classification], targetButton)
 
+    ---@type number|nil
     local removalIndex
+
     for index = 1, #ActiveTargetButtons do
         if ActiveTargetButtons[index] == targetButton then
             removalIndex = index
@@ -142,6 +145,8 @@ end
 
 TargetButtonManager:RegisterMessage(EventMessage.TargetButtonRequestDeactivate, "Reclaim")
 
+---@param eventName string
+---@param npcID NPCID
 function TargetButtonManager:ReclaimByNPCID(eventName, npcID)
     for index = 1, #ActiveTargetButtons do
         local targetButton = ActiveTargetButtons[index]
@@ -158,7 +163,9 @@ TargetButtonManager:RegisterMessage(EventMessage.DismissTargetButtonByID, "Recla
 ---@param targetButton TargetButton
 ---@param data DetectionData
 function TargetButtonManager:RespawnAsClassification(eventName, targetButton, data)
+    ---@type number|nil
     local targetButtonIndex
+
     for index = 1, #ActiveTargetButtons do
         if ActiveTargetButtons[index] == targetButton then
             targetButtonIndex = index

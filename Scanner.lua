@@ -16,6 +16,8 @@ local NPCScan = LibStub("AceAddon-3.0"):GetAddon(AddOnFolderName) ---@class NPCS
 --------------------------------------------------------------------------------
 ---- Helpers
 --------------------------------------------------------------------------------
+
+---@type function
 local ProcessDetection
 do
     local throttledNPCs = {}
@@ -287,6 +289,7 @@ end
 
 private.UpdateScanListQuestObjectives = UpdateScanListQuestObjectives
 
+---@param _ unknown
 ---@param achievementID AchievementID
 function NPCScan:ACHIEVEMENT_EARNED(_, achievementID)
     if Data.Achievements[achievementID] then
@@ -310,6 +313,7 @@ function NPCScan:LOOT_CLOSED()
     UpdateScanListQuestObjectives()
 end
 
+---@param _ unknown
 ---@param unitToken UnitToken
 function NPCScan:NAME_PLATE_UNIT_ADDED(_, unitToken)
     ProcessUnit(unitToken, UNIT_NAMEPLATES)
@@ -343,6 +347,7 @@ do
     }
 
     ---@param sourceText string
+    ---@return boolean
     local function IsIgnoringSource(sourceText)
         return private.db.profile.detection[VignetteSourceToPreference[sourceText]]
     end
@@ -456,6 +461,7 @@ do
         end
     end
 
+    ---@param _ unknown
     ---@param vignetteGUID WOWGUID
     function NPCScan:VIGNETTE_MINIMAP_UPDATED(_, vignetteGUID)
         ProcessVignetteGUID(vignetteGUID)
@@ -490,6 +496,7 @@ do
     local fadeAnimationGroup = flashFrame:CreateAnimationGroup()
     fadeAnimationGroup:SetLooping("BOUNCE")
 
+    ---@param loopState string
     fadeAnimationGroup:SetScript("OnLoop", function(self, loopState)
         if loopState == "FORWARD" then
             self.LoopCount = self.LoopCount + 1
@@ -522,6 +529,7 @@ do
         fadeAnimationGroup:Play()
     end
 
+    ---@type fun(overrideSoundCVars:boolean)
     local PlayAlertSounds
     do
         local SOUND_RESTORE_INTERVAL_SECONDS = 5

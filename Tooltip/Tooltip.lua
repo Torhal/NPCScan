@@ -164,6 +164,8 @@ local function AddEntryToDataTooltip(dataTooltip, iconPath, entryName, isCollect
     end
 end
 
+---@param list MountData[] | PetData[] | ToyData[]
+---@param fieldName "spellID" | "npcID" | "itemID"
 local function AddEntryDataIDs(list, fieldName)
     table.wipe(entryFromID)
 
@@ -429,6 +431,7 @@ function TooltipHandler:Render(anchorFrame)
         return
     end
 
+    ---@type AchievementID?
     local currentAchievementID
 
     for index = 1, #npcIDs do
@@ -567,6 +570,8 @@ end
 local UpdateDisplayThrottleIntervalSeconds = 5
 local lastUpdateTime = time()
 
+---@param _ unknown
+---@param scannerData ScannerData
 function DataObject:UpdateDisplay(_, scannerData)
     self.text = scannerData.NPCCount > 0 and scannerData.NPCCount or NONE
 

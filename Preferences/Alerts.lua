@@ -130,6 +130,7 @@ local function GetAlertOptions()
                             get = function()
                                 return profile.alert.screenFlash.isEnabled
                             end,
+                            ---@param value boolean
                             set = function(_, value)
                                 profile.alert.screenFlash.isEnabled = value
                             end,
@@ -147,6 +148,7 @@ local function GetAlertOptions()
                             get = function()
                                 return profile.alert.screenFlash.texture
                             end,
+                            ---@param value string
                             set = function(_, value)
                                 profile.alert.screenFlash.texture = value
                             end,
@@ -169,6 +171,10 @@ local function GetAlertOptions()
                                     return 0, 0, 0, 1
                                 end
                             end,
+                            ---@param r number
+                            ---@param g number
+                            ---@param b number
+                            ---@param a number
                             set = function(_, r, g, b, a)
                                 local color = profile.alert.screenFlash.color
 
@@ -217,6 +223,7 @@ local function GetAlertOptions()
                             get = function()
                                 return profile.alert.sound.isEnabled
                             end,
+                            ---@param value boolean
                             set = function(_, value)
                                 profile.alert.sound.isEnabled = value
                             end,
@@ -231,6 +238,7 @@ local function GetAlertOptions()
                             get = function()
                                 return profile.alert.sound.ignoreMute
                             end,
+                            ---@param value boolean
                             set = function(_, value)
                                 profile.alert.sound.ignoreMute = value
                             end,
@@ -260,6 +268,7 @@ local function GetAlertOptions()
                             get = function()
                                 -- Intentionally empty, since there can be multiple sounds.
                             end,
+                            ---@param value string
                             set = function(_, value)
                                 profile.alert.sound.sharedMediaNames[value] = true
                                 UpdateAlertNamesOptions()

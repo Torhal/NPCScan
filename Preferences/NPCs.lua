@@ -1315,6 +1315,8 @@ local function GetOrUpdateNPCOptions()
                             get = function()
                                 return profile.detection.userDefined
                             end,
+
+                            ---@param value boolean
                             set = function(_, value)
                                 profile.detection.userDefined = value
 

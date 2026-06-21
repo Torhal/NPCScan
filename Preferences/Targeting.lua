@@ -148,6 +148,8 @@ local function GetTargetingOptions()
                     get = function()
                         return profile.targetButtonGroup.isEnabled
                     end,
+
+                    ---@param value boolean
                     set = function(_, value)
                         profile.targetButtonGroup.isEnabled = value
                     end,
@@ -164,6 +166,8 @@ local function GetTargetingOptions()
                     get = function()
                         return profile.targetButtonGroup.durationSeconds / 60
                     end,
+                    ---@param _ unknown
+                    ---@param value number
                     set = function(_, value)
                         profile.targetButtonGroup.durationSeconds = value * 60
                     end,
@@ -179,6 +183,8 @@ local function GetTargetingOptions()
                     get = function()
                         return profile.targetButtonGroup.scale
                     end,
+
+                    ---@param value number
                     set = function(_, value)
                         profile.targetButtonGroup.scale = value
                         LibWindow.SetScale(anchorFrame, value)
@@ -244,6 +250,8 @@ local function GetTargetingOptions()
                             get = function()
                                 return profile.targetButtonGroup.hideDuringCombat
                             end,
+                            ---@param _ unknown
+                            ---@param value boolean
                             set = function(_, value)
                                 profile.targetButtonGroup.hideDuringCombat = value
                             end,

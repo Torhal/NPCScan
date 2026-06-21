@@ -13,6 +13,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale(AddOnFolderName)
 ---- Ignored Continent Options
 --------------------------------------------------------------------------------
 
+---@type table<ContinentID, MapID[]>
 local AlphabeticalContinentMaps = {}
 local ContinentAndMapOptions = {}
 local ContinentIDs = {}
@@ -67,9 +68,13 @@ local function UpdateContinentAndMapOptions()
                     name = STATUS,
                     type = "select",
                     values = private.DetectionGroupStatusLabels,
+
+                    ---@return DetectionGroupStatus
                     get = function()
                         return profile.detection.continentIDs[continentID]
                     end,
+
+                    ---@param value DetectionGroupStatus
                     set = function(_, value)
                         profile.detection.continentIDs[continentID] = value
 
@@ -214,6 +219,8 @@ local function GetDetectionOptions()
                                     get = function()
                                         return profile.detection.ignoreCompletedAchievementCriteria
                                     end,
+
+                                    ---@param value boolean
                                     set = function(_, value)
                                         profile.detection.ignoreCompletedAchievementCriteria = value
                                         NPCScan:UpdateScanList()
@@ -228,6 +235,8 @@ local function GetDetectionOptions()
                                     get = function()
                                         return profile.detection.ignoreCompletedQuestObjectives
                                     end,
+
+                                    ---@param value boolean
                                     set = function(_, value)
                                         profile.detection.ignoreCompletedQuestObjectives = value
                                         NPCScan:UpdateScanList()
@@ -242,6 +251,8 @@ local function GetDetectionOptions()
                                     get = function()
                                         return profile.detection.ignoreDeadNPCs
                                     end,
+
+                                    ---@param value boolean
                                     set = function(_, value)
                                         profile.detection.ignoreDeadNPCs = value
                                         NPCScan:UpdateScanList()
@@ -256,6 +267,8 @@ local function GetDetectionOptions()
                                     get = function()
                                         return profile.detection.ignoreMiniMap
                                     end,
+
+                                    ---@param value boolean
                                     set = function(_, value)
                                         profile.detection.ignoreMiniMap = value
                                         NPCScan:UpdateScanList()
@@ -270,6 +283,8 @@ local function GetDetectionOptions()
                                     get = function()
                                         return profile.detection.ignoreWorldMap
                                     end,
+
+                                    ---@param value boolean
                                     set = function(_, value)
                                         profile.detection.ignoreWorldMap = value
                                         NPCScan:UpdateScanList()
