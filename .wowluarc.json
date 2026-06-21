@@ -6,8 +6,7 @@
             "unknown-field-type",
             "unknown-local-type",
             "unknown-param-type",
-            "unknown-return-type",
-            "unused-function"
+            "unknown-return-type"
         ],
         "severity": {
             "code-after-break": "error",
