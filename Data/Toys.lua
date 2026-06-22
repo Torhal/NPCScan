@@ -187,6 +187,9 @@ private.Enum.Toy = {
     PanfluteOfPandaria = {
         itemID = 86586, -- Panflute of Pandaria
     },
+    PersonalShell = {
+        itemID = 198409, -- Personal Shell
+    },
     PetrificationStone = {
         itemID = 118221, -- Petrification Stone
     },
