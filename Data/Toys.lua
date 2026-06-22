@@ -142,6 +142,9 @@ private.Enum.Toy = {
     LegionCommunicationOrb = {
         itemID = 153194, -- Legion Communication Orb
     },
+    MagesChewedWand = {
+        itemID = 200249, -- Mage's Chewed Wand
+    },
     MagicBanana = {
         itemID = 86591, -- Magic Banana
     },
