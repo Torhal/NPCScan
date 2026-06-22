@@ -250,6 +250,9 @@ private.Enum.Toy = {
     SyndicateMask = {
         itemID = 163738, -- Syndicate Mask
     },
+    TheSuperShellkhanGang = {
+        itemID = 200999, -- The Super Shellkhan Gang
+    },
     ThistleleafBranch = {
         itemID = 130147, -- Thistleleaf Branch
     },
