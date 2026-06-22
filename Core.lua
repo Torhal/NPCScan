@@ -76,16 +76,16 @@ function NPCScan:OnInitialize() ---@diagnostic disable-line: unused-function
 
         if not continent then
             continent = {
-                ID = -1,
+                ID = continentID,
                 Maps = {},
-                name = "",
+                name = HereBeDragons:GetLocalizedMap(private.Enum.ContinentMapID[continentID]),
             }
 
             private.Data.Continents[continentID] = continent
+        else
+            continent.ID = continentID
+            continent.name = HereBeDragons:GetLocalizedMap(private.Enum.ContinentMapID[continentID])
         end
-
-        continent.ID = continentID
-        continent.name = HereBeDragons:GetLocalizedMap(private.Enum.ContinentMapID[continentID])
 
         DefaultPreferences.profile.detection.continentIDs[continentID] = private.Enum.DetectionGroupStatus.Enabled
     end
