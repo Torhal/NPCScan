@@ -10,6 +10,9 @@ local private = select(2, ...) ---@class PrivateNamespace
 --------------------------------------------------------------------------------
 
 private.Enum.Toy = {
+    ACollectionOfMe = {
+        itemID = 200148, -- A Collection of Me
+    },
     AiLisSkymirror = {
         itemID = 86589, -- Ai-Li's Skymirror
     },
