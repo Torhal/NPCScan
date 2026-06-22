@@ -130,6 +130,9 @@ private.Enum.Toy = {
     InfectedIchor = {
         itemID = 200178, -- Infected Ichor
     },
+    InvestiGatorsPocketwatch = {
+        itemID = 206993, -- Investi-gator's Pocketwatch
+    },
     IronBuccaneersHat = {
         itemID = 118244, -- Iron Buccaneer's Hat
     },
