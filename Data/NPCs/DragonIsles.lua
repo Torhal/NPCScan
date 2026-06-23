@@ -2974,6 +2974,9 @@ NPCs[203468] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 203468,
+    pets = {
+        Pet.Aquapo,
+    },
     questID = 75270, -- Unknown
     vignetteID = 5640,
 }
