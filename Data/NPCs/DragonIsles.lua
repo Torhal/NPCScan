@@ -464,6 +464,10 @@ NPCs[192949] = {
     classification = NPCClassification.Rare,
     npcID = 192949,
     questID = 70783, -- Skaara
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5389,
 }
 
@@ -474,6 +478,10 @@ NPCs[192983] = {
     classification = NPCClassification.Rare,
     npcID = 192983,
     questID = 67717, -- Web-Queen Ashkaz
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5163,
 }
 
@@ -481,9 +489,12 @@ NPCs[193123] = {
     --------------------------------------------------------------------------------
     ---- Steamgill
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193123,
     questID = 69667, -- Steamgill
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5168,
 }
 
@@ -494,6 +505,11 @@ NPCs[193133] = {
     classification = NPCClassification.Rare,
     npcID = 193133,
     questID = 69837, -- Sunscale Behemoth
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
+    vignetteID = 5170,
 }
 
 NPCs[193136] = {
@@ -513,6 +529,9 @@ NPCs[193140] = {
     classification = NPCClassification.Rare,
     npcID = 193140,
     questID = 72364, -- Zarizz
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5469,
 }
 
@@ -533,6 +552,9 @@ NPCs[193153] = {
     classification = NPCClassification.Rare,
     npcID = 193153,
     questID = 69851, -- Ripsaw the Stalker
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5178,
 }
 
@@ -543,6 +565,9 @@ NPCs[193163] = {
     classification = NPCClassification.Rare,
     npcID = 193163,
     questID = 69852, -- Territorial Coastling
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5179,
 }
 
@@ -570,9 +595,12 @@ NPCs[193170] = {
     --------------------------------------------------------------------------------
     ---- Fulgurb
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193170,
     questID = 69856, -- Fulgurb
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5182,
 }
 
@@ -604,15 +632,21 @@ NPCs[193209] = {
     classification = NPCClassification.Rare,
     npcID = 193209,
     questID = 73901, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+    },
 }
 
 NPCs[193212] = {
     --------------------------------------------------------------------------------
     ---- Malsegan
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193212,
     questID = 69871, -- Malsegan
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5195,
 }
 
@@ -761,6 +795,9 @@ NPCs[197009] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 197009,
+    toys = {
+        Toy.MagesChewedWand,
+    },
 }
 
 NPCs[197411] = {
@@ -776,18 +813,25 @@ NPCs[201535] = {
     --------------------------------------------------------------------------------
     ---- Bloodbeak the Ravenous
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 201535,
     questID = 74467, -- Bloodbeak the Ravenous
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
 }
 
 NPCs[201537] = {
     --------------------------------------------------------------------------------
     ---- Groffnar
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 201537,
     questID = 74463, -- Groffnar
+    toys = {
+        Toy.MagesChewedWand,
+    },
 }
 
 NPCs[201538] = {
@@ -831,6 +875,9 @@ NPCs[183984] = {
     classification = NPCClassification.Rare,
     npcID = 183984,
     questID = 74086, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 4958,
 }
 
@@ -841,6 +888,11 @@ NPCs[191305] = {
     classification = NPCClassification.Rare,
     npcID = 191305,
     questID = 72121, -- The Great Shellkhan
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+        Toy.TheSuperShellkhanGang,
+    },
     vignetteID = 5439,
 }
 
@@ -850,6 +902,9 @@ NPCs[193125] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 193125,
+    toys = {
+        Toy.MagesChewedWand,
+    },
 }
 
 NPCs[193126] = {
@@ -858,6 +913,9 @@ NPCs[193126] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 193126,
+    toys = {
+        Toy.ACollectionOfMe,
+    },
 }
 
 NPCs[193127] = {
@@ -889,6 +947,10 @@ NPCs[193130] = {
     classification = NPCClassification.Rare,
     npcID = 193130,
     questID = 73889, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5479,
 }
 
@@ -899,6 +961,9 @@ NPCs[193143] = {
     classification = NPCClassification.Rare,
     npcID = 193143,
     questID = 69853, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5180,
 }
 
@@ -919,6 +984,10 @@ NPCs[193161] = {
     classification = NPCClassification.Rare,
     npcID = 193161,
     questID = 74089, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5177,
 }
 
@@ -926,9 +995,12 @@ NPCs[193176] = {
     --------------------------------------------------------------------------------
     ---- Sandana the Tempest
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193176,
     questID = 74029, -- Unknown
+    toys = {
+        Toy.ACollectionOfMe,
+    },
     vignetteID = 5185,
 }
 
@@ -936,9 +1008,12 @@ NPCs[193210] = {
     --------------------------------------------------------------------------------
     ---- Phleep
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193210,
     questID = 74021, -- Unknown
+    toys = {
+        Toy.ACollectionOfMe,
+    },
     vignetteID = 5192,
 }
 
@@ -959,6 +1034,9 @@ NPCs[193229] = {
     classification = NPCClassification.Rare,
     npcID = 193229,
     questID = 69873, -- Henlare
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5196,
 }
 
@@ -976,9 +1054,13 @@ NPCs[193240] = {
     --------------------------------------------------------------------------------
     ---- Riverwalker Tamopo
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193240,
     questID = 69880, -- Riverwalker Tamopo
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5201,
 }
 
@@ -989,6 +1071,9 @@ NPCs[193241] = {
     classification = NPCClassification.Rare,
     npcID = 193241,
     questID = 74066, -- Unknown
+    toys = {
+        Toy.ACollectionOfMe,
+    },
     vignetteID = 5203,
 }
 
@@ -1006,9 +1091,12 @@ NPCs[193246] = {
     --------------------------------------------------------------------------------
     ---- Matriarch Remalla
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193246,
     questID = 69883, -- Matriarch Remalla
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5204,
 }
 
@@ -1030,6 +1118,10 @@ NPCs[193273] = {
     isTameable = true,
     npcID = 193273,
     questID = 72116, -- Liskron the Dazzling
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5437,
 }
 
@@ -1079,9 +1171,13 @@ NPCs[193666] = {
     --------------------------------------------------------------------------------
     ---- Rokmur
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193666,
     questID = 74025, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5238,
 }
 
@@ -1141,6 +1237,12 @@ NPCs[201664] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 201664,
+    questID = 75479,
+    toys = {
+        Toy.ACollectionOfMe,
+        Toy.InvestiGatorsPocketwatch,
+    },
+    vignetteID = 5676,
 }
 
 NPCs[205865] = {
@@ -1252,6 +1354,9 @@ NPCs[193201] = {
     classification = NPCClassification.Rare,
     npcID = 193201,
     questID = 73885, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+    },
 }
 
 NPCs[193214] = {
@@ -1297,9 +1402,12 @@ NPCs[193251] = {
     --------------------------------------------------------------------------------
     ---- Gruffy
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193251,
     questID = 69885, -- Gruffy
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5206,
 }
 
@@ -1309,15 +1417,22 @@ NPCs[193259] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 193259,
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
 }
 
 NPCs[193269] = {
     --------------------------------------------------------------------------------
     ---- Grumbletrunk
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193269,
     questID = 69892, -- Grumbletrunk
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5210,
 }
 
@@ -1347,6 +1462,9 @@ NPCs[193632] = {
     classification = NPCClassification.Rare,
     npcID = 193632,
     questID = 69948, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+    },
     vignetteID = 5224,
 }
 
@@ -1411,6 +1529,10 @@ NPCs[194392] = {
     classification = NPCClassification.Rare,
     npcID = 194392,
     questID = 70165, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5269,
 }
 
@@ -1436,9 +1558,13 @@ NPCs[197353] = {
     --------------------------------------------------------------------------------
     ---- Blisterhide
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 197353,
     questID = 73985, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5414,
 }
 
@@ -1957,6 +2083,10 @@ NPCs[184853] = {
     classification = NPCClassification.Rare,
     npcID = 184853,
     questID = 66074, -- Primal Scythid Queen
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5055,
 }
 
@@ -2030,6 +2160,10 @@ NPCs[187111] = {
     classification = NPCClassification.Rare,
     npcID = 187111,
     questID = 72835, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5057,
 }
 
@@ -2097,9 +2231,13 @@ NPCs[189822] = {
     --------------------------------------------------------------------------------
     ---- Shas'ith
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 189822,
     questID = 74077, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5108,
 }
 
@@ -2115,9 +2253,13 @@ NPCs[190985] = {
     --------------------------------------------------------------------------------
     ---- Death's Shadow
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 190985,
     questID = 73074, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5113,
 }
 
@@ -2125,9 +2267,13 @@ NPCs[190986] = {
     --------------------------------------------------------------------------------
     ---- Battlehorn Pyrhus
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 190986,
     questID = 74040, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5112,
 }
 
@@ -2168,8 +2314,12 @@ NPCs[192737] = {
     --------------------------------------------------------------------------------
     ---- Qalashi War Mammoth
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 192737,
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
 }
 
 NPCs[192738] = {
@@ -2263,6 +2413,10 @@ NPCs[193148] = {
     classification = NPCClassification.Rare,
     npcID = 193148,
     questID = 69841, -- Unknown
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5174,
 }
 
@@ -2280,9 +2434,13 @@ NPCs[193154] = {
     --------------------------------------------------------------------------------
     ---- Forgotten Gryphon
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193154,
     questID = 72130, -- Forgotten Gryphon
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
     vignetteID = 5383,
 }
 
@@ -2324,6 +2482,9 @@ NPCs[193181] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 193181,
+    toys = {
+        Toy.MagesChewedWand,
+    },
 }
 
 NPCs[193198] = {
@@ -2342,6 +2503,10 @@ NPCs[193217] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 193217,
+    toys = {
+        Toy.MagesChewedWand,
+        Toy.PersonalShell,
+    },
 }
 
 NPCs[193226] = {
