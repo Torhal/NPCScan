@@ -174,6 +174,10 @@ private.Enum.Pet = {
         itemID = 180644, -- Rocky
         npcID = 171246, -- Rocky
     },
+    RoseateHopper = {
+        itemID = 199916, -- Roseate Hopper
+        npcID = 192369, -- Roseate Hopper
+    },
     RubyDroplet = {
         itemID = 104159, -- Ruby Droplet
         npcID = 73356, -- Ruby Droplet
