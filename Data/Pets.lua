@@ -18,6 +18,10 @@ private.Enum.Pet = {
         itemID = 86563, -- Hollow Reed
         npcID = 64633, -- Aqua Strider
     },
+    Aquapo = {
+        itemID = 205154, -- Aquapo
+        npcID = 204359, -- Aquapo
+    },
     AshleafSpriteling = {
         itemID = 104156, -- Ashleaf Spriteling
         npcID = 73533, -- Ashleaf Spriteling
