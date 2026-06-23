@@ -34,6 +34,10 @@ private.Enum.Pet = {
         itemID = 118107, -- Brilliant Spore
         npcID = 86719, -- Brilliant Spore
     },
+    Brul = {
+        itemID = 205114, -- Brul
+        npcID = 204303, -- Brul
+    },
     ChirpyValeshrieker = {
         itemID = 180643, -- Chirpy Valeshrieker
         npcID = 171239, -- Chirpy Valeshrieker
