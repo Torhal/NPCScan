@@ -8,6 +8,7 @@ local private = select(2, ...) ---@class PrivateNamespace
 local NPCs = private.Data.NPCs
 local NPCClassification = private.Enum.NPCClassification
 
+local Pet = private.Enum.Pet
 local Toy = private.Enum.Toy
 
 --------------------------------------------------------------------------------
@@ -1237,7 +1238,7 @@ NPCs[201664] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 201664,
-    questID = 75479,
+    questID = 75479, -- Unknown
     toys = {
         Toy.ACollectionOfMe,
         Toy.InvestiGatorsPocketwatch,
@@ -2306,6 +2307,9 @@ NPCs[192362] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 192362,
+    pets = {
+        Pet.RoseateHopper,
+    },
     questID = 67048, -- Unknown
     vignetteID = 5139,
 }
