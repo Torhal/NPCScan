@@ -70,7 +70,9 @@ local function UpdateAlertNamesOptions()
                 return true
             end,
             set = function()
-                if private.DefaultPreferences.profile.alert.sound.sharedMediaNames[soundName] then
+                local profile = private.DefaultPreferences.profile
+
+                if profile and profile.alert.sound.sharedMediaNames[soundName] then
                     sharedMediaNames[soundName] = false
                 else
                     sharedMediaNames[soundName] = nil
