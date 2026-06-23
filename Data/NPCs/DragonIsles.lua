@@ -3062,8 +3062,11 @@ NPCs[203621] = {
     --------------------------------------------------------------------------------
     ---- Brullo the Strong
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 203621,
+    pets = {
+        Pet.Brul,
+    },
     questID = 75325, -- Unknown
     vignetteID = 5652,
 }
