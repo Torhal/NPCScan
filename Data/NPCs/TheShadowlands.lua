@@ -1323,6 +1323,9 @@ NPCs[162853] = {
     ---- Unbreakable Urtz
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
+    mounts = {
+        Mount.BattleBoundWarhound,
+    },
     npcID = 162853,
 }
 
@@ -1331,6 +1334,9 @@ NPCs[162872] = {
     ---- Xantuth the Blighted
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
+    mounts = {
+        Mount.BattleBoundWarhound,
+    },
     npcID = 162872,
 }
 
@@ -1339,6 +1345,9 @@ NPCs[162873] = {
     ---- Azmogal
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
+    mounts = {
+        Mount.BattleBoundWarhound,
+    },
     npcID = 162873,
 }
 
@@ -1347,6 +1356,9 @@ NPCs[162874] = {
     ---- Ti'or
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
+    mounts = {
+        Mount.BattleBoundWarhound,
+    },
     npcID = 162874,
 }
 
@@ -1355,6 +1367,9 @@ NPCs[162875] = {
     ---- Devmorta
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
+    mounts = {
+        Mount.BattleBoundWarhound,
+    },
     npcID = 162875,
 }
 
@@ -1363,6 +1378,9 @@ NPCs[162880] = {
     ---- Mistress Dyrax
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
+    mounts = {
+        Mount.BattleBoundWarhound,
+    },
     npcID = 162880,
 }
 
