@@ -34,6 +34,10 @@ private.Enum.Mount = {
         itemID = 166432, -- Ashenvale Chimaera
         spellID = 288495, -- Ashenvale Chimaera
     },
+    BattleBoundWarhound = {
+        itemID = 184062, -- Gnawed Reins of the Battle-Bound Warhound
+        spellID = 344228, -- Battle-Bound Warhound
+    },
     BiletoothGnasher = {
         itemID = 152903, -- Biletooth Gnasher
         spellID = 253660, -- Biletooth Gnasher
