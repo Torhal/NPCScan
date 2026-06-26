@@ -545,6 +545,7 @@ NPCs[135565] = {
     achievementQuestID = 50888, -- Unknown
     classification = NPCClassification.Normal,
     npcID = 135565,
+    questID = 50888,
     vignetteID = 2788,
 }
 
@@ -1291,6 +1292,8 @@ NPCs[123502] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
     npcID = 123502,
+    questID = -1,
+    vignetteID = -1,
 }
 
 NPCs[124185] = {
@@ -1350,6 +1353,8 @@ NPCs[129323] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
     npcID = 129323,
+    questID = -1,
+    vignetteID = -1,
 }
 
 NPCs[129343] = {
@@ -1406,6 +1411,8 @@ NPCs[130741] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
     npcID = 130741,
+    questID = -1,
+    vignetteID = -1,
 }
 
 NPCs[131233] = {
@@ -1621,6 +1628,8 @@ NPCs[135510] = {
     classification = NPCClassification.Elite,
     isTameable = true,
     npcID = 135510,
+    questID = -1,
+    vignetteID = -1,
 }
 
 NPCs[135512] = {
@@ -1629,6 +1638,8 @@ NPCs[135512] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
     npcID = 135512,
+    questID = -1,
+    vignetteID = -1,
 }
 
 NPCs[136413] = {
@@ -1662,6 +1673,8 @@ NPCs[139365] = {
     classification = NPCClassification.Normal,
     isTameable = true,
     npcID = 139365,
+    questID = -1,
+    vignetteID = -1,
 }
 
 NPCs[142434] = {
@@ -1670,6 +1683,7 @@ NPCs[142434] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 142434,
+    questID = -1,
     vignetteID = -1,
 }
 
@@ -1708,6 +1722,8 @@ NPCs[143910] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
     npcID = 143910,
+    questID = -1,
+    vignetteID = -1,
 }
 
 NPCs[145391] = {
