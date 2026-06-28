@@ -49,9 +49,11 @@ NPCs[209574] = {
     --------------------------------------------------------------------------------
     ---- Aurostor
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.Elite,
     npcID = 209574,
-    questID = 76367, -- Hibernation Heroes
+    questID = -1, -- Unknown
+    vignetteID = -1,
+    worldQuestID = 76367, -- Hibernation Heroes
 }
 
 NPCs[209620] = {
@@ -138,8 +140,10 @@ NPCs[209915] = {
     --------------------------------------------------------------------------------
     ---- Amalgamation of Dreams
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 209915,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[209919] = {
@@ -259,6 +263,7 @@ NPCs[210111] = {
     classification = NPCClassification.Rare,
     npcID = 210111,
     questID = 78263, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[210161] = {
@@ -296,7 +301,10 @@ NPCs[212090] = {
     ---- Elusive Blooming Brierhide
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 212090,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[212133] = {
@@ -304,7 +312,10 @@ NPCs[212133] = {
     ---- Elusive Verdant Gladewarden
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 212133,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 --------------------------------------------------------------------------------
@@ -337,7 +348,10 @@ NPCs[187781] = {
     ---- Hamett
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 187781,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[188095] = {
@@ -346,6 +360,7 @@ NPCs[188095] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 188095,
+    questID = -1, -- Unknown
     vignetteID = 5077,
 }
 
@@ -375,6 +390,8 @@ NPCs[189652] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 189652,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[191354] = {
@@ -396,6 +413,7 @@ NPCs[191842] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 191842,
+    questID = -1, -- Unknown
     vignetteID = 5135,
 }
 
@@ -405,6 +423,7 @@ NPCs[191950] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 191950,
+    questID = -1, -- Unknown
     vignetteID = 5136,
 }
 
@@ -582,6 +601,7 @@ NPCs[193165] = {
     toys = {
         Toy.PrimalistPrison,
     },
+    vignetteID = -1,
 }
 
 NPCs[193168] = {
@@ -589,7 +609,10 @@ NPCs[193168] = {
     ---- Biryuk
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 193168,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[193170] = {
@@ -624,6 +647,8 @@ NPCs[193188] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 193188,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[193209] = {
@@ -636,6 +661,7 @@ NPCs[193209] = {
     toys = {
         Toy.MagesChewedWand,
     },
+    vignetteID = -1,
 }
 
 NPCs[193212] = {
@@ -691,6 +717,7 @@ NPCs[193534] = {
     classification = NPCClassification.Rare,
     npcID = 193534,
     questID = 69929, -- Strunraan
+    vignetteID = -1,
 }
 
 NPCs[193669] = {
@@ -710,8 +737,10 @@ NPCs[193710] = {
     --------------------------------------------------------------------------------
     ---- Seereel, the Spring
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193710,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[195186] = {
@@ -720,6 +749,7 @@ NPCs[195186] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 195186,
+    questID = -1, -- Unknown
     vignetteID = 5351,
 }
 
@@ -739,6 +769,8 @@ NPCs[195223] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 195223,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[195409] = {
@@ -758,6 +790,7 @@ NPCs[195895] = {
     classification = NPCClassification.Rare,
     npcID = 195895,
     questID = 74093, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[196010] = {
@@ -796,9 +829,11 @@ NPCs[197009] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 197009,
+    questID = -1, -- Unknown
     toys = {
         Toy.MagesChewedWand,
     },
+    vignetteID = -1,
 }
 
 NPCs[197411] = {
@@ -808,6 +843,7 @@ NPCs[197411] = {
     classification = NPCClassification.Rare,
     npcID = 197411,
     questID = 74057, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[201535] = {
@@ -821,6 +857,7 @@ NPCs[201535] = {
         Toy.MagesChewedWand,
         Toy.PersonalShell,
     },
+    vignetteID = 5573,
 }
 
 NPCs[201537] = {
@@ -833,6 +870,7 @@ NPCs[201537] = {
     toys = {
         Toy.MagesChewedWand,
     },
+    vignetteID = 5569,
 }
 
 NPCs[201538] = {
@@ -902,10 +940,13 @@ NPCs[193125] = {
     ---- Goremaul the Gluttonous
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 193125,
+    questID = -1, -- Unknown
     toys = {
         Toy.MagesChewedWand,
     },
+    vignetteID = -1,
 }
 
 NPCs[193126] = {
@@ -914,9 +955,11 @@ NPCs[193126] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 193126,
+    questID = -1, -- Unknown
     toys = {
         Toy.ACollectionOfMe,
     },
+    vignetteID = -1,
 }
 
 NPCs[193127] = {
@@ -939,6 +982,7 @@ NPCs[193128] = {
     toys = {
         Toy.InfectedIchor,
     },
+    vignetteID = -1,
 }
 
 NPCs[193130] = {
@@ -1132,7 +1176,19 @@ NPCs[193533] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Elite,
     npcID = 193533,
-    questID = 69928, -- Liskanoth
+    questID = -1, -- Unknown
+    vignetteID = -1,
+    worldQuestID = 69928, -- Liskanoth
+}
+
+NPCs[193634] = {
+    --------------------------------------------------------------------------------
+    ---- Swog'ranka
+    --------------------------------------------------------------------------------
+    classification = NPCClassification.RareElite,
+    npcID = 193634,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[193658] = {
@@ -1205,6 +1261,16 @@ NPCs[193688] = {
     vignetteID = 5248,
 }
 
+NPCs[193735] = {
+    --------------------------------------------------------------------------------
+    ---- Moth'go Deeploom
+    --------------------------------------------------------------------------------
+    classification = NPCClassification.RareElite,
+    npcID = 193735,
+    questID = -1, -- Unknown
+    vignetteID = -1,
+}
+
 NPCs[201549] = {
     --------------------------------------------------------------------------------
     ---- Morlash
@@ -1212,6 +1278,7 @@ NPCs[201549] = {
     classification = NPCClassification.Rare,
     npcID = 201549,
     questID = 74450, -- Morlash
+    vignetteID = 5564,
 }
 
 NPCs[201550] = {
@@ -1221,15 +1288,17 @@ NPCs[201550] = {
     classification = NPCClassification.Rare,
     npcID = 201550,
     questID = 74449, -- Overloading Defense Matrix
+    vignetteID = 5563,
 }
 
 NPCs[201552] = {
     --------------------------------------------------------------------------------
     ---- Overseer Stonetongue
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 201552,
-    questID = 74566, -- Unknown
+    questID = 74448, -- Overseer Stonetongue
+    vignetteID = 5562,
 }
 
 NPCs[201664] = {
@@ -1252,6 +1321,8 @@ NPCs[205865] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 205865,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 --------------------------------------------------------------------------------
@@ -1272,9 +1343,10 @@ NPCs[190244] = {
     --------------------------------------------------------------------------------
     ---- Mahg the Trampler
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 190244,
     questID = 73883, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[191356] = {
@@ -1303,6 +1375,7 @@ NPCs[193116] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 193116,
+    questID = -1, -- Unknown
     vignetteID = 5189,
 }
 
@@ -1323,6 +1396,7 @@ NPCs[193157] = {
     classification = NPCClassification.Rare,
     npcID = 193157,
     questID = 73873, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[193178] = {
@@ -1353,11 +1427,13 @@ NPCs[193201] = {
     ---- Mucka the Raker
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 193201,
     questID = 73885, -- Unknown
     toys = {
         Toy.MagesChewedWand,
     },
+    vignetteID = -1,
 }
 
 NPCs[193214] = {
@@ -1387,6 +1463,7 @@ NPCs[193225] = {
     classification = NPCClassification.Rare,
     npcID = 193225,
     questID = 73887, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[193238] = {
@@ -1422,6 +1499,7 @@ NPCs[193259] = {
         Toy.MagesChewedWand,
         Toy.PersonalShell,
     },
+    vignetteID = -1,
 }
 
 NPCs[193269] = {
@@ -1451,9 +1529,11 @@ NPCs[193532] = {
     --------------------------------------------------------------------------------
     ---- Bazual
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.Elite,
     npcID = 193532,
-    questID = 69927, -- Bazual
+    questID = -1, -- Unknown
+    vignetteID = -1,
+    worldQuestID = 69927, -- Bazual
 }
 
 NPCs[193632] = {
@@ -1493,25 +1573,30 @@ NPCs[193706] = {
     --------------------------------------------------------------------------------
     ---- Snufflegust
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193706,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[193708] = {
     --------------------------------------------------------------------------------
     ---- Skald the Impaler
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193708,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[194210] = {
     --------------------------------------------------------------------------------
     ---- Azure Pathfinder
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 194210,
     questID = 73867, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[194270] = {
@@ -1520,6 +1605,7 @@ NPCs[194270] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 194270,
+    questID = -1, -- Unknown
     vignetteID = 5267,
 }
 
@@ -1543,6 +1629,8 @@ NPCs[195353] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 195353,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[197344] = {
@@ -1592,13 +1680,24 @@ NPCs[197356] = {
     vignetteID = 5416,
 }
 
+NPCs[197371] = {
+    --------------------------------------------------------------------------------
+    ---- Ravenous Tundra Bear
+    --------------------------------------------------------------------------------
+    classification = NPCClassification.Elite,
+    npcID = 197371,
+    questID = -1, -- Unknown
+    vignetteID = -1,
+}
+
 NPCs[197557] = {
     --------------------------------------------------------------------------------
     ---- Bisquius
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 197557,
     questID = 74097, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[198004] = {
@@ -1607,6 +1706,8 @@ NPCs[198004] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 198004,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[201556] = {
@@ -1692,6 +1793,7 @@ NPCs[182280] = {
     classification = NPCClassification.Rare,
     npcID = 182280,
     questID = 66973, -- Unknown
+    vignetteID = 5132,
 }
 
 NPCs[191713] = {
@@ -1732,9 +1834,10 @@ NPCs[200537] = {
     --------------------------------------------------------------------------------
     ---- Gahz'raxes
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 200537,
     questID = 73095, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[200579] = {
@@ -1783,7 +1886,9 @@ NPCs[200619] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200619,
-    questID = 74300, -- Tectonus
+    questID = 73127, -- Unknown
+    vignetteID = 5493,
+    worldQuestID = 74300, -- Tectonus
 }
 
 NPCs[200620] = {
@@ -1792,7 +1897,8 @@ NPCs[200620] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200620,
-    questID = 74305, -- Sir Pinchalot
+    questID = 73129, -- Unknown
+    vignetteID = 5494,
 }
 
 NPCs[200621] = {
@@ -1801,7 +1907,8 @@ NPCs[200621] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200621,
-    questID = 74306, -- Manathema
+    questID = 73136, -- Unknown
+    vignetteID = 5495,
 }
 
 NPCs[200622] = {
@@ -1810,7 +1917,8 @@ NPCs[200622] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200622,
-    questID = 74307, -- Snarfang
+    questID = 73138, -- Unknown
+    vignetteID = 5496,
 }
 
 NPCs[200681] = {
@@ -1849,7 +1957,8 @@ NPCs[200722] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200722,
-    questID = 74321, -- Gareed
+    questID = 73153, -- Unknown
+    vignetteID = 5499,
 }
 
 NPCs[200725] = {
@@ -1858,7 +1967,8 @@ NPCs[200725] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200725,
-    questID = 74322, -- Faunos
+    questID = 73158, -- Unknown
+    vignetteID = 5501,
 }
 
 NPCs[200730] = {
@@ -1867,7 +1977,8 @@ NPCs[200730] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200730,
-    questID = 74325, -- Tidesmith Zarviss
+    questID = 73161, -- Unknown
+    vignetteID = 5502,
 }
 
 NPCs[200737] = {
@@ -1876,7 +1987,8 @@ NPCs[200737] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200737,
-    questID = 74328, -- Arcantrix
+    questID = 73163, -- Unknown
+    vignetteID = 5503,
 }
 
 NPCs[200738] = {
@@ -1885,7 +1997,8 @@ NPCs[200738] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200738,
-    questID = 74329, -- Kangalo
+    questID = 73164, -- Unknown
+    vignetteID = 5504,
 }
 
 NPCs[200739] = {
@@ -1894,7 +2007,8 @@ NPCs[200739] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200739,
-    questID = 74330, -- Fimbul
+    questID = 73165, -- Unknown
+    vignetteID = 5505,
 }
 
 NPCs[200740] = {
@@ -1903,7 +2017,8 @@ NPCs[200740] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200740,
-    questID = 74331, -- Agni Blazehoof
+    questID = 73166, -- Unknown
+    vignetteID = 5506,
 }
 
 NPCs[200742] = {
@@ -1922,7 +2037,8 @@ NPCs[200743] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 200743,
-    questID = 74333, -- Amephyst
+    questID = 73168, -- Unknown
+    vignetteID = 5508,
 }
 
 NPCs[200885] = {
@@ -2011,14 +2127,18 @@ NPCs[201186] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 201186,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[201310] = {
     --------------------------------------------------------------------------------
     ---- Nidharr
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 201310,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[203353] = {
@@ -2027,6 +2147,7 @@ NPCs[203353] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 203353,
+    questID = -1, -- Unknown
     vignetteID = 5635,
 }
 
@@ -2041,6 +2162,7 @@ NPCs[201542] = {
     classification = NPCClassification.Rare,
     npcID = 201542,
     questID = 74451, -- Tikarr Frostclaw
+    vignetteID = 5565,
 }
 
 NPCs[201543] = {
@@ -2050,6 +2172,7 @@ NPCs[201543] = {
     classification = NPCClassification.Rare,
     npcID = 201543,
     questID = 74452, -- Avalantus
+    vignetteID = 5566,
 }
 
 NPCs[201545] = {
@@ -2062,6 +2185,7 @@ NPCs[201545] = {
     toys = {
         Toy.PrimalistPrison,
     },
+    vignetteID = 5568,
 }
 
 NPCs[201562] = {
@@ -2071,6 +2195,7 @@ NPCs[201562] = {
     classification = NPCClassification.Rare,
     npcID = 201562,
     questID = 74453, -- Shardwing
+    vignetteID = 5567,
 }
 
 --------------------------------------------------------------------------------
@@ -2095,9 +2220,10 @@ NPCs[186200] = {
     --------------------------------------------------------------------------------
     ---- Harkyn Grymstone
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 186200,
-    questID = 74003, -- Unknown
+    questID = 70213, -- Harkyn Grymstone
+    vignetteID = 5044,
 }
 
 NPCs[186201] = {
@@ -2106,6 +2232,8 @@ NPCs[186201] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 186201,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[186202] = {
@@ -2114,6 +2242,8 @@ NPCs[186202] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 186202,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[186203] = {
@@ -2122,6 +2252,8 @@ NPCs[186203] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 186203,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[186783] = {
@@ -2217,6 +2349,7 @@ NPCs[187945] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 187945,
+    questID = -1, -- Unknown
     vignetteID = 5069,
 }
 
@@ -2226,6 +2359,8 @@ NPCs[189289] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 189289,
+    questID = 70212, -- Penumbrus
+    vignetteID = 5107,
 }
 
 NPCs[189822] = {
@@ -2248,6 +2383,8 @@ NPCs[190718] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 190718,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[190985] = {
@@ -2305,7 +2442,7 @@ NPCs[192362] = {
     --------------------------------------------------------------------------------
     ---- Possessive Hornswog
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 192362,
     pets = {
         Pet.RoseateHopper,
@@ -2320,10 +2457,12 @@ NPCs[192737] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.RareElite,
     npcID = 192737,
+    questID = -1, -- Unknown
     toys = {
         Toy.MagesChewedWand,
         Toy.PersonalShell,
     },
+    vignetteID = 5386,
 }
 
 NPCs[192738] = {
@@ -2342,6 +2481,8 @@ NPCs[192741] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 192741,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[192743] = {
@@ -2350,6 +2491,8 @@ NPCs[192743] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 192743,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[192744] = {
@@ -2358,6 +2501,8 @@ NPCs[192744] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 192744,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[193118] = {
@@ -2478,6 +2623,7 @@ NPCs[193177] = {
     classification = NPCClassification.Rare,
     npcID = 193177,
     questID = 73902, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[193181] = {
@@ -2489,6 +2635,7 @@ NPCs[193181] = {
     toys = {
         Toy.MagesChewedWand,
     },
+    vignetteID = -1,
 }
 
 NPCs[193198] = {
@@ -2506,11 +2653,13 @@ NPCs[193217] = {
     ---- Drakewing
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 193217,
     toys = {
         Toy.MagesChewedWand,
         Toy.PersonalShell,
     },
+    vignetteID = -1,
 }
 
 NPCs[193226] = {
@@ -2519,6 +2668,8 @@ NPCs[193226] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 193226,
+    questID = 69874, -- Gorjo the Crab Shackler
+    vignetteID = 5197,
 }
 
 NPCs[193228] = {
@@ -2527,6 +2678,8 @@ NPCs[193228] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 193228,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[193232] = {
@@ -2546,6 +2699,7 @@ NPCs[193256] = {
     classification = NPCClassification.Rare,
     npcID = 193256,
     questID = 72103, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[193263] = {
@@ -2554,6 +2708,8 @@ NPCs[193263] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 193263,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[193266] = {
@@ -2583,6 +2739,7 @@ NPCs[193535] = {
     classification = NPCClassification.Rare,
     npcID = 193535,
     questID = 69930, -- Basrikron
+    vignetteID = -1,
 }
 
 NPCs[193644] = {
@@ -2739,8 +2896,9 @@ NPCs[193678] = {
     --------------------------------------------------------------------------------
     ---- Fieraan
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193678,
+    questID = 69971, -- Iceblade Trio
     vignetteID = 5243,
 }
 
@@ -2748,8 +2906,9 @@ NPCs[193679] = {
     --------------------------------------------------------------------------------
     ---- Leerain
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193679,
+    questID = 69971, -- Iceblade Trio
     vignetteID = 5243,
 }
 
@@ -2757,8 +2916,10 @@ NPCs[193680] = {
     --------------------------------------------------------------------------------
     ---- Zurgaz Corebreaker
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 193680,
+    questID = 69972, -- Zurgaz Corebreaker
+    vignetteID = 5244,
 }
 
 NPCs[193682] = {
@@ -2820,12 +2981,23 @@ NPCs[196056] = {
     vignetteID = 5380,
 }
 
+NPCs[199645] = {
+    --------------------------------------------------------------------------------
+    ---- Kill Credit [DNT]
+    --------------------------------------------------------------------------------
+    npcID = 199645,
+    questID = -1, -- Unknown
+    vignetteID = -1,
+}
+
 NPCs[200832] = {
     --------------------------------------------------------------------------------
     ---- Fyrakk
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 200832,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[201054] = {
@@ -2834,6 +3006,8 @@ NPCs[201054] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 201054,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[203698] = {
@@ -2842,6 +3016,8 @@ NPCs[203698] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 203698,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[203699] = {
@@ -2850,6 +3026,8 @@ NPCs[203699] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 203699,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[203700] = {
@@ -2858,6 +3036,8 @@ NPCs[203700] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 203700,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[203703] = {
@@ -2866,6 +3046,8 @@ NPCs[203703] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 203703,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[203705] = {
@@ -2874,6 +3056,8 @@ NPCs[203705] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 203705,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[203707] = {
@@ -2882,6 +3066,8 @@ NPCs[203707] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 203707,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 --------------------------------------------------------------------------------
@@ -2914,38 +3100,48 @@ NPCs[201747] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 201747,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[202270] = {
     --------------------------------------------------------------------------------
     ---- Animated Contaminant
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 202270,
+    questID = 75946, -- Unknown
+    vignetteID = 5725,
 }
 
 NPCs[202309] = {
     --------------------------------------------------------------------------------
     ---- Cavern Flayer Matriarch
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 202309,
+    questID = 75948, -- Unknown
+    vignetteID = 5730,
 }
 
 NPCs[202318] = {
     --------------------------------------------------------------------------------
     ---- Response Team Watcher
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 202318,
+    questID = 75945, -- Unknown
+    vignetteID = 5726,
 }
 
 NPCs[203355] = {
     --------------------------------------------------------------------------------
     ---- Captain Reykal
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 203355,
+    questID = 75943, -- Unknown
+    vignetteID = 5728,
 }
 
 NPCs[203462] = {
@@ -2995,9 +3191,11 @@ NPCs[203480] = {
     --------------------------------------------------------------------------------
     ---- Spinmarrow
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 203480,
     questID = 75275, -- Unknown
+    vignetteID = 5642,
+    worldQuestID = 75276, -- Spinmarrow
 }
 
 NPCs[203515] = {
@@ -3046,6 +3244,8 @@ NPCs[203606] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 203606,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[203618] = {
@@ -3145,26 +3345,31 @@ NPCs[203834] = {
     --------------------------------------------------------------------------------
     ---- Contaminated Titan Watcher
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 203834,
+    questID = 75944, -- Unknown
+    vignetteID = 5727,
 }
 
 NPCs[203846] = {
     --------------------------------------------------------------------------------
     ---- Elder Magma Serpent
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 203846,
+    questID = 75947, -- Unknown
+    vignetteID = 5729,
 }
 
 NPCs[204093] = {
     --------------------------------------------------------------------------------
     ---- Colossian
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.RareElite,
     npcID = 204093,
     questID = 75475, -- Unknown
     vignetteID = 5674,
+    worldQuestID = 75476, -- Colossian
 }
 
 NPCs[204426] = {
@@ -3173,6 +3378,8 @@ NPCs[204426] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 204426,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[205540] = {
@@ -3181,4 +3388,6 @@ NPCs[205540] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 205540,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
