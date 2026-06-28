@@ -126,7 +126,7 @@ end
 
 ---@param continentID ContinentID?
 function private.DumpNPCData(continentID)
-    if not continentID then
+    if not continentID or not private.Data.Continents[continentID] then
         DisplayContinents()
 
         return
