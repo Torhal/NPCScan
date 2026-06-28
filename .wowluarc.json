@@ -2,6 +2,8 @@
     "diagnostics": {
         "enable": [
             "implicit-nil-return",
+            "missing-param-annotation",
+            "missing-return-annotation",
             "need-check-nil",
             "unknown-field-type",
             "unknown-local-type",
