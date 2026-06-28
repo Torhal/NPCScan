@@ -1832,6 +1832,7 @@ NPCs[160872] = {
     classification = NPCClassification.Rare,
     npcID = 160872,
     questID = 58304, -- Unknown
+    vignetteID = 3994,
 }
 
 NPCs[160874] = {
@@ -1841,6 +1842,7 @@ NPCs[160874] = {
     classification = NPCClassification.Rare,
     npcID = 160874,
     questID = 58305, -- Unknown
+    vignetteID = 3995,
 }
 
 NPCs[160876] = {
@@ -1850,6 +1852,7 @@ NPCs[160876] = {
     classification = NPCClassification.Rare,
     npcID = 160876,
     questID = 58306, -- Unknown
+    vignetteID = 3996,
 }
 
 NPCs[160878] = {
@@ -1859,6 +1862,7 @@ NPCs[160878] = {
     classification = NPCClassification.Rare,
     npcID = 160878,
     questID = 58307, -- Unknown
+    vignetteID = 3997,
 }
 
 NPCs[160893] = {
@@ -1868,6 +1872,7 @@ NPCs[160893] = {
     classification = NPCClassification.Rare,
     npcID = 160893,
     questID = 58308, -- Unknown
+    vignetteID = 3998,
 }
 
 NPCs[160906] = {
@@ -1877,6 +1882,7 @@ NPCs[160906] = {
     classification = NPCClassification.Rare,
     npcID = 160906,
     questID = 58309, -- Unknown
+    vignetteID = 3999,
 }
 
 NPCs[160920] = {
@@ -1886,6 +1892,7 @@ NPCs[160920] = {
     classification = NPCClassification.Rare,
     npcID = 160920,
     questID = 58310, -- Unknown
+    vignetteID = 4000,
 }
 
 NPCs[160922] = {
@@ -1895,6 +1902,7 @@ NPCs[160922] = {
     classification = NPCClassification.Rare,
     npcID = 160922,
     questID = 58311, -- Unknown
+    vignetteID = 4001,
 }
 
 NPCs[160930] = {
@@ -1904,6 +1912,7 @@ NPCs[160930] = {
     classification = NPCClassification.Rare,
     npcID = 160930,
     questID = 58312, -- Unknown
+    vignetteID = 4002,
 }
 
 NPCs[160968] = {
@@ -1913,6 +1922,7 @@ NPCs[160968] = {
     classification = NPCClassification.Rare,
     npcID = 160968,
     questID = 58295, -- Unknown
+    vignetteID = 3988,
 }
 
 NPCs[163042] = {
@@ -1922,6 +1932,8 @@ NPCs[163042] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 163042,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 --------------------------------------------------------------------------------
