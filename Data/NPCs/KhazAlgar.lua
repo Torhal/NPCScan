@@ -207,7 +207,10 @@ NPCs[226232] = {
     ---- Elusive Razormouth Steelhide
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
+    isTameable = true,
     npcID = 226232,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 --------------------------------------------------------------------------------
@@ -241,6 +244,7 @@ NPCs[221067] = {
     classification = NPCClassification.Rare,
     npcID = 221067,
     questID = 81624, -- Orta, the Broken Mountain
+    vignetteID = -1,
 }
 
 --------------------------------------------------------------------------------
@@ -411,9 +415,11 @@ NPCs[221224] = {
     --------------------------------------------------------------------------------
     ---- Shurrai
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.Elite,
     npcID = 221224,
-    questID = 83467, -- Unknown
+    questID = -1, -- Unknown
+    vignetteID = -1,
+    worldQuestID = 83467, -- Unknown
 }
 
 NPCs[221534] = {
@@ -746,15 +752,19 @@ NPCs[224515] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 224515,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[229334] = {
     --------------------------------------------------------------------------------
     ---- Kordac
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.Elite,
     npcID = 229334,
-    questID = 81630, -- Activation Protocol
+    questID = -1, -- Unknown
+    vignetteID = -1,
+    worldQuestID = 81630, -- Activation Protocol
 }
 
 --------------------------------------------------------------------------------
@@ -958,6 +968,7 @@ NPCs[238319] = {
     classification = NPCClassification.Rare,
     npcID = 238319,
     questID = 90783, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[238384] = {
@@ -1406,9 +1417,11 @@ NPCs[220999] = {
     --------------------------------------------------------------------------------
     ---- Aggregation of Horrors
     --------------------------------------------------------------------------------
-    classification = NPCClassification.Rare,
+    classification = NPCClassification.Elite,
     npcID = 220999,
     questID = 83466, -- Unknown
+    vignetteID = -1,
+    worldQuestID = 82653, -- Aggregation of Horrors
 }
 
 NPCs[221199] = {
@@ -1437,6 +1450,8 @@ NPCs[228439] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 228439,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 --------------------------------------------------------------------------------
@@ -1620,6 +1635,7 @@ NPCs[231821] = {
     classification = NPCClassification.Rare,
     npcID = 231821,
     questID = 85088, -- The Main Event
+    vignetteID = -1,
 }
 
 NPCs[233471] = {
@@ -1668,4 +1684,6 @@ NPCs[234621] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 234621,
+    questID = 87007, -- Gallagio Garbage
+    vignetteID = 6700,
 }
