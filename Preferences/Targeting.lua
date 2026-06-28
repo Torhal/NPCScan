@@ -40,9 +40,13 @@ end
 ---- Helpers
 --------------------------------------------------------------------------------
 
-local function round(num, idp)
-    local mult = 10 ^ (idp or 0)
-    return math.floor(num * mult + 0.5) / mult
+--- Round a number to a given number of decimal places.
+---@param number number
+---@param decimalPlaces number|nil number of decimal places (optional)
+---@return number
+local function round(number, decimalPlaces)
+    local multiplier = 10 ^ (decimalPlaces or 0)
+    return math.floor(number * multiplier + 0.5) / multiplier
 end
 
 --------------------------------------------------------------------------------
