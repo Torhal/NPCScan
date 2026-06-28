@@ -406,6 +406,8 @@ NPCs[152500] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 152500,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[152508] = {
@@ -414,6 +416,8 @@ NPCs[152508] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 152508,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[152517] = {
@@ -422,6 +426,8 @@ NPCs[152517] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 152517,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[152612] = {
@@ -430,6 +436,8 @@ NPCs[152612] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 152612,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[156134] = {
@@ -438,6 +446,8 @@ NPCs[156134] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 156134,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[156142] = {
@@ -446,6 +456,8 @@ NPCs[156142] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 156142,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[156158] = {
@@ -454,6 +466,8 @@ NPCs[156158] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 156158,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[156237] = {
@@ -462,6 +476,8 @@ NPCs[156237] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 156237,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[170228] = {
@@ -470,6 +486,8 @@ NPCs[170228] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 170228,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[170385] = {
@@ -478,6 +496,8 @@ NPCs[170385] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 170385,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[170414] = {
@@ -486,6 +506,8 @@ NPCs[170414] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 170414,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[170417] = {
@@ -494,6 +516,8 @@ NPCs[170417] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 170417,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[173051] = {
@@ -502,6 +526,8 @@ NPCs[173051] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 173051,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[173080] = {
@@ -510,6 +536,8 @@ NPCs[173080] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 173080,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[173134] = {
@@ -518,6 +546,8 @@ NPCs[173134] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 173134,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[173191] = {
@@ -526,6 +556,8 @@ NPCs[173191] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 173191,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 NPCs[173238] = {
@@ -534,6 +566,8 @@ NPCs[173238] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 173238,
+    questID = -1, -- Unknown
+    vignetteID = -1,
 }
 
 --------------------------------------------------------------------------------
