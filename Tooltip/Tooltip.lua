@@ -8,8 +8,6 @@ local private = select(2, ...) ---@type PrivateNamespace
 local Data = private.Data
 local EventMessage = private.EventMessage
 
-local FormatAtlasTexture = private.FormatAtlasTexture
-
 local QTip = LibStub("LibQTip-2.0")
 
 --------------------------------------------------------------------------------
