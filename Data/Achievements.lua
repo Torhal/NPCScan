@@ -252,7 +252,7 @@ local function InitializeAchievements()
 
             if criteriaType == CriteriaType.NPCKill then
                 if assetID > 0 then
-                    local found
+                    local found = false
 
                     for _, map in pairs(Data.Maps) do
                         if map.NPCs[assetID] then
