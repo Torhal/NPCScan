@@ -1430,6 +1430,7 @@ NPCs[135947] = {
     achievementQuestID = 50024, -- Unknown
     classification = NPCClassification.Normal,
     npcID = 135947,
+    questID = 50024, -- Unknown
     vignetteID = 2838,
 }
 
