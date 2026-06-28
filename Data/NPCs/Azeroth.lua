@@ -24,6 +24,7 @@ NPCs[71992] = {
     pets = {
         Pet.MoonMoon,
     },
+    questID = -1, -- Unknown
     toys = {
         Toy.MoonfangShroud,
         Toy.MoonfangsPaw,
