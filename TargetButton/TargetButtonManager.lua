@@ -58,7 +58,7 @@ local function ResetTargetButtonPoints()
         if index == 1 then
             indexedButton:SetPoint("CENTER", private.TargetButtonAnchor, "CENTER")
         else
-            local spawnPoint = POINT_TRANSLATION[ActiveTargetButtons[1]:GetEffectiveSpawnPoint()]
+            local spawnPoint = POINT_TRANSLATION[ActiveTargetButtons[1]:GetEffectiveSpawnPoint()] or "TOPRIGHT"
             indexedButton:SetPoint(
                 spawnPoint,
                 ActiveTargetButtons[index - 1],
@@ -216,7 +216,7 @@ function TargetButtonManager:Spawn(eventName, data)
     if #ActiveTargetButtons == 0 then
         targetButton:SetPoint("CENTER", private.TargetButtonAnchor, "CENTER")
     else
-        local spawnPoint = POINT_TRANSLATION[ActiveTargetButtons[1]:GetEffectiveSpawnPoint()]
+        local spawnPoint = POINT_TRANSLATION[ActiveTargetButtons[1]:GetEffectiveSpawnPoint()] or "TOPRIGHT"
         targetButton:SetPoint(
             spawnPoint,
             ActiveTargetButtons[#ActiveTargetButtons],
