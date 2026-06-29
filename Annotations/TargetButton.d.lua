@@ -24,14 +24,21 @@
 ---@field __isActive? boolean
 ---@field __classification UnitClassification | NPCClassification
 ---@field Background Texture
+---@field Background2 Texture
+---@field Background3 Texture
 ---@field Classification FontString
 ---@field DismissButton UIPanelCloseButtonNoScripts
+---@field Particles1 Texture
+---@field Particles2 Texture
+---@field Particles3 Texture
 ---@field Portrait Texture
 ---@field PortraitModel PlayerModel
 ---@field PreAnimateIn? function
 ---@field RaidIcon Texture
+---@field Ring1 Texture
 ---@field SourceText FontString
 ---@field SpecialText FontString
+---@field Starglow Texture
 ---@field UnitName FontString
 ---@field animIn AnimationGroup
 ---@field dismissAnimationGroup NamedAnimationGroup
