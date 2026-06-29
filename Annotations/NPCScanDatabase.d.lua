@@ -19,8 +19,8 @@
 ---@field y integer
 
 ---@class NPCScanDatabase.Profile.Detection
----@field achievementIDs table<AchievementID, DetectionGroupStatusValue>
----@field continentIDs table<ContinentID, DetectionGroupStatusValue>
+---@field achievementIDs table<AchievementID, DetectionGroupStatus>
+---@field continentIDs table<ContinentID, DetectionGroupStatus>
 ---@field ignoreCompletedAchievementCriteria boolean
 ---@field ignoreCompletedQuestObjectives boolean
 ---@field ignoreDeadNPCs boolean
