@@ -129,7 +129,7 @@ end
 --------------------------------------------------------------------------------
 
 local TargetingOptions ---@type AceConfig.OptionsTable
-local anchorFrame
+local anchorFrame ---@type Frame!
 
 local function GetTargetingOptions()
     local profile = private.db.profile

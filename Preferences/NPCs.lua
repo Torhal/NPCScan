@@ -56,8 +56,11 @@ local function CreateDungeonAndZoneOptions(parameters)
                 name = ENABLE,
                 descStyle = "inline",
                 get = function()
-                    return private.db.profile.detection[parameters.detectionFieldName]
+                    return private.db.profile.detection[parameters.detectionFieldName] --[[@as boolean]]
                 end,
+
+                ---@param _ unknown
+                ---@param value boolean
                 set = function(_, value)
                     private.db.profile.detection[parameters.detectionFieldName] = value
 
