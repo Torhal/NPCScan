@@ -519,7 +519,7 @@ do
     local lastSoundTime = time()
 
     ---@param texturePath string
-    ---@param color ColorMixin
+    ---@param color ColorRGBAData
     function NPCScan:PlayFlashAnimation(texturePath, color)
         flashTexture:SetTexture(LibSharedMedia:Fetch("background", texturePath))
         flashTexture:SetVertexColor(color.r, color.g, color.b, color.a)
