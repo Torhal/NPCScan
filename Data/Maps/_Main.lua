@@ -277,8 +277,8 @@ end
 -- WoW 7 to 8 transition
 -----------------------------------------------------------------------
 
-
-function GetMapData(mapID)
+---@param mapID MapID
+local function GetMapData(mapID)
     mapID = mapID or _G.C_Map.GetBestMapForUnit("player")
 
     local mapInfo = _G.C_Map.GetMapInfo(mapID)

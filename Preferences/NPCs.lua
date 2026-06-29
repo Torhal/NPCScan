@@ -309,7 +309,7 @@ local function UpdateAchievementNPCOptions()
 
     for achievementIDIndex = 1, #AchievementIDs do
         local achievementID = AchievementIDs[achievementIDIndex]
-        local achievementStatus = profile.detection.achievementIDs[achievementID]
+        local achievementStatus = profile.detection.achievementIDs[achievementID] ---@type DetectionGroupStatus
 
         ---@type AceConfig.OptionsTable
         local achievementOptionsTable = {
@@ -326,9 +326,12 @@ local function UpdateAchievementNPCOptions()
                     name = STATUS,
                     type = "select",
                     values = private.DetectionGroupStatusLabels,
+                    ---@return  DetectionGroupStatus
                     get = function()
                         return profile.detection.achievementIDs[achievementID]
                     end,
+                    ---@param _ unknown
+                    ---@param value DetectionGroupStatus
                     set = function(_, value)
                         profile.detection.achievementIDs[achievementID] = value
 

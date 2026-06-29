@@ -272,7 +272,8 @@ local function GetTargetingOptions()
                             name = L["Reset Position"],
                             descStyle = "inline",
                             func = function()
-                                local defaults = private.DefaultPreferences.profile.targetButtonGroup
+                                local defaultProfile = private.DefaultPreferences.profile --[[@as NPCScanDatabase.Profile]]
+                                local defaults = defaultProfile.targetButtonGroup
                                 local preferences = profile.targetButtonGroup
 
                                 preferences.point = defaults.point

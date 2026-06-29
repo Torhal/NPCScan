@@ -53,7 +53,7 @@ local function UpdateContinentAndMapOptions()
 
     for continentIndex = 1, #ContinentIDs do
         local continentID = ContinentIDs[continentIndex]
-        local continentStatus = profile.detection.continentIDs[continentID]
+        local continentStatus = profile.detection.continentIDs[continentID] ---@type DetectionGroupStatus
         local continent = Data.Continents[continentID]
 
         local continentOptionsTable = {
