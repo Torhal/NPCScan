@@ -276,14 +276,7 @@ end
 -----------------------------------------------------------------------
 -- WoW 7 to 8 transition
 -----------------------------------------------------------------------
-function GetOldMapData(oldMapID)
-    local HBDMigrate = _G.LibStub("HereBeDragons-Migrate")
-    local newMapID = HBDMigrate:GetUIMapIDFromMapAreaId(oldMapID)
-    local mapInfo = _G.C_Map.GetMapInfo(newMapID)
-    local continentInfo = _G.MapUtil.GetMapParentInfo(newMapID, _G.Enum.UIMapType.Continent, true)
 
-    return { oldMapID = oldMapID, mapInfo = mapInfo, continentInfo = continentInfo }
-end
 
 function GetMapData(mapID)
     mapID = mapID or _G.C_Map.GetBestMapForUnit("player")
