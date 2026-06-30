@@ -127,6 +127,10 @@ do
     ---@param GUID string
     ---@return NPCID | nil
     function private.GUIDToCreatureID(GUID)
+        if issecretvalue(GUID) then
+            return nil
+        end
+
         local unitTypeName, _, _, _, _, unitID = ("-"):split(GUID)
         if ValidUnitTypeNames[unitTypeName] then
             return tonumber(unitID)
