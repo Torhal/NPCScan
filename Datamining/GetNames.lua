@@ -138,8 +138,6 @@ private.GetSpellNameFromID = GetSpellNameFromID
 ---@param isSuccessful boolean
 function NPCScan:QUEST_DATA_LOAD_RESULT(_, questID, isSuccessful)
     if isSuccessful then
-        print(("Quest %d has data!"):format(questID))
-
         GetQuestNameFromID(questID)
     end
 end
