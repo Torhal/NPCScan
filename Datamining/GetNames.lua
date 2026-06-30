@@ -21,6 +21,7 @@ private.NPCIDFromName = NPCIDFromName
 
 local QuestIDFromName = {} ---@type table<string, QuestID>
 
+---@type table<string, QuestID>
 private.QuestIDFromName = QuestIDFromName
 
 local SpellIDFromName = {} ---@type table<string, SpellID>
@@ -35,6 +36,7 @@ DatamineTooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
 --------------------------------------------------------------------------------
 
 ---@param itemID ItemID
+---@return string
 local function GetItemNameFromID(itemID)
     local itemName = private.db.locale.itemNames[itemID]
 
@@ -59,6 +61,7 @@ end
 private.GetItemNameFromID = GetItemNameFromID
 
 ---@param npcID NPCID
+---@return string
 local function GetNPCNameFromID(npcID)
     local npcName = private.db.locale.npcNames[npcID]
 
@@ -107,6 +110,7 @@ end
 private.GetQuestNameFromID = GetQuestNameFromID
 
 ---@param spellID SpellID
+---@return string
 local function GetSpellNameFromID(spellID)
     local spellName = private.db.locale.spellNames[spellID]
 
