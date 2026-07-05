@@ -273,7 +273,7 @@ function TargetButtonPrototype:Activate(data)
     self.npcData = Data.NPCs[self.npcID]
     self.npcName = data.npcName
 
-    self:SetSpecialText()
+    self:SetSpecialText(false)
 
     if data.vignetteName and data.vignetteName ~= data.npcName then
         self.SourceText:SetText(("%s %s"):format(data.sourceText, PARENS_TEMPLATE:format(data.vignetteName)))
