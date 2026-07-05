@@ -194,9 +194,18 @@ function TargetButtonPrototype:PLAYER_REGEN_ENABLED()
         -- Should only happen if the dismiss button was clicked.
         self:RequestDeactivate()
     elseif self.isDead then
-        local sound = private.db.profile.alert.sound
-        if sound.isEnabled then
-            PlaySoundFile(LibSharedMedia:Fetch("sound", "NPCScan Killed"), sound.channel)
+        local soundPreference = private.db.profile.alert.sound
+
+        if soundPreference.isEnabled then
+            local sound = LibSharedMedia:Fetch("sound", "NPCScan Killed")
+
+            if sound then
+                if type(sound) == "number" then
+                    PlaySoundFile(sound)
+                else
+                    PlaySoundFile(sound, sound.channel)
+                end
+            end
         end
 
         self:SetSpecialText(true)
@@ -238,7 +247,10 @@ function TargetButtonPrototype:UpdateData(_, data)
                 self.SourceText:SetText(data.sourceText)
             end
 
-            self.PortraitModel:SetUnit(data.unitToken)
+            if data.unitToken then
+                self.PortraitModel:SetUnit(data.unitToken)
+            end
+
             self:SetUnitData(data)
 
             hasUpdated = true
@@ -444,11 +456,11 @@ function TargetButtonPrototype:SetUnitData(data)
                 color.r * 255,
                 color.g * 255,
                 color.b * 255,
-                data.npcName
+                data.npcName or UNKNOWN
             )
         else
             self.Classification:SetText(UNIT_TYPE_LETHAL_LEVEL_TEMPLATE:format(data.unitCreatureType))
-            self.UnitName:SetFormattedText("%s%s|r", RED_FONT_COLOR_CODE, data.npcName)
+            self.UnitName:SetFormattedText("%s%s|r", RED_FONT_COLOR_CODE, data.npcName or UNKNOWN)
         end
 
         self.needsUnitData = nil
