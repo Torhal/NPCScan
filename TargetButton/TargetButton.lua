@@ -119,7 +119,7 @@ local function DismissButton_OnEnter(self)
 
     if self:IsEnabled() then
         local tooltip = GameTooltip
-        tooltip:SetOwner(self, TOOLTIP_ANCHORS[parent:GetEffectiveSpawnPoint()], 0, -50)
+        tooltip:SetOwner(self, TOOLTIP_ANCHORS[parent:GetEffectiveSpawnPoint()], 0, -50) ---@diagnostic disable-line: need-check-nil
         tooltip:AddLine(LEFT_CLICK_TEXTURE .. " " .. REMOVE, 0.5, 0.8, 1)
         tooltip:AddLine(RIGHT_CLICK_TEXTURE .. " " .. IGNORE, 0.5, 0.8, 1)
 
@@ -167,6 +167,8 @@ end
 ---- Event and message handlers.
 --------------------------------------------------------------------------------
 
+---@param _ unknown
+---@param unitGUID WOWGUID
 function TargetButtonPrototype:UNIT_DIED(_, unitGUID)
     if unitGUID and private.GUIDToCreatureID(unitGUID) == self.npcID then
         self.isDead = true
@@ -252,6 +254,8 @@ end
 --------------------------------------------------------------------------------
 ---- Methods.
 --------------------------------------------------------------------------------
+
+---@param data DetectionData
 function TargetButtonPrototype:Activate(data)
     self.npcID = data.npcID
     self.npcData = Data.NPCs[self.npcID]
@@ -419,6 +423,7 @@ function TargetButtonPrototype:SetRaidTarget(unitToken)
     return not self.needsRaidTarget
 end
 
+---@param fakeCriteriaCompleted boolean
 function TargetButtonPrototype:SetSpecialText(fakeCriteriaCompleted)
     local npcData = self.npcData
 
@@ -434,6 +439,7 @@ function TargetButtonPrototype:SetSpecialText(fakeCriteriaCompleted)
     end
 end
 
+---@param data DetectionData
 function TargetButtonPrototype:SetUnitData(data)
     if data.unitCreatureType then
         if data.unitLevel then
@@ -442,7 +448,8 @@ function TargetButtonPrototype:SetUnitData(data)
                 or UNIT_TYPE_LEVEL_TEMPLATE
             self.Classification:SetText(template:format(data.unitLevel, data.unitCreatureType))
 
-            local color = GetRelativeDifficultyColor(UnitLevel("player"), data.unitLevel)
+            local color = GetRelativeDifficultyColor(UnitLevel("player"), data.unitLevel) --[[@as ColorRGBData]]
+
             self.UnitName:SetFormattedText(
                 "|cff%02x%02x%02x%s|r",
                 color.r * 255,
@@ -490,7 +497,7 @@ do
         recentButton:ResetMacroText()
 
         local macroButton =
-            AceEvent:Embed(CreateFrame("Button", "NPCScan_SearchMacroButton", nil, "SecureActionButtonTemplate"))
+            AceEvent:Embed(CreateFrame("Button", "NPCScan_SearchMacroButton", nil, "SecureActionButtonTemplate")) --[[@as Button & SecureActionButtonTemplate & AceEvent]]
         macroButton:SetAttribute("type", "macro")
         macroButton:Hide()
 
@@ -498,6 +505,7 @@ do
         macroButton:ResetMacroText()
 
         function macroButton:PLAYER_REGEN_ENABLED()
+            ---@diagnostic disable-next-line: shadowed-local
             if self.scannerData then
                 self:Update("PLAYER_REGEN_ENABLED", self.scannerData)
                 self.scannerData = nil
@@ -506,8 +514,11 @@ do
 
         macroButton:RegisterEvent("PLAYER_REGEN_ENABLED")
 
+        ---@param _ unknown
+        ---@param scannerData ScannerData
         function macroButton:Update(_, scannerData)
             if InCombatLockdown() then
+                ---@diagnostic disable-next-line: shadowed-local
                 self.scannerData = scannerData
 
                 return
@@ -554,9 +565,11 @@ local function CreateTargetButton(unitClassification)
     ) --[[@as TargetButton]]
 
     button:SetFrameStrata("DIALOG")
+
     button:SetAttribute("type1", "macro")
     button:SetAttribute("_onshow", "self:Enable()")
     button:SetAttribute("_onhide", "self:Disable()")
+
     button:RegisterForClicks("AnyDown", "AnyUp")
 
     button:HookScript("OnClick", TargetButton_OnClick)
@@ -599,23 +612,23 @@ local function CreateTargetButton(unitClassification)
     background:SetBlendMode("BLEND")
     button.Background = background
 
-    local glowTexture = button:CreateTexture(nil, "OVERLAY") --[[@as AnimationGroupTexture]]
+    local glowTexture = button:CreateTexture(nil, "OVERLAY") ---@type AnimationGroupTexture
     glowTexture:SetBlendMode("ADD")
     glowTexture:SetAtlas("loottoast-glow")
     button.glowTexture = glowTexture
 
-    local shineTexture = button:CreateTexture(nil, "OVERLAY") --[[@as AnimationGroupTexture]]
+    local shineTexture = button:CreateTexture(nil, "OVERLAY") ---@type AnimationGroupTexture
     shineTexture:SetBlendMode("ADD")
     shineTexture:SetAtlas("loottoast-sheen")
     button.shineTexture = shineTexture
 
-    local killedBackgroundTexture = button:CreateTexture(nil, "OVERLAY") --[[@as AnimationGroupTexture]]
+    local killedBackgroundTexture = button:CreateTexture(nil, "OVERLAY") ---@type AnimationGroupTexture
     killedBackgroundTexture:Hide()
     killedBackgroundTexture:SetBlendMode("ADD")
     killedBackgroundTexture:SetTexture([[Interface\FullScreenTextures\LowHealth]])
     button.killedBackgroundTexture = killedBackgroundTexture
 
-    local killedTextureFrame = CreateFrame("Frame", nil, button)
+    local killedTextureFrame = CreateFrame("Frame", nil, button) ---@type KilledTextureFrame
     killedTextureFrame:SetSize(48, 48)
     killedTextureFrame:SetPoint("CENTER")
     button.killedTextureFrame = killedTextureFrame
