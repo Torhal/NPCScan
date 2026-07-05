@@ -130,8 +130,12 @@ end
 ---@param self TargetButton
 ---@param mouseButton MouseButton
 local function TargetButton_OnClick(self, mouseButton)
-    if mouseButton == "RightButton" and not InCombatLockdown() then
-        self.dismissAnimationGroup:Play()
+    if mouseButton == "LeftButton" then
+        self:SetRaidTarget("target")
+    elseif mouseButton == "RightButton" then
+        if not InCombatLockdown() then
+            self.dismissAnimationGroup:Play()
+        end
     end
 end
 
@@ -227,10 +231,6 @@ function TargetButtonPrototype:UpdateData(_, data)
 
         local hasUpdated = false
 
-        if self.needsRaidTarget then
-            hasUpdated = self:SetRaidTarget(data.unitToken)
-        end
-
         if self.needsUnitData then
             local sourceText = self.SourceText:GetText()
 
@@ -275,15 +275,20 @@ function TargetButtonPrototype:Activate(data)
         self.PortraitModel:SetCreature(data.npcID)
     end
 
-    self:SetRaidTarget(data.unitToken)
     self:SetUnitData(data)
 
-    if data.isFromQueue then
-        self.needsRaidTarget = true
+    local macroText = ("/cleartarget\n/tar %s"):format(data.npcName)
+
+    local raidMarker = private.db.profile.detection.raidMarker
+    if
+        raidMarker.add
+        and (raidMarker.addInGroup or not IsInGroup())
+        and GetRaidTargetIndex("target") ~= self.raidIconID
+    then
+        macroText = ("%s\n/stopmacro [noexists]\n/tm [exists] %s"):format(macroText, self.raidIconID)
     end
 
-    local macroText = ("/targetexact %s"):format(data.npcName)
-    NPCScan_RecentTargetButton:SetAttribute("macrotext", macroText)
+    _G.NPCScan_RecentTargetButton:SetAttribute("macrotext", macroText)
 
     self:SetAttribute("macrotext", macroText)
 
@@ -398,29 +403,13 @@ function TargetButtonPrototype:GetEffectiveSpawnPoint()
 end
 
 ---@param unitToken UnitToken
----@return boolean wasSet
 function TargetButtonPrototype:SetRaidTarget(unitToken)
-    if unitToken and not self.raidIconID and #RaidIconIDs > 0 then
+    if unitToken and UnitExists(unitToken) and not self.raidIconID and #RaidIconIDs > 0 then
         self.raidIconID = table.remove(RaidIconIDs)
         self.RaidIcon:Show()
 
         SetRaidTargetIconTexture(self.RaidIcon, self.raidIconID)
-
-        local raidMarker = private.db.profile.detection.raidMarker
-        if
-            raidMarker.add
-            and (raidMarker.addInGroup or not IsInGroup())
-            and GetRaidTargetIndex(unitToken) ~= self.raidIconID
-        then
-            SetRaidTarget(unitToken, self.raidIconID)
-        end
-
-        self.needsRaidTarget = nil
-    else
-        self.needsRaidTarget = true
     end
-
-    return not self.needsRaidTarget
 end
 
 ---@param fakeCriteriaCompleted boolean
