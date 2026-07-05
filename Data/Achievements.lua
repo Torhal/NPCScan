@@ -72,6 +72,7 @@ local AchievementID = {
     NazjatargetEliminated = 13690,
     PraiseTheSun = 8028,
     Predator = 10334,
+    RemnantsOfAShatteredWorld = 42761,
     RestInPistons = 13470,
     SabertronAssemble = 13054,
     StormedOff = 16461,
