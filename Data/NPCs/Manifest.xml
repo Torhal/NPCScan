@@ -16,6 +16,7 @@
     <Script file="Northrend.lua"/>
     <Script file="Outland.lua"/>
     <Script file="Pandaria.lua"/>
+    <Script file="QuelThalas.lua"/>
     <Script file="TheMaelstrom.lua"/>
     <Script file="TheShadowlands.lua"/>
     <Script file="Zandalar.lua"/>

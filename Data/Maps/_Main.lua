@@ -244,6 +244,7 @@ private.Enum.ContinentID = {
     TheShadowlands = 14,
     DragonIsles = 15,
     KhazAlgar = 16,
+    QuelThalas = 17,
 }
 
 local ContinentID = private.Enum.ContinentID
@@ -266,6 +267,7 @@ private.Enum.ContinentMapID = {
     [ContinentID.TheShadowlands] = MapID.TheShadowlands,
     [ContinentID.DragonIsles] = MapID.DragonIsles,
     [ContinentID.KhazAlgar] = MapID.KhazAlgar,
+    [ContinentID.QuelThalas] = MapID.QuelThalas,
 }
 
 local ContinentMapID = private.Enum.ContinentMapID
