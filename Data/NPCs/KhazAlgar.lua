@@ -16,6 +16,7 @@ NPCs[214151] = {
     --------------------------------------------------------------------------------
     ---- Ahg'zagall
     --------------------------------------------------------------------------------
+    achievementQuestID = 78905, -- Ahg'zagall
     classification = NPCClassification.Rare,
     npcID = 214151,
     questID = 78905, -- Unknown
@@ -26,6 +27,7 @@ NPCs[216031] = {
     --------------------------------------------------------------------------------
     ---- Abyssal Devourer
     --------------------------------------------------------------------------------
+    achievementQuestID = 81695, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216031,
     questID = 81695, -- Unknown
@@ -36,6 +38,7 @@ NPCs[216032] = {
     --------------------------------------------------------------------------------
     ---- Khak'ik
     --------------------------------------------------------------------------------
+    achievementQuestID = 81694, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216032,
     questID = 81694, -- Unknown
@@ -46,6 +49,7 @@ NPCs[216034] = {
     --------------------------------------------------------------------------------
     ---- XT-Minecrusher 8700
     --------------------------------------------------------------------------------
+    achievementQuestID = 81703, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216034,
     questID = 81703, -- Unknown
@@ -56,6 +60,7 @@ NPCs[216037] = {
     --------------------------------------------------------------------------------
     ---- Vilewing
     --------------------------------------------------------------------------------
+    achievementQuestID = 81700, -- Vilewing
     classification = NPCClassification.Rare,
     npcID = 216037,
     questID = 81700, -- Unknown
@@ -66,6 +71,7 @@ NPCs[216041] = {
     --------------------------------------------------------------------------------
     ---- Webspeaker Grik'ik
     --------------------------------------------------------------------------------
+    achievementQuestID = 81699, -- Webspeaker Grik'ik
     classification = NPCClassification.Rare,
     npcID = 216041,
     questID = 81699, -- Unknown
@@ -76,6 +82,7 @@ NPCs[216042] = {
     --------------------------------------------------------------------------------
     ---- Cha'tak
     --------------------------------------------------------------------------------
+    achievementQuestID = 81704, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216042,
     questID = 81704, -- Unknown
@@ -86,6 +93,7 @@ NPCs[216043] = {
     --------------------------------------------------------------------------------
     ---- Monstrous Lasharoth
     --------------------------------------------------------------------------------
+    achievementQuestID = 81705, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216043,
     questID = 81705, -- Unknown
@@ -96,6 +104,7 @@ NPCs[216044] = {
     --------------------------------------------------------------------------------
     ---- Maddened Siegebomber
     --------------------------------------------------------------------------------
+    achievementQuestID = 81706, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216044,
     questID = 81706, -- Unknown
@@ -106,6 +115,7 @@ NPCs[216045] = {
     --------------------------------------------------------------------------------
     ---- Enduring Gutterface
     --------------------------------------------------------------------------------
+    achievementQuestID = 81707, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216045,
     questID = 81707, -- Unknown
@@ -136,6 +146,7 @@ NPCs[216048] = {
     --------------------------------------------------------------------------------
     ---- Jix'ak the Crazed
     --------------------------------------------------------------------------------
+    achievementQuestID = 82034, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216048,
     questID = 82034, -- Unknown
@@ -146,6 +157,7 @@ NPCs[216049] = {
     --------------------------------------------------------------------------------
     ---- The Oozekhan
     --------------------------------------------------------------------------------
+    achievementQuestID = 82035, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216049,
     questID = 82035, -- Unknown
@@ -156,6 +168,7 @@ NPCs[216050] = {
     --------------------------------------------------------------------------------
     ---- Harvester Qixt
     --------------------------------------------------------------------------------
+    achievementQuestID = 82036, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216050,
     questID = 82036, -- Unknown
@@ -166,6 +179,7 @@ NPCs[216051] = {
     --------------------------------------------------------------------------------
     ---- Umbraclaw Matra
     --------------------------------------------------------------------------------
+    achievementQuestID = 82037, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216051,
     questID = 82037, -- Unknown
@@ -176,16 +190,29 @@ NPCs[216052] = {
     --------------------------------------------------------------------------------
     ---- Skirmisher Sa'zryk
     --------------------------------------------------------------------------------
+    achievementQuestID = 82078, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216052,
     questID = 82078, -- Unknown
     vignetteID = 6204,
 }
 
+NPCs[221032] = {
+    --------------------------------------------------------------------------------
+    ---- Rhak'ik
+    --------------------------------------------------------------------------------
+    achievementQuestID = 81694, -- Unknown
+    classification = NPCClassification.Rare,
+    npcID = 221032,
+    questID = 81694, -- Unknown
+    vignetteID = 6130,
+}
+
 NPCs[221327] = {
     --------------------------------------------------------------------------------
     ---- Kaheti Silk Hauler
     --------------------------------------------------------------------------------
+    achievementQuestID = 81702, -- Kaheti Silk Hauler
     classification = NPCClassification.Rare,
     npcID = 221327,
     questID = 81702, -- Unknown
@@ -196,6 +223,7 @@ NPCs[222624] = {
     --------------------------------------------------------------------------------
     ---- Deepcrawler Tx'kesh
     --------------------------------------------------------------------------------
+    achievementQuestID = 82077, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 222624,
     questID = 82077, -- Unknown
@@ -221,6 +249,7 @@ NPCs[216038] = {
     --------------------------------------------------------------------------------
     ---- The Groundskeeper
     --------------------------------------------------------------------------------
+    achievementQuestID = 81634, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216038,
     questID = 81634, -- Unknown
@@ -231,6 +260,7 @@ NPCs[216039] = {
     --------------------------------------------------------------------------------
     ---- Xishorr
     --------------------------------------------------------------------------------
+    achievementQuestID = 81701, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 216039,
     questID = 81701, -- Unknown
@@ -255,6 +285,7 @@ NPCs[206184] = {
     --------------------------------------------------------------------------------
     ---- Deathpetal
     --------------------------------------------------------------------------------
+    achievementQuestID = 82559, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 206184,
     questID = 82559, -- Unknown
@@ -265,6 +296,7 @@ NPCs[206203] = {
     --------------------------------------------------------------------------------
     ---- Moth'ethk
     --------------------------------------------------------------------------------
+    achievementQuestID = 82557, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 206203,
     questID = 82557, -- Unknown
@@ -275,6 +307,7 @@ NPCs[206514] = {
     --------------------------------------------------------------------------------
     ---- Crazed Cabbage Smacker
     --------------------------------------------------------------------------------
+    achievementQuestID = 82558, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 206514,
     questID = 82558, -- Unknown
@@ -285,6 +318,7 @@ NPCs[206977] = {
     --------------------------------------------------------------------------------
     ---- Parasidious
     --------------------------------------------------------------------------------
+    achievementQuestID = 82563, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 206977,
     questID = 82563, -- Unknown
@@ -295,6 +329,7 @@ NPCs[207780] = {
     --------------------------------------------------------------------------------
     ---- Finclaw Bloodtide
     --------------------------------------------------------------------------------
+    achievementQuestID = 82564, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 207780,
     questID = 82564, -- Unknown
@@ -305,6 +340,7 @@ NPCs[207802] = {
     --------------------------------------------------------------------------------
     ---- Beledar's Spawn
     --------------------------------------------------------------------------------
+    achievementQuestID = 81763, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 207802,
     questID = 81763, -- Unknown
@@ -315,6 +351,7 @@ NPCs[207803] = {
     --------------------------------------------------------------------------------
     ---- Toadstomper
     --------------------------------------------------------------------------------
+    achievementQuestID = 82561, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 207803,
     questID = 82561, -- Unknown
@@ -325,6 +362,7 @@ NPCs[207826] = {
     --------------------------------------------------------------------------------
     ---- Ravageant
     --------------------------------------------------------------------------------
+    achievementQuestID = 82566, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 207826,
     questID = 82566, -- Unknown
@@ -335,6 +373,7 @@ NPCs[214757] = {
     --------------------------------------------------------------------------------
     ---- Croakit
     --------------------------------------------------------------------------------
+    achievementQuestID = 82560, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 214757,
     questID = 82560, -- Unknown
@@ -345,6 +384,7 @@ NPCs[215805] = {
     --------------------------------------------------------------------------------
     ---- Sloshmuck
     --------------------------------------------------------------------------------
+    achievementQuestID = 79271, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 215805,
     questID = 79271, -- Unknown
@@ -355,6 +395,7 @@ NPCs[218426] = {
     --------------------------------------------------------------------------------
     ---- Ixlorb the Spinner
     --------------------------------------------------------------------------------
+    achievementQuestID = 80006, -- Ixlorb the Spinner
     classification = NPCClassification.Rare,
     npcID = 218426,
     questID = 80006, -- Ixlorb the Spinner
@@ -365,6 +406,7 @@ NPCs[218444] = {
     --------------------------------------------------------------------------------
     ---- The Taskmaker
     --------------------------------------------------------------------------------
+    achievementQuestID = 80009, -- The Taskmaker
     classification = NPCClassification.Rare,
     npcID = 218444,
     questID = 80009, -- The Taskmaker
@@ -375,6 +417,7 @@ NPCs[218452] = {
     --------------------------------------------------------------------------------
     ---- Murkshade
     --------------------------------------------------------------------------------
+    achievementQuestID = 80010, -- Murkshade
     classification = NPCClassification.Rare,
     npcID = 218452,
     questID = 80010, -- Murkshade
@@ -385,6 +428,7 @@ NPCs[218458] = {
     --------------------------------------------------------------------------------
     ---- Deepfiend Azellix
     --------------------------------------------------------------------------------
+    achievementQuestID = 80011, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 218458,
     questID = 80011, -- Unknown
@@ -395,6 +439,7 @@ NPCs[220771] = {
     --------------------------------------------------------------------------------
     ---- Murkspike
     --------------------------------------------------------------------------------
+    achievementQuestID = 82565, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 220771,
     questID = 82565, -- Unknown
@@ -405,6 +450,7 @@ NPCs[221179] = {
     --------------------------------------------------------------------------------
     ---- Duskshadow
     --------------------------------------------------------------------------------
+    achievementQuestID = 82562, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 221179,
     questID = 82562, -- Unknown
@@ -426,6 +472,7 @@ NPCs[221534] = {
     --------------------------------------------------------------------------------
     ---- Lytfang the Lost
     --------------------------------------------------------------------------------
+    achievementQuestID = 81756, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 221534,
     questID = 81756, -- Unknown
@@ -436,6 +483,7 @@ NPCs[221551] = {
     --------------------------------------------------------------------------------
     ---- Grimslice
     --------------------------------------------------------------------------------
+    achievementQuestID = 81761, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 221551,
     questID = 81761, -- Unknown
@@ -446,6 +494,7 @@ NPCs[221648] = {
     --------------------------------------------------------------------------------
     ---- The Perchfather
     --------------------------------------------------------------------------------
+    achievementQuestID = 81791, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 221648,
     questID = 81791, -- Unknown
@@ -456,6 +505,7 @@ NPCs[221668] = {
     --------------------------------------------------------------------------------
     ---- Horror of the Shallows
     --------------------------------------------------------------------------------
+    achievementQuestID = 81836, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 221668,
     questID = 81836, -- Unknown
@@ -466,6 +516,7 @@ NPCs[221690] = {
     --------------------------------------------------------------------------------
     ---- Strength of Beledar
     --------------------------------------------------------------------------------
+    achievementQuestID = 81849, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 221690,
     questID = 81849, -- Unknown
@@ -479,6 +530,7 @@ NPCs[221708] = {
     classification = NPCClassification.Rare,
     npcID = 221708,
     questID = 81853, -- Unknown
+    achievementQuestID = 81853, -- Unknown
     vignetteID = 6154,
 }
 
@@ -486,6 +538,7 @@ NPCs[221753] = {
     --------------------------------------------------------------------------------
     ---- Deathtide
     --------------------------------------------------------------------------------
+    achievementQuestID = 81880, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 221753,
     questID = 81880, -- Unknown
@@ -496,6 +549,7 @@ NPCs[221767] = {
     --------------------------------------------------------------------------------
     ---- Funglour
     --------------------------------------------------------------------------------
+    achievementQuestID = 81881, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 221767,
     questID = 81881, -- Unknown
@@ -506,6 +560,7 @@ NPCs[221786] = {
     --------------------------------------------------------------------------------
     ---- Pride of Beledar
     --------------------------------------------------------------------------------
+    achievementQuestID = 81882, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 221786,
     questID = 81882, -- Unknown

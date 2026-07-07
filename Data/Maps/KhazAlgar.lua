@@ -32,6 +32,7 @@ Maps[MapID.AzjKahet].NPCs = {
     [216050] = true, -- Harvester Qixt
     [216051] = true, -- Umbraclaw Matra
     [216052] = true, -- Skirmisher Sa'zryk
+    [221032] = true, -- Rhak'ik
     [221067] = true, -- Orta
     [221327] = true, -- Kaheti Silk Hauler
     [222624] = true, -- Deepcrawler Tx'kesh
