@@ -396,6 +396,7 @@ NPCs[245182] = {
     --------------------------------------------------------------------------------
     ---- Eruundi
     --------------------------------------------------------------------------------
+    achievementQuestID = 91047, -- Eruundi
     classification = NPCClassification.Rare,
     npcID = 245182,
     questID = 91047, -- Eruundi
@@ -406,6 +407,7 @@ NPCs[257027] = {
     --------------------------------------------------------------------------------
     ---- Rakshur the Bonegrinder
     --------------------------------------------------------------------------------
+    achievementQuestID = 93953, -- Rakshur the Bonegrinder
     classification = NPCClassification.Rare,
     npcID = 257027,
     questID = 93953, -- Rakshur the Bonegrinder
@@ -440,6 +442,7 @@ NPCs[238498] = {
     --------------------------------------------------------------------------------
     ---- Territorial Voidscythe
     --------------------------------------------------------------------------------
+    achievementQuestID = 91050, -- Territorial Voidscythe
     classification = NPCClassification.Rare,
     npcID = 238498,
     questID = 91050, -- Territorial Voidscythe
@@ -450,6 +453,7 @@ NPCs[241443] = {
     --------------------------------------------------------------------------------
     ---- Tremora
     --------------------------------------------------------------------------------
+    achievementQuestID = 91048, -- Tremora
     classification = NPCClassification.Rare,
     npcID = 241443,
     questID = 91048, -- Tremora
@@ -460,6 +464,7 @@ NPCs[244272] = {
     --------------------------------------------------------------------------------
     ---- Sundereth the Caller
     --------------------------------------------------------------------------------
+    achievementQuestID = 90805, -- Sundereth the Caller
     classification = NPCClassification.Rare,
     npcID = 244272,
     questID = 90805, -- Sundereth the Caller
@@ -470,6 +475,7 @@ NPCs[245044] = {
     --------------------------------------------------------------------------------
     ---- Nightbrood
     --------------------------------------------------------------------------------
+    achievementQuestID = 91051, -- Nightbrood
     classification = NPCClassification.Rare,
     npcID = 245044,
     questID = 91051, -- Nightbrood
@@ -539,6 +545,7 @@ NPCs[256770] = {
     --------------------------------------------------------------------------------
     ---- Bilemaw the Gluttonous
     --------------------------------------------------------------------------------
+    achievementQuestID = 93884, -- Bilemaw the Gluttonous
     classification = NPCClassification.Rare,
     npcID = 256770,
     questID = 93884, -- Bilemaw the Gluttonous
@@ -549,6 +556,7 @@ NPCs[256808] = {
     --------------------------------------------------------------------------------
     ---- Ravengerus
     --------------------------------------------------------------------------------
+    achievementQuestID = 93895, -- Ravengerus
     classification = NPCClassification.Rare,
     npcID = 256808,
     questID = 93895, -- Ravengerus
@@ -559,6 +567,7 @@ NPCs[256821] = {
     --------------------------------------------------------------------------------
     ---- Far'thana the Mad
     --------------------------------------------------------------------------------
+    achievementQuestID = 93896, -- Far'thana the Mad
     classification = NPCClassification.Rare,
     npcID = 256821,
     questID = 93896, -- Far'thana the Mad
@@ -569,6 +578,7 @@ NPCs[256922] = {
     --------------------------------------------------------------------------------
     ---- Screammaxa the Matriarch
     --------------------------------------------------------------------------------
+    achievementQuestID = 93966, -- Screammaxa the Matriarch
     classification = NPCClassification.Rare,
     npcID = 256922,
     questID = 93966, -- Screammaxa the Matriarch
@@ -579,6 +589,7 @@ NPCs[256923] = {
     --------------------------------------------------------------------------------
     ---- Bane of the Vilebloods
     --------------------------------------------------------------------------------
+    achievementQuestID = 93946, -- Bane of the Vilebloods
     classification = NPCClassification.Rare,
     npcID = 256923,
     questID = 93946, -- Bane of the Vilebloods
@@ -589,6 +600,7 @@ NPCs[256924] = {
     --------------------------------------------------------------------------------
     ---- Aeonelle Blackstar
     --------------------------------------------------------------------------------
+    achievementQuestID = 93944, -- Aeonelle Blackstar
     classification = NPCClassification.Rare,
     npcID = 256924,
     questID = 93944, -- Aeonelle Blackstar
@@ -599,6 +611,7 @@ NPCs[256925] = {
     --------------------------------------------------------------------------------
     ---- Lotus Darkblossom
     --------------------------------------------------------------------------------
+    achievementQuestID = 93947, -- Lotus Darkblossom
     classification = NPCClassification.Rare,
     npcID = 256925,
     questID = 93947, -- Lotus Darkblossom
@@ -609,6 +622,7 @@ NPCs[256926] = {
     --------------------------------------------------------------------------------
     ---- Queen o' War
     --------------------------------------------------------------------------------
+    achievementQuestID = 93934, -- Queen o' War
     classification = NPCClassification.Rare,
     npcID = 256926,
     questID = 93934, -- Queen o' War

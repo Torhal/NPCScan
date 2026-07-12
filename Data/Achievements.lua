@@ -85,6 +85,7 @@ local AchievementID = {
     TallestTreeInTheForest = 62122,
     TerrorsOfTheShore = 11786,
     TheSongOfSilence = 9541,
+    TheUltimatePredator = 62130,
     TimelessChampion = 8714,
     UnboundMonstrosities = 12587,
     UnleashedMonstrosities = 11160,
