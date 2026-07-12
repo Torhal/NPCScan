@@ -81,6 +81,7 @@ local AchievementID = {
     RestInPistons = 13470,
     SabertronAssemble = 13054,
     StormedOff = 16461,
+    TallestTreeInTheForest = 62122,
     TerrorsOfTheShore = 11786,
     TheSongOfSilence = 9541,
     TimelessChampion = 8714,

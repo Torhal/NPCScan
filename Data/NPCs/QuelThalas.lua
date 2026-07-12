@@ -608,6 +608,7 @@ NPCs[242023] = {
     --------------------------------------------------------------------------------
     ---- Necrohexxer Raz'ka
     --------------------------------------------------------------------------------
+    achievementQuestID = 89569, -- Necrohexxer Raz'ka
     classification = NPCClassification.Rare,
     npcID = 242023,
     questID = 89569, -- Necrohexxer Raz'ka
@@ -618,6 +619,7 @@ NPCs[242024] = {
     --------------------------------------------------------------------------------
     ---- The Snapping Scourge
     --------------------------------------------------------------------------------
+    achievementQuestID = 89570, -- The Snapping Scourge
     classification = NPCClassification.Rare,
     npcID = 242024,
     questID = 89570, -- The Snapping Scourge
@@ -628,6 +630,7 @@ NPCs[242025] = {
     --------------------------------------------------------------------------------
     ---- Skullcrusher Harak
     --------------------------------------------------------------------------------
+    achievementQuestID = 89571, -- Skullcrusher Harak
     classification = NPCClassification.Rare,
     npcID = 242025,
     questID = 89571, -- Skullcrusher Harak
@@ -638,6 +641,7 @@ NPCs[242026] = {
     --------------------------------------------------------------------------------
     ---- Elder Oaktalon
     --------------------------------------------------------------------------------
+    achievementQuestID = 89572, -- Elder Oaktalon
     classification = NPCClassification.Rare,
     npcID = 242026,
     questID = 89572, -- Elder Oaktalon
@@ -648,6 +652,7 @@ NPCs[242027] = {
     --------------------------------------------------------------------------------
     ---- Depthborn Eelamental
     --------------------------------------------------------------------------------
+    achievementQuestID = 89573, -- Depthborn Eelamental
     classification = NPCClassification.Rare,
     npcID = 242027,
     questID = 89573, -- Depthborn Eelamental
@@ -658,6 +663,7 @@ NPCs[242028] = {
     --------------------------------------------------------------------------------
     ---- Lightwood Borer
     --------------------------------------------------------------------------------
+    achievementQuestID = 89575, -- Lightwood Borer
     classification = NPCClassification.Rare,
     npcID = 242028,
     questID = 89575, -- Lightwood Borer
@@ -668,6 +674,7 @@ NPCs[242031] = {
     --------------------------------------------------------------------------------
     ---- Spinefrill
     --------------------------------------------------------------------------------
+    achievementQuestID = 89578, -- Spinefrill
     classification = NPCClassification.Rare,
     npcID = 242031,
     questID = 89578, -- Spinefrill
@@ -678,6 +685,7 @@ NPCs[242032] = {
     --------------------------------------------------------------------------------
     ---- Oophaga
     --------------------------------------------------------------------------------
+    achievementQuestID = 89579, -- Oophaga
     classification = NPCClassification.Rare,
     npcID = 242032,
     questID = 89579, -- Oophaga
@@ -688,6 +696,7 @@ NPCs[242033] = {
     --------------------------------------------------------------------------------
     ---- Tiny Vermin
     --------------------------------------------------------------------------------
+    achievementQuestID = 89580, -- Tiny Vermin
     classification = NPCClassification.Rare,
     npcID = 242033,
     questID = 89580, -- Tiny Vermin
@@ -698,6 +707,7 @@ NPCs[242034] = {
     --------------------------------------------------------------------------------
     ---- Voidtouched Crustacean
     --------------------------------------------------------------------------------
+    achievementQuestID = 89581, -- Voidtouched Crustacean
     classification = NPCClassification.Rare,
     npcID = 242034,
     questID = 89581, -- Voidtouched Crustacean
@@ -708,6 +718,7 @@ NPCs[242035] = {
     --------------------------------------------------------------------------------
     ---- The Devouring Invader
     --------------------------------------------------------------------------------
+    achievementQuestID = 89583, -- The Devouring Invader
     classification = NPCClassification.Rare,
     npcID = 242035,
     questID = 89583, -- The Devouring Invader
@@ -727,6 +738,7 @@ NPCs[245691] = {
     --------------------------------------------------------------------------------
     ---- The Decaying Diamondback
     --------------------------------------------------------------------------------
+    achievementQuestID = 91072, -- The Decaying Diamondback
     classification = NPCClassification.Rare,
     npcID = 245691,
     questID = 91072, -- The Decaying Diamondback
@@ -737,6 +749,7 @@ NPCs[245692] = {
     --------------------------------------------------------------------------------
     ---- Ash'an the Empowered
     --------------------------------------------------------------------------------
+    achievementQuestID = 91073, -- Ash'an the Empowered
     classification = NPCClassification.Rare,
     npcID = 245692,
     questID = 91073, -- Ash'an the Empowered
@@ -747,6 +760,7 @@ NPCs[245975] = {
     --------------------------------------------------------------------------------
     ---- Mrrlokk
     --------------------------------------------------------------------------------
+    achievementQuestID = 91174, -- Mrrlokk
     classification = NPCClassification.Rare,
     npcID = 245975,
     questID = 91174, -- Mrrlokk
@@ -757,6 +771,7 @@ NPCs[247976] = {
     --------------------------------------------------------------------------------
     ---- Poacher Rav'ik
     --------------------------------------------------------------------------------
+    achievementQuestID = 91634, -- Poacher Rav'ik
     classification = NPCClassification.Rare,
     npcID = 247976,
     questID = 91634, -- Poacher Rav'ik
