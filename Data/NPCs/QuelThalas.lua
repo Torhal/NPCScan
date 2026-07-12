@@ -16,6 +16,7 @@ NPCs[240129] = {
     --------------------------------------------------------------------------------
     ---- Overfester Hydra
     --------------------------------------------------------------------------------
+    achievementQuestID = 92392, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 240129,
     questID = 92392, -- Unknown
@@ -35,6 +36,7 @@ NPCs[246332] = {
     --------------------------------------------------------------------------------
     ---- Warden of Weeds
     --------------------------------------------------------------------------------
+    achievementQuestID = 91280, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 246332,
     questID = 91280, -- Unknown
@@ -45,6 +47,7 @@ NPCs[246633] = {
     --------------------------------------------------------------------------------
     ---- Harried Hawkstrider
     --------------------------------------------------------------------------------
+    achievementQuestID = 91315, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 246633,
     questID = 91315, -- Unknown
@@ -55,6 +58,7 @@ NPCs[250582] = {
     --------------------------------------------------------------------------------
     ---- Bloated Snapdragon
     --------------------------------------------------------------------------------
+    achievementQuestID = 92366, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 250582,
     questID = 92366, -- Unknown
@@ -65,6 +69,7 @@ NPCs[250683] = {
     --------------------------------------------------------------------------------
     ---- Coralfang
     --------------------------------------------------------------------------------
+    achievementQuestID = 92389, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 250683,
     questID = 92389, -- Unknown
@@ -75,6 +80,7 @@ NPCs[250719] = {
     --------------------------------------------------------------------------------
     ---- Cre'van
     --------------------------------------------------------------------------------
+    achievementQuestID = 92391, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 250719,
     questID = 92391, -- Unknown
@@ -85,6 +91,7 @@ NPCs[250754] = {
     --------------------------------------------------------------------------------
     ---- Lady Liminus
     --------------------------------------------------------------------------------
+    achievementQuestID = 92393, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 250754,
     questID = 92393, -- Unknown
@@ -95,6 +102,7 @@ NPCs[250780] = {
     --------------------------------------------------------------------------------
     ---- Waverly
     --------------------------------------------------------------------------------
+    achievementQuestID = 92395, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 250780,
     questID = 92395, -- Unknown
@@ -105,6 +113,7 @@ NPCs[250806] = {
     --------------------------------------------------------------------------------
     ---- Lost Guardian
     --------------------------------------------------------------------------------
+    achievementQuestID = 92399, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 250806,
     questID = 92399, -- Unknown
@@ -115,6 +124,7 @@ NPCs[250826] = {
     --------------------------------------------------------------------------------
     ---- Banuran
     --------------------------------------------------------------------------------
+    achievementQuestID = 92403, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 250826,
     questID = 92403, -- Unknown
@@ -125,6 +135,7 @@ NPCs[250841] = {
     --------------------------------------------------------------------------------
     ---- Bad Zed
     --------------------------------------------------------------------------------
+    achievementQuestID = 92404, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 250841,
     questID = 92404, -- Unknown
@@ -135,6 +146,7 @@ NPCs[250876] = {
     --------------------------------------------------------------------------------
     ---- Terrinor
     --------------------------------------------------------------------------------
+    achievementQuestID = 92409, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 250876,
     questID = 92409, -- Unknown
@@ -145,6 +157,7 @@ NPCs[255302] = {
     --------------------------------------------------------------------------------
     ---- Duskburn
     --------------------------------------------------------------------------------
+    achievementQuestID = 93550, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 255302,
     questID = 93550, -- Unknown
@@ -155,6 +168,7 @@ NPCs[255329] = {
     --------------------------------------------------------------------------------
     ---- Malfunctioning Construct
     --------------------------------------------------------------------------------
+    achievementQuestID = 93555, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 255329,
     questID = 93555, -- Unknown
@@ -165,6 +179,7 @@ NPCs[255348] = {
     --------------------------------------------------------------------------------
     ---- Dame Bloodshed
     --------------------------------------------------------------------------------
+    achievementQuestID = 93561, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 255348,
     questID = 93561, -- Unknown
