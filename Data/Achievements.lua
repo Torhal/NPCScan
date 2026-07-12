@@ -81,6 +81,7 @@ local AchievementID = {
     RemnantsOfAShatteredWorld = 42761,
     RestInPistons = 13470,
     SabertronAssemble = 13054,
+    ShowdownSluggerNaigtal = 62883,
     ShowdownSluggerVal = 62881,
     StormedOff = 16461,
     TallestTreeInTheForest = 62122,
