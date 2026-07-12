@@ -62,6 +62,7 @@ local AchievementID = {
     GorgrondMonsterHunter = 9400,
     Hellbane = 10061,
     HeraldsOfTheLegion = 9638,
+    HeroicSlugger = 63348,
     HighValueTargets = 9216,
     ImInYourBaseKillingYourDudes = 7932,
     IThoughtYouSaidTheydBeRare = 13691,
