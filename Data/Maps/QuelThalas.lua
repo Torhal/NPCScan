@@ -72,6 +72,23 @@ Maps[MapID.IsleOfQuelDanas].NPCs = {
 }
 
 --------------------------------------------------------------------------------
+---- Naigtal (2600)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Naigtal].NPCs = {
+    [263947] = true, -- Interminable Uarn
+    [263950] = true, -- Broxion
+    [263954] = true, -- Swalewing Matriarch
+    [263955] = true, -- Lomelith
+    [264569] = true, -- Auredar's Chassis
+    [264571] = true, -- Indomitable Mk XII
+    [264574] = true, -- Warp Agent Xi'grivr
+    [264576] = true, -- Slaipaan
+    [265698] = true, -- Voidwarped Sporebat
+    [267422] = true, -- Warbringer Thal'kuur
+}
+
+--------------------------------------------------------------------------------
 ---- Slayer's Rise (2444)
 --------------------------------------------------------------------------------
 
@@ -80,6 +97,31 @@ Maps[MapID.SlayersRise].NPCs = {
     [257027] = true, -- Rakshur the Bonegrinder
     [257199] = true, -- Hardin Steellock
     [257231] = true, -- Gar'chak Skullcleave
+}
+
+--------------------------------------------------------------------------------
+---- Val (2599)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Val].NPCs = {
+    [261716] = true, -- Glacial Broodmother
+    [261965] = true, -- Sleet-Rune
+    [262421] = true, -- Atomus
+    [264864] = true, -- Xirah
+    [264865] = true, -- Mercilus
+    [264866] = true, -- Krilkan
+    [264868] = true, -- Opprimius
+    [264869] = true, -- Nelgothar
+    [264870] = true, -- The Horror Below
+    [265269] = true, -- Shadowguard Destroyer
+}
+
+--------------------------------------------------------------------------------
+---- Vilaldoun (2646)
+--------------------------------------------------------------------------------
+
+Maps[MapID.Vilaldoun].NPCs = {
+    [264569] = true, -- Auredar's Chassis
 }
 
 --------------------------------------------------------------------------------
