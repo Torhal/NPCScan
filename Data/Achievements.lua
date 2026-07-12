@@ -69,6 +69,7 @@ local AchievementID = {
     ItsInTheMix = 14721,
     JungleStalker = 10070,
     KingOfTheMonsters = 9601,
+    LeafNoneBehind = 61264,
     LifeFindsAWayToDie = 13048,
     MakingTheCut = 9617,
     MillionsOfYearsOfEvolutionVsMyFist = 8123,
