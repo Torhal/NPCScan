@@ -50,6 +50,7 @@ local AchievementID = {
     Bloodsport = 14802,
     BloodyRare = 1312,
     BrokeBackPrecipice = 9571,
+    ChampionOfTheForbiddenReach = 17525,
     ChampionsOfLeiShen = 8103,
     CommanderOfArgus = 12078,
     CutOffTheHead = 9633,
