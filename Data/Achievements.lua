@@ -19,6 +19,10 @@ local private = select(2, ...) ---@class PrivateNamespace
 
 local Data = private.Data
 
+--------------------------------------------------------------------------------
+---- Achievements
+--------------------------------------------------------------------------------
+
 local AchievementID = {
     ABloodySong = 61507,
     AdventurerOfArdenweald = 14309,
