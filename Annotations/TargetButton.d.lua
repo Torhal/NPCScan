@@ -4,8 +4,6 @@
 ---- Types
 --------------------------------------------------------------------------------
 
----@alias UnitClassification "elite" | "minus" | "normal" | "rare" | "rareelite" | "worldboss"
-
 ---@class AnimationGroupTexture: Texture
 ---@field animIn AnimationGroup
 
@@ -22,7 +20,7 @@
 
 ---@class TargetButton: AceEvent-3.0, Button, SecureActionButtonTemplate, SecureHandlerShowHideTemplate
 ---@field __isActive? boolean
----@field __classification UnitClassification | NPCClassification
+---@field __classification NPCClassification
 ---@field Background Texture
 ---@field Background2 Texture
 ---@field Background3 Texture

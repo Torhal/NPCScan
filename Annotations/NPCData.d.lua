@@ -20,7 +20,7 @@
 ---@field achievementCriteriaID? AchievementCriteriaID
 ---@field achievementID? AchievementID
 ---@field achievementQuestID? QuestID
----@field classification? UnitClassification
+---@field classification? NPCClassification
 ---@field factionGroup? "Alliance" | "Horde"
 ---@field isCriteriaCompleted? boolean
 ---@field isTameable? boolean
