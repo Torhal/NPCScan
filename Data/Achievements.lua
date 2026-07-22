@@ -246,6 +246,7 @@ local function InitializeAchievements()
         Data.Achievements[achievementID] = achievement
 
         local defaultNPCs = DefaultAchievementCriteriaNPCs[achievementID]
+
         if defaultNPCs then
             for npcID, criteriaID in pairs(defaultNPCs) do
                 local npc = Data.NPCs[npcID]
