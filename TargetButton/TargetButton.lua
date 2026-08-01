@@ -290,8 +290,8 @@ function TargetButtonPrototype:Activate(data)
     self:SetUnitData(data)
 
     local macroText = ("/cleartarget\n/tar %s"):format(data.npcName)
-
     local raidMarker = private.db.profile.detection.raidMarker
+
     if
         raidMarker.add
         and (raidMarker.addInGroup or not IsInGroup())
