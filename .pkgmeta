@@ -4,50 +4,50 @@ enable-nolib-creation: no
 
 externals:
     Libraries/LibStub:
-        url: <https://repos.curseforge.com/wow/libstub/trunk>
+        url: https://repos.curseforge.com/wow/libstub/trunk
     Libraries/CallbackHandler-1.0:
-        url: <https://repos.curseforge.com/wow/callbackhandler/trunk/CallbackHandler-1.0>
+        url: https://repos.curseforge.com/wow/callbackhandler/trunk/CallbackHandler-1.0
     Libraries/AceAddon-3.0:
-        url: <https://repos.curseforge.com/wow/ace3/trunk/AceAddon-3.0>
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceAddon-3.0
     Libraries/AceBucket-3.0:
-        url: <https://repos.curseforge.com/wow/ace3/trunk/AceBucket-3.0>
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceBucket-3.0
     Libraries/AceConfig-3.0:
-        url: <https://repos.curseforge.com/wow/ace3/trunk/AceConfig-3.0>
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceConfig-3.0
     Libraries/AceConsole-3.0:
-        url: <https://repos.curseforge.com/wow/ace3/trunk/AceConsole-3.0>
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceConsole-3.0
     Libraries/AceDB-3.0:
-        url: <https://repos.curseforge.com/wow/ace3/trunk/AceDB-3.0>
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceDB-3.0
     Libraries/AceDBOptions-3.0:
-        url: <https://repos.curseforge.com/wow/ace3/trunk/AceDBOptions-3.0>
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceDBOptions-3.0
     Libraries/AceEvent-3.0:
-        url: <https://repos.curseforge.com/wow/ace3/trunk/AceEvent-3.0>
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceEvent-3.0
     Libraries/AceGUI-3.0:
-        url: <https://repos.curseforge.com/wow/ace3/trunk/AceGUI-3.0>
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceGUI-3.0
     Libraries/AceLocale-3.0:
-        url: <https://repos.curseforge.com/wow/ace3/trunk/AceLocale-3.0>
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceLocale-3.0
     Libraries/AceTimer-3.0:
-        url: <https://repos.curseforge.com/wow/ace3/trunk/AceTimer-3.0>
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceTimer-3.0
     Libraries/AceGUI-3.0-SharedMediaWidgets:
-        url: <https://repos.curseforge.com/wow/ace-gui-3-0-shared-media-widgets/trunk>
+        url: https://repos.curseforge.com/wow/ace-gui-3-0-shared-media-widgets/trunk
     Libraries/HereBeDragons:
-        url: <https://repos.curseforge.com/wow/herebedragons>
+        url: https://repos.curseforge.com/wow/herebedragons
     Libraries/LibDialog-1.0:
-        url: <https://repos.curseforge.com/wow/libdialog-1-0>
+        url: https://repos.curseforge.com/wow/libdialog-1-0
         tag: latest
     Libraries/LibSharedMedia-3.0:
-        url: <https://repos.curseforge.com/wow/libsharedmedia-3-0/trunk>
+        url: https://repos.curseforge.com/wow/libsharedmedia-3-0/trunk
     Libraries/LibSink-2.0:
-        url: <https://repos.curseforge.com/wow/libsink-2-0/trunk/LibSink-2.0>
+        url: https://repos.curseforge.com/wow/libsink-2-0/trunk/LibSink-2.0
     Libraries/LibTextDump-1.0:
-        url: <https://repos.curseforge.com/wow/libtextdump-1-0>
+        url: https://repos.curseforge.com/wow/libtextdump-1-0
         tag: latest
     Libraries/LibToast-1.0:
-        url: <https://repos.curseforge.com/wow/libtoast-1-0>
+        url: https://repos.curseforge.com/wow/libtoast-1-0
         tag: latest
     Libraries/LibWindow-1.1:
-        url: <https://repos.curseforge.com/wow/libwindow-1-1/trunk/LibWindow-1.1>
+        url: https://repos.curseforge.com/wow/libwindow-1-1/trunk/LibWindow-1.1
     Libraries/LibQTip-2.0:
-        url: <https://repos.curseforge.com/wow/libqtip-2-0>
+        url: https://repos.curseforge.com/wow/libqtip-2-0
     Libraries/LibDataBroker-1.1:
-        url: <https://repos.curseforge.com/wow/libdatabroker-1-1>
+        url: https://repos.curseforge.com/wow/libdatabroker-1-1
         tag: v1.1.4
