@@ -131,7 +131,7 @@ end
 ---@param mouseButton MouseButton
 local function TargetButton_OnClick(self, mouseButton)
     if mouseButton == "LeftButton" then
-        self:SetRaidTarget("target")
+        -- self:SetRaidTarget("target")
     elseif mouseButton == "RightButton" then
         if not InCombatLockdown() then
             self.dismissAnimationGroup:Play()
