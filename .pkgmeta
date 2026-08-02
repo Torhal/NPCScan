@@ -47,7 +47,8 @@ externals:
     Libraries/LibWindow-1.1:
         url: https://repos.curseforge.com/wow/libwindow-1-1/trunk/LibWindow-1.1
     Libraries/LibQTip-2.0:
-        url: https://repos.curseforge.com/wow/libqtip-2-0
+        url: https://github.com/Torhal/LibQTip-2.0.git/LibQTip-2.0
+        curse-slug: libqtip-2-0
     Libraries/LibDataBroker-1.1:
         url: https://repos.curseforge.com/wow/libdatabroker-1-1
         tag: v1.1.4
