@@ -19,7 +19,7 @@
     <Script file="Libraries\HereBeDragons\HereBeDragons-2.0.lua"/>
     <Script file="Libraries\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>
     <Include file="Libraries\LibDialog-1.0\lib.xml"/>
-    <Include file="Libraries\LibQTip-2.0\LibQTip-2.0.xml"/>
+    <Include file="Libraries\LibQTip-2.0\Manifest.xml"/>
     <Include file="Libraries\LibSink-2.0\lib.xml"/>
     <Include file="Libraries\LibTextDump-1.0\lib.xml"/>
     <Include file="Libraries\LibToast-1.0\lib.xml"/>
