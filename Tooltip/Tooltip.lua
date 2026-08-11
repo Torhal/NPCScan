@@ -389,11 +389,11 @@ function TooltipHandler:Render(anchorFrame)
 
     GenerateData()
 
+    local tooltip = self.Tooltip.Main
+
     if tooltip and QTip:IsAcquiredTooltip(AddOnFolderName) then
         QTip:ReleaseTooltip(tooltip)
     end
-
-    local tooltip = self.Tooltip.Main
 
     if not tooltip then
         tooltip = QTip:AcquireTooltip(AddOnFolderName, TooltipColumnCount)
