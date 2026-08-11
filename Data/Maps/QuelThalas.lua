@@ -100,6 +100,44 @@ Maps[MapID.SlayersRise].NPCs = {
 }
 
 --------------------------------------------------------------------------------
+---- The Coiled Isle (2512)
+--------------------------------------------------------------------------------
+
+Maps[MapID.TheCoiledIsle].NPCs = {
+    [255087] = true, -- Malformed Leviathan
+    [255088] = true, -- Looming Mutagenitor
+    [255927] = true, -- Venom Lancer Ori'kassi
+    [256631] = true, -- Big Mon
+    [257863] = true, -- Vassti, the Exalted Broodmother
+    [257906] = true, -- Coin-Eye Skully
+    [258254] = true, -- Ss'akrithos
+    [258916] = true, -- Garsecg
+    [258920] = true, -- Nar'zira
+    [261109] = true, -- Sss'alik
+    [261142] = true, -- Destra
+    [264854] = true, -- Farthik the Plunderer
+    [265237] = true, -- Lockjaw
+    [265262] = true, -- Hisstara
+    [268049] = true, -- Siltmouth
+}
+
+--------------------------------------------------------------------------------
+---- The Underbelly (2613)
+--------------------------------------------------------------------------------
+
+Maps[MapID.TheUnderbelly].NPCs = {
+    [263456] = true, -- Szarith the Fanged
+}
+
+--------------------------------------------------------------------------------
+---- Tomb of the Lost Priest (2642)
+--------------------------------------------------------------------------------
+
+Maps[MapID.TombOfTheLostPriest].NPCs = {
+    [258920] = true, -- Nar'zira
+}
+
+--------------------------------------------------------------------------------
 ---- Val (2599)
 --------------------------------------------------------------------------------
 
@@ -114,6 +152,14 @@ Maps[MapID.Val].NPCs = {
     [264869] = true, -- Nelgothar
     [264870] = true, -- The Horror Below
     [265269] = true, -- Shadowguard Destroyer
+}
+
+--------------------------------------------------------------------------------
+---- Vaults of Atal'Utek (2509)
+--------------------------------------------------------------------------------
+
+Maps[MapID.VaultsOfAtalUtek].NPCs = {
+    [263456] = true, -- Szarith the Fanged
 }
 
 --------------------------------------------------------------------------------
@@ -174,4 +220,5 @@ Maps[MapID.ZulAman].NPCs = {
     [245692] = true, -- Ash'an the Empowered
     [245975] = true, -- Mrrlokk
     [247976] = true, -- Poacher Rav'ik
+    [268090] = true, -- Kari'zah the Forgotten
 }
