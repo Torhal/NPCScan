@@ -44,6 +44,7 @@ function NPCDataPrototype:HasQuest()
     return questID and questID >= 0 or false
 end
 
+---@return boolean
 function NPCDataPrototype:HasActiveWorldQuest()
     local questID = self.worldQuestID
 
@@ -54,6 +55,7 @@ function NPCDataPrototype:HasActiveWorldQuest()
     return C_TaskQuest.IsActive(questID)
 end
 
+---@return boolean?
 function NPCDataPrototype:IsAchievementCriteriaComplete()
     if not self.achievementID then
         return true
@@ -62,6 +64,7 @@ function NPCDataPrototype:IsAchievementCriteriaComplete()
     return private.Data.Achievements[self.achievementID].isCompleted or self.isCriteriaCompleted
 end
 
+---@return boolean?
 function NPCDataPrototype:IsQuestComplete()
     local questID = self.questID or self.achievementQuestID
 

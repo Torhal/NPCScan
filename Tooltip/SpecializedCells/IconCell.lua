@@ -24,6 +24,7 @@ local DefaultIconSize = 18
 ---- Methods
 --------------------------------------------------------------------------------
 
+---@return number
 function IconCell:GetContentHeight()
     return self.IconTexture:GetHeight()
 end

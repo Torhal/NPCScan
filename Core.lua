@@ -46,6 +46,8 @@ do
 
     private.GetDebugger = GetDebugger
 
+    ---@param ... any
+    ---@return string
     function private.Debug(...)
         local message = string.format(...)
 

@@ -401,6 +401,7 @@ function TargetButtonPrototype:RequestDeactivate()
     end
 end
 
+---@return FramePoint
 function TargetButtonPrototype:GetEffectiveSpawnPoint()
     local x, y = self:GetCenter()
     if not x or not y then

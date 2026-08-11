@@ -19,6 +19,7 @@ local BaseCell = providerValues.baseCellPrototype
 
 local ContentHeight = 24
 
+---@return number
 function SectionHeaderCell:GetContentHeight()
     return math.max(BaseCell.GetContentHeight(self), ContentHeight)
 end
