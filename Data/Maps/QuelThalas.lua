@@ -160,7 +160,11 @@ Maps[MapID.Val].NPCs = {
 --------------------------------------------------------------------------------
 
 Maps[MapID.VaultsOfAtalUtek].NPCs = {
+    [263322] = true, -- Champion of the Scale
+    [263335] = true, -- Guardian of the Sacrifice
+    [263371] = true, -- Priest of the First Rattle
     [263456] = true, -- Szarith the Fanged
+    [263851] = true, -- Vserix the Sneaky
 }
 
 --------------------------------------------------------------------------------
