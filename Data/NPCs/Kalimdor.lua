@@ -381,6 +381,7 @@ NPCs[147261] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 147261,
+    questID = 54235, -- Unknown
 }
 
 NPCs[147332] = {
@@ -389,6 +390,7 @@ NPCs[147332] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 147332,
+    questID = 54248, -- Unknown
 }
 
 NPCs[147435] = {
@@ -427,6 +429,7 @@ NPCs[147708] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 147708,
+    questID = 54279, -- Unknown
 }
 
 NPCs[147744] = {
@@ -435,6 +438,7 @@ NPCs[147744] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 147744,
+    questID = 54286, -- Unknown
 }
 
 NPCs[147751] = {
@@ -443,6 +447,7 @@ NPCs[147751] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 147751,
+    questID = 54290, -- Unknown
 }
 
 NPCs[147758] = {
@@ -471,6 +476,7 @@ NPCs[147897] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 147897,
+    questID = 54321, -- Unknown
 }
 
 NPCs[147942] = {
@@ -479,6 +485,7 @@ NPCs[147942] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 147942,
+    questID = 54398, -- Unknown
 }
 
 NPCs[147966] = {
@@ -487,6 +494,7 @@ NPCs[147966] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 147966,
+    questID = 54406, -- Unknown
 }
 
 NPCs[147970] = {
@@ -495,6 +503,7 @@ NPCs[147970] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 147970,
+    questID = 54409, -- Unknown
 }
 
 NPCs[148025] = {
@@ -503,6 +512,7 @@ NPCs[148025] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 148025,
+    questID = 54427, -- Unknown
 }
 
 NPCs[148031] = {
@@ -511,6 +521,7 @@ NPCs[148031] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 148031,
+    questID = 54429, -- Unknown
 }
 
 NPCs[148037] = {
@@ -615,6 +626,7 @@ NPCs[149654] = {
     classification = NPCClassification.Rare,
     isTameable = true,
     npcID = 149654,
+    questID = 54885, -- Unknown
 }
 
 NPCs[149655] = {
@@ -643,6 +655,7 @@ NPCs[149657] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 149657,
+    questID = 54888, -- Unknown
 }
 
 NPCs[149658] = {
@@ -722,6 +735,7 @@ NPCs[149665] = {
     --------------------------------------------------------------------------------
     classification = NPCClassification.Rare,
     npcID = 149665,
+    questID = 54894, -- Unknown
 }
 
 --------------------------------------------------------------------------------
