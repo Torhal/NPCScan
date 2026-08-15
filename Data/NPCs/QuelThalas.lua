@@ -106,7 +106,7 @@ NPCs[250754] = {
     --------------------------------------------------------------------------------
     ---- Lady Liminus
     --------------------------------------------------------------------------------
-    achievementQuestID = 92393, -- Unknown
+    achievementQuestID = 94856, -- Unknown
     classification = NPCClassification.Rare,
     npcID = 250754,
     questID = 92393, -- Unknown
