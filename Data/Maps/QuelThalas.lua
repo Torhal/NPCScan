@@ -104,6 +104,7 @@ Maps[MapID.SlayersRise].NPCs = {
 --------------------------------------------------------------------------------
 
 Maps[MapID.TheCoiledIsle].NPCs = {
+    [252959] = true, -- Nymrissa Wavecaller
     [255087] = true, -- Malformed Leviathan
     [255088] = true, -- Looming Mutagenitor
     [255927] = true, -- Venom Lancer Ori'kassi
